@@ -3,8 +3,11 @@
 @theme {
   /* Amy Tangerine brand tokens */
   --color-coral: #F27B50;
+  --color-coral-dark: #E06A42;
+  --color-coral-light: #FFF0EB;
   --color-tangerine: #F5A623;
   --color-cream: #FFF9F5;
+  --color-cream-dark: #F5EDE7;
   --color-white: #FFFFFF;
   --color-text-primary: #2D2D2D;
   --color-text-secondary: #6B6B6B;

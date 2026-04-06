@@ -2,6 +2,8 @@ import React from "react"
 import type { Metadata } from "next"
 import { Nunito_Sans } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
+import Nav from "@/components/nav"
+import Footer from "@/components/footer"
 import "./globals.css"
 
 const nunitoSans = Nunito_Sans({
@@ -31,7 +33,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={nunitoSans.variable}>
       <body className="antialiased">
+        <Nav />
         {children}
+        <Footer />
         <Analytics />
       </body>
     </html>

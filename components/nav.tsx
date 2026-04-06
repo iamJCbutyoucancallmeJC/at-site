@@ -1,0 +1,134 @@
+"use client"
+
+import React, { useState } from "react"
+import Link from "next/link"
+import { Menu, X, ShoppingCart } from "lucide-react"
+
+const NAV_LINKS = [
+  { label: "Shop", href: "/shop" },
+  { label: "Learn", href: "/learn" },
+  { label: "About", href: "/about" },
+]
+
+export default function Nav() {
+  const [mobileOpen, setMobileOpen] = useState(false)
+
+  return (
+    <>
+      {/* Desktop Nav */}
+      <nav
+        className="hidden md:flex items-center h-[72px] px-12 border-b"
+        style={{
+          background: "var(--color-cream)",
+          borderColor: "var(--color-border)",
+        }}
+      >
+        <Link href="/" className="shrink-0 text-[26px] font-bold italic tracking-tight" style={{ color: "var(--color-tangerine)" }}>
+          amy tangerine
+        </Link>
+
+        <div className="flex-1 flex items-center justify-center gap-8">
+          {NAV_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-base font-semibold transition-colors hover:opacity-80"
+              style={{ color: "var(--color-text-primary)" }}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+
+        <div className="shrink-0 flex items-center gap-5">
+          <Link
+            href="/happy-mail"
+            className="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-full text-base font-bold text-white"
+            style={{
+              background: "var(--color-coral)",
+              boxShadow: "0 2px 8px rgba(242,123,80,0.3)",
+            }}
+          >
+            <span className="text-sm">♥</span> Happy Mail
+          </Link>
+          <button
+            className="w-11 h-11 flex items-center justify-center"
+            style={{ color: "var(--color-text-primary)" }}
+            aria-label="Cart"
+          >
+            <ShoppingCart size={24} />
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile Nav */}
+      <nav
+        className="md:hidden sticky top-0 z-50 flex items-center justify-between h-14 px-4 border-b"
+        style={{
+          background: "var(--color-cream)",
+          borderColor: "var(--color-border)",
+        }}
+      >
+        <button
+          className="w-11 h-11 flex items-center justify-center"
+          onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label={mobileOpen ? "Close menu" : "Open menu"}
+        >
+          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
+
+        <Link
+          href="/"
+          className="absolute left-1/2 -translate-x-1/2 text-xl font-bold italic tracking-tight"
+          style={{ color: "var(--color-tangerine)" }}
+        >
+          amy tangerine
+        </Link>
+
+        <button
+          className="w-11 h-11 flex items-center justify-center"
+          style={{ color: "var(--color-text-primary)" }}
+          aria-label="Cart"
+        >
+          <ShoppingCart size={24} />
+        </button>
+      </nav>
+
+      {/* Mobile Drawer */}
+      {mobileOpen && (
+        <div
+          className="md:hidden fixed inset-0 top-14 z-40"
+          style={{ background: "var(--color-cream)" }}
+        >
+          <div className="flex flex-col p-6 gap-2">
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-lg font-semibold py-3 border-b"
+                style={{
+                  color: "var(--color-text-primary)",
+                  borderColor: "var(--color-border)",
+                }}
+                onClick={() => setMobileOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ))}
+            <Link
+              href="/happy-mail"
+              className="mt-4 inline-flex items-center justify-center gap-2 py-3 rounded-full text-base font-bold text-white"
+              style={{
+                background: "var(--color-coral)",
+                boxShadow: "0 2px 8px rgba(242,123,80,0.3)",
+              }}
+              onClick={() => setMobileOpen(false)}
+            >
+              <span>♥</span> Happy Mail — $13/mo
+            </Link>
+          </div>
+        </div>
+      )}
+    </>
+  )
+}
