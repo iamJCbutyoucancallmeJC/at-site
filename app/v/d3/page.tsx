@@ -5,10 +5,14 @@
 
 import Image from "next/image"
 import NewsletterForm from "@/components/newsletter-form"
+import PageEngagementTracker from "@/components/page-engagement-tracker"
+import VariantTracker from "@/components/variant-tracker"
 
 export default function HomepageOptionD3() {
   return (
     <main>
+      <PageEngagementTracker page="homepage-d3" />
+      <VariantTracker variantId="d3" />
       {/* ── Hero ── */}
       <section className="relative w-full h-screen overflow-hidden">
         {/* Background image — treated cinematically */}

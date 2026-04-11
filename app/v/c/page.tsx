@@ -1,12 +1,13 @@
 // Homepage v2 — full build per wireframes/homepage-mobile.html + homepage-desktop.html
 // Sections: Hero, HM Banner, Categories, Editorial Break, New Arrivals,
 //           Feature Spotlight, About + Newsletter, Instagram, Footer (in layout)
+// Option C — Craft Feel: doodle accents, squiggly underlines, warmer overlay, card borders
 
 import Image from "next/image"
 import Link from "next/link"
-import NewsletterForm from "@/components/newsletter-form"
+import NewsletterFormWarm from "@/components/newsletter-form-warm"
+import { SquigglyUnderline, StarBurst, HeartDoodle } from "@/components/doodles"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
-import TrackableLink from "@/components/trackable-link"
 
 /* -------------------------------------------------------------------------- */
 /*  Static data (Phase 2: pull from Shopify)                                  */
@@ -46,6 +47,13 @@ const CATEGORIES = [
   },
 ]
 
+const SMALL_CARD_BORDERS: string[] = [
+  "rgba(45, 125, 95, 0.2)",   // Stickers
+  "rgba(123, 79, 162, 0.2)",  // Stamps
+  "rgba(59, 127, 160, 0.2)",  // Digital
+  "rgba(0, 173, 179, 0.2)",   // Bundles
+]
+
 const FEATURED_PRODUCTS = [
   {
     name: "Heart Healing Happiness Sticker Book",
@@ -75,7 +83,7 @@ const FEATURED_PRODUCTS = [
 export default function HomePage() {
   return (
     <main className="min-h-screen" style={{ background: "var(--color-white)" }}>
-      <PageEngagementTracker page="homepage-a" />
+      <PageEngagementTracker page="homepage-c" />
 
       {/* ================================================================== */}
       {/*  HERO                                                              */}
@@ -94,11 +102,11 @@ export default function HomePage() {
           style={{ objectPosition: "50% 20%" }}
           priority
         />
-        {/* Text overlay */}
+        {/* Text overlay — warmer brown tint */}
         <div
           className="absolute bottom-0 left-0 right-0 px-5 pb-7 pt-32 md:px-[72px] md:pb-14 md:pt-40"
           style={{
-            background: "linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%)",
+            background: "linear-gradient(to top, rgba(60,35,20,0.55) 0%, rgba(60,35,20,0) 100%)",
           }}
         >
           <h1 className="text-[28px] md:text-5xl font-extrabold text-white leading-tight mb-2 md:mb-2.5 max-w-[600px]">
@@ -110,10 +118,8 @@ export default function HomePage() {
               Stickers, stamps, die cuts, and monthly Happy Mail: hand-picked creative supplies delivered to your door.
             </span>
           </p>
-          <TrackableLink
+          <Link
             href="/shop"
-            event="hero_cta_click"
-            eventData={{ cta_text: "Shop Now", destination: "/shop", page: "homepage-a" }}
             className="inline-block px-8 py-3.5 md:px-10 md:py-4 rounded-xl text-base md:text-lg font-bold text-white"
             style={{
               background: "var(--color-orange)",
@@ -121,28 +127,29 @@ export default function HomePage() {
             }}
           >
             Shop Now
-          </TrackableLink>
+          </Link>
         </div>
       </section>
 
       {/* ================================================================== */}
       {/*  HAPPY MAIL BANNER                                                 */}
       {/* ================================================================== */}
-      <TrackableLink
+      <Link
         href="/happy-mail"
-        event="hero_cta_click"
-        eventData={{ cta_text: "Happy Mail Banner", destination: "/happy-mail", page: "homepage-a" }}
         className="block"
         style={{ background: "var(--color-orange)" }}
       >
         {/* Desktop */}
         <div className="hidden md:flex items-center px-[72px] py-5">
         <div className="flex items-center gap-5 max-w-[1200px] mx-auto w-full">
-          <div
-            className="w-12 h-12 min-w-[48px] rounded-xl flex items-center justify-center text-[22px] text-white"
-            style={{ background: "rgba(255,255,255,0.2)" }}
-          >
-            ♥
+          <div className="relative">
+            <div
+              className="w-12 h-12 min-w-[48px] rounded-xl flex items-center justify-center text-[22px] text-white"
+              style={{ background: "rgba(255,255,255,0.2)" }}
+            >
+              ♥
+            </div>
+            <StarBurst className="absolute -top-1 -right-1" color="#FFFFFF" />
           </div>
           <div>
             <h3 className="text-lg font-extrabold text-white">Happy Mail — $13/mo</h3>
@@ -163,11 +170,14 @@ export default function HomePage() {
         </div>
         {/* Mobile */}
         <div className="flex md:hidden items-center gap-3.5 px-5 py-4">
-          <div
-            className="w-[52px] h-[52px] min-w-[52px] rounded-xl flex items-center justify-center text-[22px] text-white"
-            style={{ background: "rgba(255,255,255,0.2)" }}
-          >
-            ♥
+          <div className="relative">
+            <div
+              className="w-[52px] h-[52px] min-w-[52px] rounded-xl flex items-center justify-center text-[22px] text-white"
+              style={{ background: "rgba(255,255,255,0.2)" }}
+            >
+              ♥
+            </div>
+            <StarBurst className="absolute -top-1 -right-1" color="#FFFFFF" />
           </div>
           <div>
             <h3 className="text-base font-extrabold text-white mb-0.5">Happy Mail — $13/mo</h3>
@@ -177,33 +187,32 @@ export default function HomePage() {
           </div>
           <span className="ml-auto text-white text-lg font-bold">&gt;</span>
         </div>
-      </TrackableLink>
+      </Link>
 
       {/* ================================================================== */}
       {/*  SHOP BY CATEGORY                                                  */}
       {/* ================================================================== */}
-      <section className="px-5 py-7 md:py-16 md:max-w-[1200px] md:mx-auto md:px-12">
+      <section className="px-5 py-10 md:py-20 md:max-w-[1200px] md:mx-auto md:px-12">
         <p
-          className="text-xs md:text-[13px] font-bold uppercase tracking-[1.5px] mb-1.5 md:mb-2"
+          className="text-xs md:text-[13px] font-bold uppercase tracking-[1.5px] mb-3 md:mb-2"
           style={{ color: "var(--color-orange)" }}
         >
           Shop
         </p>
         <h2
-          className="text-xl md:text-[28px] font-extrabold leading-tight mb-3.5 md:mb-7"
+          className="text-xl md:text-[28px] font-extrabold leading-tight"
           style={{ color: "var(--color-text-primary)" }}
         >
           Browse by category
         </h2>
+        <SquigglyUnderline className="mb-5 md:mb-8 w-[100px] md:w-[140px]" />
 
         {/* Desktop: asymmetric — 1 tall left + 2x2 right */}
         <div className="hidden md:grid grid-cols-2 gap-5">
-          {/* Tall featured card */}
-          <TrackableLink
+          {/* Tall featured card — label overlaid on image */}
+          <Link
             href={CATEGORIES[0].href}
-            event="category_click"
-            eventData={{ category_name: CATEGORIES[0].label, page: "homepage-a" }}
-            className="rounded-2xl overflow-hidden bg-white shadow-sm hover:-translate-y-[3px] transition-transform"
+            className="rounded-2xl overflow-hidden relative group"
             style={{ gridRow: "1 / 3" }}
           >
             <div className="relative h-[340px]" style={{ background: CATEGORIES[0].gradient }}>
@@ -213,20 +222,21 @@ export default function HomePage() {
                 fill
                 className="object-cover"
               />
+              <div className="absolute bottom-0 left-0 right-0 px-4 py-3 bg-gradient-to-t from-black/40 to-transparent">
+                <span className="text-white text-lg font-bold drop-shadow-sm">
+                  {CATEGORIES[0].label}
+                </span>
+              </div>
             </div>
-            <div className="px-4 py-3.5 text-[15px] font-bold" style={{ color: "var(--color-text-primary)" }}>
-              {CATEGORIES[0].label}
-            </div>
-          </TrackableLink>
+          </Link>
           {/* 2x2 sub-grid */}
           <div className="grid grid-cols-2 grid-rows-2 gap-5" style={{ gridRow: "1 / 3" }}>
-            {CATEGORIES.slice(1).map((cat) => (
-              <TrackableLink
+            {CATEGORIES.slice(1).map((cat, i) => (
+              <Link
                 key={cat.label}
                 href={cat.href}
-                event="category_click"
-                eventData={{ category_name: cat.label, page: "homepage-a" }}
-                className="rounded-2xl overflow-hidden bg-white shadow-sm hover:-translate-y-[3px] transition-transform"
+                className="rounded-2xl overflow-hidden bg-white border-2 hover:scale-[1.02] transition-transform"
+                style={{ borderColor: SMALL_CARD_BORDERS[i] }}
               >
                 <div className="relative h-[140px]" style={{ background: cat.gradient }}>
                   <Image src={cat.image} alt={cat.label} fill className="object-cover" />
@@ -234,7 +244,7 @@ export default function HomePage() {
                 <div className="px-4 py-3.5 text-[15px] font-bold" style={{ color: "var(--color-text-primary)" }}>
                   {cat.label}
                 </div>
-              </TrackableLink>
+              </Link>
             ))}
           </div>
         </div>
@@ -242,11 +252,10 @@ export default function HomePage() {
         {/* Mobile: stacked editorial — 1 big + 2x1 rows */}
         <div className="flex flex-col gap-3 md:hidden">
           {/* Featured */}
-          <TrackableLink
+          <Link
             href={CATEGORIES[0].href}
-            event="category_click"
-            eventData={{ category_name: CATEGORIES[0].label, page: "homepage-a" }}
-            className="rounded-[14px] overflow-hidden bg-white shadow-sm"
+            className="rounded-[14px] overflow-hidden bg-white border-2"
+            style={{ borderColor: "rgba(253, 137, 28, 0.2)" }}
           >
             <div className="relative h-[180px]" style={{ background: CATEGORIES[0].gradient }}>
               <Image src={CATEGORIES[0].image} alt={CATEGORIES[0].label} fill className="object-cover" />
@@ -254,17 +263,16 @@ export default function HomePage() {
             <div className="px-3.5 py-2.5 text-sm font-bold" style={{ color: "var(--color-text-primary)" }}>
               {CATEGORIES[0].label}
             </div>
-          </TrackableLink>
+          </Link>
           {/* Rows of 2 */}
           {[CATEGORIES.slice(1, 3), CATEGORIES.slice(3, 5)].map((row, ri) => (
             <div key={ri} className="grid grid-cols-2 gap-3">
-              {row.map((cat) => (
-                <TrackableLink
+              {row.map((cat, ci) => (
+                <Link
                   key={cat.label}
                   href={cat.href}
-                  event="category_click"
-                  eventData={{ category_name: cat.label, page: "homepage-a" }}
-                  className="rounded-[14px] overflow-hidden bg-white shadow-sm"
+                  className="rounded-[14px] overflow-hidden bg-white border-2 hover:scale-[1.02] transition-transform"
+                  style={{ borderColor: SMALL_CARD_BORDERS[ri * 2 + ci] }}
                 >
                   <div className="relative h-[110px]" style={{ background: cat.gradient }}>
                     <Image src={cat.image} alt={cat.label} fill className="object-cover" />
@@ -272,7 +280,7 @@ export default function HomePage() {
                   <div className="px-3.5 py-2.5 text-sm font-bold" style={{ color: "var(--color-text-primary)" }}>
                     {cat.label}
                   </div>
-                </TrackableLink>
+                </Link>
               ))}
             </div>
           ))}
@@ -315,30 +323,29 @@ export default function HomePage() {
       {/* ================================================================== */}
       {/*  NEW ARRIVALS                                                      */}
       {/* ================================================================== */}
-      <section className="py-7 md:py-16" style={{ background: "var(--color-white)" }}>
+      <section className="py-10 md:py-20" style={{ background: "var(--color-white)" }}>
         <div className="px-5 md:max-w-[1200px] md:mx-auto md:px-12">
           <p
-            className="text-xs md:text-[13px] font-bold uppercase tracking-[1.5px] mb-1.5 md:mb-2"
+            className="text-xs md:text-[13px] font-bold uppercase tracking-[1.5px] mb-3 md:mb-2"
             style={{ color: "var(--color-orange)" }}
           >
             Just in
           </p>
           <h2
-            className="text-xl md:text-[28px] font-extrabold leading-tight mb-3.5 md:mb-7"
+            className="text-xl md:text-[28px] font-extrabold leading-tight"
             style={{ color: "var(--color-text-primary)" }}
           >
             New arrivals
           </h2>
+          <SquigglyUnderline className="mb-5 md:mb-8 w-[90px] md:w-[120px]" />
 
           {/* Desktop: 4-col grid, featured spans 2 */}
           <div className="hidden md:grid grid-cols-4 gap-5">
             {FEATURED_PRODUCTS.map((product) => (
-              <TrackableLink
+              <Link
                 key={product.name}
                 href={product.href}
-                event="product_click"
-                eventData={{ product_name: product.name, source_section: "new-arrivals", page: "homepage-a" }}
-                className={`rounded-2xl overflow-hidden bg-white shadow-sm hover:-translate-y-[3px] transition-transform ${
+                className={`rounded-2xl overflow-hidden bg-white shadow-sm hover:scale-[1.02] hover:shadow-md transition-all duration-200 ${
                   product.featured ? "col-span-2" : ""
                 }`}
               >
@@ -364,17 +371,15 @@ export default function HomePage() {
                 >
                   {product.price}
                 </div>
-              </TrackableLink>
+              </Link>
             ))}
           </div>
 
           {/* Mobile: stacked — 1 featured + 2-up row */}
           <div className="flex flex-col gap-3 md:hidden">
-            <TrackableLink
+            <Link
               href={FEATURED_PRODUCTS[0].href}
-              event="product_click"
-              eventData={{ product_name: FEATURED_PRODUCTS[0].name, source_section: "new-arrivals", page: "homepage-a" }}
-              className="rounded-[14px] overflow-hidden bg-white shadow-sm"
+              className="rounded-[14px] overflow-hidden bg-white shadow-sm hover:scale-[1.02] hover:shadow-md transition-all duration-200"
             >
               <div
                 className="relative h-[200px]"
@@ -393,15 +398,13 @@ export default function HomePage() {
               <div className="px-3 pb-2.5 text-sm font-extrabold" style={{ color: "var(--color-orange)" }}>
                 {FEATURED_PRODUCTS[0].price}
               </div>
-            </TrackableLink>
+            </Link>
             <div className="grid grid-cols-2 gap-3">
               {FEATURED_PRODUCTS.slice(1).map((product) => (
-                <TrackableLink
+                <Link
                   key={product.name}
                   href={product.href}
-                  event="product_click"
-                  eventData={{ product_name: product.name, source_section: "new-arrivals", page: "homepage-a" }}
-                  className="rounded-[14px] overflow-hidden bg-white shadow-sm"
+                  className="rounded-[14px] overflow-hidden bg-white shadow-sm hover:scale-[1.02] hover:shadow-md transition-all duration-200"
                 >
                   <div
                     className="relative h-[140px]"
@@ -415,20 +418,18 @@ export default function HomePage() {
                   <div className="px-3 pb-2.5 text-sm font-extrabold" style={{ color: "var(--color-orange)" }}>
                     {product.price}
                   </div>
-                </TrackableLink>
+                </Link>
               ))}
             </div>
           </div>
 
-          <TrackableLink
+          <Link
             href="/shop"
-            event="hero_cta_click"
-            eventData={{ cta_text: "View all products", destination: "/shop", page: "homepage-a" }}
             className="block text-center mt-5 md:mt-7 text-sm md:text-base font-bold"
             style={{ color: "var(--color-orange)" }}
           >
             View all products &gt;
-          </TrackableLink>
+          </Link>
         </div>
       </section>
 
@@ -439,7 +440,7 @@ export default function HomePage() {
         {/* Desktop: 50/50 split */}
         <div className="hidden md:grid grid-cols-2 min-h-[420px]">
           <div
-            className="flex items-center justify-center text-sm font-semibold text-center p-6"
+            className="flex items-center justify-center text-sm font-semibold text-center p-6 rounded-r-3xl"
             style={{
               background: "linear-gradient(135deg, #FFE0D3 0%, #F5A623 50%, #F27B50 100%)",
               color: "rgba(255,255,255,0.7)",
@@ -515,15 +516,15 @@ export default function HomePage() {
       {/*  ABOUT + NEWSLETTER                                                */}
       {/* ================================================================== */}
       <section>
-        <div className="px-5 py-7 md:py-16 md:max-w-[1200px] md:mx-auto md:px-12">
+        <div className="px-5 py-10 md:py-20 md:max-w-[1200px] md:mx-auto md:px-12">
         <div className="md:grid md:grid-cols-2 md:gap-10 space-y-6 md:space-y-0">
-          {/* About teaser */}
+          {/* About teaser — no card box, floats on section background */}
           <div>
             <p
-              className="text-xs md:text-[13px] font-bold uppercase tracking-[1.5px] mb-2"
+              className="text-xs md:text-sm font-bold uppercase tracking-[1.5px] mb-2 flex items-center gap-2"
               style={{ color: "var(--color-orange)" }}
             >
-              Meet Amy
+              Meet Amy <HeartDoodle className="inline-block" />
             </p>
             <div className="flex gap-4 md:gap-6 items-center">
               <div
@@ -545,18 +546,12 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Newsletter */}
+          {/* Newsletter — warm version */}
           <div
-            className="rounded-2xl md:rounded-2xl p-6 md:p-8"
+            className="rounded-3xl p-6 md:p-8"
             style={{ background: "var(--color-orange-light)" }}
           >
-            <h4 className="text-lg md:text-xl font-extrabold mb-2" style={{ color: "var(--color-text-primary)" }}>
-              Stay in the loop
-            </h4>
-            <p className="text-[13px] md:text-sm mb-4 md:mb-5 leading-normal" style={{ color: "var(--color-text-secondary)" }}>
-              New products, creative ideas, and the occasional discount. No spam, ever.
-            </p>
-            <NewsletterForm />
+            <NewsletterFormWarm />
           </div>
         </div>
         </div>
@@ -566,7 +561,7 @@ export default function HomePage() {
       {/*  INSTAGRAM                                                         */}
       {/* ================================================================== */}
       <section style={{ background: "var(--color-white)" }}>
-      <div className="px-5 py-7 md:py-16 md:max-w-[1200px] md:mx-auto md:px-12">
+      <div className="px-5 py-10 md:py-20 md:max-w-[1200px] md:mx-auto md:px-12">
         <p
           className="text-xs md:text-[13px] font-bold uppercase tracking-[1.5px] mb-1.5 md:mb-2"
           style={{ color: "var(--color-orange)" }}
@@ -607,17 +602,13 @@ export default function HomePage() {
         </div>
 
         {/* Mobile-only follow link */}
-        <TrackableLink
+        <Link
           href="https://instagram.com/amytangerine"
-          event="external_link"
-          eventData={{ destination: "instagram", source_page: "homepage-a" }}
           className="block md:hidden text-center mt-3 text-sm font-bold"
           style={{ color: "var(--color-orange)" }}
-          target="_blank"
-          rel="noopener noreferrer"
         >
           Follow @amytangerine &gt;
-        </TrackableLink>
+        </Link>
       </div>
       </section>
     </main>

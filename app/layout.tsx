@@ -1,16 +1,13 @@
 import React from "react"
 import type { Metadata } from "next"
-import { Nunito_Sans } from "next/font/google"
+import { Epilogue } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
+import Script from "next/script"
 import Nav from "@/components/nav"
 import Footer from "@/components/footer"
 import "./globals.css"
 
-const nunitoSans = Nunito_Sans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  display: "swap",
-})
+const epilogue = Epilogue({ subsets: ["latin"], variable: "--font-sans", display: "swap" })
 
 export const metadata: Metadata = {
   title: "Amy Tangerine",
@@ -31,8 +28,25 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={nunitoSans.variable}>
+    <html lang="en" className={epilogue.variable}>
       <body className="antialiased">
+        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="gtag-init" strategy="afterInteractive">{`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}', {
+                page_title: document.title,
+                send_page_view: true
+              });
+            `}</Script>
+          </>
+        )}
         <Nav />
         {children}
         <Footer />

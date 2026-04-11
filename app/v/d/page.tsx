@@ -3,11 +3,15 @@
 // Inspired by: Jaclyn Johnson video hero + Kerri Rosenthal coordinated density
 
 import Image from "next/image"
+import PageEngagementTracker from "@/components/page-engagement-tracker"
+import VariantTracker from "@/components/variant-tracker"
 import NewsletterForm from "@/components/newsletter-form"
 
 export default function HomepageOptionD() {
   return (
     <main>
+      <PageEngagementTracker page="homepage-d" />
+      <VariantTracker variantId="d" />
       {/* ── Hero ── */}
       <section className="relative w-full h-screen overflow-hidden">
         {/* Background image — treated cinematically */}

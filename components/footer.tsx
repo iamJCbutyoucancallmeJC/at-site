@@ -1,4 +1,7 @@
+"use client"
+
 import Link from "next/link"
+import { trackEvent } from "@/lib/analytics"
 
 const DESKTOP_LINKS = [
   { label: "Shop", href: "/shop" },
@@ -31,6 +34,12 @@ export default function Footer() {
               href={link.href}
               className="text-sm hover:opacity-100 transition-opacity"
               style={{ color: "rgba(255,255,255,0.7)" }}
+              target={link.href.startsWith('http') ? '_blank' : undefined}
+              rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              onClick={() => link.href.startsWith('http')
+                ? trackEvent('external_link', { destination: link.label.toLowerCase(), source_page: 'footer' })
+                : trackEvent('footer_click', { link_text: link.label })
+              }
             >
               {link.label}
             </Link>
@@ -44,7 +53,11 @@ export default function Footer() {
           {MOBILE_LINKS.map((link, i) => (
             <span key={link.href}>
               {i > 0 && <span style={{ color: "rgba(255,255,255,0.4)" }}> &middot; </span>}
-              <Link href={link.href} style={{ color: "rgba(255,255,255,0.7)" }}>
+              <Link
+                href={link.href}
+                style={{ color: "rgba(255,255,255,0.7)" }}
+                onClick={() => trackEvent('footer_click', { link_text: link.label })}
+              >
                 {link.label}
               </Link>
             </span>

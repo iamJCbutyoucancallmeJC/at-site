@@ -3,6 +3,7 @@
 import React, { useState } from "react"
 import Link from "next/link"
 import { Menu, X, ShoppingCart } from "lucide-react"
+import { trackEvent } from "@/lib/analytics"
 
 const NAV_LINKS = [
   { label: "Shop", href: "/shop" },
@@ -19,11 +20,11 @@ export default function Nav() {
       <nav
         className="hidden md:flex items-center h-[72px] px-12 border-b"
         style={{
-          background: "var(--color-cream)",
+          background: "var(--color-white)",
           borderColor: "var(--color-border)",
         }}
       >
-        <Link href="/" className="shrink-0 text-[26px] font-bold italic tracking-tight" style={{ color: "var(--color-tangerine)" }}>
+        <Link href="/" className="shrink-0 text-[26px] font-bold italic tracking-tight" style={{ color: "var(--color-orange)" }}>
           amy tangerine
         </Link>
 
@@ -34,6 +35,7 @@ export default function Nav() {
               href={link.href}
               className="text-base font-semibold transition-colors hover:opacity-80"
               style={{ color: "var(--color-text-primary)" }}
+              onClick={() => trackEvent('nav_click', { link_text: link.label, mobile_or_desktop: 'desktop' })}
             >
               {link.label}
             </Link>
@@ -45,9 +47,10 @@ export default function Nav() {
             href="/happy-mail"
             className="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-full text-base font-bold text-white"
             style={{
-              background: "var(--color-coral)",
-              boxShadow: "0 2px 8px rgba(242,123,80,0.3)",
+              background: "var(--color-orange)",
+              boxShadow: "0 2px 8px rgba(253,137,28,0.3)",
             }}
+            onClick={() => trackEvent('nav_click', { link_text: 'Happy Mail', mobile_or_desktop: 'desktop' })}
           >
             <span className="text-sm">♥</span> Happy Mail
           </Link>
@@ -65,7 +68,7 @@ export default function Nav() {
       <nav
         className="md:hidden sticky top-0 z-50 flex items-center justify-between h-14 px-4 border-b"
         style={{
-          background: "var(--color-cream)",
+          background: "var(--color-white)",
           borderColor: "var(--color-border)",
         }}
       >
@@ -80,7 +83,7 @@ export default function Nav() {
         <Link
           href="/"
           className="absolute left-1/2 -translate-x-1/2 text-xl font-bold italic tracking-tight"
-          style={{ color: "var(--color-tangerine)" }}
+          style={{ color: "var(--color-orange)" }}
         >
           amy tangerine
         </Link>
@@ -98,7 +101,7 @@ export default function Nav() {
       {mobileOpen && (
         <div
           className="md:hidden fixed inset-0 top-14 z-40"
-          style={{ background: "var(--color-cream)" }}
+          style={{ background: "var(--color-white)" }}
         >
           <div className="flex flex-col p-6 gap-2">
             {NAV_LINKS.map((link) => (
@@ -110,7 +113,7 @@ export default function Nav() {
                   color: "var(--color-text-primary)",
                   borderColor: "var(--color-border)",
                 }}
-                onClick={() => setMobileOpen(false)}
+                onClick={() => { setMobileOpen(false); trackEvent('nav_click', { link_text: link.label, mobile_or_desktop: 'mobile' }) }}
               >
                 {link.label}
               </Link>
@@ -119,10 +122,10 @@ export default function Nav() {
               href="/happy-mail"
               className="mt-4 inline-flex items-center justify-center gap-2 py-3 rounded-full text-base font-bold text-white"
               style={{
-                background: "var(--color-coral)",
-                boxShadow: "0 2px 8px rgba(242,123,80,0.3)",
+                background: "var(--color-orange)",
+                boxShadow: "0 2px 8px rgba(253,137,28,0.3)",
               }}
-              onClick={() => setMobileOpen(false)}
+              onClick={() => { setMobileOpen(false); trackEvent('nav_click', { link_text: 'Happy Mail', mobile_or_desktop: 'mobile' }) }}
             >
               <span>♥</span> Happy Mail — $13/mo
             </Link>

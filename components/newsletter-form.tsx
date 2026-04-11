@@ -1,10 +1,15 @@
 "use client"
 
-export default function NewsletterForm() {
+import { trackEvent } from '@/lib/analytics'
+
+export default function NewsletterForm({ sourcePage = 'homepage' }: { sourcePage?: string }) {
   return (
     <form
       className="flex gap-2"
-      onSubmit={(e) => e.preventDefault()}
+      onSubmit={(e) => {
+        e.preventDefault()
+        trackEvent('newsletter_signup', { source_page: sourcePage })
+      }}
     >
       <input
         type="email"
@@ -21,7 +26,7 @@ export default function NewsletterForm() {
         type="submit"
         className="px-5 md:px-7 py-3 md:py-3.5 rounded-lg md:rounded-[10px] text-sm md:text-[15px] font-bold text-white"
         style={{
-          background: "var(--color-coral)",
+          background: "var(--color-orange)",
           fontFamily: "var(--font-sans)",
         }}
       >

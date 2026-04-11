@@ -4,9 +4,8 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import NewsletterForm from "@/components/newsletter-form"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
-import TrackableLink from "@/components/trackable-link"
+import NewsletterForm from "@/components/newsletter-form"
 
 /* -------------------------------------------------------------------------- */
 /*  Static data (Phase 2: pull from Shopify)                                  */
@@ -75,7 +74,7 @@ const FEATURED_PRODUCTS = [
 export default function HomePage() {
   return (
     <main className="min-h-screen" style={{ background: "var(--color-white)" }}>
-      <PageEngagementTracker page="homepage-a" />
+      <PageEngagementTracker page="homepage-b" />
 
       {/* ================================================================== */}
       {/*  HERO                                                              */}
@@ -102,36 +101,40 @@ export default function HomePage() {
           }}
         >
           <h1 className="text-[28px] md:text-5xl font-extrabold text-white leading-tight mb-2 md:mb-2.5 max-w-[600px]">
-            Paper goods that make you smile
+            Craft a life you love
           </h1>
           <p className="text-sm md:text-lg text-white/90 mb-4 md:mb-6 max-w-[500px]">
-            <span className="md:hidden">Stickers, stamps, die cuts, and monthly Happy Mail.</span>
+            <span className="md:hidden">Stickers, stamps, workshops, and monthly Happy Mail.</span>
             <span className="hidden md:inline">
-              Stickers, stamps, die cuts, and monthly Happy Mail: hand-picked creative supplies delivered to your door.
+              Stickers, stamps, workshops, books, and monthly Happy Mail — everything I make to help you create.
             </span>
           </p>
-          <TrackableLink
-            href="/shop"
-            event="hero_cta_click"
-            eventData={{ cta_text: "Shop Now", destination: "/shop", page: "homepage-a" }}
-            className="inline-block px-8 py-3.5 md:px-10 md:py-4 rounded-xl text-base md:text-lg font-bold text-white"
-            style={{
-              background: "var(--color-orange)",
-              boxShadow: "0 4px 16px rgba(253,137,28,0.4)",
-            }}
-          >
-            Shop Now
-          </TrackableLink>
+          <div className="flex gap-3 flex-wrap">
+            <Link
+              href="/shop"
+              className="inline-block px-8 py-3.5 md:px-10 md:py-4 rounded-full text-base md:text-lg font-bold text-white"
+              style={{
+                background: "var(--color-orange)",
+                boxShadow: "0 4px 16px rgba(253,137,28,0.35)",
+              }}
+            >
+              Shop Now
+            </Link>
+            <Link
+              href="/about"
+              className="inline-block px-8 py-3.5 md:px-10 md:py-4 rounded-full text-base md:text-lg font-bold border-2 border-white text-white hover:bg-white/10 transition-colors"
+            >
+              Meet Amy
+            </Link>
+          </div>
         </div>
       </section>
 
       {/* ================================================================== */}
       {/*  HAPPY MAIL BANNER                                                 */}
       {/* ================================================================== */}
-      <TrackableLink
+      <Link
         href="/happy-mail"
-        event="hero_cta_click"
-        eventData={{ cta_text: "Happy Mail Banner", destination: "/happy-mail", page: "homepage-a" }}
         className="block"
         style={{ background: "var(--color-orange)" }}
       >
@@ -177,7 +180,7 @@ export default function HomePage() {
           </div>
           <span className="ml-auto text-white text-lg font-bold">&gt;</span>
         </div>
-      </TrackableLink>
+      </Link>
 
       {/* ================================================================== */}
       {/*  SHOP BY CATEGORY                                                  */}
@@ -199,10 +202,8 @@ export default function HomePage() {
         {/* Desktop: asymmetric — 1 tall left + 2x2 right */}
         <div className="hidden md:grid grid-cols-2 gap-5">
           {/* Tall featured card */}
-          <TrackableLink
+          <Link
             href={CATEGORIES[0].href}
-            event="category_click"
-            eventData={{ category_name: CATEGORIES[0].label, page: "homepage-a" }}
             className="rounded-2xl overflow-hidden bg-white shadow-sm hover:-translate-y-[3px] transition-transform"
             style={{ gridRow: "1 / 3" }}
           >
@@ -217,15 +218,13 @@ export default function HomePage() {
             <div className="px-4 py-3.5 text-[15px] font-bold" style={{ color: "var(--color-text-primary)" }}>
               {CATEGORIES[0].label}
             </div>
-          </TrackableLink>
+          </Link>
           {/* 2x2 sub-grid */}
           <div className="grid grid-cols-2 grid-rows-2 gap-5" style={{ gridRow: "1 / 3" }}>
             {CATEGORIES.slice(1).map((cat) => (
-              <TrackableLink
+              <Link
                 key={cat.label}
                 href={cat.href}
-                event="category_click"
-                eventData={{ category_name: cat.label, page: "homepage-a" }}
                 className="rounded-2xl overflow-hidden bg-white shadow-sm hover:-translate-y-[3px] transition-transform"
               >
                 <div className="relative h-[140px]" style={{ background: cat.gradient }}>
@@ -234,7 +233,7 @@ export default function HomePage() {
                 <div className="px-4 py-3.5 text-[15px] font-bold" style={{ color: "var(--color-text-primary)" }}>
                   {cat.label}
                 </div>
-              </TrackableLink>
+              </Link>
             ))}
           </div>
         </div>
@@ -242,10 +241,8 @@ export default function HomePage() {
         {/* Mobile: stacked editorial — 1 big + 2x1 rows */}
         <div className="flex flex-col gap-3 md:hidden">
           {/* Featured */}
-          <TrackableLink
+          <Link
             href={CATEGORIES[0].href}
-            event="category_click"
-            eventData={{ category_name: CATEGORIES[0].label, page: "homepage-a" }}
             className="rounded-[14px] overflow-hidden bg-white shadow-sm"
           >
             <div className="relative h-[180px]" style={{ background: CATEGORIES[0].gradient }}>
@@ -254,16 +251,14 @@ export default function HomePage() {
             <div className="px-3.5 py-2.5 text-sm font-bold" style={{ color: "var(--color-text-primary)" }}>
               {CATEGORIES[0].label}
             </div>
-          </TrackableLink>
+          </Link>
           {/* Rows of 2 */}
           {[CATEGORIES.slice(1, 3), CATEGORIES.slice(3, 5)].map((row, ri) => (
             <div key={ri} className="grid grid-cols-2 gap-3">
               {row.map((cat) => (
-                <TrackableLink
+                <Link
                   key={cat.label}
                   href={cat.href}
-                  event="category_click"
-                  eventData={{ category_name: cat.label, page: "homepage-a" }}
                   className="rounded-[14px] overflow-hidden bg-white shadow-sm"
                 >
                   <div className="relative h-[110px]" style={{ background: cat.gradient }}>
@@ -272,7 +267,7 @@ export default function HomePage() {
                   <div className="px-3.5 py-2.5 text-sm font-bold" style={{ color: "var(--color-text-primary)" }}>
                     {cat.label}
                   </div>
-                </TrackableLink>
+                </Link>
               ))}
             </div>
           ))}
@@ -333,11 +328,9 @@ export default function HomePage() {
           {/* Desktop: 4-col grid, featured spans 2 */}
           <div className="hidden md:grid grid-cols-4 gap-5">
             {FEATURED_PRODUCTS.map((product) => (
-              <TrackableLink
+              <Link
                 key={product.name}
                 href={product.href}
-                event="product_click"
-                eventData={{ product_name: product.name, source_section: "new-arrivals", page: "homepage-a" }}
                 className={`rounded-2xl overflow-hidden bg-white shadow-sm hover:-translate-y-[3px] transition-transform ${
                   product.featured ? "col-span-2" : ""
                 }`}
@@ -364,16 +357,14 @@ export default function HomePage() {
                 >
                   {product.price}
                 </div>
-              </TrackableLink>
+              </Link>
             ))}
           </div>
 
           {/* Mobile: stacked — 1 featured + 2-up row */}
           <div className="flex flex-col gap-3 md:hidden">
-            <TrackableLink
+            <Link
               href={FEATURED_PRODUCTS[0].href}
-              event="product_click"
-              eventData={{ product_name: FEATURED_PRODUCTS[0].name, source_section: "new-arrivals", page: "homepage-a" }}
               className="rounded-[14px] overflow-hidden bg-white shadow-sm"
             >
               <div
@@ -393,14 +384,12 @@ export default function HomePage() {
               <div className="px-3 pb-2.5 text-sm font-extrabold" style={{ color: "var(--color-orange)" }}>
                 {FEATURED_PRODUCTS[0].price}
               </div>
-            </TrackableLink>
+            </Link>
             <div className="grid grid-cols-2 gap-3">
               {FEATURED_PRODUCTS.slice(1).map((product) => (
-                <TrackableLink
+                <Link
                   key={product.name}
                   href={product.href}
-                  event="product_click"
-                  eventData={{ product_name: product.name, source_section: "new-arrivals", page: "homepage-a" }}
                   className="rounded-[14px] overflow-hidden bg-white shadow-sm"
                 >
                   <div
@@ -415,20 +404,156 @@ export default function HomePage() {
                   <div className="px-3 pb-2.5 text-sm font-extrabold" style={{ color: "var(--color-orange)" }}>
                     {product.price}
                   </div>
-                </TrackableLink>
+                </Link>
               ))}
             </div>
           </div>
 
-          <TrackableLink
+          <Link
             href="/shop"
-            event="hero_cta_click"
-            eventData={{ cta_text: "View all products", destination: "/shop", page: "homepage-a" }}
-            className="block text-center mt-5 md:mt-7 text-sm md:text-base font-bold"
+            className="block text-center mt-5 md:mt-7 text-sm md:text-base font-bold hover:underline"
             style={{ color: "var(--color-orange)" }}
           >
-            View all products &gt;
-          </TrackableLink>
+            View all products →
+          </Link>
+        </div>
+      </section>
+
+      {/* ================================================================== */}
+      {/*  AMY'S WORLD                                                       */}
+      {/* ================================================================== */}
+
+      {/* --- Books Block --- */}
+      <section className="py-10 md:py-20">
+        <div className="px-5 md:max-w-[1200px] md:mx-auto md:px-12">
+          <div className="md:grid md:grid-cols-2 md:gap-16 md:items-center">
+            {/* Book cover */}
+            <div className="flex justify-center mb-6 md:mb-0">
+              <div
+                className="w-[200px] h-[280px] md:w-[260px] md:h-[360px] rounded-lg flex items-center justify-center text-sm font-semibold"
+                style={{
+                  background: "linear-gradient(135deg, #FFECD2, #FD891C)",
+                  color: "rgba(255,255,255,0.7)",
+                  boxShadow: "8px 12px 32px rgba(0,0,0,0.15)",
+                }}
+              >
+                [Making Memories book cover]
+              </div>
+            </div>
+            {/* Text */}
+            <div>
+              <p
+                className="text-xs md:text-sm font-bold uppercase tracking-[1.5px] mb-2"
+                style={{ color: "var(--color-orange)" }}
+              >
+                Amy&apos;s Book
+              </p>
+              <h3
+                className="text-2xl md:text-[32px] font-extrabold leading-tight mb-3"
+                style={{ color: "var(--color-text-primary)" }}
+              >
+                Making Memories
+              </h3>
+              <p
+                className="text-sm md:text-base leading-relaxed mb-6"
+                style={{ color: "var(--color-text-secondary)" }}
+              >
+                Practical and fun ideas to start making memories today. Amy&apos;s guide to unlocking creativity and connection through hands-on projects the whole family can enjoy.
+              </p>
+              <a
+                href="https://www.amazon.com/dp/0744026555"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block px-7 py-3 rounded-full text-base font-bold text-white"
+                style={{
+                  background: "var(--color-orange)",
+                  boxShadow: "0 4px 12px rgba(253,137,28,0.3)",
+                }}
+              >
+                Order on Amazon →
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- Workshops Block --- */}
+      <section className="py-10 md:py-20" style={{ background: "var(--color-gray-light)" }}>
+        <div className="px-5 md:max-w-[1200px] md:mx-auto md:px-12">
+          <div className="md:grid md:grid-cols-2 md:gap-16 md:items-center">
+            {/* Text (left on desktop) */}
+            <div className="mb-6 md:mb-0 md:order-1">
+              <p
+                className="text-xs md:text-sm font-bold uppercase tracking-[1.5px] mb-2"
+                style={{ color: "var(--color-teal)" }}
+              >
+                Online Workshops
+              </p>
+              <h3
+                className="text-2xl md:text-[32px] font-extrabold leading-tight mb-3"
+                style={{ color: "var(--color-text-primary)" }}
+              >
+                Learn something new
+              </h3>
+              <p
+                className="text-sm md:text-base leading-relaxed mb-6"
+                style={{ color: "var(--color-text-secondary)" }}
+              >
+                Discover new techniques and find the joy in this beautiful community. Give yourself permission to learn, to play, and to create without judgment.
+              </p>
+              <Link
+                href="/workshops"
+                className="inline-block px-7 py-3 rounded-full text-base font-bold border-2 transition-colors"
+                style={{
+                  borderColor: "var(--color-teal)",
+                  color: "var(--color-teal)",
+                }}
+              >
+                Browse Workshops
+              </Link>
+            </div>
+            {/* Image (right on desktop) */}
+            <div className="md:order-2">
+              <div
+                className="w-full h-[220px] md:h-[320px] rounded-2xl flex items-center justify-center text-sm font-semibold"
+                style={{
+                  background: "linear-gradient(135deg, #D5F0F0, #00ADB3)",
+                  color: "rgba(255,255,255,0.7)",
+                }}
+              >
+                [Workshop photo: Amy teaching, students crafting]
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- Podcast Banner --- */}
+      <section
+        className="py-5 md:py-6"
+        style={{ background: "var(--color-teal)" }}
+      >
+        <div className="px-5 md:max-w-[1200px] md:mx-auto md:px-12 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+          <div>
+            <h3 className="text-base md:text-lg font-extrabold text-white">
+              Listen to WorkParty — Amy&apos;s top-rated podcast
+            </h3>
+            <p className="text-sm text-white/80">
+              Real talk on creativity, business, and building a life you love.
+            </p>
+          </div>
+          <a
+            href="https://podcasts.apple.com/us/podcast/workparty/id1404548949"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-6 py-2.5 rounded-full text-sm font-bold whitespace-nowrap"
+            style={{
+              background: "var(--color-white)",
+              color: "var(--color-teal)",
+            }}
+          >
+            Listen Now
+          </a>
         </div>
       </section>
 
@@ -462,10 +587,10 @@ export default function HomePage() {
             </p>
             <Link
               href="/photobooth"
-              className="self-start inline-block px-9 py-3.5 rounded-[10px] text-base font-bold text-white"
+              className="self-start inline-block px-9 py-3.5 rounded-full text-base font-bold border-2 transition-colors"
               style={{
-                background: "var(--color-orange)",
-                boxShadow: "0 4px 12px rgba(253,137,28,0.3)",
+                borderColor: "var(--color-orange)",
+                color: "var(--color-orange)",
               }}
             >
               Learn more
@@ -499,10 +624,10 @@ export default function HomePage() {
             </p>
             <Link
               href="/photobooth"
-              className="inline-block px-7 py-3 rounded-[10px] text-[15px] font-bold text-white"
+              className="inline-block px-7 py-3 rounded-full text-[15px] font-bold border-2 transition-colors"
               style={{
-                background: "var(--color-orange)",
-                boxShadow: "0 4px 12px rgba(253,137,28,0.3)",
+                borderColor: "var(--color-orange)",
+                color: "var(--color-orange)",
               }}
             >
               Learn more
@@ -536,10 +661,10 @@ export default function HomePage() {
                 [Amy]
               </div>
               <div className="text-sm md:text-[15px] leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-                <strong style={{ color: "var(--color-text-primary)" }}>Hi, I&apos;m Amy!</strong> I make paper goods that bring a little sunshine to your day. Every sticker, stamp, and Happy Mail envelope is designed with love in Los Angeles.
+                <strong style={{ color: "var(--color-text-primary)" }}>Hi, I&apos;m Amy!</strong> I&apos;m a maker, author, mom, and your creative guide. I believe everyone is creative and has a story to tell. Everything I make — from stickers to workshops — is designed to help you craft a life you love.
                 <br />
-                <Link href="/about" className="inline-block mt-2 text-sm md:text-[15px] font-bold" style={{ color: "var(--color-orange)" }}>
-                  More about Amy &gt;
+                <Link href="/about" className="inline-block mt-2 text-sm md:text-[15px] font-bold hover:underline" style={{ color: "var(--color-orange)" }}>
+                  More about Amy →
                 </Link>
               </div>
             </div>
@@ -607,17 +732,13 @@ export default function HomePage() {
         </div>
 
         {/* Mobile-only follow link */}
-        <TrackableLink
+        <Link
           href="https://instagram.com/amytangerine"
-          event="external_link"
-          eventData={{ destination: "instagram", source_page: "homepage-a" }}
           className="block md:hidden text-center mt-3 text-sm font-bold"
           style={{ color: "var(--color-orange)" }}
-          target="_blank"
-          rel="noopener noreferrer"
         >
           Follow @amytangerine &gt;
-        </TrackableLink>
+        </Link>
       </div>
       </section>
     </main>

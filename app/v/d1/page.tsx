@@ -5,10 +5,14 @@
 import Image from "next/image"
 import NewsletterForm from "@/components/newsletter-form"
 import { SquigglyUnderline, TangerineDoodle } from "@/components/doodles"
+import PageEngagementTracker from "@/components/page-engagement-tracker"
+import VariantTracker from "@/components/variant-tracker"
 
 export default function HomepageOptionD1() {
   return (
     <main>
+      <PageEngagementTracker page="homepage-d1" />
+      <VariantTracker variantId="d1" />
       {/* ── Hero ── */}
       <section className="relative w-full h-screen overflow-hidden">
         {/* Background image — treated cinematically */}

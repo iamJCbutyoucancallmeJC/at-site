@@ -4,10 +4,14 @@
 
 import Image from "next/image"
 import NewsletterForm from "@/components/newsletter-form"
+import PageEngagementTracker from "@/components/page-engagement-tracker"
+import VariantTracker from "@/components/variant-tracker"
 
 export default function HomepageOptionD2() {
   return (
     <main>
+      <PageEngagementTracker page="homepage-d2" />
+      <VariantTracker variantId="d2" />
       {/* ── Hero — Promotion Focus ── */}
       <section className="relative w-full h-screen overflow-hidden">
         {/* Background image */}
