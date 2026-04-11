@@ -10,7 +10,7 @@ export default async function ShopPage() {
   // const products = await getAllProducts()
 
   return (
-    <main className="min-h-screen p-8" style={{ background: "var(--color-cream)" }}>
+    <main className="min-h-screen p-8" style={{ background: "var(--color-white)" }}>
       <h1 className="text-3xl font-bold mb-6" style={{ color: "var(--color-text-primary)" }}>
         Shop
       </h1>

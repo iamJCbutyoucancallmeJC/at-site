@@ -1,21 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  /* Amy Tangerine brand tokens */
-  --color-coral: #F27B50;
-  --color-coral-dark: #E06A42;
-  --color-coral-light: #FFF0EB;
-  --color-tangerine: #F5A623;
-  --color-cream: #FFF9F5;
-  --color-cream-dark: #F5EDE7;
-  --color-white: #FFFFFF;
-  --color-text-primary: #2D2D2D;
-  --color-text-secondary: #6B6B6B;
-  --color-teal: #3BBFA0;
-  --color-border: #E8E0DA;
+  /* Amy Tangerine — REAL brand tokens (pulled from amytangerine.com April 2026) */
+  --color-orange: #FD891C;          /* THE brand color. Links, CTAs, accents. One color, not two. */
+  --color-orange-dark: #E57510;     /* Hover state for orange */
+  --color-orange-light: #FFF5FA;    /* Light pink accent bg (from AT site) */
+  --color-teal: #00ADB3;            /* Secondary accent. Workshop buttons, some headings. */
+  --color-teal-dark: #009399;       /* Hover state for teal */
+  --color-white: #FFFFFF;           /* Page background — AT uses pure white, not cream */
+  --color-gray-light: #F3F5F7;     /* Light gray section bg (from AT site) */
+  --color-text-primary: #000000;    /* Body text — AT uses true black */
+  --color-text-secondary: #555555;  /* Secondary text — slightly softer */
+  --color-border: #E5E5E5;          /* Borders and dividers */
 
   /* Font */
-  --font-sans: "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Epilogue", ui-sans-serif, system-ui, sans-serif;
 }
 
 html {
@@ -23,7 +22,7 @@ html {
 }
 
 body {
-  background-color: var(--color-cream);
+  background-color: var(--color-white);
   color: var(--color-text-primary);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;

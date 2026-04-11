@@ -6,7 +6,7 @@
 
 export default function HappyMailPage() {
   return (
-    <main className="min-h-screen" style={{ background: "var(--color-cream)" }}>
+    <main className="min-h-screen" style={{ background: "var(--color-white)" }}>
 
       {/* Hero */}
       <section className="px-6 py-16 text-center max-w-2xl mx-auto">
@@ -26,8 +26,8 @@ export default function HappyMailPage() {
             <div className="text-sm" style={{ color: "var(--color-text-secondary)" }}>/month</div>
             <div className="text-xs mt-2" style={{ color: "var(--color-text-secondary)" }}>Renews monthly</div>
           </div>
-          <div className="border-2 rounded-2xl p-6 text-left min-w-[160px]" style={{ borderColor: "var(--color-coral)", background: "var(--color-white)" }}>
-            <div className="text-sm font-semibold mb-1" style={{ color: "var(--color-coral)" }}>6 Months</div>
+          <div className="border-2 rounded-2xl p-6 text-left min-w-[160px]" style={{ borderColor: "var(--color-orange)", background: "var(--color-white)" }}>
+            <div className="text-sm font-semibold mb-1" style={{ color: "var(--color-orange)" }}>6 Months</div>
             <div className="text-3xl font-bold" style={{ color: "var(--color-text-primary)" }}>$66</div>
             <div className="text-sm" style={{ color: "var(--color-text-secondary)" }}>one payment</div>
             <div className="text-xs mt-2" style={{ color: "var(--color-teal)" }}>Save $12</div>
@@ -38,13 +38,13 @@ export default function HappyMailPage() {
         <div className="flex gap-3 justify-center flex-wrap mb-4">
           <button
             className="px-8 py-3 rounded-full font-semibold text-white"
-            style={{ background: "var(--color-coral)" }}
+            style={{ background: "var(--color-orange)" }}
           >
             Subscribe Monthly — $13/mo
           </button>
           <button
             className="px-8 py-3 rounded-full font-semibold border-2"
-            style={{ borderColor: "var(--color-coral)", color: "var(--color-coral)" }}
+            style={{ borderColor: "var(--color-orange)", color: "var(--color-orange)" }}
           >
             Get 6 Months — $66
           </button>
@@ -87,7 +87,7 @@ export default function HappyMailPage() {
           ].map((step) => (
             <div key={step.n} className="flex gap-4 items-start">
               <div className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-white flex-shrink-0"
-                style={{ background: "var(--color-coral)" }}>
+                style={{ background: "var(--color-orange)" }}>
                 {step.n}
               </div>
               <div>
@@ -140,11 +140,11 @@ export default function HappyMailPage() {
       </section>
 
       {/* Bottom CTA */}
-      <section className="px-6 py-16 text-center" style={{ background: "var(--color-coral)" }}>
+      <section className="px-6 py-16 text-center" style={{ background: "var(--color-orange)" }}>
         <h2 className="text-3xl font-bold mb-4 text-white">Ready to get happy mail?</h2>
         <p className="text-white/80 mb-8">Join subscribers already getting a monthly package from Amy.</p>
         <div className="flex gap-3 justify-center flex-wrap">
-          <button className="px-8 py-3 rounded-full font-semibold bg-white" style={{ color: "var(--color-coral)" }}>
+          <button className="px-8 py-3 rounded-full font-semibold bg-white" style={{ color: "var(--color-orange)" }}>
             Subscribe Monthly — $13/mo
           </button>
           <button className="px-8 py-3 rounded-full font-semibold border-2 border-white text-white">

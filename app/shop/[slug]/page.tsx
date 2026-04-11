@@ -12,7 +12,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
   // if (!product) notFound()
 
   return (
-    <main className="min-h-screen p-8" style={{ background: "var(--color-cream)" }}>
+    <main className="min-h-screen p-8" style={{ background: "var(--color-white)" }}>
       <p style={{ color: "var(--color-text-secondary)" }}>
         Product: <strong>{params.slug}</strong> — loads once Shopify is connected.
       </p>

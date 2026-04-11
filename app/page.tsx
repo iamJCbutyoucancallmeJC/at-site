@@ -1,638 +1,286 @@
-// Homepage v2 — full build per wireframes/homepage-mobile.html + homepage-desktop.html
-// Sections: Hero, HM Banner, Categories, Editorial Break, New Arrivals,
-//           Feature Spotlight, About + Newsletter, Instagram, Footer (in layout)
+// Homepage — Production (Option D3: Editorial + Color)
+// Hero image path: /images/hero/homepage-hero.webp — swap when Amy provides final shot
+// Design: teal category bg, orange newsletter panel, teal Instagram bar, orange accent strip
 
 import Image from "next/image"
-import Link from "next/link"
 import NewsletterForm from "@/components/newsletter-form"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 import TrackableLink from "@/components/trackable-link"
 
-/* -------------------------------------------------------------------------- */
-/*  Static data (Phase 2: pull from Shopify)                                  */
-/* -------------------------------------------------------------------------- */
-
 const CATEGORIES = [
-  {
-    label: "New Arrivals",
-    href: "/shop?category=new",
-    image: "/images/products/juicybitsstickers-happyedition/1.jpg",
-    gradient: "linear-gradient(135deg, #FFECD2, #FCB69F)",
-    featured: true,
-  },
-  {
-    label: "Stickers & Dies",
-    href: "/shop?category=stickers",
-    image: "/images/products/hearthealinghappiness-sticker-book/1.jpg",
-    gradient: "linear-gradient(135deg, #D4EDDA, #A8E6CF)",
-  },
-  {
-    label: "Stamps",
-    href: "/shop?category=stamps",
-    image: "/images/products/moody2stamp4x6/1.jpg",
-    gradient: "linear-gradient(135deg, #E8D5F5, #D1B3F0)",
-  },
-  {
-    label: "Digital",
-    href: "/shop?category=digital",
-    image: "/images/products/mini-kit-embellishments/1.jpg",
-    gradient: "linear-gradient(135deg, #D5E8F5, #A8D0E6)",
-  },
-  {
-    label: "Bundles — Save",
-    href: "/shop?category=bundles",
-    image: "/images/products/tn-bundle-a/1.jpg",
-    gradient: "linear-gradient(135deg, #3BBFA0, #2DA88A)",
-  },
+  { name: "Stickers", href: "/shop?category=stickers", img: "/images/products/hearthealinghappiness-sticker-book/1.jpg" },
+  { name: "Die Cuts", href: "/shop?category=die-cuts", img: "/images/products/juicybitsstickers-happyedition/1.jpg" },
+  { name: "Stamps", href: "/shop?category=stamps", img: "/images/products/moody2stamp4x6/1.jpg" },
+  { name: "Happy Mail", href: "/happy-mail", img: "/images/products/mini-kit-embellishments/1.jpg" },
 ]
 
-const FEATURED_PRODUCTS = [
-  {
-    name: "Heart Healing Happiness Sticker Book",
-    price: "$16.00",
-    image: "/images/products/hearthealinghappiness-sticker-book/1.jpg",
-    href: "/shop/hearthealinghappiness-sticker-book",
-    featured: true,
-  },
-  {
-    name: "Squeeze the Day Stamp Set 4x6",
-    price: "$14.00",
-    image: "/images/products/squeezethedaystamp4x6/1.jpg",
-    href: "/shop/squeezethedaystamp4x6",
-  },
-  {
-    name: "Juicy Bits Stickers — Happy Edition",
-    price: "$8.50",
-    image: "/images/products/juicybitsstickers-happyedition/1.jpg",
-    href: "/shop/juicybitsstickers-happyedition",
-  },
+const NEW_ARRIVALS = [
+  { name: "Heart Healing Happiness Sticker Book", price: "$16.00", img: "/images/products/hearthealinghappiness-sticker-book/1.jpg", href: "/shop/hearthealinghappiness-sticker-book" },
+  { name: "Juicy Bits — Happy Edition", price: "$8.50", img: "/images/products/juicybitsstickers-happyedition/1.jpg", href: "/shop/juicybitsstickers-happyedition" },
+  { name: "Squeeze the Day Stamp 4x6", price: "$14.00", img: "/images/products/squeezethedaystamp4x6/1.jpg", href: "/shop/squeezethedaystamp4x6" },
+  { name: "Juicy Bits — Cozy Edition", price: "$8.50", img: "/images/products/juicybitsstickers-cozyedition/1.jpg", href: "/shop/juicybitsstickers-cozyedition" },
+  { name: "Icons Stamp Set 4x6", price: "$14.00", img: "/images/products/icons-stamp-set-4x6-pre-order-ships-mid-november/1.jpg", href: "/shop/icons-stamp-set-4x6" },
+  { name: "Make Your Mark", price: "$12.00", img: "/images/products/preorder-make-your-mark/1.jpg", href: "/shop/make-your-mark" },
 ]
 
-/* -------------------------------------------------------------------------- */
-/*  Page                                                                      */
-/* -------------------------------------------------------------------------- */
+const IG_IMAGES = [
+  "/images/products/hearthealinghappiness-sticker-book/2.jpg",
+  "/images/products/juicybitsstickers-happyedition/2.jpg",
+  "/images/products/squeezethedaystamp4x6/1.jpg",
+  "/images/products/mini-kit-embellishments/1.jpg",
+  "/images/products/mini-kit-washi/1.jpg",
+  "/images/products/juicybitsstickers-cozyedition/2.jpg",
+]
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen" style={{ background: "var(--color-white)" }}>
-      <PageEngagementTracker page="homepage-a" />
+    <main>
+      <PageEngagementTracker page="homepage" />
 
-      {/* ================================================================== */}
-      {/*  HERO                                                              */}
-      {/* ================================================================== */}
-      <section className="relative w-full h-[460px] md:h-[600px] overflow-hidden">
-        {/* Hero image */}
-        <div
-          className="absolute inset-0"
-          style={{ background: "linear-gradient(160deg, #FFECD2 0%, #FD891C 100%)" }}
-        />
+      {/* ── Hero ── */}
+      <section className="relative w-full h-screen overflow-hidden">
         <Image
           src="/images/hero/homepage-hero.webp"
-          alt="Amy Tangerine — craft supplies and creative community"
+          alt="Amy Tangerine — craft supplies for a colorful life"
           fill
+          priority
           className="object-cover"
           style={{ objectPosition: "50% 20%" }}
-          priority
+          sizes="100vw"
         />
-        {/* Text overlay */}
-        <div
-          className="absolute bottom-0 left-0 right-0 px-5 pb-7 pt-32 md:px-[72px] md:pb-14 md:pt-40"
-          style={{
-            background: "linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%)",
-          }}
-        >
-          <h1 className="text-[28px] md:text-5xl font-extrabold text-white leading-tight mb-2 md:mb-2.5 max-w-[600px]">
-            Paper goods that make you smile
+        <div className="absolute inset-0 bg-black/20" />
+        <div className="absolute inset-0 flex flex-col items-center justify-end pb-16 md:pb-24 px-6 text-center">
+          <h1
+            className="text-[56px] md:text-[120px] lg:text-[160px] font-bold tracking-tight leading-none text-white"
+            style={{ fontFamily: "var(--font-sans)" }}
+          >
+            AMY TANGERINE
           </h1>
-          <p className="text-sm md:text-lg text-white/90 mb-4 md:mb-6 max-w-[500px]">
-            <span className="md:hidden">Stickers, stamps, die cuts, and monthly Happy Mail.</span>
-            <span className="hidden md:inline">
-              Stickers, stamps, die cuts, and monthly Happy Mail: hand-picked creative supplies delivered to your door.
-            </span>
+          <p className="mt-3 md:mt-4 text-[13px] md:text-[15px] uppercase tracking-[0.2em] text-white/70">
+            Craft supplies for a colorful life
           </p>
           <TrackableLink
             href="/shop"
             event="hero_cta_click"
-            eventData={{ cta_text: "Shop Now", destination: "/shop", page: "homepage-a" }}
-            className="inline-block px-8 py-3.5 md:px-10 md:py-4 rounded-xl text-base md:text-lg font-bold text-white"
-            style={{
-              background: "var(--color-orange)",
-              boxShadow: "0 4px 16px rgba(253,137,28,0.4)",
-            }}
+            eventData={{ cta_text: "Shop Now", destination: "/shop", page: "homepage" }}
+            className="mt-6 md:mt-8 inline-block px-8 py-3 text-[13px] md:text-[14px] uppercase tracking-[0.15em] font-semibold rounded-full border-2 border-white text-white hover:bg-white hover:text-black transition-all duration-300"
           >
             Shop Now
           </TrackableLink>
         </div>
       </section>
 
-      {/* ================================================================== */}
-      {/*  HAPPY MAIL BANNER                                                 */}
-      {/* ================================================================== */}
-      <TrackableLink
-        href="/happy-mail"
-        event="hero_cta_click"
-        eventData={{ cta_text: "Happy Mail Banner", destination: "/happy-mail", page: "homepage-a" }}
-        className="block"
-        style={{ background: "var(--color-orange)" }}
+      {/* ── Happy Mail Banner ── */}
+      <section
+        className="py-4 md:py-5 text-center border-y-2"
+        style={{ background: "var(--color-orange)", borderColor: "var(--color-teal)" }}
       >
-        {/* Desktop */}
-        <div className="hidden md:flex items-center px-[72px] py-5">
-        <div className="flex items-center gap-5 max-w-[1200px] mx-auto w-full">
-          <div
-            className="w-12 h-12 min-w-[48px] rounded-xl flex items-center justify-center text-[22px] text-white"
-            style={{ background: "rgba(255,255,255,0.2)" }}
+        <p className="text-[13px] md:text-[15px] uppercase tracking-[0.15em] font-semibold text-white">
+          Happy Mail — Monthly craft subscription{" "}
+          <TrackableLink
+            href="/happy-mail"
+            event="hero_cta_click"
+            eventData={{ cta_text: "Happy Mail Banner Subscribe", destination: "/happy-mail", page: "homepage" }}
+            className="ml-3 underline underline-offset-2 hover:opacity-80 transition-opacity"
           >
-            ♥
-          </div>
-          <div>
-            <h3 className="text-lg font-extrabold text-white">Happy Mail — $13/mo</h3>
-            <span className="text-sm" style={{ color: "rgba(255,255,255,0.85)" }}>
-              Exclusive stickers, die cuts, and surprises delivered every month. 287 subscribers and counting.
-            </span>
-          </div>
-          <span
-            className="ml-auto px-7 py-2.5 rounded-lg text-[15px] font-bold"
-            style={{
-              background: "var(--color-white)",
-              color: "var(--color-orange)",
-            }}
-          >
-            Learn More
-          </span>
-        </div>
-        </div>
-        {/* Mobile */}
-        <div className="flex md:hidden items-center gap-3.5 px-5 py-4">
-          <div
-            className="w-[52px] h-[52px] min-w-[52px] rounded-xl flex items-center justify-center text-[22px] text-white"
-            style={{ background: "rgba(255,255,255,0.2)" }}
-          >
-            ♥
-          </div>
-          <div>
-            <h3 className="text-base font-extrabold text-white mb-0.5">Happy Mail — $13/mo</h3>
-            <p className="text-[13px]" style={{ color: "rgba(255,255,255,0.85)" }}>
-              Exclusive stickers + surprises, every month
-            </p>
-          </div>
-          <span className="ml-auto text-white text-lg font-bold">&gt;</span>
-        </div>
-      </TrackableLink>
-
-      {/* ================================================================== */}
-      {/*  SHOP BY CATEGORY                                                  */}
-      {/* ================================================================== */}
-      <section className="px-5 py-7 md:py-16 md:max-w-[1200px] md:mx-auto md:px-12">
-        <p
-          className="text-xs md:text-[13px] font-bold uppercase tracking-[1.5px] mb-1.5 md:mb-2"
-          style={{ color: "var(--color-orange)" }}
-        >
-          Shop
+            Subscribe
+          </TrackableLink>
         </p>
-        <h2
-          className="text-xl md:text-[28px] font-extrabold leading-tight mb-3.5 md:mb-7"
-          style={{ color: "var(--color-text-primary)" }}
-        >
-          Browse by category
+      </section>
+
+      {/* ── Shop by Category ── */}
+      <section className="px-4 md:px-10 pt-8 md:pt-12 pb-8 md:pb-10" style={{ background: "var(--color-teal)" }}>
+        <h2 className="text-[15px] md:text-[18px] uppercase tracking-[0.12em] font-semibold text-center mb-5 md:mb-6 text-white">
+          Shop by Category
         </h2>
-
-        {/* Desktop: asymmetric — 1 tall left + 2x2 right */}
-        <div className="hidden md:grid grid-cols-2 gap-5">
-          {/* Tall featured card */}
-          <TrackableLink
-            href={CATEGORIES[0].href}
-            event="category_click"
-            eventData={{ category_name: CATEGORIES[0].label, page: "homepage-a" }}
-            className="rounded-2xl overflow-hidden bg-white shadow-sm hover:-translate-y-[3px] transition-transform"
-            style={{ gridRow: "1 / 3" }}
-          >
-            <div className="relative h-[340px]" style={{ background: CATEGORIES[0].gradient }}>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
+          {CATEGORIES.map((cat) => (
+            <TrackableLink
+              key={cat.name}
+              href={cat.href}
+              event="category_click"
+              eventData={{ category_name: cat.name, page: "homepage" }}
+              className="group relative block aspect-square overflow-hidden rounded-md"
+            >
               <Image
-                src={CATEGORIES[0].image}
-                alt={CATEGORIES[0].label}
+                src={cat.img}
+                alt={cat.name}
                 fill
-                className="object-cover"
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                sizes="(max-width: 768px) 50vw, 25vw"
               />
-            </div>
-            <div className="px-4 py-3.5 text-[15px] font-bold" style={{ color: "var(--color-text-primary)" }}>
-              {CATEGORIES[0].label}
-            </div>
-          </TrackableLink>
-          {/* 2x2 sub-grid */}
-          <div className="grid grid-cols-2 grid-rows-2 gap-5" style={{ gridRow: "1 / 3" }}>
-            {CATEGORIES.slice(1).map((cat) => (
-              <TrackableLink
-                key={cat.label}
-                href={cat.href}
-                event="category_click"
-                eventData={{ category_name: cat.label, page: "homepage-a" }}
-                className="rounded-2xl overflow-hidden bg-white shadow-sm hover:-translate-y-[3px] transition-transform"
-              >
-                <div className="relative h-[140px]" style={{ background: cat.gradient }}>
-                  <Image src={cat.image} alt={cat.label} fill className="object-cover" />
-                </div>
-                <div className="px-4 py-3.5 text-[15px] font-bold" style={{ color: "var(--color-text-primary)" }}>
-                  {cat.label}
-                </div>
-              </TrackableLink>
-            ))}
-          </div>
-        </div>
-
-        {/* Mobile: stacked editorial — 1 big + 2x1 rows */}
-        <div className="flex flex-col gap-3 md:hidden">
-          {/* Featured */}
-          <TrackableLink
-            href={CATEGORIES[0].href}
-            event="category_click"
-            eventData={{ category_name: CATEGORIES[0].label, page: "homepage-a" }}
-            className="rounded-[14px] overflow-hidden bg-white shadow-sm"
-          >
-            <div className="relative h-[180px]" style={{ background: CATEGORIES[0].gradient }}>
-              <Image src={CATEGORIES[0].image} alt={CATEGORIES[0].label} fill className="object-cover" />
-            </div>
-            <div className="px-3.5 py-2.5 text-sm font-bold" style={{ color: "var(--color-text-primary)" }}>
-              {CATEGORIES[0].label}
-            </div>
-          </TrackableLink>
-          {/* Rows of 2 */}
-          {[CATEGORIES.slice(1, 3), CATEGORIES.slice(3, 5)].map((row, ri) => (
-            <div key={ri} className="grid grid-cols-2 gap-3">
-              {row.map((cat) => (
-                <TrackableLink
-                  key={cat.label}
-                  href={cat.href}
-                  event="category_click"
-                  eventData={{ category_name: cat.label, page: "homepage-a" }}
-                  className="rounded-[14px] overflow-hidden bg-white shadow-sm"
-                >
-                  <div className="relative h-[110px]" style={{ background: cat.gradient }}>
-                    <Image src={cat.image} alt={cat.label} fill className="object-cover" />
-                  </div>
-                  <div className="px-3.5 py-2.5 text-sm font-bold" style={{ color: "var(--color-text-primary)" }}>
-                    {cat.label}
-                  </div>
-                </TrackableLink>
-              ))}
-            </div>
+              <div className="absolute inset-0 bg-black/15 group-hover:bg-black/25 transition-colors duration-300" />
+              <span className="absolute bottom-3 left-3 md:bottom-4 md:left-4 text-[13px] md:text-[15px] uppercase tracking-[0.1em] font-semibold text-white">
+                {cat.name}
+              </span>
+            </TrackableLink>
           ))}
         </div>
       </section>
 
-      {/* ================================================================== */}
-      {/*  EDITORIAL IMAGE BREAK                                             */}
-      {/* ================================================================== */}
-      <section className="relative w-full h-[280px] md:h-[360px] overflow-hidden">
-        <div
-          className="absolute inset-0"
-          style={{
-            background: "linear-gradient(135deg, #FCB69F 0%, #FFECD2 50%, #F5A623 100%)",
-          }}
+      {/* ── Editorial Break ── */}
+      <div className="relative w-full h-[280px] md:h-[400px] mt-8 md:mt-10">
+        <Image
+          src="/images/products/juicybitsstickers-cozyedition/1.jpg"
+          alt="Amy Tangerine craft styling"
+          fill
+          className="object-cover"
+          sizes="100vw"
         />
-        <div
-          className="absolute inset-0 flex items-center justify-center text-center px-4"
-          style={{ color: "rgba(255,255,255,0.6)" }}
+      </div>
+
+      {/* ── New Arrivals ── */}
+      <section className="pt-8 md:pt-10 pb-0">
+        <h2
+          className="text-[15px] md:text-[18px] uppercase tracking-[0.12em] font-semibold text-center mb-5 md:mb-6 px-4"
+          style={{ color: "var(--color-text-primary)" }}
         >
-          <p className="text-xs md:text-sm font-semibold">
-            [Lifestyle photo: Amy at desk surrounded by product, mid-create]
-          </p>
-        </div>
+          New Arrivals
+        </h2>
         <div
-          className="absolute bottom-0 left-0 right-0 px-5 pb-5 pt-24 md:px-[72px] md:pb-9 md:pt-28"
-          style={{
-            background: "linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 100%)",
-          }}
+          className="flex gap-2 md:gap-3 overflow-x-auto px-4 md:px-10 pb-1"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
-          <h3 className="text-xl md:text-[32px] font-extrabold text-white mb-1 md:mb-1.5">
-            Made with love in LA
-          </h3>
-          <p className="text-[13px] md:text-base" style={{ color: "rgba(255,255,255,0.85)" }}>
-            Every piece, designed to make your day a little brighter.
-          </p>
-        </div>
-      </section>
-
-      {/* ================================================================== */}
-      {/*  NEW ARRIVALS                                                      */}
-      {/* ================================================================== */}
-      <section className="py-7 md:py-16" style={{ background: "var(--color-white)" }}>
-        <div className="px-5 md:max-w-[1200px] md:mx-auto md:px-12">
-          <p
-            className="text-xs md:text-[13px] font-bold uppercase tracking-[1.5px] mb-1.5 md:mb-2"
-            style={{ color: "var(--color-orange)" }}
-          >
-            Just in
-          </p>
-          <h2
-            className="text-xl md:text-[28px] font-extrabold leading-tight mb-3.5 md:mb-7"
-            style={{ color: "var(--color-text-primary)" }}
-          >
-            New arrivals
-          </h2>
-
-          {/* Desktop: 4-col grid, featured spans 2 */}
-          <div className="hidden md:grid grid-cols-4 gap-5">
-            {FEATURED_PRODUCTS.map((product) => (
-              <TrackableLink
-                key={product.name}
-                href={product.href}
-                event="product_click"
-                eventData={{ product_name: product.name, source_section: "new-arrivals", page: "homepage-a" }}
-                className={`rounded-2xl overflow-hidden bg-white shadow-sm hover:-translate-y-[3px] transition-transform ${
-                  product.featured ? "col-span-2" : ""
-                }`}
-              >
-                <div
-                  className={`relative ${product.featured ? "h-[280px]" : "h-[200px]"}`}
-                  style={{ background: "linear-gradient(135deg, #FFECD2, #FCB69F)" }}
-                >
-                  <Image src={product.image} alt={product.name} fill className="object-cover" />
-                </div>
-                <div
-                  className={`px-3.5 pt-3.5 pb-1 font-bold leading-snug ${
-                    product.featured ? "text-lg" : "text-[15px]"
-                  }`}
-                  style={{ color: "var(--color-text-primary)" }}
-                >
-                  {product.name}
-                </div>
-                <div
-                  className={`px-3.5 pb-3.5 font-extrabold ${
-                    product.featured ? "text-xl" : "text-base"
-                  }`}
-                  style={{ color: "var(--color-orange)" }}
-                >
-                  {product.price}
-                </div>
-              </TrackableLink>
-            ))}
-          </div>
-
-          {/* Mobile: stacked — 1 featured + 2-up row */}
-          <div className="flex flex-col gap-3 md:hidden">
+          {NEW_ARRIVALS.map((product) => (
             <TrackableLink
-              href={FEATURED_PRODUCTS[0].href}
+              key={product.name}
+              href={product.href}
               event="product_click"
-              eventData={{ product_name: FEATURED_PRODUCTS[0].name, source_section: "new-arrivals", page: "homepage-a" }}
-              className="rounded-[14px] overflow-hidden bg-white shadow-sm"
+              eventData={{ product_name: product.name, source_section: "new-arrivals", page: "homepage" }}
+              className="flex-shrink-0 w-[160px] md:w-[220px] group"
             >
-              <div
-                className="relative h-[200px]"
-                style={{ background: "linear-gradient(135deg, #FFECD2, #FCB69F)" }}
-              >
+              <div className="relative aspect-square overflow-hidden rounded-md mb-2">
                 <Image
-                  src={FEATURED_PRODUCTS[0].image}
-                  alt={FEATURED_PRODUCTS[0].name}
+                  src={product.img}
+                  alt={product.name}
                   fill
-                  className="object-cover"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="220px"
                 />
               </div>
-              <div className="px-3 pt-2.5 pb-0.5 text-[13px] font-bold leading-snug" style={{ color: "var(--color-text-primary)" }}>
-                {FEATURED_PRODUCTS[0].name}
-              </div>
-              <div className="px-3 pb-2.5 text-sm font-extrabold" style={{ color: "var(--color-orange)" }}>
-                {FEATURED_PRODUCTS[0].price}
-              </div>
+              <p
+                className="text-[12px] md:text-[13px] font-medium truncate"
+                style={{ color: "var(--color-text-primary)" }}
+              >
+                {product.name}
+              </p>
+              <p className="text-[12px] md:text-[13px]" style={{ color: "var(--color-text-secondary)" }}>
+                {product.price}
+              </p>
             </TrackableLink>
-            <div className="grid grid-cols-2 gap-3">
-              {FEATURED_PRODUCTS.slice(1).map((product) => (
-                <TrackableLink
-                  key={product.name}
-                  href={product.href}
-                  event="product_click"
-                  eventData={{ product_name: product.name, source_section: "new-arrivals", page: "homepage-a" }}
-                  className="rounded-[14px] overflow-hidden bg-white shadow-sm"
-                >
-                  <div
-                    className="relative h-[140px]"
-                    style={{ background: "linear-gradient(135deg, #FFECD2, #FCB69F)" }}
-                  >
-                    <Image src={product.image} alt={product.name} fill className="object-cover" />
-                  </div>
-                  <div className="px-3 pt-2.5 pb-0.5 text-[13px] font-bold leading-snug" style={{ color: "var(--color-text-primary)" }}>
-                    {product.name}
-                  </div>
-                  <div className="px-3 pb-2.5 text-sm font-extrabold" style={{ color: "var(--color-orange)" }}>
-                    {product.price}
-                  </div>
-                </TrackableLink>
-              ))}
-            </div>
-          </div>
-
-          <TrackableLink
-            href="/shop"
-            event="hero_cta_click"
-            eventData={{ cta_text: "View all products", destination: "/shop", page: "homepage-a" }}
-            className="block text-center mt-5 md:mt-7 text-sm md:text-base font-bold"
-            style={{ color: "var(--color-orange)" }}
-          >
-            View all products &gt;
-          </TrackableLink>
+          ))}
         </div>
       </section>
 
-      {/* ================================================================== */}
-      {/*  FEATURE SPOTLIGHT (modular zone — currently: Photobooth)          */}
-      {/* ================================================================== */}
-      <section>
-        {/* Desktop: 50/50 split */}
-        <div className="hidden md:grid grid-cols-2 min-h-[420px]">
-          <div
-            className="flex items-center justify-center text-sm font-semibold text-center p-6"
-            style={{
-              background: "linear-gradient(135deg, #FFE0D3 0%, #F5A623 50%, #F27B50 100%)",
-              color: "rgba(255,255,255,0.7)",
-            }}
-          >
-            [Photo: Photobooth setup at event, guests with props]
-          </div>
-          <div className="flex flex-col justify-center px-12 py-14" style={{ background: "var(--color-white)" }}>
-            <span
-              className="self-start inline-block px-3.5 py-1 rounded-full text-xs font-extrabold uppercase tracking-wide mb-3.5"
-              style={{ background: "var(--color-orange-light)", color: "var(--color-orange)" }}
-            >
-              New
-            </span>
-            <h3 className="text-[32px] font-extrabold leading-[1.1] mb-3" style={{ color: "var(--color-text-primary)" }}>
-              Amy Tangerine Photobooth
-            </h3>
-            <p className="text-base leading-relaxed mb-6 max-w-[420px]" style={{ color: "var(--color-text-secondary)" }}>
-              Bring the Amy Tangerine experience to your next event. Custom props, backdrops, and instant prints designed to make memories.
-            </p>
-            <Link
-              href="/photobooth"
-              className="self-start inline-block px-9 py-3.5 rounded-[10px] text-base font-bold text-white"
-              style={{
-                background: "var(--color-orange)",
-                boxShadow: "0 4px 12px rgba(253,137,28,0.3)",
-              }}
-            >
-              Learn more
-            </Link>
-          </div>
-        </div>
+      {/* ── Orange accent strip ── */}
+      <div className="mx-4 md:mx-10 h-1.5 rounded-full mt-8 md:mt-10" style={{ background: "var(--color-orange)" }} />
 
-        {/* Mobile: stacked */}
-        <div className="md:hidden">
-          <div
-            className="w-full h-[320px] flex items-center justify-center text-xs font-semibold text-center p-4"
-            style={{
-              background: "linear-gradient(135deg, #FFE0D3 0%, #F5A623 50%, #F27B50 100%)",
-              color: "rgba(255,255,255,0.7)",
-            }}
-          >
-            [Photo: Photobooth in action at event]
-          </div>
-          <div className="px-5 py-6" style={{ background: "var(--color-white)" }}>
-            <span
-              className="inline-block px-3 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wide mb-2.5"
-              style={{ background: "var(--color-orange-light)", color: "var(--color-orange)" }}
-            >
-              New
-            </span>
-            <h3 className="text-[22px] font-extrabold leading-[1.15] mb-2" style={{ color: "var(--color-text-primary)" }}>
-              Amy Tangerine Photobooth
-            </h3>
-            <p className="text-sm leading-normal mb-4" style={{ color: "var(--color-text-secondary)" }}>
-              Bring the Amy Tangerine experience to your next event. Custom props, backdrops, and instant prints designed to make memories.
+      {/* ── Feature Spotlight ── */}
+      <section className="relative mt-3 md:mt-4 mx-4 md:mx-10 rounded-lg overflow-hidden">
+        <div className="relative h-[320px] md:h-[420px]">
+          <Image
+            src="/images/products/travel-watercolor-set/1.jpg"
+            alt="Amy Tangerine Travel Watercolor Set"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 80vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+          <div className="absolute bottom-5 left-5 md:bottom-8 md:left-8 max-w-md">
+            <p className="text-[11px] md:text-[12px] uppercase tracking-[0.15em] text-white/60 mb-1">
+              Featured
             </p>
-            <Link
-              href="/photobooth"
-              className="inline-block px-7 py-3 rounded-[10px] text-[15px] font-bold text-white"
-              style={{
-                background: "var(--color-orange)",
-                boxShadow: "0 4px 12px rgba(253,137,28,0.3)",
-              }}
+            <h3 className="text-[28px] md:text-[40px] font-bold leading-tight text-white">
+              Travel Watercolor Set
+            </h3>
+            <p className="text-[13px] md:text-[15px] text-white/80 mt-1 md:mt-2 leading-snug">
+              Create on the go. Everything you need in one portable kit.
+            </p>
+            <TrackableLink
+              href="/shop/travel-watercolor-set"
+              event="product_click"
+              eventData={{ product_name: "Travel Watercolor Set", source_section: "spotlight", page: "homepage" }}
+              className="inline-block mt-3 md:mt-4 px-6 py-2.5 text-[12px] md:text-[13px] uppercase tracking-[0.1em] font-semibold rounded-full border border-white text-white hover:bg-white hover:text-black transition-all duration-300"
             >
-              Learn more
-            </Link>
+              Learn More
+            </TrackableLink>
           </div>
         </div>
       </section>
 
-      {/* ================================================================== */}
-      {/*  ABOUT + NEWSLETTER                                                */}
-      {/* ================================================================== */}
-      <section>
-        <div className="px-5 py-7 md:py-16 md:max-w-[1200px] md:mx-auto md:px-12">
-        <div className="md:grid md:grid-cols-2 md:gap-10 space-y-6 md:space-y-0">
-          {/* About teaser */}
-          <div>
-            <p
-              className="text-xs md:text-[13px] font-bold uppercase tracking-[1.5px] mb-2"
+      {/* ── About + Newsletter ── */}
+      <section className="py-10 md:py-14">
+        <div className="max-w-5xl mx-auto md:flex md:items-stretch md:gap-0">
+          {/* About */}
+          <div className="md:flex-1 px-6 md:px-10 pb-8 md:pb-0 flex flex-col justify-center">
+            <h2
+              className="text-[15px] md:text-[18px] uppercase tracking-[0.12em] font-semibold mb-3"
+              style={{ color: "var(--color-text-primary)" }}
+            >
+              About Amy
+            </h2>
+            <p className="text-[14px] md:text-[15px] leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+              Amy Tan is an author, designer, and creative entrepreneur on a mission to
+              inspire others to craft a life they love. From stickers to workshops to her
+              monthly Happy Mail, everything she creates is meant to add a little color
+              to your day.
+            </p>
+            <TrackableLink
+              href="/about"
+              event="footer_click"
+              eventData={{ link_text: "About Amy Read More", page: "homepage" }}
+              className="inline-block mt-3 text-[13px] uppercase tracking-[0.1em] font-semibold hover:opacity-70 transition-opacity"
               style={{ color: "var(--color-orange)" }}
             >
-              Meet Amy
-            </p>
-            <div className="flex gap-4 md:gap-6 items-center">
-              <div
-                className="w-20 h-20 md:w-[100px] md:h-[100px] min-w-[80px] md:min-w-[100px] rounded-full flex items-center justify-center text-xs font-semibold"
-                style={{
-                  background: "linear-gradient(135deg, #FFECD2, #F5A623)",
-                  color: "var(--color-orange)",
-                }}
-              >
-                [Amy]
-              </div>
-              <div className="text-sm md:text-[15px] leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-                <strong style={{ color: "var(--color-text-primary)" }}>Hi, I&apos;m Amy!</strong> I make paper goods that bring a little sunshine to your day. Every sticker, stamp, and Happy Mail envelope is designed with love in Los Angeles.
-                <br />
-                <Link href="/about" className="inline-block mt-2 text-sm md:text-[15px] font-bold" style={{ color: "var(--color-orange)" }}>
-                  More about Amy &gt;
-                </Link>
-              </div>
-            </div>
+              Read More
+            </TrackableLink>
           </div>
 
           {/* Newsletter */}
           <div
-            className="rounded-2xl md:rounded-2xl p-6 md:p-8"
-            style={{ background: "var(--color-orange-light)" }}
+            className="md:flex-1 px-6 md:px-10 py-8 md:py-10 rounded-none md:rounded-r-lg flex flex-col justify-center"
+            style={{ background: "var(--color-orange)" }}
           >
-            <h4 className="text-lg md:text-xl font-extrabold mb-2" style={{ color: "var(--color-text-primary)" }}>
-              Stay in the loop
-            </h4>
-            <p className="text-[13px] md:text-sm mb-4 md:mb-5 leading-normal" style={{ color: "var(--color-text-secondary)" }}>
-              New products, creative ideas, and the occasional discount. No spam, ever.
+            <h2 className="text-[15px] md:text-[18px] uppercase tracking-[0.12em] font-semibold mb-3 text-white">
+              Stay in the Loop
+            </h2>
+            <p className="text-[13px] md:text-[14px] mb-3 text-white/80">
+              New drops, workshops, and behind-the-scenes — straight to your inbox.
             </p>
-            <NewsletterForm />
+            <NewsletterForm sourcePage="homepage" />
           </div>
-        </div>
         </div>
       </section>
 
-      {/* ================================================================== */}
-      {/*  INSTAGRAM                                                         */}
-      {/* ================================================================== */}
-      <section style={{ background: "var(--color-white)" }}>
-      <div className="px-5 py-7 md:py-16 md:max-w-[1200px] md:mx-auto md:px-12">
-        <p
-          className="text-xs md:text-[13px] font-bold uppercase tracking-[1.5px] mb-1.5 md:mb-2"
-          style={{ color: "var(--color-orange)" }}
-        >
-          @amytangerine
-        </p>
-        <h2
-          className="text-xl md:text-[28px] font-extrabold leading-tight mb-3.5 md:mb-5"
-          style={{ color: "var(--color-text-primary)" }}
-        >
-          On Instagram
-        </h2>
-
-        {/* Desktop: 6 columns */}
-        <div className="hidden md:grid grid-cols-6 gap-2">
-          {IG_GRADIENTS.map((grad, i) => (
-            <div
+      {/* ── Instagram ── */}
+      <section className="pb-0">
+        <div className="py-5 md:py-6 text-center" style={{ background: "var(--color-teal)" }}>
+          <h2 className="text-[15px] md:text-[18px] uppercase tracking-[0.12em] font-semibold text-white">
+            @amytangerine
+          </h2>
+        </div>
+        <div className="grid grid-cols-4 md:grid-cols-6 gap-1">
+          {IG_IMAGES.map((src, i) => (
+            <TrackableLink
               key={i}
-              className="aspect-square rounded-lg flex items-center justify-center text-xs text-white font-semibold"
-              style={{ background: grad }}
+              href="https://instagram.com/amytangerine"
+              event="external_link"
+              eventData={{ destination: "instagram", source_page: "homepage", position: i }}
+              className="relative aspect-square overflow-hidden group block"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              IG {i + 1}
-            </div>
+              <Image
+                src={src}
+                alt="Amy Tangerine on Instagram"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                sizes="(max-width: 768px) 25vw, 16vw"
+              />
+            </TrackableLink>
           ))}
         </div>
-
-        {/* Mobile: 3x2 */}
-        <div className="grid grid-cols-3 gap-1 md:hidden">
-          {IG_GRADIENTS.map((grad, i) => (
-            <div
-              key={i}
-              className="aspect-square rounded flex items-center justify-center text-[10px] text-white font-semibold"
-              style={{ background: grad }}
-            >
-              IG {i + 1}
-            </div>
-          ))}
-        </div>
-
-        {/* Mobile-only follow link */}
-        <TrackableLink
-          href="https://instagram.com/amytangerine"
-          event="external_link"
-          eventData={{ destination: "instagram", source_page: "homepage-a" }}
-          className="block md:hidden text-center mt-3 text-sm font-bold"
-          style={{ color: "var(--color-orange)" }}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Follow @amytangerine &gt;
-        </TrackableLink>
-      </div>
       </section>
     </main>
   )
 }
-
-/* -------------------------------------------------------------------------- */
-/*  IG gradient placeholders                                                  */
-/* -------------------------------------------------------------------------- */
-
-const IG_GRADIENTS = [
-  "linear-gradient(135deg, #FFECD2, #FCB69F)",
-  "linear-gradient(135deg, #FCB69F, #F27B50)",
-  "linear-gradient(135deg, #FFECD2, #F5A623)",
-  "linear-gradient(135deg, #F27B50, #E06A42)",
-  "linear-gradient(135deg, #D4EDDA, #A8E6CF)",
-  "linear-gradient(135deg, #F5A623, #FCB69F)",
-]
