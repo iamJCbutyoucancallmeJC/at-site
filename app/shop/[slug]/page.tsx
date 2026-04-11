@@ -41,7 +41,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     .slice(0, 4)
 
   const mainVariant = product.variants.nodes[0]
-  const price = formatPrice(product.priceRange.minVariantPrice)
+  const priceFormatted = formatPrice(product.priceRange.minVariantPrice)
+  const priceAmount = parseFloat(product.priceRange.minVariantPrice.amount)
+  const mainImage = product.images.nodes[0]?.url ?? ""
   const isSubscription = product.tags.includes("subscription")
   const isHappyMail = product.collections.nodes.some((c) => c.handle === "happy-mail")
 
@@ -113,7 +115,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               className="text-[22px] md:text-[24px] font-semibold mb-4"
               style={{ color: isHappyMail ? "var(--color-orange)" : "var(--color-text-primary)" }}
             >
-              {price}
+              {priceFormatted}
               {isSubscription && (
                 <span className="text-[14px] font-normal ml-1" style={{ color: "var(--color-text-secondary)" }}>
                   / month
@@ -126,6 +128,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 variantId={mainVariant.id}
                 productTitle={product.title}
                 productHandle={slug}
+                price={priceFormatted}
+                priceAmount={priceAmount}
+                imageUrl={mainImage}
                 isSubscription={isSubscription}
               />
             ) : (

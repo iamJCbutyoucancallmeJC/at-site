@@ -2,8 +2,9 @@
 
 import React, { useState } from "react"
 import Link from "next/link"
-import { Menu, X, ShoppingCart } from "lucide-react"
+import { Menu, X, ShoppingBag } from "lucide-react"
 import { trackEvent } from "@/lib/analytics"
+import { useCart } from "@/context/cart"
 
 const NAV_LINKS = [
   { label: "Shop", href: "/shop" },
@@ -13,6 +14,7 @@ const NAV_LINKS = [
 
 export default function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const { count, openCart } = useCart()
 
   return (
     <>
@@ -35,7 +37,7 @@ export default function Nav() {
               href={link.href}
               className="text-base font-semibold transition-colors hover:opacity-80"
               style={{ color: "var(--color-text-primary)" }}
-              onClick={() => trackEvent('nav_click', { link_text: link.label, mobile_or_desktop: 'desktop' })}
+              onClick={() => trackEvent("nav_click", { link_text: link.label, mobile_or_desktop: "desktop" })}
             >
               {link.label}
             </Link>
@@ -50,16 +52,25 @@ export default function Nav() {
               background: "var(--color-orange)",
               boxShadow: "0 2px 8px rgba(253,137,28,0.3)",
             }}
-            onClick={() => trackEvent('nav_click', { link_text: 'Happy Mail', mobile_or_desktop: 'desktop' })}
+            onClick={() => trackEvent("nav_click", { link_text: "Happy Mail", mobile_or_desktop: "desktop" })}
           >
             <span className="text-sm">♥</span> Happy Mail
           </Link>
           <button
-            className="w-11 h-11 flex items-center justify-center"
+            onClick={openCart}
+            className="relative w-11 h-11 flex items-center justify-center"
             style={{ color: "var(--color-text-primary)" }}
-            aria-label="Cart"
+            aria-label={`Cart${count > 0 ? ` (${count} items)` : ""}`}
           >
-            <ShoppingCart size={24} />
+            <ShoppingBag size={22} />
+            {count > 0 && (
+              <span
+                className="absolute top-1 right-1 w-4 h-4 flex items-center justify-center text-[9px] font-bold rounded-full text-white"
+                style={{ background: "var(--color-orange)" }}
+              >
+                {count > 9 ? "9+" : count}
+              </span>
+            )}
           </button>
         </div>
       </nav>
@@ -89,11 +100,20 @@ export default function Nav() {
         </Link>
 
         <button
-          className="w-11 h-11 flex items-center justify-center"
+          onClick={openCart}
+          className="relative w-11 h-11 flex items-center justify-center"
           style={{ color: "var(--color-text-primary)" }}
-          aria-label="Cart"
+          aria-label={`Cart${count > 0 ? ` (${count} items)` : ""}`}
         >
-          <ShoppingCart size={24} />
+          <ShoppingBag size={22} />
+          {count > 0 && (
+            <span
+              className="absolute top-1 right-1 w-4 h-4 flex items-center justify-center text-[9px] font-bold rounded-full text-white"
+              style={{ background: "var(--color-orange)" }}
+            >
+              {count > 9 ? "9+" : count}
+            </span>
+          )}
         </button>
       </nav>
 
@@ -113,7 +133,7 @@ export default function Nav() {
                   color: "var(--color-text-primary)",
                   borderColor: "var(--color-border)",
                 }}
-                onClick={() => { setMobileOpen(false); trackEvent('nav_click', { link_text: link.label, mobile_or_desktop: 'mobile' }) }}
+                onClick={() => { setMobileOpen(false); trackEvent("nav_click", { link_text: link.label, mobile_or_desktop: "mobile" }) }}
               >
                 {link.label}
               </Link>
@@ -125,7 +145,7 @@ export default function Nav() {
                 background: "var(--color-orange)",
                 boxShadow: "0 2px 8px rgba(253,137,28,0.3)",
               }}
-              onClick={() => { setMobileOpen(false); trackEvent('nav_click', { link_text: 'Happy Mail', mobile_or_desktop: 'mobile' }) }}
+              onClick={() => { setMobileOpen(false); trackEvent("nav_click", { link_text: "Happy Mail", mobile_or_desktop: "mobile" }) }}
             >
               <span>♥</span> Happy Mail — $13/mo
             </Link>

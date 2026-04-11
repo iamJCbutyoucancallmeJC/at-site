@@ -5,6 +5,8 @@ import { Analytics } from "@vercel/analytics/next"
 import Script from "next/script"
 import Nav from "@/components/nav"
 import Footer from "@/components/footer"
+import CartDrawer from "@/components/cart-drawer"
+import { CartProvider } from "@/context/cart"
 import "./globals.css"
 
 const epilogue = Epilogue({ subsets: ["latin"], variable: "--font-sans", display: "swap" })
@@ -47,9 +49,12 @@ export default function RootLayout({
             `}</Script>
           </>
         )}
-        <Nav />
-        {children}
-        <Footer />
+        <CartProvider>
+          <Nav />
+          {children}
+          <Footer />
+          <CartDrawer />
+        </CartProvider>
         <Analytics />
       </body>
     </html>
