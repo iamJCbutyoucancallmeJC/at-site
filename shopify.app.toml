@@ -1,0 +1,16 @@
+name = "at-site headless"
+client_id = "12bbaf14f7af785346f6e51dd5c6d4ae"
+application_url = "https://at-site-kappa.vercel.app"
+embedded = false
+
+[access_scopes]
+scopes = "read_products,write_checkouts,read_checkouts,unauthenticated_read_product_listings,unauthenticated_read_product_inventory,unauthenticated_write_checkouts,unauthenticated_read_checkouts"
+
+[auth]
+redirect_urls = [
+  "https://at-site-kappa.vercel.app/api/auth/callback",
+  "http://localhost:3456/callback"
+]
+
+[webhooks]
+api_version = "2026-04"

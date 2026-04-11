@@ -165,6 +165,12 @@ const PRODUCT_FRAGMENT = `
 // ---------------------------------------------------------------------------
 
 export async function getAllProducts(): Promise<ShopifyProduct[]> {
+  // If no Shopify credentials are configured, use local catalog immediately
+  if (!SHOPIFY_DOMAIN || !SHOPIFY_TOKEN) {
+    const { getAllLocalProducts } = await import("./products")
+    return getAllLocalProducts()
+  }
+
   const query = `
     ${IMAGE_FRAGMENT}
     ${PRICE_FRAGMENT}
@@ -178,11 +184,27 @@ export async function getAllProducts(): Promise<ShopifyProduct[]> {
     }
   `
 
-  const data = await shopifyFetch<{ products: { nodes: ShopifyProduct[] } }>(query)
-  return data.products.nodes
+  try {
+    const data = await shopifyFetch<{ products: { nodes: ShopifyProduct[] } }>(query)
+    const products = data.products.nodes
+    // Fall back to local catalog if Shopify store has no products yet
+    if (products.length === 0) {
+      const { getAllLocalProducts } = await import("./products")
+      return getAllLocalProducts()
+    }
+    return products
+  } catch {
+    const { getAllLocalProducts } = await import("./products")
+    return getAllLocalProducts()
+  }
 }
 
 export async function getProductByHandle(handle: string): Promise<ShopifyProduct | null> {
+  if (!SHOPIFY_DOMAIN || !SHOPIFY_TOKEN) {
+    const { getLocalProductByHandle } = await import("./products")
+    return getLocalProductByHandle(handle)
+  }
+
   const query = `
     ${IMAGE_FRAGMENT}
     ${PRICE_FRAGMENT}
@@ -196,8 +218,16 @@ export async function getProductByHandle(handle: string): Promise<ShopifyProduct
     }
   `
 
-  const data = await shopifyFetch<{ productByHandle: ShopifyProduct | null }>(query, { handle })
-  return data.productByHandle
+  try {
+    const data = await shopifyFetch<{ productByHandle: ShopifyProduct | null }>(query, { handle })
+    if (data.productByHandle) return data.productByHandle
+    // Fall back to local catalog if product not found in Shopify
+    const { getLocalProductByHandle } = await import("./products")
+    return getLocalProductByHandle(handle)
+  } catch {
+    const { getLocalProductByHandle } = await import("./products")
+    return getLocalProductByHandle(handle)
+  }
 }
 
 export async function getProductsByCollection(collectionHandle: string): Promise<ShopifyProduct[]> {
