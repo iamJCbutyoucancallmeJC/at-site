@@ -2,6 +2,7 @@
 
 import React, { useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Menu, X, ShoppingBag } from "lucide-react"
 import { trackEvent } from "@/lib/analytics"
 import { useCart } from "@/context/cart"
@@ -26,8 +27,15 @@ export default function Nav() {
           borderColor: "var(--color-border)",
         }}
       >
-        <Link href="/" className="shrink-0 text-[26px] font-bold italic tracking-tight" style={{ color: "var(--color-orange)" }}>
-          amy tangerine
+        <Link href="/" className="shrink-0">
+          <Image
+            src="/images/amy-tangerine-logo.png"
+            alt="Amy Tangerine"
+            width={180}
+            height={72}
+            className="h-12 w-auto object-contain"
+            priority
+          />
         </Link>
 
         <div className="flex-1 flex items-center justify-center gap-8">
@@ -91,12 +99,15 @@ export default function Nav() {
           {mobileOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
 
-        <Link
-          href="/"
-          className="absolute left-1/2 -translate-x-1/2 text-xl font-bold italic tracking-tight"
-          style={{ color: "var(--color-orange)" }}
-        >
-          amy tangerine
+        <Link href="/" className="absolute left-1/2 -translate-x-1/2">
+          <Image
+            src="/images/amy-tangerine-logo.png"
+            alt="Amy Tangerine"
+            width={120}
+            height={48}
+            className="h-8 w-auto object-contain"
+            priority
+          />
         </Link>
 
         <button
