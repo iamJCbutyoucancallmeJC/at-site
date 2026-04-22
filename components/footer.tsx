@@ -5,18 +5,16 @@ import { trackEvent } from "@/lib/analytics"
 
 const DESKTOP_LINKS = [
   { label: "Shop", href: "/shop" },
-  { label: "Learn", href: "/learn" },
   { label: "About", href: "/about" },
+  { label: "Happy Mail", href: "/happy-mail" },
   { label: "Instagram", href: "https://instagram.com/amytangerine" },
   { label: "YouTube", href: "https://youtube.com/@amytangerine" },
-  { label: "Contact", href: "/contact" },
 ]
 
 const MOBILE_LINKS = [
   { label: "Shop", href: "/shop" },
-  { label: "Learn", href: "/learn" },
   { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
+  { label: "Happy Mail", href: "/happy-mail" },
 ]
 
 export default function Footer() {
