@@ -6,6 +6,9 @@ import Image from "next/image"
 import NewsletterForm from "@/components/newsletter-form"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 import TrackableLink from "@/components/trackable-link"
+import { getAllProducts, formatPrice } from "@/lib/shopify"
+
+export const revalidate = 60
 
 const CATEGORIES = [
   { name: "Stickers", href: "/shop?category=stickers", img: "/images/products/hearthealinghappiness-sticker-book/1.jpg" },
@@ -14,13 +17,13 @@ const CATEGORIES = [
   { name: "Happy Mail", href: "/happy-mail", img: "/images/products/mini-kit-embellishments/1.jpg" },
 ]
 
-const NEW_ARRIVALS = [
-  { name: "Heart Healing Happiness Sticker Book", price: "$16.00", img: "/images/products/hearthealinghappiness-sticker-book/1.jpg", href: "/shop/hearthealinghappiness-sticker-book" },
-  { name: "Juicy Bits — Happy Edition", price: "$8.50", img: "/images/products/juicybitsstickers-happyedition/1.jpg", href: "/shop/juicybitsstickers-happyedition" },
-  { name: "Squeeze the Day Stamp 4x6", price: "$14.00", img: "/images/products/squeezethedaystamp4x6/1.jpg", href: "/shop/squeezethedaystamp4x6" },
-  { name: "Juicy Bits — Cozy Edition", price: "$8.50", img: "/images/products/juicybitsstickers-cozyedition/1.jpg", href: "/shop/juicybitsstickers-cozyedition" },
-  { name: "Icons Stamp Set 4x6", price: "$14.00", img: "/images/products/icons-stamp-set-4x6-pre-order-ships-mid-november/1.jpg", href: "/shop/icons-stamp-set-4x6" },
-  { name: "Make Your Mark", price: "$12.00", img: "/images/products/preorder-make-your-mark/1.jpg", href: "/shop/make-your-mark" },
+const NEW_ARRIVAL_HANDLES = [
+  "hearthealinghappiness-sticker-book",
+  "juicybitsstickers-happyedition",
+  "squeezethedaystamp4x6",
+  "juicybitsstickers-cozyedition",
+  "icons-stamp-set-4x6-pre-order-ships-mid-november",
+  "preorder-make-your-mark",
 ]
 
 const IG_IMAGES = [
@@ -32,7 +35,20 @@ const IG_IMAGES = [
   "/images/products/juicybitsstickers-cozyedition/2.jpg",
 ]
 
-export default function HomePage() {
+export default async function HomePage() {
+  const allProducts = await getAllProducts()
+  const productMap = new Map(allProducts.map((p) => [p.handle, p]))
+  const newArrivals = NEW_ARRIVAL_HANDLES.flatMap((handle) => {
+    const p = productMap.get(handle)
+    if (!p) return []
+    return [{
+      name: p.title,
+      price: formatPrice(p.priceRange.minVariantPrice),
+      img: p.images.nodes[0]?.url ?? `/images/products/${handle}/1.jpg`,
+      href: `/shop/${handle}`,
+    }]
+  })
+
   return (
     <main>
       <PageEngagementTracker page="homepage" />
@@ -141,7 +157,7 @@ export default function HomePage() {
           className="flex gap-2 md:gap-3 overflow-x-auto px-4 md:px-10 pb-1"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
-          {NEW_ARRIVALS.map((product) => (
+          {newArrivals.map((product) => (
             <TrackableLink
               key={product.name}
               href={product.href}
