@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { X, Minus, Plus, ShoppingBag } from "lucide-react"
@@ -33,13 +33,26 @@ export default function CartDrawer() {
 
   const hasLocalItems = items.some((i) => isLocalVariant(i.variantId))
 
-  function handleCheckout() {
-    trackEvent("begin_checkout", {
-      item_count: count,
-      subtotal,
-    })
-    // TODO: when Shopify products are imported, call createCart() + redirect to checkoutUrl
-    // For now, nothing — button is disabled for local items
+  const [checkingOut, setCheckingOut] = useState(false)
+
+  async function handleCheckout() {
+    setCheckingOut(true)
+    trackEvent("begin_checkout", { item_count: count, subtotal })
+
+    try {
+      const res = await fetch("/api/checkout/cart", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          items: items.map((i) => ({ variantId: i.variantId, quantity: i.quantity })),
+        }),
+      })
+      if (!res.ok) throw new Error("checkout failed")
+      const { checkoutUrl } = await res.json()
+      window.location.href = checkoutUrl
+    } catch {
+      setCheckingOut(false)
+    }
   }
 
   return (
@@ -254,10 +267,11 @@ export default function CartDrawer() {
             ) : (
               <button
                 onClick={handleCheckout}
-                className="w-full py-3.5 text-[13px] uppercase tracking-[0.12em] font-semibold rounded-full text-white transition-colors"
+                disabled={checkingOut}
+                className="w-full py-3.5 text-[13px] uppercase tracking-[0.12em] font-semibold rounded-full text-white transition-colors disabled:opacity-60"
                 style={{ background: "var(--color-orange)" }}
               >
-                Checkout
+                {checkingOut ? "One moment..." : "Checkout"}
               </button>
             )}
 

@@ -19,6 +19,8 @@ export type AnalyticsEvent =
   | 'footer_click'
   | 'external_link'
   | 'variant_engagement'
+  | 'purchase_complete'
+  | 'thank_you_cta_click'
 
 type EventData = Record<string, string | number | boolean>
 

@@ -18,7 +18,14 @@ export async function POST(request: Request) {
     const cart = await createCart()
     const updatedCart = await addToCart(cart.id, variantId, 1)
 
-    return NextResponse.json({ checkoutUrl: updatedCart.checkoutUrl })
+    // Append return_to so Shopify redirects back to our site after purchase
+    // source=houston tags these buyers for analytics
+    const returnTo = "https://at-site-kappa.vercel.app/thank-you?source=houston&channel=in-person"
+    const checkoutUrl = updatedCart.checkoutUrl.includes("?")
+      ? `${updatedCart.checkoutUrl}&return_to=${encodeURIComponent(returnTo)}`
+      : `${updatedCart.checkoutUrl}?return_to=${encodeURIComponent(returnTo)}`
+
+    return NextResponse.json({ checkoutUrl })
   } catch (err) {
     console.error("[houston checkout]", err)
     return NextResponse.json({ error: "Checkout unavailable" }, { status: 500 })
