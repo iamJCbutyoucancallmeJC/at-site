@@ -1,6 +1,8 @@
-// Homepage — Production (Option D3: Editorial + Color)
-// Hero image path: /images/hero/homepage-hero.webp — swap when Amy provides final shot
-// Design: teal category bg, orange newsletter panel, teal Instagram bar, orange accent strip
+// Homepage Variant — Events-Forward (v/events)
+// Replaces the static editorial break with a two-tile "In Person" section
+// linking to /events. All other sections identical to production homepage.
+// Images: real Crafty Destinations / Squarespace URLs used as placeholders
+// until Amy provides final photography.
 
 import Image from "next/image"
 import NewsletterForm from "@/components/newsletter-form"
@@ -8,19 +10,19 @@ import PageEngagementTracker from "@/components/page-engagement-tracker"
 import TrackableLink from "@/components/trackable-link"
 
 const CATEGORIES = [
-  { name: "Stickers", href: "/shop?category=stickers", img: "/images/products/hearthealinghappiness-sticker-book/1.jpg" },
-  { name: "Die Cuts", href: "/shop?category=die-cuts", img: "/images/products/juicybitsstickers-happyedition/1.jpg" },
-  { name: "Stamps", href: "/shop?category=stamps", img: "/images/products/moody2stamp4x6/1.jpg" },
-  { name: "Happy Mail", href: "/happy-mail", img: "/images/products/mini-kit-embellishments/1.jpg" },
+  { name: "Stickers",   href: "/shop?category=stickers",  img: "/images/products/hearthealinghappiness-sticker-book/1.jpg" },
+  { name: "Die Cuts",   href: "/shop?category=die-cuts",  img: "/images/products/juicybitsstickers-happyedition/1.jpg" },
+  { name: "Stamps",     href: "/shop?category=stamps",    img: "/images/products/moody2stamp4x6/1.jpg" },
+  { name: "Happy Mail", href: "/happy-mail",              img: "/images/products/mini-kit-embellishments/1.jpg" },
 ]
 
 const NEW_ARRIVALS = [
   { name: "Heart Healing Happiness Sticker Book", price: "$16.00", img: "/images/products/hearthealinghappiness-sticker-book/1.jpg", href: "/shop/hearthealinghappiness-sticker-book" },
-  { name: "Juicy Bits — Happy Edition", price: "$8.50", img: "/images/products/juicybitsstickers-happyedition/1.jpg", href: "/shop/juicybitsstickers-happyedition" },
-  { name: "Squeeze the Day Stamp 4x6", price: "$14.00", img: "/images/products/squeezethedaystamp4x6/1.jpg", href: "/shop/squeezethedaystamp4x6" },
-  { name: "Juicy Bits — Cozy Edition", price: "$8.50", img: "/images/products/juicybitsstickers-cozyedition/1.jpg", href: "/shop/juicybitsstickers-cozyedition" },
-  { name: "Icons Stamp Set 4x6", price: "$14.00", img: "/images/products/icons-stamp-set-4x6-pre-order-ships-mid-november/1.jpg", href: "/shop/icons-stamp-set-4x6" },
-  { name: "Make Your Mark", price: "$12.00", img: "/images/products/preorder-make-your-mark/1.jpg", href: "/shop/make-your-mark" },
+  { name: "Juicy Bits — Happy Edition",           price: "$8.50",  img: "/images/products/juicybitsstickers-happyedition/1.jpg",    href: "/shop/juicybitsstickers-happyedition" },
+  { name: "Squeeze the Day Stamp 4x6",            price: "$14.00", img: "/images/products/squeezethedaystamp4x6/1.jpg",             href: "/shop/squeezethedaystamp4x6" },
+  { name: "Juicy Bits — Cozy Edition",            price: "$8.50",  img: "/images/products/juicybitsstickers-cozyedition/1.jpg",     href: "/shop/juicybitsstickers-cozyedition" },
+  { name: "Icons Stamp Set 4x6",                  price: "$14.00", img: "/images/products/icons-stamp-set-4x6-pre-order-ships-mid-november/1.jpg", href: "/shop/icons-stamp-set-4x6" },
+  { name: "Make Your Mark",                       price: "$12.00", img: "/images/products/preorder-make-your-mark/1.jpg",           href: "/shop/make-your-mark" },
 ]
 
 const IG_IMAGES = [
@@ -32,10 +34,36 @@ const IG_IMAGES = [
   "/images/products/juicybitsstickers-cozyedition/2.jpg",
 ]
 
-export default function HomePage() {
+// In-person event tiles — swap img src when Amy provides photography
+const EVENTS = [
+  {
+    id: "tokyo",
+    label: "Craft Tour",
+    title: "Tangerine Tokyo Takeover",
+    description: "A girlfriend's shopping adventure through Tokyo's best stationery shops, paper stores, and craft destinations. Guided tours, Disneyland Tokyo, Mt. Fuji, and 20,000 daily steps.",
+    cta: "Learn More",
+    href: "/events",
+    // Crafty Destinations placeholder — replace with Amy's own trip photography
+    img: "https://media.rainpos.com/14090/TangerineTakeOver.jpeg",
+    external: false,
+  },
+  {
+    id: "workshops",
+    label: "Workshops & Events",
+    title: "Craftation, Paper Fest & More",
+    description: "Amy teaches, speaks, and sells at craft conferences across the country — Craftation in Ventura, Paper Fest in Orange County, and the Squeeze the Day Retreat.",
+    cta: "See All Events",
+    href: "/events",
+    // Squarespace placeholder — replace with current event photography
+    img: "https://images.squarespace-cdn.com/content/v1/5dd0ae59b4b4b35c07faf907/1574158789074-A96SFN8OYHVTUZTMS7J4/20-Craftcation-Business-and-Makers-Conference-lifeguard.jpg",
+    external: false,
+  },
+]
+
+export default function EventsVariantPage() {
   return (
     <main>
-      <PageEngagementTracker page="homepage" />
+      <PageEngagementTracker page="homepage-events-variant" />
 
       {/* ── Hero ── */}
       <section className="relative w-full h-screen overflow-hidden">
@@ -62,7 +90,7 @@ export default function HomePage() {
           <TrackableLink
             href="/shop"
             event="hero_cta_click"
-            eventData={{ cta_text: "Shop Now", destination: "/shop", page: "homepage" }}
+            eventData={{ cta_text: "Shop Now", destination: "/shop", page: "homepage-events-variant" }}
             className="mt-6 md:mt-8 inline-block px-8 py-3 text-[13px] md:text-[14px] uppercase tracking-[0.15em] font-semibold rounded-full border-2 border-white text-white hover:bg-white hover:text-black transition-all duration-300"
           >
             Shop Now
@@ -80,7 +108,7 @@ export default function HomePage() {
           <TrackableLink
             href="/happy-mail"
             event="hero_cta_click"
-            eventData={{ cta_text: "Happy Mail Banner Subscribe", destination: "/happy-mail", page: "homepage" }}
+            eventData={{ cta_text: "Happy Mail Banner Subscribe", destination: "/happy-mail", page: "homepage-events-variant" }}
             className="ml-3 underline underline-offset-2 hover:opacity-80 transition-opacity"
           >
             Subscribe
@@ -99,7 +127,7 @@ export default function HomePage() {
               key={cat.name}
               href={cat.href}
               event="category_click"
-              eventData={{ category_name: cat.name, page: "homepage" }}
+              eventData={{ category_name: cat.name, page: "homepage-events-variant" }}
               className="group relative block aspect-square overflow-hidden rounded-md"
             >
               <Image
@@ -118,16 +146,70 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Editorial Break ── */}
-      <div className="relative w-full h-[280px] md:h-[400px] mt-8 md:mt-10">
-        <Image
-          src="/images/products/juicybitsstickers-cozyedition/1.jpg"
-          alt="Amy Tangerine craft styling"
-          fill
-          className="object-cover"
-          sizes="100vw"
-        />
-      </div>
+      {/* ── IN PERSON — two-tile events section (replaces static editorial break) ── */}
+      <section className="px-4 md:px-10 pt-8 md:pt-10 pb-0">
+        <div className="flex items-center justify-between mb-4 md:mb-5">
+          <h2
+            className="text-[15px] md:text-[18px] uppercase tracking-[0.12em] font-semibold"
+            style={{ color: "var(--color-text-primary)" }}
+          >
+            In Person
+          </h2>
+          <TrackableLink
+            href="/events"
+            event="section_link_click"
+            eventData={{ section: "in-person", page: "homepage-events-variant" }}
+            className="text-[12px] md:text-[13px] uppercase tracking-[0.1em] font-semibold hover:opacity-70 transition-opacity"
+            style={{ color: "var(--color-orange)" }}
+          >
+            All Events →
+          </TrackableLink>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+          {EVENTS.map((event) => (
+            <TrackableLink
+              key={event.id}
+              href={event.href}
+              event="event_tile_click"
+              eventData={{ event_id: event.id, event_title: event.title, page: "homepage-events-variant" }}
+              className="group relative block overflow-hidden rounded-lg"
+            >
+              {/* Image */}
+              <div className="relative h-[220px] md:h-[300px] w-full overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={event.img}
+                  alt={event.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              </div>
+
+              {/* Text overlay */}
+              <div className="absolute inset-0 flex flex-col justify-end p-5 md:p-6">
+                <p
+                  className="text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-semibold mb-1"
+                  style={{ color: "var(--color-orange)" }}
+                >
+                  {event.label}
+                </p>
+                <h3 className="text-[20px] md:text-[26px] font-bold leading-tight text-white mb-2">
+                  {event.title}
+                </h3>
+                <p className="text-[12px] md:text-[13px] text-white/75 leading-snug mb-3 line-clamp-2">
+                  {event.description}
+                </p>
+                <span
+                  className="inline-block self-start px-4 py-1.5 text-[11px] md:text-[12px] uppercase tracking-[0.1em] font-semibold rounded-full border text-white border-white/60 group-hover:bg-white group-hover:text-black transition-all duration-300"
+                >
+                  {event.cta}
+                </span>
+              </div>
+            </TrackableLink>
+          ))}
+        </div>
+      </section>
 
       {/* ── New Arrivals ── */}
       <section className="pt-8 md:pt-10 pb-0">
@@ -146,7 +228,7 @@ export default function HomePage() {
               key={product.name}
               href={product.href}
               event="product_click"
-              eventData={{ product_name: product.name, source_section: "new-arrivals", page: "homepage" }}
+              eventData={{ product_name: product.name, source_section: "new-arrivals", page: "homepage-events-variant" }}
               className="flex-shrink-0 w-[160px] md:w-[220px] group"
             >
               <div className="relative aspect-square overflow-hidden rounded-md mb-2">
@@ -179,8 +261,8 @@ export default function HomePage() {
       <section className="relative mt-3 md:mt-4 mx-4 md:mx-10 rounded-lg overflow-hidden">
         <div className="relative h-[320px] md:h-[420px]">
           <Image
-            src="/images/products/hearthealinghappiness-sticker-book/2.jpg"
-            alt="Paper Play 3 by Amy Tangerine"
+            src="/images/products/preorder-make-your-mark/1.jpg"
+            alt="Make Your Mark by Amy Tangerine"
             fill
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 80vw"
@@ -191,20 +273,18 @@ export default function HomePage() {
               Featured
             </p>
             <h3 className="text-[28px] md:text-[40px] font-bold leading-tight text-white">
-              Paper Play 3
+              Make Your Mark
             </h3>
             <p className="text-[13px] md:text-[15px] text-white/80 mt-1 md:mt-2 leading-snug">
-              Amy&apos;s latest book — now available on Amazon.
+              A guided art journal for your most colorful self.
             </p>
             <TrackableLink
-              href="https://amzn.to/4sNtWk1"
+              href="/shop/make-your-mark"
               event="product_click"
-              eventData={{ product_name: "Paper Play 3", source_section: "spotlight", page: "homepage" }}
+              eventData={{ product_name: "Make Your Mark", source_section: "spotlight", page: "homepage-events-variant" }}
               className="inline-block mt-3 md:mt-4 px-6 py-2.5 text-[12px] md:text-[13px] uppercase tracking-[0.1em] font-semibold rounded-full border border-white text-white hover:bg-white hover:text-black transition-all duration-300"
-              target="_blank"
-              rel="noopener noreferrer"
             >
-              Get It on Amazon
+              Learn More
             </TrackableLink>
           </div>
         </div>
@@ -230,7 +310,7 @@ export default function HomePage() {
             <TrackableLink
               href="/about"
               event="footer_click"
-              eventData={{ link_text: "About Amy Read More", page: "homepage" }}
+              eventData={{ link_text: "About Amy Read More", page: "homepage-events-variant" }}
               className="inline-block mt-3 text-[13px] uppercase tracking-[0.1em] font-semibold hover:opacity-70 transition-opacity"
               style={{ color: "var(--color-orange)" }}
             >
@@ -249,7 +329,7 @@ export default function HomePage() {
             <p className="text-[13px] md:text-[14px] mb-3 text-white/80">
               New drops, workshops, and behind-the-scenes — straight to your inbox.
             </p>
-            <NewsletterForm sourcePage="homepage" />
+            <NewsletterForm sourcePage="homepage-events-variant" />
           </div>
         </div>
       </section>
@@ -267,7 +347,7 @@ export default function HomePage() {
               key={i}
               href="https://instagram.com/amytangerine"
               event="external_link"
-              eventData={{ destination: "instagram", source_page: "homepage", position: i }}
+              eventData={{ destination: "instagram", source_page: "homepage-events-variant", position: i }}
               className="relative aspect-square overflow-hidden group block"
               target="_blank"
               rel="noopener noreferrer"
