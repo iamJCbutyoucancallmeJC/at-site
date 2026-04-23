@@ -24,12 +24,12 @@ const WHAT_INSIDE = [
   {
     title: "Die cuts Amy designed, made in the USA",
     body: "New designs every month. Exclusively for subscribers — not available in the shop.",
-    img: "/images/products/juicybitsstickers-happyedition/1.jpg",
+    img: "/images/houston/die-cuts.jpg",
   },
   {
     title: "First look at the newest sticker sheet",
     body: "Subscribers get it before anyone else.",
-    img: "/images/products/hearthealinghappiness-sticker-book/2.jpg",
+    img: "/images/houston/sticker-sheet.jpg",
   },
   {
     title: "A note from Amy",
