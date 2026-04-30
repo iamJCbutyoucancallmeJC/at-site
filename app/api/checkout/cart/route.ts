@@ -9,7 +9,7 @@ const RETURN_URL = "https://at-site-kappa.vercel.app/thank-you"
 export async function POST(request: Request) {
   try {
     const { items } = await request.json() as {
-      items: { variantId: string; quantity: number }[]
+      items: { variantId: string; quantity: number; sellingPlanId?: string }[]
     }
 
     if (!Array.isArray(items) || items.length === 0) {
@@ -19,7 +19,7 @@ export async function POST(request: Request) {
     const cart = await createCart()
     let updated = cart
     for (const item of items) {
-      updated = await addToCart(updated.id, item.variantId, item.quantity)
+      updated = await addToCart(updated.id, item.variantId, item.quantity, item.sellingPlanId)
     }
 
     const checkoutUrl = updated.checkoutUrl.includes("?")

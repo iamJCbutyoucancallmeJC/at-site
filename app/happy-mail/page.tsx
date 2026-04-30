@@ -1,26 +1,21 @@
+"use client"
+
 // Happy Mail landing page
 // Copy source: A5 Job/Linslow/Clients/Amy Tangerine/happy-mail-landing-copy.md
 // Design: matches D3 editorial system — teal/orange, Epilogue, full-bleed sections
 // Photos: placeholders until Amy provides styled shots (June 2026)
 
-import type { Metadata } from "next"
 import Image from "next/image"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 import TrackableLink from "@/components/trackable-link"
 import NewsletterForm from "@/components/newsletter-form"
 import FaqAccordion from "@/components/faq-accordion"
+import { useCart } from "@/context/cart"
+import { trackEvent } from "@/lib/analytics"
 
-export const metadata: Metadata = {
-  title: "Happy Mail Subscription | Amy Tangerine",
-  description:
-    "Monthly craft supplies from Amy Tangerine — die cuts, stickers, and a hand-lettered envelope. $13/month or $66 for 6 months. Cancel anytime. US only.",
-  openGraph: {
-    title: "Happy Mail — Monthly Craft Subscription | Amy Tangerine",
-    description:
-      "Once a month, an envelope from Amy. Die cuts, stickers, and a personal note — your name hand-lettered on the front.",
-    images: [{ url: "/images/products/happy-mail/1.jpg" }],
-  },
-}
+const HM_VARIANT_GID = process.env.NEXT_PUBLIC_HM6_VARIANT_GID ?? "gid://shopify/ProductVariant/51873229078848"
+const SELLING_PLAN_1MO = process.env.NEXT_PUBLIC_HM_SELLING_PLAN_1MO ?? "gid://shopify/SellingPlan/693610873152"
+const SELLING_PLAN_6MO = process.env.NEXT_PUBLIC_HM_SELLING_PLAN_6MO ?? "gid://shopify/SellingPlan/693610905920"
 
 const WHAT_INSIDE = [
   {
@@ -110,57 +105,51 @@ const FAQ_ITEMS = [
   },
 ]
 
-// Shared subscribe CTAs — used in hero and bottom band
-function SubscribeCTAs({
-  variant = "dark",
-}: {
-  variant?: "dark" | "light"
-}) {
+// Shared subscribe CTAs — adds directly to cart with Recharge selling plan
+function SubscribeCTAs({ variant = "dark" }: { variant?: "dark" | "light" }) {
+  const { addItem } = useCart()
+
   const primaryStyle =
     variant === "dark"
-      ? {
-          background: "var(--color-orange)",
-          color: "#fff",
-          border: "2px solid var(--color-orange)",
-        }
-      : {
-          background: "#fff",
-          color: "var(--color-orange)",
-          border: "2px solid #fff",
-        }
+      ? { background: "var(--color-orange)", color: "#fff", border: "2px solid var(--color-orange)" }
+      : { background: "#fff", color: "var(--color-orange)", border: "2px solid #fff" }
   const secondaryStyle =
     variant === "dark"
-      ? {
-          background: "transparent",
-          color: "var(--color-orange)",
-          border: "2px solid var(--color-orange)",
-        }
-      : {
-          background: "transparent",
-          color: "#fff",
-          border: "2px solid rgba(255,255,255,0.7)",
-        }
+      ? { background: "transparent", color: "var(--color-orange)", border: "2px solid var(--color-orange)" }
+      : { background: "transparent", color: "#fff", border: "2px solid rgba(255,255,255,0.7)" }
+
+  function handleSubscribe(plan: "monthly" | "6-month") {
+    const sellingPlanId = plan === "monthly" ? SELLING_PLAN_1MO : SELLING_PLAN_6MO
+    const price = plan === "monthly" ? "$13.00" : "$66.00"
+    const priceAmount = plan === "monthly" ? 13.0 : 66.0
+    addItem({
+      variantId: HM_VARIANT_GID,
+      productHandle: plan === "monthly" ? "happy-mail" : "happy-mail-6-month",
+      title: plan === "monthly" ? "Happy Mail — Monthly Subscription" : "Happy Mail — 6-Month Subscription",
+      price,
+      priceAmount,
+      imageUrl: "/images/products/happy-mail/1.jpg",
+      sellingPlanId,
+    })
+    trackEvent("hm_subscribe_click", { plan, price: priceAmount.toString(), page: "happy-mail" })
+  }
 
   return (
     <div className="flex flex-col sm:flex-row gap-3">
-      <TrackableLink
-        href="/shop/happy-mail"
-        event="hm_subscribe_click"
-        eventData={{ plan: "monthly", price: "13.00", page: "happy-mail" }}
-        className="inline-block px-7 py-3.5 text-[13px] uppercase tracking-[0.1em] font-semibold rounded-full text-center transition-all duration-300 hover:opacity-90"
+      <button
+        onClick={() => handleSubscribe("monthly")}
+        className="inline-block px-7 py-3.5 text-[13px] uppercase tracking-[0.1em] font-semibold rounded-full text-center transition-all duration-300 hover:opacity-90 cursor-pointer"
         style={primaryStyle}
       >
         Subscribe Monthly — $13/mo
-      </TrackableLink>
-      <TrackableLink
-        href="/shop/happy-mail-6-month"
-        event="hm_subscribe_click"
-        eventData={{ plan: "6-month", price: "66.00", page: "happy-mail" }}
-        className="inline-block px-7 py-3.5 text-[13px] uppercase tracking-[0.1em] font-semibold rounded-full text-center transition-all duration-300 hover:opacity-80"
+      </button>
+      <button
+        onClick={() => handleSubscribe("6-month")}
+        className="inline-block px-7 py-3.5 text-[13px] uppercase tracking-[0.1em] font-semibold rounded-full text-center transition-all duration-300 hover:opacity-80 cursor-pointer"
         style={secondaryStyle}
       >
         Get 6 Months — $66
-      </TrackableLink>
+      </button>
     </div>
   )
 }

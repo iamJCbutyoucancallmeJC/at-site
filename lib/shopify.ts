@@ -305,7 +305,7 @@ export async function createCart(): Promise<ShopifyCart> {
   return data.cartCreate.cart
 }
 
-export async function addToCart(cartId: string, variantId: string, quantity = 1): Promise<ShopifyCart> {
+export async function addToCart(cartId: string, variantId: string, quantity = 1, sellingPlanId?: string): Promise<ShopifyCart> {
   const query = `
     ${IMAGE_FRAGMENT}
     ${PRICE_FRAGMENT}
@@ -318,9 +318,12 @@ export async function addToCart(cartId: string, variantId: string, quantity = 1)
     }
   `
 
+  const line: Record<string, unknown> = { merchandiseId: variantId, quantity }
+  if (sellingPlanId) line.sellingPlanId = sellingPlanId
+
   const data = await shopifyFetch<{ cartLinesAdd: { cart: ShopifyCart } }>(query, {
     cartId,
-    lines: [{ merchandiseId: variantId, quantity }],
+    lines: [line],
   })
   return data.cartLinesAdd.cart
 }

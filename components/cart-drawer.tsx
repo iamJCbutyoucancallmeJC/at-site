@@ -44,7 +44,7 @@ export default function CartDrawer() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          items: items.map((i) => ({ variantId: i.variantId, quantity: i.quantity })),
+          items: items.map((i) => ({ variantId: i.variantId, quantity: i.quantity, sellingPlanId: i.sellingPlanId })),
         }),
       })
       if (!res.ok) throw new Error("checkout failed")

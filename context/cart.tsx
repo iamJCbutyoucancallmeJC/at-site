@@ -15,6 +15,7 @@ export type CartItem = {
   priceAmount: number  // numeric for totals
   imageUrl: string
   quantity: number
+  sellingPlanId?: string  // set for subscription products
 }
 
 type CartState = {
