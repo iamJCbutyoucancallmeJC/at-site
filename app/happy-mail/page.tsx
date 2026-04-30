@@ -13,9 +13,9 @@ import FaqAccordion from "@/components/faq-accordion"
 import { useCart } from "@/context/cart"
 import { trackEvent } from "@/lib/analytics"
 
-const HM_VARIANT_GID = process.env.NEXT_PUBLIC_HM6_VARIANT_GID ?? "gid://shopify/ProductVariant/51873229078848"
-const SELLING_PLAN_1MO = process.env.NEXT_PUBLIC_HM_SELLING_PLAN_1MO ?? "gid://shopify/SellingPlan/693610873152"
-const SELLING_PLAN_6MO = process.env.NEXT_PUBLIC_HM_SELLING_PLAN_6MO ?? "gid://shopify/SellingPlan/693610905920"
+const HM_VARIANT_GID = process.env.NEXT_PUBLIC_HM_VARIANT_GID ?? "gid://shopify/ProductVariant/51926357311808"
+const SELLING_PLAN_1MO = process.env.NEXT_PUBLIC_HM_SELLING_PLAN_1MO ?? "gid://shopify/SellingPlan/693610938688"
+const SELLING_PLAN_6MO = process.env.NEXT_PUBLIC_HM_SELLING_PLAN_6MO ?? "gid://shopify/SellingPlan/693610971456"
 
 const WHAT_INSIDE = [
   {
