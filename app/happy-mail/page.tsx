@@ -77,7 +77,7 @@ const TESTIMONIALS = [
 const FAQ_ITEMS = [
   {
     q: "What's the difference between Monthly and 6-Month?",
-    a: "Monthly ($13/mo) renews automatically each month until you cancel. 6-Month ($66) is a one-time payment for six months — no recurring charges. Both get the same monthly package.",
+    a: "Monthly ($13/mo) renews automatically each month until you cancel. 6-Month ($72) is a one-time payment for six months — no recurring charges. Both get the same monthly package.",
   },
   {
     q: "When does it ship?",
@@ -120,11 +120,11 @@ function SubscribeCTAs({ variant = "dark" }: { variant?: "dark" | "light" }) {
 
   function handleSubscribe(plan: "monthly" | "6-month") {
     const sellingPlanId = plan === "monthly" ? SELLING_PLAN_1MO : SELLING_PLAN_6MO
-    const price = plan === "monthly" ? "$13.00" : "$66.00"
-    const priceAmount = plan === "monthly" ? 13.0 : 66.0
+    const price = plan === "monthly" ? "$13.00" : "$72.00"
+    const priceAmount = plan === "monthly" ? 13.0 : 72.0
     addItem({
       variantId: HM_VARIANT_GID,
-      productHandle: plan === "monthly" ? "happy-mail" : "happy-mail-6-month",
+      productHandle: plan === "monthly" ? "happy-mail" : "happy-mail-6-month-subscription",
       title: plan === "monthly" ? "Happy Mail — Monthly Subscription" : "Happy Mail — 6-Month Subscription",
       price,
       priceAmount,
@@ -148,7 +148,7 @@ function SubscribeCTAs({ variant = "dark" }: { variant?: "dark" | "light" }) {
         className="inline-block px-7 py-3.5 text-[13px] uppercase tracking-[0.1em] font-semibold rounded-full text-center transition-all duration-300 hover:opacity-80 cursor-pointer"
         style={secondaryStyle}
       >
-        Get 6 Months — $66
+        Get 6 Months — $72
       </button>
     </div>
   )
@@ -286,7 +286,7 @@ export default function HappyMailPage() {
                 className="text-[44px] font-bold leading-none"
                 style={{ color: "var(--color-text-primary)" }}
               >
-                $66
+                $72
               </span>
               <span
                 className="text-[14px] mb-1"
@@ -302,13 +302,13 @@ export default function HappyMailPage() {
               No recurring charge · great as a gift
             </p>
             <TrackableLink
-              href="/shop/happy-mail-6-month"
+              href="/shop/happy-mail-6-month-subscription"
               event="hm_subscribe_click"
-              eventData={{ plan: "6-month", price: "66.00", source: "pricing-card", page: "happy-mail" }}
+              eventData={{ plan: "6-month", price: "72.00", source: "pricing-card", page: "happy-mail" }}
               className="block w-full py-3 text-center text-[12px] uppercase tracking-[0.1em] font-semibold rounded-full text-white transition-all duration-300 hover:opacity-90"
               style={{ background: "var(--color-orange)" }}
             >
-              Get 6 Months — $66
+              Get 6 Months — $72
             </TrackableLink>
           </div>
         </div>
@@ -496,12 +496,12 @@ export default function HappyMailPage() {
             Monthly — $13
           </TrackableLink>
           <TrackableLink
-            href="/shop/happy-mail-6-month"
+            href="/shop/happy-mail-6-month-subscription"
             event="hm_subscribe_click"
             eventData={{ plan: "6-month", source: "mid-page-strip", page: "happy-mail" }}
             className="px-5 py-2.5 text-[12px] uppercase tracking-[0.1em] font-semibold rounded-full border-2 border-white text-white transition-opacity hover:opacity-80"
           >
-            6 Months — $66
+            6 Months — $72
           </TrackableLink>
         </div>
       </section>

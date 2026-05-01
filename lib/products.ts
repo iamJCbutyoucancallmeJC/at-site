@@ -489,16 +489,16 @@ export const LOCAL_PRODUCTS: ShopifyProduct[] = [
   },
   {
     id: "local-happy-mail-6month",
-    handle: "happy-mail-6-month",
+    handle: "happy-mail-6-month-subscription",
     title: "Happy Mail — Six Month Subscription",
     description:
       "Six months of happy, delivered. Get Happy Mail every month for half a year — stickers, die cuts, and surprises designed just for subscribers.",
     descriptionHtml:
       "<p>Six months of happy, delivered. Get Happy Mail every month for half a year — stickers, die cuts, and surprises designed just for subscribers.</p>",
     availableForSale: true,
-    priceRange: { minVariantPrice: price("78.00"), maxVariantPrice: price("78.00") },
+    priceRange: { minVariantPrice: price("72.00"), maxVariantPrice: price("72.00") },
     images: { nodes: imgNodes("happy-mail-6-month", 2) },
-    variants: { nodes: [variant("local-hm6-v1", "78.00")] },
+    variants: { nodes: [variant("local-hm6-v1", "72.00")] },
     tags: ["happy-mail", "subscription"],
     productType: "Subscription",
     collections: { nodes: [collection("happy-mail", "Happy Mail")] },
