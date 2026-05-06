@@ -10,38 +10,38 @@ export const metadata = {
 }
 
 const COLLABORATED_WITH = [
-  "Apple",
-  "Disney",
-  "Target",
-  "Amazon",
-  "Samsung",
-  "HP",
-  "Intel",
-  "HBO",
-  "Hallmark",
-  "Nordstrom",
-  "Clinique",
-  "Olay",
-  "Crayola",
-  "Avery",
-  "Fiskars",
-  "Shutterfly",
-  "Mixbook",
-  "American Crafts",
-  "Happy Planner",
-  "Fujifilm",
-  "Uniqlo",
-  "Kohl's",
-  "Dunkin'",
-  "General Mills",
-  "Popsicle",
-  "State Farm",
-  "H&R Block",
-  "Alaska Airlines",
-  "Four Seasons",
-  "Hamilton Princess",
-  "Aulani",
-  "LEGOLAND",
+  { name: "Apple", file: "/images/logos/01-apple.jpg" },
+  { name: "Target", file: "/images/logos/02-target.png" },
+  { name: "Uniqlo", file: "/images/logos/03-uniqlo.png" },
+  { name: "State Farm", file: "/images/logos/04-state-farm.png" },
+  { name: "Kohl's", file: "/images/logos/05-kohls.png" },
+  { name: "Fujifilm", file: "/images/logos/06-fujifilm.png" },
+  { name: "Avery", file: "/images/logos/07-avery.png" },
+  { name: "Fiskars", file: "/images/logos/08-fiskars.png" },
+  { name: "Shutterfly", file: "/images/logos/09-shutterfly.png" },
+  { name: "Dunkin'", file: "/images/logos/10-dunkin.png" },
+  { name: "Crayola", file: "/images/logos/11-crayola.jpg" },
+  { name: "H&R Block", file: "/images/logos/12-hr-block.png" },
+  { name: "Samsung", file: "/images/logos/13-samsung.jpeg" },
+  { name: "Intel", file: "/images/logos/14-intel.png" },
+  { name: "HP", file: "/images/logos/15-hp.png" },
+  { name: "Alaska Airlines", file: "/images/logos/16-alaska-airlines.png" },
+  { name: "Amazon", file: "/images/logos/17-amazon.png" },
+  { name: "General Mills", file: "/images/logos/18-general-mills.jpg" },
+  { name: "Mixbook", file: "/images/logos/19-mixbook.jpg" },
+  { name: "Four Seasons", file: "/images/logos/20-four-seasons.png" },
+  { name: "Clinique", file: "/images/logos/21-clinique.png" },
+  { name: "HBO", file: "/images/logos/22-hbo.png" },
+  { name: "Disney", file: "/images/logos/23-disney.png" },
+  { name: "Hallmark", file: "/images/logos/24-hallmark.png" },
+  { name: "Happy Planner", file: "/images/logos/25-happy-planner.jpg" },
+  { name: "Nordstrom", file: "/images/logos/26-nordstrom.png" },
+  { name: "American Crafts", file: "/images/logos/27-american-crafts.png" },
+  { name: "Hamilton Princess", file: "/images/logos/28-hamilton-princess.jpg" },
+  { name: "Aulani", file: "/images/logos/29-aulani.jpg" },
+  { name: "LEGOLAND", file: "/images/logos/30-legoland.jpg" },
+  { name: "Olay", file: "/images/logos/31-olay.png" },
+  { name: "Popsicle", file: "/images/logos/32-popsicle.jpg" },
 ]
 
 const FEATURED_IN = [
@@ -185,15 +185,20 @@ export default function AboutPage() {
           >
             Creative partners &amp; clients.
           </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-6 gap-y-5 mb-16">
-            {COLLABORATED_WITH.map((brand) => (
-              <span
-                key={brand}
-                className="text-[14px] md:text-[15px] font-semibold text-center"
-                style={{ color: "var(--color-text-secondary)" }}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-8 gap-y-10 mb-20">
+            {COLLABORATED_WITH.map(({ name, file }) => (
+              <div
+                key={name}
+                className="relative w-full aspect-[3/2] flex items-center justify-center"
               >
-                {brand}
-              </span>
+                <Image
+                  src={file}
+                  alt={name}
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 640px) 45vw, (max-width: 768px) 30vw, (max-width: 1024px) 22vw, 18vw"
+                />
+              </div>
             ))}
           </div>
 
