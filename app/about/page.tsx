@@ -9,13 +9,65 @@ export const metadata = {
     "Amy Tangerine is a multi-passionate maker, creative journaling teacher, and memory keeper based in Los Angeles, CA.",
 }
 
-const BRANDS = [
-  "Disney",
+const COLLABORATED_WITH = [
   "Apple",
+  "Disney",
+  "Target",
+  "Amazon",
+  "Samsung",
+  "HP",
+  "Intel",
+  "HBO",
+  "Hallmark",
+  "Nordstrom",
+  "Clinique",
+  "Olay",
+  "Crayola",
   "Avery",
-  "NY Times",
-  "Real Simple",
+  "Fiskars",
+  "Shutterfly",
+  "Mixbook",
+  "American Crafts",
+  "Happy Planner",
+  "Fujifilm",
+  "Uniqlo",
+  "Kohl's",
+  "Dunkin'",
+  "General Mills",
+  "Popsicle",
+  "State Farm",
+  "H&R Block",
+  "Alaska Airlines",
+  "Four Seasons",
+  "Hamilton Princess",
+  "Aulani",
+  "LEGOLAND",
+]
+
+const FEATURED_IN = [
   "Forbes",
+  "PaperCrafter",
+  "EventMarketer",
+  "Cut & Paste",
+  "MOTHER",
+  "Adobe Blog",
+  "Your Tango",
+  "Craft Industry Alliance",
+  "The Modern Creative Podcast",
+  "Dear Handmade Life",
+  "Liberty Session",
+  "Proof to Product",
+  "Exactly Enough Time",
+  "The Brava Podcast",
+  "Don't Keep Your Day Job",
+  "The Lavendaire Lifestyle",
+  "A Creative Approach",
+  "Craft Hangout",
+  "Elise Gets Crafty",
+  "Raise Your Hand. Say Yes.",
+  "Pimp Your Brilliance",
+  "Misses Ambitious",
+  "Homegirl Talk",
 ]
 
 const LINKS = [
@@ -112,29 +164,59 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── As seen in / brands ── */}
+      {/* ── Collaborated with / Featured in ── */}
       <section
-        className="py-12 px-6 md:px-16 border-t border-b"
+        className="py-16 md:py-20 px-6 md:px-16 border-t border-b"
         style={{
           borderColor: "var(--color-border)",
           background: "var(--color-white)",
         }}
       >
-        <div className="max-w-3xl mx-auto text-center">
+        <div className="max-w-5xl mx-auto">
           <p
-            className="text-[11px] uppercase tracking-[0.18em] font-semibold mb-8"
-            style={{ color: "var(--color-text-secondary)" }}
+            className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-3 text-center"
+            style={{ color: "var(--color-orange)" }}
           >
-            Featured in &amp; collaborated with
+            Collaborated with
           </p>
-          <div className="flex flex-wrap justify-center gap-6 md:gap-10">
-            {BRANDS.map((brand) => (
+          <h2
+            className="text-[22px] md:text-[28px] font-bold mb-10 text-center"
+            style={{ color: "var(--color-text-primary)" }}
+          >
+            Creative partners &amp; clients.
+          </h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-6 gap-y-5 mb-16">
+            {COLLABORATED_WITH.map((brand) => (
               <span
                 key={brand}
-                className="text-[14px] font-semibold"
+                className="text-[14px] md:text-[15px] font-semibold text-center"
                 style={{ color: "var(--color-text-secondary)" }}
               >
                 {brand}
+              </span>
+            ))}
+          </div>
+
+          <p
+            className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-3 text-center"
+            style={{ color: "var(--color-orange)" }}
+          >
+            Featured in
+          </p>
+          <h2
+            className="text-[22px] md:text-[28px] font-bold mb-10 text-center"
+            style={{ color: "var(--color-text-primary)" }}
+          >
+            Press, podcasts &amp; publications.
+          </h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-6 gap-y-5">
+            {FEATURED_IN.map((name) => (
+              <span
+                key={name}
+                className="text-[13px] md:text-[14px] font-semibold text-center"
+                style={{ color: "var(--color-text-secondary)" }}
+              >
+                {name}
               </span>
             ))}
           </div>
