@@ -9,65 +9,41 @@ export const metadata = {
     "Amy Tangerine is a multi-passionate maker, creative journaling teacher, and memory keeper based in Los Angeles, CA.",
 }
 
-const COLLABORATED_WITH = [
-  { name: "Apple", file: "/images/logos/01-apple.jpg" },
-  { name: "Target", file: "/images/logos/02-target.png" },
-  { name: "Uniqlo", file: "/images/logos/03-uniqlo.png" },
-  { name: "State Farm", file: "/images/logos/04-state-farm.png" },
-  { name: "Kohl's", file: "/images/logos/05-kohls.png" },
-  { name: "Fujifilm", file: "/images/logos/06-fujifilm.png" },
-  { name: "Avery", file: "/images/logos/07-avery.png" },
-  { name: "Fiskars", file: "/images/logos/08-fiskars.png" },
-  { name: "Shutterfly", file: "/images/logos/09-shutterfly.png" },
-  { name: "Dunkin'", file: "/images/logos/10-dunkin.png" },
-  { name: "Crayola", file: "/images/logos/11-crayola.jpg" },
-  { name: "H&R Block", file: "/images/logos/12-hr-block.png" },
-  { name: "Samsung", file: "/images/logos/13-samsung.jpeg" },
-  { name: "Intel", file: "/images/logos/14-intel.png" },
-  { name: "HP", file: "/images/logos/15-hp.png" },
-  { name: "Alaska Airlines", file: "/images/logos/16-alaska-airlines.png" },
-  { name: "Amazon", file: "/images/logos/17-amazon.png" },
-  { name: "General Mills", file: "/images/logos/18-general-mills.jpg" },
-  { name: "Mixbook", file: "/images/logos/19-mixbook.jpg" },
-  { name: "Four Seasons", file: "/images/logos/20-four-seasons.png" },
-  { name: "Clinique", file: "/images/logos/21-clinique.png" },
-  { name: "HBO", file: "/images/logos/22-hbo.png" },
-  { name: "Disney", file: "/images/logos/23-disney.png" },
-  { name: "Hallmark", file: "/images/logos/24-hallmark.png" },
-  { name: "Happy Planner", file: "/images/logos/25-happy-planner.jpg" },
-  { name: "Nordstrom", file: "/images/logos/26-nordstrom.png" },
-  { name: "American Crafts", file: "/images/logos/27-american-crafts.png" },
-  { name: "Hamilton Princess", file: "/images/logos/28-hamilton-princess.jpg" },
-  { name: "Aulani", file: "/images/logos/29-aulani.jpg" },
-  { name: "LEGOLAND", file: "/images/logos/30-legoland.jpg" },
-  { name: "Olay", file: "/images/logos/31-olay.png" },
-  { name: "Popsicle", file: "/images/logos/32-popsicle.jpg" },
-]
-
-const FEATURED_IN = [
-  "Forbes",
-  "PaperCrafter",
-  "EventMarketer",
-  "Cut & Paste",
-  "MOTHER",
-  "Adobe Blog",
-  "Your Tango",
-  "Craft Industry Alliance",
-  "The Modern Creative Podcast",
-  "Dear Handmade Life",
-  "Liberty Session",
-  "Proof to Product",
-  "Exactly Enough Time",
-  "The Brava Podcast",
-  "Don't Keep Your Day Job",
-  "The Lavendaire Lifestyle",
-  "A Creative Approach",
-  "Craft Hangout",
-  "Elise Gets Crafty",
-  "Raise Your Hand. Say Yes.",
-  "Pimp Your Brilliance",
-  "Misses Ambitious",
-  "Homegirl Talk",
+// Brand logos in Amy's source order from amytangerine.com/featured-in (32 brands).
+// Files live in /public/images/logos/, prefixed with order number.
+const BRAND_LOGOS = [
+  { name: "Apple",                       file: "01-apple.jpg" },
+  { name: "Target",                      file: "02-target.png" },
+  { name: "Uniqlo",                      file: "03-uniqlo.png" },
+  { name: "State Farm",                  file: "04-state-farm.png" },
+  { name: "Kohl's",                      file: "05-kohls.png" },
+  { name: "Fujifilm",                    file: "06-fujifilm.png" },
+  { name: "Avery",                       file: "07-avery.png" },
+  { name: "Fiskars",                     file: "08-fiskars.png" },
+  { name: "San Diego Tourism Authority", file: "09-san-diego-tourism.png" },
+  { name: "Dunkin'",                     file: "10-dunkin.png" },
+  { name: "Crayola",                     file: "11-crayola.jpg" },
+  { name: "H&R Block",                   file: "12-hr-block.png" },
+  { name: "Samsung",                     file: "13-samsung.jpeg" },
+  { name: "Intel",                       file: "14-intel.png" },
+  { name: "HP",                          file: "15-hp.png" },
+  { name: "Alaska Airlines",             file: "16-alaska-airlines.png" },
+  { name: "Amazon",                      file: "17-amazon.png" },
+  { name: "General Mills",               file: "18-general-mills.jpg" },
+  { name: "Mixbook",                     file: "19-mixbook.jpg" },
+  { name: "Four Seasons",                file: "20-four-seasons.png" },
+  { name: "Clinique",                    file: "21-clinique.png" },
+  { name: "HBO",                         file: "22-hbo.png" },
+  { name: "Disney",                      file: "23-disney.png" },
+  { name: "Adobe",                       file: "24-adobe.png" },
+  { name: "Happy Planner",               file: "25-happy-planner.jpg" },
+  { name: "Nordstrom",                   file: "26-nordstrom.png" },
+  { name: "American Crafts",             file: "27-american-crafts.png" },
+  { name: "Hamilton Princess",           file: "28-hamilton-princess.jpg" },
+  { name: "Aulani",                      file: "29-aulani.jpg" },
+  { name: "Legoland",                    file: "30-legoland.jpg" },
+  { name: "Olay",                        file: "31-olay.png" },
+  { name: "Popsicle",                    file: "32-popsicle.jpg" },
 ]
 
 const LINKS = [
@@ -164,7 +140,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── Collaborated with / Featured in ── */}
+      {/* ── Brand logo wall ── */}
       <section
         className="py-16 md:py-20 px-6 md:px-16 border-t border-b"
         style={{
@@ -172,7 +148,7 @@ export default function AboutPage() {
           background: "var(--color-white)",
         }}
       >
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <p
             className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-3 text-center"
             style={{ color: "var(--color-orange)" }}
@@ -185,44 +161,21 @@ export default function AboutPage() {
           >
             Creative partners &amp; clients.
           </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-8 gap-y-10 mb-20">
-            {COLLABORATED_WITH.map(({ name, file }) => (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-8 gap-y-10 items-center">
+            {BRAND_LOGOS.map(({ name, file }) => (
               <div
-                key={name}
-                className="relative w-full aspect-[3/2] flex items-center justify-center"
+                key={file}
+                className="relative aspect-[3/2] w-full"
+                title={name}
               >
                 <Image
-                  src={file}
+                  src={`/images/logos/${file}`}
                   alt={name}
                   fill
+                  sizes="(max-width: 640px) 40vw, (max-width: 1024px) 25vw, 16vw"
                   className="object-contain"
-                  sizes="(max-width: 640px) 45vw, (max-width: 768px) 30vw, (max-width: 1024px) 22vw, 18vw"
                 />
               </div>
-            ))}
-          </div>
-
-          <p
-            className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-3 text-center"
-            style={{ color: "var(--color-orange)" }}
-          >
-            Featured in
-          </p>
-          <h2
-            className="text-[22px] md:text-[28px] font-bold mb-10 text-center"
-            style={{ color: "var(--color-text-primary)" }}
-          >
-            Press, podcasts &amp; publications.
-          </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-6 gap-y-5">
-            {FEATURED_IN.map((name) => (
-              <span
-                key={name}
-                className="text-[13px] md:text-[14px] font-semibold text-center"
-                style={{ color: "var(--color-text-secondary)" }}
-              >
-                {name}
-              </span>
             ))}
           </div>
         </div>
@@ -293,8 +246,8 @@ export default function AboutPage() {
                 <TrackableLink
                   key={label}
                   href={href}
-                  eventName="about_cta_click"
-                  eventData={{ label }}
+                  event="nav_click"
+                  eventData={{ label, source_page: "about" }}
                   className="px-8 py-3 rounded-full text-[13px] font-semibold uppercase tracking-[0.1em] border transition-all duration-200 hover:opacity-80"
                   style={{
                     borderColor: "var(--color-orange)",
@@ -326,7 +279,8 @@ export default function AboutPage() {
         </p>
         <TrackableLink
           href="/happy-mail"
-          eventName="about_hm_cta_click"
+          event="hero_cta_click"
+          eventData={{ cta_text: "About Happy Mail CTA", destination: "/happy-mail", page: "about" }}
           className="inline-block px-10 py-4 rounded-full bg-white text-[14px] font-semibold uppercase tracking-[0.1em] hover:bg-white/90 transition-all duration-200"
           style={{ color: "var(--color-orange)" }}
         >
