@@ -21,3 +21,6 @@
 .DS_Store
 *.pem
 npm-debug.log*
+
+# typescript build info (regenerated on every build)
+tsconfig.tsbuildinfo
