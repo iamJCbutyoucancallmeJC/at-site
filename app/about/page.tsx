@@ -49,7 +49,6 @@ const BRAND_LOGOS = [
 const LINKS = [
   { label: "Shop", href: "/shop" },
   { label: "Happy Mail", href: "/happy-mail" },
-  { label: "Events", href: "/events" },
   { label: "YouTube", href: "https://youtube.com/@amytangerine", external: true },
 ]
 
