@@ -21,6 +21,8 @@ export type AnalyticsEvent =
   | 'variant_engagement'
   | 'purchase_complete'
   | 'thank_you_cta_click'
+  | 'not_found_view'
+  | 'error_view'
 
 type EventData = Record<string, string | number | boolean>
 
