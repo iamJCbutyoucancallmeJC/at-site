@@ -1,5 +1,9 @@
 import type { Metadata } from "next"
 
+// Prices in the description below MUST stay in sync with PRICE_MONTHLY +
+// PRICE_6MONTH in app/happy-mail/page.tsx. Static here because Next metadata
+// resolution doesn't support runtime imports cleanly; revisit if pricing
+// strategy changes more than once a year.
 export const metadata: Metadata = {
   title: "Happy Mail Subscription | Amy Tangerine",
   description:

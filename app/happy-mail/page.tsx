@@ -17,6 +17,16 @@ const HM_VARIANT_GID = process.env.NEXT_PUBLIC_HM_VARIANT_GID ?? "gid://shopify/
 const SELLING_PLAN_1MO = process.env.NEXT_PUBLIC_HM_SELLING_PLAN_1MO ?? "gid://shopify/SellingPlan/693610938688"
 const SELLING_PLAN_6MO = process.env.NEXT_PUBLIC_HM_SELLING_PLAN_6MO ?? "gid://shopify/SellingPlan/693610971456"
 
+// Pricing constants — single source of truth.
+// TODO post-launch: pull from Shopify Storefront API at request time so price
+// changes are a Shopify edit, not a code deploy. Blocked today because the HM
+// products are status:draft pre-launch and lib/shopify.ts now throws on null
+// returns (would break the build). Revisit after May 29 launch.
+// Verified correct against shopify-admin-api.md line 138-139 + Recharge plans 21951492/21951493.
+const PRICE_MONTHLY = 13
+const PRICE_6MONTH = 72
+const SAVINGS_6MONTH_VS_MONTHLY = PRICE_MONTHLY * 6 - PRICE_6MONTH // = 6
+
 const WHAT_INSIDE = [
   {
     title: "Your name, hand-lettered by Amy",
@@ -77,7 +87,7 @@ const TESTIMONIALS = [
 const FAQ_ITEMS = [
   {
     q: "What's the difference between Monthly and 6-Month?",
-    a: "Monthly ($13/mo) renews automatically each month until you cancel. 6-Month ($72) is a one-time payment for six months — no recurring charges. Both get the same monthly package.",
+    a: `Monthly ($${PRICE_MONTHLY}/mo) renews automatically each month until you cancel. 6-Month ($${PRICE_6MONTH}) is a one-time payment for six months — no recurring charges. Both get the same monthly package.`,
   },
   {
     q: "When does it ship?",
@@ -120,8 +130,8 @@ function SubscribeCTAs({ variant = "dark" }: { variant?: "dark" | "light" }) {
 
   function handleSubscribe(plan: "monthly" | "6-month") {
     const sellingPlanId = plan === "monthly" ? SELLING_PLAN_1MO : SELLING_PLAN_6MO
-    const price = plan === "monthly" ? "$13.00" : "$72.00"
-    const priceAmount = plan === "monthly" ? 13.0 : 72.0
+    const priceAmount = plan === "monthly" ? PRICE_MONTHLY : PRICE_6MONTH
+    const price = `$${priceAmount.toFixed(2)}`
     addItem({
       variantId: HM_VARIANT_GID,
       productHandle: plan === "monthly" ? "happy-mail" : "happy-mail-6-month-subscription",
@@ -141,14 +151,14 @@ function SubscribeCTAs({ variant = "dark" }: { variant?: "dark" | "light" }) {
         className="inline-block px-7 py-3.5 text-[13px] uppercase tracking-[0.1em] font-semibold rounded-full text-center transition-all duration-300 hover:opacity-90 cursor-pointer"
         style={primaryStyle}
       >
-        Subscribe Monthly — $13/mo
+        Subscribe Monthly — ${PRICE_MONTHLY}/mo
       </button>
       <button
         onClick={() => handleSubscribe("6-month")}
         className="inline-block px-7 py-3.5 text-[13px] uppercase tracking-[0.1em] font-semibold rounded-full text-center transition-all duration-300 hover:opacity-80 cursor-pointer"
         style={secondaryStyle}
       >
-        Get 6 Months — $72
+        Get 6 Months — ${PRICE_6MONTH}
       </button>
     </div>
   )
@@ -238,7 +248,7 @@ export default function HappyMailPage() {
                 className="text-[44px] font-bold leading-none"
                 style={{ color: "var(--color-text-primary)" }}
               >
-                $13
+                ${PRICE_MONTHLY}
               </span>
               <span
                 className="text-[14px] mb-1"
@@ -253,7 +263,7 @@ export default function HappyMailPage() {
             <TrackableLink
               href="/shop/happy-mail"
               event="hm_subscribe_click"
-              eventData={{ plan: "monthly", price: "13.00", source: "pricing-card", page: "happy-mail" }}
+              eventData={{ plan: "monthly", price: PRICE_MONTHLY.toFixed(2), source: "pricing-card", page: "happy-mail" }}
               className="block w-full py-3 text-center text-[12px] uppercase tracking-[0.1em] font-semibold rounded-full border-2 transition-all duration-300 hover:opacity-80"
               style={{
                 borderColor: "var(--color-orange)",
@@ -286,7 +296,7 @@ export default function HappyMailPage() {
                 className="text-[44px] font-bold leading-none"
                 style={{ color: "var(--color-text-primary)" }}
               >
-                $72
+                ${PRICE_6MONTH}
               </span>
               <span
                 className="text-[14px] mb-1"
@@ -296,7 +306,7 @@ export default function HappyMailPage() {
               </span>
             </div>
             <p className="text-[12px] mb-1" style={{ color: "var(--color-teal)" }}>
-              Save $12 vs. monthly
+              Save ${SAVINGS_6MONTH_VS_MONTHLY} vs. monthly
             </p>
             <p className="text-[12px] mb-5" style={{ color: "var(--color-text-secondary)" }}>
               No recurring charge · great as a gift
@@ -304,11 +314,11 @@ export default function HappyMailPage() {
             <TrackableLink
               href="/shop/happy-mail-6-month-subscription"
               event="hm_subscribe_click"
-              eventData={{ plan: "6-month", price: "72.00", source: "pricing-card", page: "happy-mail" }}
+              eventData={{ plan: "6-month", price: PRICE_6MONTH.toFixed(2), source: "pricing-card", page: "happy-mail" }}
               className="block w-full py-3 text-center text-[12px] uppercase tracking-[0.1em] font-semibold rounded-full text-white transition-all duration-300 hover:opacity-90"
               style={{ background: "var(--color-orange)" }}
             >
-              Get 6 Months — $72
+              Get 6 Months — ${PRICE_6MONTH}
             </TrackableLink>
           </div>
         </div>
@@ -493,7 +503,7 @@ export default function HappyMailPage() {
             className="px-5 py-2.5 text-[12px] uppercase tracking-[0.1em] font-semibold rounded-full bg-white transition-opacity hover:opacity-90"
             style={{ color: "var(--color-orange)" }}
           >
-            Monthly — $13
+            Monthly — ${PRICE_MONTHLY}
           </TrackableLink>
           <TrackableLink
             href="/shop/happy-mail-6-month-subscription"
@@ -501,7 +511,7 @@ export default function HappyMailPage() {
             eventData={{ plan: "6-month", source: "mid-page-strip", page: "happy-mail" }}
             className="px-5 py-2.5 text-[12px] uppercase tracking-[0.1em] font-semibold rounded-full border-2 border-white text-white transition-opacity hover:opacity-80"
           >
-            6 Months — $72
+            6 Months — ${PRICE_6MONTH}
           </TrackableLink>
         </div>
       </section>
