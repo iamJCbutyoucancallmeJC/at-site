@@ -2,6 +2,23 @@
   "redirects": [
     {
       "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "amytangerine.com"
+        }
+      ],
+      "destination": "https://www.amytangerine.com",
+      "permanent": false
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.amytangerine.com"
+        }
+      ],
       "destination": "https://www.amytangerine.com",
       "permanent": false
     }
