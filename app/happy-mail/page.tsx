@@ -13,9 +13,10 @@ import FaqAccordion from "@/components/faq-accordion"
 import { useCart } from "@/context/cart"
 import { trackEvent } from "@/lib/analytics"
 
-const HM_VARIANT_GID = process.env.NEXT_PUBLIC_HM_VARIANT_GID ?? "gid://shopify/ProductVariant/51926357311808"
+const HM_VARIANT_MONTHLY_GID = process.env.NEXT_PUBLIC_HM_VARIANT_MONTHLY_GID ?? "gid://shopify/ProductVariant/51926357311808"
+const HM_VARIANT_6MONTH_GID = process.env.NEXT_PUBLIC_HM_VARIANT_6MONTH_GID ?? "gid://shopify/ProductVariant/51998971068736"
 const SELLING_PLAN_1MO = process.env.NEXT_PUBLIC_HM_SELLING_PLAN_1MO ?? "gid://shopify/SellingPlan/693610938688"
-const SELLING_PLAN_6MO = process.env.NEXT_PUBLIC_HM_SELLING_PLAN_6MO ?? "gid://shopify/SellingPlan/693610971456"
+const SELLING_PLAN_6MO = process.env.NEXT_PUBLIC_HM_SELLING_PLAN_6MO ?? "gid://shopify/SellingPlan/693625356608"
 
 // Pricing constants — single source of truth.
 // TODO post-launch: pull from Shopify Storefront API at request time so price
@@ -129,12 +130,13 @@ function SubscribeCTAs({ variant = "dark" }: { variant?: "dark" | "light" }) {
       : { background: "transparent", color: "#fff", border: "2px solid rgba(255,255,255,0.7)" }
 
   function handleSubscribe(plan: "monthly" | "6-month") {
+    const variantId = plan === "monthly" ? HM_VARIANT_MONTHLY_GID : HM_VARIANT_6MONTH_GID
     const sellingPlanId = plan === "monthly" ? SELLING_PLAN_1MO : SELLING_PLAN_6MO
     const priceAmount = plan === "monthly" ? PRICE_MONTHLY : PRICE_6MONTH
     const price = `$${priceAmount.toFixed(2)}`
     addItem({
-      variantId: HM_VARIANT_GID,
-      productHandle: plan === "monthly" ? "happy-mail" : "happy-mail-6-month-subscription",
+      variantId,
+      productHandle: "happy-mail",
       title: plan === "monthly" ? "Happy Mail — Monthly Subscription" : "Happy Mail — 6-Month Subscription",
       price,
       priceAmount,
@@ -312,7 +314,7 @@ export default function HappyMailPage() {
               No recurring charge · great as a gift
             </p>
             <TrackableLink
-              href="/shop/happy-mail-6-month-subscription"
+              href="/shop/happy-mail"
               event="hm_subscribe_click"
               eventData={{ plan: "6-month", price: PRICE_6MONTH.toFixed(2), source: "pricing-card", page: "happy-mail" }}
               className="block w-full py-3 text-center text-[12px] uppercase tracking-[0.1em] font-semibold rounded-full text-white transition-all duration-300 hover:opacity-90"
