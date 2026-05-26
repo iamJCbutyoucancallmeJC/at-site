@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Mail emails — sight review</title>
+<style>
+  :root {
+    --at-orange: #FD891C;
+    --at-orange-light: #FFF5FA;
+    --at-teal: #00ADB3;
+    --hairline-grey: #B6B6BD;
+    --footer-grey: #8E8F8E;
+    --ink: #000000;
+    --muted: #6b6b6b;
+    --page-bg: #f4f1ec;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--page-bg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+  .page-header {
+    margin-bottom: 32px;
+  }
+  .page-header h1 {
+    font-size: 24px;
+    margin: 0 0 8px;
+    font-weight: 600;
+  }
+  .page-header p {
+    margin: 4px 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .nav-bar {
+    position: sticky;
+    top: 0;
+    background: var(--page-bg);
+    padding: 12px 0;
+    margin-bottom: 24px;
+    z-index: 10;
+    border-bottom: 1px solid #ddd;
+  }
+  .nav-bar-inner {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .nav-pill {
+    padding: 6px 12px;
+    font-size: 13px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    cursor: pointer;
+    color: var(--ink);
+    text-decoration: none;
+    transition: all 0.15s;
+  }
+  .nav-pill:hover {
+    border-color: var(--at-orange);
+    color: var(--at-orange);
+  }
+  .nav-pill.active {
+    background: var(--at-orange);
+    color: white;
+    border-color: var(--at-orange);
+  }
+  .email-block {
+    margin-bottom: 60px;
+  }
+  .email-meta {
+    background: white;
+    border: 1px solid #ddd;
+    border-left: 3px solid var(--at-orange);
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    border-radius: 4px;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .email-meta .badge {
+    display: inline-block;
+    background: var(--at-orange);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-right: 8px;
+    letter-spacing: 0.3px;
+    vertical-align: 1px;
+  }
+  .email-meta .meta-title {
+    font-weight: 600;
+    font-size: 15px;
+    display: inline-block;
+  }
+  .email-meta .meta-row {
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .email-meta .meta-row strong { color: var(--ink); font-weight: 500; }
+  .email-meta .fnf-flag {
+    margin-top: 8px;
+    padding: 8px 12px;
+    background: var(--at-orange-light);
+    border-radius: 4px;
+    color: var(--ink);
+    font-size: 13px;
+  }
+
+  /* =============================================
+     THE EMAIL FRAME — matches FNF Recharge template
+     Font: Roboto / Helvetica Neue / Helvetica / Arial
+     Logo: Amy Tangerine wordmark, Shopify CDN
+     Dividers: 2px solid #B6B6BD
+     Section pattern: H1 centered, H4 left-aligned
+     ============================================= */
+  .email {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+    max-width: 620px;
+    margin: 0 auto;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .email-subject {
+    background: #fafafa;
+    padding: 14px 24px;
+    border-bottom: 1px solid #e8e8e8;
+    font-size: 13px;
+    color: var(--muted);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .email-subject .from { display: block; margin-bottom: 4px; color: var(--ink); font-weight: 500; }
+  .email-subject .subj { color: var(--ink); font-weight: 600; font-size: 15px; }
+
+  /* Inside the email container, everything uses the FNF font stack */
+  .email-inner {
+    font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: var(--ink);
+  }
+  .email-header-band {
+    padding: 24px 0 16px;
+    text-align: center;
+    background: white;
+  }
+  .email-header-band img {
+    max-width: 320px;
+    width: 320px;
+    height: auto;
+    display: inline-block;
+  }
+  .email-body {
+    padding: 12px 20px 20px;
+    font-size: 14px;
+    line-height: 150%;
+  }
+  .email-body h1 {
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 150%;
+    text-align: center;
+    margin: 16px 0 8px;
+    color: var(--ink);
+  }
+  .email-body h3 {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 150%;
+    text-align: left;
+    margin: 0;
+    color: var(--ink);
+  }
+  .email-body h4 {
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 125%;
+    text-align: left;
+    margin: 20px 0 4px;
+    color: var(--ink);
+  }
+  .email-body p {
+    font-size: 14px;
+    line-height: 150%;
+    margin: 8px 0;
+    color: var(--ink);
+  }
+  .email-body a {
+    color: var(--at-orange);
+    font-weight: bold;
+    text-decoration: none;
+  }
+  .email-body .divider {
+    border-top: 2px solid var(--hairline-grey);
+    margin: 16px 0;
+  }
+  .email-body .line-item {
+    display: flex;
+    justify-content: space-between;
+    margin: 8px 0;
+  }
+  .email-body .line-item .left ul {
+    margin: 4px 0 0 18px;
+    padding: 0;
+    font-size: 14px;
+  }
+  .email-body .line-item .left ul li {
+    margin: 2px 0;
+  }
+  .email-body .totals-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    font-size: 14px;
+  }
+  .email-body .totals-row.total {
+    padding-top: 12px;
+  }
+  .email-body .totals-row.total .label,
+  .email-body .totals-row.total .value {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .email-body .legal-note {
+    font-style: italic;
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 16px;
+  }
+  .email-body .btn-primary {
+    display: inline-block;
+    background: var(--at-orange);
+    color: white !important;
+    padding: 12px 28px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+  .email-body .btn-secondary {
+    display: inline-block;
+    background: transparent;
+    color: var(--at-orange) !important;
+    border: 1px solid var(--at-orange);
+    padding: 11px 27px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+  .email-body .center { text-align: center; }
+  .email-body .small-meta { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+  /* Footer band — matches FNF */
+  .email-footer-band {
+    padding: 20px 20px;
+    text-align: center;
+    background: white;
+  }
+  .email-footer-band h4 {
+    text-align: center;
+    color: var(--footer-grey);
+    padding-bottom: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0;
+    font-family: Helvetica, Arial, sans-serif;
+  }
+
+  /* Utility (internal) email — different visual job */
+  .email-body.utility {
+    font-family: -apple-system, "SF Mono", Menlo, monospace;
+    font-size: 13px;
+    background: #fafafa;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+  .utility-block {
+    background: white;
+    padding: 14px 18px;
+    border-radius: 4px;
+    margin: 12px 0;
+    border: 1px solid #e8e8e8;
+  }
+  .utility-label {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .utility-value {
+    font-size: 14px;
+    color: var(--ink);
+  }
+  .utility-divider {
+    border-top: 1px dashed #ccc;
+    margin: 16px 0;
+  }
+
+  .pager {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 32px;
+    padding: 0 4px;
+  }
+  .pager a {
+    color: var(--at-orange);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .pager a:hover { text-decoration: underline; }
+  .pager a.disabled { color: var(--muted); pointer-events: none; }
+  .final-note {
+    background: white;
+    border: 1px solid #ddd;
+    padding: 24px;
+    border-radius: 6px;
+    margin-top: 48px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .final-note h3 { margin-top: 0; font-size: 16px; }
+  .final-note ul { padding-left: 18px; margin: 8px 0; }
+  .final-note li { margin: 4px 0; }
+  @media (max-width: 600px) {
+    .page { padding: 20px 12px 60px; }
+    .email-body { padding: 12px 16px 16px; }
+    .email-header-band img { max-width: 260px; width: 260px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="page-header">
+    <h1>Happy Mail emails — sight review</h1>
+    <p><strong>For:</strong> Amy. <strong>From:</strong> JC. <strong>What this is:</strong> the six emails that fire automatically once we flip things on.</p>
+    <p>Same visual frame as the Subscription confirmation email you signed off on for FNF (logo, font, spacing, dividers). Scroll through. If nothing makes you wince, just say "yes."</p>
+  </div>
+
+  <div class="nav-bar">
+    <div class="nav-bar-inner">
+      <a href="#email-1" class="nav-pill">1 · Order confirmation</a>
+      <a href="#email-2" class="nav-pill">2 · New order alert</a>
+      <a href="#email-3" class="nav-pill">3 · Welcome</a>
+      <a href="#email-4" class="nav-pill">4 · Card declined</a>
+      <a href="#email-5" class="nav-pill">5 · Address updated</a>
+      <a href="#email-6" class="nav-pill">6 · Long pause</a>
+    </div>
+  </div>
+
+  <!-- ===================== EMAIL 1 ===================== -->
+  <div class="email-block" id="email-1">
+    <div class="email-meta">
+      <span class="badge">1 of 6</span>
+      <span class="meta-title">Order confirmation</span>
+      <div class="meta-row"><strong>Fires:</strong> every order, within seconds of checkout · <strong>Goes to:</strong> customer · <strong>System:</strong> Shopify</div>
+      <div class="meta-row"><strong>Sample shown:</strong> Sarah, monthly Happy Mail subscription, $5 migration discount applied.</div>
+    </div>
+    <div class="email">
+      <div class="email-subject">
+        <span class="from">Amy Tangerine &lt;hello@amytangerine.com&gt;</span>
+        <span class="subj">Your Happy Mail is locked in</span>
+      </div>
+      <div class="email-inner">
+        <div class="email-header-band">
+          <img src="https://cdn.shopify.com/s/files/1/0981/5667/5392/files/amy-tangerine-logo_b8f32b9b-1f9b-462d-acf8-e7ce2bdcae60.png?v=1779635354" alt="Amy Tangerine">
+        </div>
+        <div class="email-body">
+          <h1>Thank you.</h1>
+          <p>Hi Sarah,</p>
+          <p>Your order is in. Here's what to expect.</p>
+
+          <h4>When will it arrive?</h4>
+          <p>Your first Happy Mail envelope ships around the 15th. After that, the same date every month, until you tell us otherwise.</p>
+
+          <div class="divider"></div>
+
+          <h3>Order #1042</h3>
+
+          <div class="divider"></div>
+
+          <div class="line-item">
+            <div class="left">
+              <h4 style="margin-top:0;">Happy Mail</h4>
+              <ul>
+                <li>Charges every month</li>
+                <li>Next charge on Jun 30, 2026</li>
+              </ul>
+            </div>
+            <div class="right" style="text-align: right;">$13.00</div>
+          </div>
+
+          <div class="divider"></div>
+
+          <h4 style="margin-top:0;">Discounts</h4>
+          <div class="line-item">
+            <div>MAY-MIGRATE-5</div>
+            <div style="text-align: right;">−$5.00</div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="totals-row">
+            <span class="label">Subtotal</span>
+            <span class="value">$8.00</span>
+          </div>
+          <div class="totals-row">
+            <span class="label">Shipping</span>
+            <span class="value">$0.00</span>
+          </div>
+          <div class="totals-row">
+            <span class="label">Taxes</span>
+            <span class="value">$0.00</span>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="totals-row total">
+            <span class="label">Total</span>
+            <span class="value">$8.00 USD</span>
+          </div>
+
+          <div class="divider"></div>
+
+          <h4 style="margin-top:0;">Shipping to</h4>
+          <p style="margin-top:4px;">Sarah Mitchell<br>
+          4218 Maple Drive<br>
+          Austin, TX 78704</p>
+
+          <p style="margin-top: 20px;">If anything looks off, just reply.</p>
+
+          <p class="legal-note">A note on the discount: this code applies to your first charge only. Future Happy Mail charges are $13 — same as anyone else.</p>
+        </div>
+        <div class="email-footer-band">
+          <h4>Amy Tangerine</h4>
+          <h4>amytangerine.com</h4>
+          <h4>10736 Jefferson Blvd #312, Culver City, CA 90230</h4>
+        </div>
+      </div>
+    </div>
+    <div class="pager">
+      <a href="#" class="disabled">←</a>
+      <a href="#email-2">Next: New order alert →</a>
+    </div>
+  </div>
+
+  <!-- ===================== EMAIL 2 ===================== -->
+  <div class="email-block" id="email-2">
+    <div class="email-meta">
+      <span class="badge">2 of 6</span>
+      <span class="meta-title">New order alert (internal)</span>
+      <div class="meta-row"><strong>Fires:</strong> every order, within seconds · <strong>Goes to:</strong> Amy + Ahpo · <strong>System:</strong> Shopify</div>
+      <div class="meta-row">Kept utility-plain on purpose: faster scan for fulfillment, no branded decoration. Different job from the customer email.</div>
+    </div>
+    <div class="email">
+      <div class="email-subject">
+        <span class="from">Amy Tangerine Shop &lt;orders@amytangerine.com&gt;</span>
+        <span class="subj">[AT] #1042 — Happy Mail Monthly × 1 → Austin, TX</span>
+      </div>
+      <div class="email-body utility">
+        <strong>Order #1042</strong> placed May 30, 2026 at 9:42 am<br><br>
+
+        <div class="utility-block">
+          <span class="utility-label">Ship to</span>
+          <span class="utility-value">
+            Sarah Mitchell<br>
+            4218 Maple Drive<br>
+            Austin, TX 78704
+          </span>
+        </div>
+
+        <div class="utility-block">
+          <span class="utility-label">What to send</span>
+          <span class="utility-value">
+            Happy Mail · Monthly Subscription · qty 1<br>
+            SKU: HM-MONTHLY
+          </span>
+        </div>
+
+        <div class="utility-block">
+          <span class="utility-label">Type</span>
+          <span class="utility-value">Subscription (Happy Mail Monthly)</span>
+        </div>
+
+        <div class="utility-divider"></div>
+
+        Subtotal: $13.00<br>
+        Discount: −$5.00 (MAY-MIGRATE-5)<br>
+        Shipping: $0.00 (Free)<br>
+        <strong>Total paid: $8.00</strong><br><br>
+
+        Payment: Shopify Payments (Visa ····4218)<br><br>
+
+        <a href="#" style="color: #FD891C; font-weight: bold;">View in admin →</a>
+      </div>
+    </div>
+    <div class="pager">
+      <a href="#email-1">← Order confirmation</a>
+      <a href="#email-3">Next: Welcome to Happy Mail →</a>
+    </div>
+  </div>
+
+  <!-- ===================== EMAIL 3 ===================== -->
+  <div class="email-block" id="email-3">
+    <div class="email-meta">
+      <span class="badge">3 of 6</span>
+      <span class="meta-title">Welcome to Happy Mail</span>
+      <div class="meta-row"><strong>Fires:</strong> every new subscription, ~30-90s after #1 · <strong>Goes to:</strong> customer · <strong>System:</strong> Recharge</div>
+      <div class="meta-row"><strong>Sample shown:</strong> same Sarah, monthly cohort.</div>
+      <div class="fnf-flag">
+        <strong>This is the FNF version</strong> — same template + copy that already shipped to FNF testers May 22-24. You voice-checked this one. The visual frame on the other five emails matches this one.
+      </div>
+    </div>
+    <div class="email">
+      <div class="email-subject">
+        <span class="from">Amy Tangerine &lt;hello@amytangerine.com&gt;</span>
+        <span class="subj">Subscription confirmation</span>
+      </div>
+      <div class="email-inner">
+        <div class="email-header-band">
+          <img src="https://cdn.shopify.com/s/files/1/0981/5667/5392/files/amy-tangerine-logo_b8f32b9b-1f9b-462d-acf8-e7ce2bdcae60.png?v=1779635354" alt="Amy Tangerine">
+        </div>
+        <div class="email-body">
+          <h1>You're in.</h1>
+
+          <p>Hi Sarah,</p>
+          <p>Thanks for joining Happy Mail. Here's what's coming.</p>
+
+          <h4>What am I getting?</h4>
+          <p>Every Happy Mail includes a sticker sheet I designed, die cuts made in the USA, and a personal note from me. First access to the newest sticker sheet, before it hits the shop. The exact contents change month to month. That's part of the surprise.</p>
+
+          <h4>When will it arrive?</h4>
+          <p>Envelopes ship around the 15th of each month, US first-class mail. If you signed up after the 10th, your first envelope ships next month.</p>
+
+          <h4>How does billing work?</h4>
+          <p>You'll get a Happy Mail every month. We'll charge your card $13 each month on the same date you signed up.</p>
+
+          <h4>What if I need to change something?</h4>
+          <p>Update your address, payment method, or cancel anytime: <a href="#">Manage subscription</a></p>
+          <p>Got questions? Email me at <a href="mailto:hello@amytangerine.com">hello@amytangerine.com</a>. I read every one.</p>
+
+          <div class="divider"></div>
+
+          <h3>Subscription details</h3>
+
+          <div class="divider"></div>
+
+          <div class="line-item">
+            <div class="left">
+              <h4 style="margin-top:0;">Happy Mail</h4>
+              <ul>
+                <li>Charges every month</li>
+                <li>Next charge on Jun 30, 2026</li>
+              </ul>
+            </div>
+            <div class="right" style="text-align: right;">$13.00</div>
+          </div>
+
+          <div class="divider"></div>
+
+          <h4 style="margin-top:0;">Discounts</h4>
+          <div class="line-item">
+            <div>MAY-MIGRATE-5</div>
+            <div style="text-align: right;">−$5.00</div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="totals-row">
+            <span class="label">Subtotal</span>
+            <span class="value">$8.00</span>
+          </div>
+          <div class="totals-row">
+            <span class="label">Shipping</span>
+            <span class="value">$0.00</span>
+          </div>
+          <div class="totals-row">
+            <span class="label">Taxes</span>
+            <span class="value">$0.00</span>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="totals-row total">
+            <span class="label">Total</span>
+            <span class="value">$8.00 USD</span>
+          </div>
+
+          <div class="divider"></div>
+
+          <p>Please email us <a href="mailto:hello@amytangerine.com">here</a> if you have any questions about your subscription.</p>
+
+          <p class="legal-note">Amy Tangerine provides a subscription service. By subscribing to our service, you have confirmed that you accept our Terms of Service. Your membership will automatically renew on a recurring basis at which time your credit card will be charged automatically for the subscription products, including applicable shipping and handling fees until you cancel your membership. You may cancel your membership at anytime by logging in to your account, selecting Subscriptions, then clicking cancel next to the item.</p>
+
+          <p class="legal-note">Your total today reflects an applied discount of $5.00. After the discount charge limit is reached, your total will increase by the discounted amount.</p>
+        </div>
+        <div class="email-footer-band">
+          <h4>Amy Tangerine</h4>
+          <h4>amytangerine.com</h4>
+          <h4>10736 Jefferson Blvd #312, Culver City, CA 90230</h4>
+        </div>
+      </div>
+    </div>
+    <div class="pager">
+      <a href="#email-2">← New order alert</a>
+      <a href="#email-4">Next: Card declined →</a>
+    </div>
+  </div>
+
+  <!-- ===================== EMAIL 4 ===================== -->
+  <div class="email-block" id="email-4">
+    <div class="email-meta">
+      <span class="badge">4 of 6</span>
+      <span class="meta-title">Card couldn't charge</span>
+      <div class="meta-row"><strong>Fires:</strong> after 4 declined charge attempts over ~15 days · <strong>Goes to:</strong> customer · <strong>System:</strong> Recharge</div>
+      <div class="meta-row">The subscription auto-cancels at this point. You see the count in the monthly synthesis, not individual emails.</div>
+    </div>
+    <div class="email">
+      <div class="email-subject">
+        <span class="from">Amy Tangerine &lt;hello@amytangerine.com&gt;</span>
+        <span class="subj">A note about your Happy Mail subscription</span>
+      </div>
+      <div class="email-inner">
+        <div class="email-header-band">
+          <img src="https://cdn.shopify.com/s/files/1/0981/5667/5392/files/amy-tangerine-logo_b8f32b9b-1f9b-462d-acf8-e7ce2bdcae60.png?v=1779635354" alt="Amy Tangerine">
+        </div>
+        <div class="email-body">
+          <h1>A note from Amy.</h1>
+
+          <p>Hi Sarah,</p>
+          <p>We tried to charge your card for this month's Happy Mail a few times and it didn't go through. That's almost always a card-on-file issue, not anything you did — expired card, new number, bank flagged it as unfamiliar.</p>
+          <p>We've gone ahead and canceled your subscription so you're not getting charge-attempt emails. No further action on your end.</p>
+
+          <h4>If you'd like to come back</h4>
+          <p>The door's open.</p>
+
+          <p class="center" style="margin: 20px 0;"><a href="#" class="btn-primary">Restart Happy Mail</a></p>
+
+          <p>If this happened by surprise and you want help sorting it out, just reply to this email. I read every one.</p>
+        </div>
+        <div class="email-footer-band">
+          <h4>Amy Tangerine</h4>
+          <h4>amytangerine.com</h4>
+          <h4>10736 Jefferson Blvd #312, Culver City, CA 90230</h4>
+        </div>
+      </div>
+    </div>
+    <div class="pager">
+      <a href="#email-3">← Welcome to Happy Mail</a>
+      <a href="#email-5">Next: Address updated →</a>
+    </div>
+  </div>
+
+  <!-- ===================== EMAIL 5 ===================== -->
+  <div class="email-block" id="email-5">
+    <div class="email-meta">
+      <span class="badge">5 of 6</span>
+      <span class="meta-title">Address updated</span>
+      <div class="meta-row"><strong>Fires:</strong> when we change a customer's ship-to · <strong>Goes to:</strong> customer · <strong>System:</strong> Shopify / Recharge</div>
+      <div class="meta-row">Closes the loop the old system didn't. They emailed us; we updated; now they know it took.</div>
+    </div>
+    <div class="email">
+      <div class="email-subject">
+        <span class="from">Amy Tangerine &lt;hello@amytangerine.com&gt;</span>
+        <span class="subj">Got it — your address is updated</span>
+      </div>
+      <div class="email-inner">
+        <div class="email-header-band">
+          <img src="https://cdn.shopify.com/s/files/1/0981/5667/5392/files/amy-tangerine-logo_b8f32b9b-1f9b-462d-acf8-e7ce2bdcae60.png?v=1779635354" alt="Amy Tangerine">
+        </div>
+        <div class="email-body">
+          <h1>Got it.</h1>
+
+          <p>Hi Sarah,</p>
+          <p>Quick confirmation: your Happy Mail will go to the new address starting with the June envelope.</p>
+
+          <div class="divider"></div>
+
+          <h4 style="margin-top:0;">New shipping address</h4>
+          <p>Sarah Mitchell<br>
+          1158 Cherrywood Lane<br>
+          Portland, OR 97214</p>
+
+          <div class="divider"></div>
+
+          <p>If that doesn't look right, reply and we'll fix it.</p>
+        </div>
+        <div class="email-footer-band">
+          <h4>Amy Tangerine</h4>
+          <h4>amytangerine.com</h4>
+          <h4>10736 Jefferson Blvd #312, Culver City, CA 90230</h4>
+        </div>
+      </div>
+    </div>
+    <div class="pager">
+      <a href="#email-4">← Card declined</a>
+      <a href="#email-6">Next: Long pause →</a>
+    </div>
+  </div>
+
+  <!-- ===================== EMAIL 6 ===================== -->
+  <div class="email-block" id="email-6">
+    <div class="email-meta">
+      <span class="badge">6 of 6</span>
+      <span class="meta-title">Still want Happy Mail?</span>
+      <div class="meta-row"><strong>Fires:</strong> when a subscription has been paused for 90+ days with no activity · <strong>Goes to:</strong> customer · <strong>System:</strong> Recharge</div>
+      <div class="meta-row">Light touch — used to surface these to you; now the system reaches out once and you see the count monthly.</div>
+    </div>
+    <div class="email">
+      <div class="email-subject">
+        <span class="from">Amy Tangerine &lt;hello@amytangerine.com&gt;</span>
+        <span class="subj">Your Happy Mail is on pause</span>
+      </div>
+      <div class="email-inner">
+        <div class="email-header-band">
+          <img src="https://cdn.shopify.com/s/files/1/0981/5667/5392/files/amy-tangerine-logo_b8f32b9b-1f9b-462d-acf8-e7ce2bdcae60.png?v=1779635354" alt="Amy Tangerine">
+        </div>
+        <div class="email-body">
+          <h1>Still want Happy Mail?</h1>
+
+          <p>Hi Sarah,</p>
+          <p>You paused your Happy Mail subscription a few months back. No problem — life happens.</p>
+          <p>Just wanted to put it on your radar in case you forgot, or in case you'd like to come back. The envelopes are still going out every month, and we'd love to send you one again.</p>
+
+          <h4>Restart your subscription</h4>
+          <p>You'll get the next envelope in the cycle, charged at your original rate.</p>
+          <p class="center" style="margin: 16px 0;"><a href="#" class="btn-primary">Restart Happy Mail</a></p>
+
+          <div class="divider"></div>
+
+          <h4>Stay paused, or cancel for good</h4>
+          <p>No hard feelings. Your account stays open if you ever want to come back.</p>
+          <p class="center" style="margin: 16px 0;"><a href="#" class="btn-secondary">Manage subscription</a></p>
+
+          <p style="margin-top: 24px;">Or do nothing and stay paused. We won't ask again for a while.</p>
+        </div>
+        <div class="email-footer-band">
+          <h4>Amy Tangerine</h4>
+          <h4>amytangerine.com</h4>
+          <h4>10736 Jefferson Blvd #312, Culver City, CA 90230</h4>
+        </div>
+      </div>
+    </div>
+    <div class="pager">
+      <a href="#email-5">← Address updated</a>
+      <a href="#" class="disabled">End →</a>
+    </div>
+  </div>
+
+  <div class="final-note">
+    <h3>What I'm asking for</h3>
+    <p>Skim it. If nothing makes you wince, reply "yes" or "all good." That's all.</p>
+    <p>If something feels off, mark which email and what bothered you. We'll fix that one and we ship.</p>
+
+    <h3 style="margin-top: 20px;">Things I'm explicitly NOT asking</h3>
+    <ul>
+      <li>The mechanics behind each one (when it fires, what triggers it — locked)</li>
+      <li>Whether to send these (firing once we flip the switch)</li>
+      <li>The visual frame — it matches the FNF Subscription confirmation you already approved</li>
+    </ul>
+
+    <h3 style="margin-top: 20px;">Eyes especially on</h3>
+    <ul>
+      <li>Anything that doesn't sound like you in #1, #4, #5, #6</li>
+      <li>#4 (Card declined) — direct on purpose; flag if it should be softer</li>
+      <li>The "$13 going forward" reframe in the legal note at the bottom of #1 and #3 — this is what the May 28 migration-announce $5/$10 codes need to land cleanly</li>
+    </ul>
+  </div>
+
+</div>
+
+<script>
+  const pills = document.querySelectorAll('.nav-pill');
+  const sections = document.querySelectorAll('.email-block');
+  function onScroll() {
+    let activeIdx = 0;
+    sections.forEach((s, i) => {
+      const rect = s.getBoundingClientRect();
+      if (rect.top < window.innerHeight / 2) activeIdx = i;
+    });
+    pills.forEach((p, i) => p.classList.toggle('active', i === activeIdx));
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+</script>
+
+</body>
+</html>
