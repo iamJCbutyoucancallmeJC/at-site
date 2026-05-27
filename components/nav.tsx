@@ -159,17 +159,6 @@ export default function Nav() {
                 {link.label}
               </Link>
             ))}
-            <Link
-              href="/contact"
-              className="text-lg font-semibold py-3 border-b"
-              style={{
-                color: "var(--color-text-primary)",
-                borderColor: "var(--color-border)",
-              }}
-              onClick={() => { setMobileOpen(false); trackEvent("nav_click", { link_text: "Contact", mobile_or_desktop: "mobile" }) }}
-            >
-              Contact
-            </Link>
           </div>
         </div>
       )}
