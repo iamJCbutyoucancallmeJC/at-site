@@ -241,8 +241,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             </p>
             <TrackableLink
               href="/happy-mail"
-              event="hero_cta_click"
-              eventData={{ cta_text: "PDP Happy Mail Cross-sell", destination: "/happy-mail", page: "pdp" }}
+              event="hm_subscribe_click"
+              eventData={{ source: "cross-sell-pdp", slug: slug, cta_text: "PDP Happy Mail Cross-sell", destination: "/happy-mail", page: "pdp" }}
               className="inline-block px-5 py-2 text-[12px] uppercase tracking-[0.1em] font-semibold rounded-full text-white transition-all duration-300"
               style={{ background: "var(--color-orange)" }}
             >

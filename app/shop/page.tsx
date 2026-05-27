@@ -179,8 +179,8 @@ export default async function ShopPage({
               </p>
               <TrackableLink
                 href="/happy-mail"
-                event="hero_cta_click"
-                eventData={{ cta_text: "Shop Happy Mail Cross-sell", destination: "/happy-mail", page: "shop" }}
+                event="hm_subscribe_click"
+                eventData={{ source: "cross-sell-shop", cta_text: "Shop Happy Mail Cross-sell", destination: "/happy-mail", page: "shop" }}
                 className="inline-block px-6 py-2.5 text-[12px] uppercase tracking-[0.1em] font-semibold rounded-full border-2 border-white text-white hover:bg-white hover:text-black transition-all duration-300"
               >
                 Learn More
