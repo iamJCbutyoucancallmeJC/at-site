@@ -152,7 +152,7 @@ export default function ContactPage() {
         </h2>
         <p className="text-[15px] text-white/80 mb-8 max-w-sm mx-auto leading-relaxed">
           Once a month, a package arrives — die cuts, stickers, and a personal
-          note. Your name, hand-lettered by Amy.
+          note. The good kind of mail.
         </p>
         <TrackableLink
           href="/happy-mail"
