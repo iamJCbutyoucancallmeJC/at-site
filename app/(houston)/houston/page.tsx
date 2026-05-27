@@ -17,8 +17,8 @@ const HM6_VARIANT_GID = process.env.NEXT_PUBLIC_HM6_VARIANT_GID ?? ""
 
 const WHAT_INSIDE = [
   {
-    title: "Your name, hand-lettered by Amy",
-    body: "The envelope arrives addressed in Amy's handwriting. Not printed. Actually hand-lettered.",
+    title: "An envelope from Amy",
+    body: "Sent straight to your door, once a month.",
     img: "/images/products/happy-mail/2.jpg",
   },
   {
@@ -40,7 +40,7 @@ const WHAT_INSIDE = [
 
 const TESTIMONIALS = [
   {
-    quote: "I literally squealed when it arrived. The hand-lettering detail is unreal.",
+    quote: "I literally squealed when it arrived. So much care in every envelope.",
     name: "Sarah K.", location: "Portland, OR",
   },
   {
@@ -151,7 +151,7 @@ export default function HoustonPage() {
             style={{ color: "var(--color-text-secondary)" }}
           >
             Once a month, a package from Amy — die cuts, stickers, and a personal
-            note. Your name, hand-lettered on the envelope. The good kind of mail.
+            note. The good kind of mail.
           </p>
           <p
             className="text-[14px] leading-relaxed mb-6"

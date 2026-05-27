@@ -8,10 +8,8 @@ export const revalidate = 60
 const CATEGORIES = [
   { label: "All", value: "all" },
   { label: "Stickers", value: "stickers" },
-  { label: "Die Cuts", value: "die-cuts" },
   { label: "Stamps", value: "stamps" },
   { label: "Happy Mail", value: "happy-mail" },
-  { label: "Apparel", value: "apparel" },
 ]
 
 export default async function ShopPage({
@@ -125,7 +123,14 @@ export default async function ShopPage({
                       <div
                         className="w-full h-full flex items-center justify-center"
                         style={{ background: "var(--color-gray-light)" }}
-                      />
+                      >
+                        <span
+                          className="text-[10px] uppercase tracking-[0.1em] text-center px-2"
+                          style={{ color: "var(--color-text-secondary)" }}
+                        >
+                          Image coming soon
+                        </span>
+                      </div>
                     )}
                     {!product.availableForSale && (
                       <div className="absolute inset-0 bg-white/60 flex items-center justify-center">

@@ -39,6 +39,13 @@ export default function CartDrawer() {
     setCheckingOut(true)
     trackEvent("begin_checkout", { item_count: count, subtotal })
 
+    // Safety net: if the redirect hasn't happened after 8s (typical mobile
+    // navigation is < 2s even on slow networks), reset the button so the user
+    // can retry instead of staring at "One moment..." indefinitely. The
+    // pageshow handler also clears it if the user lands back here via Shop Pay
+    // intercept or browser back. See FNF-H-04 (Heidi 2026-05-24).
+    const resetTimer = setTimeout(() => setCheckingOut(false), 8000)
+
     try {
       const res = await fetch("/api/checkout/cart", {
         method: "POST",
@@ -51,9 +58,20 @@ export default function CartDrawer() {
       const { checkoutUrl } = await res.json()
       window.location.href = checkoutUrl
     } catch {
+      clearTimeout(resetTimer)
       setCheckingOut(false)
     }
   }
+
+  // Reset checkout button if user returns to the cart via browser back/Shop
+  // Pay cancel without a full page reload (bfcache restore).
+  useEffect(() => {
+    function onPageShow(e: PageTransitionEvent) {
+      if (e.persisted) setCheckingOut(false)
+    }
+    window.addEventListener("pageshow", onPageShow)
+    return () => window.removeEventListener("pageshow", onPageShow)
+  }, [])
 
   return (
     <>

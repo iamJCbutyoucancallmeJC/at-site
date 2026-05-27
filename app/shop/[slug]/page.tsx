@@ -45,7 +45,10 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   const priceAmount = parseFloat(product.priceRange.minVariantPrice.amount)
   const mainImage = product.images.nodes[0]?.url ?? ""
   const isSubscription = product.tags.includes("subscription")
-  const isHappyMail = product.collections.nodes.some((c) => c.handle === "happy-mail")
+  const isHappyMail =
+    product.handle === "happy-mail" ||
+    product.tags.includes("happy-mail") ||
+    product.collections.nodes.some((c) => c.handle === "happy-mail")
 
   const breadcrumbCategory = product.collections.nodes[0]
 
@@ -122,6 +125,28 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 </span>
               )}
             </p>
+
+            {isHappyMail && (
+              <div
+                className="mb-4 p-3 rounded-lg text-[13px] leading-relaxed"
+                style={{
+                  background: "var(--color-orange-light)",
+                  border: "1px solid #fde0c0",
+                  color: "var(--color-text-primary)",
+                }}
+              >
+                New to Happy Mail?{" "}
+                <TrackableLink
+                  href="/happy-mail"
+                  event="nav_click"
+                  eventData={{ link_text: "Learn about Happy Mail", page: "pdp" }}
+                  className="font-semibold underline"
+                  style={{ color: "var(--color-orange)" }}
+                >
+                  See what's inside, how it ships, and how to gift it →
+                </TrackableLink>
+              </div>
+            )}
 
             {product.availableForSale && mainVariant ? (
               <AddToCartButton

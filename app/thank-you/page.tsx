@@ -42,8 +42,8 @@ function ThankYouContent() {
         style={{ color: "var(--color-text-secondary)" }}
       >
         {isHouston
-          ? "So glad you stopped by the booth! Amy will hand-letter your envelope herself. Check your email for a confirmation."
-          : "Thank you for your order! Amy will be hand-lettering your envelope and packing it with love. Check your email for a confirmation."}
+          ? "So glad you stopped by the booth! Your first envelope is on its way. Check your email for a confirmation."
+          : "Thank you for your order! Amy is packing your envelope with love. Check your email for a confirmation."}
       </p>
 
       <p
