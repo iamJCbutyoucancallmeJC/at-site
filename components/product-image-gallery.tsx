@@ -16,9 +16,16 @@ export default function ProductImageGallery({ images, productTitle }: Props) {
   if (images.length === 0) {
     return (
       <div
-        className="relative aspect-square rounded-xl overflow-hidden"
+        className="relative aspect-square rounded-xl overflow-hidden flex items-center justify-center"
         style={{ background: "var(--color-gray-light)" }}
-      />
+      >
+        <span
+          className="text-[12px] uppercase tracking-[0.15em]"
+          style={{ color: "var(--color-text-secondary)" }}
+        >
+          Image coming soon
+        </span>
+      </div>
     )
   }
 

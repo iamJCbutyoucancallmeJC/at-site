@@ -12,7 +12,6 @@ export const revalidate = 60
 
 const CATEGORIES = [
   { name: "Stickers", href: "/shop?category=stickers", img: "/images/products/hearthealinghappiness-sticker-book/1.jpg" },
-  { name: "Die Cuts", href: "/shop?category=die-cuts", img: "/images/products/juicybitsstickers-happyedition/1.jpg" },
   { name: "Stamps", href: "/shop?category=stamps", img: "/images/products/moody2stamp4x6/1.jpg" },
   { name: "Happy Mail", href: "/happy-mail", img: "/images/products/mini-kit-embellishments/1.jpg" },
 ]
@@ -109,7 +108,7 @@ export default async function HomePage() {
         <h2 className="text-[15px] md:text-[18px] uppercase tracking-[0.12em] font-semibold text-center mb-5 md:mb-6 text-white">
           Shop by Category
         </h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
+        <div className="grid grid-cols-3 gap-2 md:gap-3">
           {CATEGORIES.map((cat) => (
             <TrackableLink
               key={cat.name}

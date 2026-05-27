@@ -134,6 +134,17 @@ export default function Nav() {
           style={{ background: "var(--color-white)" }}
         >
           <div className="flex flex-col p-6 gap-2">
+            <Link
+              href="/happy-mail"
+              className="inline-flex items-center justify-center gap-2 py-3 mb-3 rounded-full text-base font-bold text-white"
+              style={{
+                background: "var(--color-orange)",
+                boxShadow: "0 2px 8px rgba(253,137,28,0.3)",
+              }}
+              onClick={() => { setMobileOpen(false); trackEvent("nav_click", { link_text: "Happy Mail", mobile_or_desktop: "mobile" }) }}
+            >
+              <span>♥</span> Happy Mail — $13/mo
+            </Link>
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
@@ -149,15 +160,15 @@ export default function Nav() {
               </Link>
             ))}
             <Link
-              href="/happy-mail"
-              className="mt-4 inline-flex items-center justify-center gap-2 py-3 rounded-full text-base font-bold text-white"
+              href="/contact"
+              className="text-lg font-semibold py-3 border-b"
               style={{
-                background: "var(--color-orange)",
-                boxShadow: "0 2px 8px rgba(253,137,28,0.3)",
+                color: "var(--color-text-primary)",
+                borderColor: "var(--color-border)",
               }}
-              onClick={() => { setMobileOpen(false); trackEvent("nav_click", { link_text: "Happy Mail", mobile_or_desktop: "mobile" }) }}
+              onClick={() => { setMobileOpen(false); trackEvent("nav_click", { link_text: "Contact", mobile_or_desktop: "mobile" }) }}
             >
-              <span>♥</span> Happy Mail — $13/mo
+              Contact
             </Link>
           </div>
         </div>
