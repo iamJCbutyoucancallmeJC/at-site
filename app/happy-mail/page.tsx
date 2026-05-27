@@ -76,6 +76,11 @@ const FAQ_ITEMS = [
     q: "What if my mail doesn't arrive?",
     a: "If you haven't received your envelope by the 25th, email help@amytangerine.com and we'll sort it out.",
   },
+  {
+    q: "Do you ship internationally?",
+    a: `Yes — Happy Mail is available to subscribers in Canada, Australia, and the UK at $16/mo USD (shown in your local currency at checkout). Sign up the same way US subscribers do; the price reflects international postage. This is our "first in your market" pricing — subscribe now and lock in $16/mo for as long as you stay subscribed.`,
+    link: { href: "/products/happy-mail-international", label: "Subscribe internationally →" },
+  },
 ]
 
 function SubscribeButton({ plan, dark = true }: { plan: "monthly" | "6-month"; dark?: boolean }) {
@@ -152,7 +157,7 @@ export default function HappyMailPage() {
             <SubscribeButton plan="6-month" dark={true} />
           </div>
         </div>
-        <p className="text-center text-[11px] mt-4" style={{ color: "var(--color-text-secondary)" }}>Ships around the 15th · US only · Cancel anytime</p>
+        <p className="text-center text-[11px] mt-4" style={{ color: "var(--color-text-secondary)" }}>Ships around the 15th · US, Canada, Australia, UK · Cancel anytime</p>
       </section>
 
       {/* ── Testimonials ── */}
