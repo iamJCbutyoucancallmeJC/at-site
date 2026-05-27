@@ -4,18 +4,39 @@ import { Suspense, useEffect } from "react"
 import { useSearchParams } from "next/navigation"
 import TrackableLink from "@/components/trackable-link"
 import { trackEvent } from "@/lib/analytics"
+import { useCart } from "@/context/cart"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 
 function ThankYouContent() {
   const params = useSearchParams()
   const source = params.get("source") ?? "unknown"
   const channel = params.get("channel") ?? "online"
+  const cartId = params.get("cart_id")
+  const { clearCart } = useCart()
 
   useEffect(() => {
     // Tags every buyer with source + channel.
     // Houston in-person buyers arrive with ?source=houston&channel=in-person
     trackEvent("purchase_complete", { source, channel })
-  }, [source, channel])
+
+    // Clear the local cart if this looks like a real checkout completion.
+    // Two-factor check: (a) cart_id must be present in URL (set by our
+    // /api/checkout/cart return_to), AND (b) it must match the token we
+    // stashed in localStorage when initiating checkout. This prevents a
+    // direct nav to /thank-you?cart_id=foo from accidentally clearing
+    // someone else's cart. See t621 (Heidi 2026-05-24).
+    if (cartId) {
+      try {
+        const stashedToken = localStorage.getItem("at-cart-pending-token")
+        if (stashedToken && stashedToken === cartId) {
+          clearCart()
+          localStorage.removeItem("at-cart-pending-token")
+        }
+      } catch {
+        // ignore
+      }
+    }
+  }, [source, channel, cartId, clearCart])
 
   const isHouston = source === "houston"
 

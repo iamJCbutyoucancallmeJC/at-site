@@ -55,7 +55,12 @@ export default function CartDrawer() {
         }),
       })
       if (!res.ok) throw new Error("checkout failed")
-      const { checkoutUrl } = await res.json()
+      const { checkoutUrl, cartToken } = await res.json()
+      // Stash the cart token so /thank-you can verify the round-trip and
+      // only clear the local cart on a real checkout completion. See t621.
+      if (cartToken) {
+        try { localStorage.setItem("at-cart-pending-token", cartToken) } catch {}
+      }
       window.location.href = checkoutUrl
     } catch {
       clearTimeout(resetTimer)

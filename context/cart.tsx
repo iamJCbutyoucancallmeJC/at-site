@@ -41,6 +41,7 @@ type CartContextValue = {
   updateQty: (variantId: string, quantity: number) => void
   openCart: () => void
   closeCart: () => void
+  clearCart: () => void
 }
 
 // ---------------------------------------------------------------------------
@@ -160,9 +161,20 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     dispatch({ type: "CLOSE" })
   }
 
+  function clearCart() {
+    dispatch({ type: "HYDRATE", items: [] })
+    // Belt-and-suspenders: directly clear localStorage in case the persist
+    // effect hasn't fired yet when caller navigates away.
+    try {
+      localStorage.removeItem(STORAGE_KEY)
+    } catch {
+      // ignore
+    }
+  }
+
   return (
     <CartContext.Provider
-      value={{ items: state.items, count, subtotal, isOpen: state.isOpen, addItem, removeItem, updateQty, openCart, closeCart }}
+      value={{ items: state.items, count, subtotal, isOpen: state.isOpen, addItem, removeItem, updateQty, openCart, closeCart, clearCart }}
     >
       {children}
     </CartContext.Provider>
