@@ -1,9 +1,11 @@
 import Image from "next/image"
 import { getAllProducts, formatPrice } from "@/lib/shopify"
+import { getVisitorCountry } from "@/lib/geo"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 import TrackableLink from "@/components/trackable-link"
 
-export const revalidate = 60
+// Dynamic rendering: grid varies by visitor country (Markets-scoped products).
+export const dynamic = "force-dynamic"
 
 const CATEGORIES = [
   { label: "All", value: "all" },
@@ -15,11 +17,12 @@ const CATEGORIES = [
 export default async function ShopPage({
   searchParams,
 }: {
-  searchParams: Promise<{ category?: string }>
+  searchParams: Promise<{ category?: string; country?: string }>
 }) {
-  const { category } = await searchParams
-  const activeCategory = category ?? "all"
-  const allProducts = await getAllProducts()
+  const sp = await searchParams
+  const activeCategory = sp.category ?? "all"
+  const country = await getVisitorCountry(sp)
+  const allProducts = await getAllProducts(country)
 
   const products =
     activeCategory === "all"

@@ -7,8 +7,10 @@ import NewsletterForm from "@/components/newsletter-form"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 import TrackableLink from "@/components/trackable-link"
 import { getAllProducts, formatPrice } from "@/lib/shopify"
+import { getVisitorCountry } from "@/lib/geo"
 
-export const revalidate = 60
+// Dynamic rendering: new-arrivals section varies by visitor country (Markets-scoped products).
+export const dynamic = "force-dynamic"
 
 const CATEGORIES = [
   { name: "Stickers", href: "/shop?category=stickers", img: "/images/products/hearthealinghappiness-sticker-book/1.jpg" },
@@ -35,7 +37,8 @@ const IG_IMAGES = [
 ]
 
 export default async function HomePage() {
-  const allProducts = await getAllProducts()
+  const country = await getVisitorCountry()
+  const allProducts = await getAllProducts(country)
   const productMap = new Map(allProducts.map((p) => [p.handle, p]))
   const newArrivals = NEW_ARRIVAL_HANDLES.flatMap((handle) => {
     const p = productMap.get(handle)

@@ -12,6 +12,7 @@ interface Props {
   priceAmount: number   // numeric, e.g. 16.00
   imageUrl: string
   isSubscription?: boolean
+  sellingPlanId?: string // if present, Subscribe adds to cart with this plan instead of redirecting
 }
 
 export default function AddToCartButton({
@@ -22,6 +23,7 @@ export default function AddToCartButton({
   priceAmount,
   imageUrl,
   isSubscription = false,
+  sellingPlanId,
 }: Props) {
   const { addItem } = useCart()
   const [status, setStatus] = useState<"idle" | "adding" | "added">("idle")
@@ -35,12 +37,16 @@ export default function AddToCartButton({
       price,
       priceAmount,
       imageUrl,
+      sellingPlanId,
     })
     setStatus("added")
     setTimeout(() => setStatus("idle"), 2000)
   }
 
-  if (isSubscription) {
+  if (isSubscription && !sellingPlanId) {
+    // Canonical HM PDP at /shop/happy-mail: redirect to /happy-mail landing where the
+    // Monthly/6-Month plan picker lives. Path B and any future Subscribe-direct PDPs
+    // pass sellingPlanId to bypass this redirect.
     return (
       <a
         href="/happy-mail"
@@ -56,6 +62,21 @@ export default function AddToCartButton({
       >
         Subscribe
       </a>
+    )
+  }
+
+  if (isSubscription && sellingPlanId) {
+    return (
+      <button
+        onClick={handleAddToCart}
+        disabled={status === "adding"}
+        className="w-full py-3.5 text-[13px] uppercase tracking-[0.12em] font-semibold rounded-full transition-all duration-300 text-white disabled:opacity-70"
+        style={{ background: status === "added" ? "var(--color-teal)" : "var(--color-orange)" }}
+      >
+        {status === "idle" && `Subscribe · ${price}/mo`}
+        {status === "adding" && "Adding..."}
+        {status === "added" && "Added to Cart"}
+      </button>
     )
   }
 

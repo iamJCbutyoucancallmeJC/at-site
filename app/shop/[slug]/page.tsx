@@ -1,14 +1,17 @@
 import Image from "next/image"
-import { notFound } from "next/navigation"
+import { notFound, redirect } from "next/navigation"
 import { getProductByHandle, getAllProducts, formatPrice } from "@/lib/shopify"
+import { getVisitorCountry, isInternational } from "@/lib/geo"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 import TrackableLink from "@/components/trackable-link"
 import AddToCartButton from "@/components/add-to-cart-button"
 import ProductImageGallery from "@/components/product-image-gallery"
 
-export const revalidate = 60
+// Dynamic rendering: PDP varies by visitor country (Markets-scoped products).
+export const dynamic = "force-dynamic"
 
 export async function generateStaticParams() {
+  // US-default at build time; intl PDPs (Path B) resolve dynamically at request time.
   const products = await getAllProducts()
   return products.map((p) => ({ slug: p.handle }))
 }
@@ -23,12 +26,30 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 }
 
-export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function ProductPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ slug: string }>
+  searchParams: Promise<Record<string, string | string[] | undefined>>
+}) {
   const { slug } = await params
-  const product = await getProductByHandle(slug)
+  const sp = await searchParams
+  const country = await getVisitorCountry(sp)
+  const intl = isInternational(country)
+
+  // Symmetric routing: canonical HM (US-only) <-> Path B (intl-only)
+  if (slug === "happy-mail" && intl) {
+    redirect("/shop/happy-mail-international")
+  }
+  if (slug === "happy-mail-international" && !intl) {
+    redirect("/shop/happy-mail")
+  }
+
+  const product = await getProductByHandle(slug, country)
   if (!product) notFound()
 
-  const allProducts = await getAllProducts()
+  const allProducts = await getAllProducts(country)
   // Related: same collection, excluding current
   const relatedProducts = allProducts
     .filter(
@@ -45,10 +66,17 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   const priceAmount = parseFloat(product.priceRange.minVariantPrice.amount)
   const mainImage = product.images.nodes[0]?.url ?? ""
   const isSubscription = product.tags.includes("subscription")
+  const isHappyMailIntl = product.handle === "happy-mail-international"
   const isHappyMail =
     product.handle === "happy-mail" ||
     product.tags.includes("happy-mail") ||
     product.collections.nodes.some((c) => c.handle === "happy-mail")
+
+  // Path B: international subs subscribe directly from this PDP (no /happy-mail redirect).
+  // Selling plan ID hardcoded as fallback; can be overridden via env var.
+  const HM_INTL_SELLING_PLAN_ID =
+    process.env.NEXT_PUBLIC_HM_INTL_SELLING_PLAN_ID ?? "gid://shopify/SellingPlan/693645214016"
+  const subscribeSellingPlanId = isHappyMailIntl ? HM_INTL_SELLING_PLAN_ID : undefined
 
   const breadcrumbCategory = product.collections.nodes[0]
 
@@ -126,7 +154,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               )}
             </p>
 
-            {isHappyMail && (
+            {isHappyMail && !isHappyMailIntl && (
               <div
                 className="mb-4 p-3 rounded-lg text-[13px] leading-relaxed"
                 style={{
@@ -157,6 +185,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 priceAmount={priceAmount}
                 imageUrl={mainImage}
                 isSubscription={isSubscription}
+                sellingPlanId={subscribeSellingPlanId}
               />
             ) : (
               <div

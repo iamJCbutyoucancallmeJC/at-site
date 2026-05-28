@@ -164,50 +164,68 @@ const PRODUCT_FRAGMENT = `
 // Products
 // ---------------------------------------------------------------------------
 
-export async function getAllProducts(): Promise<ShopifyProduct[]> {
+// Build a country-aware @inContext directive. Returns `($country: CountryCode!)` and
+// `@inContext(country: $country)` strings to splice into a query operation. When
+// country is undefined, both are empty strings (default-market behavior preserved).
+function inContextDirective(country?: string): { params: string; directive: string; vars: Record<string, unknown> } {
+  if (!country) return { params: "", directive: "", vars: {} }
+  return {
+    params: "($country: CountryCode!",
+    directive: " @inContext(country: $country)",
+    vars: { country },
+  }
+}
+
+export async function getAllProducts(country?: string): Promise<ShopifyProduct[]> {
+  const ctx = inContextDirective(country)
+  const opParams = ctx.params ? `${ctx.params})` : ""
   const query = `
     ${IMAGE_FRAGMENT}
     ${PRICE_FRAGMENT}
     ${VARIANT_FRAGMENT}
     ${PRODUCT_FRAGMENT}
 
-    query GetAllProducts {
+    query GetAllProducts${opParams}${ctx.directive} {
       products(first: 100, sortKey: TITLE) {
         nodes { ...ProductFragment }
       }
     }
   `
 
-  const data = await shopifyFetch<{ products: { nodes: ShopifyProduct[] } }>(query)
+  const data = await shopifyFetch<{ products: { nodes: ShopifyProduct[] } }>(query, ctx.vars)
   return data.products.nodes
 }
 
-export async function getProductByHandle(handle: string): Promise<ShopifyProduct | null> {
+export async function getProductByHandle(handle: string, country?: string): Promise<ShopifyProduct | null> {
+  const ctx = inContextDirective(country)
+  const opParams = ctx.params ? `${ctx.params}, $handle: String!)` : "($handle: String!)"
   const query = `
     ${IMAGE_FRAGMENT}
     ${PRICE_FRAGMENT}
     ${VARIANT_FRAGMENT}
     ${PRODUCT_FRAGMENT}
 
-    query GetProduct($handle: String!) {
+    query GetProduct${opParams}${ctx.directive} {
       productByHandle(handle: $handle) {
         ...ProductFragment
       }
     }
   `
 
-  const data = await shopifyFetch<{ productByHandle: ShopifyProduct | null }>(query, { handle })
+  const data = await shopifyFetch<{ productByHandle: ShopifyProduct | null }>(query, { handle, ...ctx.vars })
   return data.productByHandle
 }
 
-export async function getProductsByCollection(collectionHandle: string): Promise<ShopifyProduct[]> {
+export async function getProductsByCollection(collectionHandle: string, country?: string): Promise<ShopifyProduct[]> {
+  const ctx = inContextDirective(country)
+  const opParams = ctx.params ? `${ctx.params}, $handle: String!)` : "($handle: String!)"
   const query = `
     ${IMAGE_FRAGMENT}
     ${PRICE_FRAGMENT}
     ${VARIANT_FRAGMENT}
     ${PRODUCT_FRAGMENT}
 
-    query GetCollection($handle: String!) {
+    query GetCollection${opParams}${ctx.directive} {
       collection(handle: $handle) {
         products(first: 100) {
           nodes { ...ProductFragment }
@@ -218,7 +236,7 @@ export async function getProductsByCollection(collectionHandle: string): Promise
 
   const data = await shopifyFetch<{ collection: { products: { nodes: ShopifyProduct[] } } | null }>(
     query,
-    { handle: collectionHandle }
+    { handle: collectionHandle, ...ctx.vars }
   )
   return data.collection?.products.nodes ?? []
 }

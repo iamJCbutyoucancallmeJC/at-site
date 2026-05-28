@@ -7,7 +7,7 @@ import type { Metadata } from "next"
 export const metadata: Metadata = {
   title: "Happy Mail Subscription | Amy Tangerine",
   description:
-    "Monthly craft supplies from Amy Tangerine — die cuts, stickers, and an envelope from Amy. $13/month or $72 for 6 months. Cancel anytime. US only.",
+    "Monthly craft supplies from Amy Tangerine — die cuts, stickers, and an envelope from Amy. $13/month or $72 for 6 months. Cancel anytime. Available in US, Canada, Australia, and UK ($16/mo international).",
   openGraph: {
     title: "Happy Mail — Monthly Craft Subscription | Amy Tangerine",
     description:
