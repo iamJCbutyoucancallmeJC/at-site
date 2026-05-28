@@ -1,5 +1,6 @@
 import Image from "next/image"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
+import TrackableLink from "@/components/trackable-link"
 
 export const metadata = {
   title: "About Amy | Amy Tangerine",
