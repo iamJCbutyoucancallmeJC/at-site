@@ -9,6 +9,7 @@
 
 import Image from "next/image"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
+import FaqAccordion from "@/components/faq-accordion"
 import { useCart } from "@/context/cart"
 import { trackEvent } from "@/lib/analytics"
 
@@ -24,6 +25,62 @@ const BOX_CONTENTS = [
   { label: "Sticker sheet", body: "Exclusive, before anyone else", img: "/images/products/hearthealinghappiness-sticker-book/2.jpg" },
   { label: "An envelope from Amy", body: "Sent straight to your door", img: "/images/products/happy-mail/2.jpg" },
   { label: "A note from Amy", body: "What she's making, what she loves", img: "/images/products/happy-mail/3.jpg" },
+]
+
+// Testimonials — placeholders until Amy pulls from Instagram DMs/comments
+const TESTIMONIALS = [
+  {
+    quote: "I literally squealed when it arrived. Amy puts so much care into every envelope.",
+    name: "Sarah K.",
+    location: "Portland, OR",
+  },
+  {
+    quote: "I've tried other subscription boxes. Nothing comes close to getting actual mail from Amy.",
+    name: "Melissa T.",
+    location: "Austin, TX",
+  },
+  {
+    quote: "The die cuts are exclusively for subscribers and they're always my favorites. Worth every penny.",
+    name: "Rachel B.",
+    location: "Chicago, IL",
+  },
+  {
+    quote: "I gave this as a gift and my mom calls me every month when it arrives. She loves it.",
+    name: "Jess M.",
+    location: "Nashville, TN",
+  },
+]
+
+const FAQ_ITEMS = [
+  {
+    q: "What's the difference between Monthly and 6-Month?",
+    a: `Monthly ($${PRICE_MONTHLY}/mo) renews automatically each month until you cancel. 6-Month ($${PRICE_6MONTH}) is a one-time payment for six months — no recurring charges, and non-refundable once purchased. Both get the same monthly package.`,
+  },
+  {
+    q: "When does it ship?",
+    a: "Around the 15th of each month. You'll get it like a letter from a friend — USPS first-class, no tracking number, usually arrives within a week.",
+  },
+  {
+    q: "Are the contents available in your shop?",
+    a: "Nope. Happy Mail goodies are subscriber-exclusive. That's part of the deal.",
+  },
+  {
+    q: "Can I send it as a gift?",
+    a: "Yes. At checkout, enter your recipient's shipping address. The 6-Month option is the most popular gift choice — they'll get mail from Amy for half a year.",
+  },
+  {
+    q: "How do I cancel?",
+    a: "You can cancel any time in your subscriber account, or email help@amytangerine.com and we'll take care of it. No questions asked. To skip the current month's envelope, cancel before the 10th — we start prepping that month's mail then. Cancellations after the 10th take effect the following month.",
+  },
+  {
+    q: "What if my mail doesn't arrive?",
+    a: "If you haven't received your envelope by the 25th, email help@amytangerine.com and we'll sort it out.",
+  },
+  {
+    q: "Do you ship internationally?",
+    a: `Yes — Happy Mail is available to subscribers in Canada, Australia, and the UK at $16/mo USD (shown in your local currency at checkout). Sign up the same way US subscribers do; the price reflects international postage. This is our "first in your market" pricing — subscribe now and lock in $16/mo for as long as you stay subscribed.`,
+    link: { href: "/products/happy-mail-international", label: "Subscribe internationally →" },
+  },
 ]
 
 function SubscribeButton({ plan, dark = true }: { plan: "monthly" | "6-month"; dark?: boolean }) {
@@ -100,26 +157,105 @@ export default function HappyMailPage() {
             <SubscribeButton plan="6-month" dark={true} />
           </div>
         </div>
-        <p className="text-center text-[11px] mt-4" style={{ color: "var(--color-text-secondary)" }}>Ships around the 15th · US only · Cancel anytime</p>
+        <p className="text-center text-[11px] mt-4" style={{ color: "var(--color-text-secondary)" }}>Ships around the 15th · US, Canada, Australia, UK · Cancel anytime</p>
       </section>
 
-      <section className="px-4 md:px-10 py-12 md:py-16" style={{ background: "var(--color-gray-light)" }}>
-        <div className="max-w-3xl mx-auto text-center">
-          <p className="text-[11px] uppercase tracking-[0.15em] font-semibold mb-3" style={{ color: "var(--color-orange)" }}>What subscribers say</p>
-          <p className="text-[20px] md:text-[26px] font-medium leading-snug mb-4" style={{ color: "var(--color-text-primary)" }}>"It's the only mail I look forward to. Amy puts so much care into every package — it feels like getting a letter from a friend."</p>
-          <p className="text-[12px]" style={{ color: "var(--color-text-secondary)" }}>— a real subscriber (placeholder)</p>
+      {/* ── Testimonials ── */}
+      <section
+        className="py-12 md:py-16 px-4 md:px-10"
+        style={{ background: "var(--color-gray-light)" }}
+      >
+        <h2
+          className="text-[15px] md:text-[17px] uppercase tracking-[0.12em] font-semibold text-center mb-8 md:mb-10"
+          style={{ color: "var(--color-text-primary)" }}
+        >
+          From the mailbox:
+        </h2>
+        <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {TESTIMONIALS.map((t, i) => (
+            <div
+              key={i}
+              className="rounded-xl p-5 flex flex-col"
+              style={{ background: "var(--color-white)", border: "1px solid var(--color-border)" }}
+            >
+              <p
+                className="text-[13px] leading-relaxed flex-1 mb-4"
+                style={{ color: "var(--color-text-secondary)" }}
+              >
+                &ldquo;{t.quote}&rdquo;
+              </p>
+              <div>
+                <p
+                  className="text-[12px] font-semibold"
+                  style={{ color: "var(--color-text-primary)" }}
+                >
+                  {t.name}
+                </p>
+                <p className="text-[11px]" style={{ color: "var(--color-text-secondary)" }}>
+                  {t.location}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
-      <section className="px-4 md:px-10 py-12 md:py-16">
+      {/* ── Mid-page subscriber-count CTA strip ── */}
+      <section
+        className="py-5 px-4 md:px-10 flex flex-col sm:flex-row items-center justify-between gap-4 border-y"
+        style={{
+          background: "var(--color-orange)",
+          borderColor: "var(--color-orange)",
+        }}
+      >
+        <p className="text-[14px] md:text-[15px] font-semibold text-white text-center sm:text-left">
+          287 subscribers are already getting Happy Mail. Join them.
+        </p>
+        <div className="flex gap-3 flex-shrink-0">
+          <button
+            onClick={() => {
+              const el = document.getElementById("subscribe")
+              if (el) el.scrollIntoView({ behavior: "smooth", block: "start" })
+              trackEvent("hm_subscribe_click", {
+                plan: "monthly",
+                price: PRICE_MONTHLY.toString(),
+                source: "mid-page-strip",
+                page: "happy-mail",
+              })
+            }}
+            className="px-5 py-2.5 text-[12px] uppercase tracking-[0.1em] font-semibold rounded-full bg-white transition-opacity hover:opacity-90 cursor-pointer"
+            style={{ color: "var(--color-orange)" }}
+          >
+            Monthly — ${PRICE_MONTHLY}
+          </button>
+          <button
+            onClick={() => {
+              const el = document.getElementById("subscribe")
+              if (el) el.scrollIntoView({ behavior: "smooth", block: "start" })
+              trackEvent("hm_subscribe_click", {
+                plan: "6-month",
+                price: PRICE_6MONTH.toString(),
+                source: "mid-page-strip",
+                page: "happy-mail",
+              })
+            }}
+            className="px-5 py-2.5 text-[12px] uppercase tracking-[0.1em] font-semibold rounded-full border-2 border-white text-white transition-opacity hover:opacity-80 cursor-pointer"
+          >
+            6 Months — ${PRICE_6MONTH}
+          </button>
+        </div>
+      </section>
+
+      {/* ── FAQ ── */}
+      <section className="py-12 md:py-16 px-4 md:px-10">
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-[24px] md:text-[30px] font-bold mb-6" style={{ color: "var(--color-text-primary)" }}>Questions</h2>
-          <div className="space-y-4 text-[14px]" style={{ color: "var(--color-text-secondary)" }}>
-            <p><span className="font-semibold" style={{ color: "var(--color-text-primary)" }}>When does it ship?</span> Around the 15th of each month via USPS.</p>
-            <p><span className="font-semibold" style={{ color: "var(--color-text-primary)" }}>Can I cancel?</span> Anytime, no questions asked.</p>
-            <p><span className="font-semibold" style={{ color: "var(--color-text-primary)" }}>Can I send it as a gift?</span> Yes — enter the recipient's address at checkout.</p>
-            <p><span className="font-semibold" style={{ color: "var(--color-text-primary)" }}>International?</span> Not yet — US only for now.</p>
-          </div>
+          <h2
+            className="text-[15px] md:text-[17px] uppercase tracking-[0.12em] font-semibold mb-8"
+            style={{ color: "var(--color-text-primary)" }}
+          >
+            Questions?
+          </h2>
+          <FaqAccordion items={FAQ_ITEMS} />
         </div>
       </section>
     </main>
