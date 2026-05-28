@@ -13,18 +13,25 @@ import { getVisitorCountry } from "@/lib/geo"
 export const dynamic = "force-dynamic"
 
 const CATEGORIES = [
-  { name: "Stickers", href: "/shop?category=stickers", img: "/images/products/hearthealinghappiness-sticker-book/1.jpg" },
-  { name: "Stamps", href: "/shop?category=stamps", img: "/images/products/moody2stamp4x6/1.jpg" },
-  { name: "Happy Mail", href: "/happy-mail", img: "/images/products/mini-kit-embellishments/1.jpg" },
+  // Stickers tile: swapped 2026-05-28 (prior was hearthealinghappiness-sticker-book which is sold out qty -2).
+  // Washi sticker book has qty 90 + is in-genre.
+  { name: "Stickers", href: "/shop?category=stickers", img: "/images/products/washistickerbook-preorder/1.jpg" },
+  // Stamps tile: swapped 2026-05-28 from moody2stamp4x6 (qty 0) to Squeeze the Day (qty 26).
+  // Tile links to /shop?category=stamps; image is purely category visual.
+  { name: "Stamps", href: "/shop?category=stamps", img: "/images/products/squeezethedaystamp4x6/1.jpg" },
+  { name: "Happy Mail", href: "/happy-mail", img: "/images/homepage/happy-mail-category.jpg" },
 ]
 
+// New Arrivals list: refreshed 2026-05-28 to match live inventory after SS->Shopify sync.
+// All 6 verified in-stock at refresh time. Editorial list (not algorithmic) -- edit to swap.
+// Prior list had 4 of 6 broken (3 sold-out, 1 dead handle).
 const NEW_ARRIVAL_HANDLES = [
-  "hearthealinghappiness-sticker-book",
-  "juicybitsstickers-happyedition",
-  "squeezethedaystamp4x6",
-  "juicybitsstickers-cozyedition",
-  "icons-stamp-set-4x6-pre-order-ships-mid-november",
-  "preorder-make-your-mark",
+  "washistickerbook-preorder",              // qty 90 -- In My Colorful Era Washi Sticker Book
+  "junkjournalstickerbook",                 // qty 68 -- A Little Obsessed Junk Journal Sticker Book
+  "sticker-bundle-little-craft-fest",       // qty 33 -- Sticker Sheet Bundle from Little Craft Fest
+  "icons-stamp-set-4x6-pre-order-ships-mid-november",  // qty 32 -- ICONS1 Stamp Set 4x6
+  "squeezethedaystamp4x6",                  // qty 26 -- Squeeze the Day Stamp Set 4x6
+  "ugh1stamp4x6",                           // qty 5 -- UGH Stamp Set (low stock, intentional for urgency)
 ]
 
 const IG_IMAGES = [
@@ -58,8 +65,8 @@ export default async function HomePage() {
       {/* ── Hero ── */}
       <section className="relative w-full h-screen overflow-hidden">
         <Image
-          src="/images/hero/homepage-hero.webp"
-          alt="Amy Tangerine — craft supplies for a colorful life"
+          src="/images/hero/homepage-hero.jpg"
+          alt="Amy Tangerine in front of the Shine Bright mural"
           fill
           priority
           className="object-cover"
@@ -74,7 +81,7 @@ export default async function HomePage() {
           >
             AMY TANGERINE
           </h1>
-          <p className="mt-3 md:mt-4 text-[13px] md:text-[15px] uppercase tracking-[0.2em] text-white/70">
+          <p className="mt-3 md:mt-4 text-[18px] md:text-[24px] uppercase tracking-[0.2em] font-medium text-white">
             Craft supplies for a colorful life
           </p>
           <TrackableLink
@@ -137,14 +144,26 @@ export default async function HomePage() {
       </section>
 
       {/* ── Editorial Break ── */}
+      {/* Default image: /images/homepage/editorial-break-default.jpg (Paper Play journals + watercolor flat-lay).
+          Use this whenever there is no temporary feature image to display. Convention set 2026-05-28 with Amy.
+          Section links to nothing on purpose -- purely visual rhythm between Shop by Category and New Arrivals.
+          Typography matches Feature Spotlight headline treatment (bottom-left gradient + drop-shadow). */}
       <div className="relative w-full h-[280px] md:h-[400px] mt-8 md:mt-10">
         <Image
-          src="/images/products/juicybitsstickers-cozyedition/1.jpg"
+          src="/images/homepage/editorial-break-default.jpg"
           alt="Amy Tangerine craft styling"
           fill
           className="object-cover"
           sizes="100vw"
         />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/15 to-transparent" />
+        <div className="absolute bottom-6 right-6 md:bottom-10 md:right-10 max-w-lg text-right">
+          <h3 className="text-[28px] md:text-[44px] font-bold leading-tight text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
+            Craft A Life
+            <br />
+            You Love
+          </h3>
+        </div>
       </div>
 
       {/* ── New Arrivals ── */}
@@ -197,28 +216,25 @@ export default async function HomePage() {
       <section className="relative mt-3 md:mt-4 mx-4 md:mx-10 rounded-lg overflow-hidden">
         <div className="relative h-[320px] md:h-[420px]">
           <Image
-            src="/images/products/hearthealinghappiness-sticker-book/2.jpg"
+            src="/images/homepage/paper-play-3-spotlight.jpg"
             alt="Paper Play 3 by Amy Tangerine"
             fill
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 80vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-          <div className="absolute bottom-5 left-5 md:bottom-8 md:left-8 max-w-md">
-            <p className="text-[11px] md:text-[12px] uppercase tracking-[0.15em] text-white/60 mb-1">
-              Featured
-            </p>
-            <h3 className="text-[28px] md:text-[40px] font-bold leading-tight text-white">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+          <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10 max-w-lg">
+            <h3 className="text-[36px] md:text-[56px] font-bold leading-tight text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
               Paper Play 3
             </h3>
-            <p className="text-[13px] md:text-[15px] text-white/80 mt-1 md:mt-2 leading-snug">
+            <p className="text-[15px] md:text-[17px] text-white/95 mt-2 md:mt-3 leading-snug">
               Amy&apos;s latest book — now available on Amazon.
             </p>
             <TrackableLink
               href="https://amzn.to/4sNtWk1"
               event="product_click"
               eventData={{ product_name: "Paper Play 3", source_section: "spotlight", page: "homepage" }}
-              className="inline-block mt-3 md:mt-4 px-6 py-2.5 text-[12px] md:text-[13px] uppercase tracking-[0.1em] font-semibold rounded-full border border-white text-white hover:bg-white hover:text-black transition-all duration-300"
+              className="inline-block mt-4 md:mt-5 px-8 py-3 text-[13px] md:text-[14px] uppercase tracking-[0.1em] font-semibold rounded-full border-2 border-white text-white hover:bg-white hover:text-black transition-all duration-300"
               target="_blank"
               rel="noopener noreferrer"
             >

@@ -23,7 +23,6 @@ const PRICE_6MONTH = 72
 const BOX_CONTENTS = [
   { label: "Die cuts", body: "New designs every month", img: "/images/products/juicybitsstickers-happyedition/1.jpg" },
   { label: "Sticker sheet", body: "Exclusive, before anyone else", img: "/images/products/hearthealinghappiness-sticker-book/2.jpg" },
-  { label: "An envelope from Amy", body: "Sent straight to your door", img: "/images/products/happy-mail/2.jpg" },
   { label: "A note from Amy", body: "What she's making, what she loves", img: "/images/products/happy-mail/3.jpg" },
 ]
 
@@ -119,11 +118,11 @@ export default function HappyMailClient() {
       <section className="px-4 md:px-10 pt-10 md:pt-16 pb-8 md:pb-10">
         <div className="max-w-6xl mx-auto">
           <p className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-3" style={{ color: "var(--color-orange)" }}>Monthly Subscription</p>
-          <h1 className="text-[36px] md:text-[52px] font-bold leading-[1.05] tracking-tight mb-4" style={{ color: "var(--color-text-primary)" }}>Every month, a letter from me.</h1>
-          <p className="text-[16px] md:text-[18px] leading-relaxed max-w-xl mb-8" style={{ color: "var(--color-text-secondary)" }}>Die cuts, stickers, an envelope from Amy, and a note. The good kind of mail.</p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-8">
+          <h1 className="text-[36px] md:text-[52px] font-bold leading-[1.05] tracking-tight mb-4" style={{ color: "var(--color-text-primary)" }}>Every month, a letter from Amy.</h1>
+          <p className="text-[16px] md:text-[18px] leading-relaxed max-w-xl mb-8" style={{ color: "var(--color-text-secondary)" }}>The good kind of mail.</p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 mb-8">
             {BOX_CONTENTS.map((item) => (
-              <div key={item.label} className="rounded-xl overflow-hidden">
+              <div key={item.label}>
                 <div className="relative aspect-square bg-gray-50 rounded-xl overflow-hidden mb-2">
                   <Image src={item.img} alt={item.label} fill className="object-cover" sizes="(max-width: 768px) 50vw, 25vw" />
                 </div>
@@ -157,7 +156,7 @@ export default function HappyMailClient() {
             <SubscribeButton plan="6-month" dark={true} />
           </div>
         </div>
-        <p className="text-center text-[11px] mt-4" style={{ color: "var(--color-text-secondary)" }}>Ships around the 15th · US, Canada, Australia, UK · Cancel anytime</p>
+        <p className="text-center text-[11px] mt-4" style={{ color: "var(--color-text-secondary)" }}>Ships around the 15th.</p>
       </section>
 
       {/* ── Testimonials ── */}
@@ -197,52 +196,6 @@ export default function HappyMailClient() {
               </div>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* ── Mid-page subscriber-count CTA strip ── */}
-      <section
-        className="py-5 px-4 md:px-10 flex flex-col sm:flex-row items-center justify-between gap-4 border-y"
-        style={{
-          background: "var(--color-orange)",
-          borderColor: "var(--color-orange)",
-        }}
-      >
-        <p className="text-[14px] md:text-[15px] font-semibold text-white text-center sm:text-left">
-          287 subscribers are already getting Happy Mail. Join them.
-        </p>
-        <div className="flex gap-3 flex-shrink-0">
-          <button
-            onClick={() => {
-              const el = document.getElementById("subscribe")
-              if (el) el.scrollIntoView({ behavior: "smooth", block: "start" })
-              trackEvent("hm_subscribe_click", {
-                plan: "monthly",
-                price: PRICE_MONTHLY.toString(),
-                source: "mid-page-strip",
-                page: "happy-mail",
-              })
-            }}
-            className="px-5 py-2.5 text-[12px] uppercase tracking-[0.1em] font-semibold rounded-full bg-white transition-opacity hover:opacity-90 cursor-pointer"
-            style={{ color: "var(--color-orange)" }}
-          >
-            Monthly — ${PRICE_MONTHLY}
-          </button>
-          <button
-            onClick={() => {
-              const el = document.getElementById("subscribe")
-              if (el) el.scrollIntoView({ behavior: "smooth", block: "start" })
-              trackEvent("hm_subscribe_click", {
-                plan: "6-month",
-                price: PRICE_6MONTH.toString(),
-                source: "mid-page-strip",
-                page: "happy-mail",
-              })
-            }}
-            className="px-5 py-2.5 text-[12px] uppercase tracking-[0.1em] font-semibold rounded-full border-2 border-white text-white transition-opacity hover:opacity-80 cursor-pointer"
-          >
-            6 Months — ${PRICE_6MONTH}
-          </button>
         </div>
       </section>
 

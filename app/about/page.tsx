@@ -1,7 +1,5 @@
 import Image from "next/image"
-import Link from "next/link"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
-import TrackableLink from "@/components/trackable-link"
 
 export const metadata = {
   title: "About Amy | Amy Tangerine",
@@ -46,12 +44,6 @@ const BRAND_LOGOS = [
   { name: "Popsicle",                    file: "32-popsicle.jpg" },
 ]
 
-const LINKS = [
-  { label: "Shop", href: "/shop" },
-  { label: "Happy Mail", href: "/happy-mail" },
-  { label: "YouTube", href: "https://youtube.com/@amytangerine", external: true },
-]
-
 export default function AboutPage() {
   return (
     <>
@@ -64,10 +56,12 @@ export default function AboutPage() {
       >
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-12 md:gap-16 items-center">
 
-          {/* Photo placeholder -- swap for Amy headshot when received */}
+          {/* About hero photo: Amy in pink dress on the patchwork settee.
+              Was prior homepage hero (replaced 2026-05-28 by the Shine Bright mural shot).
+              Repurposed here as the About hero; portrait 4:5 fits the container natively. */}
           <div className="relative w-full md:w-[380px] flex-shrink-0 aspect-[4/5] rounded-2xl overflow-hidden shadow-lg">
             <Image
-              src="/images/products/happy-mail/3.jpg"
+              src="/images/about/amy-hero.webp"
               alt="Amy Tangerine"
               fill
               priority
@@ -149,17 +143,11 @@ export default function AboutPage() {
       >
         <div className="max-w-6xl mx-auto">
           <p
-            className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-3 text-center"
+            className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-10 text-center"
             style={{ color: "var(--color-orange)" }}
           >
-            Collaborated with
+            Collaborations
           </p>
-          <h2
-            className="text-[22px] md:text-[28px] font-bold mb-10 text-center"
-            style={{ color: "var(--color-text-primary)" }}
-          >
-            Creative partners &amp; clients.
-          </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-8 gap-y-10 items-center">
             {BRAND_LOGOS.map(({ name, file }) => (
               <div
@@ -189,74 +177,22 @@ export default function AboutPage() {
           <div>
             <p className="text-[28px] font-bold mb-2">Creativity</p>
             <p className="text-[14px] leading-relaxed text-white/75">
-              Everyone has a story to tell. Amy&rsquo;s work is about helping
-              you find the tools and space to tell yours.
+              Everyone has a story. The work is making space for it.
             </p>
           </div>
           <div>
             <p className="text-[28px] font-bold mb-2">Journaling</p>
             <p className="text-[14px] leading-relaxed text-white/75">
-              From travel notebooks to memory keeping, Amy believes that
-              documenting your life is a practice worth protecting.
+              Documenting a life, in notebooks, photos, a few lines at the end
+              of the day, is a practice worth keeping.
             </p>
           </div>
           <div>
             <p className="text-[28px] font-bold mb-2">Community</p>
             <p className="text-[14px] leading-relaxed text-white/75">
-              Workshops, retreats, YouTube, and Happy Mail. Connection with
-              fellow makers is at the heart of everything Amy does.
+              Workshops, retreats, YouTube, Happy Mail. Connection with fellow
+              makers, always.
             </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ── CTA links ── */}
-      <section className="py-16 md:py-20 px-6 md:px-16">
-        <div className="max-w-2xl mx-auto text-center">
-          <p
-            className="text-[13px] uppercase tracking-[0.18em] font-semibold mb-4"
-            style={{ color: "var(--color-orange)" }}
-          >
-            Explore
-          </p>
-          <h2
-            className="text-[28px] md:text-[36px] font-bold mb-10"
-            style={{ color: "var(--color-text-primary)" }}
-          >
-            Find your corner of Amy&rsquo;s world.
-          </h2>
-          <div className="flex flex-wrap justify-center gap-4">
-            {LINKS.map(({ label, href, external }) =>
-              external ? (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-8 py-3 rounded-full text-[13px] font-semibold uppercase tracking-[0.1em] border transition-all duration-200 hover:opacity-80"
-                  style={{
-                    borderColor: "var(--color-orange)",
-                    color: "var(--color-orange)",
-                  }}
-                >
-                  {label}
-                </a>
-              ) : (
-                <TrackableLink
-                  key={label}
-                  href={href}
-                  event="nav_click"
-                  eventData={{ label, source_page: "about" }}
-                  className="px-8 py-3 rounded-full text-[13px] font-semibold uppercase tracking-[0.1em] border transition-all duration-200 hover:opacity-80"
-                  style={{
-                    borderColor: "var(--color-orange)",
-                    color: "var(--color-orange)",
-                  }}
-                >
-                  {label}
-                </TrackableLink>
-              )
-            )}
           </div>
         </div>
       </section>
