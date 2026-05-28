@@ -34,13 +34,17 @@ const NEW_ARRIVAL_HANDLES = [
   "ugh1stamp4x6",                           // qty 5 -- UGH Stamp Set (low stock, intentional for urgency)
 ]
 
+// Instagram grid: 5 hand-picked posts from @amytangerine (Amy-curated 2026-05-28).
+// Static download pattern -- tiles link out to instagram.com/amytangerine but images are
+// local files. Real-feed integration (Meta Graph API or third-party widget) is a separate
+// post-launch project. To refresh: pull new images, replace files in /images/homepage/ig/,
+// update this array. Order is Amy's order.
 const IG_IMAGES = [
-  "/images/products/hearthealinghappiness-sticker-book/2.jpg",
-  "/images/products/juicybitsstickers-happyedition/2.jpg",
-  "/images/products/squeezethedaystamp4x6/1.jpg",
-  "/images/products/mini-kit-embellishments/1.jpg",
-  "/images/products/mini-kit-washi/1.jpg",
-  "/images/products/juicybitsstickers-cozyedition/2.jpg",
+  "/images/homepage/ig/ig1-C5otcs.jpg",  // Apr 11 2024 "Hello sunshine" carousel
+  "/images/homepage/ig/ig2-CukrsP.jpg",  // Jul 11 2023 Katherine Center "Hello Stranger" launch
+  "/images/homepage/ig/ig3-Ckl4VJ.jpg",  // Nov 05 2022 Dwell Magazine home feature
+  "/images/homepage/ig/ig4-DY0emU.jpg",  // May 26 2026 "permission to play" supplies
+  "/images/homepage/ig/ig5-DYYTU4.jpg",  // May 16 2026 Bluey & Mickey pop-up
 ]
 
 export default async function HomePage() {
@@ -295,7 +299,7 @@ export default async function HomePage() {
             @amytangerine
           </h2>
         </div>
-        <div className="grid grid-cols-4 md:grid-cols-6 gap-1">
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-1">
           {IG_IMAGES.map((src, i) => (
             <TrackableLink
               key={i}
