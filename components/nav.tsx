@@ -9,6 +9,7 @@ import { useCart } from "@/context/cart"
 
 const NAV_LINKS = [
   { label: "Shop", href: "/shop" },
+  { label: "Photobooth", href: "https://photobooth.amytangerine.com/", external: true },
   { label: "About", href: "/about" },
 ]
 
@@ -38,17 +39,31 @@ export default function Nav() {
         </Link>
 
         <div className="flex-1 flex items-center justify-center gap-8">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-base font-semibold transition-colors hover:opacity-80"
-              style={{ color: "var(--color-text-primary)" }}
-              onClick={() => trackEvent("nav_click", { link_text: link.label, mobile_or_desktop: "desktop" })}
-            >
-              {link.label}
-            </Link>
-          ))}
+          {NAV_LINKS.map((link) =>
+            link.external ? (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-base font-semibold transition-colors hover:opacity-80"
+                style={{ color: "var(--color-text-primary)" }}
+                onClick={() => trackEvent("nav_click", { link_text: link.label, mobile_or_desktop: "desktop" })}
+              >
+                {link.label}
+              </a>
+            ) : (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-base font-semibold transition-colors hover:opacity-80"
+                style={{ color: "var(--color-text-primary)" }}
+                onClick={() => trackEvent("nav_click", { link_text: link.label, mobile_or_desktop: "desktop" })}
+              >
+                {link.label}
+              </Link>
+            )
+          )}
         </div>
 
         <div className="shrink-0 flex items-center gap-5">
@@ -145,20 +160,37 @@ export default function Nav() {
             >
               <span>♥</span> Happy Mail — $13/mo
             </Link>
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-lg font-semibold py-3 border-b"
-                style={{
-                  color: "var(--color-text-primary)",
-                  borderColor: "var(--color-border)",
-                }}
-                onClick={() => { setMobileOpen(false); trackEvent("nav_click", { link_text: link.label, mobile_or_desktop: "mobile" }) }}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {NAV_LINKS.map((link) =>
+              link.external ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-lg font-semibold py-3 border-b"
+                  style={{
+                    color: "var(--color-text-primary)",
+                    borderColor: "var(--color-border)",
+                  }}
+                  onClick={() => { setMobileOpen(false); trackEvent("nav_click", { link_text: link.label, mobile_or_desktop: "mobile" }) }}
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-lg font-semibold py-3 border-b"
+                  style={{
+                    color: "var(--color-text-primary)",
+                    borderColor: "var(--color-border)",
+                  }}
+                  onClick={() => { setMobileOpen(false); trackEvent("nav_click", { link_text: link.label, mobile_or_desktop: "mobile" }) }}
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
           </div>
         </div>
       )}
