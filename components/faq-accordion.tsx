@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Plus, Minus } from "lucide-react"
 
-type FaqItem = { q: string; a: string; link?: { href: string; label: string } }
+type FaqItem = { q: string; a: string; lead?: string; link?: { href: string; label: string } }
 
 export default function FaqAccordion({ items }: { items: FaqItem[] }) {
   const [open, setOpen] = useState<number | null>(0)
@@ -32,6 +32,14 @@ export default function FaqAccordion({ items }: { items: FaqItem[] }) {
               className="pb-4 text-[14px] leading-relaxed"
               style={{ color: "var(--color-text-secondary)" }}
             >
+              {item.lead && (
+                <p
+                  className="text-[18px] md:text-[20px] font-extrabold leading-tight mb-2"
+                  style={{ color: "var(--color-teal)" }}
+                >
+                  {item.lead}
+                </p>
+              )}
               <p>{item.a}</p>
               {item.link && (
                 <p className="mt-2">

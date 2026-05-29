@@ -21,9 +21,10 @@ const PRICE_MONTHLY = 13
 const PRICE_6MONTH = 72
 
 const BOX_CONTENTS = [
-  { label: "Die cuts", body: "New designs every month", img: "/images/products/juicybitsstickers-happyedition/1.jpg" },
-  { label: "Sticker sheet", body: "Exclusive, before anyone else", img: "/images/products/hearthealinghappiness-sticker-book/2.jpg" },
-  { label: "A note from Amy", body: "What she's making, what she loves", img: "/images/products/happy-mail/3.jpg" },
+  { label: "Sticker sheet", body: "Exclusive, before anyone else", img: "/images/happy-mail/sticker-sheet.jpg" },
+  { label: "Die cuts", body: "New designs every month", img: "/images/happy-mail/die-cuts.jpg" },
+  { label: "A note from Amy", body: "What she's making, what she loves", img: "/images/happy-mail/note-from-amy.jpg" },
+  { label: "What's inside", body: "Everything that comes each month", img: "/images/happy-mail/whats-inside.jpg" },
 ]
 
 // Testimonials — placeholders until Amy pulls from Instagram DMs/comments
@@ -34,14 +35,14 @@ const TESTIMONIALS = [
     location: "Portland, OR",
   },
   {
-    quote: "I've tried other subscription boxes. Nothing comes close to getting actual mail from Amy.",
-    name: "Melissa T.",
-    location: "Austin, TX",
+    quote: "The pieces take my art journal and memory keeper spreads to the next level.",
+    name: "Jo Ann T.",
+    location: "Torrance, CA",
   },
   {
-    quote: "The die cuts are exclusively for subscribers and they're always my favorites. Worth every penny.",
-    name: "Rachel B.",
-    location: "Chicago, IL",
+    quote: "A total no-brainer and a true highlight of my month when it arrives. It gives me the inspiration boost I need to get creative. Thank you!",
+    name: "Nicole M.",
+    location: "Austin, TX",
   },
   {
     quote: "I gave this as a gift and my mom calls me every month when it arrives. She loves it.",
@@ -52,8 +53,23 @@ const TESTIMONIALS = [
 
 const FAQ_ITEMS = [
   {
+    // [t658] 6-month copy correction (2026-05-29). Was WRONG: said "one-time payment / no recurring charges / non-refundable."
+    // Truth (credentials.md "6-month product POLICY" + cutover-week-ops R9): 6-month RECURS ($72 every 6 mo, auto-renews
+    // indefinitely, Recharge 22062815 expire_after=null); it's a commitment — cancel stops the NEXT renewal, does not exit/
+    // refund the current term; service failures honored normally.
+    // FAQ wording options (explaining surface — the cancel-scope reconciliation lives here):
+    //   A (live): see below — complete + true on both axes; appends C's "make it right" reassurance.
+    //   B: "Monthly ($13/mo) bills each month and you can cancel anytime. 6-Month ($72) covers six months of mail in one
+    //       payment and keeps renewing every 6 months until you cancel. Cancelling turns off your next renewal — it doesn't
+    //       end or refund the term you're currently in. Same monthly package either way."
+    //   C: "Monthly ($13/mo): no commitment, cancel anytime. 6-Month ($72): one payment for a six-month term that auto-renews
+    //       every 6 months. Because it's a commitment, it can't be cancelled or refunded mid-term — but you can cancel anytime
+    //       before your next renewal so you're not charged again. (If something's ever wrong with an order, we'll always make it right.)"
+    // ⚠️ Cancel-scope sentence is the one for Amy's eye. Final wording = JC+Amy. Do not mark t658 done.
+    // `lead` = big/bold discount emphasis (JC+Amy 2026-05-29). Lead options: "Save $6 on 6 months" / "Save $6 vs. monthly" / "6 months, save $6".
     q: "What's the difference between Monthly and 6-Month?",
-    a: `Monthly ($${PRICE_MONTHLY}/mo) renews automatically each month until you cancel. 6-Month ($${PRICE_6MONTH}) is a one-time payment for six months — no recurring charges, and non-refundable once purchased. Both get the same monthly package.`,
+    lead: "Save $6 with 6 Months",
+    a: `Monthly ($${PRICE_MONTHLY}/mo) renews automatically each month — cancel anytime and billing stops. 6-Month ($${PRICE_6MONTH}) is a six-month commitment billed once up front, then auto-renews every 6 months. You can cancel before a renewal to stop the next term; the current six-month term isn't cancelled or refunded partway through. Both get the same monthly package, and if something's ever wrong with an order, we'll always make it right.`,
   },
   {
     q: "When does it ship?",
@@ -68,8 +84,28 @@ const FAQ_ITEMS = [
     a: "Yes. At checkout, enter your recipient's shipping address. The 6-Month option is the most popular gift choice — they'll get mail from Amy for half a year.",
   },
   {
+    // [t658 addendum] Cancel copy aligned to policy (2026-05-29). REMOVED the old "skip the current month's envelope, cancel
+    // before the 10th" line — NO SKIP (R11) and the date mechanic was wrong (R15: the 5th is the fulfillment-batch LOCK, not a
+    // billing date; once billed you keep that envelope). Timing detail now lives in the dedicated "Can I skip or cancel a
+    // month?" Q below; this answer stays high-level on HOW to cancel + the Monthly-vs-6mo scope.
+    // Final wording = JC+Amy. Do not mark t658 done.
     q: "How do I cancel?",
-    a: "You can cancel any time in your subscriber account, or email help@amytangerine.com and we'll take care of it. No questions asked. To skip the current month's envelope, cancel before the 10th — we start prepping that month's mail then. Cancellations after the 10th take effect the following month.",
+    a: "Manage your subscription any time in your subscriber account, or email help@amytangerine.com and we'll take care of it. Monthly subscribers can cancel whenever — billing just stops going forward. For 6-Month, cancelling stops your next 6-month renewal; the current six-month term runs to the end. (See “Can I skip or cancel a month?” below for the timing on your final envelope.)",
+  },
+  {
+    // [t658 addendum] NEW Q (2026-05-29, Amy). Two rules: (1) NO SKIP (R11) — not offered to anyone. (2) Cancel timing (R15):
+    // once billed you keep that envelope (no pull-back/refund); the 5th = fulfillment-batch LOCK, not a billing date.
+    // Precedence: already billed → keep current, cancel takes next month · not billed but cancel AFTER the 5th → batch locked,
+    // still get this month, cancel next month · not billed AND on/before the 5th → clean exit, no charge, no final envelope.
+    // Wording options for this answer:
+    //   A (live): "no skip" + clean-exit = cancel BEFORE billing date AND BEFORE the 5th (R15 case 3, the explicit AND per JC
+    //             2026-05-29); otherwise this month's envelope is the last and cancel takes the following month (R15 cases 1+2).
+    //   B (fuller): adds the explicit "if you've already been charged this month, that envelope is on its way" sentence.
+    //   C (tersest): "We don't offer skipping. To stop, cancel — if you've already been billed for the month, that envelope
+    //                 ships and your cancellation starts the next month."
+    // ⚠️ For Amy's eye: the "5th" cutoff + whether to name a specific date publicly at all (vs. "once we've billed you").
+    q: "Can I skip or cancel a month?",
+    a: "We don't offer skipping individual months — every subscriber gets each month's envelope while they're subscribed. You can cancel any time, though. Here's the timing: if you cancel before your monthly billing date (which recurs on your original order date) and before the 5th, when we get each month's envelopes ready, your cancellation applies to the current month and you're out cleanly with no final charge. Otherwise, this month's envelope still ships — it's your last — and your cancellation takes effect the following month.",
   },
   {
     q: "What if my mail doesn't arrive?",
@@ -120,7 +156,7 @@ export default function HappyMailClient() {
           <p className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-3" style={{ color: "var(--color-orange)" }}>Monthly Subscription</p>
           <h1 className="text-[36px] md:text-[52px] font-bold leading-[1.05] tracking-tight mb-4" style={{ color: "var(--color-text-primary)" }}>Every month, a letter from Amy.</h1>
           <p className="text-[16px] md:text-[18px] leading-relaxed max-w-xl mb-8" style={{ color: "var(--color-text-secondary)" }}>The good kind of mail.</p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 mb-8">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4 mb-8">
             {BOX_CONTENTS.map((item) => (
               <div key={item.label}>
                 <div className="relative aspect-square bg-gray-50 rounded-xl overflow-hidden mb-2">
@@ -152,11 +188,59 @@ export default function HappyMailClient() {
               <span className="text-[36px] font-bold leading-none" style={{ color: "var(--color-text-primary)" }}>${PRICE_6MONTH}</span>
               <span className="text-[13px] mb-1" style={{ color: "var(--color-text-secondary)" }}>one payment</span>
             </div>
-            <p className="text-[11px] mb-4" style={{ color: "var(--color-teal)" }}>Save $6 · no recurring charge</p>
+            {/* [t658] 6-month copy correction (2026-05-29). Plan was WRONG: it recurs (Recharge 22062815, expire_after=null).
+                Selling surface — discount now emphasized big/bold per JC+Amy 2026-05-29; honest cadence kept as subline.
+                Wording options (cancel-terms live in the FAQ, not here):
+                  A (live): "Save $6" big/bold + "billed every 6 months" subline
+                  B:        "Save $6" big/bold + "renews until you cancel" subline
+                  C:        "Save $6" big/bold + "auto-renews every 6 months" subline
+                Final wording is JC+Amy's call — do not mark t658 done. */}
+            <p className="text-[20px] md:text-[22px] font-extrabold leading-none mb-0.5" style={{ color: "var(--color-teal)" }}>Save $6</p>
+            <p className="text-[11px] mb-4" style={{ color: "var(--color-text-secondary)" }}>billed every 6 months</p>
             <SubscribeButton plan="6-month" dark={true} />
           </div>
         </div>
         <p className="text-center text-[11px] mt-4" style={{ color: "var(--color-text-secondary)" }}>Ships around the 15th.</p>
+      </section>
+
+      {/* ── Editorial: a note about Happy Mail (reused from prior site, Amy's voice) ── */}
+      <section className="py-12 md:py-16 px-4 md:px-10" style={{ background: "var(--color-white)" }}>
+        <div className="max-w-2xl mx-auto">
+          <p className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-3" style={{ color: "var(--color-orange)" }}>
+            Let me send you mail
+          </p>
+          <h2 className="text-[26px] md:text-[34px] font-bold leading-tight tracking-tight mb-5" style={{ color: "var(--color-text-primary)" }}>
+            Happy mail!
+          </h2>
+          <p className="text-[16px] md:text-[18px] leading-relaxed mb-5" style={{ color: "var(--color-text-secondary)" }}>
+            Once a month, you&rsquo;ll get an envelope from me filled with fresh &amp; juicy bits I designed
+            and actually use for paper crafting and journaling: a 4&times;6 sticker sheet, die cuts, and some
+            surprises. Plus a little note.
+          </p>
+          <p className="text-[16px] md:text-[18px] leading-relaxed mb-8" style={{ color: "var(--color-text-secondary)" }}>
+            It&rsquo;s the good kind of mail. The kind that makes you smile when you see it in the stack.
+          </p>
+
+          <p className="text-[12px] uppercase tracking-[0.15em] font-semibold mb-4" style={{ color: "var(--color-text-primary)" }}>
+            What&rsquo;s inside
+          </p>
+          <ul className="space-y-3 mb-8">
+            {[
+              "Ephemera (die cuts), made in the USA",
+              "Exclusive first look at our newest 4×6 sticker sheet (not available anywhere else online)",
+              "A note from me about what I'm making, loving, or thinking about",
+            ].map((item) => (
+              <li key={item} className="flex gap-3 text-[15px] md:text-[16px] leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+                <span aria-hidden className="select-none" style={{ color: "var(--color-orange)" }}>&#10003;</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+
+          <p className="text-[14px] font-semibold" style={{ color: "var(--color-orange)" }}>
+            Limited spots available.
+          </p>
+        </div>
       </section>
 
       {/* ── Testimonials ── */}
@@ -168,7 +252,7 @@ export default function HappyMailClient() {
           className="text-[15px] md:text-[17px] uppercase tracking-[0.12em] font-semibold text-center mb-8 md:mb-10"
           style={{ color: "var(--color-text-primary)" }}
         >
-          From the mailbox:
+          Fan mail
         </h2>
         <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {TESTIMONIALS.map((t, i) => (
