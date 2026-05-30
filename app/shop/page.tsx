@@ -110,11 +110,15 @@ export default async function ShopPage({
             {products.map((product) => {
               const img = product.images.nodes[0]
               const priceStr = formatPrice(product.priceRange.minVariantPrice)
-              // Canonical HM tile -> /happy-mail landing page (better merchandising than the
-              // sparse PDP). Path B (intl) tile -> /shop/happy-mail-international PDP, which
-              // IS the intl landing surface (no separate /happy-mail-international page).
+              // Both HM products go to their rich landing pages (better merchandising than the
+              // sparse PDP): US HM -> /happy-mail, intl HM -> /happy-mail-international (2026-05-30).
+              // Everything else -> its PDP.
               const tileHref =
-                product.handle === "happy-mail" ? "/happy-mail" : `/shop/${product.handle}`
+                product.handle === "happy-mail"
+                  ? "/happy-mail"
+                  : product.handle === "happy-mail-international"
+                    ? "/happy-mail-international"
+                    : `/shop/${product.handle}`
               return (
                 <TrackableLink
                   key={product.id}

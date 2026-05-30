@@ -47,6 +47,15 @@ export default async function ProductPage({
     redirect(`/happy-mail?plan=${plan}`)
   }
 
+  // International Happy Mail also has no standalone PDP -- it gets the same treatment as US
+  // HM: /happy-mail-international is its rich landing page (IHM stamp, $16 pricing, intl FAQ).
+  // Redirect every inbound /shop/happy-mail-international path there. (2026-05-30.) Works for
+  // every visitor: an intl buyer lands on the buyable page; a US visitor sees it and is
+  // cross-linked to /happy-mail (US can't purchase the intl product).
+  if (slug === "happy-mail-international") {
+    redirect("/happy-mail-international")
+  }
+
   // Country is resolved for PRICING CONTEXT only (localized currency via @inContext).
   // The previous symmetric US<->intl redirect machinery was removed 2026-05-29: IHM is now
   // a normal catalog product visible to everyone; no geo routing. The single guard below is
@@ -57,9 +66,9 @@ export default async function ProductPage({
   const product = await getProductByHandle(slug, country)
   if (!product) {
     // Guard: intl visitor requested the US-only HM product (null for their market) -> route to
-    // the international HM product instead of a dead end. Everything else 404s normally.
+    // the international HM landing instead of a dead end. Everything else 404s normally.
     if (slug === "happy-mail" && isInternational(country)) {
-      redirect("/shop/happy-mail-international")
+      redirect("/happy-mail-international")
     }
     notFound()
   }

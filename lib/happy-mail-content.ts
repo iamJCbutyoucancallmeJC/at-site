@@ -91,7 +91,98 @@ export const HM_FAQ_ITEMS = [
   },
   {
     q: "Do you ship internationally?",
-    a: `Yes — Happy Mail is available to subscribers in Canada, Australia, and the UK at $16/mo USD (shown in your local currency at checkout). Sign up the same way US subscribers do; the price reflects international postage. This is our "first in your market" pricing — subscribe now and lock in $16/mo for as long as you stay subscribed.`,
-    link: { href: "/shop/happy-mail-international", label: "Subscribe internationally →" },
+    // Updated 2026-05-30: points at the new /happy-mail-international landing (not the
+    // PDP that 404s for US readers). Intl buyers subscribe there; US gifters email help@.
+    a: `Yes. If you live in Canada, the UK, or Australia, you can subscribe to International Happy Mail at $16/mo USD (shown in your local currency at checkout). The price reflects international postage. If you're in the US and want to send Happy Mail to someone abroad, email help@amytangerine.com and we'll arrange an international gift.`,
+    link: { href: "/happy-mail-international", label: "International Happy Mail →" },
+  },
+]
+
+// ── International Happy Mail (IHM) ─────────────────────────────────────────────
+// IHM is a SEPARATE Shopify product (handle happy-mail-international), monthly-only
+// ($16 USD, shown in local currency via Shopify Markets). No 6-month intl tier exists.
+// Scoped to the International market (CA/AU/GB) only; a US visitor can VIEW this page
+// but cannot purchase (the cart drops the intl variant), so the page cross-links US
+// readers to /happy-mail. See Website Redesign/ihm-gift-intl-options-2026-05-30.md.
+
+export const IHM_VARIANT_GID =
+  process.env.NEXT_PUBLIC_HM_INTL_VARIANT_GID ?? "gid://shopify/ProductVariant/52063112659264"
+export const IHM_SELLING_PLAN =
+  process.env.NEXT_PUBLIC_HM_INTL_SELLING_PLAN_ID ?? "gid://shopify/SellingPlan/693645214016"
+
+// $16 USD base; Shopify Markets presents local currency at checkout (CA$23 / AU$23 / £13).
+export const IHM_PRICE_USD = 16
+
+// ── IHM 6-Month tier (DECIDED 2026-05-30; NOT YET BUILT in Shopify/Recharge) ──────
+// Build target: $90 6-month ("Save $6" vs $16 x 6 = $96), mirroring US "$6 off" shape.
+// Future step (window close): $18/mo + $100 (or $99). See
+// Website Redesign/ihm-6month-tier-policy-change-2026-05-30.md.
+//
+// ⚠️ The variant GID + selling plan GID DO NOT EXIST YET -- the coordinator session
+// creates them (new Shopify variant on happy-mail-international + new Recharge prepaid_v2
+// plan, attached to delivery profile 137513632064). Until both env vars are set to REAL
+// ids, IHM_6MONTH_READY is false and the page shows the 6-month card as "Coming soon"
+// (disabled, cannot reach checkout). Filling both env vars flips it live -- no code change.
+export const IHM_VARIANT_6MONTH_GID =
+  process.env.NEXT_PUBLIC_HM_INTL_VARIANT_6MONTH_GID ?? "" // TODO(coordinator): real variant GID
+export const IHM_SELLING_PLAN_6MONTH =
+  process.env.NEXT_PUBLIC_HM_INTL_SELLING_PLAN_6MONTH_ID ?? "" // TODO(coordinator): real selling plan GID
+export const IHM_PRICE_6MONTH_USD = 90
+
+// True only when BOTH the 6-month variant and selling plan ids are real (non-empty).
+// Gates the live subscribe path; the card renders either way (disabled when false).
+export const IHM_6MONTH_READY =
+  IHM_VARIANT_6MONTH_GID.length > 0 && IHM_SELLING_PLAN_6MONTH.length > 0
+
+// Box contents + testimonials are identical to US HM (same physical envelope).
+export const IHM_BOX_CONTENTS = HM_BOX_CONTENTS
+export const IHM_TESTIMONIALS = HM_TESTIMONIALS
+
+export const IHM_FAQ_ITEMS = [
+  {
+    q: "Where do you ship, and how much is it?",
+    a: `International Happy Mail goes to Canada, the UK, and Australia. It's $${IHM_PRICE_USD}/mo USD, shown in your local currency at checkout (about CA$23, AU$23, or £13 with current exchange rates). International postage is already included — there's no separate shipping charge. This is our "first in your market" pricing: subscribe now and lock in $${IHM_PRICE_USD}/mo for as long as you stay subscribed.`,
+  },
+  {
+    q: "How is this different from US Happy Mail?",
+    // Honest framing: same envelope, the price difference is postage only.
+    a: "Same envelope, same surprises — the only difference is the price covers international postage instead of US postage. You'll get the exact same monthly sticker sheet, die cuts, and note from Amy that US subscribers get.",
+  },
+  // NOTE: a 6-month intl tier ($90) is DECIDED but NOT launched (needs Recharge variant/plan
+  // work). Held OFF the page for the monthly-only launch (JC 2026-05-30). When it ships, add an
+  // "Is there a 6-month option?" FAQ here + the second plan card. Do not advertise it before it
+  // is purchasable.
+  {
+    q: "When does it ship?",
+    a: "Around the 15th of each month. It travels as international letter mail, so allow a little extra time — it usually arrives within two to three weeks depending on your country's post.",
+  },
+  {
+    q: "Are the contents available in your shop?",
+    a: "Nope. Happy Mail goodies are subscriber-exclusive. That's part of the deal.",
+  },
+  {
+    q: "Can I send it as a gift?",
+    // Within-market only. Cross-border gifting (e.g. a US buyer -> intl recipient) is NOT
+    // self-serve yet (concierge via help@). Do NOT promise a cross-border gift here.
+    a: "Yes. At checkout, enter your recipient's shipping address in Canada, the UK, or Australia, and the mail goes straight to them. (Sending from the US to a friend abroad? Email help@amytangerine.com and we'll set that up for you.)",
+  },
+  {
+    q: "How do I cancel?",
+    a: "Manage your subscription any time in your subscriber account, or email help@amytangerine.com and we'll take care of it. Cancel whenever — billing just stops going forward.",
+  },
+  {
+    q: "What if my mail doesn't arrive?",
+    // Wider window than US (intl transit is slower).
+    a: "International mail can take longer. If you haven't received your envelope within four weeks of the ship date, email help@amytangerine.com and we'll sort it out.",
+  },
+  {
+    q: "Are there any customs fees?",
+    // Honest: low-value letter mail is below de-minimis in CA/AU/GB, but say it plainly.
+    a: "For Canada, the UK, and Australia, Happy Mail is small, low-value letter mail and almost never triggers customs charges. If your country's post ever asks for a small import fee, reach out to help@amytangerine.com and we'll help.",
+  },
+  {
+    q: "Want US Happy Mail instead?",
+    a: "If you're in the United States, head to our US Happy Mail page for $13/mo (or $72 for six months).",
+    link: { href: "/happy-mail", label: "US Happy Mail →" },
   },
 ]
