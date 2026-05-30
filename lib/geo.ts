@@ -1,24 +1,22 @@
-// Geo detection for market-aware Shopify queries.
+// Geo detection for market-aware Shopify PRICING CONTEXT.
 //
-// Reads the visitor's country from the Vercel-provided `x-vercel-ip-country` header
-// in Server Components. Falls back to "US" if missing (local dev, non-Vercel hosts,
-// or visitors Vercel couldn't geolocate). The `country` query param overrides everything
-// for testing.
+// Reads the visitor's country from the Vercel-provided `x-vercel-ip-country` header in Server
+// Components and passes it to Shopify via @inContext so prices localize (CA$, AU$, £). Falls back
+// to "US" if missing (local dev, non-Vercel hosts, or visitors Vercel couldn't geolocate) -- a
+// missing header is harmless: the storefront shows USD base prices and Shopify checkout still
+// localizes at the cart step.
+//
+// 2026-05-29: the `?country=` query-param override and all geo-based ROUTING (symmetric
+// US<->intl PDP redirects, the /happy-mail redirect) were removed. Country now only colors
+// pricing; it never changes which page/product a visitor lands on. The fragile launch-eve
+// behavior lived in the routing, not here.
 
 import { headers } from "next/headers"
 
-// Markets we've configured in Shopify. Anything else -> US.
+// Markets configured in Shopify. Anything else -> US (base-currency) context.
 const SUPPORTED_COUNTRIES = new Set(["US", "CA", "AU", "GB"])
 
-export async function getVisitorCountry(searchParams?: Record<string, string | string[] | undefined>): Promise<string> {
-  // Query param override (e.g., /shop?country=CA) for testing without VPN.
-  const override = searchParams?.country
-  if (typeof override === "string") {
-    const upper = override.toUpperCase()
-    if (SUPPORTED_COUNTRIES.has(upper)) return upper
-  }
-
-  // Vercel header.
+export async function getVisitorCountry(): Promise<string> {
   const h = await headers()
   const country = h.get("x-vercel-ip-country")?.toUpperCase()
   if (country && SUPPORTED_COUNTRIES.has(country)) return country

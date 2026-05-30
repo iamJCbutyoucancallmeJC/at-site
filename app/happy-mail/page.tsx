@@ -1,23 +1,12 @@
-// /happy-mail — Server wrapper. Geo-redirects intl visitors to /shop/happy-mail-international
-// (Path B PDP — different product, different price, different Recharge plan). US visitors get
-// the Option A landing page client component below.
+// /happy-mail — Happy Mail landing page (Option A). Renders for everyone.
+//
+// The geo-redirect (intl visitors -> /shop/happy-mail-international) was removed 2026-05-29:
+// IHM is now a normal catalog product reachable via the shop grid, so this landing page no
+// longer needs to fork by country. International HM subscribers reach the intl product through
+// /shop or the explanatory cross-link on the intl PDP.
 
-import { redirect } from "next/navigation"
-import { getVisitorCountry, isInternational } from "@/lib/geo"
 import HappyMailClient from "./happy-mail-client"
 
-// Dynamic rendering: redirect target varies by visitor country.
-export const dynamic = "force-dynamic"
-
-export default async function HappyMailPage({
-  searchParams,
-}: {
-  searchParams: Promise<Record<string, string | string[] | undefined>>
-}) {
-  const sp = await searchParams
-  const country = await getVisitorCountry(sp)
-  if (isInternational(country)) {
-    redirect("/shop/happy-mail-international")
-  }
+export default function HappyMailPage() {
   return <HappyMailClient />
 }

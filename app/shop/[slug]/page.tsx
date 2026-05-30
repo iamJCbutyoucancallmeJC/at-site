@@ -28,26 +28,26 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function ProductPage({
   params,
-  searchParams,
 }: {
   params: Promise<{ slug: string }>
-  searchParams: Promise<Record<string, string | string[] | undefined>>
 }) {
   const { slug } = await params
-  const sp = await searchParams
-  const country = await getVisitorCountry(sp)
-  const intl = isInternational(country)
-
-  // Symmetric routing: canonical HM (US-only) <-> Path B (intl-only)
-  if (slug === "happy-mail" && intl) {
-    redirect("/shop/happy-mail-international")
-  }
-  if (slug === "happy-mail-international" && !intl) {
-    redirect("/shop/happy-mail")
-  }
+  // Country is resolved for PRICING CONTEXT only (localized currency via @inContext).
+  // The previous symmetric US<->intl redirect machinery was removed 2026-05-29: IHM is now
+  // a normal catalog product visible to everyone; no geo routing. The single guard below is
+  // the one piece kept -- it prevents an international visitor who lands on the US-only $13 HM
+  // URL from hitting a dead "not found" (that product is market-scoped null for their context).
+  const country = await getVisitorCountry()
 
   const product = await getProductByHandle(slug, country)
-  if (!product) notFound()
+  if (!product) {
+    // Guard: intl visitor requested the US-only HM product (null for their market) -> route to
+    // the international HM product instead of a dead end. Everything else 404s normally.
+    if (slug === "happy-mail" && isInternational(country)) {
+      redirect("/shop/happy-mail-international")
+    }
+    notFound()
+  }
 
   const allProducts = await getAllProducts(country)
   // Related: same collection, excluding current
@@ -173,6 +173,32 @@ export default async function ProductPage({
                 >
                   See what's inside, how it ships, and how to gift it →
                 </TrackableLink>
+              </div>
+            )}
+
+            {isHappyMailIntl && (
+              <div
+                className="mb-4 p-3 rounded-lg text-[13px] leading-relaxed"
+                style={{
+                  background: "var(--color-orange-light)",
+                  border: "1px solid #fde0c0",
+                  color: "var(--color-text-primary)",
+                }}
+              >
+                <span className="font-semibold">Shipping outside the US?</span> This is the
+                international edition of Happy Mail, for subscribers in Canada, Australia, and the
+                UK. Same envelope, same surprises, shipped worldwide with postage included. (In the
+                US?{" "}
+                <TrackableLink
+                  href="/happy-mail"
+                  event="nav_click"
+                  eventData={{ link_text: "US Happy Mail", page: "pdp" }}
+                  className="font-semibold underline"
+                  style={{ color: "var(--color-orange)" }}
+                >
+                  Subscribe to US Happy Mail here →
+                </TrackableLink>
+                )
               </div>
             )}
 

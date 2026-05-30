@@ -21,13 +21,23 @@ export default async function ShopPage({
 }) {
   const sp = await searchParams
   const activeCategory = sp.category ?? "all"
-  const country = await getVisitorCountry(sp)
+  // Country resolved for pricing context only (localized currency). No geo routing.
+  const country = await getVisitorCountry()
   const allProducts = await getAllProducts(country)
+
+  // Sort the international HM product to the very back of the grid (Amy's call 2026-05-29):
+  // it's a normal catalog item now, but the intl edition reads as a secondary option for the
+  // primarily-US audience, so it trails the rest of the catalog.
+  const ordered = [...allProducts].sort((a, b) => {
+    const aIntl = a.handle === "happy-mail-international" ? 1 : 0
+    const bIntl = b.handle === "happy-mail-international" ? 1 : 0
+    return aIntl - bIntl
+  })
 
   const products =
     activeCategory === "all"
-      ? allProducts
-      : allProducts.filter((p) =>
+      ? ordered
+      : ordered.filter((p) =>
           p.collections.nodes.some((c) => c.handle === activeCategory) ||
           p.tags.includes(activeCategory)
         )
