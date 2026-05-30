@@ -28,10 +28,25 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function ProductPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string }>
+  searchParams: Promise<{ plan?: string }>
 }) {
   const { slug } = await params
+
+  // Happy Mail has no standalone PDP. It's one Shopify product with two plan variants
+  // (Monthly $13 / 6-Month $72), and /happy-mail is its canonical page (photos, both
+  // plans, editorial, FAQ). Redirect every inbound /shop/happy-mail path -- cart links,
+  // old bookmarks, search -- to the landing. Carry ?plan= so a 6-Month cart click
+  // pre-selects the 6-Month plan there. (Replaces the old generic PDP that showed stale
+  // Shopify copy + always the Monthly variant. 2026-05-30.)
+  if (slug === "happy-mail") {
+    const sp = await searchParams
+    const plan = sp.plan === "6-month" ? "6-month" : "monthly"
+    redirect(`/happy-mail?plan=${plan}`)
+  }
+
   // Country is resolved for PRICING CONTEXT only (localized currency via @inContext).
   // The previous symmetric US<->intl redirect machinery was removed 2026-05-29: IHM is now
   // a normal catalog product visible to everyone; no geo routing. The single guard below is

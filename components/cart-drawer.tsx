@@ -6,10 +6,22 @@ import Link from "next/link"
 import { X, Minus, Plus, ShoppingBag } from "lucide-react"
 import { useCart } from "@/context/cart"
 import { trackEvent } from "@/lib/analytics"
+import { HM_VARIANT_6MONTH_GID } from "@/lib/happy-mail-content"
 
 // Detect local (non-Shopify) variant IDs — checkout not available yet
 function isLocalVariant(variantId: string) {
   return variantId.startsWith("local-")
+}
+
+// Resolve the PDP link for a cart item. Happy Mail is one product/handle with two
+// plan variants (Monthly + 6-Month); the rebuilt /shop/happy-mail PDP reads ?plan=
+// so the clicked item lands on the right plan instead of the default Monthly view.
+function productHref(variantId: string, productHandle: string): string {
+  if (productHandle === "happy-mail") {
+    const plan = variantId === HM_VARIANT_6MONTH_GID ? "6-month" : "monthly"
+    return `/shop/happy-mail?plan=${plan}`
+  }
+  return `/shop/${productHandle}`
 }
 
 export default function CartDrawer() {
@@ -165,7 +177,7 @@ export default function CartDrawer() {
                 >
                   {/* Image */}
                   <Link
-                    href={`/shop/${item.productHandle}`}
+                    href={productHref(item.variantId, item.productHandle)}
                     onClick={closeCart}
                     className="relative flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden bg-gray-50"
                   >
@@ -183,7 +195,7 @@ export default function CartDrawer() {
                   {/* Details */}
                   <div className="flex-1 min-w-0">
                     <Link
-                      href={`/shop/${item.productHandle}`}
+                      href={productHref(item.variantId, item.productHandle)}
                       onClick={closeCart}
                       className="block text-[13px] font-medium leading-snug line-clamp-2 hover:underline mb-1"
                       style={{ color: "var(--color-text-primary)" }}
