@@ -27,3 +27,44 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
+
+/* Product description HTML (rendered from Shopify descriptionHtml).
+   Tailwind v4 resets list styles, so re-establish bullets + spacing here. */
+.product-description > * + * {
+  margin-top: 0.75rem;
+}
+.product-description p {
+  margin: 0;
+}
+.product-description ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+  margin: 0;
+}
+.product-description ul li {
+  margin-top: 0.25rem;
+}
+.product-description ul li p {
+  display: inline;
+}
+.product-description strong {
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+.product-description a {
+  color: var(--color-orange);
+  text-decoration: underline;
+}
+.product-description a:hover {
+  color: var(--color-orange-dark);
+}
+.product-description small {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  opacity: 0.8;
+}
+.product-description h3 {
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0;
+}

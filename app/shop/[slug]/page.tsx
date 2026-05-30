@@ -240,12 +240,11 @@ export default async function ProductPage({
               >
                 Details
               </h2>
-              <p
-                className="text-[14px] leading-relaxed"
+              <div
+                className="product-description text-[14px] leading-relaxed"
                 style={{ color: "var(--color-text-secondary)" }}
-              >
-                {product.description}
-              </p>
+                dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
+              />
             </div>
 
             {/* Tags */}
