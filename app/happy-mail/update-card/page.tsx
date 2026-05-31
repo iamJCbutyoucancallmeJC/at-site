@@ -118,6 +118,10 @@ const FAQ_ITEMS = [
     a: "Your Happy Mail charge will now show up as “RECHARGE * AMY TANGERINE” on your bank or card statement. That's us — same subscription, just the new system's name on the line item.",
   },
   {
+    q: "The card page doesn't look like amytangerine.com. Is it really you?",
+    a: "Yes, it's us. When you go to update your card, the secure payment page opens on our billing system, so you may see a “myshopify.com” web address instead of amytangerine.com. That's normal and expected: it's where your subscription and card are kept safe, the same way many stores hand you to a secure checkout. If you ever want to double-check, you can start from this page on our site, or just reply to us and we'll confirm.",
+  },
+  {
     q: "What's the difference between Monthly and 6-Month?",
     a: "Monthly ($13/mo) renews automatically each month — cancel anytime and billing stops. 6-Month ($72) is a six-month commitment billed once up front, then auto-renews every 6 months. You can cancel before a renewal to stop the next term; the current six-month term isn't cancelled or refunded partway through. Both get the same monthly package, and if something's ever wrong with an order, we'll always make it right.",
   },
