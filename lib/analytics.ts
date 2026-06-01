@@ -10,6 +10,7 @@ export type AnalyticsEvent =
   | 'add_to_cart'
   | 'begin_checkout'
   | 'newsletter_signup'
+  | 'waitlist_signup'
   | 'hm_page_view'
   | 'hm_plan_select'
   | 'hm_subscribe_click'

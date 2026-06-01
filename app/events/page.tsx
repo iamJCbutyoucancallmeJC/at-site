@@ -8,15 +8,15 @@ import PageEngagementTracker from "@/components/page-engagement-tracker"
 const EVENTS = [
   {
     id: "tokyo-takeover",
-    label: "Craft Tour",
+    label: "Past + Upcoming",
     title: "Tangerine Tokyo Takeover",
-    dates: "Dates TBA",
+    dates: "March 2026 — Sold out. Next trip TBA.",
     location: "Tokyo, Japan",
     description:
-      "A once-in-a-lifetime girlfriend's shopping adventure through Tokyo's best stationery shops, paper stores, and craft destinations. Six nights at Solaria Ginza Hotel, private guided bus tours, Tokyo SkyTree, Asakusa, Disneyland Tokyo pass, and a Mt. Fuji day trip by bullet train.",
+      "Twenty crafters, six nights in Ginza, paper shops and stationery treasure hunts, Tokyo SkyTree and Asakusa, a Disneyland day, and a Mt. Fuji bullet-train day trip. The first one sold out fast. Get on the list for the next one.",
     cta: "Get on the List",
-    href: "https://www.craftydestinations.com/module/class/609003/tangerine-tokyo-takeover",
-    external: true,
+    href: "/japan",
+    external: false,
   },
   {
     id: "craftation",
