@@ -24,19 +24,36 @@ import {
   IHM_VARIANT_GID,
   IHM_SELLING_PLAN,
   IHM_PRICE_USD as PRICE,
+  IHM_VARIANT_6MONTH_GID,
+  IHM_SELLING_PLAN_6MONTH,
+  IHM_PRICE_6MONTH_USD as PRICE_6MONTH,
+  IHM_6MONTH_READY,
   IHM_BOX_CONTENTS as BOX_CONTENTS,
   IHM_TESTIMONIALS as TESTIMONIALS,
   IHM_FAQ_ITEMS as FAQ_ITEMS,
 } from "@/lib/happy-mail-content"
 
-// Launch shape (JC 2026-05-30): MONTHLY ONLY. The 6-month intl tier + the "AIR MAIL/INTL"
-// stamp treatment are built but held OFF for launch (6-month needs Recharge variant/plan work;
-// stamp pending Amy's pick). The two-card layout, ComingSoonButton, and IhmStamp live in git
-// history + ihm-stamp.tsx / happy-mail-content.ts (IHM_*_6MONTH_* constants) for re-add.
+// Shape (JC 2026-06-01): TWO-TIER. Monthly ($16) + 6-Month ($90 = "save $6") intl tiers,
+// both LIVE. The 6-month card renders when IHM_6MONTH_READY (variant + selling plan IDs set).
+// Prices shown: monthly = server-localized; 6-month = flat USD label (checkout localizes).
+// The "AIR MAIL/INTL" stamp treatment is still held OFF pending Amy's pick (ihm-stamp.tsx / t679).
 
-function SubscribeButton({ label }: { label: string }) {
+function SubscribeButton({ plan, label }: { plan: "monthly" | "6-month"; label: string }) {
   const { addItem } = useCart()
   function handle() {
+    if (plan === "6-month") {
+      addItem({
+        variantId: IHM_VARIANT_6MONTH_GID,
+        productHandle: "happy-mail-international",
+        title: "International Happy Mail — 6-Month Subscription",
+        price: `$${PRICE_6MONTH.toFixed(2)}`,
+        priceAmount: PRICE_6MONTH,
+        imageUrl: "/images/products/happy-mail-international/1.jpg",
+        sellingPlanId: IHM_SELLING_PLAN_6MONTH,
+      })
+      trackEvent("hm_subscribe_click", { plan: "6-month-intl", price: PRICE_6MONTH.toString(), source: "happy-mail-international", page: "happy-mail-international" })
+      return
+    }
     addItem({
       variantId: IHM_VARIANT_GID,
       productHandle: "happy-mail-international",
@@ -94,19 +111,33 @@ export default function HappyMailInternationalClient({ localizedPrice }: { local
         </div>
       </section>
 
-      {/* ── Subscribe (monthly only at launch) ── */}
+      {/* ── Subscribe (two-tier: Monthly + 6-Month, both live) ── */}
       <section id="subscribe" className="px-4 md:px-10 pb-12 md:pb-16">
-        <div className="max-w-md mx-auto">
-          <div className="rounded-2xl p-6 border-2 relative" style={{ background: "var(--color-white)", borderColor: "var(--color-orange)" }}>
-            <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 text-[10px] uppercase tracking-[0.12em] font-bold rounded-full text-white" style={{ background: "var(--color-teal)" }}>First in your market</span>
+        <div className={`mx-auto grid gap-4 ${IHM_6MONTH_READY ? "max-w-2xl sm:grid-cols-2" : "max-w-md"}`}>
+          {/* Monthly */}
+          <div className="rounded-2xl p-6 border-2 relative flex flex-col" style={{ background: "var(--color-white)", borderColor: "var(--color-border)" }}>
             <p className="text-[11px] uppercase tracking-[0.15em] font-semibold mb-2" style={{ color: "var(--color-orange)" }}>Monthly · International</p>
             <div className="flex items-end gap-1 mb-1">
               <span className="text-[36px] font-bold leading-none" style={{ color: "var(--color-text-primary)" }}>{priceLabel}</span>
               <span className="text-[13px] mb-1" style={{ color: "var(--color-text-secondary)" }}>/month</span>
             </div>
-            <p className="text-[11px] mb-4" style={{ color: "var(--color-text-secondary)" }}>Postage included · cancel anytime</p>
-            <SubscribeButton label={`Subscribe · ${priceLabel}/mo`} />
+            <p className="text-[11px] mb-4 flex-1" style={{ color: "var(--color-text-secondary)" }}>Postage included · cancel anytime</p>
+            <SubscribeButton plan="monthly" label={`Subscribe · ${priceLabel}/mo`} />
           </div>
+
+          {/* 6-Month (renders only when the tier is live) */}
+          {IHM_6MONTH_READY && (
+            <div className="rounded-2xl p-6 border-2 relative flex flex-col" style={{ background: "var(--color-white)", borderColor: "var(--color-orange)" }}>
+              <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 text-[10px] uppercase tracking-[0.12em] font-bold rounded-full text-white whitespace-nowrap" style={{ background: "var(--color-teal)" }}>Save $6 with 6 months</span>
+              <p className="text-[11px] uppercase tracking-[0.15em] font-semibold mb-2" style={{ color: "var(--color-orange)" }}>6-Month · International</p>
+              <div className="flex items-end gap-1 mb-1">
+                <span className="text-[36px] font-bold leading-none" style={{ color: "var(--color-text-primary)" }}>${PRICE_6MONTH}</span>
+                <span className="text-[13px] mb-1" style={{ color: "var(--color-text-secondary)" }}>/6 months</span>
+              </div>
+              <p className="text-[11px] mb-4 flex-1" style={{ color: "var(--color-text-secondary)" }}>Billed once every 6 months · postage included · shown in your local currency at checkout</p>
+              <SubscribeButton plan="6-month" label={`Subscribe · $${PRICE_6MONTH}/6mo`} />
+            </div>
+          )}
         </div>
         <p className="text-center text-[11px] mt-4" style={{ color: "var(--color-text-secondary)" }}>
           <span className="font-semibold" style={{ color: "var(--color-orange)" }}>First in your market</span> — subscribe now and lock in this rate. Ships around the 15th. International postage included.

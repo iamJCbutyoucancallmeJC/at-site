@@ -113,20 +113,21 @@ export const IHM_SELLING_PLAN =
 // $16 USD base; Shopify Markets presents local currency at checkout (CA$23 / AU$23 / £13).
 export const IHM_PRICE_USD = 16
 
-// ── IHM 6-Month tier (DECIDED 2026-05-30; NOT YET BUILT in Shopify/Recharge) ──────
-// Build target: $90 6-month ("Save $6" vs $16 x 6 = $96), mirroring US "$6 off" shape.
+// ── IHM 6-Month tier (BUILT + LIVE 2026-06-01) ────────────────────────────────────
+// $90 6-month ("Save $6" vs $16 x 6 = $96), mirroring US "$6 off" shape.
 // Future step (window close): $18/mo + $100 (or $99). See
 // Website Redesign/ihm-6month-tier-policy-change-2026-05-30.md.
 //
-// ⚠️ The variant GID + selling plan GID DO NOT EXIST YET -- the coordinator session
-// creates them (new Shopify variant on happy-mail-international + new Recharge prepaid_v2
-// plan, attached to delivery profile 137513632064). Until both env vars are set to REAL
-// ids, IHM_6MONTH_READY is false and the page shows the 6-month card as "Coming soon"
-// (disabled, cannot reach checkout). Filling both env vars flips it live -- no code change.
+// BUILT 2026-06-01: new Shopify variant on happy-mail-international + Recharge prepaid_v2
+// plan 22473180 (recurring, expire_after=null), SPG attached to intl delivery profile
+// 137513632064. Verified live via Storefront @inContext: CA $127 / AU $128 / GB £68, all
+// availableForSale, US correctly null. Real-customer free shipping confirmed (the $18.48
+// USPS line was an API-synthetic artifact, not the checkout path). IHM_6MONTH_READY is now
+// true; the page renders the two-tier (Monthly + 6-Month) layout.
 export const IHM_VARIANT_6MONTH_GID =
-  process.env.NEXT_PUBLIC_HM_INTL_VARIANT_6MONTH_GID ?? "" // TODO(coordinator): real variant GID
+  process.env.NEXT_PUBLIC_HM_INTL_VARIANT_6MONTH_GID ?? "gid://shopify/ProductVariant/52075528356160"
 export const IHM_SELLING_PLAN_6MONTH =
-  process.env.NEXT_PUBLIC_HM_INTL_SELLING_PLAN_6MONTH_ID ?? "" // TODO(coordinator): real selling plan GID
+  process.env.NEXT_PUBLIC_HM_INTL_SELLING_PLAN_6MONTH_ID ?? "gid://shopify/SellingPlan/693648687424"
 export const IHM_PRICE_6MONTH_USD = 90
 
 // True only when BOTH the 6-month variant and selling plan ids are real (non-empty).
@@ -148,10 +149,11 @@ export const IHM_FAQ_ITEMS = [
     // Honest framing: same envelope, the price difference is postage only.
     a: "Same envelope, same surprises — the only difference is the price covers international postage instead of US postage. You'll get the exact same monthly sticker sheet, die cuts, and note from Amy that US subscribers get.",
   },
-  // NOTE: a 6-month intl tier ($90) is DECIDED but NOT launched (needs Recharge variant/plan
-  // work). Held OFF the page for the monthly-only launch (JC 2026-05-30). When it ships, add an
-  // "Is there a 6-month option?" FAQ here + the second plan card. Do not advertise it before it
-  // is purchasable.
+  {
+    q: "Is there a 6-month option?",
+    // 6-month intl tier LIVE 2026-06-01. $90 = "save $6" vs $16 x 6 = $96.
+    a: `Yes! The 6-Month plan is $${IHM_PRICE_6MONTH_USD} (shown in your local currency at checkout) — that's $6 off versus paying monthly. You're billed once every six months, postage included, and it auto-renews so you don't have to think about it. Same envelope every month either way.`,
+  },
   {
     q: "When does it ship?",
     a: "Around the 15th of each month. It travels as international letter mail, so allow a little extra time — it usually arrives within two to three weeks depending on your country's post.",
