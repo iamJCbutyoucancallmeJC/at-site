@@ -11,6 +11,7 @@ export type AnalyticsEvent =
   | 'begin_checkout'
   | 'newsletter_signup'
   | 'waitlist_signup'
+  | 'event_cta_click'
   | 'hm_page_view'
   | 'hm_plan_select'
   | 'hm_subscribe_click'
