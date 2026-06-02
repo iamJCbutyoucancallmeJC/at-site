@@ -1,20 +1,20 @@
 "use client"
 
-// Tokyo Tangerine Takeover waitlist form (feature f001).
+// Events waitlist form (feature f001).
 // Mirrors components/newsletter-form.tsx but:
 //   - POSTs to /api/waitlist (separate Kajabi form + tags) instead of /api/newsletter
 //   - adds an optional first-name field
 //   - fires the `waitlist_signup` analytics event
-//   - shows a richer confirmation that points to IG / the vlog
-// The on-submit tagging (tokyo-takeover-waitlist, etc.) lives server-side in
-// the route so the schema has a single source of truth.
+//   - shows a confirmation tuned for the "tell me where Amy will be" ask
+// The on-submit tagging (events-waitlist, etc.) lives server-side in the route
+// so the schema has a single source of truth.
 
 import { useState } from "react"
 import { trackEvent } from "@/lib/analytics"
 
 type Status = "idle" | "submitting" | "success" | "error"
 
-export default function WaitlistForm({ sourcePage = "at-site:/japan" }: { sourcePage?: string }) {
+export default function WaitlistForm({ sourcePage = "at-site:/events" }: { sourcePage?: string }) {
   const [email, setEmail] = useState("")
   const [name, setName] = useState("")
   const [status, setStatus] = useState<Status>("idle")
@@ -33,7 +33,7 @@ export default function WaitlistForm({ sourcePage = "at-site:/japan" }: { source
 
     setStatus("submitting")
     setErrorMsg("")
-    trackEvent("waitlist_signup", { source_page: sourcePage, list: "tokyo-takeover-waitlist" })
+    trackEvent("waitlist_signup", { source_page: sourcePage, list: "events-waitlist" })
 
     try {
       const res = await fetch("/api/waitlist", {
@@ -69,7 +69,7 @@ export default function WaitlistForm({ sourcePage = "at-site:/japan" }: { source
       >
         <p className="text-[16px] md:text-[18px] font-bold mb-1">You&rsquo;re on the list.</p>
         <p className="text-[13px] md:text-[14px]" style={{ color: "var(--color-text-secondary)" }}>
-          We&rsquo;ll email you the moment the next Tokyo Takeover is announced.
+          We&rsquo;ll let you know where Amy&rsquo;s headed next.
         </p>
       </div>
     )

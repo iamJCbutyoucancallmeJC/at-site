@@ -1,149 +1,162 @@
-// Events page — stub
-// Linked from homepage v/events tiles. Full page to be built once Amy
-// confirms upcoming schedule, photography, and registration links.
+// /events — "Where Amy's Been (and Where She's Headed)" landing page (feature f001).
+//
+// Reframed 2026-06-01 PM (per JC) from a multi-event card list into a single,
+// simple landing page: a short recap of past events Amy's appeared at, a
+// "stay tuned" line, and one email-capture form for people who want to know
+// where Amy will be next or join a future event (e.g. the next Tokyo Takeover).
+//
+// Capture: WaitlistForm -> POST /api/waitlist -> Kajabi opt-in form, tagged
+// events-waitlist / signup-from-at-site-events / interest-future-events /
+// interest-future-craft-tours (pre-Klaviyo bridge; see
+// scope-tokyo-takeover-page-2026-06-01.md).
+//
+// Photos: public/images/japan/tokyo-0X.webp (placeholders from the legacy SQS
+// Tokyo Workshops post until Amy supplies real photos). See that folder's README.
+// All copy below is a JC starting point for Amy's voice pass.
 
-import TrackableLink from "@/components/trackable-link"
+import fs from "fs"
+import path from "path"
+import Image from "next/image"
+import WaitlistForm from "@/components/waitlist-form"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 
-const EVENTS = [
+export const metadata = {
+  title: "Events | Amy Tangerine",
+  description:
+    "Where Amy Tangerine has been and where she's headed next: craft tours, conferences, retreats, and pop-ups. Get on the list to hear about future events.",
+}
+
+// Past events Amy's appeared at. Light recap list, not a registration system.
+const PAST_EVENTS = [
   {
-    id: "tokyo-takeover",
-    label: "Past + Upcoming",
+    label: "Craft Tour",
     title: "Tangerine Tokyo Takeover",
-    dates: "March 2026 — Sold out. Next trip TBA.",
-    location: "Tokyo, Japan",
-    description:
-      "Twenty crafters, six nights in Ginza, paper shops and stationery treasure hunts, Tokyo SkyTree and Asakusa, a Disneyland day, and a Mt. Fuji bullet-train day trip. The first one sold out fast. Get on the list for the next one.",
-    cta: "Get on the List",
-    href: "/japan",
-    external: false,
+    meta: "Tokyo, Japan · March 2026",
+    blurb:
+      "Twenty crafters, six nights in Ginza, paper shops and a Mt. Fuji bullet-train day trip. The first one sold out fast.",
   },
   {
-    id: "craftation",
     label: "Conference",
     title: "Craftation: Business & Makers Conference",
-    dates: "Date TBD",
-    location: "Ventura, CA",
-    description:
-      "Amy teaches and speaks at this annual four-day conference in the artsy seaside town of Ventura, Southern California. One of the craft world's premier business and creative events.",
-    cta: "Learn More",
-    href: "https://craftcation.com",
-    external: true,
+    meta: "Ventura, CA",
+    blurb: "Amy teaches and speaks at this annual four-day conference for makers and creative entrepreneurs.",
   },
   {
-    id: "paper-fest",
     label: "Vendor + Speaker",
     title: "Paper Fest",
-    dates: "Date TBD",
-    location: "Orange County, CA",
-    description:
-      "Amy's first year at Paper Fest — a dedicated paper craft and stationery event in Orange County. Shop her products and catch her on stage.",
-    cta: "Learn More",
-    href: "#",
-    external: false,
+    meta: "Orange County, CA",
+    blurb: "A dedicated paper craft and stationery event. Shop Amy's products and catch her on stage.",
   },
   {
-    id: "squeeze-the-day",
     label: "Retreat",
     title: "Squeeze the Day Retreat",
-    dates: "Date TBD",
-    location: "TBA",
-    description:
-      "An immersive crafting retreat experience designed by Amy. Small group, hands-on, and focused on creative joy.",
-    cta: "Stay Tuned",
-    href: "#",
-    external: false,
+    meta: "Location TBA",
+    blurb: "An immersive, small-group crafting retreat designed by Amy and focused on creative joy.",
   },
 ]
 
+// A couple of photos for warmth (placeholders until Amy supplies real ones).
+function fileExists(publicRelPath: string): boolean {
+  try {
+    return fs.existsSync(path.join(process.cwd(), "public", publicRelPath))
+  } catch {
+    return false
+  }
+}
+const PHOTOS = ["tokyo-02.webp", "tokyo-04.webp", "tokyo-03.webp"]
+
 export default function EventsPage() {
+  const photos = PHOTOS.filter((f) => fileExists(`images/japan/${f}`)).map((f) => `/images/japan/${f}`)
+
   return (
     <main className="min-h-screen">
       <PageEngagementTracker page="events" />
 
       {/* ── Header ── */}
-      <section
-        className="py-16 md:py-24 px-4 text-center"
-        style={{ background: "var(--color-teal)" }}
-      >
+      <section className="px-6 py-16 md:py-24 text-center" style={{ background: "var(--color-teal)" }}>
         <h1
-          className="text-[36px] md:text-[56px] font-bold tracking-tight text-white leading-tight"
+          className="text-[38px] md:text-[60px] font-bold tracking-tight text-white leading-[1.05]"
           style={{ fontFamily: "var(--font-sans)" }}
         >
-          In Person
+          Where Amy&rsquo;s Been
         </h1>
-        <p className="mt-3 text-[13px] md:text-[15px] uppercase tracking-[0.2em] text-white/70">
-          Tours · Workshops · Conferences · Retreats
+        <p className="mt-4 text-[15px] md:text-[18px] text-white/85 max-w-xl mx-auto leading-relaxed">
+          From a takeover of Tokyo&rsquo;s best paper shops to conferences, retreats, and pop-ups,
+          here are a few of the places Amy has shown up to craft, teach, and connect.
         </p>
       </section>
 
-      {/* ── Event list ── */}
-      <section className="max-w-3xl mx-auto px-4 md:px-8 py-10 md:py-14 space-y-8">
-        {EVENTS.map((event) => (
-          <div
-            key={event.id}
-            className="border-t pt-8"
-            style={{ borderColor: "var(--color-border)" }}
-          >
-            <p
-              className="text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-semibold mb-1"
-              style={{ color: "var(--color-orange)" }}
-            >
-              {event.label}
-            </p>
-            <h2
-              className="text-[22px] md:text-[30px] font-bold leading-tight mb-1"
-              style={{ color: "var(--color-text-primary)" }}
-            >
-              {event.title}
-            </h2>
-            <p
-              className="text-[12px] md:text-[13px] uppercase tracking-[0.08em] mb-3"
-              style={{ color: "var(--color-text-secondary)" }}
-            >
-              {event.dates} &nbsp;·&nbsp; {event.location}
-            </p>
-            <p
-              className="text-[14px] md:text-[15px] leading-relaxed mb-4"
-              style={{ color: "var(--color-text-secondary)" }}
-            >
-              {event.description}
-            </p>
-            {event.href !== "#" && (
-              <TrackableLink
-                href={event.href}
-                event="event_cta_click"
-                eventData={{ event_id: event.id, event_title: event.title, page: "events" }}
-                className="inline-block px-5 py-2 text-[12px] uppercase tracking-[0.1em] font-semibold rounded-full border-2 transition-all duration-300 hover:opacity-80"
-                style={{ borderColor: "var(--color-teal)", color: "var(--color-teal)" }}
-                {...(event.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              >
-                {event.cta}
-              </TrackableLink>
-            )}
+      {/* ── Photos ── */}
+      {photos.length > 0 && (
+        <section className="px-3 md:px-6 pt-8 md:pt-12">
+          <div className="max-w-4xl mx-auto grid grid-cols-3 gap-2 md:gap-3">
+            {photos.slice(0, 3).map((src, i) => (
+              <div key={src} className="relative aspect-square overflow-hidden rounded-lg">
+                <Image
+                  src={src}
+                  alt={`Amy Tangerine event ${i + 1}`}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 33vw, 25vw"
+                />
+              </div>
+            ))}
           </div>
-        ))}
+        </section>
+      )}
+
+      {/* ── Past events recap list ── */}
+      <section className="max-w-2xl mx-auto px-6 py-12 md:py-16">
+        <h2
+          className="text-[13px] md:text-[15px] uppercase tracking-[0.18em] font-semibold mb-6 text-center"
+          style={{ color: "var(--color-orange)" }}
+        >
+          A Few Past Events
+        </h2>
+        <div className="space-y-7">
+          {PAST_EVENTS.map((event) => (
+            <div key={event.title} className="border-t pt-6" style={{ borderColor: "var(--color-border)" }}>
+              <p
+                className="text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-semibold mb-1"
+                style={{ color: "var(--color-orange)" }}
+              >
+                {event.label}
+              </p>
+              <h3
+                className="text-[19px] md:text-[24px] font-bold leading-tight"
+                style={{ color: "var(--color-text-primary)" }}
+              >
+                {event.title}
+              </h3>
+              <p
+                className="text-[12px] md:text-[13px] uppercase tracking-[0.08em] mb-2"
+                style={{ color: "var(--color-text-secondary)" }}
+              >
+                {event.meta}
+              </p>
+              <p className="text-[14px] md:text-[15px] leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+                {event.blurb}
+              </p>
+            </div>
+          ))}
+        </div>
+        <p className="text-center text-[14px] md:text-[15px] mt-10 leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+          More to come. Stay tuned to this page for where Amy&rsquo;s headed next.
+        </p>
       </section>
 
-      {/* ── Newsletter nudge ── */}
-      <section
-        className="py-10 md:py-12 px-4 text-center"
-        style={{ background: "var(--color-orange)" }}
-      >
-        <h2 className="text-[18px] md:text-[22px] font-bold text-white mb-2">
-          Want to know when new events are announced?
-        </h2>
-        <p className="text-[13px] md:text-[14px] text-white/80 mb-5">
-          Subscribers hear first.
-        </p>
-        <TrackableLink
-          href="/happy-mail"
-          event="hero_cta_click"
-          eventData={{ cta_text: "Events page newsletter CTA", destination: "/happy-mail", page: "events" }}
-          className="inline-block px-8 py-3 text-[13px] uppercase tracking-[0.15em] font-semibold rounded-full border-2 border-white text-white hover:bg-white hover:text-black transition-all duration-300"
-        >
-          Subscribe to Happy Mail
-        </TrackableLink>
+      {/* ── Capture form ── */}
+      <section className="px-6 py-12 md:py-16" style={{ background: "var(--color-orange)" }}>
+        <div className="max-w-lg mx-auto text-center">
+          <h2 className="text-[24px] md:text-[34px] font-bold leading-tight text-white mb-3">
+            Want to know where Amy will be?
+          </h2>
+          <p className="text-[14px] md:text-[16px] text-white/90 mb-6 leading-relaxed">
+            Drop your email and we&rsquo;ll let you know about future events, pop-ups, and trips,
+            including the next Tokyo Tangerine Takeover. No spam, just the good stuff.
+          </p>
+          <WaitlistForm sourcePage="at-site:/events" />
+        </div>
       </section>
     </main>
   )

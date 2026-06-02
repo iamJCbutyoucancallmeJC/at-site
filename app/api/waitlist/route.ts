@@ -8,11 +8,14 @@
 // Kajabi tags below migrate cleanly to a Klaviyo List + Custom Properties +
 // Event, so we don't have to re-tag anyone.
 //
-// Tagging schema (MUST match the scope doc exactly so the Klaviyo migration
-// isn't double-work):
-//   Kajabi tag  tokyo-takeover-waitlist       -> Klaviyo List name + signup_source property
-//   Kajabi tag  signup-from-at-site-japan     -> surface attribution
-//   Kajabi tag  interest-future-craft-tours   -> composable "likes Amy trips" flag
+// Tagging schema (designed to migrate cleanly to Klaviyo Lists + Custom
+// Properties + Events so the migration isn't double-work). The surface is now a
+// general "where will Amy be / join a future event" landing page at /events
+// (reframed 2026-06-01 PM per JC), so the tags are broader than Tokyo-only:
+//   Kajabi tag  events-waitlist               -> Klaviyo List name + signup_source property
+//   Kajabi tag  signup-from-at-site-events     -> surface attribution
+//   Kajabi tag  interest-future-events         -> composable "wants to know where Amy is" flag
+//   Kajabi tag  interest-future-craft-tours    -> narrower "would join a trip" flag (Tokyo etc.)
 //   (Klaviyo)   signup_campaign: hobonichi-jun-2026  -> promo-window slice (set later)
 //
 // We send the tags as Kajabi hidden form fields. A Kajabi opt-in form applies
@@ -42,13 +45,18 @@ const KAJABI_FORM_URL = process.env.KAJABI_WAITLIST_FORM_URL
 const KAJABI_EMAIL_FIELD = process.env.KAJABI_WAITLIST_FORM_FIELD ?? "form_submission[email]"
 const KAJABI_NAME_FIELD = process.env.KAJABI_WAITLIST_NAME_FIELD ?? "form_submission[name]"
 
-// Tags applied to every waitlist signup. Order/values are load-bearing for the
-// Klaviyo migration -- do not edit without updating the scope doc's schema.
+// Tags applied to every events-waitlist signup. Order/values are load-bearing
+// for the Klaviyo migration -- do not edit without updating the scope doc.
 const WAITLIST_TAGS = [
-  "tokyo-takeover-waitlist",
-  "signup-from-at-site-japan",
+  "events-waitlist",
+  "signup-from-at-site-events",
+  "interest-future-events",
   "interest-future-craft-tours",
 ] as const
+
+// The signup_source Custom Property is the semantic source of truth that
+// survives the Klaviyo migration (see scope "Tagging principle worth keeping").
+const SIGNUP_SOURCE = "events-waitlist"
 
 // Minimal email validation -- defer hard validation to Kajabi.
 function isValidEmail(s: string): boolean {
@@ -63,7 +71,7 @@ export async function POST(request: Request) {
     const body = (await request.json()) as { email?: string; name?: string; source?: string }
     email = (body.email ?? "").trim().toLowerCase()
     name = (body.name ?? "").trim().slice(0, 120)
-    source = (body.source ?? "at-site:/japan").slice(0, 64)
+    source = (body.source ?? "at-site:/events").slice(0, 64)
   } catch {
     return NextResponse.json({ error: "Bad request" }, { status: 400 })
   }
@@ -87,7 +95,7 @@ export async function POST(request: Request) {
     const formBody = new URLSearchParams({
       [KAJABI_EMAIL_FIELD]: email,
       // signup_source is the semantic source of truth that survives migration.
-      "form_submission[signup_source]": "tokyo-takeover-waitlist",
+      "form_submission[signup_source]": SIGNUP_SOURCE,
       "form_submission[signup_surface]": source,
       "form_submission[source]": source,
     })
