@@ -14,8 +14,6 @@
 // Tokyo Workshops post until Amy supplies real photos). See that folder's README.
 // All copy below is a JC starting point for Amy's voice pass.
 
-import fs from "fs"
-import path from "path"
 import Image from "next/image"
 import WaitlistForm from "@/components/waitlist-form"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
@@ -55,18 +53,12 @@ const PAST_EVENTS = [
   },
 ]
 
-// A couple of photos for warmth (placeholders until Amy supplies real ones).
-function fileExists(publicRelPath: string): boolean {
-  try {
-    return fs.existsSync(path.join(process.cwd(), "public", publicRelPath))
-  } catch {
-    return false
-  }
-}
-const PHOTOS = ["tokyo-02.webp", "tokyo-04.webp", "tokyo-03.webp"]
+// A couple of photos for warmth (placeholders until Amy supplies real ones,
+// committed under public/images/japan/ — see that folder's README to swap).
+const PHOTOS = ["/images/japan/tokyo-02.webp", "/images/japan/tokyo-04.webp", "/images/japan/tokyo-03.webp"]
 
 export default function EventsPage() {
-  const photos = PHOTOS.filter((f) => fileExists(`images/japan/${f}`)).map((f) => `/images/japan/${f}`)
+  const photos = PHOTOS
 
   return (
     <main className="min-h-screen">
