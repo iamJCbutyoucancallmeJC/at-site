@@ -77,7 +77,8 @@ const EVENTS: EventEntry[] = [
   },
 ]
 
-const PHOTOS = ["/images/japan/tokyo-02.webp", "/images/japan/tokyo-04.webp", "/images/japan/tokyo-03.webp"]
+// Real Tokyo Takeover photos (Amy, 2026-06-03). A strong, varied trio.
+const PHOTOS = ["/images/japan/tokyo-01.webp", "/images/japan/tokyo-03.webp", "/images/japan/tokyo-04.webp"]
 
 export default function EventsPage() {
   return (

@@ -1,23 +1,31 @@
 # /japan + /events Tokyo imagery
 
-Placeholder assets for the Tokyo Tangerine Takeover surfaces (feature f001).
+Real Tokyo Tangerine Takeover photos supplied by Amy (2026-06-03), processed
+from `~/Downloads/tangerinetokyotakeover/TangerineTokyoTakeover1-9`.
 
-## Current (placeholders)
+Processing applied: EXIF orientation baked into pixels, long edge resized to
+1600px, converted to WebP q82. Photo #9 was rotated 90° CW to upright.
 
-`tokyo-01.webp` … `tokyo-06.webp` — pulled from the legacy Squarespace
-"Tokyo Workshops" blog post (vault: `Website Redesign/Archive/squarespace-legacy-2026-05-29`).
-Real Amy craft-workshop photos, used as gallery placeholders until Amy supplies
-the March 2026 trip photos. Swap the files in place (keep the same filenames) and
-no code change is needed.
+## Files
 
-## Drop-in slots (swap real files here, keep filenames)
+| File | Source | Content | Used on |
+|---|---|---|---|
+| `hero.webp` | #1 | Amy holding the trip card | /japan hero |
+| `tokyo-01.webp` | #1 | Amy holding the trip card | /events strip |
+| `tokyo-02.webp` | #2 | Stationery shop interior | /japan gallery |
+| `tokyo-03.webp` | #3 | Group at Rainbowholic cafe | /events strip + /japan gallery |
+| `tokyo-04.webp` | #4 | Sticker wall | /events strip + /japan gallery |
+| `tokyo-05.webp` | #5 | Group indoors | /japan gallery |
+| `tokyo-06.webp` | #6 | Amy + cherry blossoms | /japan gallery |
+| `tokyo-07.webp` | #7 | Group with the Hobonichi bear | /japan gallery |
+| `tokyo-08.webp` | #8 | Mother / EarthBound plush finds | /japan gallery |
+| `tokyo-09.webp` | #9 | Full group at Hobonichi HQ | /japan gallery |
 
-| Filename | Where it renders | Notes |
-|---|---|---|
-| `tokyo-takeover-logo.png` | /japan hero + /events Tokyo entry | The "Tangerine Tokyo Takeover — the sweetest trip ever!" brand logo (Tokyo-tower mark). NOT yet in repo; hero falls back to a styled text treatment until this file exists. |
-| `hero.webp` | /japan hero background | Optional single strong Tokyo photo behind the headline. Falls back to brand-color block if absent. |
-| `tokyo-01.webp` … `tokyo-06.webp` | /japan gallery + /events | The gallery reads the first 4–6 in order. |
+## To swap a photo
 
-All consuming code degrades gracefully if a file is missing — the page never
-breaks on an absent image, so this is safe to ship to the PDF before Amy's
-photos arrive.
+Replace the file in place (keep the filename) and redeploy. Both pages
+reference these as plain constants (no build-time fs checks — those caused a
+deploy-only hydration crash, since fixed). The `/japan` gallery order and
+`/events` trio are defined in those page files.
+
+Originals retained in `~/Downloads/tangerinetokyotakeover/` (not committed).

@@ -27,13 +27,16 @@ export const metadata = {
     "Amy's girlfriends' shopping adventure through Tokyo's best stationery and paper shops. The first trip sold out fast. Get on the list for the next Tangerine Tokyo Takeover.",
 }
 
+// Photo #1 (Amy holding the trip card) is the hero. The rest fill the gallery.
 const GALLERY = [
-  "/images/japan/tokyo-01.webp",
-  "/images/japan/tokyo-02.webp",
-  "/images/japan/tokyo-03.webp",
-  "/images/japan/tokyo-04.webp",
-  "/images/japan/tokyo-05.webp",
-  "/images/japan/tokyo-06.webp",
+  "/images/japan/tokyo-02.webp", // stationery shop interior
+  "/images/japan/tokyo-09.webp", // full group at Hobonichi HQ
+  "/images/japan/tokyo-03.webp", // group at Rainbowholic cafe
+  "/images/japan/tokyo-04.webp", // sticker wall
+  "/images/japan/tokyo-07.webp", // group with Hobonichi bear
+  "/images/japan/tokyo-06.webp", // Amy + cherry blossoms
+  "/images/japan/tokyo-05.webp", // group indoors
+  "/images/japan/tokyo-08.webp", // Mother/EarthBound plush finds
 ]
 
 export default function JapanPage() {
@@ -41,26 +44,35 @@ export default function JapanPage() {
     <main className="min-h-screen">
       <PageEngagementTracker page="japan" />
 
-      {/* ── Hero (brand text treatment; swap in tokyo-takeover-logo.png later) ── */}
-      <section className="px-6 py-16 md:py-24 text-center" style={{ background: "var(--color-orange-light)" }}>
-        <p className="text-[11px] md:text-[13px] uppercase tracking-[0.25em] font-semibold mb-5" style={{ color: "var(--color-orange)" }}>
-          Craft Tour · Tokyo, Japan
-        </p>
-        <h1 className="text-[40px] md:text-[72px] font-bold tracking-tight leading-[1.02] mb-3" style={{ color: "var(--color-text-primary)" }}>
-          <span style={{ color: "var(--color-orange)" }}>Tangerine</span>
-          <br />
-          <span style={{ color: "var(--color-teal)" }}>Tokyo Takeover</span>
-        </h1>
-        <p className="mt-4 text-[16px] md:text-[20px] max-w-xl mx-auto leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-          The sweetest trip ever. Get on the list for the next one.
-        </p>
-        <a
-          href="#waitlist"
-          className="mt-7 inline-block px-8 py-3 text-[13px] md:text-[14px] uppercase tracking-[0.12em] font-semibold rounded-full text-white transition-all duration-300 hover:opacity-90"
-          style={{ background: "var(--color-orange)" }}
-        >
-          Get on the List
-        </a>
+      {/* ── Hero (photo #1: Amy holding the trip card) ── */}
+      <section className="relative w-full h-[72vh] md:h-[80vh] overflow-hidden">
+        <Image
+          src="/images/japan/hero.webp"
+          alt="Amy holding the Tangerine Tokyo Takeover card in Tokyo"
+          fill
+          priority
+          className="object-cover"
+          style={{ objectPosition: "50% 30%" }}
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-black/35" />
+        <div className="absolute inset-0 flex flex-col items-center justify-end pb-12 md:pb-20 px-6 text-center">
+          <p className="text-[11px] md:text-[13px] uppercase tracking-[0.25em] font-semibold mb-4 text-white/90">
+            Craft Tour · Tokyo, Japan
+          </p>
+          <h1 className="text-[40px] md:text-[76px] font-bold tracking-tight leading-[1.0] text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)]">
+            Tangerine Tokyo Takeover
+          </h1>
+          <p className="mt-3 md:mt-4 text-[16px] md:text-[20px] max-w-xl mx-auto leading-relaxed text-white drop-shadow-[0_1px_6px_rgba(0,0,0,0.5)]">
+            The sweetest trip ever. Get on the list for the next one.
+          </p>
+          <a
+            href="#waitlist"
+            className="mt-6 md:mt-8 inline-block px-8 py-3 text-[13px] md:text-[14px] uppercase tracking-[0.12em] font-semibold rounded-full border-2 border-white text-white hover:bg-white hover:text-black transition-all duration-300"
+          >
+            Get on the List
+          </a>
+        </div>
       </section>
 
       {/* ── The story ── */}
@@ -69,10 +81,10 @@ export default function JapanPage() {
           A girlfriends&rsquo; shopping adventure through Tokyo.
         </h2>
         <p className="text-[15px] md:text-[17px] leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-          Six nights in Ginza, the world&rsquo;s most beautiful stationery and paper shops, washi tape
-          we couldn&rsquo;t carry home, Tokyo SkyTree and Asakusa, a Disneyland day, and a Mt. Fuji
-          bullet-train trip. The first Tangerine Tokyo Takeover sold out fast, and we&rsquo;re already
-          dreaming up the next one.
+          Six nights in Ginza, the world&rsquo;s most beautiful stationery and paper shops, a Tokyo
+          Disneyland day, a super special trip to Hobonichi headquarters (pinch me!), late nights
+          crafting away in the hotel lobby and the best tour bus guide to Mt. Fuji. The first
+          Tangerine Tokyo Takeover sold out fast, and we&rsquo;re already dreaming up the next one.
         </p>
       </section>
 
@@ -83,7 +95,7 @@ export default function JapanPage() {
             <div key={src} className="relative aspect-square overflow-hidden rounded-lg">
               <Image
                 src={src}
-                alt={`Tangerine Tokyo Takeover ${i + 1}`}
+                alt={`Tangerine Tokyo Takeover trip photo ${i + 1}`}
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 50vw, 33vw"
@@ -100,11 +112,11 @@ export default function JapanPage() {
       <section id="waitlist" className="px-6 py-12 md:py-16" style={{ background: "var(--color-teal)" }}>
         <div className="max-w-lg mx-auto text-center">
           <h2 className="text-[26px] md:text-[36px] font-bold leading-tight text-white mb-3">
-            Get on the list for the next Tokyo Takeover
+            Get on the list for the next Tangerine Takeover
           </h2>
           <p className="text-[14px] md:text-[16px] text-white/85 mb-6 leading-relaxed">
-            Be the first to know when the next trip is announced. No spam, just the details when
-            there&rsquo;s real news.
+            Be it in Tokyo or somewhere closer. No spam, just the details when there&rsquo;s something
+            to share, and you&rsquo;ll be among the first to know.
           </p>
           <WaitlistForm sourcePage="at-site:/japan" />
           <p className="text-[13px] md:text-[14px] text-white/80 mt-5 leading-relaxed">
