@@ -48,8 +48,14 @@ const KAJABI_EMAIL_FIELD = process.env.KAJABI_WAITLIST_FORM_FIELD ?? "form_submi
 // form configured either way captures it. Override the field names via env if a
 // specific Kajabi form uses different name attributes.
 const KAJABI_NAME_FIELD = process.env.KAJABI_WAITLIST_NAME_FIELD ?? "form_submission[name]"
-const KAJABI_FIRST_NAME_FIELD = process.env.KAJABI_WAITLIST_FIRST_NAME_FIELD ?? "form_submission[first_name]"
-const KAJABI_LAST_NAME_FIELD = process.env.KAJABI_WAITLIST_LAST_NAME_FIELD ?? "form_submission[last_name]"
+// Amy's Kajabi form has a SINGLE "Name" field (+ Email), so by default we only
+// send the combined name. The on-site form still collects first + last for
+// clean data; the API joins them into "First Last" for Kajabi's one field, and
+// keeps firstName/lastName in the fail-open log so the split survives until the
+// Klaviyo migration (Klaviyo has separate first/last). If a future Kajabi form
+// adds dedicated first/last fields, set these env vars to enable sending them.
+const KAJABI_FIRST_NAME_FIELD = process.env.KAJABI_WAITLIST_FIRST_NAME_FIELD
+const KAJABI_LAST_NAME_FIELD = process.env.KAJABI_WAITLIST_LAST_NAME_FIELD
 
 // Tags applied to every events-waitlist signup. Order/values are load-bearing
 // for the Klaviyo migration -- do not edit without updating the scope doc.
@@ -119,10 +125,12 @@ export async function POST(request: Request) {
     if (name) {
       formBody.set(KAJABI_NAME_FIELD, name)
     }
-    if (firstName) {
+    // Only send dedicated first/last fields if a Kajabi form is configured for
+    // them (env vars set). Amy's current form is Name-only, so these stay off.
+    if (firstName && KAJABI_FIRST_NAME_FIELD) {
       formBody.set(KAJABI_FIRST_NAME_FIELD, firstName)
     }
-    if (lastName) {
+    if (lastName && KAJABI_LAST_NAME_FIELD) {
       formBody.set(KAJABI_LAST_NAME_FIELD, lastName)
     }
     // Tags as repeated hidden fields; a Kajabi form configured to accept them
