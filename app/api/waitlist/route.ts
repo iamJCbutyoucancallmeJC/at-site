@@ -43,7 +43,13 @@ import { NextResponse } from "next/server"
 
 const KAJABI_FORM_URL = process.env.KAJABI_WAITLIST_FORM_URL
 const KAJABI_EMAIL_FIELD = process.env.KAJABI_WAITLIST_FORM_FIELD ?? "form_submission[email]"
+// Kajabi opt-in forms use either a single "name" field or separate first/last.
+// We always send the combined "name" (most compatible) plus first/last so a
+// form configured either way captures it. Override the field names via env if a
+// specific Kajabi form uses different name attributes.
 const KAJABI_NAME_FIELD = process.env.KAJABI_WAITLIST_NAME_FIELD ?? "form_submission[name]"
+const KAJABI_FIRST_NAME_FIELD = process.env.KAJABI_WAITLIST_FIRST_NAME_FIELD ?? "form_submission[first_name]"
+const KAJABI_LAST_NAME_FIELD = process.env.KAJABI_WAITLIST_LAST_NAME_FIELD ?? "form_submission[last_name]"
 
 // Tags applied to every events-waitlist signup. Order/values are load-bearing
 // for the Klaviyo migration -- do not edit without updating the scope doc.
@@ -65,12 +71,23 @@ function isValidEmail(s: string): boolean {
 
 export async function POST(request: Request) {
   let email: string
+  let firstName: string
+  let lastName: string
   let name: string
   let source: string
   try {
-    const body = (await request.json()) as { email?: string; name?: string; source?: string }
+    const body = (await request.json()) as {
+      email?: string
+      firstName?: string
+      lastName?: string
+      name?: string // legacy single-field callers
+      source?: string
+    }
     email = (body.email ?? "").trim().toLowerCase()
-    name = (body.name ?? "").trim().slice(0, 120)
+    firstName = (body.firstName ?? "").trim().slice(0, 60)
+    lastName = (body.lastName ?? "").trim().slice(0, 60)
+    // combined name: prefer explicit first+last, else fall back to legacy `name`
+    name = [firstName, lastName].filter(Boolean).join(" ") || (body.name ?? "").trim().slice(0, 120)
     source = (body.source ?? "at-site:/events").slice(0, 64)
   } catch {
     return NextResponse.json({ error: "Bad request" }, { status: 400 })
@@ -86,7 +103,7 @@ export async function POST(request: Request) {
   // which list/properties to apply.
   if (!KAJABI_FORM_URL) {
     console.log(
-      `[waitlist] queued (KAJABI_WAITLIST_FORM_URL unset): email=${email} name=${name || "-"} source=${source} tags=${WAITLIST_TAGS.join(",")}`
+      `[waitlist] queued (KAJABI_WAITLIST_FORM_URL unset): email=${email} name=${name || "-"} first=${firstName || "-"} last=${lastName || "-"} source=${source} tags=${WAITLIST_TAGS.join(",")}`
     )
     return NextResponse.json({ ok: true, queued: true })
   }
@@ -101,6 +118,12 @@ export async function POST(request: Request) {
     })
     if (name) {
       formBody.set(KAJABI_NAME_FIELD, name)
+    }
+    if (firstName) {
+      formBody.set(KAJABI_FIRST_NAME_FIELD, firstName)
+    }
+    if (lastName) {
+      formBody.set(KAJABI_LAST_NAME_FIELD, lastName)
     }
     // Tags as repeated hidden fields; a Kajabi form configured to accept them
     // applies each as a profile tag. Ignored harmlessly if the form isn't set

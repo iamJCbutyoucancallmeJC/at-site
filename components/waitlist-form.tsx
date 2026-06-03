@@ -16,7 +16,8 @@ type Status = "idle" | "submitting" | "success" | "error"
 
 export default function WaitlistForm({ sourcePage = "at-site:/events" }: { sourcePage?: string }) {
   const [email, setEmail] = useState("")
-  const [name, setName] = useState("")
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
   const [status, setStatus] = useState<Status>("idle")
   const [errorMsg, setErrorMsg] = useState("")
 
@@ -30,6 +31,11 @@ export default function WaitlistForm({ sourcePage = "at-site:/events" }: { sourc
       setErrorMsg("Please enter your email")
       return
     }
+    if (!firstName.trim() || !lastName.trim()) {
+      setStatus("error")
+      setErrorMsg("Please enter your first and last name")
+      return
+    }
 
     setStatus("submitting")
     setErrorMsg("")
@@ -39,7 +45,12 @@ export default function WaitlistForm({ sourcePage = "at-site:/events" }: { sourc
       const res = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: trimmed, name: name.trim(), source: sourcePage }),
+        body: JSON.stringify({
+          email: trimmed,
+          firstName: firstName.trim(),
+          lastName: lastName.trim(),
+          source: sourcePage,
+        }),
       })
       const data = await res.json().catch(() => ({}))
       if (!res.ok) {
@@ -49,7 +60,8 @@ export default function WaitlistForm({ sourcePage = "at-site:/events" }: { sourc
       }
       setStatus("success")
       setEmail("")
-      setName("")
+      setFirstName("")
+      setLastName("")
     } catch {
       setStatus("error")
       setErrorMsg("Network error, please try again")
@@ -77,21 +89,42 @@ export default function WaitlistForm({ sourcePage = "at-site:/events" }: { sourc
 
   return (
     <form className="flex flex-col gap-2.5" onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        disabled={status === "submitting"}
-        className="w-full px-4 py-3.5 rounded-xl text-sm md:text-[15px] border-2 outline-none disabled:opacity-60"
-        style={{
-          borderColor: "var(--color-border)",
-          background: "var(--color-white)",
-          color: "var(--color-text-primary)",
-          fontFamily: "var(--font-sans)",
-        }}
-        placeholder="First name (optional)"
-        aria-label="First name"
-      />
+      <div className="flex gap-2">
+        <input
+          type="text"
+          required
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          disabled={status === "submitting"}
+          autoComplete="given-name"
+          className="flex-1 min-w-0 px-4 py-3.5 rounded-xl text-sm md:text-[15px] border-2 outline-none disabled:opacity-60"
+          style={{
+            borderColor: "var(--color-border)",
+            background: "var(--color-white)",
+            color: "var(--color-text-primary)",
+            fontFamily: "var(--font-sans)",
+          }}
+          placeholder="First name"
+          aria-label="First name"
+        />
+        <input
+          type="text"
+          required
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+          disabled={status === "submitting"}
+          autoComplete="family-name"
+          className="flex-1 min-w-0 px-4 py-3.5 rounded-xl text-sm md:text-[15px] border-2 outline-none disabled:opacity-60"
+          style={{
+            borderColor: "var(--color-border)",
+            background: "var(--color-white)",
+            color: "var(--color-text-primary)",
+            fontFamily: "var(--font-sans)",
+          }}
+          placeholder="Last name"
+          aria-label="Last name"
+        />
+      </div>
       <div className="flex gap-2">
         <input
           type="email"
@@ -99,6 +132,7 @@ export default function WaitlistForm({ sourcePage = "at-site:/events" }: { sourc
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           disabled={status === "submitting"}
+          autoComplete="email"
           className="flex-1 px-4 py-3.5 rounded-xl text-sm md:text-[15px] border-2 outline-none disabled:opacity-60"
           style={{
             borderColor: "var(--color-border)",
