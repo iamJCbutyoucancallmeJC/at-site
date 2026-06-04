@@ -27,7 +27,9 @@ export const metadata = {
     "Amy's girlfriends' shopping adventure through Tokyo's best stationery and paper shops. The first trip sold out fast. Get on the list for the next Tangerine Tokyo Takeover.",
 }
 
-// Photo #1 (Amy holding the trip card) is the hero. The rest fill the gallery.
+// Photo #1 (Amy holding the trip card) is the hero. These 8 fill the gallery.
+// On mobile (2 cols) 8 reads cleanly as 2-2-2-2. On desktop (3 cols) 8 leaves a
+// gap (3-3-2), so we append a 9th DESKTOP-ONLY tile to complete the grid (3-3-3).
 const GALLERY = [
   "/images/japan/tokyo-02.webp", // stationery shop interior
   "/images/japan/tokyo-09.webp", // full group at Hobonichi HQ
@@ -38,6 +40,8 @@ const GALLERY = [
   "/images/japan/tokyo-05.webp", // group indoors
   "/images/japan/tokyo-08.webp", // Mother/EarthBound plush finds
 ]
+// Desktop-only 9th tile so the 3-col grid completes (3-3-3 instead of 3-3-2).
+const GALLERY_DESKTOP_ONLY = "/images/japan/tokyo-01.webp" // Amy holding the trip card
 
 export default function JapanPage() {
   return (
@@ -102,10 +106,39 @@ export default function JapanPage() {
               />
             </div>
           ))}
+          {/* 9th tile: desktop only, completes the 3-col grid */}
+          <div className="relative aspect-square overflow-hidden rounded-lg hidden md:block">
+            <Image
+              src={GALLERY_DESKTOP_ONLY}
+              alt={`Tangerine Tokyo Takeover trip photo ${GALLERY.length + 1}`}
+              fill
+              className="object-cover"
+              sizes="33vw"
+            />
+          </div>
         </div>
         <p className="text-center text-[11px] uppercase tracking-[0.12em] mt-3" style={{ color: "var(--color-text-secondary)" }}>
           From the first trip
         </p>
+      </section>
+
+      {/* ── Recap video ── */}
+      <section className="px-6 pb-12 md:pb-16">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-[20px] md:text-[26px] font-bold leading-tight text-center mb-5" style={{ color: "var(--color-text-primary)" }}>
+            Watch the recap
+          </h2>
+          <div className="relative w-full overflow-hidden rounded-xl" style={{ aspectRatio: "16 / 9" }}>
+            <iframe
+              className="absolute inset-0 h-full w-full"
+              src="https://www.youtube.com/embed/h-JURDA8gIA?si=3GN2T1Lh0gSTmXWL"
+              title="Tangerine Tokyo Takeover recap"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            />
+          </div>
+        </div>
       </section>
 
       {/* ── Waitlist ── */}
