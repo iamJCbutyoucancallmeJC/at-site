@@ -131,9 +131,17 @@ export const IHM_SELLING_PLAN_6MONTH =
 export const IHM_PRICE_6MONTH_USD = 90
 
 // True only when BOTH the 6-month variant and selling plan ids are real (non-empty).
-// Gates the live subscribe path; the card renders either way (disabled when false).
+// Gates the live subscribe path AND the card render (the 6-month card + its Subscribe
+// button live inside `{IHM_6MONTH_READY && ...}` in happy-mail-international-client.tsx).
+//
+// TEMPORARILY FORCED FALSE (2026-06-04): the IHM 6-month Recharge plan (693648687424) is
+// DISABLED pending Recharge ticket #1216915 / t702 (checkout-overcharge fix). With the plan
+// disabled, selecting the 6-month tier produces a dead checkout that hangs ("one moment")
+// -- customer-reported (Gordana, 6/3). Hiding the tier leaves the monthly intl ($16) as the
+// only option. REVERT when t702 resolves: remove the `&& false`, redeploy, then verify a
+// CA-context cartCreate on the 6-month reads CA$127 (not CA$759).
 export const IHM_6MONTH_READY =
-  IHM_VARIANT_6MONTH_GID.length > 0 && IHM_SELLING_PLAN_6MONTH.length > 0
+  IHM_VARIANT_6MONTH_GID.length > 0 && IHM_SELLING_PLAN_6MONTH.length > 0 && false
 
 // Box contents + testimonials are identical to US HM (same physical envelope).
 export const IHM_BOX_CONTENTS = HM_BOX_CONTENTS
