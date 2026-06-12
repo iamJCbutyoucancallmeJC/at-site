@@ -11,6 +11,10 @@ const CATEGORIES = [
   { label: "All", value: "all" },
   { label: "Stickers", value: "stickers" },
   { label: "Stamps", value: "stamps" },
+  // Printables: one menu tab, not mixed into the main grid (Amy's intent: digital
+  // printables shouldn't dominate the shop). Filters via the `printables` tag the
+  // 55 draft products carry. Renders nothing on live until those drafts are published.
+  { label: "Printables", value: "printables" },
   { label: "Happy Mail", value: "happy-mail" },
 ]
 
@@ -34,9 +38,15 @@ export default async function ShopPage({
     return aIntl - bIntl
   })
 
+  const isPrintable = (p: (typeof ordered)[number]) =>
+    p.tags.includes("printables") ||
+    p.collections.nodes.some((c) => c.handle === "printables")
+
   const products =
     activeCategory === "all"
-      ? ordered
+      ? // Keep printables out of the default grid so they don't dominate the shop;
+        // they live under their own "Printables" tab only.
+        ordered.filter((p) => !isPrintable(p))
       : ordered.filter((p) =>
           p.collections.nodes.some((c) => c.handle === activeCategory) ||
           p.tags.includes(activeCategory)
