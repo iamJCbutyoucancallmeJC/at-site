@@ -39,6 +39,7 @@ function ThankYouContent() {
   }, [source, channel, cartId, clearCart])
 
   const isHouston = source === "houston"
+  const isEvent = isHouston || source === "girls-trip"
 
   return (
     <main className="min-h-[80vh] flex flex-col items-center justify-center px-6 text-center py-24">
@@ -62,8 +63,8 @@ function ThankYouContent() {
         className="text-[16px] md:text-[18px] leading-relaxed mb-4 max-w-md"
         style={{ color: "var(--color-text-secondary)" }}
       >
-        {isHouston
-          ? "So glad you stopped by the booth! Your first envelope is on its way. Check your email for a confirmation."
+        {isEvent
+          ? "So glad you stopped by! Your first envelope is on its way. Check your email for a confirmation."
           : "Thank you for your order! Amy is packing your envelope with love. Check your email for a confirmation."}
       </p>
 
