@@ -1,10 +1,10 @@
-// POST /api/checkout/girls-trip
+// POST /api/checkout/junklub
 // Creates a Shopify cart with the 6-month Happy Mail variant, auto-applies the
-// GIRLSTRIP event discount ($6 off -> $66), and returns the checkoutUrl for
-// immediate redirect. Called client-side from the Girls Trip event page button.
+// JUNKLUB event discount ($6 off -> $66), and returns the checkoutUrl for
+// immediate redirect. Called client-side from the Junklub event page button.
 //
 // The discount is gated by the QR code, not by a typed code: only attendees who
-// scan Amy's QR reach this page, and the button applies GIRLSTRIP for them so the
+// scan Amy's QR reach this page, and the button applies JUNKLUB for them so the
 // checkout shows $66 with nothing to type.
 
 import { NextResponse } from "next/server"
@@ -12,7 +12,7 @@ import { createCart, addToCart } from "@/lib/shopify"
 
 // Event discount code created in the live store (Jun 13 -> Jun 22, 2026).
 // $6 off, scoped to the 6-month Happy Mail variant only.
-const EVENT_DISCOUNT_CODE = "GIRLSTRIP"
+const EVENT_DISCOUNT_CODE = "JUNKLUB"
 
 export async function POST(request: Request) {
   try {
@@ -32,12 +32,12 @@ export async function POST(request: Request) {
     base.searchParams.set("discount", EVENT_DISCOUNT_CODE)
 
     const returnTo =
-      "https://amytangerine.com/thank-you?source=girls-trip&channel=in-person"
+      "https://amytangerine.com/thank-you?source=junklub&channel=in-person"
     base.searchParams.set("return_to", returnTo)
 
     return NextResponse.json({ checkoutUrl: base.toString() })
   } catch (err) {
-    console.error("[girls-trip checkout]", err)
+    console.error("[junklub checkout]", err)
     return NextResponse.json({ error: "Checkout unavailable" }, { status: 500 })
   }
 }

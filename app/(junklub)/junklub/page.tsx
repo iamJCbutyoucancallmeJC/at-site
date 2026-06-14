@@ -1,10 +1,10 @@
 "use client"
 
-// Girls Trip junk-journal event landing page — Happy Mail 6-Month, event price.
+// Junklub event landing page — Happy Mail 6-Month, event price.
 // - No nav, no footer, no cart drawer (isolated layout)
-// - "Met Amy at Girls Trip?" framing for junk-journal attendees
+// - "Met me at Junklub?" framing for junk-journal attendees
 // - Shows $72 struck through -> $66 event price
-// - Direct-to-checkout: creates a Shopify cart, auto-applies GIRLSTRIP, redirects
+// - Direct-to-checkout: creates a Shopify cart, auto-applies JUNKLUB, redirects
 // - Reached only via Amy's QR code (the QR is the gate on the discount)
 
 import { useState } from "react"
@@ -12,7 +12,7 @@ import Image from "next/image"
 import { trackEvent } from "@/lib/analytics"
 
 // Live US 6-Month Happy Mail variant ($72 base). Confirmed available for sale on
-// the live store (q9x1sj-hc). The GIRLSTRIP discount takes $6 off at checkout.
+// the live store (q9x1sj-hc). The JUNKLUB discount takes $6 off at checkout.
 const HM6_VARIANT_GID =
   process.env.NEXT_PUBLIC_HM_VARIANT_6MONTH_GID ??
   "gid://shopify/ProductVariant/51998971068736"
@@ -24,12 +24,12 @@ const WHAT_INSIDE = [
   {
     title: "Die cuts for your pages",
     body: "New designs every month, made in the USA. Perfect for layering into your junk journal.",
-    img: "/images/girls-trip/die-cuts.jpg",
+    img: "/images/junklub/die-cuts.jpg",
   },
   {
     title: "First look at the newest sticker sheet",
     body: "Subscribers get it before anyone else — often before it's even listed.",
-    img: "/images/girls-trip/sticker-sheet.jpg",
+    img: "/images/junklub/sticker-sheet.jpg",
   },
   {
     title: "An envelope from Amy",
@@ -58,7 +58,7 @@ const TESTIMONIALS = [
   },
 ]
 
-export default function GirlsTripPage() {
+export default function JunklubPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
 
@@ -73,12 +73,12 @@ export default function GirlsTripPage() {
     trackEvent("hm_subscribe_click", {
       plan: "6-month",
       price: String(EVENT_PRICE.toFixed(2)),
-      source: "girls-trip-event",
-      page: "girls-trip",
+      source: "junklub-event",
+      page: "junklub",
     })
 
     try {
-      const res = await fetch("/api/checkout/girls-trip", {
+      const res = await fetch("/api/checkout/junklub", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ variantId: HM6_VARIANT_GID }),
@@ -117,7 +117,7 @@ export default function GirlsTripPage() {
         className="py-3 text-center text-[12px] uppercase tracking-[0.18em] font-semibold text-white"
         style={{ background: "var(--color-teal)" }}
       >
-        Girls Trip Exclusive · Your event price is already applied
+        Junklub Exclusive · Your event price is already applied
       </div>
 
       {/* ── Hero ── */}
@@ -148,7 +148,7 @@ export default function GirlsTripPage() {
           >
             Met me at
             <br />
-            Girls Trip?
+            Junklub?
           </h1>
           <p
             className="text-[16px] leading-relaxed mb-4"
@@ -300,7 +300,7 @@ export default function GirlsTripPage() {
         style={{ background: "var(--color-teal)" }}
       >
         <p className="text-[11px] uppercase tracking-[0.2em] text-white/60 mb-3">
-          Girls Trip Exclusive
+          Junklub Exclusive
         </p>
         <h2 className="text-[28px] md:text-[40px] font-bold text-white leading-tight mb-3">
           Ready to get happy mail?

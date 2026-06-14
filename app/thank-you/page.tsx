@@ -39,7 +39,7 @@ function ThankYouContent() {
   }, [source, channel, cartId, clearCart])
 
   const isHouston = source === "houston"
-  const isEvent = isHouston || source === "girls-trip"
+  const isEvent = isHouston || source === "junklub"
 
   return (
     <main className="min-h-[80vh] flex flex-col items-center justify-center px-6 text-center py-24">

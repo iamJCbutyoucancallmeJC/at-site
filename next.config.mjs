@@ -7,8 +7,8 @@ const nextConfig = {
     return [
       // Short path for Houston conference QR code handouts
       { source: "/hm", destination: "/houston", permanent: false },
-      // Short path for Girls Trip junk-journal event QR code handouts
-      { source: "/gt", destination: "/girls-trip", permanent: false },
+      // Short path for Junklub event QR code handouts
+      { source: "/jl", destination: "/junklub", permanent: false },
     ]
   },
   images: {
