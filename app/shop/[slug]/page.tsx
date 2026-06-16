@@ -6,6 +6,10 @@ import ProductDetail from "@/components/product-detail"
 
 // Dynamic rendering: PDP varies by visitor country (Markets-scoped products).
 export const dynamic = "force-dynamic"
+// Render on-demand for any handle NOT in the build-time list (products added or
+// published after the last deploy). Without this, a newly-published product 404s
+// until the next rebuild -- which would bite the printables on publish.
+export const dynamicParams = true
 
 export async function generateStaticParams() {
   // US-default at build time; intl PDPs (Path B) resolve dynamically at request time.
