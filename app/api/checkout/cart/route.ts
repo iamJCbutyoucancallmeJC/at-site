@@ -7,7 +7,7 @@
 import { NextResponse } from "next/server"
 import { createCart, addToCart } from "@/lib/shopify"
 
-const RETURN_BASE = "https://at-site-kappa.vercel.app/thank-you"
+const RETURN_BASE = "https://amytangerine.com/thank-you"
 
 // Shopify returns cart IDs like "gid://shopify/Cart/<token>?key=<key>".
 // Strip down to just the opaque token for use as the discriminator.

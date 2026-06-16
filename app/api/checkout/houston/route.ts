@@ -20,7 +20,7 @@ export async function POST(request: Request) {
 
     // Append return_to so Shopify redirects back to our site after purchase
     // source=houston tags these buyers for analytics
-    const returnTo = "https://at-site-kappa.vercel.app/thank-you?source=houston&channel=in-person"
+    const returnTo = "https://amytangerine.com/thank-you?source=houston&channel=in-person"
     const checkoutUrl = updatedCart.checkoutUrl.includes("?")
       ? `${updatedCart.checkoutUrl}&return_to=${encodeURIComponent(returnTo)}`
       : `${updatedCart.checkoutUrl}?return_to=${encodeURIComponent(returnTo)}`
