@@ -4,6 +4,19 @@ import TrackableLink from "@/components/trackable-link"
 import AddToCartButton from "@/components/add-to-cart-button"
 import ProductImageGallery from "@/components/product-image-gallery"
 
+// Tags that are functional/internal, not customer-facing descriptors -- never
+// shown in the PDP tag row. `preview-ready` is preview plumbing; the category +
+// fulfillment tags drive filtering/logic, not browse display.
+const HIDDEN_TAGS = new Set([
+  "new",
+  "subscription",
+  "preview-ready",
+  "digital-downloads",
+  "printable",
+  "printables",
+  "happy-mail",
+])
+
 /**
  * The product detail (PDP) body, shared by the live /shop/[slug] page and the
  * gated /preview/shop/[handle] route. Keeping this in one component guarantees
@@ -195,11 +208,11 @@ export default function ProductDetail({
               />
             </div>
 
-            {/* Tags */}
-            {product.tags.filter((t) => !["new", "subscription"].includes(t)).length > 0 && (
+            {/* Tags (internal/plumbing + category tags hidden; only descriptors show) */}
+            {product.tags.filter((t) => !HIDDEN_TAGS.has(t)).length > 0 && (
               <div className="mt-4 flex flex-wrap gap-1.5">
                 {product.tags
-                  .filter((t) => !["new", "subscription"].includes(t))
+                  .filter((t) => !HIDDEN_TAGS.has(t))
                   .map((tag) => (
                     <span
                       key={tag}
