@@ -5,8 +5,12 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      // Short path for Houston conference QR code handouts
-      { source: "/hm", destination: "/houston", permanent: false },
+      // Houston conference cohort closed 2026-06-16 (t659): finite 6-month, 11 subs ride to
+      // Oct expiry, no more conference sales. The /houston landing page + the /hm QR shortcut
+      // now redirect to the main Happy Mail page so any stray bookmark/QR handout lands sensibly.
+      // (Page source kept in git for a future conference; flip these back to revive it.)
+      { source: "/houston", destination: "/happy-mail", permanent: false },
+      { source: "/hm", destination: "/happy-mail", permanent: false },
       // Short path for Junklub event QR code handouts
       { source: "/jl", destination: "/junklub", permanent: false },
     ]
