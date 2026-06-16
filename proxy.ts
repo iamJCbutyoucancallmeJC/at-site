@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server"
  * Password gate for /preview/* ONLY.
  *
  * The /preview/shop route reads DRAFT (unpublished) products via the Admin API so
- * they can be reviewed before going live. This middleware keeps that route private:
+ * they can be reviewed before going live. This proxy keeps that route private:
  * a visitor must enter PREVIEW_PASSWORD once, then gets a signed session cookie.
  *
  * Scope is strictly /preview/* (see `matcher`) -- the public site is never gated.
@@ -65,7 +65,7 @@ function promptResponse(message?: string): NextResponse {
   return new NextResponse(html, { status: 401, headers: { "Content-Type": "text/html" } })
 }
 
-export async function middleware(req: NextRequest) {
+export async function proxy(req: NextRequest) {
   // Fail closed: if the gate isn't configured, do not expose the preview.
   if (!SECRET || !PASSWORD) {
     return new NextResponse("Preview is not configured.", { status: 503 })
@@ -76,7 +76,10 @@ export async function middleware(req: NextRequest) {
     const form = await req.formData()
     const submitted = String(form.get("password") ?? "")
     if (timingSafeEqual(submitted, PASSWORD)) {
-      const res = NextResponse.redirect(new URL(req.nextUrl.pathname + req.nextUrl.search, req.url))
+      // 303 See Other: the browser MUST switch to GET for the follow-up request.
+      // A default redirect is 307 (preserves the method), which would re-POST to
+      // this same path and loop forever.
+      const res = NextResponse.redirect(new URL(req.nextUrl.pathname + req.nextUrl.search, req.url), 303)
       res.cookies.set(COOKIE, await expectedCookie(), {
         httpOnly: true,
         secure: true,
