@@ -118,30 +118,32 @@ export const IHM_PRICE_USD = 16
 // Future step (window close): $18/mo + $100 (or $99). See
 // Website Redesign/ihm-6month-tier-policy-change-2026-05-30.md.
 //
-// BUILT 2026-06-01: new Shopify variant on happy-mail-international + Recharge prepaid_v2
-// plan 22473180 (recurring, expire_after=null), SPG attached to intl delivery profile
-// 137513632064. Verified live via Storefront @inContext: CA $127 / AU $128 / GB £68, all
-// availableForSale, US correctly null. Real-customer free shipping confirmed (the $18.48
-// USPS line was an API-synthetic artifact, not the checkout path). IHM_6MONTH_READY is now
-// true; the page renders the two-tier (Monthly + 6-Month) layout.
+// BUILT 2026-06-01, OVERCHARGE-FIXED + RE-ENABLED 2026-06-16: variant 52075528356160 priced at
+// $15/delivery (NOT the $90 total -- prepaid Variant-Level multiplies x6), Recharge plan 22473180
+// re-enabled -> fresh selling plan 693671100736 with correct $90 policy. SPG on intl delivery
+// profile 137513632064. Verified live via Storefront @inContext: CA$132 / AU$132 / GBP72, all
+// availableForSale, US correctly null. Real-customer free shipping confirmed. The page renders the
+// two-tier (Monthly + 6-Month) layout.
 export const IHM_VARIANT_6MONTH_GID =
   process.env.NEXT_PUBLIC_HM_INTL_VARIANT_6MONTH_GID ?? "gid://shopify/ProductVariant/52075528356160"
 export const IHM_SELLING_PLAN_6MONTH =
-  process.env.NEXT_PUBLIC_HM_INTL_SELLING_PLAN_6MONTH_ID ?? "gid://shopify/SellingPlan/693648687424"
+  process.env.NEXT_PUBLIC_HM_INTL_SELLING_PLAN_6MONTH_ID ?? "gid://shopify/SellingPlan/693671100736"
 export const IHM_PRICE_6MONTH_USD = 90
 
 // True only when BOTH the 6-month variant and selling plan ids are real (non-empty).
 // Gates the live subscribe path AND the card render (the 6-month card + its Subscribe
 // button live inside `{IHM_6MONTH_READY && ...}` in happy-mail-international-client.tsx).
 //
-// TEMPORARILY FORCED FALSE (2026-06-04): the IHM 6-month Recharge plan (693648687424) is
-// DISABLED pending Recharge ticket #1216915 / t702 (checkout-overcharge fix). With the plan
-// disabled, selecting the 6-month tier produces a dead checkout that hangs ("one moment")
-// -- customer-reported (Gordana, 6/3). Hiding the tier leaves the monthly intl ($16) as the
-// only option. REVERT when t702 resolves: remove the `&& false`, redeploy, then verify a
-// CA-context cartCreate on the 6-month reads CA$127 (not CA$759).
+// RE-ENABLED 2026-06-16 (t702 RESOLVED): the CAD$759 overcharge is fixed. Root cause was the
+// prepaid Variant-Level model multiplying the variant price x6; the variant was priced at the
+// 6-month TOTAL ($90) instead of per-delivery, so it charged $90 x6 = $540 -> CA$759. Fix:
+// repriced variant 52075528356160 to $15/delivery; Recharge re-enable generated a fresh plan
+// (693671100736) whose pricing policy now correctly computes $15 x6 = $90 USD. Verified live
+// across markets: CA$132 / AU$132 / GBP72 (~6x monthly with the prepaid discount; exact CA$127
+// is unreachable -- Shopify market price-rounding quantizes the per-delivery price then x6's it).
+// NOTE: selling plan GID updated above (the old 693648687424 died on disable; 693671100736 is live).
 export const IHM_6MONTH_READY =
-  IHM_VARIANT_6MONTH_GID.length > 0 && IHM_SELLING_PLAN_6MONTH.length > 0 && false
+  IHM_VARIANT_6MONTH_GID.length > 0 && IHM_SELLING_PLAN_6MONTH.length > 0
 
 // Box contents + testimonials are identical to US HM (same physical envelope).
 export const IHM_BOX_CONTENTS = HM_BOX_CONTENTS
