@@ -46,8 +46,8 @@ function timingSafeEqual(a: string, b: string): boolean {
 }
 
 function promptResponse(message?: string): NextResponse {
-  const html = `<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Amy Tangerine — Preview</title>
+  const html = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Amy Tangerine Preview</title>
     <style>
       body{font-family:Arial,Helvetica,sans-serif;display:flex;min-height:100vh;align-items:center;justify-content:center;margin:0;background:#faf8f5;color:#222}
       .card{width:320px;padding:32px;border:1px solid #e7e2da;border-radius:12px;background:#fff;text-align:center}
@@ -62,7 +62,7 @@ function promptResponse(message?: string): NextResponse {
       <input type="password" name="password" placeholder="Password" autofocus />
       <button type="submit">Enter</button>
     </form></body></html>`
-  return new NextResponse(html, { status: 401, headers: { "Content-Type": "text/html" } })
+  return new NextResponse(html, { status: 401, headers: { "Content-Type": "text/html; charset=utf-8" } })
 }
 
 export async function proxy(req: NextRequest) {
