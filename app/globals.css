@@ -33,6 +33,12 @@ body {
 .product-description > * + * {
   margin-top: 0.75rem;
 }
+/* Give the closer + small-print a touch more breathing room after the bullet list. */
+.product-description ul + p,
+.product-description ul + small,
+.product-description p + small {
+  margin-top: 1rem;
+}
 .product-description p {
   margin: 0;
 }
