@@ -220,3 +220,146 @@ export async function getPreviewProductByHandle(handle: string): Promise<Shopify
   const data = await adminFetch<{ productByHandle: AdminProductNode | null }>(query, { handle })
   return data.productByHandle ? mapAdminProduct(data.productByHandle, "USD") : null
 }
+
+// ===========================================================================
+// Digital download delivery (printables) -- used by /api/download and the
+// /api/digital-orders/notify webhook. Ported from the digital-downloads
+// architecture (digital-downloads-architecture-2026-05-27.md). Reuses the
+// adminFetch token machinery above.
+// ===========================================================================
+
+export type OrderLineItem = {
+  id: string                  // numeric (last segment of GID)
+  email: string               // customer email on the order
+  productId: string           // numeric
+  variantId: string           // numeric
+  productTitle: string
+  pdfFileGid: string | null   // GenericFile GID from product metafield
+  pdfFileUrl: string | null   // resolved file URL (CDN)
+  pdfFilename: string         // derived from product title
+}
+
+const ORDER_QUERY = `
+  query OrderForDownload($id: ID!) {
+    order(id: $id) {
+      id
+      email
+      lineItems(first: 50) {
+        edges {
+          node {
+            id
+            title
+            variant {
+              id
+              product {
+                id
+                title
+                tags
+                metafield(namespace: "digital", key: "pdf_file_gid") { value }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
+const FILE_URL_QUERY = `
+  query FileUrl($id: ID!) {
+    node(id: $id) { ... on GenericFile { url mimeType } }
+  }
+`
+
+function derivePdfFilename(title: string): string {
+  const base = title
+    .replace(/^\*[A-Z][A-Z\s\-]*\*\s*/g, "")
+    .replace(/\s*\*[A-Z][A-Z\s\-]*\*\s*$/g, "")
+    .replace(/[^a-zA-Z0-9\s\-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-")
+    .toLowerCase()
+  return `${base || "download"}.pdf`
+}
+
+type OrderQueryResult = {
+  order: {
+    id: string
+    email: string
+    lineItems: {
+      edges: Array<{
+        node: {
+          id: string
+          title: string
+          variant: {
+            id: string
+            product: { id: string; title: string; tags: string[]; metafield: { value: string } | null }
+          }
+        }
+      }>
+    }
+  } | null
+}
+
+/** Resolve a single order line item -> its PDF download URL. */
+export async function getDigitalLineItem(
+  orderIdNumeric: string,
+  lineItemIdNumeric: string,
+): Promise<OrderLineItem | null> {
+  const orderGid = `gid://shopify/Order/${orderIdNumeric}`
+  const data = await adminFetch<OrderQueryResult>(ORDER_QUERY, { id: orderGid })
+  if (!data.order) return null
+
+  const targetGid = `gid://shopify/LineItem/${lineItemIdNumeric}`
+  const match = data.order.lineItems.edges.find((e) => e.node.id === targetGid)
+  if (!match) return null
+
+  const product = match.node.variant.product
+  const pdfFileGid = product.metafield?.value ?? null
+  let pdfFileUrl: string | null = null
+  if (pdfFileGid) {
+    const fileData = await adminFetch<{ node: { url: string; mimeType: string } | null }>(
+      FILE_URL_QUERY, { id: pdfFileGid })
+    pdfFileUrl = fileData.node?.url ?? null
+  }
+
+  return {
+    id: lineItemIdNumeric,
+    email: data.order.email,
+    productId: product.id.split("/").pop() ?? "",
+    variantId: match.node.variant.id.split("/").pop() ?? "",
+    productTitle: product.title,
+    pdfFileGid,
+    pdfFileUrl,
+    pdfFilename: derivePdfFilename(product.title),
+  }
+}
+
+/** All digital (printable) line items on an order, for the post-purchase notify webhook. */
+export async function getDigitalLineItems(orderIdNumeric: string): Promise<OrderLineItem[]> {
+  const orderGid = `gid://shopify/Order/${orderIdNumeric}`
+  const data = await adminFetch<OrderQueryResult>(ORDER_QUERY, { id: orderGid })
+  if (!data.order) return []
+  const email = data.order.email
+  const out: OrderLineItem[] = []
+  for (const edge of data.order.lineItems.edges) {
+    const product = edge.node.variant.product
+    const pdfFileGid = product.metafield?.value ?? null
+    if (!pdfFileGid) continue // not a digital line item
+    let pdfFileUrl: string | null = null
+    const fileData = await adminFetch<{ node: { url: string; mimeType: string } | null }>(
+      FILE_URL_QUERY, { id: pdfFileGid })
+    pdfFileUrl = fileData.node?.url ?? null
+    out.push({
+      id: edge.node.id.split("/").pop() ?? "",
+      email,
+      productId: product.id.split("/").pop() ?? "",
+      variantId: product.id.split("/").pop() ?? "",
+      productTitle: product.title,
+      pdfFileGid,
+      pdfFileUrl,
+      pdfFilename: derivePdfFilename(product.title),
+    })
+  }
+  return out
+}
