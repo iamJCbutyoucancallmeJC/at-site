@@ -25,7 +25,13 @@ async function shopifyFetch<T>(query: string, variables?: Record<string, unknown
       "X-Shopify-Storefront-Access-Token": SHOPIFY_TOKEN,
     },
     body: JSON.stringify({ query, variables }),
-    next: { revalidate: 60 }, // ISR: revalidate product data every 60s
+    // No fetch-level cache. Every page that reads product data is `dynamic =
+    // "force-dynamic"` and country-aware, so a 60s ISR cache here bought nothing --
+    // it only created a stale window. During that window a product (re)published,
+    // retagged, or market-rescoped in Shopify kept serving the stale cached response;
+    // when the cached response was `null` the PDP 404'd a product that was actually
+    // live (transient PDP 404 bug, t421). Read fresh per request instead. (2026-06-17)
+    cache: "no-store",
   })
 
   if (!res.ok) {
