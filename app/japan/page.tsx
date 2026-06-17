@@ -122,7 +122,7 @@ export default function JapanPage() {
         </p>
       </section>
 
-      {/* ── Recap video ── */}
+      {/* ── Recap videos (Amy's, then Hobonichi's feature below it) ── */}
       <section className="px-6 pb-12 md:pb-16">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-[20px] md:text-[26px] font-bold leading-tight text-center mb-5" style={{ color: "var(--color-text-primary)" }}>
@@ -133,6 +133,21 @@ export default function JapanPage() {
               className="absolute inset-0 h-full w-full"
               src="https://www.youtube.com/embed/h-JURDA8gIA?si=3GN2T1Lh0gSTmXWL"
               title="Tangerine Tokyo Takeover recap"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            />
+          </div>
+
+          {/* Hobonichi's video feature, below Amy's */}
+          <p className="text-center text-[12px] md:text-[13px] uppercase tracking-[0.15em] font-semibold mt-10 mb-4" style={{ color: "var(--color-text-secondary)" }}>
+            And on Hobonichi&rsquo;s channel
+          </p>
+          <div className="relative w-full overflow-hidden rounded-xl" style={{ aspectRatio: "16 / 9" }}>
+            <iframe
+              className="absolute inset-0 h-full w-full"
+              src="https://www.youtube.com/embed/4Ld_mpYS-dc?si=Z0dKtY-CzJGegv5B"
+              title="Tangerine Tokyo Takeover on Hobonichi's channel"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerPolicy="strict-origin-when-cross-origin"
               allowFullScreen
