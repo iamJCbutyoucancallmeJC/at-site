@@ -171,7 +171,7 @@ export default function EventsVariantPage() {
             <TrackableLink
               key={event.id}
               href={event.href}
-              event="event_tile_click"
+              event="event_cta_click"
               eventData={{ event_id: event.id, event_title: event.title, page: "homepage-events-variant" }}
               className="group relative block overflow-hidden rounded-lg"
             >
