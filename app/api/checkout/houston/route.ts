@@ -4,7 +4,7 @@
 // Called client-side from the Houston page button.
 
 import { NextResponse } from "next/server"
-import { createCart, addToCart } from "@/lib/shopify"
+import { createCart, addToCart, extractCartToken } from "@/lib/shopify"
 
 export async function POST(request: Request) {
   try {
@@ -18,9 +18,13 @@ export async function POST(request: Request) {
     const cart = await createCart()
     const updatedCart = await addToCart(cart.id, variantId, 1)
 
-    // Append return_to so Shopify redirects back to our site after purchase
-    // source=houston tags these buyers for analytics
-    const returnTo = "https://amytangerine.com/thank-you?source=houston&channel=in-person"
+    // Append return_to so Shopify redirects back to our site after purchase.
+    // source=houston tags these buyers; cart_id lets /thank-you resolve the order
+    // for the GA4 purchase event so event-channel revenue lands in ecommerce (t687).
+    const cartToken = extractCartToken(updatedCart.id)
+    const returnTo = cartToken
+      ? `https://amytangerine.com/thank-you?source=houston&channel=in-person&cart_id=${cartToken}`
+      : "https://amytangerine.com/thank-you?source=houston&channel=in-person"
     const checkoutUrl = updatedCart.checkoutUrl.includes("?")
       ? `${updatedCart.checkoutUrl}&return_to=${encodeURIComponent(returnTo)}`
       : `${updatedCart.checkoutUrl}?return_to=${encodeURIComponent(returnTo)}`

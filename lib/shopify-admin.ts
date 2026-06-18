@@ -56,7 +56,7 @@ async function adminToken(): Promise<string> {
   return cachedToken.value
 }
 
-async function adminFetch<T>(query: string, variables?: Record<string, unknown>): Promise<T> {
+export async function adminFetch<T>(query: string, variables?: Record<string, unknown>): Promise<T> {
   const token = await adminToken()
   const res = await fetch(ADMIN_ENDPOINT, {
     method: "POST",

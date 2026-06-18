@@ -8,7 +8,7 @@
 // checkout shows $66 with nothing to type.
 
 import { NextResponse } from "next/server"
-import { createCart, addToCart } from "@/lib/shopify"
+import { createCart, addToCart, extractCartToken } from "@/lib/shopify"
 
 // Event discount code created in the live store (Jun 13 -> Jun 22, 2026).
 // $6 off, scoped to the 6-month Happy Mail variant only.
@@ -31,9 +31,14 @@ export async function POST(request: Request) {
     const base = new URL(updatedCart.checkoutUrl)
     base.searchParams.set("discount", EVENT_DISCOUNT_CODE)
 
-    const returnTo =
-      "https://amytangerine.com/thank-you?source=junklub&channel=in-person"
-    base.searchParams.set("return_to", returnTo)
+    // cart_id lets /thank-you resolve the order for the GA4 purchase event so
+    // event-channel revenue lands in ecommerce reporting (t687).
+    const cartToken = extractCartToken(updatedCart.id)
+    const returnUrl = new URL("https://amytangerine.com/thank-you")
+    returnUrl.searchParams.set("source", "junklub")
+    returnUrl.searchParams.set("channel", "in-person")
+    if (cartToken) returnUrl.searchParams.set("cart_id", cartToken)
+    base.searchParams.set("return_to", returnUrl.toString())
 
     return NextResponse.json({ checkoutUrl: base.toString() })
   } catch (err) {

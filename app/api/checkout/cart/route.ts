@@ -5,16 +5,9 @@
 // cart on the former. See t621 (FNF Heidi 2026-05-24 cart-doesn't-clear bug).
 
 import { NextResponse } from "next/server"
-import { createCart, addToCart } from "@/lib/shopify"
+import { createCart, addToCart, extractCartToken } from "@/lib/shopify"
 
 const RETURN_BASE = "https://amytangerine.com/thank-you"
-
-// Shopify returns cart IDs like "gid://shopify/Cart/<token>?key=<key>".
-// Strip down to just the opaque token for use as the discriminator.
-function extractCartToken(gid: string): string {
-  const m = gid.match(/\/Cart\/([^?]+)/)
-  return m ? m[1] : ""
-}
 
 export async function POST(request: Request) {
   try {
