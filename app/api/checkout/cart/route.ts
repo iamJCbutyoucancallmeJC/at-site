@@ -11,15 +11,23 @@ const RETURN_BASE = "https://amytangerine.com/thank-you"
 
 export async function POST(request: Request) {
   try {
-    const { items } = await request.json() as {
+    const { items, gaClientId } = await request.json() as {
       items: { variantId: string; quantity: number; sellingPlanId?: string }[]
+      gaClientId?: string
     }
 
     if (!Array.isArray(items) || items.length === 0) {
       return NextResponse.json({ error: "No items" }, { status: 400 })
     }
 
-    const cart = await createCart()
+    // Attach the GA client_id as a cart attribute so it rides through every
+    // checkout path onto the order, where the orders/create webhook reads it to
+    // fire the server-side GA4 purchase event in the right session (t687).
+    const attributes = gaClientId && /^\d+\.\d+$/.test(gaClientId)
+      ? [{ key: "_ga_client_id", value: gaClientId }]
+      : undefined
+
+    const cart = await createCart(attributes)
     let updated = cart
     for (const item of items) {
       updated = await addToCart(updated.id, item.variantId, item.quantity, item.sellingPlanId)

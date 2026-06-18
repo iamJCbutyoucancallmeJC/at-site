@@ -282,20 +282,30 @@ const CART_FRAGMENT = `
   }
 `
 
-export async function createCart(): Promise<ShopifyCart> {
+// Cart attributes ride through every checkout path (Shop Pay, card, etc.) and
+// land on the order as note_attributes, where the orders/create webhook reads
+// them to fire a server-side GA4 purchase event with the right session. This is
+// how we attribute revenue from Shop Pay buyers who never return to /thank-you.
+export type CartAttribute = { key: string; value: string }
+
+export async function createCart(attributes?: CartAttribute[]): Promise<ShopifyCart> {
   const query = `
     ${IMAGE_FRAGMENT}
     ${PRICE_FRAGMENT}
     ${CART_FRAGMENT}
 
-    mutation CreateCart {
-      cartCreate {
+    mutation CreateCart($input: CartInput) {
+      cartCreate(input: $input) {
         cart { ...CartFragment }
       }
     }
   `
 
-  const data = await shopifyFetch<{ cartCreate: { cart: ShopifyCart } }>(query)
+  // Drop empty-valued attributes; Shopify rejects empty-string attribute values.
+  const attrs = (attributes ?? []).filter((a) => a.value)
+  const input = attrs.length ? { attributes: attrs } : undefined
+
+  const data = await shopifyFetch<{ cartCreate: { cart: ShopifyCart } }>(query, { input })
   return data.cartCreate.cart
 }
 

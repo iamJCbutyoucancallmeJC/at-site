@@ -13,6 +13,18 @@ function isLocalVariant(variantId: string) {
   return variantId.startsWith("local-")
 }
 
+// Read the GA4 client_id from the _ga cookie. Format: "GA1.1.<cid1>.<cid2>"
+// where the client_id GA4 uses is "<cid1>.<cid2>". Returns "" if not present
+// (e.g. consent-blocked); the webhook tolerates a missing cid.
+function readGaClientId(): string {
+  try {
+    const m = document.cookie.match(/(?:^|;\s*)_ga=GA\d\.\d\.(\d+\.\d+)/)
+    return m ? m[1] : ""
+  } catch {
+    return ""
+  }
+}
+
 // Resolve the PDP link for a cart item. Happy Mail is one product/handle with two
 // plan variants (Monthly + 6-Month); the rebuilt /shop/happy-mail PDP reads ?plan=
 // so the clicked item lands on the right plan instead of the default Monthly view.
@@ -64,6 +76,9 @@ export default function CartDrawer() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           items: items.map((i) => ({ variantId: i.variantId, quantity: i.quantity, sellingPlanId: i.sellingPlanId })),
+          // GA client_id so the orders/create webhook can attribute the
+          // server-side purchase event to this browsing session (t687).
+          gaClientId: readGaClientId(),
         }),
       })
       if (!res.ok) throw new Error("checkout failed")

@@ -37,39 +37,11 @@ function ThankYouContent() {
       }
     }
 
-    // Fire GA4's STANDARD ecommerce `purchase` event with server-verified
-    // revenue (t687). purchase_complete above is custom and carries no value;
-    // GA4 ignores it for ecommerce reporting. We look the order up server-side
-    // from the cart token so the revenue matches Shopify admin exactly.
-    // Fire-and-forget: a lookup failure must never affect the buyer's page.
-    if (!cartId) return
-    fetch(`/api/order-lookup?cart_id=${encodeURIComponent(cartId)}`)
-      .then((r) => r.json())
-      .then((o) => {
-        if (!o?.found || !o.transaction_id) return
-        // Dedup: a refresh of /thank-you would otherwise re-fire purchase and
-        // double-count revenue. Guard on the order's transaction_id.
-        const sentKey = `at-purchase-sent-${o.transaction_id}`
-        try {
-          if (localStorage.getItem(sentKey)) return
-          localStorage.setItem(sentKey, "1")
-        } catch {
-          // localStorage unavailable: better to risk a rare dup than to skip
-          // the event entirely, so fall through and fire.
-        }
-        const gtag = (window as typeof window & { gtag?: (...args: unknown[]) => void }).gtag
-        gtag?.("event", "purchase", {
-          transaction_id: o.transaction_id,
-          value: o.value,
-          currency: o.currency,
-          items: o.items,
-          source,
-          channel,
-        })
-      })
-      .catch(() => {
-        // ignore — analytics must not break the thank-you page
-      })
+    // NOTE: the standard GA4 `purchase` ecommerce event is NOT fired here.
+    // It fires server-side from the orders/create webhook
+    // (app/api/webhooks/orders-create) so it covers EVERY order, including Shop
+    // Pay checkouts that never redirect back to this page. Firing it here too
+    // would double-count revenue for card checkouts. See t687.
   }, [source, channel, cartId, clearCart])
 
   const isHouston = source === "houston"
