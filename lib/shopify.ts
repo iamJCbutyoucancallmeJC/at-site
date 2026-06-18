@@ -379,10 +379,10 @@ export function formatPrice(price: ShopifyPrice): string {
 }
 
 // Shopify returns cart IDs like "gid://shopify/Cart/<token>?key=<key>".
-// Strip to the opaque token, which (a) /thank-you uses to discriminate real
-// completion from direct nav, and (b) /api/order-lookup uses to resolve the
-// completed order for the GA4 purchase event (t687). Shared so the cart,
-// Houston, and junklub checkout routes all attach cart_id consistently.
+// Strip to the opaque token, which /thank-you uses to discriminate a real
+// checkout completion from a direct nav (so it only clears the local cart on
+// the former; see t621). Shared so the cart, Houston, and junklub checkout
+// routes all attach cart_id to their return URL consistently.
 export function extractCartToken(gid: string): string {
   const m = gid.match(/\/Cart\/([^?]+)/)
   return m ? m[1] : ""
