@@ -138,10 +138,27 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   function addItem(item: Omit<CartItem, "quantity">) {
     dispatch({ type: "ADD_ITEM", item })
     dispatch({ type: "OPEN" })
+    // GA4 standard ecommerce shape (items[] + value + currency) so native
+    // funnel/Monetization reports populate; the legacy product_name/variant_id
+    // params are kept for back-compat with existing reports. Currency is USD
+    // client-side; the authoritative per-order revenue is the server-side
+    // `purchase` event (orders/create webhook), which reads the real currency.
+    // See t687.
     trackEvent("add_to_cart", {
       product_name: item.title,
       variant_id: item.variantId,
       product_handle: item.productHandle,
+      currency: "USD",
+      value: item.priceAmount,
+      items: [
+        {
+          item_id: item.variantId,
+          item_name: item.title,
+          price: item.priceAmount,
+          quantity: 1,
+          ...(item.sellingPlanId ? { item_variant: "subscription" } : {}),
+        },
+      ],
     })
   }
 

@@ -30,6 +30,8 @@ export default function AddToCartButton({
 
   async function handleAddToCart() {
     setStatus("adding")
+    // Fires the GA4 add_to_cart event (standard ecommerce shape) from the cart
+    // context, the single add path. See context/cart.tsx addItem. (t687)
     addItem({
       variantId,
       productHandle,

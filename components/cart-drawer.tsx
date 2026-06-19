@@ -61,7 +61,23 @@ export default function CartDrawer() {
 
   async function handleCheckout() {
     setCheckingOut(true)
-    trackEvent("begin_checkout", { item_count: count, subtotal })
+    // GA4 standard ecommerce shape (items[] + value + currency) so native
+    // funnel reports populate; item_count/subtotal kept for back-compat. The
+    // authoritative revenue is the server-side `purchase` event. See t687.
+    const checkoutValue = items.reduce((sum, i) => sum + i.priceAmount * i.quantity, 0)
+    trackEvent("begin_checkout", {
+      item_count: count,
+      subtotal,
+      currency: "USD",
+      value: checkoutValue,
+      items: items.map((i) => ({
+        item_id: i.variantId,
+        item_name: i.title,
+        price: i.priceAmount,
+        quantity: i.quantity,
+        ...(i.sellingPlanId ? { item_variant: "subscription" } : {}),
+      })),
+    })
 
     // Safety net: if the redirect hasn't happened after 8s (typical mobile
     // navigation is < 2s even on slow networks), reset the button so the user

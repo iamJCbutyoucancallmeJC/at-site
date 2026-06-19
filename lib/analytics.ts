@@ -27,7 +27,17 @@ export type AnalyticsEvent =
   | 'not_found_view'
   | 'error_view'
 
-type EventData = Record<string, string | number | boolean>
+// GA4 standard ecommerce item (items[] on add_to_cart / begin_checkout / purchase).
+export type GA4Item = {
+  item_id: string
+  item_name: string
+  price: number
+  quantity: number
+  item_variant?: string
+}
+
+// Scalar params plus the optional GA4 ecommerce items[] array.
+type EventData = Record<string, string | number | boolean | GA4Item[]>
 
 export function trackEvent(name: AnalyticsEvent, data?: EventData) {
   // Vercel Analytics custom events
