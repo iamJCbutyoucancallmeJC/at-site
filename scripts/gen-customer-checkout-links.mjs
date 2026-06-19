@@ -33,7 +33,7 @@
 //   node scripts/gen-customer-checkout-links.mjs            # dry-run
 //   node scripts/gen-customer-checkout-links.mjs --execute  # live
 
-import { readFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
@@ -50,6 +50,19 @@ const SF_TOKEN = env.SHOPIFY_STOREFRONT_TOKEN;
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN;
 const EXECUTE = process.argv.includes("--execute");
 
+// --batch-file <path>: load the customer batch from a JSON array instead of the
+// hardcoded BATCH below. Each row: { key, name, email, kind, discount, expectTotal,
+// ... } (extra fields like rechargeSubId/billingDay are carried through, ignored here).
+// --code-prefix <str>: override the discount-code prefix (default T726B) so different
+// waves don't collide on code names. Added 2026-06-19 so the tool is reusable per-wave
+// without editing source (the HM82 + late-month sends both needed this).
+const argVal = (flag) => {
+  const i = process.argv.indexOf(flag);
+  return i !== -1 && process.argv[i + 1] ? process.argv[i + 1] : null;
+};
+const BATCH_FILE = argVal("--batch-file");
+const CODE_PREFIX = argVal("--code-prefix") || "T726B";
+
 const SF_ENDPOINT = `https://${DOMAIN}/api/2025-01/graphql.json`;
 const ADMIN_ENDPOINT = `https://${DOMAIN}/admin/api/2026-07/graphql.json`;
 
@@ -65,8 +78,10 @@ const PLAN_6MO         = "gid://shopify/SellingPlan/693625356608"; // proven liv
 if (!SF_TOKEN) { console.error("Missing SHOPIFY_STOREFRONT_TOKEN in .env.local"); process.exit(1); }
 if (!ADMIN_TOKEN) { console.error("Missing ADMIN_TOKEN env var (client_credentials token)."); process.exit(1); }
 
-// --- THE BATCH (Kristin + 5 confirmed switchers; Sharon HELD + Hope cardless are excluded) ---
-const BATCH = [
+// --- THE BATCH ---
+// Default (no --batch-file): the original t726 batch (Kristin + 5 confirmed switchers;
+// Sharon HELD + Hope cardless excluded). With --batch-file, loaded from JSON instead.
+const DEFAULT_BATCH = [
   { key: "kristin",   name: "Kristin Burns",     email: "sactownkid@gmail.com",      kind: "monthly", discount: 5,  expectTotal: "8.00",  rechargeCust: "251868061" },
   { key: "morgan",    name: "Morgan Phillips",   email: "akmoose04@me.com",          kind: "6mo",     discount: 10, expectTotal: "62.00", rechargeCust: "251866840" },
   { key: "sheri",     name: "Sheri Novotny",     email: "novotnyfive@yahoo.com",     kind: "6mo",     discount: 10, expectTotal: "62.00", rechargeCust: "251867923" },
@@ -74,6 +89,16 @@ const BATCH = [
   { key: "eileen",    name: "Eileen Cohen",      email: "efcohen2@gmail.com",        kind: "6mo",     discount: 10, expectTotal: "62.00", rechargeCust: "251867192" },
   { key: "alejandra", name: "Alejandra Vazquez", email: "ale_vazquez@me.com",        kind: "6mo",     discount: 10, expectTotal: "62.00", rechargeCust: "251866845" },
 ];
+const BATCH = BATCH_FILE ? JSON.parse(readFileSync(BATCH_FILE, "utf8")) : DEFAULT_BATCH;
+// Validate the loaded rows fail fast on a malformed batch-file (before any live writes).
+for (const [i, c] of BATCH.entries()) {
+  for (const f of ["key", "name", "email", "kind", "discount", "expectTotal"]) {
+    if (c[f] === undefined || c[f] === null || c[f] === "") {
+      console.error(`batch row ${i} (${c.email || c.name || "?"}) missing required field "${f}"`); process.exit(1);
+    }
+  }
+  if (!["monthly", "6mo"].includes(c.kind)) { console.error(`batch row ${i}: kind must be "monthly" or "6mo", got "${c.kind}"`); process.exit(1); }
+}
 
 async function gql(endpoint, token, headerName, query, variables) {
   const res = await fetch(endpoint, {
@@ -106,7 +131,7 @@ async function createDiscount(c, customerGid) {
   // customer, so Shopify drops the restricted code. FIX: customerSelection.all=true so the
   // code is not identity-gated, but usageLimit:1 caps total redemptions to one (the code
   // only lives inside this one customer's link, and dies after a single use -> no leak).
-  const code = `T726B-${c.key.toUpperCase()}-${c.discount}OFF`;
+  const code = `${CODE_PREFIX}-${c.key.toUpperCase()}-${c.discount}OFF`;
   const input = {
     title: `t726 ${c.name} ($${c.discount} off, single-use)`,
     code,
@@ -169,7 +194,7 @@ async function createCart(c, code) {
 
 async function main() {
   console.log(`\n=== gen-customer-checkout-links (${EXECUTE ? "EXECUTE" : "DRY-RUN"}) ===`);
-  console.log(`domain=${DOMAIN}  batch=${BATCH.length} (Sharon HELD + Hope cardless excluded)\n`);
+  console.log(`domain=${DOMAIN}  batch=${BATCH.length}  source=${BATCH_FILE || "DEFAULT_BATCH"}  code-prefix=${CODE_PREFIX}\n`);
   const results = [];
   for (const c of BATCH) {
     console.log(`\n--- ${c.name} <${c.email}> [${c.kind}, expect $${c.expectTotal}] ---`);
@@ -207,7 +232,15 @@ async function main() {
     else console.log(`  [${r.pass ? "OK " : "BAD"}] ${r.name}: $${r.total}  ${r.url || "(no url)"}`);
   }
   if (EXECUTE) {
-    console.log(`\nJSON:\n${JSON.stringify(results.map(({name,email,kind,code,total,pass,url})=>({name,email,kind,code,total,pass,url})), null, 2)}`);
+    const out = results.map(({key,name,email,kind,code,total,pass,url,rechargeSubId,billingDay})=>({key,name,email,kind,code,total,pass,url,rechargeSubId,billingDay}));
+    console.log(`\nJSON:\n${JSON.stringify(out, null, 2)}`);
+    // Persist the results next to the batch-file (or /tmp) so the paste kit + Kajabi
+    // import can be built from a real file, not scraped from stdout.
+    const outPath = (BATCH_FILE ? BATCH_FILE.replace(/\.json$/, "") : "/tmp/gen-customer-checkout-links") + "-results.json";
+    writeFileSync(outPath, JSON.stringify(out, null, 2));
+    console.log(`\nWrote results -> ${outPath}`);
+    const passed = out.filter(r => r.pass).length;
+    console.log(`PASS ${passed}/${out.length}${passed < out.length ? "  <-- some withheld; do NOT send those" : ""}`);
   }
 }
 
