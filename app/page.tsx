@@ -8,6 +8,7 @@ import PageEngagementTracker from "@/components/page-engagement-tracker"
 import TrackableLink from "@/components/trackable-link"
 import { getAllProducts, formatPrice } from "@/lib/shopify"
 import { getVisitorCountry } from "@/lib/geo"
+import { shopifyImageUrl, isShopifyCdn } from "@/lib/shopify-image-loader"
 
 // Dynamic rendering: new-arrivals section varies by visitor country (Markets-scoped products).
 export const dynamic = "force-dynamic"
@@ -192,7 +193,8 @@ export default async function HomePage() {
             >
               <div className="relative aspect-square overflow-hidden rounded-md mb-2">
                 <Image
-                  src={product.img}
+                  src={shopifyImageUrl(product.img, 440)}
+                  unoptimized={isShopifyCdn(product.img)}
                   alt={product.name}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"

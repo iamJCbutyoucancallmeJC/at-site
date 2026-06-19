@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { formatPrice, type ShopifyProduct } from "@/lib/shopify"
+import { shopifyImageUrl, isShopifyCdn } from "@/lib/shopify-image-loader"
 import TrackableLink from "@/components/trackable-link"
 import AddToCartButton from "@/components/add-to-cart-button"
 import ProductImageGallery from "@/components/product-image-gallery"
@@ -284,7 +285,8 @@ export default function ProductDetail({
                   <div className="relative aspect-square overflow-hidden rounded-lg mb-2 bg-gray-50">
                     {img && (
                       <Image
-                        src={img.url}
+                        src={shopifyImageUrl(img.url, 700)}
+                        unoptimized={isShopifyCdn(img.url)}
                         alt={img.altText ?? related.title}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-500"

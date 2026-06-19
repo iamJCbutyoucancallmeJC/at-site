@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Image from "next/image"
 import type { ShopifyImage } from "@/lib/shopify"
+import { shopifyImageUrl, isShopifyCdn } from "@/lib/shopify-image-loader"
 
 interface Props {
   images: ShopifyImage[]
@@ -36,7 +37,8 @@ export default function ProductImageGallery({ images, productTitle }: Props) {
       {/* Main image */}
       <div className="relative aspect-square rounded-xl overflow-hidden mb-3">
         <Image
-          src={activeImage.url}
+          src={shopifyImageUrl(activeImage.url, 1200)}
+          unoptimized={isShopifyCdn(activeImage.url)}
           alt={activeImage.altText ?? productTitle}
           fill
           priority
@@ -59,7 +61,8 @@ export default function ProductImageGallery({ images, productTitle }: Props) {
               aria-label={`View image ${i + 1}`}
             >
               <Image
-                src={img.url}
+                src={shopifyImageUrl(img.url, 128)}
+                unoptimized={isShopifyCdn(img.url)}
                 alt={img.altText ?? `${productTitle} ${i + 1}`}
                 fill
                 className="object-cover"
