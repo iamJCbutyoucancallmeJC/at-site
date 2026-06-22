@@ -301,8 +301,21 @@ export async function createCart(attributes?: CartAttribute[]): Promise<ShopifyC
     }
   `
 
+  // t756 candidate fix (preview-test only; see t755 root-cause): stamp a unique
+  // per-checkout nonce attribute on every cart so each checkout is a distinct
+  // object. Goal: stop Shop Pay from MERGING a returning recognized buyer's new
+  // cart into their still-open prior checkout on an abandon-then-retry (the
+  // FNF-H-01 over-charge: drawer 2 items/$43 -> checkout 3 items/$73). CAVEAT:
+  // Shop Pay merges on BUYER IDENTITY (device/cookie at the shop.app redirect),
+  // not on cart id or cart attributes, so this nonce may NOT defeat the merge.
+  // This is the cheapest thing to try first; it must be verified on a Vercel
+  // preview against the signed-in abandon-retry repro before any prod deploy. If
+  // the merge persists, escalate to not handing signed-in users the accelerated
+  // shop.app checkoutUrl for the abandon-retry case (see t756 escalation ladder).
+  const nonce: CartAttribute = { key: "_checkout_nonce", value: crypto.randomUUID() }
+
   // Drop empty-valued attributes; Shopify rejects empty-string attribute values.
-  const attrs = (attributes ?? []).filter((a) => a.value)
+  const attrs = [...(attributes ?? []), nonce].filter((a) => a.value)
   const input = attrs.length ? { attributes: attrs } : undefined
 
   const data = await shopifyFetch<{ cartCreate: { cart: ShopifyCart } }>(query, { input })
