@@ -1,48 +1,16 @@
-// POST /api/checkout/junklub
-// Creates a Shopify cart with the 6-month Happy Mail variant, auto-applies the
-// JUNKLUB event discount ($6 off -> $66), and returns the checkoutUrl for
-// immediate redirect. Called client-side from the Junklub event page button.
+// POST /api/checkout/junklub — RETIRED 2026-06-23 (t764).
 //
-// The discount is gated by the QR code, not by a typed code: only attendees who
-// scan Amy's QR reach this page, and the button applies JUNKLUB for them so the
-// checkout shows $66 with nothing to type.
+// The Junklub event ran Jun 13–22, 2026 and is over. The page now redirects to
+// /happy-mail, so this route is no longer called. It previously added the 6mo
+// variant WITHOUT a selling plan; after the t764 per-delivery migration that
+// would resolve to $12 (then $6 after the JUNKLUB discount), so it is disabled
+// rather than left to underbill. Returns 410 Gone.
 
 import { NextResponse } from "next/server"
-import { createCart, addToCart, extractCartToken } from "@/lib/shopify"
 
-// Event discount code created in the live store (Jun 13 -> Jun 22, 2026).
-// $6 off, scoped to the 6-month Happy Mail variant only.
-const EVENT_DISCOUNT_CODE = "JUNKLUB"
-
-export async function POST(request: Request) {
-  try {
-    const { variantId } = await request.json()
-
-    if (!variantId || typeof variantId !== "string") {
-      return NextResponse.json({ error: "Missing variantId" }, { status: 400 })
-    }
-
-    // Create a fresh cart and add the 6-month variant
-    const cart = await createCart()
-    const updatedCart = await addToCart(cart.id, variantId, 1)
-
-    // Auto-apply the event discount + tag the source for analytics, both via the
-    // checkout URL. Shopify reads ?discount=CODE and applies it on the cart.
-    const base = new URL(updatedCart.checkoutUrl)
-    base.searchParams.set("discount", EVENT_DISCOUNT_CODE)
-
-    // cart_id lets /thank-you resolve the order for the GA4 purchase event so
-    // event-channel revenue lands in ecommerce reporting (t687).
-    const cartToken = extractCartToken(updatedCart.id)
-    const returnUrl = new URL("https://amytangerine.com/thank-you")
-    returnUrl.searchParams.set("source", "junklub")
-    returnUrl.searchParams.set("channel", "in-person")
-    if (cartToken) returnUrl.searchParams.set("cart_id", cartToken)
-    base.searchParams.set("return_to", returnUrl.toString())
-
-    return NextResponse.json({ checkoutUrl: base.toString() })
-  } catch (err) {
-    console.error("[junklub checkout]", err)
-    return NextResponse.json({ error: "Checkout unavailable" }, { status: 500 })
-  }
+export async function POST() {
+  return NextResponse.json(
+    { error: "The Junklub event has ended." },
+    { status: 410 },
+  )
 }
