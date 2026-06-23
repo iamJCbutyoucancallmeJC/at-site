@@ -8,12 +8,18 @@
 
 export const HM_VARIANT_MONTHLY_GID =
   process.env.NEXT_PUBLIC_HM_VARIANT_MONTHLY_GID ?? "gid://shopify/ProductVariant/51926357311808"
+// t764 cutover 2026-06-23: US 6mo migrated flat-price -> per-delivery model.
+// New $12 variant 52363362861376 + new plan (selling plan 693674672448) whose fixed
+// policy = $12 x6 = $72. The main /happy-mail buy attaches HM_SELLING_PLAN_6MO, so the
+// plan's $72 policy governs (the bare $12 variant price is never charged on that path).
+// Old variant 51998971068736 + old plan 693625356608 stay live for the finite riders
+// aging out on the old flat plan. (Layer 2 already repointed the 13 recurring subs.)
 export const HM_VARIANT_6MONTH_GID =
-  process.env.NEXT_PUBLIC_HM_VARIANT_6MONTH_GID ?? "gid://shopify/ProductVariant/51998971068736"
+  process.env.NEXT_PUBLIC_HM_VARIANT_6MONTH_GID ?? "gid://shopify/ProductVariant/52363362861376"
 export const HM_SELLING_PLAN_1MO =
   process.env.NEXT_PUBLIC_HM_SELLING_PLAN_1MO ?? "gid://shopify/SellingPlan/693610938688"
 export const HM_SELLING_PLAN_6MO =
-  process.env.NEXT_PUBLIC_HM_SELLING_PLAN_6MO ?? "gid://shopify/SellingPlan/693625356608"
+  process.env.NEXT_PUBLIC_HM_SELLING_PLAN_6MO ?? "gid://shopify/SellingPlan/693674672448"
 
 export const HM_PRICE_MONTHLY = 13
 export const HM_PRICE_6MONTH = 72
