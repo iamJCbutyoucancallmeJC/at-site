@@ -108,6 +108,11 @@ export type ShopifyCart = {
     subtotalAmount: ShopifyPrice
     totalAmount: ShopifyPrice
   }
+  // Discount codes the cart carries. `applicable: false` means Shopify rejected
+  // the code (typo, inactive, expired, or out of its scheduled window) — the
+  // event checkout route checks this so an unredeemable code can't silently
+  // sell at full price. See applyDiscountCode + /api/checkout/paperworld.
+  discountCodes: { code: string; applicable: boolean }[]
 }
 
 // ---------------------------------------------------------------------------
@@ -279,6 +284,10 @@ const CART_FRAGMENT = `
       subtotalAmount { ...PriceFragment }
       totalAmount { ...PriceFragment }
     }
+    discountCodes {
+      code
+      applicable
+    }
   }
 `
 
@@ -343,6 +352,38 @@ export async function addToCart(cartId: string, variantId: string, quantity = 1,
     lines: [line],
   })
   return data.cartLinesAdd.cart
+}
+
+// Apply discount code(s) to a cart (Storefront cartDiscountCodesUpdate). The
+// returned cart's `discountCodes[].applicable` tells you whether Shopify
+// actually accepted each code — an inactive, expired, or out-of-window code is
+// returned with `applicable: false` (NOT an error), so callers must inspect it
+// rather than assume success. Used by the event checkout route to auto-apply
+// the QR-gated event code before redirecting to Shopify checkout. Passing an
+// empty array clears all codes.
+export async function applyDiscountCode(cartId: string, discountCodes: string[]): Promise<ShopifyCart> {
+  const query = `
+    ${IMAGE_FRAGMENT}
+    ${PRICE_FRAGMENT}
+    ${CART_FRAGMENT}
+
+    mutation ApplyDiscount($cartId: ID!, $discountCodes: [String!]!) {
+      cartDiscountCodesUpdate(cartId: $cartId, discountCodes: $discountCodes) {
+        cart { ...CartFragment }
+        userErrors { field message }
+      }
+    }
+  `
+
+  const data = await shopifyFetch<{
+    cartDiscountCodesUpdate: { cart: ShopifyCart; userErrors: { field: string[]; message: string }[] }
+  }>(query, { cartId, discountCodes })
+
+  const { cart, userErrors } = data.cartDiscountCodesUpdate
+  if (userErrors?.length) {
+    throw new Error(`cartDiscountCodesUpdate: ${userErrors.map((e) => e.message).join("; ")}`)
+  }
+  return cart
 }
 
 export async function getCart(cartId: string): Promise<ShopifyCart | null> {

@@ -1,7 +1,9 @@
 "use client"
 
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { trackEvent } from "@/lib/analytics"
+import { isChromelessRoute } from "@/lib/chromeless-routes"
 
 const DESKTOP_LINKS = [
   { label: "Shop", href: "/shop" },
@@ -22,6 +24,11 @@ const MOBILE_LINKS = [
 ]
 
 export default function Footer() {
+  const pathname = usePathname()
+
+  // Chromeless (isolated event) routes render no global footer. See lib/chromeless-routes.
+  if (isChromelessRoute(pathname)) return null
+
   return (
     <footer style={{ background: "var(--color-text-primary)" }}>
       {/* Desktop */}
