@@ -3,9 +3,11 @@
 import React, { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { usePathname } from "next/navigation"
 import { Menu, X, ShoppingBag } from "lucide-react"
 import { trackEvent } from "@/lib/analytics"
 import { useCart } from "@/context/cart"
+import { isChromelessRoute } from "@/lib/chromeless-routes"
 
 const NAV_LINKS = [
   { label: "Shop", href: "/shop" },
@@ -16,6 +18,10 @@ const NAV_LINKS = [
 export default function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const { count, openCart } = useCart()
+  const pathname = usePathname()
+
+  // Chromeless (isolated event) routes render no global nav. See lib/chromeless-routes.
+  if (isChromelessRoute(pathname)) return null
 
   return (
     <>

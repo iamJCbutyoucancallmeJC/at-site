@@ -3,10 +3,12 @@
 import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { X, Minus, Plus, ShoppingBag } from "lucide-react"
 import { useCart } from "@/context/cart"
 import { trackEvent } from "@/lib/analytics"
 import { HM_VARIANT_6MONTH_GID } from "@/lib/happy-mail-content"
+import { isChromelessRoute } from "@/lib/chromeless-routes"
 
 // Detect local (non-Shopify) variant IDs — checkout not available yet
 function isLocalVariant(variantId: string) {
@@ -39,6 +41,7 @@ function productHref(variantId: string, productHandle: string): string {
 export default function CartDrawer() {
   const { items, count, subtotal, isOpen, closeCart, removeItem, updateQty } = useCart()
   const drawerRef = useRef<HTMLDivElement>(null)
+  const pathname = usePathname()
 
   // Close on Escape
   useEffect(() => {
@@ -120,6 +123,11 @@ export default function CartDrawer() {
     window.addEventListener("pageshow", onPageShow)
     return () => window.removeEventListener("pageshow", onPageShow)
   }, [])
+
+  // Chromeless (isolated event) routes have no cart drawer — checkout is a
+  // single direct-to-Shopify redirect. Guard placed AFTER all hooks so hook
+  // order stays stable across renders. See lib/chromeless-routes.
+  if (isChromelessRoute(pathname)) return null
 
   return (
     <>
