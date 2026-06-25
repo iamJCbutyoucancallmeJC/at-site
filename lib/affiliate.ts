@@ -31,13 +31,13 @@ import { adminFetch } from "@/lib/shopify-admin"
 const LIST_TYPE = "app--345947701249--affiliate_pick_list"
 
 // Amy's Amazon Associates tracking tag. d055 (2026-06-23): v1 uses a SITE-SPECIFIC
-// sub-tag (not the storefront Influencer tag) for clean on-site attribution.
-// Lives here so the tag is changed in ONE place; it is appended to every outbound
-// URL at render, never stored on the metaobject. Overridable via env for staging.
-// NOTE: the concrete tag value is pending Amy's confirmation (t816 CDQ #2); until
-// then this default keeps links well-formed and clearly attributable to the site.
+// sub-tag (not the storefront Influencer tag wwwamytangeri-20) for clean on-site
+// attribution. Amy created `atwbsite-20` (AT Web Site) on 2026-06-24 for exactly
+// this page. Lives here so the tag is changed in ONE place; it is appended to
+// every outbound URL at render, never stored on the metaobject. Overridable via
+// env for staging.
 export const AMAZON_ASSOCIATES_TAG =
-  process.env.NEXT_PUBLIC_AMAZON_ASSOCIATES_TAG || "amytangsite-20"
+  process.env.NEXT_PUBLIC_AMAZON_ASSOCIATES_TAG || "atwbsite-20"
 
 // ---------------------------------------------------------------------------
 // Public types
@@ -66,6 +66,10 @@ export type AffiliatePickList = {
   featured: boolean
   active: boolean
   picks: AffiliatePick[]
+  /** Tagged "See all on Amazon" deep-link to the full idea list, or null. */
+  listUrl: string | null
+  /** Total items on the full Amazon list (for the "See all N" label), or null. */
+  itemCount: number | null
 }
 
 // ---------------------------------------------------------------------------
@@ -174,6 +178,8 @@ function mapList(raw: RawList): AffiliatePickList {
     // Only active picks with a usable Amazon link render.
     .filter((p) => p.active && p.amazonUrl)
   const sortRaw = text(m.get("sort_order"))
+  const countRaw = text(m.get("item_count"))
+  const rawListUrl = text(m.get("list_url"))
   return {
     id: raw.id,
     title,
@@ -183,6 +189,8 @@ function mapList(raw: RawList): AffiliatePickList {
     featured: bool(m.get("featured")),
     active: activeFlag(m.get("active")),
     picks,
+    listUrl: rawListUrl ? withTag(rawListUrl) : null,
+    itemCount: countRaw != null ? Number(countRaw) : null,
   }
 }
 
@@ -214,19 +222,24 @@ export async function getAffiliatePickLists(): Promise<AffiliatePickList[]> {
 }
 
 /**
- * Build the outbound Amazon href for a pick: the raw product URL with Amy's
- * Associates `tag` parameter appended (replacing any existing tag). Centralizing
- * this keeps the tag in one config spot. Returns "" if the pick has no URL.
+ * Append Amy's Associates `tag` to any Amazon URL (replacing any existing tag),
+ * so the tag lives in ONE config spot. Returns "" for a null/empty input. Used
+ * for both product links and the per-list "See all on Amazon" deep-link.
  */
-export function amazonHref(pick: AffiliatePick): string {
-  if (!pick.amazonUrl) return ""
+function withTag(url: string | null): string {
+  if (!url) return ""
   try {
-    const u = new URL(pick.amazonUrl)
+    const u = new URL(url)
     u.searchParams.set("tag", AMAZON_ASSOCIATES_TAG)
     return u.toString()
   } catch {
     // Not a parseable absolute URL -- append the tag defensively.
-    const sep = pick.amazonUrl.includes("?") ? "&" : "?"
-    return `${pick.amazonUrl}${sep}tag=${encodeURIComponent(AMAZON_ASSOCIATES_TAG)}`
+    const sep = url.includes("?") ? "&" : "?"
+    return `${url}${sep}tag=${encodeURIComponent(AMAZON_ASSOCIATES_TAG)}`
   }
+}
+
+/** Tagged outbound Amazon href for a pick. Returns "" if the pick has no URL. */
+export function amazonHref(pick: AffiliatePick): string {
+  return withTag(pick.amazonUrl)
 }

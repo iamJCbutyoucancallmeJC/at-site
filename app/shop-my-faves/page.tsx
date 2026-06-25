@@ -1,5 +1,6 @@
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 import AffiliateCard from "@/components/affiliate-card"
+import TrackableLink from "@/components/trackable-link"
 import { getAffiliatePickLists, amazonHref } from "@/lib/affiliate"
 
 // Affiliate content is authored in Shopify and may change anytime; read fresh.
@@ -108,6 +109,32 @@ export default async function ShopMyFavesPage() {
                     />
                   ))}
                 </div>
+
+                {/* "See all N on Amazon" deep-link to the full idea list. We show a
+                    curated subset on-site; this sends browsers to Amy's full list. */}
+                {list.listUrl && (
+                  <div className="mt-7 md:mt-8">
+                    <TrackableLink
+                      href={list.listUrl}
+                      event="affiliate_click"
+                      eventData={{
+                        link_type: "see_all_list",
+                        list_title: list.title,
+                        destination: list.listUrl,
+                        page: "shop-my-faves",
+                      }}
+                      target="_blank"
+                      rel="noopener sponsored nofollow"
+                      className="inline-flex items-center gap-1.5 text-[14px] font-semibold transition-opacity hover:opacity-70"
+                      style={{ color: "var(--color-orange)" }}
+                    >
+                      {list.itemCount
+                        ? `See all ${list.itemCount} on Amazon`
+                        : "See all on Amazon"}
+                      <span aria-hidden="true">&rarr;</span>
+                    </TrackableLink>
+                  </div>
+                )}
               </section>
             ))}
           </div>
