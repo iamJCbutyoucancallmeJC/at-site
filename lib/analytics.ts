@@ -21,6 +21,7 @@ export type AnalyticsEvent =
   | 'nav_click'
   | 'footer_click'
   | 'external_link'
+  | 'affiliate_click'
   | 'variant_engagement'
   | 'purchase_complete'
   | 'thank_you_cta_click'

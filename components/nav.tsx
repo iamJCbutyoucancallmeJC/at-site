@@ -11,6 +11,7 @@ import { isChromelessRoute } from "@/lib/chromeless-routes"
 
 const NAV_LINKS = [
   { label: "Shop", href: "/shop" },
+  { label: "Shop My Faves", href: "/shop-my-faves" },
   { label: "Photobooth", href: "https://photobooth.amytangerine.com/", external: true },
   { label: "About", href: "/about" },
 ]
