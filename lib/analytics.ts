@@ -12,6 +12,7 @@ export type AnalyticsEvent =
   | 'newsletter_signup'
   | 'waitlist_signup'
   | 'event_cta_click'
+  | 'affiliate_click'
   | 'section_link_click'
   | 'hm_page_view'
   | 'hm_plan_select'

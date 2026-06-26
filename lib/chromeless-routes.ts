@@ -12,6 +12,7 @@
 
 const CHROMELESS_PREFIXES = [
   "/paperworld", // Seattle Paper World event page (t824)
+  "/amzn",       // Amazon affiliate QR landings, e.g. /amzn/book (booth book QR)
 ]
 
 export function isChromelessRoute(pathname: string | null | undefined): boolean {
