@@ -18,6 +18,7 @@ import { trackEvent } from "@/lib/analytics"
 import {
   BOOK_HREF,
   BOOK_TITLE,
+  BOOK_SUBTITLE,
   BOOK_TITLE_CONFIRMED,
   AFFILIATE_DISCLOSURE,
 } from "@/lib/book-qr"
@@ -37,9 +38,9 @@ const BOOK_HREF_UTM = (() => {
   }
 })()
 
-// Generic, always-correct hero copy. If Amy confirms the exact title, set
-// BOOK_TITLE in lib/book-qr.ts and it appears here automatically.
-const HEADLINE = BOOK_TITLE_CONFIRMED && BOOK_TITLE ? BOOK_TITLE : "Amy's new book."
+// Hero headline = the short main title once confirmed; falls back to generic
+// copy if the title is ever cleared in lib/book-qr.ts.
+const HEADLINE = BOOK_TITLE_CONFIRMED && BOOK_TITLE ? BOOK_TITLE : "Amy's new notebook."
 
 export default function BookQrPage() {
   const [clicked, setClicked] = useState(false)
@@ -89,11 +90,19 @@ export default function BookQrPage() {
           Just for friends at the booth
         </p>
         <h1
-          className="text-[36px] md:text-[48px] font-bold leading-[1.05] tracking-tight mb-4"
+          className="text-[36px] md:text-[48px] font-bold leading-[1.05] tracking-tight mb-3"
           style={{ color: "var(--color-text-primary)" }}
         >
           {HEADLINE}
         </h1>
+        {BOOK_TITLE_CONFIRMED && BOOK_SUBTITLE && (
+          <p
+            className="text-[15px] md:text-[16px] font-medium leading-snug mb-5 max-w-md mx-auto"
+            style={{ color: "var(--color-text-primary)" }}
+          >
+            {BOOK_SUBTITLE}
+          </p>
+        )}
         <p
           className="text-[16px] md:text-[18px] leading-relaxed mb-3"
           style={{ color: "var(--color-text-secondary)" }}
@@ -105,7 +114,7 @@ export default function BookQrPage() {
           className="text-[14px] leading-relaxed mb-8"
           style={{ color: "var(--color-text-secondary)" }}
         >
-          Same book, shipped to you. No carrying it around the show.
+          Same notebook, shipped to you. No carrying it around the show.
         </p>
 
         {/* CTA — affiliate link-out to Amazon (new tab, sponsored/nofollow) */}

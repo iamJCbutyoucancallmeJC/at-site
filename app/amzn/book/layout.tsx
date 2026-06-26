@@ -9,8 +9,9 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Amy's Book on Amazon | Amy Tangerine",
-  description: "Grab Amy Tangerine's book on Amazon, shipped to your door.",
+  title: "Sunshine & Rainbows Traveler's Notebook | Amy Tangerine",
+  description:
+    "Grab Amy Tangerine's Sunshine & Rainbows Traveler's Notebook on Amazon, shipped to your door.",
   robots: { index: false, follow: false },
 }
 

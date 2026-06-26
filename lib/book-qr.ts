@@ -14,12 +14,15 @@ export const BOOK_ASIN = "B0H414S9DK"
 // RAW canonical product URL (no tag — the tag is appended at render, one place).
 export const BOOK_AMAZON_URL = `https://www.amazon.com/dp/${BOOK_ASIN}`
 
-// TODO(Amy): confirm the exact book title + subtitle for the hero. Amazon's
-// anti-bot blocked the automated title lookup (2026-06-26) and it must not be
-// guessed on printed signage. Until confirmed, the page uses generic "Amy's new
-// book" copy that reads correctly regardless. Swap BOOK_TITLE in when confirmed.
-export const BOOK_TITLE = "" // e.g. "Craft a Life You Love" — leave "" to use the generic hero
-export const BOOK_TITLE_CONFIRMED = false
+// Confirmed 2026-06-26 from the live Amazon listing (JC).
+// Full title: "Sunshine & Rainbows Traveler's Notebook: A Colorful Foundation
+// for Creativity, Memories & Everyday Joy" — by Amy Tangerine, paperback, 75 pp.
+// The hero uses the short main title; the subtitle renders below it.
+// (No price on the page — Amazon prohibits cached/scraped prices.)
+export const BOOK_TITLE = "Sunshine & Rainbows"
+export const BOOK_SUBTITLE =
+  "A Traveler's Notebook for creativity, memories & everyday joy"
+export const BOOK_TITLE_CONFIRMED = true
 
 // Amazon Associates tag — SAME tag as the Shop My Faves build (atwbsite-20, the
 // site-specific tag Amy created 2026-06-24, NOT her storefront influencer tag).
