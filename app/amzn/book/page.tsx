@@ -135,6 +135,20 @@ export default function BookQrPage() {
         >
           {clicked ? "Opening Amazon in a new tab…" : "Opens Amazon in a new tab"}
         </p>
+
+        {/* Cover image — below the CTA (per booth-page direction). Centered,
+            contained cover at a capped width; the art already carries the title. */}
+        <div className="mt-10 flex justify-center">
+          <Image
+            src="/images/book/sunshine-rainbows-cover.jpeg"
+            alt="Sunshine &amp; Rainbows Traveler's Notebook cover by Amy Tangerine"
+            width={719}
+            height={1399}
+            className="w-[260px] md:w-[280px] h-auto rounded-2xl"
+            style={{ border: "1px solid var(--color-border)" }}
+            priority
+          />
+        </div>
       </section>
 
       {/* Footer — minimal + disclosure echo */}
