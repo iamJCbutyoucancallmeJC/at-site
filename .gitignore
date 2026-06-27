@@ -24,3 +24,8 @@ npm-debug.log*
 
 # typescript build info (regenerated on every build)
 tsconfig.tsbuildinfo
+
+# Blog migration scratch: legacy images downloaded from the SQS CDN before upload
+# to Shopify Files. These live on Shopify, not in the repo (~1.6G). The url-map +
+# manifest ARE tracked (they're the migration record); the raw image bytes are not.
+scripts/blog-migration/images/

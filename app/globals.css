@@ -74,3 +74,71 @@ body {
   color: var(--color-text-primary);
   margin: 0;
 }
+
+/* ── Blog post body (t812) ──
+   Legacy Squarespace post HTML, sanitized at extraction (wrappers stripped, semantic
+   tags kept). Images still resolve from the Squarespace CDN until t811 re-hosts them. */
+.blog-body {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+}
+.blog-body > * + * {
+  margin-top: 1.25rem;
+}
+.blog-body p {
+  margin: 0;
+}
+.blog-body h1,
+.blog-body h2,
+.blog-body h3,
+.blog-body h4 {
+  font-weight: 700;
+  color: var(--color-text-primary);
+  line-height: 1.25;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+.blog-body h2 { font-size: 1.5rem; }
+.blog-body h3 { font-size: 1.25rem; }
+.blog-body a {
+  color: var(--color-orange);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.blog-body a:hover { color: var(--color-orange-dark); }
+.blog-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+  margin: 1.5rem auto;
+  display: block;
+}
+.blog-body ul,
+.blog-body ol {
+  padding-left: 1.5rem;
+  margin: 1.25rem 0;
+}
+.blog-body ul { list-style: disc; }
+.blog-body ol { list-style: decimal; }
+.blog-body li { margin-top: 0.4rem; }
+.blog-body blockquote {
+  border-left: 3px solid var(--color-orange);
+  padding-left: 1.25rem;
+  font-style: italic;
+  color: var(--color-text-primary);
+}
+.blog-body strong { color: var(--color-text-primary); font-weight: 600; }
+.blog-body iframe {
+  max-width: 100%;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border-radius: 0.75rem;
+  margin: 1.5rem 0;
+}
+.blog-body hr {
+  border: 0;
+  border-top: 1px solid var(--color-border);
+  margin: 2rem 0;
+}

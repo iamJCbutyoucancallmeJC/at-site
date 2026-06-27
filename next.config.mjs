@@ -1,3 +1,5 @@
+import { blogLegacyRedirects } from "./lib/blog-redirects.mjs"
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {
@@ -38,12 +40,26 @@ const nextConfig = {
       // SQS default /pages/<slug> namespace -- only contact has a live equivalent.
       { source: "/pages/contact", destination: "/contact", permanent: true },
 
-      // Blog: no blog on the new site. Catch the index, all posts (flat + dated SQS
-      // paths like /blog/2015/4/8/<slug>), and /blog/tag|category/* taxonomy pages.
-      { source: "/blog", destination: "/", permanent: true },
-      { source: "/blog/:path*", destination: "/", permanent: true },
-      // Blogspot-era flat archive paths (pre-SQS), e.g. /2012/04/<slug>.html.
-      { source: "/:year(20\\d{2})/:month/:rest*", destination: "/", permanent: true },
+      // ---- Blog reinstated (t812, 2026-06-26) ----
+      // The blog is back as MDX-in-repo on this stack (blog-reinstate-prd-2026-06-20.md,
+      // Decision B: normalize every legacy URL to /blog/[slug] + 301, never 404). This
+      // REPLACES the prior "no blog -> redirect /blog/* to /" rules.
+      //
+      // 1) Exception map FIRST (must precede the general rule): opaque SQS ids,
+      //    'html'-suffixed slugs, and slug collisions whose clean slug differs from a
+      //    pure date-strip. Auto-generated from the migration -- see lib/blog-redirects.mjs.
+      ...blogLegacyRedirects,
+      // 2) General collapse: every dated SQS path /blog/YYYY/MM(/DD)?/<slug> -> /blog/<slug>.
+      //    Covers ~1,079 legacy posts in one rule. Clean-slug paths (~216) need no redirect:
+      //    the /blog/[slug] route serves them at the canonical URL directly.
+      { source: "/blog/:year(20\\d{2})/:month/:day/:slug", destination: "/blog/:slug", permanent: true },
+      { source: "/blog/:year(20\\d{2})/:month/:slug", destination: "/blog/:slug", permanent: true },
+      // 3) Old SQS taxonomy pages: /blog/tag/X stays (we have a tag route); /blog/category/X
+      //    maps to the same tag namespace (categories and tags were merged at extraction).
+      { source: "/blog/category/:slug", destination: "/blog/tag/:slug", permanent: true },
+      // Blogspot-era flat archive paths (pre-SQS), e.g. /2012/04/<slug>.html -> blog home
+      // (no clean slug recoverable from these; they predate the captured corpus).
+      { source: "/:year(20\\d{2})/:month/:rest*", destination: "/blog", permanent: true },
 
       // Podcast: no podcast page on the new site.
       { source: "/podcast/:path*", destination: "/", permanent: true },
