@@ -80,6 +80,18 @@ const nextConfig = {
       { source: "/commerce/:path*", destination: "/", permanent: true },
       { source: "/store/receipt", destination: "/", permanent: true },
       { source: "/checkout/subscription-confirmed", destination: "/happy-mail", permanent: true },
+
+      // ---- Residual not_found tail cleanup (2026-06-29, t833) ----
+      // The t732 digest confirmed the blog/podcast 404s went to zero once the t812 blog
+      // migration + redirect map deployed (Jun 26). The genuine post-deploy tail (~8/day)
+      // is retired /shop/<handle> products + two stragglers with real targets:
+      //   - Old SQS newsletter slug -> the live signup section on home (#newsletter anchor).
+      { source: "/newsletter-sign-up", destination: "/#newsletter", permanent: true },
+      //   - SQS /s/* static-asset namespace (e.g. old printable PDFs) -> home.
+      { source: "/s/:path*", destination: "/", permanent: true },
+      // Retired /shop/<handle> products are NOT redirected: they fall through to the
+      // enriched 404 (app/not-found.tsx), which acknowledges the product retired and
+      // shows the current lineup -- a better landing than a silent dump to /shop.
     ]
   },
   images: {

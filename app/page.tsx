@@ -280,7 +280,8 @@ export default async function HomePage() {
 
           {/* Newsletter */}
           <div
-            className="md:flex-1 px-6 md:px-10 py-8 md:py-10 rounded-none md:rounded-r-lg flex flex-col justify-center"
+            id="newsletter"
+            className="md:flex-1 px-6 md:px-10 py-8 md:py-10 rounded-none md:rounded-r-lg flex flex-col justify-center scroll-mt-24"
             style={{ background: "var(--color-orange)" }}
           >
             <h2 className="text-[15px] md:text-[18px] uppercase tracking-[0.12em] font-semibold mb-3 text-white">
