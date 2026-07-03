@@ -1,0 +1,3092 @@
+{
+  "http://aliedwards.com/a-week-in-the-life": {
+    "code": 404,
+    "final": "http://aliedwards.com/a-week-in-the-life",
+    "status": "dead"
+  },
+  "http://allforthememories.com/blog/2015/12/08/organizing-craft-supplies-for-the-unorganized-part-1/": {
+    "code": 200,
+    "final": "https://allforthememories.com/organizing-craft-supplies-for-the-unorganized-part-1/",
+    "status": "alive"
+  },
+  "http://allreadymemories.bigcartel.com/category/storage-organization": {
+    "code": 200,
+    "final": "http://allreadymemories.bigcartel.com/category/storage-organization",
+    "status": "alive"
+  },
+  "http://americancrafts.com": {
+    "code": 429,
+    "final": "http://americancrafts.com",
+    "status": "uncertain"
+  },
+  "http://amytangerine.com/s/OhHappyDay80507.avery": {
+    "code": 404,
+    "final": "http://amytangerine.com/s/OhHappyDay80507.avery",
+    "status": "dead"
+  },
+  "http://amytangerine.com/s/us_download.jpg": {
+    "code": 404,
+    "final": "http://amytangerine.com/s/us_download.jpg",
+    "status": "dead"
+  },
+  "http://amzn.to/1O1YnHQ": {
+    "code": 200,
+    "final": "https://www.amazon.com/Creative-Options-Needle-Roll-Tote/dp/B00LUP0MRK/ref=as_li_ss_tl?ie=UTF8&qid=1449011614&sr=8-4&keywords=creative+options+knitting&linkCode=sl1&tag=wwwamytangeri-20&linkId=c6c9a635acbaaf15f58b4d1bcd2562b3",
+    "status": "alive"
+  },
+  "http://amzn.to/1gfP7kF": {
+    "code": 200,
+    "final": "https://www.amazon.com/",
+    "status": "alive"
+  },
+  "http://amzn.to/2BnJtQZ": {
+    "code": 200,
+    "final": "https://www.amazon.com/Fiskars-1845201001-Original-Stainless-Scissors/dp/B00006IFN6/ref=as_li_ss_tl?s=arts-crafts&ie=UTF8&qid=1518304677&sr=1-2&keywords=fiskars+original&linkCode=sl1&tag=wwwamytangeri-20&linkId=2dd0a52223febc2b9a975690281a9da1",
+    "status": "alive"
+  },
+  "http://amzn.to/2Cb7ffE": {
+    "code": 200,
+    "final": "https://www.amazon.com/Fiskars-Control-Non-stick-Precision-Scissors/dp/B072KFPJG7/ref=as_li_ss_tl?ie=UTF8&linkCode=sl1&tag=wwwamytangeri-20&linkId=33d7e999dbdb74fe3dcd01d93000d1db",
+    "status": "alive"
+  },
+  "http://amzn.to/2EEMWtv": {
+    "code": 200,
+    "final": "https://www.amazon.com/Leuchtturm1917-Classic-Hardcover-Notebook-Emerald/dp/B00FYNV8DQ/ref=as_li_ss_tl?s=office-products&ie=UTF8&qid=1514950116&sr=1-5&keywords=leuchtturm1917+dotted&linkCode=sl1&tag=wwwamytangeri-20&linkId=1048b5c7cf9ff64b6fb0aa04d85ad0fd",
+    "status": "alive"
+  },
+  "http://amzn.to/2F8f0sp": {
+    "code": 200,
+    "final": "https://www.amazon.com/Fujifilm-Instax-SP-3-Mobile-Printer/dp/B076DRQ5XB/ref=as_li_ss_tl?ie=UTF8&qid=1519833473&sr=8-1&keywords=instax+sp3&linkCode=sl1&tag=wwwamytangeri-20&linkId=2db8f0a95a85369a25f2ad5341b18ecb",
+    "status": "alive"
+  },
+  "http://amzn.to/2H30iRk": {
+    "code": 200,
+    "final": "https://www.amazon.com/Fiskars-Control-Non-stick-Precision-Scissors/dp/B072KFPJG7/ref=as_li_ss_tl?ie=UTF8&linkCode=sl1&tag=wwwamytangeri-20&linkId=88d245eea039c31cb4e5f8487f09aa26",
+    "status": "alive"
+  },
+  "http://amzn.to/2HUC0th": {
+    "code": 200,
+    "final": "https://www.amazon.com/gp/product/B0012VI9V8/ref=as_li_ss_tl?ie=UTF8&psc=1&linkCode=sl1&tag=wwwamytangeri-20&linkId=b66d987f99ae1f5d7c095a4405fe1ac8",
+    "status": "alive"
+  },
+  "http://amzn.to/2eCxQbo": {
+    "code": 200,
+    "final": "https://www.amazon.com/Umbra-Prisma-Picture-Frame-6-Inch/dp/B00HY8FUTM/ref=as_li_ss_tl?ie=UTF8&qid=1477092867&sr=8-1&keywords=umbra+prism+frame&linkCode=sl1&tag=wwwamytangeri-20&linkId=11c7b6e3b1930f9e86761042d74fb3f3",
+    "status": "alive"
+  },
+  "http://amzn.to/2is81QX": {
+    "code": 200,
+    "final": "https://www.amazon.com/Touch-Screen-Convertible-i5-7200U-Fingerprint-Windows/dp/B0743PFGX1/ref=as_li_ss_tl?s=electronics&ie=UTF8&qid=1503531641&sr=1-3&keywords=lenovo+yoga+720&linkCode=sl1&tag=wwwamytangeri-20&linkId=d0f84844a9d8e966e75a40738d8d7e4e",
+    "status": "alive"
+  },
+  "http://amzn.to/2sYV8mu": {
+    "code": 200,
+    "final": "https://www.amazon.com/gp/product/B00IX1C8V2/ref=as_li_ss_tl?ie=UTF8&psc=1&linkCode=sl1&tag=wwwamytangeri-20&linkId=978679f1fadf54761913a27d719096da",
+    "status": "alive"
+  },
+  "http://annmarieloves.com/": {
+    "code": 200,
+    "final": "http://annmarieloves.com/",
+    "status": "alive"
+  },
+  "http://at.nick.com/2y9Z6GQ": {
+    "code": 200,
+    "final": "https://www.nickelodeon.la/?xrs=PPM-18-10caf1g",
+    "status": "alive"
+  },
+  "http://bit.ly/17sZT3v": {
+    "code": 404,
+    "final": "http://bit.ly/17sZT3v",
+    "status": "dead"
+  },
+  "http://bit.ly/1HjV9AG": {
+    "code": 200,
+    "final": "https://tieks.com/?sv1=affiliate&sv_campaign_id=2000099&sscid=88481_1783095351_0ff437595cca36c303aa3a8de907d37b&awc=88481_1783095351_0ff437595cca36c303aa3a8de907d37b&sscid=88481_1783095351_0ff437595cca36c303aa3a8de907d37b",
+    "status": "alive"
+  },
+  "http://bit.ly/1Q1OFXg": {
+    "code": 403,
+    "final": "http://bit.ly/1Q1OFXg",
+    "status": "uncertain"
+  },
+  "http://bit.ly/1SpeBAh": {
+    "code": 403,
+    "final": "http://bit.ly/1SpeBAh",
+    "status": "uncertain"
+  },
+  "http://bit.ly/1WveaYX": {
+    "code": 200,
+    "final": "https://www.target.com/?clkid=6e841ee7N76fa11f18a3027521d9d7605&cpng=PTID3&TCID=AFL-6e841ee7N76fa11f18a3027521d9d7605-116548&afsrc=1&lnm=81938&afid=LTK&ref=tgt_adv_xasd0002",
+    "status": "alive"
+  },
+  "http://bit.ly/1Wveebd": {
+    "code": 404,
+    "final": "http://bit.ly/1Wveebd",
+    "status": "dead"
+  },
+  "http://bit.ly/1ele4zH": {
+    "code": 403,
+    "final": "http://bit.ly/1ele4zH",
+    "status": "uncertain"
+  },
+  "http://bit.ly/1gcs75O": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&mi=10513&pw=41735&url=http://www.twopeasinabucket.com/shop/_plus%2520one_/_amy_tangerine_/",
+    "status": "alive"
+  },
+  "http://bit.ly/28KRVZl": {
+    "code": 400,
+    "final": "http://bit.ly/28KRVZl",
+    "status": "uncertain"
+  },
+  "http://bit.ly/28KSYrW": {
+    "code": 400,
+    "final": "http://bit.ly/28KSYrW",
+    "status": "uncertain"
+  },
+  "http://bit.ly/28KT432": {
+    "code": 400,
+    "final": "http://bit.ly/28KT432",
+    "status": "uncertain"
+  },
+  "http://bit.ly/28KUYRb": {
+    "code": 400,
+    "final": "http://bit.ly/28KUYRb",
+    "status": "uncertain"
+  },
+  "http://bit.ly/28Lo9aE": {
+    "code": 400,
+    "final": "http://bit.ly/28Lo9aE",
+    "status": "uncertain"
+  },
+  "http://bit.ly/28LoEBz": {
+    "code": 400,
+    "final": "http://bit.ly/28LoEBz",
+    "status": "uncertain"
+  },
+  "http://bit.ly/28Locn7": {
+    "code": 400,
+    "final": "http://bit.ly/28Locn7",
+    "status": "uncertain"
+  },
+  "http://bit.ly/28LojPt": {
+    "code": 400,
+    "final": "http://bit.ly/28LojPt",
+    "status": "uncertain"
+  },
+  "http://bit.ly/28Loo5K": {
+    "code": 400,
+    "final": "http://bit.ly/28Loo5K",
+    "status": "uncertain"
+  },
+  "http://bit.ly/28LooCS": {
+    "code": 400,
+    "final": "http://bit.ly/28LooCS",
+    "status": "uncertain"
+  },
+  "http://bit.ly/28Low5a": {
+    "code": 400,
+    "final": "http://bit.ly/28Low5a",
+    "status": "uncertain"
+  },
+  "http://bit.ly/2NFKtCo": {
+    "code": 200,
+    "final": "https://awin1.com/closedMerchant.html?b=725661&u=530666&m=59098&urllink=www.primary.com%2Fshop%2Fkids%2Fthe-slub-classic-tee%3Fcolor%3Draspberry%26ref%3Dplp_pdp_4%26size%3D4-5&afftrack=&originalPath=%2Fr.cfm&source=sas-click",
+    "status": "alive"
+  },
+  "http://bit.ly/2Ov8rFT": {
+    "code": 200,
+    "final": "https://awin1.com/closedMerchant.html?b=725661&u=530666&m=59098&urllink=www.primary.com%2Fshop%2Fall%2Fthe-jogger%3Fcolor%3Dheather-gray%26ref%3Dpdp_cross_5%26size%3D5&afftrack=&originalPath=%2Fr.cfm&source=sas-click",
+    "status": "alive"
+  },
+  "http://bit.ly/2QUpEFs": {
+    "code": 404,
+    "final": "http://bit.ly/2QUpEFs",
+    "status": "dead"
+  },
+  "http://bit.ly/2RjKii9": {
+    "code": 400,
+    "final": "http://bit.ly/2RjKii9",
+    "status": "uncertain"
+  },
+  "http://bit.ly/2UdYO0i": {
+    "code": 404,
+    "final": "http://bit.ly/2UdYO0i",
+    "status": "dead"
+  },
+  "http://bit.ly/2Ued0X3": {
+    "code": 404,
+    "final": "http://bit.ly/2Ued0X3",
+    "status": "dead"
+  },
+  "http://bit.ly/2UhRpwT": {
+    "code": 404,
+    "final": "http://bit.ly/2UhRpwT",
+    "status": "dead"
+  },
+  "http://bit.ly/2UqVY8g": {
+    "code": 200,
+    "final": "https://www.target.com/?clkid=6770e749N76fa11f18a3027521d9d7605&cpng=PTID3&TCID=AFL-6770e749N76fa11f18a3027521d9d7605-116548&afsrc=1&lnm=81938&afid=LTK&ref=tgt_adv_xasd0002",
+    "status": "alive"
+  },
+  "http://bit.ly/2VIlbZP": {
+    "code": 400,
+    "final": "http://bit.ly/2VIlbZP",
+    "status": "uncertain"
+  },
+  "http://bit.ly/2VcVu68": {
+    "code": 400,
+    "final": "http://bit.ly/2VcVu68",
+    "status": "uncertain"
+  },
+  "http://bit.ly/2eVIpr7": {
+    "code": 404,
+    "final": "http://bit.ly/2eVIpr7",
+    "status": "dead"
+  },
+  "http://bit.ly/2fDNQf2": {
+    "code": 404,
+    "final": "http://bit.ly/2fDNQf2",
+    "status": "dead"
+  },
+  "http://bit.ly/2hm6dJb": {
+    "code": 404,
+    "final": "http://bit.ly/2hm6dJb",
+    "status": "dead"
+  },
+  "http://bit.ly/2iekoAm": {
+    "code": 404,
+    "final": "http://bit.ly/2iekoAm",
+    "status": "dead"
+  },
+  "http://bit.ly/2jq6afZ": {
+    "code": 404,
+    "final": "http://bit.ly/2jq6afZ",
+    "status": "dead"
+  },
+  "http://bit.ly/2kv5Fkh": {
+    "code": 404,
+    "final": "http://bit.ly/2kv5Fkh",
+    "status": "dead"
+  },
+  "http://bit.ly/2n2gMhr": {
+    "code": 400,
+    "final": "http://bit.ly/2n2gMhr",
+    "status": "uncertain"
+  },
+  "http://bit.ly/2n2goQc": {
+    "code": 200,
+    "final": "https://www.amazon.com/Pattern-Play-Ages-Coloring-Book/dp/0692771352?tag=amytangerin-1-bg-20",
+    "status": "alive"
+  },
+  "http://bit.ly/2nQfElp": {
+    "code": 400,
+    "final": "http://bit.ly/2nQfElp",
+    "status": "uncertain"
+  },
+  "http://bit.ly/2vUXNe8": {
+    "code": 404,
+    "final": "http://bit.ly/2vUXNe8",
+    "status": "dead"
+  },
+  "http://bit.ly/2wqkA0U": {
+    "code": 404,
+    "final": "http://bit.ly/2wqkA0U",
+    "status": "dead"
+  },
+  "http://bit.ly/2x0hEKh": {
+    "code": 404,
+    "final": "http://bit.ly/2x0hEKh",
+    "status": "dead"
+  },
+  "http://bit.ly/2xJeitS": {
+    "code": 404,
+    "final": "http://bit.ly/2xJeitS",
+    "status": "dead"
+  },
+  "http://bit.ly/2xJt1ok": {
+    "code": 200,
+    "final": "https://www.target.com/s?searchTerm=PAW+Patrol+Pirate+Pups+Plush",
+    "status": "alive"
+  },
+  "http://bit.ly/2xgZ2aR": {
+    "code": 200,
+    "final": "https://www.target.com/bp/shimmer+and+shine",
+    "status": "alive"
+  },
+  "http://bit.ly/2xmlAVU": {
+    "code": 404,
+    "final": "http://bit.ly/2xmlAVU",
+    "status": "dead"
+  },
+  "http://bit.ly/2xyc6sF": {
+    "code": 404,
+    "final": "http://bit.ly/2xyc6sF",
+    "status": "dead"
+  },
+  "http://bit.ly/2xzMNHi": {
+    "code": 404,
+    "final": "http://bit.ly/2xzMNHi",
+    "status": "dead"
+  },
+  "http://bit.ly/2y6j1XK": {
+    "code": 404,
+    "final": "http://bit.ly/2y6j1XK",
+    "status": "dead"
+  },
+  "http://bit.ly/2yHHYtJ": {
+    "code": 200,
+    "final": "https://awin1.com/closedMerchant.html?b=725661&u=530666&m=59098&urllink=www.primary.com%2Fshop%2Fkids%2Fthe-slub-classic-tee%3Fcolor%3Dheather-gray%26ref%3Dplp_pdp_4%26size%3D4-5&afftrack=&originalPath=%2Fr.cfm&source=sas-click",
+    "status": "alive"
+  },
+  "http://bit.ly/2yuKu8f": {
+    "code": 404,
+    "final": "http://bit.ly/2yuKu8f",
+    "status": "dead"
+  },
+  "http://bit.ly/30hrM2e": {
+    "code": 400,
+    "final": "http://bit.ly/30hrM2e",
+    "status": "uncertain"
+  },
+  "http://bit.ly/31Xfh9w": {
+    "code": 400,
+    "final": "http://bit.ly/31Xfh9w",
+    "status": "uncertain"
+  },
+  "http://bit.ly/33z4dQz": {
+    "code": 404,
+    "final": "http://bit.ly/33z4dQz",
+    "status": "dead"
+  },
+  "http://bit.ly/AmyTangerineSub": {
+    "code": 200,
+    "final": "https://www.youtube.com/user/amytangerine?sub_confirmation=1",
+    "status": "alive"
+  },
+  "http://bit.ly/BTDcampaign": {
+    "code": 404,
+    "final": "http://bit.ly/BTDcampaign",
+    "status": "dead"
+  },
+  "http://bit.ly/IlNJBT": {
+    "code": 404,
+    "final": "http://bit.ly/IlNJBT",
+    "status": "dead"
+  },
+  "http://bit.ly/Pipsticks": {
+    "code": 200,
+    "final": "https://www.amytangerine.com/",
+    "status": "alive"
+  },
+  "http://bit.ly/WUIXxn": {
+    "code": 404,
+    "final": "http://bit.ly/WUIXxn",
+    "status": "dead"
+  },
+  "http://bit.ly/amydreambox": {
+    "code": 429,
+    "final": "http://bit.ly/amydreambox",
+    "status": "uncertain"
+  },
+  "http://bit.ly/amykidbox": {
+    "code": 200,
+    "final": "http://pepperjamnetwork.com/tracking/error.php",
+    "status": "alive"
+  },
+  "http://bit.ly/amylateafternoon": {
+    "code": 403,
+    "final": "http://bit.ly/amylateafternoon",
+    "status": "uncertain"
+  },
+  "http://bit.ly/amylateafternoon ": {
+    "code": 403,
+    "final": "http://bit.ly/amylateafternoon ",
+    "status": "uncertain"
+  },
+  "http://bit.ly/amyplannerpouch": {
+    "code": "conn:[Errno 8] nodename nor servname provided",
+    "final": "http://bit.ly/amyplannerpouch",
+    "status": "dead"
+  },
+  "http://bit.ly/amyprimary": {
+    "code": 200,
+    "final": "https://awin1.com/closedMerchant.html?b=812241&u=530666&m=59098&urllink=&afftrack=&originalPath=%2Fr.cfm&source=sas-click",
+    "status": "alive"
+  },
+  "http://bit.ly/amyrocketsofawesome": {
+    "code": 200,
+    "final": "https://www.mightly.com/pages/roa-landing-page",
+    "status": "alive"
+  },
+  "http://bit.ly/amystaysweet": {
+    "code": 403,
+    "final": "http://bit.ly/amystaysweet",
+    "status": "uncertain"
+  },
+  "http://bit.ly/amytangerinebook": {
+    "code": 200,
+    "final": "https://www.amazon.com/dp/0692816127/ref=as_li_ss_tl?ie=UTF8&qid=1483393284&sr=8-1&keywords=craft+a+life+you+love&linkCode=ll1&tag=wwwamytangeri-20&linkId=2341d28c8b6c2a43a8ed7d75150a3df6",
+    "status": "alive"
+  },
+  "http://bit.ly/amytangerineonawhim": {
+    "code": 403,
+    "final": "http://bit.ly/amytangerineonawhim",
+    "status": "uncertain"
+  },
+  "http://bit.ly/lovepipsticks": {
+    "code": 200,
+    "final": "https://awin1.com/closedMerchant.html?B=827689&U=530666&M=63829&urllink=&originalPath=%2Fr.cfm&source=sas-click",
+    "status": "alive"
+  },
+  "http://bit.ly/onawhim": {
+    "code": 200,
+    "final": "https://www.simonsaysstamp.com/search?currency=USD&q=on+a+whim&source=aw&sv1=affiliate&sv_campaign_id=2000099&utm_source=ShareASale&utm_medium=referral&utm_campaign=2000099&sscid=71143_1783095323_44abf89fe9624f561d6e551886130294",
+    "status": "alive"
+  },
+  "http://bit.ly/onawhim1": {
+    "code": 403,
+    "final": "http://bit.ly/onawhim1",
+    "status": "uncertain"
+  },
+  "http://bit.ly/pphw-t": {
+    "code": 200,
+    "final": "https://www.target.com/s/paw+patrol+halloween",
+    "status": "alive"
+  },
+  "http://bit.ly/sbamy": {
+    "code": 403,
+    "final": "http://bit.ly/sbamy",
+    "status": "uncertain"
+  },
+  "http://bitly.com/lovepipsticks": {
+    "code": 200,
+    "final": "https://awin1.com/closedMerchant.html?B=827689&U=530666&M=63829&urllink=&originalPath=%2Fr.cfm&source=sas-click",
+    "status": "alive"
+  },
+  "http://blog.michaels.com/blog/watercolor-hand-lettering-with-amy-tangerine": {
+    "code": "err:timed out",
+    "final": "http://blog.michaels.com/blog/watercolor-hand-lettering-with-amy-tangerine",
+    "status": "uncertain"
+  },
+  "http://classic.avantlink.com/click.php?mi=10513&amp;pw=41735&amp;tt=cl&amp;url=http%3A%2F%2Fwww.twopeasinabucket.com%2Fshop%2Famerican-crafts%2F139072-life-yes-please-amy-tangerine-sticker-book%2F%3Ffilters%3D_yes_please_": {
+    "code": 200,
+    "final": "http://classic.avantlink.com/click.php?mi=10513&amp;pw=41735&amp;tt=cl&amp;url=http%3A%2F%2Fwww.twopeasinabucket.com%2Fshop%2Famerican-crafts%2F139072-life-yes-please-amy-tangerine-sticker-book%2F%3Ffilters%3D_yes_please_",
+    "status": "alive"
+  },
+  "http://craftcationconference.com/": {
+    "code": 200,
+    "final": "https://www.craftcationconference.com/",
+    "status": "alive"
+  },
+  "http://daydesigner.com/#_l_5y/": {
+    "code": 429,
+    "final": "http://daydesigner.com/#_l_5y/",
+    "status": "uncertain"
+  },
+  "http://ellesstudio.blogspot.com/": {
+    "code": 200,
+    "final": "http://ellesstudio.blogspot.com/",
+    "status": "alive"
+  },
+  "http://ellesstudio.blogspot.com/2013/04/announcing-our-new-collections.html": {
+    "code": 200,
+    "final": "http://ellesstudio.blogspot.com/2013/04/announcing-our-new-collections.html",
+    "status": "alive"
+  },
+  "http://email.d.kajabimail.net/c/eJw9T9FqxCAQ_Jr4UhR1NZc8-HBQDvrcDziMbhuvRoOxF-7va66lsCwzLDOz4w3KSQkSjORiFEJqCVzAiQmmxFmCGKRSF60VqE5xz77szU5hsSGyhJXMBr1zoxN21ADKniz02jnfO9erfoKxJ9HMta5bB-dOXtrs-85scTMWm3yO4Y7M5aUdXI4RXQ05bY2t0aaE5QlL9t-uHtAuD1pt-sQSEtKPXOivFX0aUW8reiq55PRPT9eCNBff0DaHdaMp33GZGhW6zgSPJlePh7o8rsGbYRglH4QAUkxLa6Xb_o88XiXVvIeKL2-vnQTJe_gBsFxpHw": {
+    "code": 429,
+    "final": "http://email.d.kajabimail.net/c/eJw9T9FqxCAQ_Jr4UhR1NZc8-HBQDvrcDziMbhuvRoOxF-7va66lsCwzLDOz4w3KSQkSjORiFEJqCVzAiQmmxFmCGKRSF60VqE5xz77szU5hsSGyhJXMBr1zoxN21ADKniz02jnfO9erfoKxJ9HMta5bB-dOXtrs-85scTMWm3yO4Y7M5aUdXI4RXQ05bY2t0aaE5QlL9t-uHtAuD1pt-sQSEtKPXOivFX0aUW8reiq55PRPT9eCNBff0DaHdaMp33GZGhW6zgSPJlePh7o8rsGbYRglH4QAUkxLa6Xb_o88XiXVvIeKL2-vnQTJe_gBsFxpHw",
+    "status": "uncertain"
+  },
+  "http://email.d.kajabimail.net/c/eJwVjb1ugzAURp8GL5Us3x9jM3hIlBB17tQJGXybOAGCiFOJty-VPh2d6XwpCPYMKgc00ACgRTJAToNmOCCBR-bWWiau2CT9iPfY5ynmUc9S1C00dqhrMGCdaRLgj2N2qU_eMVlLQ63GcCtleVV0qLDdtz3f5a172bU7srHL9_kiDyX_zS7JmH9l3bqcgvcNGg9Aag1x2vb7nSXOV1nzLHp4TqqEr1zk4_NUIaGp6Q-nVzuB": {
+    "code": 200,
+    "final": "https://www.youtube.com/watch?v=_B405pYEGek&feature=youtu.be",
+    "status": "alive"
+  },
+  "http://email.d.kajabimail.net/c/eJwVjc0KwjAQhJ-muQghu0nb7CGHghQ8-wAlTbYa7Y_UIPbtjTAMc_j4JjrG0YBIDhUQANaoFehWgjTQoQaLxvR1bbSpjIry6R9-TItPs1w5i7tTU1AUSQVsoA22pQk8FWWkQITWitndc369K91V2JeMKcv5KMMvR9zZL-P2Ffw3DpHn9OH9GFJ01hIqC6DF7gpZzktnv954TyvLsC0iu2vKfLqcK9SoGv0Dx3s8bw": {
+    "code": 429,
+    "final": "http://email.d.kajabimail.net/c/eJwVjc0KwjAQhJ-muQghu0nb7CGHghQ8-wAlTbYa7Y_UIPbtjTAMc_j4JjrG0YBIDhUQANaoFehWgjTQoQaLxvR1bbSpjIry6R9-TItPs1w5i7tTU1AUSQVsoA22pQk8FWWkQITWitndc369K91V2JeMKcv5KMMvR9zZL-P2Ffw3DpHn9OH9GFJ01hIqC6DF7gpZzktnv954TyvLsC0iu2vKfLqcK9SoGv0Dx3s8bw",
+    "status": "uncertain"
+  },
+  "http://email.d.kajabimail.net/c/eJwdjcEKwjAQRL-muQghu5vY5pBDQQp6E1G8SZquNrWtUqPQv7cKw_AOw5vGMdYaRHSowAKgQVJAuQSpoUSCArWujNGkM60aefedr-PgYy9HTqJ1pOw11CFnb9Ha_zwg52w1WqN8EL1rU3q-MiozrJbMj3d6y5oXPOzO6tmdqrQ_Cv45Lw338cPTfImNKwqLqgAgMTk_zMv90smPN57iyDI8BpHcISZebTcZEqo1fQElPTyY": {
+    "code": 200,
+    "final": "https://www.youtube.com/watch?v=SJX0pjVFtQU&feature=youtu.be",
+    "status": "alive"
+  },
+  "http://email.d.kajabimail.net/c/eJxNjsEKwjAQRL-muQghu5s06SGHggie_YCyMbGNtlFqEPr31pswl4F5j4k-YdAgskcFHQAaJAVkJUgNPRI41PpkjCbdaBXlg-8c8sJ5liVVMXm0rTLGumDYdlfrbBvQxS7clHWtIRazn2p9vRvqGzztyeVdeVx5kdfnsndetsplTGsuSaSfeYhpzp-0bkOO3rkOlQMgsfp9up_4B34OUf0l13Q4HxskVC19AbpPP18": {
+    "code": 200,
+    "final": "https://www.instagram.com/amytangerine",
+    "status": "alive"
+  },
+  "http://email.d.kajabimail.net/c/eJxNjssKwjAURL-m2Qgh95HaLrIoiODaD5DE3NpoH1KjpX9v3QmzGuYcJjrBwKCSQwM1AFokA7TXoBkaJKiQ-WgtExdson74uw9p8KnXo2TVObbBlyHEPdjoA7QeAtbXkluywHUk1bsu5-eroKbA45ZlWfQ6vfM7iL5Ow9b4Yc1-vMmcRlHyc1-i9Okj83pJ0VVVjaYCIDW7bbrd-Ad-DpXdOWXZnQ4FEpqSvtU6QS8": {
+    "code": 200,
+    "final": "https://www.youtube.com/amytangerine",
+    "status": "alive"
+  },
+  "http://evalicious.bigcartel.com/products": {
+    "code": 404,
+    "final": "http://evalicious.bigcartel.com/products",
+    "status": "dead"
+  },
+  "http://ginkopapers.com/": {
+    "code": 200,
+    "final": "http://ginkopapers.com/",
+    "status": "alive"
+  },
+  "http://go.magik.ly/ml/1o5l/": {
+    "code": "err:timed out",
+    "final": "http://go.magik.ly/ml/1o5l/",
+    "status": "uncertain"
+  },
+  "http://go.magik.ly/ml/1o5p/": {
+    "code": "err:timed out",
+    "final": "http://go.magik.ly/ml/1o5p/",
+    "status": "uncertain"
+  },
+  "http://go.magik.ly/ml/hpc/": {
+    "code": "err:timed out",
+    "final": "http://go.magik.ly/ml/hpc/",
+    "status": "uncertain"
+  },
+  "http://goodelifeproject.com/podcast": {
+    "code": "conn:[Errno 8] nodename nor servname provided",
+    "final": "http://goodelifeproject.com/podcast",
+    "status": "dead"
+  },
+  "http://hbomaxhalloween.dja.com/": {
+    "code": 201,
+    "final": "https://hbomaxhalloween.dja.com:443/",
+    "status": "alive"
+  },
+  "http://iheartmemories.typepad.com/": {
+    "code": 200,
+    "final": "https://www.networksolutions.com/typepad?siteID=100&channelID=P99C100S653N0B5A1D0E0000V111",
+    "status": "alive"
+  },
+  "http://inacreativebubble.blogspot.com/2014/08/freebie-spark-of-madness.html": {
+    "code": 200,
+    "final": "https://inacreativebubble.blogspot.com/2014/08/freebie-spark-of-madness.html",
+    "status": "alive"
+  },
+  "http://ink361.com/app/photo/ig-573933974525409799_476885": {
+    "code": 403,
+    "final": "http://ink361.com/app/photo/ig-573933974525409799_476885",
+    "status": "uncertain"
+  },
+  "http://ink361.com/app/tag/amytangerinehandbook": {
+    "code": 403,
+    "final": "http://ink361.com/app/tag/amytangerinehandbook",
+    "status": "uncertain"
+  },
+  "http://instagram.com/amytangerine": {
+    "code": 200,
+    "final": "https://www.instagram.com/amytangerine",
+    "status": "alive"
+  },
+  "http://instagram.com/creative_opts": {
+    "code": 200,
+    "final": "https://www.instagram.com/creative_opts",
+    "status": "alive"
+  },
+  "http://instagram.com/ellesstudio": {
+    "code": 200,
+    "final": "https://www.instagram.com/ellesstudio",
+    "status": "alive"
+  },
+  "http://instagram.com/ellesstudio/": {
+    "code": 200,
+    "final": "https://www.instagram.com/ellesstudio/",
+    "status": "alive"
+  },
+  "http://instagram.com/ginkopapers": {
+    "code": 200,
+    "final": "https://www.instagram.com/ginkopapers",
+    "status": "alive"
+  },
+  "http://instagram.com/pinkfreshstudio": {
+    "code": 200,
+    "final": "https://www.instagram.com/pinkfreshstudio",
+    "status": "alive"
+  },
+  "http://kalbarteski.bigcartel.com/": {
+    "code": 200,
+    "final": "http://kalbarteski.bigcartel.com/",
+    "status": "alive"
+  },
+  "http://kristinharmel.com/": {
+    "code": 200,
+    "final": "https://kristinharmel.com/",
+    "status": "alive"
+  },
+  "http://lifelovepaper.bigcartel.com/product/we-were-here-rubber-stamp": {
+    "code": 404,
+    "final": "http://lifelovepaper.bigcartel.com/product/we-were-here-rubber-stamp",
+    "status": "dead"
+  },
+  "http://lishcreative.com/": {
+    "code": 200,
+    "final": "https://lishcreative.com/",
+    "status": "alive"
+  },
+  "http://new.inlinkz.com/pm.php?utm_source=prdlist&amp;utm_medium=widget_o&amp;utm_campaign=powered": {
+    "code": 200,
+    "final": "https://linkdeli.com/",
+    "status": "alive"
+  },
+  "http://officedepot.com/": {
+    "code": "err:timed out",
+    "final": "http://officedepot.com/",
+    "status": "uncertain"
+  },
+  "http://paperandmusings.wordpress.com/": {
+    "code": 200,
+    "final": "https://paperandmusings.wordpress.com/",
+    "status": "alive"
+  },
+  "http://persnicketyprints.com/": {
+    "code": 200,
+    "final": "https://www.persnicketyprints.com/",
+    "status": "alive"
+  },
+  "http://pictapgo.com/": {
+    "code": 200,
+    "final": "https://gettotallyrad.com/",
+    "status": "alive"
+  },
+  "http://pinterest.com/ellesstudiopins/": {
+    "code": 200,
+    "final": "https://www.pinterest.com/ellesstudiopins/",
+    "status": "alive"
+  },
+  "http://pinterest.com/ellesstudiopins/pins/": {
+    "code": 200,
+    "final": "https://www.pinterest.com/ellesstudiopins/",
+    "status": "alive"
+  },
+  "http://rachelpitzel.com/": {
+    "code": 200,
+    "final": "https://rachelpitzel.com/",
+    "status": "alive"
+  },
+  "http://scrapperin.blogspot.de/": {
+    "code": 200,
+    "final": "http://scrapperin.blogspot.com/",
+    "status": "alive"
+  },
+  "http://shop.blinksoflife.com/": {
+    "code": "conn:[Errno 8] nodename nor servname provided",
+    "final": "http://shop.blinksoflife.com/",
+    "status": "dead"
+  },
+  "http://shrsl.com/?~8ebq": {
+    "code": 404,
+    "final": "http://shrsl.com/?~8ebq",
+    "status": "dead"
+  },
+  "http://shrsl.com/?~8qrd": {
+    "code": 404,
+    "final": "http://shrsl.com/?~8qrd",
+    "status": "dead"
+  },
+  "http://shrsl.com/ijok": {
+    "code": 200,
+    "final": "https://awin1.com/closedMerchant.html?sasshortcode=ijok",
+    "status": "alive"
+  },
+  "http://skipping5.com/": {
+    "code": "conn:[Errno 8] nodename nor servname provided",
+    "final": "http://skipping5.com/",
+    "status": "dead"
+  },
+  "http://skipping5.com/collections/186436-all-products": {
+    "code": "conn:[Errno 8] nodename nor servname provided",
+    "final": "http://skipping5.com/collections/186436-all-products",
+    "status": "dead"
+  },
+  "http://stylebyemilyhenderson.com/blog/happy-8-months-mr-charles/": {
+    "code": 403,
+    "final": "http://stylebyemilyhenderson.com/blog/happy-8-months-mr-charles/",
+    "status": "uncertain"
+  },
+  "http://twopeasinabucket.typepad.com/": {
+    "code": 200,
+    "final": "https://www.networksolutions.com/typepad?siteID=100&channelID=P99C100S653N0B5A1D0E0000V111",
+    "status": "alive"
+  },
+  "http://vimeo.com/37711971": {
+    "code": 200,
+    "final": "https://vimeo.com/37711971",
+    "status": "alive"
+  },
+  "http://whimsodoodle.com/": {
+    "code": 429,
+    "final": "http://whimsodoodle.com/",
+    "status": "uncertain"
+  },
+  "http://wp.me/p4uKLp-4O4": {
+    "code": 200,
+    "final": "https://www.amytangerine.com/?p=18480",
+    "status": "alive"
+  },
+  "http://wp.me/p4uKLp-5Iu": {
+    "code": 200,
+    "final": "https://www.amytangerine.com/?p=21978",
+    "status": "alive"
+  },
+  "http://wp.me/p4uKLp-6vA": {
+    "code": 200,
+    "final": "https://www.amytangerine.com/?p=25022",
+    "status": "alive"
+  },
+  "http://www.CreativeOptionsCrafts.com": {
+    "code": 200,
+    "final": "https://www.purefishing.com/",
+    "status": "alive"
+  },
+  "http://www.LetsStartToday.com": {
+    "code": "conn:[Errno 8] nodename nor servname provided",
+    "final": "http://www.LetsStartToday.com",
+    "status": "dead"
+  },
+  "http://www.abeautifulmess.com/2015/04/baked-asparagus-fries-with-creamy-lemon-sauce.html": {
+    "code": 200,
+    "final": "https://abeautifulmess.com/?s=fries",
+    "status": "alive"
+  },
+  "http://www.abeautifulmess.com/2016/09/blog-qa-what-should-i-do-about-haters.html": {
+    "code": 410,
+    "final": "http://www.abeautifulmess.com/2016/09/blog-qa-what-should-i-do-about-haters.html",
+    "status": "dead"
+  },
+  "http://www.amazon.com/gp/product/0385536976/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0385536976&amp;linkCode=as2&amp;tag=wwwamytangeri-20": {
+    "code": 200,
+    "final": "https://www.amazon.com/gp/product/0385536976/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0385536976&amp;linkCode=as2&amp;tag=wwwamytangeri-20",
+    "status": "alive"
+  },
+  "http://www.amazon.com/gp/product/1476754152/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=1476754152&amp;linkCode=as2&amp;tag=wwwamytangeri-20&amp;linkId=B63HATZIQQQYJ4MF": {
+    "code": 200,
+    "final": "https://www.amazon.com/gp/product/1476754152/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=1476754152&amp;linkCode=as2&amp;tag=wwwamytangeri-20&amp;linkId=B63HATZIQQQYJ4MF",
+    "status": "alive"
+  },
+  "http://www.amazon.com/gp/product/1594203334/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=1594203334&amp;linkCode=as2&amp;tag=wwwamytangeri-20": {
+    "code": 200,
+    "final": "https://www.amazon.com/gp/product/1594203334/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=1594203334&amp;linkCode=as2&amp;tag=wwwamytangeri-20",
+    "status": "alive"
+  },
+  "http://www.amazon.com/gp/product/B007OME98Q/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B007OME98Q&amp;linkCode=as2&amp;tag=wwwamytangeri-20": {
+    "code": 200,
+    "final": "https://www.amazon.com/gp/product/B007OME98Q/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B007OME98Q&amp;linkCode=as2&amp;tag=wwwamytangeri-20",
+    "status": "alive"
+  },
+  "http://www.amazon.com/gp/product/B007UU2U6K/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B007UU2U6K&amp;linkCode=as2&amp;tag=wwwamytangeri-20": {
+    "code": 200,
+    "final": "https://www.amazon.com/gp/product/B007UU2U6K/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B007UU2U6K&amp;linkCode=as2&amp;tag=wwwamytangeri-20",
+    "status": "alive"
+  },
+  "http://www.amazon.com/gp/product/B008FYGKES/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B008FYGKES&amp;linkCode=as2&amp;tag=wwwamytangeri-20": {
+    "code": 200,
+    "final": "https://www.amazon.com/gp/product/B008FYGKES/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B008FYGKES&amp;linkCode=as2&amp;tag=wwwamytangeri-20",
+    "status": "alive"
+  },
+  "http://www.amazon.com/gp/product/B00EAARZ5Y/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B00EAARZ5Y&amp;linkCode=as2&amp;tag=wwwamytangeri-20": {
+    "code": 200,
+    "final": "https://www.amazon.com/gp/product/B00EAARZ5Y/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B00EAARZ5Y&amp;linkCode=as2&amp;tag=wwwamytangeri-20",
+    "status": "alive"
+  },
+  "http://www.amazon.com/gp/product/B00EU9V3QW/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B00EU9V3QW&amp;linkCode=as2&amp;tag=wwwamytangeri-20": {
+    "code": 200,
+    "final": "https://www.amazon.com/gp/product/B00EU9V3QW/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B00EU9V3QW&amp;linkCode=as2&amp;tag=wwwamytangeri-20",
+    "status": "alive"
+  },
+  "http://www.amazon.com/gp/product/B00HYAL84Q/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B00HYAL84Q&amp;linkCode=as2&amp;tag=wwwamytangeri-20": {
+    "code": 200,
+    "final": "https://www.amazon.com/gp/product/B00HYAL84Q/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B00HYAL84Q&amp;linkCode=as2&amp;tag=wwwamytangeri-20",
+    "status": "alive"
+  },
+  "http://www.amazon.com/s/?_encoding=UTF8&amp;camp=1789&amp;creative=390957&amp;field-keywords=creative%20options&amp;linkCode=ur2&amp;sprefix=creative%20options%2Caps%2C206&amp;tag=wwwamytangeri-20&amp;url=search-alias%3Darts-crafts&amp;linkId=PG52WT7ABVUOFPEP": {
+    "code": 503,
+    "final": "http://www.amazon.com/s/?_encoding=UTF8&amp;camp=1789&amp;creative=390957&amp;field-keywords=creative%20options&amp;linkCode=ur2&amp;sprefix=creative%20options%2Caps%2C206&amp;tag=wwwamytangeri-20&amp;url=search-alias%3Darts-crafts&amp;linkId=PG52WT7ABVUOFPEP",
+    "status": "uncertain"
+  },
+  "http://www.amytangerine.com/": {
+    "code": 200,
+    "final": "https://www.amytangerine.com/",
+    "status": "alive"
+  },
+  "http://www.amytangerine.com/blog/2011/07/sunday-monday.html": {
+    "code": 200,
+    "final": "https://www.amytangerine.com/",
+    "status": "alive"
+  },
+  "http://www.amytangerine.com/blog/2011/07/tuesday.html": {
+    "code": 200,
+    "final": "https://www.amytangerine.com/",
+    "status": "alive"
+  },
+  "http://www.amytangerine.com/blog/2013/05/guest-post-paige-evans.html?rq=paige%20evans": {
+    "code": 200,
+    "final": "https://www.amytangerine.com/?rq=paige%20evans",
+    "status": "alive"
+  },
+  "http://www.amytangerine.com/blog/2015/1/15/creative-handbook-page-1.html": {
+    "code": 200,
+    "final": "https://www.amytangerine.com/",
+    "status": "alive"
+  },
+  "http://www.amytangerine.com/blog/2015/1/30/creative-handbook-practice-2.html?rq=handbook": {
+    "code": 200,
+    "final": "https://www.amytangerine.com/?rq=handbook",
+    "status": "alive"
+  },
+  "http://www.amytangerine.com/blog/2015/3/18/watch-my-new-show-design-on-time.html": {
+    "code": 200,
+    "final": "https://www.amytangerine.com/",
+    "status": "alive"
+  },
+  "http://www.amytangerine.com/blog/2015/4/13/design-on-time-episode-04.html": {
+    "code": 200,
+    "final": "https://www.amytangerine.com/",
+    "status": "alive"
+  },
+  "http://www.amytangerine.com/blog/2015/4/19/rocksbox.html?rq=rocksbox": {
+    "code": 200,
+    "final": "https://www.amytangerine.com/?rq=rocksbox",
+    "status": "alive"
+  },
+  "http://www.amytangerine.com/blog/2015/6/2/donut-worry-be-happy.html": {
+    "code": 200,
+    "final": "https://www.amytangerine.com/",
+    "status": "alive"
+  },
+  "http://www.amytangerine.com/blog/2018/10/18/art-opening-jacks-5th-birthday-party": {
+    "code": 200,
+    "final": "https://www.amytangerine.com/",
+    "status": "alive"
+  },
+  "http://www.amytangerine.com/blog/be-happy-box-reveal": {
+    "code": 200,
+    "final": "https://www.amytangerine.com/",
+    "status": "alive"
+  },
+  "http://www.amytangerine.com/blog/designontime03": {
+    "code": 200,
+    "final": "https://www.amytangerine.com/",
+    "status": "alive"
+  },
+  "http://www.amytangerine.com/blog/designontime05": {
+    "code": 200,
+    "final": "https://www.amytangerine.com/",
+    "status": "alive"
+  },
+  "http://www.amytangerine.com/blog/designontime06": {
+    "code": 200,
+    "final": "https://www.amytangerine.com/",
+    "status": "alive"
+  },
+  "http://www.amytangerine.com/blog/designontime07": {
+    "code": 200,
+    "final": "https://www.amytangerine.com/",
+    "status": "alive"
+  },
+  "http://www.amytangerine.com/blog/designontime08": {
+    "code": 200,
+    "final": "https://www.amytangerine.com/",
+    "status": "alive"
+  },
+  "http://www.amytangerine.com/blog/halloween-diydoggybags": {
+    "code": 200,
+    "final": "https://www.amytangerine.com/",
+    "status": "alive"
+  },
+  "http://www.amytangerine.com/blog/kidbox": {
+    "code": 200,
+    "final": "https://www.amytangerine.com/",
+    "status": "alive"
+  },
+  "http://www.amytangerine.com/giveaway": {
+    "code": 404,
+    "final": "http://www.amytangerine.com/giveaway",
+    "status": "dead"
+  },
+  "http://www.amytangerine.com/s/Brene_Quote.jpg": {
+    "code": 404,
+    "final": "http://www.amytangerine.com/s/Brene_Quote.jpg",
+    "status": "dead"
+  },
+  "http://www.amytangerine.com/s/FallFavorites.jpg": {
+    "code": 404,
+    "final": "http://www.amytangerine.com/s/FallFavorites.jpg",
+    "status": "dead"
+  },
+  "http://www.archerandolive.com/?aff=142": {
+    "code": 200,
+    "final": "https://www.archerandolive.com/?aff=142",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/_amy%2520tangerine_/%3Fpp%3D300": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/_amy%2520tangerine_/%3Fpp%3D300",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/_amy_tangerine_/%3Fpp%3D300": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/_amy_tangerine_/%3Fpp%3D300",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/_composition_%26%2520color_/%3Fpp%3D300": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/_composition_%26%2520color_/%3Fpp%3D300",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/_project_life%2520by%2520becky%2520higgins_/_project_life%2520core%2520kits_/die-cuts/": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/_project_life%2520by%2520becky%2520higgins_/_project_life%2520core%2520kits_/die-cuts/",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/_snap_/_simple_stories%2520snap_/%3Fpp%3D300": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/_snap_/_simple_stories%2520snap_/%3Fpp%3D300",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/_sweet_notes_/%3Fpp%3D300": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/_sweet_notes_/%3Fpp%3D300",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/_yes_please_/%3Fpp%3D300": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/_yes_please_/%3Fpp%3D300",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/american-crafts/126954-white-amy-tangerine-sketchbook-journal-foam-thickers-stickers/%3Ffilters%3D_journal_thickers_": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/american-crafts/126954-white-amy-tangerine-sketchbook-journal-foam-thickers-stickers/%3Ffilters%3D_journal_thickers_",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/american-crafts/126976-montage-spiral-daybook-amy-tangerine-sketchbook/%3Ffilters%3D_spiral%2Bdaybook_%252Falbums": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/american-crafts/126976-montage-spiral-daybook-amy-tangerine-sketchbook/%3Ffilters%3D_spiral%2Bdaybook_%252Falbums",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/american-crafts/139087-document-yes-please-amy-tangerine-alphabet-stamp-set/%3Ffilters%3D_yes_please_": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/american-crafts/139087-document-yes-please-amy-tangerine-alphabet-stamp-set/%3Ffilters%3D_yes_please_",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/american-crafts/139088-lovely-yes-please-amy-tangerine-calendar-stamp-set/%3Ffilters%3D_calendar_stamp_": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/american-crafts/139088-lovely-yes-please-amy-tangerine-calendar-stamp-set/%3Ffilters%3D_calendar_stamp_",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/american-crafts/139088-lovely-yes-please-amy-tangerine-calendar-stamp-set/%3Ffilters%3D_yes_please_": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/american-crafts/139088-lovely-yes-please-amy-tangerine-calendar-stamp-set/%3Ffilters%3D_yes_please_",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/american-crafts/139089-authentic-yes-please-amy-tangerine-phrase-roller-stamp/%3Ffilters%3D_yes_please_": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/american-crafts/139089-authentic-yes-please-amy-tangerine-phrase-roller-stamp/%3Ffilters%3D_yes_please_",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/american-crafts/139091-capture-yes-please-amy-tangerine-embroidery-stencil-kit/%3Ffilters%3D_yes_please_": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/american-crafts/139091-capture-yes-please-amy-tangerine-embroidery-stencil-kit/%3Ffilters%3D_yes_please_",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/american-crafts/139092-original-yes-please-amy-tangerine-daybook/%3Ffilters%3D_daybook_": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/american-crafts/139092-original-yes-please-amy-tangerine-daybook/%3Ffilters%3D_daybook_",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/american-crafts/144205-infatuation-12x12-cut-paste-amy-tangerine-paper/": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/american-crafts/144205-infatuation-12x12-cut-paste-amy-tangerine-paper/",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/american-crafts/144228-cut-paste-amy-tangerine-12x12-paper-pad/": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/american-crafts/144228-cut-paste-amy-tangerine-12x12-paper-pad/",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/american-crafts/144237-begonia-cut-outs-rubber-cut-paste-amy-tangerine-thickers/": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/american-crafts/144237-begonia-cut-outs-rubber-cut-paste-amy-tangerine-thickers/",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/american-crafts/144238-cut-out-accents-printed-chipboard-cut-paste-amy-tangerine-thickers/": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/american-crafts/144238-cut-out-accents-printed-chipboard-cut-paste-amy-tangerine-thickers/",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/american-crafts/144240-harper-cut-paste-amy-tangerine-tiny-alpha-transparent-stickers/": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/american-crafts/144240-harper-cut-paste-amy-tangerine-tiny-alpha-transparent-stickers/",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/american-crafts/144248-cut-paste-amy-tangerine-die-cut-shapes/": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/american-crafts/144248-cut-paste-amy-tangerine-die-cut-shapes/",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/american-crafts/144259-cut-paste-amy-tangerine-noted-daybook-kit/": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/american-crafts/144259-cut-paste-amy-tangerine-noted-daybook-kit/",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/american-crafts/_ready_set%2520go_/%3Fpp%3D300": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/american-crafts/_ready_set%2520go_/%3Fpp%3D300",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/crate-paper/144376-maggie-holmes-flea-market-fabric-bows/": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/crate-paper/144376-maggie-holmes-flea-market-fabric-bows/",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/freckled-fawn/130185-aquapink-hearts-washi-tape/%3Ffilters%3D_freckled%2Bfawn_%252Ftapes": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/freckled-fawn/130185-aquapink-hearts-washi-tape/%3Ffilters%3D_freckled%2Bfawn_%252Ftapes",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/heidi-swapp/126754-color-magic-12x12-resist-paper-pack/%3Ffilters%3D_heidi%2Bswapp_": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/heidi-swapp/126754-color-magic-12x12-resist-paper-pack/%3Ffilters%3D_heidi%2Bswapp_",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/jillibean-soup/125350-yam-yellow-alphabean-cardstock-stickers/%3Ffilters%3Dwhats-hot": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/jillibean-soup/125350-yam-yellow-alphabean-cardstock-stickers/%3Ffilters%3Dwhats-hot",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/love-my-tapes/128113-teal-white-diagonal-stripe-washi-tape/%3Ffilters%3Dwhats-hot": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/love-my-tapes/128113-teal-white-diagonal-stripe-washi-tape/%3Ffilters%3Dwhats-hot",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/my-minds-eye-llc/130225-together-the-sweetest-thing-decorative-tape/%3Ffilters%3Dmy-minds-eye-llc": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/my-minds-eye-llc/130225-together-the-sweetest-thing-decorative-tape/%3Ffilters%3Dmy-minds-eye-llc",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/my-minds-eye-llc/130227-together-chevron-12x12-the-sweetest-thing-paper/%3Ffilters%3Dwhats-hot": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/my-minds-eye-llc/130227-together-chevron-12x12-the-sweetest-thing-paper/%3Ffilters%3Dwhats-hot",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/project-life/142758-blush-edition-core-kit/": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/project-life/142758-blush-edition-core-kit/",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/project-life/142771-design-a-photo-pocket-pages/": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/project-life/142771-design-a-photo-pocket-pages/",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/project-life/142772-design-b-photo-pocket-pages/": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/project-life/142772-design-b-photo-pocket-pages/",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/silhouette/122900-silhouette-cameo/%3Ffilters%3Dreceived-in-last-48-hours": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/silhouette/122900-silhouette-cameo/%3Ffilters%3Dreceived-in-last-48-hours",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/simple-stories/135073-snp-binder-orange/%3Ffilters%3D_snap_%252F_simple_stories%2Bsnap_": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/simple-stories/135073-snp-binder-orange/%3Ffilters%3D_snap_%252F_simple_stories%2Bsnap_",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/simple-stories/135091-letters-snp-stickers/%3Ffilters%3D_simple_stories%2Bsnap_": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/simple-stories/135091-letters-snp-stickers/%3Ffilters%3D_simple_stories%2Bsnap_",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/studio-calico/128157-chevron-hueys-mask/%3Ffilters%3Dwhats-hot": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/studio-calico/128157-chevron-hueys-mask/%3Ffilters%3Dwhats-hot",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/studio-calico/131751-classic-calico-3-roller-date-stamp/%3Ffilters%3D_studio_calico_%252F_date_stamp_%252Fstamps": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/studio-calico/131751-classic-calico-3-roller-date-stamp/%3Ffilters%3D_studio_calico_%252F_date_stamp_%252Fstamps",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/two-peas/127505-collect-create-workshop/%3Ffilters%3Dworkshops-only%252Fworkshops": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/two-peas/127505-collect-create-workshop/%3Ffilters%3Dworkshops-only%252Fworkshops",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/two-peas/127505-collect-create-workshop/%3Ffilters%3Dworkshops-only/workshops%26avad%3D41735_b2b1de45": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/two-peas/127505-collect-create-workshop/%3Ffilters%3Dworkshops-only/workshops%26avad%3D41735_b2b1de45",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/two-peas/128153-sassy-scrapping-with-shannon-workshop/%3Ffilters%3Dworkshops-only%252Fworkshops": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/two-peas/128153-sassy-scrapping-with-shannon-workshop/%3Ffilters%3Dworkshops-only%252Fworkshops",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/two-peas/141195-mix-it-up-mini-workshop-with-amy-tan/%3Ffilters%3Dworkshops-only%252Fworkshops": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/two-peas/141195-mix-it-up-mini-workshop-with-amy-tan/%3Ffilters%3Dworkshops-only%252Fworkshops",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/we-r-memory-keepers-inc/143758-3x4-card-punch/": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/we-r-memory-keepers-inc/143758-3x4-card-punch/",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/whats-hot/%3Fpp%3D300": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=cl&amp;mi=10513&amp;pw=41735&amp;url=http%3A//www.twopeasinabucket.com/shop/whats-hot/%3Fpp%3D300",
+    "status": "alive"
+  },
+  "http://www.avantlink.com/click.php?tt=ml&amp;ti=24913&amp;pw=41735": {
+    "code": 200,
+    "final": "http://www.avantlink.com/click.php?tt=ml&amp;ti=24913&amp;pw=41735",
+    "status": "alive"
+  },
+  "http://www.avery.com/": {
+    "code": 200,
+    "final": "https://www.avery.com/",
+    "status": "alive"
+  },
+  "http://www.avery.com/avery/en_us/": {
+    "code": 200,
+    "final": "https://www.avery.com/",
+    "status": "alive"
+  },
+  "http://www.avery.com/print": {
+    "code": 200,
+    "final": "https://www.avery.com/templates?utm_source=vanity&utm_campaign=print",
+    "status": "alive"
+  },
+  "http://www.baum-kuchen.net/": {
+    "code": 429,
+    "final": "http://www.baum-kuchen.net/",
+    "status": "uncertain"
+  },
+  "http://www.baum-kuchen.net/collections/midori-collection/products/film-pocket-sticker-card-size": {
+    "code": 429,
+    "final": "http://www.baum-kuchen.net/collections/midori-collection/products/film-pocket-sticker-card-size",
+    "status": "uncertain"
+  },
+  "http://www.baum-kuchen.net/collections/midori-collection/products/kangaroo-notebook": {
+    "code": 429,
+    "final": "http://www.baum-kuchen.net/collections/midori-collection/products/kangaroo-notebook",
+    "status": "uncertain"
+  },
+  "http://www.beckyhiggins.com/blog": {
+    "code": 404,
+    "final": "http://www.beckyhiggins.com/blog",
+    "status": "dead"
+  },
+  "http://www.bigpictureclasses.com/PPP_AT": {
+    "code": 200,
+    "final": "https://www.bigpictureclasses.com/PPP_AT",
+    "status": "alive"
+  },
+  "http://www.blogger.com/profile/11706525695537612172": {
+    "code": 200,
+    "final": "https://www.blogger.com/profile/11706525695537612172",
+    "status": "alive"
+  },
+  "http://www.businesswire.com/news/home/20130603006033/en/Fiskars-Scissors-Amplify-Cutting-Edge": {
+    "code": "err:timed out",
+    "final": "http://www.businesswire.com/news/home/20130603006033/en/Fiskars-Scissors-Amplify-Cutting-Edge",
+    "status": "uncertain"
+  },
+  "http://www.craftsy.com/ext/AmyTan_5112_kit": {
+    "code": 404,
+    "final": "http://www.craftsy.com/ext/AmyTan_5112_kit",
+    "status": "dead"
+  },
+  "http://www.cutchens.com/": {
+    "code": 200,
+    "final": "http://www.cutchens.com/",
+    "status": "alive"
+  },
+  "http://www.facebook.com/ShopEllesStudio": {
+    "code": 400,
+    "final": "http://www.facebook.com/ShopEllesStudio",
+    "status": "uncertain"
+  },
+  "http://www.facebook.com/ohscrapstore": {
+    "code": 400,
+    "final": "http://www.facebook.com/ohscrapstore",
+    "status": "uncertain"
+  },
+  "http://www.facebook.com/shopevalicious": {
+    "code": 400,
+    "final": "http://www.facebook.com/shopevalicious",
+    "status": "uncertain"
+  },
+  "http://www.fynesdesigns.com/": {
+    "code": 200,
+    "final": "https://www.fynesdesigns.com/",
+    "status": "alive"
+  },
+  "http://www.fynesdesigns.com/50-christmas-gift-ideas-for-crafty-women/": {
+    "code": 200,
+    "final": "https://www.fynesdesigns.com/50-christmas-gift-ideas-for-crafty-women/",
+    "status": "alive"
+  },
+  "http://www.ginkopapers.com/store/erasers/index.php?show_item=169": {
+    "code": 404,
+    "final": "http://www.ginkopapers.com/store/erasers/index.php?show_item=169",
+    "status": "dead"
+  },
+  "http://www.ginkopapers.com/store/fresh_finds/index.php?show_item=1951": {
+    "code": 404,
+    "final": "http://www.ginkopapers.com/store/fresh_finds/index.php?show_item=1951",
+    "status": "dead"
+  },
+  "http://www.ginkopapers.com/store/fresh_finds/index.php?show_item=1961": {
+    "code": 404,
+    "final": "http://www.ginkopapers.com/store/fresh_finds/index.php?show_item=1961",
+    "status": "dead"
+  },
+  "http://www.ginkopapers.com/store/notepads/index.php?show_item=1726": {
+    "code": 404,
+    "final": "http://www.ginkopapers.com/store/notepads/index.php?show_item=1726",
+    "status": "dead"
+  },
+  "http://www.ginkopapers.com/store/tape/index.php?show_item=1964": {
+    "code": 404,
+    "final": "http://www.ginkopapers.com/store/tape/index.php?show_item=1964",
+    "status": "dead"
+  },
+  "http://www.imdb.com/title/tt0120148/": {
+    "code": 202,
+    "final": "https://www.imdb.com/title/tt0120148/",
+    "status": "alive"
+  },
+  "http://www.instagram.com/AmyTangerine": {
+    "code": 200,
+    "final": "https://www.instagram.com/AmyTangerine",
+    "status": "alive"
+  },
+  "http://www.instagram.com/auragami.la": {
+    "code": 200,
+    "final": "https://www.instagram.com/auragami.la",
+    "status": "alive"
+  },
+  "http://www.instagram.com/balloonzilla": {
+    "code": 200,
+    "final": "https://www.instagram.com/balloonzilla",
+    "status": "alive"
+  },
+  "http://www.instagram.com/bykaraelise": {
+    "code": 200,
+    "final": "https://www.instagram.com/bykaraelise",
+    "status": "alive"
+  },
+  "http://www.instagram.com/chescamakesthings": {
+    "code": 200,
+    "final": "https://www.instagram.com/chescamakesthings",
+    "status": "alive"
+  },
+  "http://www.instagram.com/coastal_cocktails": {
+    "code": 200,
+    "final": "https://www.instagram.com/coastal_cocktails",
+    "status": "alive"
+  },
+  "http://www.instagram.com/doadoublegood": {
+    "code": 200,
+    "final": "https://www.instagram.com/doadoublegood",
+    "status": "alive"
+  },
+  "http://www.instagram.com/festoon_la": {
+    "code": 200,
+    "final": "https://www.instagram.com/festoon_la",
+    "status": "alive"
+  },
+  "http://www.instagram.com/reachalana": {
+    "code": 200,
+    "final": "https://www.instagram.com/reachalana",
+    "status": "alive"
+  },
+  "http://www.instagram.com/shopnarwall": {
+    "code": 200,
+    "final": "https://www.instagram.com/shopnarwall",
+    "status": "alive"
+  },
+  "http://www.instagram.com/slobrucraftcoffee": {
+    "code": 200,
+    "final": "https://www.instagram.com/slobrucraftcoffee",
+    "status": "alive"
+  },
+  "http://www.instagram.com/tillamook": {
+    "code": 200,
+    "final": "https://www.instagram.com/tillamook",
+    "status": "alive"
+  },
+  "http://www.instagram.com/weareooly": {
+    "code": 200,
+    "final": "https://www.instagram.com/weareooly",
+    "status": "alive"
+  },
+  "http://www.instagram.com/yeahrentals": {
+    "code": 200,
+    "final": "https://www.instagram.com/yeahrentals",
+    "status": "alive"
+  },
+  "http://www.jennifermcguireink.com/": {
+    "code": 403,
+    "final": "http://www.jennifermcguireink.com/",
+    "status": "uncertain"
+  },
+  "http://www.joymode.com": {
+    "code": 200,
+    "final": "http://www.joymode.com",
+    "status": "alive"
+  },
+  "http://www.kellypurkey.com/its_me_kp/2013/10/my-week-daybook.html": {
+    "code": 404,
+    "final": "http://www.kellypurkey.com/its_me_kp/2013/10/my-week-daybook.html",
+    "status": "dead"
+  },
+  "http://www.letsstarttoday.com": {
+    "code": "conn:[Errno 8] nodename nor servname provided",
+    "final": "http://www.letsstarttoday.com",
+    "status": "dead"
+  },
+  "http://www.lifelovepaper.bigcartel.com/": {
+    "code": 404,
+    "final": "http://www.lifelovepaper.bigcartel.com/",
+    "status": "dead"
+  },
+  "http://www.marilyn.ca/AtHome/segments/Daily/March2016/03_10_2016/DIYPhotoFrame": {
+    "code": 200,
+    "final": "https://more.ctv.ca/marilyn/",
+    "status": "alive"
+  },
+  "http://www.memory-works.com/admin/index.mhtml?page=aboutus": {
+    "code": 200,
+    "final": "http://www.memory-works.com/index.php?page=aboutus",
+    "status": "alive"
+  },
+  "http://www.mixbook.com/": {
+    "code": 200,
+    "final": "https://www.mixbook.com:443/",
+    "status": "alive"
+  },
+  "http://www.myfavouritemagazines.co.uk/stitch-craft/mollie-makes-magazine-subscription/": {
+    "code": 200,
+    "final": "https://www.magazinesdirect.com/row",
+    "status": "alive"
+  },
+  "http://www.mypurpleylife.com/2015/12/journaling-on-go-with-creative-options.html": {
+    "code": "conn:[Errno 8] nodename nor servname provided",
+    "final": "http://www.mypurpleylife.com/2015/12/journaling-on-go-with-creative-options.html",
+    "status": "dead"
+  },
+  "http://www.neatandtangled.com/": {
+    "code": 403,
+    "final": "http://www.neatandtangled.com/",
+    "status": "uncertain"
+  },
+  "http://www.neatandtangled.com/collections/sequins": {
+    "code": 403,
+    "final": "http://www.neatandtangled.com/collections/sequins",
+    "status": "uncertain"
+  },
+  "http://www.one-happy-mama.com/2015/12/creative-options-a-super-cute-organizing-solution.html": {
+    "code": 200,
+    "final": "https://www.one-happy-mama.com/2015/12/creative-options-a-super-cute-organizing-solution.html",
+    "status": "alive"
+  },
+  "http://www.paigeandchris.com/": {
+    "code": 200,
+    "final": "https://www.paigeandchris.com/",
+    "status": "alive"
+  },
+  "http://www.papercraftmagazines.com/item/950-simplycards-and-papercraft-177": {
+    "code": 404,
+    "final": "http://www.papercraftmagazines.com/item/950-simplycards-and-papercraft-177",
+    "status": "dead"
+  },
+  "http://www.papertales.com/store/p20/Amy_Tan_%26_Paper_Tales_Photopolymer_Stamp.html": {
+    "code": 409,
+    "final": "http://www.papertales.com/store/p20/Amy_Tan_%26_Paper_Tales_Photopolymer_Stamp.html",
+    "status": "uncertain"
+  },
+  "http://www.persnicketyprints.com/": {
+    "code": 200,
+    "final": "https://www.persnicketyprints.com/",
+    "status": "alive"
+  },
+  "http://www.playavistafm.com/": {
+    "code": "conn:[Errno 8] nodename nor servname provided",
+    "final": "http://www.playavistafm.com/",
+    "status": "dead"
+  },
+  "http://www.polkadotcreative.com.au/2015/01/lost-your-creative-mojo-try-this/": {
+    "code": 404,
+    "final": "http://www.polkadotcreative.com.au/2015/01/lost-your-creative-mojo-try-this/",
+    "status": "dead"
+  },
+  "http://www.rocksbox.com": {
+    "code": 403,
+    "final": "http://www.rocksbox.com",
+    "status": "uncertain"
+  },
+  "http://www.sakuralala.com/product/fun-pack-say-cheese/": {
+    "code": "err:timed out",
+    "final": "http://www.sakuralala.com/product/fun-pack-say-cheese/",
+    "status": "uncertain"
+  },
+  "http://www.shareasale.com/r.cfm?b=199868&amp;u=530666&amp;m=24698&amp;urllink=&amp;afftrack=": {
+    "code": 200,
+    "final": "https://awin1.com/closedMerchant.html?b=199868&amp%3Bu=530666&amp%3Bm=24698&amp%3Burllink=&amp%3Bafftrack=&originalPath=%2Fr.cfm&source=sas-click",
+    "status": "alive"
+  },
+  "http://www.shareasale.com/r.cfm?b=253536&amp;u=530666&amp;m=29190&amp;urllink=&amp;afftrack=": {
+    "code": 200,
+    "final": "https://awin1.com/closedMerchant.html?b=253536&amp%3Bu=530666&amp%3Bm=29190&amp%3Burllink=&amp%3Bafftrack=&originalPath=%2Fr.cfm&source=sas-click",
+    "status": "alive"
+  },
+  "http://www.shareasale.com/r.cfm?b=635603&amp;u=530666&amp;m=9622&amp;urllink=&amp;afftrack=": {
+    "code": 200,
+    "final": "https://awin1.com/closedMerchant.html?b=635603&amp%3Bu=530666&amp%3Bm=9622&amp%3Burllink=&amp%3Bafftrack=&originalPath=%2Fr.cfm&source=sas-click",
+    "status": "alive"
+  },
+  "http://www.shareasale.com/r.cfm?u=530666&amp;b=199868&amp;m=24698&amp;afftrack=KP%20June%20July&amp;urllink=www%2Esimonsaysstamp%2Ecom%2Fservlet%2Fthe%2D57314%2Fkelly%2Dpurkey%2Dsimon%2Dsays%2FDetail": {
+    "code": 200,
+    "final": "https://awin1.com/closedMerchant.html?u=530666&amp%3Bb=199868&amp%3Bm=24698&amp%3Bafftrack=KP+June+July&amp%3Burllink=www.simonsaysstamp.com%2Fservlet%2Fthe-57314%2Fkelly-purkey-simon-says%2FDetail&originalPath=%2Fr.cfm&source=sas-click",
+    "status": "alive"
+  },
+  "http://www.shareasale.com/r.cfm?u=530666&amp;b=199868&amp;m=24698&amp;afftrack=Noted%20Daybook&amp;urllink=www%2Esimonsaysstamp%2Ecom%2Fservlet%2Fthe%2D60996%2Fnote%2Dnoted%2Dday%2Dbook%2FDetail": {
+    "code": 200,
+    "final": "https://awin1.com/closedMerchant.html?u=530666&amp%3Bb=199868&amp%3Bm=24698&amp%3Bafftrack=Noted+Daybook&amp%3Burllink=www.simonsaysstamp.com%2Fservlet%2Fthe-60996%2Fnote-noted-day-book%2FDetail&originalPath=%2Fr.cfm&source=sas-click",
+    "status": "alive"
+  },
+  "http://www.shareasale.com/r.cfm?u=530666&amp;b=199868&amp;m=24698&amp;afftrack=calendar%20stamp&amp;urllink=www%2Esimonsaysstamp%2Ecom%2Fservlet%2Fthe%2D54210%2Fcalendar%2Dstamp%2Dset%2Dlovely%2FDetail": {
+    "code": 200,
+    "final": "https://awin1.com/closedMerchant.html?u=530666&amp%3Bb=199868&amp%3Bm=24698&amp%3Bafftrack=calendar+stamp&amp%3Burllink=www.simonsaysstamp.com%2Fservlet%2Fthe-54210%2Fcalendar-stamp-set-lovely%2FDetail&originalPath=%2Fr.cfm&source=sas-click",
+    "status": "alive"
+  },
+  "http://www.shareasale.com/r.cfm?u=530666&amp;b=199868&amp;m=24698&amp;afftrack=cut%20%26%20paste&amp;urllink=www%2Esimonsaysstamp%2Ecom%2Fservlet%2Fthe%2D60077%2F366066%2D8%2Dpage%2Dsticker%2FDetail": {
+    "code": 200,
+    "final": "https://awin1.com/closedMerchant.html?u=530666&amp%3Bb=199868&amp%3Bm=24698&amp%3Bafftrack=cut+%26+paste&amp%3Burllink=www.simonsaysstamp.com%2Fservlet%2Fthe-60077%2F366066-8-page-sticker%2FDetail&originalPath=%2Fr.cfm&source=sas-click",
+    "status": "alive"
+  },
+  "http://www.shareasale.com/r.cfm?u=530666&amp;b=199868&amp;m=24698&amp;afftrack=die%20cut%20tags&amp;urllink=www%2Esimonsaysstamp%2Ecom%2Fservlet%2Fthe%2D61003%2F366069%2Ddie%2Dcut%2Dtags%2FDetail": {
+    "code": 200,
+    "final": "https://awin1.com/closedMerchant.html?u=530666&amp%3Bb=199868&amp%3Bm=24698&amp%3Bafftrack=die+cut+tags&amp%3Burllink=www.simonsaysstamp.com%2Fservlet%2Fthe-61003%2F366069-die-cut-tags%2FDetail&originalPath=%2Fr.cfm&source=sas-click",
+    "status": "alive"
+  },
+  "http://www.shareasale.com/r.cfm?u=530666&amp;b=199868&amp;m=24698&amp;afftrack=garland&amp;urllink=www%2Esimonsaysstamp%2Ecom%2Fproduct%2Easpx%3Fid%3D312644": {
+    "code": 200,
+    "final": "https://awin1.com/closedMerchant.html?u=530666&amp%3Bb=199868&amp%3Bm=24698&amp%3Bafftrack=garland&amp%3Burllink=www.simonsaysstamp.com%2Fproduct.aspx%3Fid%3D312644&originalPath=%2Fr.cfm&source=sas-click",
+    "status": "alive"
+  },
+  "http://www.shareasale.com/r.cfm?u=530666&amp;b=199868&amp;m=24698&amp;afftrack=neat%20%26%20tangled&amp;urllink=www%2Esimonsaysstamp%2Ecom%2Fsearch%2Easpx%3Ff15%3D200": {
+    "code": 200,
+    "final": "https://awin1.com/closedMerchant.html?u=530666&amp%3Bb=199868&amp%3Bm=24698&amp%3Bafftrack=neat+%26+tangled&amp%3Burllink=www.simonsaysstamp.com%2Fsearch.aspx%3Ff15%3D200&originalPath=%2Fr.cfm&source=sas-click",
+    "status": "alive"
+  },
+  "http://www.shareasale.com/r.cfm?u=530666&amp;b=199868&amp;m=24698&amp;afftrack=stitched&amp;urllink=www%2Esimonsaysstamp%2Ecom%2Fsearch%2Easpx%3FKeywords%3Damy%2Btangerine%2Bstitched%2B2014": {
+    "code": 200,
+    "final": "https://awin1.com/closedMerchant.html?u=530666&amp%3Bb=199868&amp%3Bm=24698&amp%3Bafftrack=stitched&amp%3Burllink=www.simonsaysstamp.com%2Fsearch.aspx%3FKeywords%3Damy%2Btangerine%2Bstitched%2B2014&originalPath=%2Fr.cfm&source=sas-click",
+    "status": "alive"
+  },
+  "http://www.shareasale.com/r.cfm?u=530666&amp;b=33086&amp;m=7429&amp;afftrack=%26&amp;urllink=store%2Escrapbook%2Ecom%2Fac%2D369106%2Ehtml%3Fw%3Dheidi%2Bswapp%2Bmarquee%2Blove": {
+    "code": 200,
+    "final": "https://awin1.com/closedMerchant.html?u=530666&amp%3Bb=33086&amp%3Bm=7429&amp%3Bafftrack=%26&amp%3Burllink=store.scrapbook.com%2Fac-369106.html%3Fw%3Dheidi%2Bswapp%2Bmarquee%2Blove&originalPath=%2Fr.cfm&source=sas-click",
+    "status": "alive"
+  },
+  "http://www.shareasale.com/r.cfm?u=530666&amp;b=33086&amp;m=7429&amp;afftrack=garland&amp;urllink=store%2Escrapbook%2Ecom%2Fac%2D368979%2Ehtml": {
+    "code": 200,
+    "final": "https://awin1.com/closedMerchant.html?u=530666&amp%3Bb=33086&amp%3Bm=7429&amp%3Bafftrack=garland&amp%3Burllink=store.scrapbook.com%2Fac-368979.html&originalPath=%2Fr.cfm&source=sas-click",
+    "status": "alive"
+  },
+  "http://www.shopellesstudio.com/": {
+    "code": 200,
+    "final": "https://shopellesstudio.com/",
+    "status": "alive"
+  },
+  "http://www.shopellesstudio.com/Be-Merry/": {
+    "code": 429,
+    "final": "http://www.shopellesstudio.com/Be-Merry/",
+    "status": "uncertain"
+  },
+  "http://www.shopellesstudio.com/Elle-s-Studio-July-2013-Kit.html": {
+    "code": 429,
+    "final": "http://www.shopellesstudio.com/Elle-s-Studio-July-2013-Kit.html",
+    "status": "uncertain"
+  },
+  "http://www.shopellesstudio.com/Exclusive-Christmas-Stamp.html": {
+    "code": 429,
+    "final": "http://www.shopellesstudio.com/Exclusive-Christmas-Stamp.html",
+    "status": "uncertain"
+  },
+  "http://www.shopellesstudio.com/New/": {
+    "code": 404,
+    "final": "http://www.shopellesstudio.com/New/",
+    "status": "dead"
+  },
+  "http://www.shopellesstudio.com/giftcert.php": {
+    "code": 429,
+    "final": "http://www.shopellesstudio.com/giftcert.php",
+    "status": "uncertain"
+  },
+  "http://www.shopevalicious.com/": {
+    "code": 200,
+    "final": "http://www.shopevalicious.com/",
+    "status": "alive"
+  },
+  "http://www.silhouetteamerica.com/black": {
+    "code": 200,
+    "final": "https://www.silhouetteamerica.com/",
+    "status": "alive"
+  },
+  "http://www.sisterssuitcaseblog.com/2012/08/how-to-print-phone-instagram-pics-for.html": {
+    "code": 200,
+    "final": "https://sisterssuitcaseblog.com/2012/08/how-to-print-phone-instagram-pics-for.html",
+    "status": "alive"
+  },
+  "http://www.skipping5.com/": {
+    "code": "conn:[Errno 8] nodename nor servname provided",
+    "final": "http://www.skipping5.com/",
+    "status": "dead"
+  },
+  "http://www.snapfish.com/amytangerine": {
+    "code": 200,
+    "final": "https://www.snapfish.com/home",
+    "status": "alive"
+  },
+  "http://www.spiegel.com/": {
+    "code": "conn:[Errno 8] nodename nor servname provided",
+    "final": "http://www.spiegel.com/",
+    "status": "dead"
+  },
+  "http://www.spiegel.com/charlotte-trench-coat-45732.html?color=LIGHT-GRAY": {
+    "code": "conn:[Errno 8] nodename nor servname provided",
+    "final": "http://www.spiegel.com/charlotte-trench-coat-45732.html?color=LIGHT-GRAY",
+    "status": "dead"
+  },
+  "http://www.spiegel.com/control-sheath-dress-with-lace-trim-by-shape-fx-43992.html?color=BLACK": {
+    "code": "conn:[Errno 8] nodename nor servname provided",
+    "final": "http://www.spiegel.com/control-sheath-dress-with-lace-trim-by-shape-fx-43992.html?color=BLACK",
+    "status": "dead"
+  },
+  "http://www.spiegel.com/marissa-dress-45678.html?color=RED": {
+    "code": "conn:[Errno 8] nodename nor servname provided",
+    "final": "http://www.spiegel.com/marissa-dress-45678.html?color=RED",
+    "status": "dead"
+  },
+  "http://www.spiegel.com/maureen-bracelet-45296.html?color=SILVER": {
+    "code": "conn:[Errno 8] nodename nor servname provided",
+    "final": "http://www.spiegel.com/maureen-bracelet-45296.html?color=SILVER",
+    "status": "dead"
+  },
+  "http://www.spiegel.com/melanie-shirtdress-45473.html?color=BLACK": {
+    "code": "conn:[Errno 8] nodename nor servname provided",
+    "final": "http://www.spiegel.com/melanie-shirtdress-45473.html?color=BLACK",
+    "status": "dead"
+  },
+  "http://www.spiegel.com/pamella-dress-45747.html?color=RED-MULTI": {
+    "code": "conn:[Errno 8] nodename nor servname provided",
+    "final": "http://www.spiegel.com/pamella-dress-45747.html?color=RED-MULTI",
+    "status": "dead"
+  },
+  "http://www.spiegel.com/riley-jacket-45671.html?color=BLACK": {
+    "code": "conn:[Errno 8] nodename nor servname provided",
+    "final": "http://www.spiegel.com/riley-jacket-45671.html?color=BLACK",
+    "status": "dead"
+  },
+  "http://www.spiegel.com/solid-bikini-with-ruching-and-crisscross-details-45565.html?color=BLACK": {
+    "code": "conn:[Errno 8] nodename nor servname provided",
+    "final": "http://www.spiegel.com/solid-bikini-with-ruching-and-crisscross-details-45565.html?color=BLACK",
+    "status": "dead"
+  },
+  "http://www.spiegel.com/stone-pendant-teardrop-earrings-45591.html?color=CORAL": {
+    "code": "conn:[Errno 8] nodename nor servname provided",
+    "final": "http://www.spiegel.com/stone-pendant-teardrop-earrings-45591.html?color=CORAL",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/blog?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/blog?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/creative-team-galleries/sugar-rush?aff=6cc2c70f&amp;designer=amy-tan--2&amp;kit=&amp;project_type=&amp;utf8=%E2%9C%93": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/creative-team-galleries/sugar-rush?aff=6cc2c70f&amp;designer=amy-tan--2&amp;kit=&amp;project_type=&amp;utf8=%E2%9C%93",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/creative-team-gallery/double-scoop/scrapbook/amy-tan--2?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/creative-team-gallery/double-scoop/scrapbook/amy-tan--2?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/creative-team-gallery/valley-high/scrapbook?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/creative-team-gallery/valley-high/scrapbook?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/digital/digital-stamp-brushes/penny-arcade-scrapbook-kit-stamps?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/digital/digital-stamp-brushes/penny-arcade-scrapbook-kit-stamps?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/galleries/129698-donut-worry?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/galleries/129698-donut-worry?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/galleries/145328-hello-kitty-con": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/galleries/145328-hello-kitty-con",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/baker-bridge?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/baker-bridge?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/bessie?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/bessie?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/bluegrass-farm-project-life-kit?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/bluegrass-farm-project-life-kit?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/bluegrass-farm-scrapbook-kit?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/bluegrass-farm-scrapbook-kit?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/bluegrass-farm?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/bluegrass-farm?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/camelot-project-life-kit?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/camelot-project-life-kit?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/camelot-scrapbook-kit?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/camelot-scrapbook-kit?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/camelot?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/camelot?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/carolina-moon-project-life-kit?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/carolina-moon-project-life-kit?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/carolina-moon?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/carolina-moon?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/cirque-project-life-kit?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/cirque-project-life-kit?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/cirque?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/cirque?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/concord?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/concord?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/dec-pl-add-on-1?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/dec-pl-add-on-1?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/dec-pl-add-on-2?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/dec-pl-add-on-2?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/dec-sb-add-on-1?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/dec-sb-add-on-1?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/dec-sb-add-on-2?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/dec-sb-add-on-2?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/dickinson?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/dickinson?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/double-scoop-scrapbook-kit?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/double-scoop-scrapbook-kit?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/double-scoop?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/double-scoop?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/embellishment-kit-d493f628-f402-4920-a486-616016a6d1b1?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/embellishment-kit-d493f628-f402-4920-a486-616016a6d1b1?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/guten-tag?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/guten-tag?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/hello-hello-project-life-kit?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/hello-hello-project-life-kit?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/hello-hello-scrapbook-kit?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/hello-hello-scrapbook-kit?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/hello-hello?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/hello-hello?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/jennifer?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/jennifer?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/jet?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/jet?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/merlin?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/merlin?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/more-patterned-paper-may-2014?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/more-patterned-paper-may-2014?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/notting-hill?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/notting-hill?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/office-hours-project-life-kit?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/office-hours-project-life-kit?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/office-hours-scrapbook-kit?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/office-hours-scrapbook-kit?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/office-hours?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/office-hours?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/pantomime?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/pantomime?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/park-ave-project-life-kit?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/park-ave-project-life-kit?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/park-ave?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/park-ave?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/penny-arcade-project-life-kit?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/penny-arcade-project-life-kit?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/penny-arcade?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/penny-arcade?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/piccadilly?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/piccadilly?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/poet-society-project-life-kit?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/poet-society-project-life-kit?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/poet-society-scrapbook-kit?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/poet-society-scrapbook-kit?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/poet-society?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/poet-society?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/repeater?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/repeater?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/report?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/report?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/ring-pop?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/ring-pop?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/sandlot-project-life-kit?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/sandlot-project-life-kit?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/sandlot-scrapbook-kit?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/sandlot-scrapbook-kit?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/sandlot?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/sandlot?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/spring-card-sticker-set-by-life-love-paper?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/spring-card-sticker-set-by-life-love-paper?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/spun-sugar?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/spun-sugar?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/sugar-rush-project-life-kit?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/sugar-rush-project-life-kit?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/sugar-rush-scrapbook-kit?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/sugar-rush-scrapbook-kit?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/sugar-rush?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/sugar-rush?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/the-underground-project-life-kit?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/the-underground-project-life-kit?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/the-underground-scrapbook-kit?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/the-underground-scrapbook-kit?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/the-underground?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/the-underground?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/to-do?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/to-do?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/valley-high-card-kit?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/valley-high-card-kit?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/valley-high-project-life-kit?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/valley-high-project-life-kit?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/valley-high-scrapbook-kit?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/valley-high-scrapbook-kit?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/valley-high?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/valley-high?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/walden-project-life-kit?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/walden-project-life-kit?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/walden-scrapbook-kit?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/walden-scrapbook-kit?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/walden?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/walden?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/winona?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/winona?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/kits/yeah-yeah?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/kits/yeah-yeah?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/project-folders/2732-office-hours?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/project-folders/2732-office-hours?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/project-folders/3163-bluegrass-farm?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/project-folders/3163-bluegrass-farm?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/project-folders/3516-camelot?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/project-folders/3516-camelot?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/project-folders/3995-hello-hello?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/project-folders/3995-hello-hello?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/project-folders/4318-penny-arcade?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/project-folders/4318-penny-arcade?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/project-folders/4717-sandlot?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/project-folders/4717-sandlot?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/project-folders/5074-poet-society?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/project-folders/5074-poet-society?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/project-folders/5480-the-underground?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/project-folders/5480-the-underground?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/project-folders/5777-walden?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/project-folders/5777-walden?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/project-folders/6035-park-avenue?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/project-folders/6035-park-avenue?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/project-folders/6662-cirque?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/project-folders/6662-cirque?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/shop/classrooms/25-days-a-december-daily-guide-with-instructor-maggie-holmes?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/shop/classrooms/25-days-a-december-daily-guide-with-instructor-maggie-holmes?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/shop/classrooms/sketchbook-2014?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/shop/classrooms/sketchbook-2014?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/shop/classrooms/stitched?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/shop/classrooms/stitched?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/shop/color-theory--2/color-theory-acrylic-bundle?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/shop/color-theory--2/color-theory-acrylic-bundle?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/shop/die-cutting/silhouette-cameo-bundle?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/shop/die-cutting/silhouette-cameo-bundle?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/shop/pens-markers/uni-ball-impact-gel-pen-white?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/shop/pens-markers/uni-ball-impact-gel-pen-white?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/shop/scissors/honey-bee-scissors?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/shop/scissors/honey-bee-scissors?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/shop/studio-selections--2/amy-tan-signature-series-autographed-copy?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/shop/studio-selections--2/amy-tan-signature-series-autographed-copy?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.studiocalico.com/waiting-list/project_life?aff=6cc2c70f": {
+    "code": "known-dead-host",
+    "final": "http://www.studiocalico.com/waiting-list/project_life?aff=6cc2c70f",
+    "status": "dead"
+  },
+  "http://www.sunglowphotography.com/": {
+    "code": 200,
+    "final": "https://www.sunglowphotography.com/",
+    "status": "alive"
+  },
+  "http://www.sunglowphotography.com/weddings/courtney-jon-st-matthew-catholic-church-backyard-wedding-winter-haven/": {
+    "code": 404,
+    "final": "http://www.sunglowphotography.com/weddings/courtney-jon-st-matthew-catholic-church-backyard-wedding-winter-haven/",
+    "status": "dead"
+  },
+  "http://www.thehappyplanner.com/": {
+    "code": 200,
+    "final": "https://thehappyplanner.com/",
+    "status": "alive"
+  },
+  "http://www.theparkerpalmsprings.com/index.php": {
+    "code": 200,
+    "final": "https://www.parkerpalmsprings.com/",
+    "status": "alive"
+  },
+  "http://www.theurbanoven.com/": {
+    "code": 200,
+    "final": "https://www.theurbanoven.com/",
+    "status": "alive"
+  },
+  "http://www.traveltown.org/": {
+    "code": 200,
+    "final": "https://traveltown.org/",
+    "status": "alive"
+  },
+  "http://www.treasuredmemoriesca.com/": {
+    "code": 200,
+    "final": "https://www.treasuredmemoriesca.com/",
+    "status": "alive"
+  },
+  "http://www.urbanicpaper.com/": {
+    "code": 429,
+    "final": "http://www.urbanicpaper.com/",
+    "status": "uncertain"
+  },
+  "http://www.youtube.com/watch?feature=player_embedded&amp;v=0Om_3iq8_zQ": {
+    "code": 200,
+    "final": "https://www.youtube.com/",
+    "status": "alive"
+  },
+  "http://www.youtube.com/watch?v=Jg-B6O9ass4": {
+    "code": 200,
+    "final": "https://www.youtube.com/watch?v=Jg-B6O9ass4",
+    "status": "alive"
+  },
+  "http://www2.fiskars.com": {
+    "code": 200,
+    "final": "https://www.fiskars.com/en-us",
+    "status": "alive"
+  },
+  "http://www2.fiskars.com/Sewing-Quilting/Products/Amplify-Shears-Collection": {
+    "code": 429,
+    "final": "http://www2.fiskars.com/Sewing-Quilting/Products/Amplify-Shears-Collection",
+    "status": "uncertain"
+  },
+  "http://www2.fiskars.com/Shop-Products/Amplify-Shears-Collection": {
+    "code": 200,
+    "final": "https://www.fiskars.com/en-us",
+    "status": "alive"
+  },
+  "http://youtu.be/QVzTxn_kILs": {
+    "code": 200,
+    "final": "https://www.youtube.com/watch?v=QVzTxn_kILs&feature=youtu.be",
+    "status": "alive"
+  },
+  "http://youtube.com/amytangerine": {
+    "code": 200,
+    "final": "https://www.youtube.com/amytangerine",
+    "status": "alive"
+  },
+  "https://amytangerinenewsite.squarespace.com/newsletter-sign-up": {
+    "code": 200,
+    "final": "https://amytangerinenewsite.squarespace.com/newsletter-sign-up",
+    "status": "alive"
+  },
+  "https://amzn.to/2A5WjSE": {
+    "code": 200,
+    "final": "https://www.amazon.com/gp/product/B019RIWEEK/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=wwwamytangeri-20&creative=9325&linkCode=as2&creativeASIN=B019RIWEEK&linkId=b27359586bc7b222383528f6aed946d5",
+    "status": "alive"
+  },
+  "https://amzn.to/2EfbwFe": {
+    "code": 200,
+    "final": "https://www.amazon.com/gp/product/B00006IFN9/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B00006IFN9&linkCode=as2&tag=wwwamytangeri-20&linkId=bf9baecde7989dc434d2995998bc487a",
+    "status": "alive"
+  },
+  "https://amzn.to/2GZH2Zc": {
+    "code": 200,
+    "final": "https://www.amazon.com/dp/080072349X/?tag=wwwamytangeri-20",
+    "status": "alive"
+  },
+  "https://amzn.to/2GxTLPW": {
+    "code": 200,
+    "final": "https://www.amazon.com/When-Breath-Becomes-Paul-Kalanithi/dp/081298840X/ref=as_li_ss_tl?crid=22SIJOKL76S3C&keywords=when+breath+becomes+air&qid=1564406386&s=books&sprefix=when+breath,arts-crafts,155&sr=1-1&linkCode=sl1&tag=wwwamytangeri-20&linkId=2cb8e510b026146e186e5666af869e37&language=en_US",
+    "status": "alive"
+  },
+  "https://amzn.to/2LPikvZ": {
+    "code": 200,
+    "final": "https://www.amazon.com/How-Live-Good-Life-Surprising/dp/1401946321/ref=as_li_ss_tl?keywords=jonathan+fields&qid=1564406999&s=gateway&sr=8-16&linkCode=sl1&tag=wwwamytangeri-20&linkId=a5ccc992b848511fa70914acf8ed44c7&language=en_US",
+    "status": "alive"
+  },
+  "https://amzn.to/2MMQhep": {
+    "code": 200,
+    "final": "https://www.amazon.com/How-Live-Good-Life-Surprising/dp/1401948413/ref=as_li_ss_tl?s=books&ie=UTF8&qid=1509395388&sr=1-1&keywords=how+to+live+a+good+life&linkCode=sl1&tag=goodlifepro0b-20&linkId=bd45e4bf85cae793ce3ff2cb5f348d67&language=en_US",
+    "status": "alive"
+  },
+  "https://amzn.to/2MVvHZD": {
+    "code": 200,
+    "final": "https://www.amazon.com/Uncertainty-Turning-Fear-Doubt-Brilliance/dp/1591845661/ref=as_li_ss_tl?s=books&ie=UTF8&qid=1549300370&sr=1-1&keywords=uncertainty&linkCode=sl1&tag=goodlifepro0b-20&linkId=1f87df1e7c863903c975e08c0ac47132&language=en_US",
+    "status": "alive"
+  },
+  "https://amzn.to/2Mnr6Ry": {
+    "code": 200,
+    "final": "https://www.amazon.com/Being-Mortal-Medicine-What-Matters/dp/1250076226/ref=as_li_ss_tl?keywords=being+mortal&qid=1564407032&s=gateway&sr=8-3&linkCode=sl1&tag=wwwamytangeri-20&linkId=48984cd1863131576cac5b08750cdfa0&language=en_US",
+    "status": "alive"
+  },
+  "https://amzn.to/2N0Rd0i": {
+    "code": 200,
+    "final": "https://www.amazon.com/gp/product/1984825054/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=wwwamytangeri-20&creative=9325&linkCode=as2&creativeASIN=1984825054&linkId=72103bbd427b16cf01c0d6476c94d47f",
+    "status": "alive"
+  },
+  "https://amzn.to/2OpEeIm": {
+    "code": 200,
+    "final": "https://www.amazon.com/Mans-Search-Meaning-Viktor-Frankl/dp/0807014273/ref=as_li_ss_tl?crid=16MIUY6CYNAQ6&keywords=man's+search+for+meaning&qid=1564407070&s=gateway&sprefix=man's+sea,aps,150&sr=8-1&linkCode=sl1&tag=wwwamytangeri-20&linkId=2ed111c6a6adf31b0eb320d1fc8a1997&language=en_US",
+    "status": "alive"
+  },
+  "https://amzn.to/2P5GtPC": {
+    "code": 200,
+    "final": "https://www.amazon.com/Capital-Gaines-Things-Learned-Stupid/dp/0785216308/ref=as_li_ss_tl?ie=UTF8&linkCode=sl1&tag=wwwamytangeri-20&linkId=faa31522f12a84efd5285d3a1ff8cc5f&language=en_US",
+    "status": "alive"
+  },
+  "https://amzn.to/2PtUS5Q": {
+    "code": 200,
+    "final": "https://www.amazon.com/gp/product/B00114RF8O/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B00114RF8O&linkCode=as2&tag=wwwamytangeri-20&linkId=4c9842a1fb5e10cd4d2dc94f2e2e35f3",
+    "status": "alive"
+  },
+  "https://amzn.to/2SYvA4v": {
+    "code": 200,
+    "final": "https://www.amazon.com/gp/product/1401941761/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=wwwamytangeri-20&creative=9325&linkCode=as2&creativeASIN=1401941761&linkId=ae7fb2a9b61beecc1335c3730265a8f1",
+    "status": "alive"
+  },
+  "https://amzn.to/2Ux3myE": {
+    "code": 503,
+    "final": "https://amzn.to/2Ux3myE",
+    "status": "uncertain"
+  },
+  "https://amzn.to/2Vkxs6y": {
+    "code": 200,
+    "final": "https://www.amazon.com/gp/product/B01AUP5W0M/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=wwwamytangeri-20&creative=9325&linkCode=as2&creativeASIN=B01AUP5W0M&linkId=fbcfeb18e45770a844bdaf29b0b5204f",
+    "status": "alive"
+  },
+  "https://amzn.to/2tDoabX": {
+    "code": 200,
+    "final": "https://www.amazon.com/gp/product/B07P67PHK4/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=wwwamytangeri-20&creative=9325&linkCode=as2&creativeASIN=B07P67PHK4&linkId=7f30380aec48642d7c5c9db724bc2394",
+    "status": "alive"
+  },
+  "https://amzn.to/34d9Nbx": {
+    "code": 200,
+    "final": "https://www.amazon.com/gp/product/0735220697/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=wwwamytangeri-20&creative=9325&linkCode=as2&creativeASIN=0735220697&linkId=3627da847bda70f140631e7e1e79c8fe",
+    "status": "alive"
+  },
+  "https://amzn.to/34gwPRS": {
+    "code": 200,
+    "final": "https://www.amazon.com/gp/product/B07DYQRW1M/ref=as_li_ss_tl?ie=UTF8&psc=1&linkCode=sl1&tag=wwwamytangeri-20&linkId=43e4dbb379e305a5ce6901af6af17d68&language=en_US",
+    "status": "alive"
+  },
+  "https://amzn.to/37DUrys": {
+    "code": 200,
+    "final": "https://www.amazon.com/gp/product/1594634726/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=wwwamytangeri-20&creative=9325&linkCode=as2&creativeASIN=1594634726&linkId=d586b6b6fbc2a80027cdcb901060d8c6",
+    "status": "alive"
+  },
+  "https://amzn.to/37GZiyQ": {
+    "code": 200,
+    "final": "https://www.amazon.com/gp/product/B01AS5I0ZS/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=wwwamytangeri-20&creative=9325&linkCode=as2&creativeASIN=B01AS5I0ZS&linkId=1f9fc1fe372d784528073dfc973f5f5a",
+    "status": "alive"
+  },
+  "https://amzn.to/38liOC5": {
+    "code": 200,
+    "final": "https://www.amazon.com/Essentialism-Disciplined-Pursuit-Greg-McKeown/dp/0804137382/ref=as_li_ss_tl?ie=UTF8&linkCode=sl1&tag=wwwamytangeri-20&linkId=293b85b533a1bddaab950cf89c694201&language=en_US",
+    "status": "alive"
+  },
+  "https://amzn.to/38oN8f5": {
+    "code": 200,
+    "final": "https://www.amazon.com/Magnolia-Story-Bonus-Content-ebook/dp/B01CH2EW20/ref=as_li_ss_tl?ie=UTF8&linkCode=sl1&tag=wwwamytangeri-20&linkId=6eb8d989c42e588b1555056d6a98a3d6&language=en_US",
+    "status": "alive"
+  },
+  "https://amzn.to/39J3ik9": {
+    "code": 200,
+    "final": "https://www.amazon.com/gp/product/1849352607/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=wwwamytangeri-20&creative=9325&linkCode=as2&creativeASIN=1849352607&linkId=8afa25a77529b228cddf813253107242",
+    "status": "alive"
+  },
+  "https://bit.ly/2JEwL5u": {
+    "code": 403,
+    "final": "https://bit.ly/2JEwL5u",
+    "status": "uncertain"
+  },
+  "https://bit.ly/3u3WUNl": {
+    "code": "err:The read operation timed out",
+    "final": "https://bit.ly/3u3WUNl",
+    "status": "uncertain"
+  },
+  "https://bit.ly/3v6Pc6p": {
+    "code": "err:The read operation timed out",
+    "final": "https://bit.ly/3v6Pc6p",
+    "status": "uncertain"
+  },
+  "https://bit.ly/3wgsuZQ": {
+    "code": "err:The read operation timed out",
+    "final": "https://bit.ly/3wgsuZQ",
+    "status": "uncertain"
+  },
+  "https://blog.pipsticks.com/pipsticks-amy-tangerine-giveaway/": {
+    "code": 200,
+    "final": "https://www.pipsticks.com/blogs/blog/pipsticks-amy-tangerine-giveaway",
+    "status": "alive"
+  },
+  "https://eliseblaha.typepad.com/": {
+    "code": 200,
+    "final": "https://www.networksolutions.com/typepad?siteID=100&channelID=P99C100S653N0B5A1D0E0000V111",
+    "status": "alive"
+  },
+  "https://geeseandganders.com/": {
+    "code": 429,
+    "final": "https://geeseandganders.com/",
+    "status": "uncertain"
+  },
+  "https://gettoworkbook.bigcartel.com/": {
+    "code": 404,
+    "final": "https://gettoworkbook.bigcartel.com/",
+    "status": "dead"
+  },
+  "https://heymama.co/alaska-airlines-amy-tangerine/": {
+    "code": 200,
+    "final": "https://heymama.co/alaska-airlines-amy-tangerine/",
+    "status": "alive"
+  },
+  "https://instagram.com/p/2LsKWGtnv4/?taken-by=amytangerine": {
+    "code": 200,
+    "final": "https://www.instagram.com/p/2LsKWGtnv4/?taken-by=amytangerine",
+    "status": "alive"
+  },
+  "https://instagram.com/p/B3sG_Sdp3rf/": {
+    "code": 200,
+    "final": "https://www.instagram.com/p/B3sG_Sdp3rf/",
+    "status": "alive"
+  },
+  "https://itunes.apple.com/us/album/free-to-love/id934813226?i=934813301": {
+    "code": 404,
+    "final": "https://itunes.apple.com/us/album/free-to-love/id934813226?i=934813301",
+    "status": "dead"
+  },
+  "https://itunes.apple.com/us/app/canon-easy-photoprint/id331269951?mt=8": {
+    "code": 404,
+    "final": "https://itunes.apple.com/us/app/canon-easy-photoprint/id331269951?mt=8",
+    "status": "dead"
+  },
+  "https://itunes.apple.com/us/app/pocketbooth-photobooth-that/id385145330?mt=8": {
+    "code": 200,
+    "final": "https://apps.apple.com/us/app/pocketbooth-photo-booth/id385145330",
+    "status": "alive"
+  },
+  "https://katenorthrup.com/": {
+    "code": 200,
+    "final": "https://katenorthrup.com/",
+    "status": "alive"
+  },
+  "https://katenorthrup.com/planner/": {
+    "code": 429,
+    "final": "https://katenorthrup.com/planner/",
+    "status": "uncertain"
+  },
+  "https://katenorthrup.com/work-with-me/": {
+    "code": 200,
+    "final": "https://katenorthrup.com/",
+    "status": "alive"
+  },
+  "https://lishcreative.com/": {
+    "code": 200,
+    "final": "https://lishcreative.com/",
+    "status": "alive"
+  },
+  "https://nicolejardim.com/": {
+    "code": 200,
+    "final": "https://nicolejardim.com/",
+    "status": "alive"
+  },
+  "https://nurture-life.pxf.io/c/1374811/928996/12498": {
+    "code": 404,
+    "final": "https://nurture-life.pxf.io/c/1374811/928996/12498",
+    "status": "dead"
+  },
+  "https://nurture-life.pxf.io/c/1374811/929000/12498": {
+    "code": 404,
+    "final": "https://nurture-life.pxf.io/c/1374811/929000/12498",
+    "status": "dead"
+  },
+  "https://nurture-life.pxf.io/c/1374811/929001/12498": {
+    "code": 404,
+    "final": "https://nurture-life.pxf.io/c/1374811/929001/12498",
+    "status": "dead"
+  },
+  "https://nurture-life.pxf.io/c/1374811/929078/12498": {
+    "code": 404,
+    "final": "https://nurture-life.pxf.io/c/1374811/929078/12498",
+    "status": "dead"
+  },
+  "https://odp.biz/2F5QgCT": {
+    "code": "err:The read operation timed out",
+    "final": "https://odp.biz/2F5QgCT",
+    "status": "uncertain"
+  },
+  "https://odp.biz/2SvTd2C": {
+    "code": "err:The read operation timed out",
+    "final": "https://odp.biz/2SvTd2C",
+    "status": "uncertain"
+  },
+  "https://odp.biz/2Sxc65t": {
+    "code": "err:The read operation timed out",
+    "final": "https://odp.biz/2Sxc65t",
+    "status": "uncertain"
+  },
+  "https://odp.biz/32jvB7h": {
+    "code": "err:The read operation timed out",
+    "final": "https://odp.biz/32jvB7h",
+    "status": "uncertain"
+  },
+  "https://odp.biz/36CoysK": {
+    "code": "err:The read operation timed out",
+    "final": "https://odp.biz/36CoysK",
+    "status": "uncertain"
+  },
+  "https://odp.biz/3mfp6uc": {
+    "code": "err:The read operation timed out",
+    "final": "https://odp.biz/3mfp6uc",
+    "status": "uncertain"
+  },
+  "https://odp.biz/3oyyESo": {
+    "code": "err:The read operation timed out",
+    "final": "https://odp.biz/3oyyESo",
+    "status": "uncertain"
+  },
+  "https://ographr.app.link/H50PhgDDPS": {
+    "code": 200,
+    "final": "https://ographr.app.link/H50PhgDDPS",
+    "status": "alive"
+  },
+  "https://podcasts.apple.com/us/podcast/craft-a-life-you-love/id1463447461": {
+    "code": 200,
+    "final": "https://podcasts.apple.com/us/podcast/craft-a-life-you-love/id1463447461",
+    "status": "alive"
+  },
+  "https://podcasts.apple.com/us/podcast/kate-mike-show-life-love-business/id1160960959?mt=2": {
+    "code": 200,
+    "final": "https://podcasts.apple.com/us/podcast/plenty-with-kate-northrup/id1160960959",
+    "status": "alive"
+  },
+  "https://podcasts.apple.com/us/podcast/man-in-the-window/id1465334342": {
+    "code": 200,
+    "final": "https://podcasts.apple.com/us/podcast/man-in-the-window-the-golden-state-killer/id1465334342",
+    "status": "alive"
+  },
+  "https://podcasts.apple.com/us/podcast/to-live-and-die-in-la/id1453788965": {
+    "code": 200,
+    "final": "https://podcasts.apple.com/us/podcast/to-live-and-die-in-la/id1453788965",
+    "status": "alive"
+  },
+  "https://shop.meandmybigideas.com/": {
+    "code": 429,
+    "final": "https://shop.meandmybigideas.com/",
+    "status": "uncertain"
+  },
+  "https://shop.meandmybigideas.com/collections/amy-tangerine-be-happy-box/products/be-happy-box-amy-tangerine": {
+    "code": 429,
+    "final": "https://shop.meandmybigideas.com/collections/amy-tangerine-be-happy-box/products/be-happy-box-amy-tangerine",
+    "status": "uncertain"
+  },
+  "https://soundcloud.com/tudorwilliams": {
+    "code": 200,
+    "final": "https://soundcloud.com/tudorwilliams",
+    "status": "alive"
+  },
+  "https://studiocalico.com/shop?search=mega+date+stamp": {
+    "code": "known-dead-host",
+    "final": "https://studiocalico.com/shop?search=mega+date+stamp",
+    "status": "dead"
+  },
+  "https://thework.com/": {
+    "code": 200,
+    "final": "https://thework.com/",
+    "status": "alive"
+  },
+  "https://tinyurl.com/ym7ayyms": {
+    "code": 200,
+    "final": "https://www.alisalranch.com/plan-your-stay/rates-packages/?utm_source=blog&utm_medium=social&utm_campaign=influencer&utm_content=learn_more&utm_term=Amy",
+    "status": "alive"
+  },
+  "https://twitter.com/MattBloomFilms/status/388955618876608513/photo/1": {
+    "code": 200,
+    "final": "https://x.com/MattBloomFilms/status/388955618876608513/photo/1",
+    "status": "alive"
+  },
+  "https://twitter.com/ellesstudio": {
+    "code": 200,
+    "final": "https://twitter.com/ellesstudio",
+    "status": "alive"
+  },
+  "https://twitter.com/ginkopapers": {
+    "code": 404,
+    "final": "https://twitter.com/ginkopapers",
+    "status": "dead"
+  },
+  "https://twitter.com/katenorthrup?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor": {
+    "code": 200,
+    "final": "https://twitter.com/katenorthrup?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor",
+    "status": "alive"
+  },
+  "https://twitter.com/shopevalicious": {
+    "code": 200,
+    "final": "https://twitter.com/shopevalicious",
+    "status": "alive"
+  },
+  "https://www.alaskaair.com/": {
+    "code": 200,
+    "final": "https://www.alaskaair.com/",
+    "status": "alive"
+  },
+  "https://www.amazon.com/Farm-Novel-Joanne-Ramos/dp/1984853759": {
+    "code": 200,
+    "final": "https://www.amazon.com/Farm-Novel-Joanne-Ramos/dp/1984853759",
+    "status": "alive"
+  },
+  "https://www.amytangerine.com/blog/brave+bold": {
+    "code": 200,
+    "final": "https://www.amytangerine.com/",
+    "status": "alive"
+  },
+  "https://www.amytangerine.com/blog/frozen-2-inspired-frozen-heart-cards": {
+    "code": 200,
+    "final": "https://www.amytangerine.com/",
+    "status": "alive"
+  },
+  "https://www.amytangerine.com/blog/vdaydiy?rq=holiday": {
+    "code": 200,
+    "final": "https://www.amytangerine.com/?rq=holiday",
+    "status": "alive"
+  },
+  "https://www.amytangerine.com/digishop/p/clean-out-boxes": {
+    "code": 404,
+    "final": "https://www.amytangerine.com/digishop/p/clean-out-boxes",
+    "status": "dead"
+  },
+  "https://www.amytangerine.com/newsletter-sign-up": {
+    "code": 404,
+    "final": "https://www.amytangerine.com/newsletter-sign-up",
+    "status": "dead"
+  },
+  "https://www.amytangerineworkshops.com/tn-course": {
+    "code": 200,
+    "final": "https://www.amytangerineworkshops.com/tn-course",
+    "status": "alive"
+  },
+  "https://www.archerandolive.com/": {
+    "code": 429,
+    "final": "https://www.archerandolive.com/",
+    "status": "uncertain"
+  },
+  "https://www.archerandolive.com/collections/planners/products/amy-tangerine-for-archer-olive-dated-2020-planner-pre-order-ships-november-15th": {
+    "code": 200,
+    "final": "https://www.archerandolive.com/",
+    "status": "alive"
+  },
+  "https://www.craftandhobby.org/eweb/StartPage.aspx?site=cha": {
+    "code": 404,
+    "final": "https://www.craftandhobby.org/eweb/StartPage.aspx?site=cha",
+    "status": "dead"
+  },
+  "https://www.createroom.com": {
+    "code": 429,
+    "final": "https://www.createroom.com",
+    "status": "uncertain"
+  },
+  "https://www.creativememories.com/?utm_source=Amy%20Tangerine&amp;utm_campaign=Baby%20Gift%20Boxes%20Dec%202016&amp;utm_medium=Sponsored%20Blog%20Post": {
+    "code": 200,
+    "final": "https://creativememories.com/?utm_source=Amy%20Tangerine&amp;utm_campaign=Baby%20Gift%20Boxes%20Dec%202016&amp;utm_medium=Sponsored%20Blog%20Post",
+    "status": "alive"
+  },
+  "https://www.creativememories.com/shop-all/collections/gift-boxes.html?utm_source=Amy%20Tangerine&amp;utm_campaign=Baby%20Gift%20Boxes%20Dec%202016&amp;utm_medium=Sponsored%20Blog%20Post": {
+    "code": 429,
+    "final": "https://www.creativememories.com/shop-all/collections/gift-boxes.html?utm_source=Amy%20Tangerine&amp;utm_campaign=Baby%20Gift%20Boxes%20Dec%202016&amp;utm_medium=Sponsored%20Blog%20Post",
+    "status": "uncertain"
+  },
+  "https://www.creativememories.com/shop-all/collections/gift-boxes/hello-baby-boy-gift-box-bundle.html?utm_source=Amy%20Tangerine&amp;utm_campaign=Baby%20Gift%20Boxes%20Dec%202016&amp;utm_medium=Sponsored%20Blog%20Post": {
+    "code": 429,
+    "final": "https://www.creativememories.com/shop-all/collections/gift-boxes/hello-baby-boy-gift-box-bundle.html?utm_source=Amy%20Tangerine&amp;utm_campaign=Baby%20Gift%20Boxes%20Dec%202016&amp;utm_medium=Sponsored%20Blog%20Post",
+    "status": "uncertain"
+  },
+  "https://www.creativememories.com/shop-all/collections/gift-boxes/hello-baby-girl-gift-box-bundle.html?utm_source=Amy%20Tangerine&amp;utm_campaign=Baby%20Gift%20Boxes%20Dec%202016&amp;utm_medium=Sponsored%20Blog%20Post": {
+    "code": 429,
+    "final": "https://www.creativememories.com/shop-all/collections/gift-boxes/hello-baby-girl-gift-box-bundle.html?utm_source=Amy%20Tangerine&amp;utm_campaign=Baby%20Gift%20Boxes%20Dec%202016&amp;utm_medium=Sponsored%20Blog%20Post",
+    "status": "uncertain"
+  },
+  "https://www.dropbox.com/s/a4w66a21micuskc/Jonathan_Fields.pdf?dl=0": {
+    "code": 200,
+    "final": "https://www.dropbox.com/scl/fi/k0be85fgmetx722x0ikwb/Jonathan_Fields.pdf?rlkey=43t4xwiep7bpss4jld3hd3xb3&dl=0",
+    "status": "alive"
+  },
+  "https://www.easyspirit.com/freney-casual-walking-shoes.html?web_style_color_name=1784&amp;utm_channel=AmyTangerine&amp;utm_medium=influencer&amp;utm_campaign=movefor": {
+    "code": 429,
+    "final": "https://www.easyspirit.com/freney-casual-walking-shoes.html?web_style_color_name=1784&amp;utm_channel=AmyTangerine&amp;utm_medium=influencer&amp;utm_campaign=movefor",
+    "status": "uncertain"
+  },
+  "https://www.elisejoy.com/": {
+    "code": 200,
+    "final": "https://www.elisejoy.com/",
+    "status": "alive"
+  },
+  "https://www.elisejoy.com/book": {
+    "code": 200,
+    "final": "https://www.elisejoy.com/book",
+    "status": "alive"
+  },
+  "https://www.facebook.com/FerdinandMovie/": {
+    "code": 400,
+    "final": "https://www.facebook.com/FerdinandMovie/",
+    "status": "uncertain"
+  },
+  "https://www.facebook.com/GinkoPapers": {
+    "code": 400,
+    "final": "https://www.facebook.com/GinkoPapers",
+    "status": "uncertain"
+  },
+  "https://www.facebook.com/GoodLifeProject/": {
+    "code": 400,
+    "final": "https://www.facebook.com/GoodLifeProject/",
+    "status": "uncertain"
+  },
+  "https://www.facebook.com/OfficialPlannerCon/": {
+    "code": 400,
+    "final": "https://www.facebook.com/OfficialPlannerCon/",
+    "status": "uncertain"
+  },
+  "https://www.facebook.com/PinkfreshStudio": {
+    "code": 400,
+    "final": "https://www.facebook.com/PinkfreshStudio",
+    "status": "uncertain"
+  },
+  "https://www.facebook.com/ShopEllesStudio": {
+    "code": 400,
+    "final": "https://www.facebook.com/ShopEllesStudio",
+    "status": "uncertain"
+  },
+  "https://www.facebook.com/amytangerine/": {
+    "code": 400,
+    "final": "https://www.facebook.com/amytangerine/",
+    "status": "uncertain"
+  },
+  "https://www.facebook.com/amytangerine/videos/10155781369770479/": {
+    "code": 200,
+    "final": "https://www.facebook.com/amytangerine/videos/10155781369770479/",
+    "status": "alive"
+  },
+  "https://www.facebook.com/amytangerine/videos/238484050163453/": {
+    "code": 200,
+    "final": "https://www.facebook.com/amytangerine/videos/238484050163453/",
+    "status": "alive"
+  },
+  "https://www.facebook.com/archerandolive": {
+    "code": 400,
+    "final": "https://www.facebook.com/archerandolive",
+    "status": "uncertain"
+  },
+  "https://www.facebook.com/creativememories": {
+    "code": 400,
+    "final": "https://www.facebook.com/creativememories",
+    "status": "uncertain"
+  },
+  "https://www.facebook.com/creativeoptionscrafts": {
+    "code": 400,
+    "final": "https://www.facebook.com/creativeoptionscrafts",
+    "status": "uncertain"
+  },
+  "https://www.facebook.com/justaddsunshineinc/": {
+    "code": 400,
+    "final": "https://www.facebook.com/justaddsunshineinc/",
+    "status": "uncertain"
+  },
+  "https://www.facebook.com/katenorthrupcommunity/": {
+    "code": 400,
+    "final": "https://www.facebook.com/katenorthrupcommunity/",
+    "status": "uncertain"
+  },
+  "https://www.gettoworkbook.com/category/100-pep-talks": {
+    "code": "err:[SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] ssl",
+    "final": "https://www.gettoworkbook.com/category/100-pep-talks",
+    "status": "uncertain"
+  },
+  "https://www.goodlifeproject.com/": {
+    "code": 200,
+    "final": "https://www.goodlifeproject.com/",
+    "status": "alive"
+  },
+  "https://www.goodlifeproject.com/podcast/": {
+    "code": 200,
+    "final": "https://www.goodlifeproject.com/podcast/",
+    "status": "alive"
+  },
+  "https://www.goodlifeproject.com/sparketypes/": {
+    "code": 200,
+    "final": "https://sparketype.com//",
+    "status": "alive"
+  },
+  "https://www.graymalin.com/": {
+    "code": 200,
+    "final": "https://graymalin.com/",
+    "status": "alive"
+  },
+  "https://www.hauteandborrowed.com/": {
+    "code": "conn:[Errno 8] nodename nor servname provided",
+    "final": "https://www.hauteandborrowed.com/",
+    "status": "dead"
+  },
+  "https://www.instagram.com/ajmcgarvey/ ": {
+    "code": 200,
+    "final": "https://www.instagram.com/ajmcgarvey/",
+    "status": "alive"
+  },
+  "https://www.instagram.com/amytangerine/": {
+    "code": 200,
+    "final": "https://www.instagram.com/amytangerine/",
+    "status": "alive"
+  },
+  "https://www.instagram.com/archerandolive/": {
+    "code": 200,
+    "final": "https://www.instagram.com/archerandolive/",
+    "status": "alive"
+  },
+  "https://www.instagram.com/arterestically/ ": {
+    "code": 200,
+    "final": "https://www.instagram.com/arterestically/",
+    "status": "alive"
+  },
+  "https://www.instagram.com/creativememories/": {
+    "code": 200,
+    "final": "https://www.instagram.com/creativememories/",
+    "status": "alive"
+  },
+  "https://www.instagram.com/elisejoy/": {
+    "code": 200,
+    "final": "https://www.instagram.com/elisejoy/",
+    "status": "alive"
+  },
+  "https://www.instagram.com/goodlifeproject/": {
+    "code": 200,
+    "final": "https://www.instagram.com/goodlifeproject/",
+    "status": "alive"
+  },
+  "https://www.instagram.com/hbomaxfamily/": {
+    "code": 200,
+    "final": "https://www.instagram.com/hbomaxfamily/",
+    "status": "alive"
+  },
+  "https://www.instagram.com/jessicanturner/": {
+    "code": 200,
+    "final": "https://www.instagram.com/jessicanturner/",
+    "status": "alive"
+  },
+  "https://www.instagram.com/justaddsunshineinc/": {
+    "code": 200,
+    "final": "https://www.instagram.com/justaddsunshineinc/",
+    "status": "alive"
+  },
+  "https://www.instagram.com/katenorthrup/?hl=en": {
+    "code": 200,
+    "final": "https://www.instagram.com/katenorthrup/?hl=en",
+    "status": "alive"
+  },
+  "https://www.instagram.com/lovelearncreate2400/ ": {
+    "code": 200,
+    "final": "https://www.instagram.com/lovelearncreate2400/",
+    "status": "alive"
+  },
+  "https://www.instagram.com/momruncraft/": {
+    "code": 200,
+    "final": "https://www.instagram.com/momruncraft/",
+    "status": "alive"
+  },
+  "https://www.instagram.com/myhappyplaceplans/ ": {
+    "code": 200,
+    "final": "https://www.instagram.com/myhappyplaceplans/",
+    "status": "alive"
+  },
+  "https://www.instagram.com/p/BEUVWh4tnj4/": {
+    "code": 200,
+    "final": "https://www.instagram.com/p/BEUVWh4tnj4/",
+    "status": "alive"
+  },
+  "https://www.instagram.com/p/BLZA3jqFqHp/": {
+    "code": 200,
+    "final": "https://www.instagram.com/p/BLZA3jqFqHp/",
+    "status": "alive"
+  },
+  "https://www.instagram.com/p/BY1Htt4HGvC/": {
+    "code": 200,
+    "final": "https://www.instagram.com/p/BY1Htt4HGvC/",
+    "status": "alive"
+  },
+  "https://www.instagram.com/p/CKPQI5eJQtR/?utm_source=ig_web_copy_link": {
+    "code": 200,
+    "final": "https://www.instagram.com/p/CKPQI5eJQtR/?utm_source=ig_web_copy_link",
+    "status": "alive"
+  },
+  "https://www.instagram.com/p/CKgWw90JDdK/?utm_source=ig_web_copy_link": {
+    "code": 200,
+    "final": "https://www.instagram.com/p/CKgWw90JDdK/?utm_source=ig_web_copy_link",
+    "status": "alive"
+  },
+  "https://www.instagram.com/p/CLUjn4pJWxV/?utm_source=ig_web_copy_link": {
+    "code": 200,
+    "final": "https://www.instagram.com/p/CLUjn4pJWxV/?utm_source=ig_web_copy_link",
+    "status": "alive"
+  },
+  "https://www.instagram.com/p/CLkIsm-ppHA/?utm_source=ig_web_copy_link": {
+    "code": 200,
+    "final": "https://www.instagram.com/p/CLkIsm-ppHA/?utm_source=ig_web_copy_link",
+    "status": "alive"
+  },
+  "https://www.instagram.com/p/CLr04zbJILq/?utm_source=ig_web_copy_link": {
+    "code": 200,
+    "final": "https://www.instagram.com/p/CLr04zbJILq/?utm_source=ig_web_copy_link",
+    "status": "alive"
+  },
+  "https://www.instagram.com/p/CLw1YicJLcs/?utm_source=ig_web_copy_link": {
+    "code": 200,
+    "final": "https://www.instagram.com/p/CLw1YicJLcs/?utm_source=ig_web_copy_link",
+    "status": "alive"
+  },
+  "https://www.instagram.com/p/CMDMZb9ltus/?utm_source=ig_web_copy_link": {
+    "code": 200,
+    "final": "https://www.instagram.com/p/CMDMZb9ltus/?utm_source=ig_web_copy_link",
+    "status": "alive"
+  },
+  "https://www.instagram.com/p/rXmqe1tno4/?tagged=atmotivationalmonday": {
+    "code": 200,
+    "final": "https://www.instagram.com/p/rXmqe1tno4/?tagged=atmotivationalmonday",
+    "status": "alive"
+  },
+  "https://www.instagram.com/planawayrenee/ ": {
+    "code": 200,
+    "final": "https://www.instagram.com/planawayrenee/",
+    "status": "alive"
+  },
+  "https://www.instagram.com/reel/CwgDeSlSIfu/": {
+    "code": 200,
+    "final": "https://www.instagram.com/reel/CwgDeSlSIfu/",
+    "status": "alive"
+  },
+  "https://www.instagram.com/thelifefacilitator/ ": {
+    "code": 200,
+    "final": "https://www.instagram.com/thelifefacilitator/",
+    "status": "alive"
+  },
+  "https://www.instagram.com/theplannerteawithdani/ ": {
+    "code": 200,
+    "final": "https://www.instagram.com/theplannerteawithdani/",
+    "status": "alive"
+  },
+  "https://www.instagram.com/vanessapglass/": {
+    "code": 200,
+    "final": "https://www.instagram.com/vanessapglass/",
+    "status": "alive"
+  },
+  "https://www.katehaus.com/": {
+    "code": 200,
+    "final": "https://www.katehaus.com/",
+    "status": "alive"
+  },
+  "https://www.michellesparkling.com/entertaining/recipes/holiday-poinsettia": {
+    "code": 200,
+    "final": "https://www.michellesparkling.com/entertaining/recipes/holiday-poinsettia",
+    "status": "alive"
+  },
+  "https://www.pinterest.com/amytangerine/": {
+    "code": 200,
+    "final": "https://www.pinterest.com/amytangerine/",
+    "status": "alive"
+  },
+  "https://www.play-well.org/": {
+    "code": 200,
+    "final": "https://www.play-well.org/",
+    "status": "alive"
+  },
+  "https://www.rodanandfields.com": {
+    "code": 200,
+    "final": "https://www.rodanandfields.com/en-us/",
+    "status": "alive"
+  },
+  "https://www.rodanandfields.com/shop/active-hydration-serum/p/ENHEFG1": {
+    "code": 200,
+    "final": "https://www.rodanandfields.com/en-us/shop/rodan-fields-active-hydration-serum/p/ENHEFG1",
+    "status": "alive"
+  },
+  "https://www.rodanandfields.com/shop/redefine-intensive-renewing-serum/p/AASRI60": {
+    "code": 200,
+    "final": "https://www.rodanandfields.com/en-us/shop/redefine-intensive-renewing-serum/p/AASRI60",
+    "status": "alive"
+  },
+  "https://www.snapchat.com/": {
+    "code": 200,
+    "final": "https://www.snapchat.com/",
+    "status": "alive"
+  },
+  "https://www.statefarm.com": {
+    "code": 200,
+    "final": "https://www.statefarm.com",
+    "status": "alive"
+  },
+  "https://www.statefarm.com/simple-insights/credit-and-loans/how-to-become-a-frugal-superstar": {
+    "code": 200,
+    "final": "https://www.statefarm.com/simple-insights/financial/budget-breakdown",
+    "status": "alive"
+  },
+  "https://www.statefarm.com/simple-insights/planning/5-steps-to-start-today-for-a-wellrounded-financial-plan": {
+    "code": 200,
+    "final": "https://www.statefarm.com/simple-insights/financial/follow-these-steps-to-achieve-financial-wellness",
+    "status": "alive"
+  },
+  "https://www.statefarm.com/simple-insights/small-business": {
+    "code": 200,
+    "final": "https://www.statefarm.com/simple-insights/small-business",
+    "status": "alive"
+  },
+  "https://www.statefarm.com/simple-insights/smart-ideas/budgeting-help": {
+    "code": 200,
+    "final": "https://www.statefarm.com/simple-insights/financial/budget-breakdown",
+    "status": "alive"
+  },
+  "https://www.step2.com/": {
+    "code": 200,
+    "final": "https://www.step2.com/",
+    "status": "alive"
+  },
+  "https://www.theoriginalscrapbox.com/": {
+    "code": 429,
+    "final": "https://www.theoriginalscrapbox.com/",
+    "status": "uncertain"
+  },
+  "https://www.tombowusa.com/markers/fudenosuke/fudenosuke-colors-set-10-pack.html?sscid=11k5_sfpru": {
+    "code": 429,
+    "final": "https://www.tombowusa.com/markers/fudenosuke/fudenosuke-colors-set-10-pack.html?sscid=11k5_sfpru",
+    "status": "uncertain"
+  },
+  "https://www.walmart.com/ip/54061173": {
+    "code": 404,
+    "final": "https://www.walmart.com/ip/54061173",
+    "status": "dead"
+  },
+  "https://www.youtube.com/amytangerine": {
+    "code": 200,
+    "final": "https://www.youtube.com/amytangerine",
+    "status": "alive"
+  },
+  "https://www.youtube.com/playlist?list=PLX4HQiOkev_KspjvmC6G9tqagM9XRsg3d": {
+    "code": 200,
+    "final": "https://www.youtube.com/playlist?list=PLX4HQiOkev_KspjvmC6G9tqagM9XRsg3d",
+    "status": "alive"
+  },
+  "https://www.youtube.com/playlist?list=PLX4HQiOkev_LyHDdGxWaJhBams2ijDVFe&amp;inf_contact_key=fd06a35c16597ae772d6eb75a4dc4392dead30f5952182701734c94455c59268": {
+    "code": 200,
+    "final": "https://www.youtube.com/playlist?list=PLX4HQiOkev_LyHDdGxWaJhBams2ijDVFe&amp;inf_contact_key=fd06a35c16597ae772d6eb75a4dc4392dead30f5952182701734c94455c59268",
+    "status": "alive"
+  },
+  "https://www.youtube.com/watch?v=ANfl8f6E7d4&amp;feature=youtu.be": {
+    "code": 200,
+    "final": "https://www.youtube.com/watch?v=ANfl8f6E7d4&amp;feature=youtu.be",
+    "status": "alive"
+  },
+  "https://www.youtube.com/watch?v=CKnmpsRL3xI&amp;index=1&amp;list=UUAQq7x9kln3StzjMPX0Efkg": {
+    "code": 200,
+    "final": "https://www.youtube.com/watch?v=CKnmpsRL3xI&amp;index=1&amp;list=UUAQq7x9kln3StzjMPX0Efkg",
+    "status": "alive"
+  },
+  "https://www.youtube.com/watch?v=SamUpE0q9fo&amp;feature=youtu.be": {
+    "code": 200,
+    "final": "https://www.youtube.com/watch?v=SamUpE0q9fo&amp;feature=youtu.be",
+    "status": "alive"
+  },
+  "https://www.youtube.com/watch?v=_B405pYEGek": {
+    "code": 200,
+    "final": "https://www.youtube.com/watch?v=_B405pYEGek",
+    "status": "alive"
+  },
+  "https://www.youtube.com/watch?v=s3iXI3C2g6s": {
+    "code": 200,
+    "final": "https://www.youtube.com/watch?v=s3iXI3C2g6s",
+    "status": "alive"
+  },
+  "https://www.youtube.com/watch?v=u8A3BgN6iog": {
+    "code": 200,
+    "final": "https://www.youtube.com/watch?v=u8A3BgN6iog",
+    "status": "alive"
+  },
+  "https://www.youtube.com/watch?v=uyZlq_fQ4RE&amp;list=UUAQq7x9kln3StzjMPX0Efkg&amp;index=4": {
+    "code": 200,
+    "final": "https://www.youtube.com/watch?v=uyZlq_fQ4RE&amp;list=UUAQq7x9kln3StzjMPX0Efkg&amp;index=4",
+    "status": "alive"
+  },
+  "https://www.youtube.com/watch?v=xmQ-w1tlNw8": {
+    "code": 200,
+    "final": "https://www.youtube.com/watch?v=xmQ-w1tlNw8",
+    "status": "alive"
+  },
+  "https://youtu.be/0wXyJ0cXobI": {
+    "code": 200,
+    "final": "https://www.youtube.com/watch?v=0wXyJ0cXobI&feature=youtu.be",
+    "status": "alive"
+  },
+  "https://youtu.be/5Fr08D2udX0": {
+    "code": 200,
+    "final": "https://www.youtube.com/watch?v=5Fr08D2udX0&feature=youtu.be",
+    "status": "alive"
+  },
+  "https://youtu.be/D38a9ouhSP4": {
+    "code": 200,
+    "final": "https://www.youtube.com/watch?v=D38a9ouhSP4&feature=youtu.be",
+    "status": "alive"
+  },
+  "https://youtu.be/DhsRU18ih_A": {
+    "code": 200,
+    "final": "https://www.youtube.com/watch?v=DhsRU18ih_A&feature=youtu.be",
+    "status": "alive"
+  },
+  "https://youtu.be/E-ctd_AIbz4": {
+    "code": 200,
+    "final": "https://www.youtube.com/watch?v=E-ctd_AIbz4&feature=youtu.be",
+    "status": "alive"
+  },
+  "https://youtu.be/JCgX05wMLuY": {
+    "code": 200,
+    "final": "https://www.youtube.com/watch?v=JCgX05wMLuY&feature=youtu.be",
+    "status": "alive"
+  },
+  "https://youtu.be/KmKVfYvywl0": {
+    "code": 200,
+    "final": "https://www.youtube.com/watch?v=KmKVfYvywl0&feature=youtu.be",
+    "status": "alive"
+  },
+  "https://youtu.be/PvL0nKhaL74": {
+    "code": 200,
+    "final": "https://www.youtube.com/watch?v=PvL0nKhaL74&feature=youtu.be",
+    "status": "alive"
+  },
+  "https://youtu.be/SJ9iyHbiwFs": {
+    "code": 200,
+    "final": "https://www.youtube.com/watch?v=SJ9iyHbiwFs&feature=youtu.be",
+    "status": "alive"
+  },
+  "https://youtu.be/YNc5f0mn7Ss": {
+    "code": 200,
+    "final": "https://www.youtube.com/watch?v=YNc5f0mn7Ss&feature=youtu.be",
+    "status": "alive"
+  },
+  "https://youtu.be/ZhK1FSwB2ZQ": {
+    "code": 200,
+    "final": "https://www.youtube.com/watch?v=ZhK1FSwB2ZQ&feature=youtu.be",
+    "status": "alive"
+  },
+  "https://youtu.be/_HtckJ415PI": {
+    "code": 200,
+    "final": "https://www.youtube.com/watch?v=_HtckJ415PI&feature=youtu.be",
+    "status": "alive"
+  },
+  "https://youtu.be/_nWoW5GuF3s": {
+    "code": 200,
+    "final": "https://www.youtube.com/watch?v=_nWoW5GuF3s&feature=youtu.be",
+    "status": "alive"
+  },
+  "https://youtu.be/dVnr9ZNcP-0": {
+    "code": 200,
+    "final": "https://www.youtube.com/watch?v=dVnr9ZNcP-0&feature=youtu.be",
+    "status": "alive"
+  },
+  "https://youtu.be/mrhLrLwk6ws": {
+    "code": 200,
+    "final": "https://www.youtube.com/watch?v=mrhLrLwk6ws&feature=youtu.be",
+    "status": "alive"
+  },
+  "https://youtu.be/t5Pfw0ABeDM": {
+    "code": 200,
+    "final": "https://www.youtube.com/watch?v=t5Pfw0ABeDM&feature=youtu.be",
+    "status": "alive"
+  },
+  "https://youtu.be/vczXQdxSnHg": {
+    "code": 200,
+    "final": "https://www.youtube.com/watch?v=vczXQdxSnHg&feature=youtu.be",
+    "status": "alive"
+  },
+  "https://youtu.be/wQsTFAxmeVc": {
+    "code": 200,
+    "final": "https://www.youtube.com/watch?v=wQsTFAxmeVc&feature=youtu.be",
+    "status": "alive"
+  },
+  "https://youtube.com/amytangerine": {
+    "code": 200,
+    "final": "https://www.youtube.com/amytangerine",
+    "status": "alive"
+  }
+}

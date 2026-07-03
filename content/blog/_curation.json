@@ -5,7 +5,7 @@
     "date": "2024-11-07",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -23,7 +23,7 @@
     "date": "2021-06-25",
     "kind": "sale/discount/promo",
     "treatment": "redirect",
-    "reason": "sale/discount/promo -> redirect",
+    "reason": "title: sale/discount/promo",
     "source": "auto"
   },
   {
@@ -32,7 +32,7 @@
     "date": "2021-05-25",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -59,7 +59,7 @@
     "date": "2020-12-16",
     "kind": "sale/discount/promo",
     "treatment": "redirect",
-    "reason": "sale/discount/promo -> redirect",
+    "reason": "title: sale/discount/promo",
     "source": "auto"
   },
   {
@@ -68,7 +68,7 @@
     "date": "2020-10-21",
     "kind": "sale/discount/promo",
     "treatment": "redirect",
-    "reason": "sale/discount/promo -> redirect",
+    "reason": "title: sale/discount/promo",
     "source": "auto"
   },
   {
@@ -77,7 +77,7 @@
     "date": "2020-08-31",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -86,7 +86,7 @@
     "date": "2020-08-20",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -95,7 +95,7 @@
     "date": "2020-08-13",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -104,7 +104,7 @@
     "date": "2020-06-30",
     "kind": "sale/discount/promo",
     "treatment": "redirect",
-    "reason": "sale/discount/promo -> redirect",
+    "reason": "title: sale/discount/promo",
     "source": "auto"
   },
   {
@@ -113,7 +113,7 @@
     "date": "2020-05-01",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -122,7 +122,7 @@
     "date": "2020-04-29",
     "kind": "sale/discount/promo",
     "treatment": "redirect",
-    "reason": "sale/discount/promo -> redirect",
+    "reason": "title: sale/discount/promo",
     "source": "auto"
   },
   {
@@ -131,7 +131,7 @@
     "date": "2020-04-05",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -140,7 +140,7 @@
     "date": "2019-12-04",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -149,8 +149,17 @@
     "date": "2019-10-23",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
+  },
+  {
+    "slug": "happy-list",
+    "title": "Happy List",
+    "date": "2019-10-16",
+    "kind": "sponsored/collab+dead-dest",
+    "treatment": "redirect",
+    "reason": "sponsored/collab; 1 dead commercial link(s), 0 alive",
+    "source": "auto-dead-link"
   },
   {
     "slug": "brush-lettering-workshop-is-back",
@@ -158,7 +167,7 @@
     "date": "2019-07-01",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -167,7 +176,7 @@
     "date": "2019-05-31",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -176,8 +185,17 @@
     "date": "2019-04-23",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
+  },
+  {
+    "slug": "lets-start-today",
+    "title": "Let's Start Today",
+    "date": "2019-01-18",
+    "kind": "sponsored/collab+dead-dest",
+    "treatment": "redirect",
+    "reason": "sponsored/collab; 1 dead commercial link(s), 0 alive",
+    "source": "auto-dead-link"
   },
   {
     "slug": "pipsticks-collaboration",
@@ -185,7 +203,7 @@
     "date": "2019-01-11",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -194,7 +212,7 @@
     "date": "2018-12-27",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -203,7 +221,7 @@
     "date": "2018-11-30",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -212,7 +230,7 @@
     "date": "2018-10-17",
     "kind": "sale/discount/promo",
     "treatment": "redirect",
-    "reason": "sale/discount/promo -> redirect",
+    "reason": "title: sale/discount/promo",
     "source": "auto"
   },
   {
@@ -221,7 +239,7 @@
     "date": "2018-10-04",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -230,7 +248,7 @@
     "date": "2018-09-28",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -239,7 +257,7 @@
     "date": "2018-09-27",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -248,7 +266,7 @@
     "date": "2018-06-28",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -257,7 +275,7 @@
     "date": "2018-06-18",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -266,7 +284,7 @@
     "date": "2018-05-16",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -275,8 +293,17 @@
     "date": "2018-05-11",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
+  },
+  {
+    "slug": "simplycards",
+    "title": "Simply Cards & Papercraft Magazine",
+    "date": "2018-05-06",
+    "kind": "freebie/download+dead-dest",
+    "treatment": "redirect",
+    "reason": "freebie/download; 1 dead commercial link(s), 0 alive",
+    "source": "auto-dead-link"
   },
   {
     "slug": "altenew-blog-hop-2",
@@ -284,7 +311,7 @@
     "date": "2018-04-06",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -293,7 +320,7 @@
     "date": "2018-03-07",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -302,7 +329,7 @@
     "date": "2018-02-07",
     "kind": "sale/discount/promo",
     "treatment": "redirect",
-    "reason": "sale/discount/promo -> redirect",
+    "reason": "title: sale/discount/promo",
     "source": "auto"
   },
   {
@@ -311,7 +338,7 @@
     "date": "2018-01-04",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -320,8 +347,17 @@
     "date": "2017-10-29",
     "kind": "sale/discount/promo",
     "treatment": "redirect",
-    "reason": "sale/discount/promo -> redirect",
+    "reason": "title: sale/discount/promo",
     "source": "auto"
+  },
+  {
+    "slug": "artnaturals",
+    "title": "Five Tips for Creating a Stress-Free Home | Art Naturals",
+    "date": "2017-04-16",
+    "kind": "sponsored/collab+dead-dest",
+    "treatment": "redirect",
+    "reason": "sponsored/collab; 4 dead commercial link(s), 0 alive",
+    "source": "auto-dead-link"
   },
   {
     "slug": "mixbook-photo-canvases",
@@ -329,7 +365,7 @@
     "date": "2017-01-30",
     "kind": "sale/discount/promo",
     "treatment": "redirect",
-    "reason": "sale/discount/promo -> redirect",
+    "reason": "title: sale/discount/promo",
     "source": "auto"
   },
   {
@@ -338,7 +374,7 @@
     "date": "2016-12-13",
     "kind": "sale/discount/promo",
     "treatment": "redirect",
-    "reason": "sale/discount/promo -> redirect",
+    "reason": "title: sale/discount/promo",
     "source": "auto"
   },
   {
@@ -347,8 +383,17 @@
     "date": "2016-10-12",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
+  },
+  {
+    "slug": "be-brave-fierce-and-free",
+    "title": "Be Brave, Fierce and Free",
+    "date": "2016-10-10",
+    "kind": "freebie/download+dead-dest",
+    "treatment": "redirect",
+    "reason": "freebie/download; 1 dead commercial link(s), 0 alive",
+    "source": "auto-dead-link"
   },
   {
     "slug": "freshrealm",
@@ -356,7 +401,7 @@
     "date": "2016-10-07",
     "kind": "sale/discount/promo",
     "treatment": "redirect",
-    "reason": "sale/discount/promo -> redirect",
+    "reason": "title: sale/discount/promo",
     "source": "auto"
   },
   {
@@ -365,7 +410,7 @@
     "date": "2016-09-13",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -374,7 +419,7 @@
     "date": "2016-08-22",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -383,7 +428,7 @@
     "date": "2016-07-06",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -392,7 +437,7 @@
     "date": "2016-06-06",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -401,7 +446,7 @@
     "date": "2016-05-31",
     "kind": "sale/discount/promo",
     "treatment": "redirect",
-    "reason": "sale/discount/promo -> redirect",
+    "reason": "title: sale/discount/promo",
     "source": "auto"
   },
   {
@@ -410,7 +455,7 @@
     "date": "2015-10-12",
     "kind": "sale/discount/promo",
     "treatment": "redirect",
-    "reason": "sale/discount/promo -> redirect",
+    "reason": "title: sale/discount/promo",
     "source": "auto"
   },
   {
@@ -419,7 +464,7 @@
     "date": "2015-08-26",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -428,7 +473,7 @@
     "date": "2015-06-30",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -437,8 +482,17 @@
     "date": "2015-04-30",
     "kind": "sale/discount/promo",
     "treatment": "redirect",
-    "reason": "sale/discount/promo -> redirect",
+    "reason": "title: sale/discount/promo",
     "source": "auto"
+  },
+  {
+    "slug": "studio-calico-project-life-kits",
+    "title": "Studio Calico Project Life Kits",
+    "date": "2015-04-27",
+    "kind": "commercial-CTA+dead-dest",
+    "treatment": "redirect",
+    "reason": "commercial-CTA; 10 dead commercial link(s), 0 alive",
+    "source": "auto-dead-link"
   },
   {
     "slug": "practice5",
@@ -446,8 +500,17 @@
     "date": "2015-03-18",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
+  },
+  {
+    "slug": "get-inspired-then-get-creative",
+    "title": "Get Inspired... Then Get Creative",
+    "date": "2015-02-11",
+    "kind": "commercial-CTA+dead-dest",
+    "treatment": "redirect",
+    "reason": "commercial-CTA; 1 dead commercial link(s), 0 alive",
+    "source": "auto-dead-link"
   },
   {
     "slug": "creative-handbook-practice-2",
@@ -455,8 +518,17 @@
     "date": "2015-01-30",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
+  },
+  {
+    "slug": "studio-calico-cirque-contributor",
+    "title": "Studio Calico Cirque Project Life Kits",
+    "date": "2015-01-27",
+    "kind": "commercial-CTA+dead-dest",
+    "treatment": "redirect",
+    "reason": "commercial-CTA; 10 dead commercial link(s), 0 alive",
+    "source": "auto-dead-link"
   },
   {
     "slug": "creative-handbook-page-1",
@@ -464,7 +536,7 @@
     "date": "2015-01-16",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -473,7 +545,7 @@
     "date": "2015-01-14",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -482,8 +554,26 @@
     "date": "2015-01-09",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
+  },
+  {
+    "slug": "studio-calico-park-avenue-kit-layouts",
+    "title": "Studio Calico Park Avenue Kit Layouts",
+    "date": "2014-11-27",
+    "kind": "commercial-CTA+dead-dest",
+    "treatment": "redirect",
+    "reason": "commercial-CTA; 11 dead commercial link(s), 0 alive",
+    "source": "auto-dead-link"
+  },
+  {
+    "slug": "studio-calico-walden-kits",
+    "title": "Studio Calico Walden Kits!",
+    "date": "2014-10-27",
+    "kind": "commercial-CTA+dead-dest",
+    "treatment": "redirect",
+    "reason": "commercial-CTA; 13 dead commercial link(s), 0 alive",
+    "source": "auto-dead-link"
   },
   {
     "slug": "a-workspace-that-works",
@@ -491,7 +581,7 @@
     "date": "2014-10-22",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -500,7 +590,7 @@
     "date": "2014-10-03",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -509,7 +599,7 @@
     "date": "2014-08-20",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -518,7 +608,7 @@
     "date": "2014-08-14",
     "kind": "sale/discount/promo",
     "treatment": "redirect",
-    "reason": "sale/discount/promo -> redirect",
+    "reason": "title: sale/discount/promo",
     "source": "auto"
   },
   {
@@ -527,7 +617,7 @@
     "date": "2014-06-26",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -536,8 +626,17 @@
     "date": "2014-05-08",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
+  },
+  {
+    "slug": "studio-calico-camelot-kits",
+    "title": "Studio Calico - Camelot Kits",
+    "date": "2014-04-27",
+    "kind": "commercial-CTA+dead-dest",
+    "treatment": "redirect",
+    "reason": "commercial-CTA; 14 dead commercial link(s), 0 alive",
+    "source": "auto-dead-link"
   },
   {
     "slug": "evalicious-giveaway-discount-code",
@@ -545,7 +644,7 @@
     "date": "2014-04-24",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -554,7 +653,7 @@
     "date": "2014-03-27",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -563,7 +662,7 @@
     "date": "2014-01-30",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -572,7 +671,7 @@
     "date": "2014-01-10",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -581,7 +680,7 @@
     "date": "2014-01-09",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -590,7 +689,7 @@
     "date": "2014-01-01",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -599,7 +698,7 @@
     "date": "2013-12-29",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -608,7 +707,7 @@
     "date": "2013-11-30",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -617,7 +716,7 @@
     "date": "2013-11-29",
     "kind": "sale/discount/promo",
     "treatment": "redirect",
-    "reason": "sale/discount/promo -> redirect",
+    "reason": "title: sale/discount/promo",
     "source": "auto"
   },
   {
@@ -626,7 +725,7 @@
     "date": "2013-11-26",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -635,7 +734,7 @@
     "date": "2013-11-18",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -644,7 +743,7 @@
     "date": "2013-11-05",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -653,8 +752,17 @@
     "date": "2013-11-01",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
+  },
+  {
+    "slug": "five-for-friday",
+    "title": "5 For Friday",
+    "date": "2013-10-25",
+    "kind": "commercial-CTA+dead-dest",
+    "treatment": "redirect",
+    "reason": "commercial-CTA; 2 dead commercial link(s), 0 alive",
+    "source": "auto-dead-link"
   },
   {
     "slug": "freckled-fawn-giveaway-2",
@@ -662,7 +770,7 @@
     "date": "2013-10-20",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -671,7 +779,7 @@
     "date": "2013-09-10",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -680,8 +788,17 @@
     "date": "2013-09-01",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
+  },
+  {
+    "slug": "studio-calico-double-scoop-kits",
+    "title": "Studio Calico Double Scoop Kits",
+    "date": "2013-08-27",
+    "kind": "commercial-CTA+dead-dest",
+    "treatment": "redirect",
+    "reason": "commercial-CTA; 5 dead commercial link(s), 0 alive",
+    "source": "auto-dead-link"
   },
   {
     "slug": "simon-says-stamp-kp-blog-hop",
@@ -689,7 +806,7 @@
     "date": "2013-08-19",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -698,7 +815,7 @@
     "date": "2013-07-19",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -707,7 +824,7 @@
     "date": "2013-07-11",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -716,7 +833,7 @@
     "date": "2013-07-10",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -725,7 +842,7 @@
     "date": "2013-07-05",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -734,8 +851,17 @@
     "date": "2013-07-02",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
+  },
+  {
+    "slug": "studio-calico-valley-high-kit-layouts",
+    "title": "Studio Calico Valley High Kit Layouts",
+    "date": "2013-06-28",
+    "kind": "commercial-CTA+dead-dest",
+    "treatment": "redirect",
+    "reason": "commercial-CTA; 12 dead commercial link(s), 0 alive",
+    "source": "auto-dead-link"
   },
   {
     "slug": "inked",
@@ -743,7 +869,7 @@
     "date": "2013-06-27",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -752,7 +878,7 @@
     "date": "2013-05-20",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -761,8 +887,17 @@
     "date": "2013-05-09",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
+  },
+  {
+    "slug": "spotlight-on-spiegel",
+    "title": "Spotlight on Spiegel",
+    "date": "2013-05-03",
+    "kind": "sponsored/collab+dead-dest",
+    "treatment": "redirect",
+    "reason": "sponsored/collab; 10 dead commercial link(s), 0 alive",
+    "source": "auto-dead-link"
   },
   {
     "slug": "a-studio-calico-special-30-off",
@@ -770,7 +905,7 @@
     "date": "2013-04-11",
     "kind": "sale/discount/promo",
     "treatment": "redirect",
-    "reason": "sale/discount/promo -> redirect",
+    "reason": "title: sale/discount/promo",
     "source": "auto"
   },
   {
@@ -779,7 +914,7 @@
     "date": "2013-04-01",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -788,7 +923,7 @@
     "date": "2013-03-09",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -797,7 +932,7 @@
     "date": "2013-02-28",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -806,7 +941,7 @@
     "date": "2013-02-22",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -815,7 +950,7 @@
     "date": "2013-02-20",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -824,7 +959,7 @@
     "date": "2013-02-08",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -833,8 +968,17 @@
     "date": "2013-01-25",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
+  },
+  {
+    "slug": "my-book",
+    "title": "My Book!",
+    "date": "2013-01-17",
+    "kind": "commercial-CTA+dead-dest",
+    "treatment": "redirect",
+    "reason": "commercial-CTA; 1 dead commercial link(s), 0 alive",
+    "source": "auto-dead-link"
   },
   {
     "slug": "why-thank-you-winner",
@@ -842,7 +986,7 @@
     "date": "2013-01-11",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -851,7 +995,7 @@
     "date": "2013-01-07",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -860,7 +1004,7 @@
     "date": "2012-12-04",
     "kind": "sale/discount/promo",
     "treatment": "redirect",
-    "reason": "sale/discount/promo -> redirect",
+    "reason": "title: sale/discount/promo",
     "source": "auto"
   },
   {
@@ -869,7 +1013,7 @@
     "date": "2012-11-28",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -878,7 +1022,7 @@
     "date": "2012-11-23",
     "kind": "sale/discount/promo",
     "treatment": "redirect",
-    "reason": "sale/discount/promo -> redirect",
+    "reason": "title: sale/discount/promo",
     "source": "auto"
   },
   {
@@ -887,7 +1031,7 @@
     "date": "2012-11-21",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -896,7 +1040,7 @@
     "date": "2012-11-15",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -905,7 +1049,7 @@
     "date": "2012-11-01",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -914,7 +1058,7 @@
     "date": "2012-10-01",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -923,7 +1067,7 @@
     "date": "2012-09-22",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -932,7 +1076,7 @@
     "date": "2012-09-02",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -941,7 +1085,7 @@
     "date": "2012-08-31",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -950,7 +1094,7 @@
     "date": "2012-08-17",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -959,7 +1103,7 @@
     "date": "2012-05-31",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -968,7 +1112,7 @@
     "date": "2012-05-17",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -977,7 +1121,7 @@
     "date": "2012-04-20",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -986,7 +1130,7 @@
     "date": "2012-04-17",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -995,7 +1139,7 @@
     "date": "2012-04-13",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -1004,7 +1148,7 @@
     "date": "2012-04-06",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -1013,7 +1157,7 @@
     "date": "2012-04-05",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -1022,7 +1166,7 @@
     "date": "2012-03-27",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -1031,7 +1175,7 @@
     "date": "2012-03-23",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -1040,7 +1184,7 @@
     "date": "2012-03-21",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -1049,7 +1193,7 @@
     "date": "2012-03-12",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -1058,7 +1202,7 @@
     "date": "2012-03-10",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -1067,7 +1211,7 @@
     "date": "2012-02-23",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -1076,7 +1220,7 @@
     "date": "2012-02-07",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -1085,7 +1229,7 @@
     "date": "2012-01-30",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -1094,7 +1238,7 @@
     "date": "2012-01-27",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -1103,7 +1247,7 @@
     "date": "2012-01-23",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -1112,7 +1256,7 @@
     "date": "2012-01-17",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -1121,7 +1265,7 @@
     "date": "2012-01-16",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -1130,7 +1274,7 @@
     "date": "2012-01-13",
     "kind": "giveaway/blog-hop",
     "treatment": "redirect",
-    "reason": "giveaway/blog-hop -> redirect",
+    "reason": "title: giveaway/blog-hop",
     "source": "auto"
   },
   {
@@ -1139,7 +1283,7 @@
     "date": "2012-01-02",
     "kind": "class/workshop",
     "treatment": "redirect",
-    "reason": "class/workshop -> redirect",
+    "reason": "title: class/workshop",
     "source": "auto"
   },
   {
@@ -1148,7 +1292,7 @@
     "date": "2021-06-14",
     "kind": "sponsored",
     "treatment": "archive-only",
-    "reason": "sponsored -> archive-only",
+    "reason": "title: sponsored",
     "source": "auto"
   },
   {
@@ -1157,7 +1301,7 @@
     "date": "2019-03-27",
     "kind": "sponsored",
     "treatment": "archive-only",
-    "reason": "sponsored -> archive-only",
+    "reason": "title: sponsored",
     "source": "auto"
   },
   {
@@ -1166,7 +1310,7 @@
     "date": "2018-05-24",
     "kind": "sponsored",
     "treatment": "archive-only",
-    "reason": "sponsored -> archive-only",
+    "reason": "title: sponsored",
     "source": "auto"
   },
   {
@@ -1175,7 +1319,7 @@
     "date": "2018-05-08",
     "kind": "sponsored",
     "treatment": "archive-only",
-    "reason": "sponsored -> archive-only",
+    "reason": "title: sponsored",
     "source": "auto"
   },
   {
@@ -1184,7 +1328,7 @@
     "date": "2018-04-10",
     "kind": "dated-logistics",
     "treatment": "archive-only",
-    "reason": "dated-logistics -> archive-only",
+    "reason": "title: dated-logistics",
     "source": "auto"
   },
   {
@@ -1193,7 +1337,7 @@
     "date": "2018-03-27",
     "kind": "dated-logistics",
     "treatment": "archive-only",
-    "reason": "dated-logistics -> archive-only",
+    "reason": "title: dated-logistics",
     "source": "auto"
   },
   {
@@ -1202,7 +1346,7 @@
     "date": "2018-01-18",
     "kind": "sponsored",
     "treatment": "archive-only",
-    "reason": "sponsored -> archive-only",
+    "reason": "title: sponsored",
     "source": "auto"
   },
   {
@@ -1211,7 +1355,7 @@
     "date": "2013-03-11",
     "kind": "dated-logistics",
     "treatment": "archive-only",
-    "reason": "dated-logistics -> archive-only",
+    "reason": "title: dated-logistics",
     "source": "auto"
   },
   {
@@ -1220,7 +1364,7 @@
     "date": "2013-01-21",
     "kind": "dated-logistics",
     "treatment": "archive-only",
-    "reason": "dated-logistics -> archive-only",
+    "reason": "title: dated-logistics",
     "source": "auto"
   },
   {
@@ -1229,7 +1373,7 @@
     "date": "2012-06-15",
     "kind": "dated-logistics",
     "treatment": "archive-only",
-    "reason": "dated-logistics -> archive-only",
+    "reason": "title: dated-logistics",
     "source": "auto"
   },
   {
@@ -1238,7 +1382,7 @@
     "date": "2012-06-05",
     "kind": "dated-logistics",
     "treatment": "archive-only",
-    "reason": "dated-logistics -> archive-only",
+    "reason": "title: dated-logistics",
     "source": "auto"
   },
   {
@@ -1247,7 +1391,7 @@
     "date": "2012-05-16",
     "kind": "dated-logistics",
     "treatment": "archive-only",
-    "reason": "dated-logistics -> archive-only",
+    "reason": "title: dated-logistics",
     "source": "auto"
   },
   {
@@ -1256,7 +1400,7 @@
     "date": "2012-05-09",
     "kind": "dated-logistics",
     "treatment": "archive-only",
-    "reason": "dated-logistics -> archive-only",
+    "reason": "title: dated-logistics",
     "source": "auto"
   },
   {
@@ -1265,7 +1409,7 @@
     "date": "2012-04-25",
     "kind": "dated-logistics",
     "treatment": "archive-only",
-    "reason": "dated-logistics -> archive-only",
+    "reason": "title: dated-logistics",
     "source": "auto"
   },
   {
@@ -1274,7 +1418,7 @@
     "date": "2012-03-18",
     "kind": "dated-logistics",
     "treatment": "archive-only",
-    "reason": "dated-logistics -> archive-only",
+    "reason": "title: dated-logistics",
     "source": "auto"
   },
   {
@@ -1283,7 +1427,7 @@
     "date": "2012-03-11",
     "kind": "dated-logistics",
     "treatment": "archive-only",
-    "reason": "dated-logistics -> archive-only",
+    "reason": "title: dated-logistics",
     "source": "auto"
   },
   {
@@ -1292,7 +1436,7 @@
     "date": "2012-03-03",
     "kind": "dated-logistics",
     "treatment": "archive-only",
-    "reason": "dated-logistics -> archive-only",
+    "reason": "title: dated-logistics",
     "source": "auto"
   },
   {
@@ -1301,7 +1445,7 @@
     "date": "2012-02-25",
     "kind": "dated-logistics",
     "treatment": "archive-only",
-    "reason": "dated-logistics -> archive-only",
+    "reason": "title: dated-logistics",
     "source": "auto"
   },
   {
@@ -1310,7 +1454,7 @@
     "date": "2012-02-16",
     "kind": "dated-logistics",
     "treatment": "archive-only",
-    "reason": "dated-logistics -> archive-only",
+    "reason": "title: dated-logistics",
     "source": "auto"
   },
   {
@@ -1319,7 +1463,7 @@
     "date": "2012-02-03",
     "kind": "dated-logistics",
     "treatment": "archive-only",
-    "reason": "dated-logistics -> archive-only",
+    "reason": "title: dated-logistics",
     "source": "auto"
   },
   {
@@ -1328,7 +1472,7 @@
     "date": "2012-01-20",
     "kind": "dated-logistics",
     "treatment": "archive-only",
-    "reason": "dated-logistics -> archive-only",
+    "reason": "title: dated-logistics",
     "source": "auto"
   },
   {
@@ -1337,7 +1481,7 @@
     "date": "2012-01-07",
     "kind": "dated-logistics",
     "treatment": "archive-only",
-    "reason": "dated-logistics -> archive-only",
+    "reason": "title: dated-logistics",
     "source": "auto"
   }
 ]
