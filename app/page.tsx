@@ -225,7 +225,7 @@ export default async function HomePage() {
             src="/images/homepage/sunshine-rainbows-spotlight.jpg"
             alt="Sunshine &amp; Rainbows Traveler's Notebook by Amy Tangerine"
             fill
-            className="object-cover"
+            className="object-cover object-top"
             sizes="(max-width: 768px) 100vw, 80vw"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
