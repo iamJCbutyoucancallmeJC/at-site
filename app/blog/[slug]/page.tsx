@@ -2,17 +2,19 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 import {
-  getAllPostsMeta,
+  getListablePosts,
   getPostBySlug,
   formatDate,
   tagToSlug,
   isArchivalPost,
 } from "@/lib/blog"
 
-// Static at build time. New posts (added to content/blog) need a rebuild to appear;
-// dynamicParams stays default (true) so a slug not in the build list renders on demand.
+// Static at build time. Built from the listable set (redirect-tier ephemera is
+// excluded -- those 301 to /blog in next.config, so no page is generated for them).
+// New posts (added to content/blog) need a rebuild to appear; dynamicParams stays
+// default (true) so a slug not in the build list renders on demand.
 export async function generateStaticParams() {
-  return getAllPostsMeta().map((p) => ({ slug: p.slug }))
+  return getListablePosts().map((p) => ({ slug: p.slug }))
 }
 
 export async function generateMetadata({

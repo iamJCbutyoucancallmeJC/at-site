@@ -1,4 +1,5 @@
 import { blogLegacyRedirects } from "./lib/blog-redirects.mjs"
+import { blogCurationRedirects } from "./lib/blog-curation-redirects.mjs"
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -49,6 +50,12 @@ const nextConfig = {
       //    'html'-suffixed slugs, and slug collisions whose clean slug differs from a
       //    pure date-strip. Auto-generated from the migration -- see lib/blog-redirects.mjs.
       ...blogLegacyRedirects,
+      // 1b) Merchandising curation (2026-07-03): the deadest stale-commercial ephemera
+      //    (giveaways, expired sales, closed classes) 301 -> /blog so the canonical URL
+      //    resolves (never 404) without showing a dead-offer page. Auto-generated from
+      //    content/blog/_curation.json -- see scripts/blog-migration/classify-curation.py.
+      //    Placed before the generic collapse so a canonical /blog/<slug> hits in one hop.
+      ...blogCurationRedirects,
       // 2) General collapse: every dated SQS path /blog/YYYY/MM(/DD)?/<slug> -> /blog/<slug>.
       //    Covers ~1,079 legacy posts in one rule. Clean-slug paths (~216) need no redirect:
       //    the /blog/[slug] route serves them at the canonical URL directly.

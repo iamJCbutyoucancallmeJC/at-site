@@ -1,7 +1,7 @@
 import Link from "next/link"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 import BlogSearch, { type SearchEntry } from "@/components/blog/blog-search"
-import { getAllPostsMeta } from "@/lib/blog"
+import { getListablePosts } from "@/lib/blog"
 
 export const metadata = {
   title: "Search the Journal | Amy Tangerine",
@@ -11,7 +11,9 @@ export const metadata = {
 export default function BlogSearchPage() {
   // Build-time search index: title + excerpt + tags only (no bodies), so the
   // payload stays small even across the full archive. Static, $0, no service.
-  const index: SearchEntry[] = getAllPostsMeta().map((p) => ({
+  // Listable set only -- redirect-tier ephemera 301s to /blog, so indexing it
+  // would surface a result that just bounces the reader to the index.
+  const index: SearchEntry[] = getListablePosts().map((p) => ({
     slug: p.slug,
     title: p.title,
     date: p.date,
