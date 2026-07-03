@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 import PostCard from "@/components/blog/post-card"
 import FeaturedTiles from "@/components/blog/featured-tiles"
@@ -46,11 +47,25 @@ export default async function BlogIndex({
       <PageEngagementTracker page="blog-index" />
 
       {/* ── Header ── */}
-      <section
-        className="py-14 md:py-20 px-6 md:px-16"
-        style={{ background: "var(--color-gray-light)" }}
-      >
-        <div className="max-w-5xl mx-auto">
+      <section className="relative overflow-hidden flex items-center min-h-[340px] md:min-h-[440px] py-14 md:py-20 px-6 md:px-16">
+        {/* Hero photo — placeholder pulled from the archive; swap for Amy's chosen shot */}
+        <Image
+          src="/images/blog/journal-hero.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        {/* Left-anchored white scrim keeps the dark headline legible over the photo */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to right, rgba(255,255,255,0.94) 0%, rgba(255,255,255,0.80) 42%, rgba(255,255,255,0.35) 100%)",
+          }}
+        />
+        <div className="max-w-5xl mx-auto w-full relative">
           <p
             className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-3"
             style={{ color: "var(--color-orange)" }}
