@@ -1,16 +1,17 @@
 "use client"
 
-// Standalone Amazon book QR landing page (/amzn/book).
+// Standalone Amazon affiliate landing page for Amy's notebook (/amzn/book).
 //
-// The booth scenario: Amy is debuting her KDP book at Seattle Paper World and may
-// sell out of the physical copies she brought. This page is the QR she hands to
-// interested customers so they can buy it on Amazon. It is an AFFILIATE link-out
-// (Amazon Associates tag atwbsite-20), NOT an AT Shopify checkout — nothing
-// transacts on at-site; the sale and fulfillment are Amazon's.
+// Audience-neutral as of 2026-07-03: this page now serves ALL entry points —
+// Amy's email newsletter, the homepage Feature Spotlight, and the Seattle Paper
+// World booth QR. It is an AFFILIATE link-out (Amazon Associates tag atwbsite-20),
+// NOT an AT Shopify checkout — nothing transacts on at-site; the sale and
+// fulfillment are Amazon's. (Originally built booth-only 2026-06-26; copy
+// generalized when the newsletter push reused it.)
 //
-// Chromeless (no nav/footer/cart) like the Paper World event page, reached via QR,
-// noindex. Mirrors the Shop My Faves affiliate conventions (tag, rel hygiene,
-// disclosure, GA4 affiliate_click) so it stays consistent when that build ships.
+// Chromeless (no nav/footer/cart), noindex. Mirrors the Shop My Faves affiliate
+// conventions (tag, rel hygiene, disclosure, GA4 affiliate_click) so it stays
+// consistent when that build ships.
 
 import { useState } from "react"
 import Image from "next/image"
@@ -23,20 +24,11 @@ import {
   AFFILIATE_DISCLOSURE,
 } from "@/lib/book-qr"
 
-// UTM tags so booth scans are attributable in GA4 (mirrors the Paper World QR
-// convention). The affiliate_click event below is the on-site signal; UTM tags
-// the landing visit.
-const BOOK_HREF_UTM = (() => {
-  try {
-    const u = new URL(BOOK_HREF)
-    u.searchParams.set("utm_source", "booth-qr")
-    u.searchParams.set("utm_medium", "qr")
-    u.searchParams.set("utm_campaign", "paperworld-seattle-book")
-    return u.toString()
-  } catch {
-    return BOOK_HREF
-  }
-})()
+// Outbound Amazon href = the tagged canonical URL (atwbsite-20). No hardcoded
+// booth UTMs anymore: this page now serves ALL sources (newsletter, homepage
+// spotlight, and the booth QR). Inbound source attribution comes from each
+// entry point's own UTMs on the landing URL, which GA4 captures on page load.
+const BOOK_HREF_OUT = BOOK_HREF
 
 // Hero headline = the short main title once confirmed; falls back to generic
 // copy if the title is ever cleared in lib/book-qr.ts.
@@ -49,8 +41,8 @@ export default function BookQrPage() {
     setClicked(true)
     trackEvent("affiliate_click", {
       product_name: BOOK_TITLE || "Amy Tangerine book (KDP)",
-      list_title: "paperworld-booth",
-      source: "paperworld",
+      list_title: "sunshine-rainbows",
+      source: "amzn-book",
       page: "amzn-book",
     })
     // Let the analytics call fire, then the native <a> navigation proceeds.
@@ -87,7 +79,7 @@ export default function BookQrPage() {
           className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-3"
           style={{ color: "var(--color-orange)" }}
         >
-          Just for friends at the booth
+          New from Amy Tangerine
         </p>
         <h1
           className="text-[36px] md:text-[48px] font-bold leading-[1.05] tracking-tight mb-3"
@@ -107,19 +99,20 @@ export default function BookQrPage() {
           className="text-[16px] md:text-[18px] leading-relaxed mb-3"
           style={{ color: "var(--color-text-secondary)" }}
         >
-          Thanks for stopping by! If we&rsquo;ve sold out at the table, you can grab
-          your copy on Amazon and have it sent straight to your door.
+          Amy&rsquo;s new traveler&rsquo;s notebook — a colorful foundation for
+          creativity, memories, and everyday joy. Grab your copy on Amazon and have
+          it shipped straight to your door.
         </p>
         <p
           className="text-[14px] leading-relaxed mb-8"
           style={{ color: "var(--color-text-secondary)" }}
         >
-          Same notebook, shipped to you. No carrying it around the show.
+          75 pages of prompts and inspiration to make your own.
         </p>
 
         {/* CTA — affiliate link-out to Amazon (new tab, sponsored/nofollow) */}
         <a
-          href={BOOK_HREF_UTM}
+          href={BOOK_HREF_OUT}
           target="_blank"
           rel="noopener sponsored nofollow"
           onClick={handleBuy}

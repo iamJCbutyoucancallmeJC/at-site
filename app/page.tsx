@@ -222,27 +222,25 @@ export default async function HomePage() {
       <section className="relative mt-3 md:mt-4 mx-4 md:mx-10 rounded-lg overflow-hidden">
         <div className="relative h-[320px] md:h-[420px]">
           <Image
-            src="/images/homepage/paper-play-3-spotlight.jpg"
-            alt="Paper Play 3 by Amy Tangerine"
+            src="/images/homepage/sunshine-rainbows-spotlight.jpg"
+            alt="Sunshine &amp; Rainbows Traveler's Notebook by Amy Tangerine"
             fill
-            className="object-cover"
+            className="object-cover object-top"
             sizes="(max-width: 768px) 100vw, 80vw"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
           <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10 max-w-lg">
             <h3 className="text-[36px] md:text-[56px] font-bold leading-tight text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
-              Paper Play 3
+              Sunshine &amp; Rainbows
             </h3>
             <p className="text-[15px] md:text-[17px] text-white/95 mt-2 md:mt-3 leading-snug">
-              Amy&apos;s latest book — now available on Amazon.
+              Amy&apos;s new traveler&apos;s notebook — now available on Amazon.
             </p>
             <TrackableLink
-              href="https://amzn.to/4sNtWk1"
+              href="/amzn/book"
               event="product_click"
-              eventData={{ product_name: "Paper Play 3", source_section: "spotlight", page: "homepage" }}
+              eventData={{ product_name: "Sunshine & Rainbows Traveler's Notebook", source_section: "spotlight", page: "homepage" }}
               className="inline-block mt-4 md:mt-5 px-8 py-3 text-[13px] md:text-[14px] uppercase tracking-[0.1em] font-semibold rounded-full border-2 border-white text-white hover:bg-white hover:text-black transition-all duration-300"
-              target="_blank"
-              rel="noopener noreferrer"
             >
               Get It on Amazon
             </TrackableLink>
