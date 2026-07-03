@@ -1,0 +1,1532 @@
+[
+  {
+    "slug": "altenew-blog-hop-3",
+    "title": "ALTENEW BLOG HOP & GIVEAWAY",
+    "date": "2024-11-07",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "free-printables-for-you",
+    "title": "2 Free Printables for you!",
+    "date": "2023-03-23",
+    "kind": null,
+    "treatment": "redirect",
+    "reason": "override -> redirect",
+    "source": "override"
+  },
+  {
+    "slug": "create-room-sale",
+    "title": "DreamBox Lowest Price Ever and Create Room 4th of July Sale",
+    "date": "2021-06-25",
+    "kind": "sale/discount/promo",
+    "treatment": "redirect",
+    "reason": "title: sale/discount/promo",
+    "source": "auto"
+  },
+  {
+    "slug": "workshop-week",
+    "title": "Free Online Creative Workshops All Week Long",
+    "date": "2021-05-25",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "shop-brave-bold",
+    "title": "Shop the Brave and Bold Collection Online!",
+    "date": "2021-03-04",
+    "kind": null,
+    "treatment": "redirect",
+    "reason": "override -> redirect",
+    "source": "override"
+  },
+  {
+    "slug": "nurture-life",
+    "title": "Nurture Life: A Healthy, Kid-Friendly Subscription Meal Service",
+    "date": "2021-02-25",
+    "kind": null,
+    "treatment": "redirect",
+    "reason": "override -> redirect",
+    "source": "override"
+  },
+  {
+    "slug": "nest-diapers",
+    "title": "Plant-Based Eco-Diapers from Nest",
+    "date": "2021-01-25",
+    "kind": null,
+    "treatment": "redirect",
+    "reason": "override -> redirect",
+    "source": "override"
+  },
+  {
+    "slug": "brave-bold",
+    "title": "Brave + Bold Collection",
+    "date": "2021-01-12",
+    "kind": null,
+    "treatment": "redirect",
+    "reason": "override -> redirect",
+    "source": "override"
+  },
+  {
+    "slug": "winter-sale",
+    "title": "Winter Sale!",
+    "date": "2020-12-16",
+    "kind": "sale/discount/promo",
+    "treatment": "redirect",
+    "reason": "title: sale/discount/promo",
+    "source": "auto"
+  },
+  {
+    "slug": "studio-clean-out-boxes",
+    "title": "Studio Clean Out Boxes",
+    "date": "2020-10-21",
+    "kind": "sale/discount/promo",
+    "treatment": "redirect",
+    "reason": "title: sale/discount/promo",
+    "source": "auto"
+  },
+  {
+    "slug": "free-online-workshop",
+    "title": "Free Online Workshop: Cultivating Peace Through Creating",
+    "date": "2020-08-31",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "new-online-course-announcement",
+    "title": "*New* Online Course Announcement - Fresh Takes on Traveler’s Notebooks!",
+    "date": "2020-08-20",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "free-workshop-easy-travelers-notebook-techniques",
+    "title": "FREE Online Workshop - Easy Traveler’s Notebook Techniques!",
+    "date": "2020-08-13",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "new-collection-late-afternoon",
+    "title": "New Collection with American Crafts - Late Afternoon!",
+    "date": "2020-07-03",
+    "kind": null,
+    "treatment": "redirect",
+    "reason": "override -> redirect",
+    "source": "override"
+  },
+  {
+    "slug": "dreambox-summer-sale",
+    "title": "DreamBox Summer Sale!",
+    "date": "2020-06-30",
+    "kind": "sale/discount/promo",
+    "treatment": "redirect",
+    "reason": "title: sale/discount/promo",
+    "source": "auto"
+  },
+  {
+    "slug": "the-digital-shop-is-now-open",
+    "title": "The Digital Shop is Now OPEN!",
+    "date": "2020-05-26",
+    "kind": null,
+    "treatment": "redirect",
+    "reason": "override -> redirect",
+    "source": "override"
+  },
+  {
+    "slug": "coloring-outside-the-lines",
+    "title": "Coloring Outside the Lines *Altenew Blog Hop*",
+    "date": "2020-05-01",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "dreambox-mothers-day-sale",
+    "title": "DreamBox Mother's Day Sale",
+    "date": "2020-04-29",
+    "kind": "sale/discount/promo",
+    "treatment": "redirect",
+    "reason": "title: sale/discount/promo",
+    "source": "auto"
+  },
+  {
+    "slug": "altenew6th",
+    "title": "Altenew 6th Anniversary Blog Hop!",
+    "date": "2020-04-05",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "your-brightest-year-yet-workshop-announcement",
+    "title": "✨YOUR BRIGHTEST YEAR YET! ✨Workshop Announcement",
+    "date": "2019-12-04",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "new-travelers-notebook-workshop-the-four-seasons-aviara",
+    "title": "New Traveler's Notebook Workshop @ The Four Seasons Aviara",
+    "date": "2019-10-23",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "happy-list",
+    "title": "Happy List",
+    "date": "2019-10-16",
+    "kind": null,
+    "treatment": "redirect",
+    "reason": "override -> redirect",
+    "source": "override"
+  },
+  {
+    "slug": "brush-lettering-workshop-is-back",
+    "title": "Brush Lettering Workshop is back!",
+    "date": "2019-07-01",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "be-happy-box-reveal",
+    "title": "Be Happy Box Reveal!",
+    "date": "2019-06-06",
+    "kind": null,
+    "treatment": "redirect",
+    "reason": "override -> redirect",
+    "source": "override"
+  },
+  {
+    "slug": "3-highlights-from-the-erin-condren-workshop",
+    "title": "3 Highlights from the Erin Condren Workshop",
+    "date": "2019-05-31",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "dreambox-walkthrough-giveaway-announcement",
+    "title": "Dreambox Walkthrough + $1500 Giveaway Announcement",
+    "date": "2019-04-23",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "lets-start-today",
+    "title": "Let's Start Today",
+    "date": "2019-01-18",
+    "kind": null,
+    "treatment": "redirect",
+    "reason": "override -> redirect",
+    "source": "override"
+  },
+  {
+    "slug": "pipsticks-collaboration",
+    "title": "3 Reasons to Try Pipsticks’ Sticker Subscription",
+    "date": "2019-01-11",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "altenew-a-year-in-review-blog-hop",
+    "title": "A Year In Review Blog Hop | Altenew",
+    "date": "2018-12-27",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "altenew-blog-hop",
+    "title": "Altenew’s Crafty Friends Blog Hop + Giveaway",
+    "date": "2018-11-30",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "halloweendiy",
+    "title": "DIY Halloween Costumes",
+    "date": "2018-10-17",
+    "kind": "sale/discount/promo",
+    "treatment": "redirect",
+    "reason": "title: sale/discount/promo",
+    "source": "auto"
+  },
+  {
+    "slug": "altenew-watercolor-brush-markers",
+    "title": "Altenew Watercolor Brush Markers Release Blog Hop + Giveaway",
+    "date": "2018-10-04",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "raven-lily-feature-and-giveaway",
+    "title": "Featured on Raven + Lily",
+    "date": "2018-09-28",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "altenew-september-2018-washi-tape-release",
+    "title": "Altenew Washi Tape Release Blog Hop + GIVEAWAY!",
+    "date": "2018-09-27",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "busy-bees-creatively-crafting-my-incredible-time-at-the-queen-bee-craft-fair",
+    "title": "Queen Bee Craft Night San Diego!",
+    "date": "2018-06-28",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "join-me-for-a-free-webinar-with-get-messy",
+    "title": "Join Me for a Free Webinar with Get Messy!",
+    "date": "2018-06-18",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "my-pinterest-book-release-event",
+    "title": "My Pinterest Book Release Event!",
+    "date": "2018-05-16",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "a-japan-fangerines-beautiful-book",
+    "title": "From My Japan trip: A Fangerine's Beautiful Book",
+    "date": "2018-05-11",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "simplycards",
+    "title": "Simply Cards & Papercraft Magazine",
+    "date": "2018-05-06",
+    "kind": null,
+    "treatment": "redirect",
+    "reason": "override -> redirect",
+    "source": "override"
+  },
+  {
+    "slug": "altenew-blog-hop-2",
+    "title": "Altenew 4th Anniversary Blog Hop + Giveaway!",
+    "date": "2018-04-06",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "altenew",
+    "title": "Altenew in a Traveler's Notebook",
+    "date": "2018-03-07",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "planner-pouch-pre-sale-is-on",
+    "title": "Planner Pouch Pre-Sale is On!",
+    "date": "2018-02-07",
+    "kind": "sale/discount/promo",
+    "treatment": "redirect",
+    "reason": "title: sale/discount/promo",
+    "source": "auto"
+  },
+  {
+    "slug": "new-collection-reveal-sunshine-good-times",
+    "title": "New Collection Reveal + Giveaway | Sunshine & Good Times!",
+    "date": "2018-01-04",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "treat-yourself-before-our-sale-ends-tonight",
+    "title": "Treat Yourself Before Our Sale Ends Tonight!",
+    "date": "2017-10-29",
+    "kind": "sale/discount/promo",
+    "treatment": "redirect",
+    "reason": "title: sale/discount/promo",
+    "source": "auto"
+  },
+  {
+    "slug": "artnaturals",
+    "title": "Five Tips for Creating a Stress-Free Home | Art Naturals",
+    "date": "2017-04-16",
+    "kind": null,
+    "treatment": "redirect",
+    "reason": "override -> redirect",
+    "source": "override"
+  },
+  {
+    "slug": "mixbook-photo-canvases",
+    "title": "Valentine's Day Idea | Photo Canvases + Mixbook discount code",
+    "date": "2017-01-30",
+    "kind": "sale/discount/promo",
+    "treatment": "redirect",
+    "reason": "title: sale/discount/promo",
+    "source": "auto"
+  },
+  {
+    "slug": "easy-holiday-cards",
+    "title": "Easy Holiday Cards + DISCOUNT CODE!",
+    "date": "2016-12-13",
+    "kind": "sale/discount/promo",
+    "treatment": "redirect",
+    "reason": "title: sale/discount/promo",
+    "source": "auto"
+  },
+  {
+    "slug": "planner-hero-arts",
+    "title": "Planner stamps blog hop with Hero Arts",
+    "date": "2016-10-12",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "be-brave-fierce-and-free",
+    "title": "Be Brave, Fierce and Free",
+    "date": "2016-10-10",
+    "kind": null,
+    "treatment": "redirect",
+    "reason": "override -> redirect",
+    "source": "override"
+  },
+  {
+    "slug": "freshrealm",
+    "title": "Cooking with FreshRealm + Discount Code!",
+    "date": "2016-10-07",
+    "kind": "sale/discount/promo",
+    "treatment": "redirect",
+    "reason": "title: sale/discount/promo",
+    "source": "auto"
+  },
+  {
+    "slug": "workshop-at-baum-kuchen",
+    "title": "Workshop at Baum-Kuchen",
+    "date": "2016-09-13",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "hero-arts-blog-hop",
+    "title": "Hero Arts Blog Hop!",
+    "date": "2016-08-22",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "30-day-coloring-challenge-blog-hop",
+    "title": "30 Day Coloring Challenge Blog Hop",
+    "date": "2016-07-06",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "mymonthlyherojune",
+    "title": "My Monthly Hero Kit Launch Blog Hop",
+    "date": "2016-06-06",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "fathersday2016",
+    "title": "Fun Father's Day Gift Idea + discount code",
+    "date": "2016-05-31",
+    "kind": "sale/discount/promo",
+    "treatment": "redirect",
+    "reason": "title: sale/discount/promo",
+    "source": "auto"
+  },
+  {
+    "slug": "motivational-monday-quotes-on-sale",
+    "title": "Motivational Monday + Quotes on sale!",
+    "date": "2015-10-12",
+    "kind": "sale/discount/promo",
+    "treatment": "redirect",
+    "reason": "title: sale/discount/promo",
+    "source": "auto"
+  },
+  {
+    "slug": "tieks",
+    "title": "Tieks Giveaway CLOSED</strong>",
+    "date": "2015-08-26",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "last-day-to-sign-up-for-everyday-traveler",
+    "title": "Last day to sign up for Everyday Traveler",
+    "date": "2015-06-30",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "an-announcement-a-studio-spring-cleaning-sale",
+    "title": "An Announcement + A Studio Spring Cleaning Sale!",
+    "date": "2015-04-30",
+    "kind": "sale/discount/promo",
+    "treatment": "redirect",
+    "reason": "title: sale/discount/promo",
+    "source": "auto"
+  },
+  {
+    "slug": "studio-calico-project-life-kits",
+    "title": "Studio Calico Project Life Kits",
+    "date": "2015-04-27",
+    "kind": null,
+    "treatment": "redirect",
+    "reason": "override -> redirect",
+    "source": "override"
+  },
+  {
+    "slug": "practice5",
+    "title": "Let's Actually Think INSIDE the Box!",
+    "date": "2015-03-18",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "get-inspired-then-get-creative",
+    "title": "Get Inspired... Then Get Creative",
+    "date": "2015-02-11",
+    "kind": null,
+    "treatment": "redirect",
+    "reason": "override -> redirect",
+    "source": "override"
+  },
+  {
+    "slug": "creative-handbook-practice-2",
+    "title": "Creative Handbook Practice 2",
+    "date": "2015-01-30",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "studio-calico-cirque-contributor",
+    "title": "Studio Calico Cirque Project Life Kits",
+    "date": "2015-01-27",
+    "kind": null,
+    "treatment": "redirect",
+    "reason": "override -> redirect",
+    "source": "override"
+  },
+  {
+    "slug": "creative-handbook-page-1",
+    "title": "Creative Handbook Page 1",
+    "date": "2015-01-16",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "travel-scrapbooking-class",
+    "title": "Travel Scrapbooking Class!",
+    "date": "2015-01-14",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "oh-baby-im-on-craftsy",
+    "title": "Oh Baby, I’m on Craftsy!",
+    "date": "2015-01-09",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "studio-calico-park-avenue-kit-layouts",
+    "title": "Studio Calico Park Avenue Kit Layouts",
+    "date": "2014-11-27",
+    "kind": null,
+    "treatment": "redirect",
+    "reason": "override -> redirect",
+    "source": "override"
+  },
+  {
+    "slug": "studio-calico-walden-kits",
+    "title": "Studio Calico Walden Kits!",
+    "date": "2014-10-27",
+    "kind": null,
+    "treatment": "redirect",
+    "reason": "override -> redirect",
+    "source": "override"
+  },
+  {
+    "slug": "a-workspace-that-works",
+    "title": "A Workspace That Works",
+    "date": "2014-10-22",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "paint-plan-play",
+    "title": "Paint. Plan. Play.",
+    "date": "2014-10-03",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "studio-calico-news",
+    "title": "Studio Calico News",
+    "date": "2014-08-20",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "ginko-papers-giveaway-discount-code",
+    "title": "Ginko Papers Discount Code",
+    "date": "2014-08-14",
+    "kind": "sale/discount/promo",
+    "treatment": "redirect",
+    "reason": "title: sale/discount/promo",
+    "source": "auto"
+  },
+  {
+    "slug": "endings-beginnings",
+    "title": "Endings & Beginnings",
+    "date": "2014-06-26",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "workshop-announcement",
+    "title": "Workshop Announcement!",
+    "date": "2014-05-08",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "studio-calico-camelot-kits",
+    "title": "Studio Calico - Camelot Kits",
+    "date": "2014-04-27",
+    "kind": null,
+    "treatment": "redirect",
+    "reason": "override -> redirect",
+    "source": "override"
+  },
+  {
+    "slug": "evalicious-giveaway-discount-code",
+    "title": "Evalicious Giveaway + Discount Code",
+    "date": "2014-04-24",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "bluegrass-farm-kit-from-studio-calico",
+    "title": "Bluegrass Farm Kit from Studio Calico!",
+    "date": "2014-03-27",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "xo-2",
+    "title": "XO",
+    "date": "2014-01-30",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "5-for-friday-6",
+    "title": "5 for Friday",
+    "date": "2014-01-10",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "project-real-life-begins-today",
+    "title": "Project Real Life Begins Today",
+    "date": "2014-01-09",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "2014",
+    "title": "2014!",
+    "date": "2014-01-01",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "day-by-day",
+    "title": "Day by Day",
+    "date": "2013-12-29",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "studio-calico-blue-note-small-business-saturday",
+    "title": "Studio Calico Blue Note + Small Business Saturday",
+    "date": "2013-11-30",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "high-5-its-black-friday",
+    "title": "High 5 - It’s Black Friday",
+    "date": "2013-11-29",
+    "kind": "sale/discount/promo",
+    "treatment": "redirect",
+    "reason": "title: sale/discount/promo",
+    "source": "auto"
+  },
+  {
+    "slug": "hello-love-silhouette-cameo-giveaway",
+    "title": "Hello Love... Silhouette Cameo Giveaway - closed",
+    "date": "2013-11-26",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "last-day-to-sign-up-for-artsy-ornaments-online-class",
+    "title": "Last Day to Sign Up for Artsy Ornaments Online Class",
+    "date": "2013-11-18",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "teaching-an-online-christmas-ornament-workshop",
+    "title": "Teaching an Online Christmas Ornament Workshop!",
+    "date": "2013-11-05",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "high-5-its-friday",
+    "title": "High 5 - It’s Friday",
+    "date": "2013-11-01",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "five-for-friday",
+    "title": "5 For Friday",
+    "date": "2013-10-25",
+    "kind": null,
+    "treatment": "redirect",
+    "reason": "override -> redirect",
+    "source": "override"
+  },
+  {
+    "slug": "freckled-fawn-giveaway-2",
+    "title": "Freckled Fawn - Giveaway - closed</strong>",
+    "date": "2013-10-20",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "week-in-the-life-a-giveaway",
+    "title": "Week in the Life + a giveaway",
+    "date": "2013-09-10",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "getting-fresh-with-pinkfresh-studio-giveaway",
+    "title": "Getting Fresh with Pinkfresh Studio & Giveaway",
+    "date": "2013-09-01",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "studio-calico-double-scoop-kits",
+    "title": "Studio Calico Double Scoop Kits",
+    "date": "2013-08-27",
+    "kind": null,
+    "treatment": "redirect",
+    "reason": "override -> redirect",
+    "source": "override"
+  },
+  {
+    "slug": "simon-says-stamp-kp-blog-hop",
+    "title": "Simon Says Stamp + KP Blog Hop",
+    "date": "2013-08-19",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "toolbox-promo",
+    "title": "Toolbox Promo",
+    "date": "2013-07-19",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "freckled-fawn-giveaway",
+    "title": "Freckled Fawn Giveaway",
+    "date": "2013-07-11",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "amytangerine-instagram-2",
+    "title": "#amytangerine | Instagram + Elle's Studio kits giveaway",
+    "date": "2013-07-10",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "summer-manifesto",
+    "title": "Summer Manifesto",
+    "date": "2013-07-05",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "2-for-tuesday-3",
+    "title": "2 for Tuesday",
+    "date": "2013-07-02",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "studio-calico-valley-high-kit-layouts",
+    "title": "Studio Calico Valley High Kit Layouts",
+    "date": "2013-06-28",
+    "kind": null,
+    "treatment": "redirect",
+    "reason": "override -> redirect",
+    "source": "override"
+  },
+  {
+    "slug": "inked",
+    "title": "Inked",
+    "date": "2013-06-27",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "yes-please-digi-version-giveaway",
+    "title": "Yes, Please Digi Version + Giveaway",
+    "date": "2013-05-20",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "the-phone-photography-project-workshop",
+    "title": "The Phone Photography Project Workshop!",
+    "date": "2013-05-09",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "spotlight-on-spiegel",
+    "title": "Spotlight on Spiegel",
+    "date": "2013-05-03",
+    "kind": null,
+    "treatment": "redirect",
+    "reason": "override -> redirect",
+    "source": "override"
+  },
+  {
+    "slug": "a-studio-calico-special-30-off",
+    "title": "A Studio Calico special - 30% Off!",
+    "date": "2013-04-11",
+    "kind": "sale/discount/promo",
+    "treatment": "redirect",
+    "reason": "title: sale/discount/promo",
+    "source": "auto"
+  },
+  {
+    "slug": "mix-it-up",
+    "title": "Mix It Up!",
+    "date": "2013-04-01",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "evalicious-giveaway",
+    "title": "Evalicious Giveaway",
+    "date": "2013-03-09",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "silhouette-portrait-giveaway",
+    "title": "Silhouette Portrait Giveaway",
+    "date": "2013-02-28",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "gardeners-digest-february",
+    "title": "Gardeners' Digest February",
+    "date": "2013-02-22",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "100-giveaway-from-freckled-fawn",
+    "title": "$100 Giveaway from Freckled Fawn",
+    "date": "2013-02-20",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "just-peachy-giveaway",
+    "title": "Just Peachy Giveaway",
+    "date": "2013-02-08",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "sc",
+    "title": "Behind the Scenes of my Book + Giveaway",
+    "date": "2013-01-25",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "my-book",
+    "title": "My Book!",
+    "date": "2013-01-17",
+    "kind": null,
+    "treatment": "redirect",
+    "reason": "override -> redirect",
+    "source": "override"
+  },
+  {
+    "slug": "why-thank-you-winner",
+    "title": "Why Thank You! + Winner",
+    "date": "2013-01-11",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "bright-ideas",
+    "title": "Bright Ideas",
+    "date": "2013-01-07",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "the-essentials-sale",
+    "title": "The Essentials Sale",
+    "date": "2012-12-04",
+    "kind": "sale/discount/promo",
+    "treatment": "redirect",
+    "reason": "title: sale/discount/promo",
+    "source": "auto"
+  },
+  {
+    "slug": "121212-is-just-2-weeks-away-a-giveaway",
+    "title": "12/12/12 is just 2 Weeks Away + A Giveaway",
+    "date": "2012-11-28",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "black-friday-deals",
+    "title": "Black Friday Deals",
+    "date": "2012-11-23",
+    "kind": "sale/discount/promo",
+    "treatment": "redirect",
+    "reason": "title: sale/discount/promo",
+    "source": "auto"
+  },
+  {
+    "slug": "december-daily-a-cameo-giveaway",
+    "title": "December Daily + a CAMEO Giveaway! (CLOSED)",
+    "date": "2012-11-21",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "elles-studio-giveaway",
+    "title": "Elle's Studio Giveaway",
+    "date": "2012-11-15",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "new-studio-calico-online-class-25-days",
+    "title": "New Studio Calico Online Class || 25 Days",
+    "date": "2012-11-01",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "fabric-paper-love",
+    "title": "Fabric + Paper Love",
+    "date": "2012-10-01",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "19930",
+    "title": "Two Peas Gardeners' Digest + Giveaway",
+    "date": "2012-09-22",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "sc-central-high-layouts-giveaway",
+    "title": "SC Central High Layouts + Giveaway",
+    "date": "2012-09-02",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "everyday-eclectic-blog-hop",
+    "title": "Everyday Eclectic Blog Hop",
+    "date": "2012-08-31",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "friday-favorites-4",
+    "title": "Friday Favorites + Giveaway",
+    "date": "2012-08-17",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "chevron-spray-mists-yes-please",
+    "title": "Chevron + Spray Mists? Yes Please.",
+    "date": "2012-05-31",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "washi-workshop-giveaway",
+    "title": "Washi Workshop",
+    "date": "2012-05-17",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "wow-winner",
+    "title": "Wow + a winner",
+    "date": "2012-04-20",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "week-14-project-life-giveaway",
+    "title": "Week 14 + Project Life Giveaway",
+    "date": "2012-04-17",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "crafters-workshop",
+    "title": "The Crafter's Workshop",
+    "date": "2012-04-13",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "dreaming-in-color",
+    "title": "Dreaming in Color",
+    "date": "2012-04-06",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "thrilled-to-announce",
+    "title": "Thrilled to Announce",
+    "date": "2012-04-05",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "winner-shop-update-tomorrow",
+    "title": "Winner + Shop Update Tomorrow",
+    "date": "2012-03-27",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "week-11-washi-tape-giveaway",
+    "title": "Week 11 + a washi tape giveaway",
+    "date": "2012-03-23",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "art-of-layers-giveaway-2-peas-digest",
+    "title": "Art of Layers Giveaway + 2 Peas Digest",
+    "date": "2012-03-21",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "scrapbook-stampers-workshop-giveaway",
+    "title": "Scrapbook Stamper's Workshop Giveaway",
+    "date": "2012-03-12",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "cocoa-daisy-blog-hop-giveaway-closed",
+    "title": "Cocoa Daisy Blog Hop + Giveaway *closed*",
+    "date": "2012-03-10",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "pendant-project-giveaway",
+    "title": "Pendant Project + Giveaway",
+    "date": "2012-02-23",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "sweet-things-washi-tape-giveaway",
+    "title": "Sweet Things + a Washi Tape Giveaway",
+    "date": "2012-02-07",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "last-call",
+    "title": "Last Call",
+    "date": "2012-01-30",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "project-life-week-3-giveaway",
+    "title": "Project Life Week 3 + Giveaway",
+    "date": "2012-01-27",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "tutorial-anyone",
+    "title": "Tutorial Anyone?",
+    "date": "2012-01-23",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "new-collection-blog-hop",
+    "title": "New Collection + a Blog Hop",
+    "date": "2012-01-17",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "3-things-including-another-giveaway",
+    "title": "3 Things (including another giveaway)",
+    "date": "2012-01-16",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "field-guide-giveaway",
+    "title": "Field Guide Giveaway",
+    "date": "2012-01-13",
+    "kind": "giveaway/blog-hop",
+    "treatment": "redirect",
+    "reason": "title: giveaway/blog-hop",
+    "source": "auto"
+  },
+  {
+    "slug": "new-year-new-class",
+    "title": "A New Year, a New Class!",
+    "date": "2012-01-02",
+    "kind": "class/workshop",
+    "treatment": "redirect",
+    "reason": "title: class/workshop",
+    "source": "auto"
+  },
+  {
+    "slug": "simple-skincare-regimen",
+    "title": "My Simple Skincare Regimen",
+    "date": "2021-06-14",
+    "kind": "sponsored",
+    "treatment": "archive-only",
+    "reason": "title: sponsored",
+    "source": "auto"
+  },
+  {
+    "slug": "planningyourtomorrow",
+    "title": "Planning Your Tomorrow",
+    "date": "2019-03-27",
+    "kind": "sponsored",
+    "treatment": "archive-only",
+    "reason": "title: sponsored",
+    "source": "auto"
+  },
+  {
+    "slug": "great-wolf-lodge",
+    "title": "Great Wolf Lodge + Crafting with Kids",
+    "date": "2018-05-24",
+    "kind": "sponsored",
+    "treatment": "archive-only",
+    "reason": "title: sponsored",
+    "source": "auto"
+  },
+  {
+    "slug": "4-ways-to-pack-light-travel-like-a-pro",
+    "title": "4 Ways To Pack Light & Travel Like A Pro",
+    "date": "2018-05-08",
+    "kind": "sponsored",
+    "treatment": "archive-only",
+    "reason": "title: sponsored",
+    "source": "auto"
+  },
+  {
+    "slug": "craft-a-life-you-love-is-1-new-release",
+    "title": "Craft a Life You Love is #1 New Release!",
+    "date": "2018-04-10",
+    "kind": "dated-logistics",
+    "treatment": "archive-only",
+    "reason": "title: dated-logistics",
+    "source": "auto"
+  },
+  {
+    "slug": "preorder",
+    "title": "Craft a Life You Love Is Available for Pre-Order!!",
+    "date": "2018-03-27",
+    "kind": "dated-logistics",
+    "treatment": "archive-only",
+    "reason": "title: dated-logistics",
+    "source": "auto"
+  },
+  {
+    "slug": "kidbox",
+    "title": "Kidbox LOVE",
+    "date": "2018-01-18",
+    "kind": "sponsored",
+    "treatment": "archive-only",
+    "reason": "title: sponsored",
+    "source": "auto"
+  },
+  {
+    "slug": "pl-week-4-calendar-date-stamp-in-action",
+    "title": "PL Week 4 + Calendar Date Stamp in Action",
+    "date": "2013-03-11",
+    "kind": "dated-logistics",
+    "treatment": "archive-only",
+    "reason": "title: dated-logistics",
+    "source": "auto"
+  },
+  {
+    "slug": "project-life-week-1",
+    "title": "Project Life : Week 1",
+    "date": "2013-01-21",
+    "kind": "dated-logistics",
+    "treatment": "archive-only",
+    "reason": "title: dated-logistics",
+    "source": "auto"
+  },
+  {
+    "slug": "week-20-pl-share",
+    "title": "Week 20 PL Share",
+    "date": "2012-06-15",
+    "kind": "dated-logistics",
+    "treatment": "archive-only",
+    "reason": "title: dated-logistics",
+    "source": "auto"
+  },
+  {
+    "slug": "week-18-19",
+    "title": "Week 18 + 19",
+    "date": "2012-06-05",
+    "kind": "dated-logistics",
+    "treatment": "archive-only",
+    "reason": "title: dated-logistics",
+    "source": "auto"
+  },
+  {
+    "slug": "project-life-qa-week-17",
+    "title": "Project Life Q&A + Week 17",
+    "date": "2012-05-16",
+    "kind": "dated-logistics",
+    "treatment": "archive-only",
+    "reason": "title: dated-logistics",
+    "source": "auto"
+  },
+  {
+    "slug": "week-16-project-life",
+    "title": "Week 16 - Project Life",
+    "date": "2012-05-09",
+    "kind": "dated-logistics",
+    "treatment": "archive-only",
+    "reason": "title: dated-logistics",
+    "source": "auto"
+  },
+  {
+    "slug": "week-15",
+    "title": "Week 15",
+    "date": "2012-04-25",
+    "kind": "dated-logistics",
+    "treatment": "archive-only",
+    "reason": "title: dated-logistics",
+    "source": "auto"
+  },
+  {
+    "slug": "project-life-week-10",
+    "title": "Project Life Week 10",
+    "date": "2012-03-18",
+    "kind": "dated-logistics",
+    "treatment": "archive-only",
+    "reason": "title: dated-logistics",
+    "source": "auto"
+  },
+  {
+    "slug": "project-life-week-9",
+    "title": "Project Life Week 9",
+    "date": "2012-03-11",
+    "kind": "dated-logistics",
+    "treatment": "archive-only",
+    "reason": "title: dated-logistics",
+    "source": "auto"
+  },
+  {
+    "slug": "clean-desk-week-8",
+    "title": "Clean Desk & Week 8",
+    "date": "2012-03-03",
+    "kind": "dated-logistics",
+    "treatment": "archive-only",
+    "reason": "title: dated-logistics",
+    "source": "auto"
+  },
+  {
+    "slug": "project-life-week-7",
+    "title": "Project Life Week 7",
+    "date": "2012-02-25",
+    "kind": "dated-logistics",
+    "treatment": "archive-only",
+    "reason": "title: dated-logistics",
+    "source": "auto"
+  },
+  {
+    "slug": "week-6-paperclipping-roundtable",
+    "title": "Week 6 + Paperclipping Roundtable",
+    "date": "2012-02-16",
+    "kind": "dated-logistics",
+    "treatment": "archive-only",
+    "reason": "title: dated-logistics",
+    "source": "auto"
+  },
+  {
+    "slug": "project-life-week-4",
+    "title": "Project Life Week 4",
+    "date": "2012-02-03",
+    "kind": "dated-logistics",
+    "treatment": "archive-only",
+    "reason": "title: dated-logistics",
+    "source": "auto"
+  },
+  {
+    "slug": "project-life-week-2",
+    "title": "Project Life Week 2",
+    "date": "2012-01-20",
+    "kind": "dated-logistics",
+    "treatment": "archive-only",
+    "reason": "title: dated-logistics",
+    "source": "auto"
+  },
+  {
+    "slug": "seven-on-saturday",
+    "title": "Seven on Saturday",
+    "date": "2012-01-07",
+    "kind": "dated-logistics",
+    "treatment": "archive-only",
+    "reason": "title: dated-logistics",
+    "source": "auto"
+  }
+]

@@ -8,6 +8,7 @@ import { isChromelessRoute } from "@/lib/chromeless-routes"
 const DESKTOP_LINKS = [
   { label: "Shop", href: "/shop" },
   { label: "About", href: "/about" },
+  { label: "Journal", href: "/blog" },
   { label: "Happy Mail", href: "/happy-mail" },
   { label: "Events", href: "/events" },
   { label: "Contact", href: "/contact" },
@@ -18,6 +19,7 @@ const DESKTOP_LINKS = [
 const MOBILE_LINKS = [
   { label: "Shop", href: "/shop" },
   { label: "About", href: "/about" },
+  { label: "Journal", href: "/blog" },
   { label: "Happy Mail", href: "/happy-mail" },
   { label: "Events", href: "/events" },
   { label: "Contact", href: "/contact" },

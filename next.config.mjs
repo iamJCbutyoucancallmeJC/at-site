@@ -1,3 +1,6 @@
+import { blogLegacyRedirects } from "./lib/blog-redirects.mjs"
+import { blogCurationRedirects } from "./lib/blog-curation-redirects.mjs"
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {
@@ -38,12 +41,32 @@ const nextConfig = {
       // SQS default /pages/<slug> namespace -- only contact has a live equivalent.
       { source: "/pages/contact", destination: "/contact", permanent: true },
 
-      // Blog: no blog on the new site. Catch the index, all posts (flat + dated SQS
-      // paths like /blog/2015/4/8/<slug>), and /blog/tag|category/* taxonomy pages.
-      { source: "/blog", destination: "/", permanent: true },
-      { source: "/blog/:path*", destination: "/", permanent: true },
-      // Blogspot-era flat archive paths (pre-SQS), e.g. /2012/04/<slug>.html.
-      { source: "/:year(20\\d{2})/:month/:rest*", destination: "/", permanent: true },
+      // ---- Blog reinstated (t812, 2026-06-26) ----
+      // The blog is back as MDX-in-repo on this stack (blog-reinstate-prd-2026-06-20.md,
+      // Decision B: normalize every legacy URL to /blog/[slug] + 301, never 404). This
+      // REPLACES the prior "no blog -> redirect /blog/* to /" rules.
+      //
+      // 1) Exception map FIRST (must precede the general rule): opaque SQS ids,
+      //    'html'-suffixed slugs, and slug collisions whose clean slug differs from a
+      //    pure date-strip. Auto-generated from the migration -- see lib/blog-redirects.mjs.
+      ...blogLegacyRedirects,
+      // 1b) Merchandising curation (2026-07-03): the deadest stale-commercial ephemera
+      //    (giveaways, expired sales, closed classes) 301 -> /blog so the canonical URL
+      //    resolves (never 404) without showing a dead-offer page. Auto-generated from
+      //    content/blog/_curation.json -- see scripts/blog-migration/classify-curation.py.
+      //    Placed before the generic collapse so a canonical /blog/<slug> hits in one hop.
+      ...blogCurationRedirects,
+      // 2) General collapse: every dated SQS path /blog/YYYY/MM(/DD)?/<slug> -> /blog/<slug>.
+      //    Covers ~1,079 legacy posts in one rule. Clean-slug paths (~216) need no redirect:
+      //    the /blog/[slug] route serves them at the canonical URL directly.
+      { source: "/blog/:year(20\\d{2})/:month/:day/:slug", destination: "/blog/:slug", permanent: true },
+      { source: "/blog/:year(20\\d{2})/:month/:slug", destination: "/blog/:slug", permanent: true },
+      // 3) Old SQS taxonomy pages: /blog/tag/X stays (we have a tag route); /blog/category/X
+      //    maps to the same tag namespace (categories and tags were merged at extraction).
+      { source: "/blog/category/:slug", destination: "/blog/tag/:slug", permanent: true },
+      // Blogspot-era flat archive paths (pre-SQS), e.g. /2012/04/<slug>.html -> blog home
+      // (no clean slug recoverable from these; they predate the captured corpus).
+      { source: "/:year(20\\d{2})/:month/:rest*", destination: "/blog", permanent: true },
 
       // Podcast: no podcast page on the new site.
       { source: "/podcast/:path*", destination: "/", permanent: true },
@@ -64,6 +87,18 @@ const nextConfig = {
       { source: "/commerce/:path*", destination: "/", permanent: true },
       { source: "/store/receipt", destination: "/", permanent: true },
       { source: "/checkout/subscription-confirmed", destination: "/happy-mail", permanent: true },
+
+      // ---- Residual not_found tail cleanup (2026-06-29, t833) ----
+      // The t732 digest confirmed the blog/podcast 404s went to zero once the t812 blog
+      // migration + redirect map deployed (Jun 26). The genuine post-deploy tail (~8/day)
+      // is retired /shop/<handle> products + two stragglers with real targets:
+      //   - Old SQS newsletter slug -> the live signup section on home (#newsletter anchor).
+      { source: "/newsletter-sign-up", destination: "/#newsletter", permanent: true },
+      //   - SQS /s/* static-asset namespace (e.g. old printable PDFs) -> home.
+      { source: "/s/:path*", destination: "/", permanent: true },
+      // Retired /shop/<handle> products are NOT redirected: they fall through to the
+      // enriched 404 (app/not-found.tsx), which acknowledges the product retired and
+      // shows the current lineup -- a better landing than a silent dump to /shop.
     ]
   },
   images: {
