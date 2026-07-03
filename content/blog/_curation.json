@@ -9,6 +9,15 @@
     "source": "auto"
   },
   {
+    "slug": "free-printables-for-you",
+    "title": "2 Free Printables for you!",
+    "date": "2023-03-23",
+    "kind": null,
+    "treatment": "redirect",
+    "reason": "override -> redirect",
+    "source": "override"
+  },
+  {
     "slug": "create-room-sale",
     "title": "DreamBox Lowest Price Ever and Create Room 4th of July Sale",
     "date": "2021-06-25",
@@ -25,6 +34,24 @@
     "treatment": "redirect",
     "reason": "class/workshop -> redirect",
     "source": "auto"
+  },
+  {
+    "slug": "shop-brave-bold",
+    "title": "Shop the Brave and Bold Collection Online!",
+    "date": "2021-03-04",
+    "kind": null,
+    "treatment": "redirect",
+    "reason": "override -> redirect",
+    "source": "override"
+  },
+  {
+    "slug": "nurture-life",
+    "title": "Nurture Life: A Healthy, Kid-Friendly Subscription Meal Service",
+    "date": "2021-02-25",
+    "kind": null,
+    "treatment": "redirect",
+    "reason": "override -> redirect",
+    "source": "override"
   },
   {
     "slug": "winter-sale",
