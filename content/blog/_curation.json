@@ -54,6 +54,15 @@
     "source": "override"
   },
   {
+    "slug": "nest-diapers",
+    "title": "Plant-Based Eco-Diapers from Nest",
+    "date": "2021-01-25",
+    "kind": null,
+    "treatment": "redirect",
+    "reason": "override -> redirect",
+    "source": "override"
+  },
+  {
     "slug": "brave-bold",
     "title": "Brave + Bold Collection",
     "date": "2021-01-12",
@@ -183,10 +192,10 @@
     "slug": "happy-list",
     "title": "Happy List",
     "date": "2019-10-16",
-    "kind": "sponsored/collab+dead-dest",
+    "kind": null,
     "treatment": "redirect",
-    "reason": "sponsored/collab; 1 dead commercial link(s), 0 alive",
-    "source": "auto-dead-link"
+    "reason": "override -> redirect",
+    "source": "override"
   },
   {
     "slug": "brush-lettering-workshop-is-back",
@@ -228,10 +237,10 @@
     "slug": "lets-start-today",
     "title": "Let's Start Today",
     "date": "2019-01-18",
-    "kind": "sponsored/collab+dead-dest",
+    "kind": null,
     "treatment": "redirect",
-    "reason": "sponsored/collab; 1 dead commercial link(s), 0 alive",
-    "source": "auto-dead-link"
+    "reason": "override -> redirect",
+    "source": "override"
   },
   {
     "slug": "pipsticks-collaboration",
@@ -336,10 +345,10 @@
     "slug": "simplycards",
     "title": "Simply Cards & Papercraft Magazine",
     "date": "2018-05-06",
-    "kind": "freebie/download+dead-dest",
+    "kind": null,
     "treatment": "redirect",
-    "reason": "freebie/download; 1 dead commercial link(s), 0 alive",
-    "source": "auto-dead-link"
+    "reason": "override -> redirect",
+    "source": "override"
   },
   {
     "slug": "altenew-blog-hop-2",
@@ -390,10 +399,10 @@
     "slug": "artnaturals",
     "title": "Five Tips for Creating a Stress-Free Home | Art Naturals",
     "date": "2017-04-16",
-    "kind": "sponsored/collab+dead-dest",
+    "kind": null,
     "treatment": "redirect",
-    "reason": "sponsored/collab; 4 dead commercial link(s), 0 alive",
-    "source": "auto-dead-link"
+    "reason": "override -> redirect",
+    "source": "override"
   },
   {
     "slug": "mixbook-photo-canvases",
@@ -426,10 +435,10 @@
     "slug": "be-brave-fierce-and-free",
     "title": "Be Brave, Fierce and Free",
     "date": "2016-10-10",
-    "kind": "freebie/download+dead-dest",
+    "kind": null,
     "treatment": "redirect",
-    "reason": "freebie/download; 1 dead commercial link(s), 0 alive",
-    "source": "auto-dead-link"
+    "reason": "override -> redirect",
+    "source": "override"
   },
   {
     "slug": "freshrealm",
@@ -525,10 +534,10 @@
     "slug": "studio-calico-project-life-kits",
     "title": "Studio Calico Project Life Kits",
     "date": "2015-04-27",
-    "kind": "commercial-CTA+dead-dest",
+    "kind": null,
     "treatment": "redirect",
-    "reason": "commercial-CTA; 10 dead commercial link(s), 0 alive",
-    "source": "auto-dead-link"
+    "reason": "override -> redirect",
+    "source": "override"
   },
   {
     "slug": "practice5",
@@ -543,10 +552,10 @@
     "slug": "get-inspired-then-get-creative",
     "title": "Get Inspired... Then Get Creative",
     "date": "2015-02-11",
-    "kind": "commercial-CTA+dead-dest",
+    "kind": null,
     "treatment": "redirect",
-    "reason": "commercial-CTA; 1 dead commercial link(s), 0 alive",
-    "source": "auto-dead-link"
+    "reason": "override -> redirect",
+    "source": "override"
   },
   {
     "slug": "creative-handbook-practice-2",
@@ -561,10 +570,10 @@
     "slug": "studio-calico-cirque-contributor",
     "title": "Studio Calico Cirque Project Life Kits",
     "date": "2015-01-27",
-    "kind": "commercial-CTA+dead-dest",
+    "kind": null,
     "treatment": "redirect",
-    "reason": "commercial-CTA; 10 dead commercial link(s), 0 alive",
-    "source": "auto-dead-link"
+    "reason": "override -> redirect",
+    "source": "override"
   },
   {
     "slug": "creative-handbook-page-1",
@@ -597,19 +606,19 @@
     "slug": "studio-calico-park-avenue-kit-layouts",
     "title": "Studio Calico Park Avenue Kit Layouts",
     "date": "2014-11-27",
-    "kind": "commercial-CTA+dead-dest",
+    "kind": null,
     "treatment": "redirect",
-    "reason": "commercial-CTA; 11 dead commercial link(s), 0 alive",
-    "source": "auto-dead-link"
+    "reason": "override -> redirect",
+    "source": "override"
   },
   {
     "slug": "studio-calico-walden-kits",
     "title": "Studio Calico Walden Kits!",
     "date": "2014-10-27",
-    "kind": "commercial-CTA+dead-dest",
+    "kind": null,
     "treatment": "redirect",
-    "reason": "commercial-CTA; 13 dead commercial link(s), 0 alive",
-    "source": "auto-dead-link"
+    "reason": "override -> redirect",
+    "source": "override"
   },
   {
     "slug": "a-workspace-that-works",
@@ -669,10 +678,10 @@
     "slug": "studio-calico-camelot-kits",
     "title": "Studio Calico - Camelot Kits",
     "date": "2014-04-27",
-    "kind": "commercial-CTA+dead-dest",
+    "kind": null,
     "treatment": "redirect",
-    "reason": "commercial-CTA; 14 dead commercial link(s), 0 alive",
-    "source": "auto-dead-link"
+    "reason": "override -> redirect",
+    "source": "override"
   },
   {
     "slug": "evalicious-giveaway-discount-code",
@@ -795,10 +804,10 @@
     "slug": "five-for-friday",
     "title": "5 For Friday",
     "date": "2013-10-25",
-    "kind": "commercial-CTA+dead-dest",
+    "kind": null,
     "treatment": "redirect",
-    "reason": "commercial-CTA; 2 dead commercial link(s), 0 alive",
-    "source": "auto-dead-link"
+    "reason": "override -> redirect",
+    "source": "override"
   },
   {
     "slug": "freckled-fawn-giveaway-2",
@@ -831,10 +840,10 @@
     "slug": "studio-calico-double-scoop-kits",
     "title": "Studio Calico Double Scoop Kits",
     "date": "2013-08-27",
-    "kind": "commercial-CTA+dead-dest",
+    "kind": null,
     "treatment": "redirect",
-    "reason": "commercial-CTA; 5 dead commercial link(s), 0 alive",
-    "source": "auto-dead-link"
+    "reason": "override -> redirect",
+    "source": "override"
   },
   {
     "slug": "simon-says-stamp-kp-blog-hop",
@@ -894,10 +903,10 @@
     "slug": "studio-calico-valley-high-kit-layouts",
     "title": "Studio Calico Valley High Kit Layouts",
     "date": "2013-06-28",
-    "kind": "commercial-CTA+dead-dest",
+    "kind": null,
     "treatment": "redirect",
-    "reason": "commercial-CTA; 12 dead commercial link(s), 0 alive",
-    "source": "auto-dead-link"
+    "reason": "override -> redirect",
+    "source": "override"
   },
   {
     "slug": "inked",
@@ -930,10 +939,10 @@
     "slug": "spotlight-on-spiegel",
     "title": "Spotlight on Spiegel",
     "date": "2013-05-03",
-    "kind": "sponsored/collab+dead-dest",
+    "kind": null,
     "treatment": "redirect",
-    "reason": "sponsored/collab; 10 dead commercial link(s), 0 alive",
-    "source": "auto-dead-link"
+    "reason": "override -> redirect",
+    "source": "override"
   },
   {
     "slug": "a-studio-calico-special-30-off",
@@ -1011,10 +1020,10 @@
     "slug": "my-book",
     "title": "My Book!",
     "date": "2013-01-17",
-    "kind": "commercial-CTA+dead-dest",
+    "kind": null,
     "treatment": "redirect",
-    "reason": "commercial-CTA; 1 dead commercial link(s), 0 alive",
-    "source": "auto-dead-link"
+    "reason": "override -> redirect",
+    "source": "override"
   },
   {
     "slug": "why-thank-you-winner",

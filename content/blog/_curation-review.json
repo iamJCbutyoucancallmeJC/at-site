@@ -131,7 +131,7 @@
     "date": "2019-07-30",
     "purpose": "freebie/download",
     "links_alive": 13,
-    "links_dead": 1,
+    "links_dead": 0,
     "note": "commercial-purpose but destination not proven dead -> KEPT in feed; eyeball"
   },
   {
@@ -140,7 +140,7 @@
     "date": "2019-07-15",
     "purpose": "commercial-CTA",
     "links_alive": 7,
-    "links_dead": 1,
+    "links_dead": 0,
     "note": "commercial-purpose but destination not proven dead -> KEPT in feed; eyeball"
   },
   {
@@ -158,7 +158,7 @@
     "date": "2019-04-04",
     "purpose": "sponsored/collab",
     "links_alive": 2,
-    "links_dead": 7,
+    "links_dead": 0,
     "note": "commercial-purpose but destination not proven dead -> KEPT in feed; eyeball"
   },
   {
@@ -212,7 +212,7 @@
     "date": "2018-02-28",
     "purpose": "sponsored/collab",
     "links_alive": 5,
-    "links_dead": 1,
+    "links_dead": 0,
     "note": "commercial-purpose but destination not proven dead -> KEPT in feed; eyeball"
   },
   {
@@ -239,7 +239,7 @@
     "date": "2017-10-18",
     "purpose": "sponsored/collab",
     "links_alive": 7,
-    "links_dead": 10,
+    "links_dead": 0,
     "note": "commercial-purpose but destination not proven dead -> KEPT in feed; eyeball"
   },
   {
@@ -248,7 +248,7 @@
     "date": "2017-09-24",
     "purpose": "sponsored/collab",
     "links_alive": 4,
-    "links_dead": 15,
+    "links_dead": 0,
     "note": "commercial-purpose but destination not proven dead -> KEPT in feed; eyeball"
   },
   {
@@ -275,7 +275,7 @@
     "date": "2017-08-23",
     "purpose": "sponsored/collab",
     "links_alive": 2,
-    "links_dead": 1,
+    "links_dead": 0,
     "note": "commercial-purpose but destination not proven dead -> KEPT in feed; eyeball"
   },
   {
@@ -293,7 +293,7 @@
     "date": "2017-04-06",
     "purpose": "commercial-CTA",
     "links_alive": 1,
-    "links_dead": 1,
+    "links_dead": 0,
     "note": "commercial-purpose but destination not proven dead -> KEPT in feed; eyeball"
   },
   {
@@ -302,7 +302,7 @@
     "date": "2017-03-29",
     "purpose": "commercial-CTA",
     "links_alive": 9,
-    "links_dead": 2,
+    "links_dead": 0,
     "note": "commercial-purpose but destination not proven dead -> KEPT in feed; eyeball"
   },
   {
@@ -311,7 +311,7 @@
     "date": "2017-03-20",
     "purpose": "sponsored/collab",
     "links_alive": 2,
-    "links_dead": 3,
+    "links_dead": 0,
     "note": "commercial-purpose but destination not proven dead -> KEPT in feed; eyeball"
   },
   {
@@ -410,7 +410,7 @@
     "date": "2016-06-02",
     "purpose": "sponsored/collab",
     "links_alive": 5,
-    "links_dead": 1,
+    "links_dead": 0,
     "note": "commercial-purpose but destination not proven dead -> KEPT in feed; eyeball"
   },
   {
@@ -437,7 +437,7 @@
     "date": "2015-12-09",
     "purpose": "sponsored/collab",
     "links_alive": 5,
-    "links_dead": 1,
+    "links_dead": 0,
     "note": "commercial-purpose but destination not proven dead -> KEPT in feed; eyeball"
   },
   {
@@ -473,7 +473,7 @@
     "date": "2015-05-22",
     "purpose": "freebie/download",
     "links_alive": 4,
-    "links_dead": 1,
+    "links_dead": 0,
     "note": "commercial-purpose but destination not proven dead -> KEPT in feed; eyeball"
   },
   {
@@ -482,7 +482,7 @@
     "date": "2015-05-08",
     "purpose": "commercial-CTA",
     "links_alive": 4,
-    "links_dead": 2,
+    "links_dead": 0,
     "note": "commercial-purpose but destination not proven dead -> KEPT in feed; eyeball"
   },
   {
@@ -491,7 +491,7 @@
     "date": "2015-05-02",
     "purpose": "freebie/download",
     "links_alive": 2,
-    "links_dead": 1,
+    "links_dead": 0,
     "note": "commercial-purpose but destination not proven dead -> KEPT in feed; eyeball"
   },
   {
@@ -500,7 +500,7 @@
     "date": "2015-03-25",
     "purpose": "freebie/download",
     "links_alive": 1,
-    "links_dead": 1,
+    "links_dead": 0,
     "note": "commercial-purpose but destination not proven dead -> KEPT in feed; eyeball"
   },
   {
@@ -536,7 +536,7 @@
     "date": "2014-09-27",
     "purpose": "commercial-CTA",
     "links_alive": 2,
-    "links_dead": 15,
+    "links_dead": 0,
     "note": "commercial-purpose but destination not proven dead -> KEPT in feed; eyeball"
   },
   {
@@ -545,7 +545,7 @@
     "date": "2014-08-27",
     "purpose": "commercial-CTA",
     "links_alive": 3,
-    "links_dead": 12,
+    "links_dead": 0,
     "note": "commercial-purpose but destination not proven dead -> KEPT in feed; eyeball"
   },
   {
@@ -563,7 +563,7 @@
     "date": "2014-07-27",
     "purpose": "commercial-CTA",
     "links_alive": 3,
-    "links_dead": 14,
+    "links_dead": 0,
     "note": "commercial-purpose but destination not proven dead -> KEPT in feed; eyeball"
   },
   {
@@ -572,7 +572,7 @@
     "date": "2014-06-27",
     "purpose": "commercial-CTA",
     "links_alive": 1,
-    "links_dead": 10,
+    "links_dead": 0,
     "note": "commercial-purpose but destination not proven dead -> KEPT in feed; eyeball"
   },
   {
@@ -581,7 +581,7 @@
     "date": "2014-05-27",
     "purpose": "commercial-CTA",
     "links_alive": 1,
-    "links_dead": 11,
+    "links_dead": 0,
     "note": "commercial-purpose but destination not proven dead -> KEPT in feed; eyeball"
   },
   {
@@ -590,7 +590,7 @@
     "date": "2014-02-27",
     "purpose": "commercial-CTA",
     "links_alive": 5,
-    "links_dead": 13,
+    "links_dead": 0,
     "note": "commercial-purpose but destination not proven dead -> KEPT in feed; eyeball"
   },
   {
@@ -599,7 +599,7 @@
     "date": "2014-01-27",
     "purpose": "commercial-CTA",
     "links_alive": 2,
-    "links_dead": 7,
+    "links_dead": 0,
     "note": "commercial-purpose but destination not proven dead -> KEPT in feed; eyeball"
   },
   {
@@ -608,7 +608,7 @@
     "date": "2014-01-06",
     "purpose": "commercial-CTA",
     "links_alive": 2,
-    "links_dead": 2,
+    "links_dead": 0,
     "note": "commercial-purpose but destination not proven dead -> KEPT in feed; eyeball"
   },
   {
@@ -617,7 +617,7 @@
     "date": "2013-12-05",
     "purpose": "commercial-CTA",
     "links_alive": 7,
-    "links_dead": 1,
+    "links_dead": 0,
     "note": "commercial-purpose but destination not proven dead -> KEPT in feed; eyeball"
   },
   {
@@ -626,7 +626,7 @@
     "date": "2013-12-03",
     "purpose": "commercial-CTA",
     "links_alive": 2,
-    "links_dead": 2,
+    "links_dead": 0,
     "note": "commercial-purpose but destination not proven dead -> KEPT in feed; eyeball"
   },
   {
@@ -644,7 +644,7 @@
     "date": "2013-09-12",
     "purpose": "commercial-CTA",
     "links_alive": 9,
-    "links_dead": 2,
+    "links_dead": 0,
     "note": "commercial-purpose but destination not proven dead -> KEPT in feed; eyeball"
   },
   {
@@ -662,7 +662,7 @@
     "date": "2013-06-10",
     "purpose": "commercial-CTA",
     "links_alive": 11,
-    "links_dead": 6,
+    "links_dead": 0,
     "note": "commercial-purpose but destination not proven dead -> KEPT in feed; eyeball"
   },
   {
@@ -680,7 +680,7 @@
     "date": "2013-03-22",
     "purpose": "commercial-CTA",
     "links_alive": 5,
-    "links_dead": 1,
+    "links_dead": 0,
     "note": "commercial-purpose but destination not proven dead -> KEPT in feed; eyeball"
   },
   {
@@ -689,7 +689,7 @@
     "date": "2013-02-21",
     "purpose": "commercial-CTA",
     "links_alive": 7,
-    "links_dead": 1,
+    "links_dead": 0,
     "note": "commercial-purpose but destination not proven dead -> KEPT in feed; eyeball"
   },
   {
