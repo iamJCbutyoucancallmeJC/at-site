@@ -79,6 +79,10 @@ def _request(url: str, method: str):
 
 
 def probe_one(url: str) -> dict:
+    # Malformed legacy hrefs (embedded whitespace/control chars, e.g. two URLs
+    # mashed together) can't be requested and aren't a clean "dead" verdict.
+    if re.search(r"\s", url):
+        return {"status": "uncertain", "code": "malformed-url", "final": url}
     if host_of(url) in KNOWN_DEAD_HOSTS:
         return {"status": "dead", "code": "known-dead-host", "final": url}
     for method in ("HEAD", "GET"):
@@ -103,6 +107,8 @@ def probe_one(url: str) -> dict:
                                               "no address", "refused", "getaddrinfo")):
                 return {"status": "dead", "code": f"conn:{msg[:40]}", "final": url}
             return {"status": "uncertain", "code": f"err:{msg[:40]}", "final": url}
+        except Exception as e:  # noqa: BLE001 -- any other per-URL failure must not kill the run
+            return {"status": "uncertain", "code": f"{type(e).__name__}:{str(e)[:40]}", "final": url}
     return {"status": "uncertain", "code": "no-response", "final": url}
 
 
@@ -129,6 +135,9 @@ def main():
             or (args.refresh and (args.refresh == "all" or cache[u]["status"] == args.refresh))]
     print(f"{len(urls)} candidate URLs | {len(cache)} cached | probing {len(todo)}...")
 
+    def flush():
+        CACHE.write_text(json.dumps(cache, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+
     done = 0
     with ThreadPoolExecutor(max_workers=16) as ex:
         for url, res in zip(todo, ex.map(probe_one, todo)):
@@ -136,7 +145,9 @@ def main():
             done += 1
             if done % 50 == 0:
                 print(f"  {done}/{len(todo)}", file=sys.stderr)
-    CACHE.write_text(json.dumps(cache, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+            if done % 300 == 0:   # checkpoint so a mid-run crash can't lose progress
+                flush()
+    flush()
 
     from collections import Counter
     probed = {u: cache[u] for u in urls}
