@@ -1,41 +1,42 @@
 // populate-affiliate-images.mjs  (t828 -- AT affiliate shop: durable image pass)
 //
 // Fills the `image_url` field on every Affiliate Pick metaobject with Amazon's
-// OWN sanctioned product image, sourced via the Product Advertising API (PA-API v5)
-// GetItems operation. This is the compliant image path per the affiliate-shop PRD
-// (2026-06-20, Decision on product imagery): use Amazon-provided assets
-// (SiteStripe or PA-API) ONLY -- NEVER scrape a listing image.
+// OWN sanctioned product image, sourced via the **Amazon Creators API** getItems
+// operation. This is the compliant image path per the affiliate-shop PRD
+// (2026-06-20): Amazon-provided assets ONLY, never a scraped listing image.
 //
-// It does not hardcode the 40 ASINs: it reads them back out of the existing
-// `amazon_url` fields, so it also covers any NEW pick Amy adds later. Re-running
-// is safe and idempotent (updates image_url in place; skips picks that already
-// have one unless --force).
+// NOTE (2026-07-03): Amazon retired PA-API 5.0 on 2026-05-15 and moved affiliates
+// to the Creators API. This replaces the earlier PA-API/SigV4 version. Auth is now
+// OAuth2 client-credentials (an "app" in Associates Central issues a Credential ID
+// + Secret; we mint a short-lived Bearer token from them).
+//
+// It reads the ASINs back out of the existing `amazon_url` fields, so it also
+// covers any NEW pick Amy adds later. Idempotent: updates image_url in place and
+// skips picks that already have one (unless --force).
 //
 // SAFETY
 //   - DRY-RUN by default. Pass --execute to write to Shopify.
+//   - --limit N processes only the first N picks. Use --limit 1 --execute on the
+//     FIRST real run: it prints the raw Creators API response so we can confirm
+//     the image field path + that auth/eligibility work before the full batch.
 //   - --force re-fetches + overwrites picks that already have an image_url.
-//   - --limit N processes only the first N picks (use --limit 1 on the FIRST
-//     real run to validate PA-API signing before spending the whole batch).
 //
 // CREDENTIALS (in .env.local next to the Shopify admin creds this repo already uses)
-//   PAAPI_ACCESS_KEY   = Amazon PA-API access key   (from Amy's Associates account)
-//   PAAPI_SECRET_KEY   = Amazon PA-API secret key
-//   PAAPI_PARTNER_TAG  = Associates store id         (default: atwbsite-20)
+//   CREATORS_CREDENTIAL_ID     = app's Credential ID   (amzn1.application-oa2-client...)
+//   CREATORS_CREDENTIAL_SECRET = app's Credential Secret (amzn1.oa2-cs.v1...)
+//   CREATORS_PARTNER_TAG       = associate/store tag    (default: wwwamytangeri-20)
 //   SHOPIFY_ADMIN_CLIENT_ID / SHOPIFY_ADMIN_CLIENT_SECRET / SHOPIFY_STORE_DOMAIN
 //
-// To get the PA-API keys: log into Amy's Amazon Associates account ->
-//   Tools -> Product Advertising API -> "Manage credentials" -> add credentials.
-//   (PA-API access requires the account to have qualifying sales; Amy's active
-//    affiliate practice should satisfy this.)
+// Where the credentials come from: Associates Central -> the Creators API app
+// (ApplicationId wwwamytangeri-20.atsiteaffiliate) -> Credential ID + Secret.
 //
 // RUN
-//   node scripts/populate-affiliate-images.mjs                 # dry run, all picks
-//   node scripts/populate-affiliate-images.mjs --limit 1 --execute   # smoke test 1
-//   node scripts/populate-affiliate-images.mjs --execute            # write all
-//   node scripts/populate-affiliate-images.mjs --force --execute    # re-fetch all
+//   node scripts/populate-affiliate-images.mjs                       # dry run, all
+//   node scripts/populate-affiliate-images.mjs --limit 1 --execute   # validate 1 + dump raw
+//   node scripts/populate-affiliate-images.mjs --execute             # write all
+//   node scripts/populate-affiliate-images.mjs --force --execute     # re-fetch all
 
 import { readFileSync } from "node:fs";
-import { createHash, createHmac } from "node:crypto";
 
 // ---- env ----------------------------------------------------------------
 const env = {};
@@ -53,13 +54,13 @@ const CLIENT_SECRET = get("SHOPIFY_ADMIN_CLIENT_SECRET");
 const API = "2026-07";
 const PICK_TYPE = "app--345947701249--affiliate_pick";
 
-const PAAPI_ACCESS = get("PAAPI_ACCESS_KEY");
-const PAAPI_SECRET = get("PAAPI_SECRET_KEY");
-const PARTNER_TAG = get("PAAPI_PARTNER_TAG") || "atwbsite-20";
-// US marketplace endpoint. (For a non-US store swap host/region/marketplace.)
-const PAAPI_HOST = "webservices.amazon.com";
-const PAAPI_REGION = "us-east-1";
-const MARKETPLACE = "www.amazon.com";
+const CRED_ID = get("CREATORS_CREDENTIAL_ID");
+const CRED_SECRET = get("CREATORS_CREDENTIAL_SECRET");
+const PARTNER_TAG = get("CREATORS_PARTNER_TAG") || "wwwamytangeri-20";
+const TOKEN_ENDPOINT = get("CREATORS_TOKEN_ENDPOINT") || "https://api.amazon.com/auth/o2/token";
+const SCOPE = get("CREATORS_SCOPE") || "creatorsapi::default";
+const CREATORS_HOST = get("CREATORS_HOST") || "creatorsapi.amazon";
+const MARKETPLACE = get("CREATORS_MARKETPLACE") || "www.amazon.com";
 
 const EXECUTE = process.argv.includes("--execute");
 const FORCE = process.argv.includes("--force");
@@ -119,74 +120,69 @@ async function setImageUrl(token, id, url) {
   if (errs && errs.length) throw new Error("metaobjectUpdate: " + JSON.stringify(errs));
 }
 
-// ---- PA-API v5 GetItems (AWS SigV4-signed) ------------------------------
-const sha256hex = (s) => createHash("sha256").update(s, "utf8").digest("hex");
-const hmac = (key, s) => createHmac("sha256", key).update(s, "utf8").digest();
-
-function signingKey(secret, dateStamp, region, service) {
-  const kDate = hmac("AWS4" + secret, dateStamp);
-  const kRegion = hmac(kDate, region);
-  const kService = hmac(kRegion, service);
-  return hmac(kService, "aws4_request");
+// ---- Amazon Creators API ------------------------------------------------
+let _tokenCache = null; // { token, exp }
+async function creatorsToken() {
+  if (_tokenCache && Date.now() < _tokenCache.exp) return _tokenCache.token;
+  const body = new URLSearchParams({
+    grant_type: "client_credentials",
+    client_id: CRED_ID,
+    client_secret: CRED_SECRET,
+    scope: SCOPE,
+  });
+  const res = await fetch(TOKEN_ENDPOINT, {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body,
+  });
+  const j = await res.json();
+  if (!res.ok || !j.access_token) throw new Error(`Creators token mint failed (${res.status}): ` + JSON.stringify(j).slice(0, 400));
+  _tokenCache = { token: j.access_token, exp: Date.now() + ((j.expires_in || 3600) - 60) * 1000 };
+  return _tokenCache.token;
 }
 
-async function getItems(asins) {
-  const service = "ProductAdvertisingAPI";
-  const target = "com.amazon.paapi5.v1.ProductAdvertisingAPIv1.GetItems";
-  const path = "/paapi5/getitems";
-  const now = new Date();
-  const amzDate = now.toISOString().replace(/[:-]|\.\d{3}/g, ""); // YYYYMMDDTHHMMSSZ
-  const dateStamp = amzDate.slice(0, 8);
+// Pull the Large primary image URL from an item, tolerant of casing variants
+// (the Creators API mirrors PA-API's shape but in lowerCamelCase).
+function imageOf(item) {
+  const img = item.images || item.Images;
+  const primary = img?.primary || img?.Primary;
+  const large = primary?.large || primary?.Large;
+  return large?.url || large?.URL || null;
+}
+const asinField = (item) => item.asin || item.ASIN;
 
+async function getItems(asins, { debug = false } = {}) {
+  const token = await creatorsToken();
   const payload = JSON.stringify({
-    PartnerTag: PARTNER_TAG,
-    PartnerType: "Associates",
-    Marketplace: MARKETPLACE,
-    ItemIdType: "ASIN",
-    ItemIds: asins,
-    Resources: ["Images.Primary.Large", "ItemInfo.Title"],
+    partnerTag: PARTNER_TAG,
+    partnerType: "Associates",
+    marketplace: MARKETPLACE,
+    itemIdType: "ASIN",
+    itemIds: asins,
+    resources: ["images.primary.large", "itemInfo.title"],
   });
-
-  const canonicalHeaders =
-    `content-encoding:amz-1.0\n` +
-    `host:${PAAPI_HOST}\n` +
-    `x-amz-date:${amzDate}\n` +
-    `x-amz-target:${target}\n`;
-  const signedHeaders = "content-encoding;host;x-amz-date;x-amz-target";
-  const canonicalRequest = [
-    "POST", path, "", canonicalHeaders, signedHeaders, sha256hex(payload),
-  ].join("\n");
-
-  const scope = `${dateStamp}/${PAAPI_REGION}/${service}/aws4_request`;
-  const stringToSign = ["AWS4-HMAC-SHA256", amzDate, scope, sha256hex(canonicalRequest)].join("\n");
-  const signature = createHmac("sha256", signingKey(PAAPI_SECRET, dateStamp, PAAPI_REGION, service))
-    .update(stringToSign, "utf8").digest("hex");
-
-  const authorization =
-    `AWS4-HMAC-SHA256 Credential=${PAAPI_ACCESS}/${scope}, ` +
-    `SignedHeaders=${signedHeaders}, Signature=${signature}`;
-
-  const res = await fetch(`https://${PAAPI_HOST}${path}`, {
+  const res = await fetch(`https://${CREATORS_HOST}/catalog/v1/getItems`, {
     method: "POST",
     headers: {
-      "content-encoding": "amz-1.0",
-      "content-type": "application/json; charset=utf-8",
-      "host": PAAPI_HOST,
-      "x-amz-date": amzDate,
-      "x-amz-target": target,
-      "Authorization": authorization,
+      "Authorization": `Bearer ${token}`,
+      "Content-Type": "application/json",
+      "x-marketplace": MARKETPLACE,
     },
     body: payload,
   });
-  const j = await res.json();
-  if (!res.ok) throw new Error(`PA-API ${res.status}: ${JSON.stringify(j).slice(0, 400)}`);
+  const text = await res.text();
+  if (debug) console.log("--- raw getItems response ---\n" + text.slice(0, 2000) + "\n-----------------------------");
+  let j;
+  try { j = JSON.parse(text); } catch { throw new Error(`Creators getItems ${res.status}: non-JSON: ${text.slice(0, 300)}`); }
+  if (!res.ok) throw new Error(`Creators getItems ${res.status}: ${JSON.stringify(j).slice(0, 400)}`);
+  const items = j.itemsResult?.items || j.ItemsResult?.Items || [];
   const map = {};
-  for (const it of j.ItemsResult?.Items || []) {
-    const url = it.Images?.Primary?.Large?.URL;
-    if (url) map[it.ASIN] = url;
+  for (const it of items) {
+    const asin = asinField(it);
+    const url = imageOf(it);
+    if (asin && url) map[asin] = url;
   }
-  // PA-API reports per-item failures (bad/absent ASIN) in a separate Errors array.
-  for (const e of j.Errors || []) console.warn("  PA-API item error:", e.Code, e.Message);
+  for (const e of j.errors || j.Errors || []) console.warn("  Creators item error:", e.code || e.Code, e.message || e.Message);
   return map;
 }
 
@@ -196,10 +192,10 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 // ---- main ---------------------------------------------------------------
 (async () => {
-  for (const [k, v] of Object.entries({ SHOPIFY_ADMIN_CLIENT_ID: CLIENT_ID, SHOPIFY_ADMIN_CLIENT_SECRET: CLIENT_SECRET, PAAPI_ACCESS_KEY: PAAPI_ACCESS, PAAPI_SECRET_KEY: PAAPI_SECRET })) {
+  for (const [k, v] of Object.entries({ SHOPIFY_ADMIN_CLIENT_ID: CLIENT_ID, SHOPIFY_ADMIN_CLIENT_SECRET: CLIENT_SECRET, CREATORS_CREDENTIAL_ID: CRED_ID, CREATORS_CREDENTIAL_SECRET: CRED_SECRET })) {
     if (!v) { console.error(`Missing ${k} in .env.local / env.`); process.exit(1); }
   }
-  console.log(`Mode: ${EXECUTE ? "EXECUTE (writes live)" : "DRY-RUN"}${FORCE ? " +force" : ""}  partner=${PARTNER_TAG}`);
+  console.log(`Mode: ${EXECUTE ? "EXECUTE (writes live)" : "DRY-RUN"}${FORCE ? " +force" : ""}  partner=${PARTNER_TAG}  api=CreatorsAPI`);
 
   const token = await mintAdminToken();
   const picks = await allPicks(token);
@@ -212,13 +208,14 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
   console.log(`${picks.length} picks total; ${targets.length} to fetch, ${skipped} skipped (already have image_url or no ASIN).`);
   if (!targets.length) return;
 
-  // fetch images in batches of 10 (PA-API max ItemIds per GetItems)
+  // fetch images in batches of 10; dump the raw response on a --limit smoke test
+  const debugRaw = Number.isFinite(LIMIT);
   const images = {};
   for (const batch of chunk(targets.map((t) => t.asin), 10)) {
-    const map = await getItems(batch);
+    const map = await getItems(batch, { debug: debugRaw });
     Object.assign(images, map);
     console.log(`  fetched ${Object.keys(map).length}/${batch.length} images`);
-    await sleep(1100); // stay under the 1 TPS default
+    await sleep(1100);
   }
 
   let wrote = 0, missing = 0;
@@ -229,5 +226,5 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
     console.log(`  ${EXECUTE ? "wrote" : "would write"}  ${t.asin}  ${url}`);
   }
   console.log(`\nDone. ${EXECUTE ? "Wrote" : "Would write"} ${EXECUTE ? wrote : targets.length - missing} image_url(s); ${missing} with no image returned.`);
-  if (!EXECUTE) console.log("Re-run with --execute to write. Use --limit 1 --execute first to validate signing.");
+  if (!EXECUTE) console.log("Re-run with --execute to write. Use --limit 1 --execute first to validate auth + confirm the image field path.");
 })().catch((e) => { console.error(e); process.exit(1); });
