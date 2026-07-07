@@ -115,6 +115,12 @@ const nextConfig = {
         protocol: "https",
         hostname: "media.rainpos.com",
       },
+      // YouTube thumbnails for the click-to-play recap facade on
+      // /events/<slug> pages (components/events/recap-video.tsx).
+      {
+        protocol: "https",
+        hostname: "i.ytimg.com",
+      },
     ],
   },
 }

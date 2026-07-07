@@ -10,7 +10,7 @@ const DESKTOP_LINKS = [
   { label: "About", href: "/about" },
   { label: "Journal", href: "/blog" },
   { label: "Happy Mail", href: "/happy-mail" },
-  { label: "Events", href: "/events" },
+  { label: "In Person", href: "/events" },
   { label: "Contact", href: "/contact" },
   { label: "Instagram", href: "https://instagram.com/amytangerine" },
   { label: "YouTube", href: "https://youtube.com/@amytangerine" },
@@ -21,7 +21,7 @@ const MOBILE_LINKS = [
   { label: "About", href: "/about" },
   { label: "Journal", href: "/blog" },
   { label: "Happy Mail", href: "/happy-mail" },
-  { label: "Events", href: "/events" },
+  { label: "In Person", href: "/events" },
   { label: "Contact", href: "/contact" },
 ]
 

@@ -9,7 +9,21 @@ import { trackEvent } from "@/lib/analytics"
 import { useCart } from "@/context/cart"
 import { isChromelessRoute } from "@/lib/chromeless-routes"
 
-const NAV_LINKS = [
+// Nav restructure (2026-07-07, per JC): three top-level items.
+//   Fun Stuff (dropdown, room to grow) / Shop (unchanged) / About Amy (dropdown)
+// A parent WITHOUT an href is a pure dropdown trigger (Fun Stuff has no landing
+// page); a parent WITH an href both links and drops down (Shop -> /shop).
+// Analytics: child clicks carry `group` so dropdown items are distinguishable
+// from top-level clicks in GA4.
+
+type NavChild = { label: string; href: string; external?: boolean }
+type NavItem = { label: string; href?: string; external?: boolean; children?: NavChild[] }
+
+const NAV_LINKS: NavItem[] = [
+  {
+    label: "Fun Stuff",
+    children: [{ label: "Photobooth", href: "https://photobooth.amytangerine.com/", external: true }],
+  },
   {
     label: "Shop",
     href: "/shop",
@@ -18,9 +32,33 @@ const NAV_LINKS = [
       { label: "Shop My Faves", href: "/shop-my-faves" },
     ],
   },
-  { label: "Photobooth", href: "https://photobooth.amytangerine.com/", external: true },
-  { label: "About", href: "/about" },
+  {
+    label: "About Amy",
+    href: "/about",
+    children: [
+      { label: "About", href: "/about" },
+      { label: "Journal", href: "/blog" },
+      { label: "In Person", href: "/events" },
+    ],
+  },
 ]
+
+function DesktopDropdownChild({ child, group }: { child: NavChild; group: string }) {
+  const className = "block px-5 py-2.5 text-base font-semibold transition-colors hover:opacity-80"
+  const style = { color: "var(--color-text-primary)" }
+  const onClick = () =>
+    trackEvent("nav_click", { link_text: child.label, group, mobile_or_desktop: "desktop" })
+
+  return child.external ? (
+    <a href={child.href} target="_blank" rel="noopener noreferrer" className={className} style={style} onClick={onClick}>
+      {child.label}
+    </a>
+  ) : (
+    <Link href={child.href} className={className} style={style} onClick={onClick}>
+      {child.label}
+    </Link>
+  )
+}
 
 export default function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -53,9 +91,46 @@ export default function Nav() {
 
         <div className="flex-1 flex items-center justify-center gap-8">
           {NAV_LINKS.map((link) =>
-            link.external ? (
+            link.children ? (
+              <div key={link.label} className="relative group">
+                {link.href ? (
+                  <Link
+                    href={link.href}
+                    className="inline-flex items-center gap-1 text-base font-semibold transition-colors hover:opacity-80 py-2"
+                    style={{ color: "var(--color-text-primary)" }}
+                    onClick={() => trackEvent("nav_click", { link_text: link.label, mobile_or_desktop: "desktop" })}
+                  >
+                    {link.label}
+                    <ChevronDown size={16} className="transition-transform group-hover:rotate-180" />
+                  </Link>
+                ) : (
+                  <button
+                    type="button"
+                    className="inline-flex items-center gap-1 text-base font-semibold transition-colors hover:opacity-80 py-2"
+                    style={{ color: "var(--color-text-primary)" }}
+                    aria-haspopup="true"
+                  >
+                    {link.label}
+                    <ChevronDown size={16} className="transition-transform group-hover:rotate-180" />
+                  </button>
+                )}
+                <div className="absolute left-1/2 -translate-x-1/2 top-full pt-1 hidden group-hover:block group-focus-within:block z-50">
+                  <div
+                    className="min-w-[180px] rounded-lg border py-2 shadow-lg"
+                    style={{
+                      background: "var(--color-white)",
+                      borderColor: "var(--color-border)",
+                    }}
+                  >
+                    {link.children.map((child) => (
+                      <DesktopDropdownChild key={child.href} child={child} group={link.label} />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ) : link.external ? (
               <a
-                key={link.href}
+                key={link.label}
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -65,45 +140,10 @@ export default function Nav() {
               >
                 {link.label}
               </a>
-            ) : link.children ? (
-              <div key={link.href} className="relative group">
-                <Link
-                  href={link.href}
-                  className="inline-flex items-center gap-1 text-base font-semibold transition-colors hover:opacity-80 py-2"
-                  style={{ color: "var(--color-text-primary)" }}
-                  onClick={() => trackEvent("nav_click", { link_text: link.label, mobile_or_desktop: "desktop" })}
-                >
-                  {link.label}
-                  <ChevronDown size={16} className="transition-transform group-hover:rotate-180" />
-                </Link>
-                <div
-                  className="absolute left-1/2 -translate-x-1/2 top-full pt-1 hidden group-hover:block group-focus-within:block z-50"
-                >
-                  <div
-                    className="min-w-[180px] rounded-lg border py-2 shadow-lg"
-                    style={{
-                      background: "var(--color-white)",
-                      borderColor: "var(--color-border)",
-                    }}
-                  >
-                    {link.children.map((child) => (
-                      <Link
-                        key={child.href}
-                        href={child.href}
-                        className="block px-5 py-2.5 text-base font-semibold transition-colors hover:opacity-80"
-                        style={{ color: "var(--color-text-primary)" }}
-                        onClick={() => trackEvent("nav_click", { link_text: child.label, mobile_or_desktop: "desktop" })}
-                      >
-                        {child.label}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              </div>
             ) : (
               <Link
-                key={link.href}
-                href={link.href}
+                key={link.label}
+                href={link.href!}
                 className="text-base font-semibold transition-colors hover:opacity-80"
                 style={{ color: "var(--color-text-primary)" }}
                 onClick={() => trackEvent("nav_click", { link_text: link.label, mobile_or_desktop: "desktop" })}
@@ -209,9 +249,51 @@ export default function Nav() {
               <span>♥</span> Happy Mail — $13/mo
             </Link>
             {NAV_LINKS.map((link) =>
-              link.external ? (
+              link.children ? (
+                <div key={link.label} className="border-b" style={{ borderColor: "var(--color-border)" }}>
+                  {link.href ? (
+                    <Link
+                      href={link.href}
+                      className="block text-lg font-semibold py-3"
+                      style={{ color: "var(--color-text-primary)" }}
+                      onClick={() => { setMobileOpen(false); trackEvent("nav_click", { link_text: link.label, mobile_or_desktop: "mobile" }) }}
+                    >
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <p className="text-lg font-semibold py-3" style={{ color: "var(--color-text-primary)" }}>
+                      {link.label}
+                    </p>
+                  )}
+                  {link.children.map((child) =>
+                    child.external ? (
+                      <a
+                        key={child.href}
+                        href={child.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block text-base font-semibold py-2.5 pl-4"
+                        style={{ color: "var(--color-text-secondary, var(--color-text-primary))" }}
+                        onClick={() => { setMobileOpen(false); trackEvent("nav_click", { link_text: child.label, group: link.label, mobile_or_desktop: "mobile" }) }}
+                      >
+                        {child.label}
+                      </a>
+                    ) : (
+                      <Link
+                        key={child.href}
+                        href={child.href}
+                        className="block text-base font-semibold py-2.5 pl-4"
+                        style={{ color: "var(--color-text-secondary, var(--color-text-primary))" }}
+                        onClick={() => { setMobileOpen(false); trackEvent("nav_click", { link_text: child.label, group: link.label, mobile_or_desktop: "mobile" }) }}
+                      >
+                        {child.label}
+                      </Link>
+                    )
+                  )}
+                </div>
+              ) : link.external ? (
                 <a
-                  key={link.href}
+                  key={link.label}
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -224,32 +306,10 @@ export default function Nav() {
                 >
                   {link.label}
                 </a>
-              ) : link.children ? (
-                <div key={link.href} className="border-b" style={{ borderColor: "var(--color-border)" }}>
-                  <Link
-                    href={link.href}
-                    className="block text-lg font-semibold py-3"
-                    style={{ color: "var(--color-text-primary)" }}
-                    onClick={() => { setMobileOpen(false); trackEvent("nav_click", { link_text: link.label, mobile_or_desktop: "mobile" }) }}
-                  >
-                    {link.label}
-                  </Link>
-                  {link.children.map((child) => (
-                    <Link
-                      key={child.href}
-                      href={child.href}
-                      className="block text-base font-semibold py-2.5 pl-4"
-                      style={{ color: "var(--color-text-secondary, var(--color-text-primary))" }}
-                      onClick={() => { setMobileOpen(false); trackEvent("nav_click", { link_text: child.label, mobile_or_desktop: "mobile" }) }}
-                    >
-                      {child.label}
-                    </Link>
-                  ))}
-                </div>
               ) : (
                 <Link
-                  key={link.href}
-                  href={link.href}
+                  key={link.label}
+                  href={link.href!}
                   className="text-lg font-semibold py-3 border-b"
                   style={{
                     color: "var(--color-text-primary)",
