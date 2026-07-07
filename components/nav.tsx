@@ -4,13 +4,20 @@ import React, { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { Menu, X, ShoppingBag } from "lucide-react"
+import { Menu, X, ShoppingBag, ChevronDown } from "lucide-react"
 import { trackEvent } from "@/lib/analytics"
 import { useCart } from "@/context/cart"
 import { isChromelessRoute } from "@/lib/chromeless-routes"
 
 const NAV_LINKS = [
-  { label: "Shop", href: "/shop" },
+  {
+    label: "Shop",
+    href: "/shop",
+    children: [
+      { label: "Shop My Stuff", href: "/shop" },
+      { label: "Shop My Faves", href: "/shop-my-faves" },
+    ],
+  },
   { label: "Photobooth", href: "https://photobooth.amytangerine.com/", external: true },
   { label: "About", href: "/about" },
 ]
@@ -58,6 +65,41 @@ export default function Nav() {
               >
                 {link.label}
               </a>
+            ) : link.children ? (
+              <div key={link.href} className="relative group">
+                <Link
+                  href={link.href}
+                  className="inline-flex items-center gap-1 text-base font-semibold transition-colors hover:opacity-80 py-2"
+                  style={{ color: "var(--color-text-primary)" }}
+                  onClick={() => trackEvent("nav_click", { link_text: link.label, mobile_or_desktop: "desktop" })}
+                >
+                  {link.label}
+                  <ChevronDown size={16} className="transition-transform group-hover:rotate-180" />
+                </Link>
+                <div
+                  className="absolute left-1/2 -translate-x-1/2 top-full pt-1 hidden group-hover:block group-focus-within:block z-50"
+                >
+                  <div
+                    className="min-w-[180px] rounded-lg border py-2 shadow-lg"
+                    style={{
+                      background: "var(--color-white)",
+                      borderColor: "var(--color-border)",
+                    }}
+                  >
+                    {link.children.map((child) => (
+                      <Link
+                        key={child.href}
+                        href={child.href}
+                        className="block px-5 py-2.5 text-base font-semibold transition-colors hover:opacity-80"
+                        style={{ color: "var(--color-text-primary)" }}
+                        onClick={() => trackEvent("nav_click", { link_text: child.label, mobile_or_desktop: "desktop" })}
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
             ) : (
               <Link
                 key={link.href}
@@ -182,6 +224,28 @@ export default function Nav() {
                 >
                   {link.label}
                 </a>
+              ) : link.children ? (
+                <div key={link.href} className="border-b" style={{ borderColor: "var(--color-border)" }}>
+                  <Link
+                    href={link.href}
+                    className="block text-lg font-semibold py-3"
+                    style={{ color: "var(--color-text-primary)" }}
+                    onClick={() => { setMobileOpen(false); trackEvent("nav_click", { link_text: link.label, mobile_or_desktop: "mobile" }) }}
+                  >
+                    {link.label}
+                  </Link>
+                  {link.children.map((child) => (
+                    <Link
+                      key={child.href}
+                      href={child.href}
+                      className="block text-base font-semibold py-2.5 pl-4"
+                      style={{ color: "var(--color-text-secondary, var(--color-text-primary))" }}
+                      onClick={() => { setMobileOpen(false); trackEvent("nav_click", { link_text: child.label, mobile_or_desktop: "mobile" }) }}
+                    >
+                      {child.label}
+                    </Link>
+                  ))}
+                </div>
               ) : (
                 <Link
                   key={link.href}
