@@ -18,13 +18,15 @@
 
 export const AFFILIATE_LISTS = [
   {
-    // Amy's OWN KDP books (JC-ruled 2026-07-06: merchandise at top of page; start
-    // with these 2, more to come). No listId -- there's no Amazon idea list for
+    // Amy's OWN books (JC-ruled 2026-07-06: merchandise at top of page). Full
+    // catalog pulled from her Amazon author page (author B01MZD2H0P) 2026-07-07.
+    // Print-edition ASINs preferred for the two trad-published titles (ISBN-10
+    // is the ASIN for print books). No listId -- there's no Amazon idea list for
     // these, so no "See all" deep-link (populate script writes list_url as empty).
     listId: null,
     title: "My Books",
     slug: "my-books",
-    count: 2,
+    count: 6,
     sortOrder: 0,
     description:
       "The ones I made myself! Books and notebooks designed to be used hard: torn, snipped, painted, and filled with your everyday memories.",
@@ -33,6 +35,14 @@ export const AFFILIATE_LISTS = [
         note: "My traveler's notebook: a colorful foundation for creativity, memories, and everyday joy." },
       { asin: "B0GVF8HP46", title: "Paper Play 3: Junk Journal Edition",
         note: "The third Paper Play! A whole book of pages made to be cut, torn, layered, and collaged." },
+      { asin: "B0F319N4CM", title: "Paper Play 2: Cut, Craft + Collage",
+        note: "Round two of Paper Play. More pages made to be cut up, crafted, and collaged into your projects." },
+      { asin: "B0CVLG17RT", title: "Paper Play: Cut, Craft + Create",
+        note: "The one that started it all. A book you're supposed to cut up! Tear out the pages and make them yours." },
+      { asin: "0241465699", title: "Making Memories",
+        note: "My book on mindful memory keeping: journaling, scrapbooking, and finding a little calm every day." },
+      { asin: "0692816127", title: "Craft a Life You Love",
+        note: "My heart in book form. 25 practices for infusing creativity, fun, and intention into your every day." },
     ],
   },
   {
