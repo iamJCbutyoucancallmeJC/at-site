@@ -14,7 +14,7 @@ const NAV_LINKS = [
     label: "Shop",
     href: "/shop",
     children: [
-      { label: "Shop All", href: "/shop" },
+      { label: "Shop My Stuff", href: "/shop" },
       { label: "Shop My Faves", href: "/shop-my-faves" },
     ],
   },

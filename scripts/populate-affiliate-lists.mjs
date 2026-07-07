@@ -159,7 +159,7 @@ async function main() {
       description: list.description,
       slug: list.slug,
       sort_order: String(list.sortOrder),
-      list_url: listUrl(list.listId),
+      list_url: list.listId ? listUrl(list.listId) : "",
       item_count: String(list.count),
       active: "true",
       featured: "false",

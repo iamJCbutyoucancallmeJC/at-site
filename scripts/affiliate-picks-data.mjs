@@ -18,6 +18,24 @@
 
 export const AFFILIATE_LISTS = [
   {
+    // Amy's OWN KDP books (JC-ruled 2026-07-06: merchandise at top of page; start
+    // with these 2, more to come). No listId -- there's no Amazon idea list for
+    // these, so no "See all" deep-link (populate script writes list_url as empty).
+    listId: null,
+    title: "My Books",
+    slug: "my-books",
+    count: 2,
+    sortOrder: 0,
+    description:
+      "The ones I made myself! Books and notebooks designed to be used hard: torn, snipped, painted, and filled with your everyday memories.",
+    picks: [
+      { asin: "B0H414S9DK", title: "Sunshine & Rainbows Traveler's Notebook",
+        note: "My traveler's notebook: a colorful foundation for creativity, memories, and everyday joy." },
+      { asin: "B0GVF8HP46", title: "Paper Play 3: Junk Journal Edition",
+        note: "The third Paper Play! A whole book of pages made to be cut, torn, layered, and collaged." },
+    ],
+  },
+  {
     listId: "L7F4JUTVJ39Z",
     title: "Favorite Crafty Must Haves",
     slug: "favorite-crafty-must-haves",
@@ -40,8 +58,8 @@ export const AFFILIATE_LISTS = [
         note: "Turns any paper into faux postage stamps. Such a fun detail for snail mail and journals." },
       { asin: "B0FJ2PPXNX", title: "Hobonichi Techo Graph Notebook (A5)",
         note: "The paper quality is worth the hype. Takes my pens and paint without bleeding through." },
-      { asin: "B0GVF8HP46", title: "Paper Play: Junk Journal Edition",
-        note: "A whole book of collage and craft inspiration. Perfect for when I need a creative nudge." },
+      // Paper Play (B0GVF8HP46) moved to the "My Books" list 2026-07-06 -- it's
+      // Amy's own book; same pick metaobject (keyed by ASIN), keeps its image.
     ],
   },
   {
