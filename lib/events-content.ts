@@ -25,6 +25,7 @@ export type SiteEvent = {
   dates: string // display string
   sortDate: string // ISO date used only for ordering
   blurb: string
+  meetAmy?: string // upcoming events: what meeting Amy there looks like (booth vs walking)
   detailPage: boolean // true = /events/<slug> exists for this entry
   internalHref?: string // bespoke page override (Tokyo -> /japan)
   eventUrl?: string // the event's own site
@@ -50,12 +51,31 @@ export const EVENTS: SiteEvent[] = [
     dates: "July 30 – August 1, 2026",
     sortDate: "2026-07-30",
     blurb:
-      "Three days, 200+ stationery brands, and thousands of paper people in one place. Amy will be there. Come say hi, see what she's been making, and craft a little something together.",
+      "Three days, 200+ stationery brands, and thousands of paper people in one place. Amy will be there all three days.",
+    // Compound calendar (2026-07-07): Amy is WALKING the fest, not exhibiting.
+    meetAmy:
+      "Amy's walking the fest all three days, exploring the aisles with the rest of us paper people. If you spot her, say hi.",
     detailPage: true,
     eventUrl: "https://stationeryfestival.com/",
     ticketUrl: "https://stationeryfestival.com/ticket",
-    // Booth number + which days Amy is there: JC drops in during review.
-    details: [],
+    details: ["571 2nd Avenue, Brooklyn, NY 11232"],
+  },
+  {
+    slug: "paper-world-orlando",
+    status: "upcoming",
+    title: "Paper World Stationery Expo",
+    label: "Stationery Expo",
+    city: "Orlando, FL",
+    venue: "Hilton Orlando",
+    dates: "August 29, 2026",
+    sortDate: "2026-08-29",
+    blurb:
+      "Paper World heads to Florida: 50+ curated stationery vendors, workshops, hands-on experiences, and a whole day of paper people. Amy's third Paper World this year.",
+    meetAmy:
+      "Stop by Amy's table to shop her supplies in person, see new goodies first, and say hi. She loves meeting people who make things.",
+    detailPage: true,
+    eventUrl: "https://www.paperworldstationeryexpo.com/",
+    ticketUrl: "https://www.tickettailor.com/events/paperworldstationeryexpo",
   },
   {
     slug: "village-well",
@@ -90,6 +110,13 @@ export const EVENTS: SiteEvent[] = [
       youtubeId: "v4HbwY-OAuc",
       videoTitle: "Paper World Stationery Expo Seattle Vlog",
     },
+    // Frames from Amy's own vlog (YouTube auto-thumbnails 1/2/3) -- the same
+    // 3-up treatment as the Tokyo card, without hosting anything ourselves.
+    photos: [
+      "https://i.ytimg.com/vi/v4HbwY-OAuc/hq1.jpg",
+      "https://i.ytimg.com/vi/v4HbwY-OAuc/hq2.jpg",
+      "https://i.ytimg.com/vi/v4HbwY-OAuc/hq3.jpg",
+    ],
   },
   {
     slug: "paper-world-anaheim",

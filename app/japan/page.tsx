@@ -204,7 +204,7 @@ export default function JapanPage() {
           className="text-[13px] uppercase tracking-[0.1em] font-semibold hover:opacity-70"
           style={{ color: "var(--color-orange)" }}
         >
-          ← See all events
+          ← Back to In Person
         </TrackableLink>
       </section>
     </main>

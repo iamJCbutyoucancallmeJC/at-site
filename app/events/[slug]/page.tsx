@@ -73,11 +73,10 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
           {event.blurb}
         </p>
 
-        {/* Upcoming boilerplate: what a visit to Amy's booth is like */}
-        {event.status === "upcoming" && (
+        {/* What meeting Amy there looks like (per-event: booth vs walking) */}
+        {event.meetAmy && (
           <p className="mt-4 text-[15px] md:text-[17px] leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-            Stop by to shop Amy&rsquo;s supplies in person, see new goodies before anyone else, and say
-            hi. She loves meeting people who make things.
+            {event.meetAmy}
           </p>
         )}
 
@@ -212,7 +211,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
           className="text-[13px] uppercase tracking-[0.1em] font-semibold hover:opacity-70"
           style={{ color: "var(--color-orange)" }}
         >
-          ← See all events
+          ← Back to In Person
         </TrackableLink>
       </section>
     </main>
