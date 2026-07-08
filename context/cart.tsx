@@ -180,8 +180,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   function clearCart() {
     dispatch({ type: "HYDRATE", items: [] })
-    // Belt-and-suspenders: directly clear localStorage in case the persist
-    // effect hasn't fired yet when caller navigates away.
+    // Belt-and-suspenders: directly clear localStorage in case the caller
+    // navigates away before the persist effect fires. Note: if the effect
+    // DOES fire it wins, re-writing the key as "[]" — an empty cart either
+    // way, so the difference is only whether the key exists.
     try {
       localStorage.removeItem(STORAGE_KEY)
     } catch {

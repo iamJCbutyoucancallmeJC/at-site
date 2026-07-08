@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation"
 import TrackableLink from "@/components/trackable-link"
 import { trackEvent } from "@/lib/analytics"
 import { useCart } from "@/context/cart"
+import { consumePendingCartToken } from "@/lib/pending-checkout-tokens"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 
 function ThankYouContent() {
@@ -21,20 +22,14 @@ function ThankYouContent() {
 
     // Clear the local cart if this looks like a real checkout completion.
     // Two-factor check: (a) cart_id must be present in URL (set by our
-    // /api/checkout/cart return_to), AND (b) it must match the token we
+    // /api/checkout/cart return_to), AND (b) it must match a token we
     // stashed in localStorage when initiating checkout. This prevents a
     // direct nav to /thank-you?cart_id=foo from accidentally clearing
-    // someone else's cart. See t621 (Heidi 2026-05-24).
-    if (cartId) {
-      try {
-        const stashedToken = localStorage.getItem("at-cart-pending-token")
-        if (stashedToken && stashedToken === cartId) {
-          clearCart()
-          localStorage.removeItem("at-cart-pending-token")
-        }
-      } catch {
-        // ignore
-      }
+    // someone else's cart. See t621 (Heidi 2026-05-24). Tokens are a set
+    // (one per pending checkout) so checkouts started in multiple tabs all
+    // verify; only the matched token is consumed. See t646.
+    if (cartId && consumePendingCartToken(cartId)) {
+      clearCart()
     }
 
     // NOTE: the standard GA4 `purchase` ecommerce event is NOT fired here.

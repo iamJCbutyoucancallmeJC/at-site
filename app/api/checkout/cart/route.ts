@@ -34,6 +34,12 @@ export async function POST(request: Request) {
     }
 
     const cartToken = extractCartToken(updated.id)
+    if (!cartToken) {
+      // An empty token means the Cart gid shape changed and extractCartToken
+      // no longer matches — checkout still works, but /thank-you can't verify
+      // the round-trip so carts silently stop clearing. Make it diagnosable.
+      console.warn("[cart checkout] empty cart token extracted from gid:", updated.id)
+    }
     const returnUrl = cartToken ? `${RETURN_BASE}?cart_id=${cartToken}` : RETURN_BASE
 
     const checkoutUrl = updated.checkoutUrl.includes("?")
