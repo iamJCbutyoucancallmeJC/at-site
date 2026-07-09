@@ -222,7 +222,7 @@ export default function HappyMailClient() {
       </section>
 
       {/* ── FAQ ── */}
-      <section className="py-12 md:py-16 px-4 md:px-10">
+      <section id="faq" className="py-12 md:py-16 px-4 md:px-10">
         <div className="max-w-2xl mx-auto">
           <h2
             className="text-[15px] md:text-[17px] uppercase tracking-[0.12em] font-semibold mb-8"
