@@ -33,8 +33,9 @@ const nextConfig = {
       // chains correctly. Retired/sold-out handles land on the styled 404 (which links to
       // /shop), which is the right outcome for a discontinued product.
       { source: "/shop/p/:handle", destination: "/shop/:handle", permanent: true },
-      // SQS digital-prints listing -> the shop catalog (printables live there now).
-      { source: "/shop/digital-prints", destination: "/shop", permanent: true },
+      // SQS digital-prints listing -> the printables category (the category filter
+      // didn't exist when this rule shipped Jun 26; it does now).
+      { source: "/shop/digital-prints", destination: "/shop?category=printables", permanent: true },
 
       // Old SQS about page slug.
       { source: "/aboutamy", destination: "/about", permanent: true },
@@ -99,6 +100,25 @@ const nextConfig = {
       // Retired /shop/<handle> products are NOT redirected: they fall through to the
       // enriched 404 (app/not-found.tsx), which acknowledges the product retired and
       // shows the current lineup -- a better landing than a silent dump to /shop.
+
+      // ---- Printables handle-prefix fix (2026-07-09) ----
+      // The Shopify migration imported the printables under `printable-`-prefixed
+      // handles, so the old SQS URLs (still indexed by Google + pinned on Pinterest)
+      // 404 while the SAME product is live at /shop/printable-<slug>. These are NOT
+      // retired products (the t833 rule above), they're live products cut off from
+      // their historic URLs. GA4 top not_found paths (trailing 7d) matched 1:1
+      // against the live catalog produced these eight. 301 each to its live twin.
+      // Retired printables with no live twin stay on the styled 404 per t833.
+      { source: "/shop/selflove", destination: "/shop/printable-selflove", permanent: true },
+      { source: "/shop/permissionslip", destination: "/shop/printable-permissionslip", permanent: true },
+      { source: "/shop/marchprintable", destination: "/shop/printable-marchprintable", permanent: true },
+      { source: "/shop/good-thoughts", destination: "/shop/printable-good-thoughts", permanent: true },
+      { source: "/shop/trust-yourself-printable", destination: "/shop/printable-trust-yourself-printable", permanent: true },
+      { source: "/shop/make-some-magic-printable", destination: "/shop/printable-make-some-magic-printable", permanent: true },
+      { source: "/shop/december-map-your-month-making-abundance-possible", destination: "/shop/printable-december-map-your-month-making-abundance-possible", permanent: true },
+      { source: "/shop/december-map-your-month-making-abundance-possible-44ydf", destination: "/shop/printable-december-map-your-month-making-abundance-possible-44ydf", permanent: true },
+      // Old SQS digital-shop section landing -> the live printables category.
+      { source: "/digishop", destination: "/shop?category=printables", permanent: true },
     ]
   },
   images: {
