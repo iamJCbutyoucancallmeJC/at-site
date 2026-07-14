@@ -56,9 +56,9 @@ export default function ContactPage() {
           className="text-[16px] md:text-[18px] leading-relaxed max-w-xl mx-auto"
           style={{ color: "var(--color-text-secondary)" }}
         >
-          The fastest way to reach Amy is on Instagram. For business,
-          partnerships, press, and Happy Mail customer service, email works
-          best.
+          The fastest way to reach Amy is on Instagram. For orders, Happy Mail,
+          and anything about a purchase, or for business, partnerships, and
+          press, email works best.
         </p>
       </section>
 
@@ -66,35 +66,45 @@ export default function ContactPage() {
       <section className="py-16 md:py-20 px-6 md:px-16">
         <div className="max-w-2xl mx-auto text-center">
           <h2
-            className="text-[24px] md:text-[28px] font-bold mb-6"
+            className="text-[24px] md:text-[28px] font-bold mb-8"
             style={{ color: "var(--color-text-primary)" }}
           >
             Email
           </h2>
+
+          {/* Customer service: orders, Happy Mail, anything about a purchase */}
           <p
-            className="text-[15px] mb-6 leading-relaxed"
+            className="text-[15px] mb-3 leading-relaxed"
             style={{ color: "var(--color-text-secondary)" }}
           >
-            Business, press, partnerships, wholesale, and Happy Mail questions
-            all go to:
+            Questions about an order, Happy Mail, or a purchase:
+          </p>
+          <TrackableLink
+            href="mailto:help@amytangerine.com"
+            event="external_link"
+            eventData={{ destination: "email", email_type: "cs", source_page: "contact" }}
+            className="inline-block text-[20px] md:text-[24px] font-semibold underline underline-offset-4 decoration-2 hover:opacity-70 transition-opacity"
+            style={{ color: "var(--color-orange)" }}
+          >
+            help@amytangerine.com
+          </TrackableLink>
+
+          {/* Business: proposals, press, wholesale, partnerships, Amy access */}
+          <p
+            className="text-[15px] mb-3 mt-12 leading-relaxed"
+            style={{ color: "var(--color-text-secondary)" }}
+          >
+            Collabs, press, wholesale, or partnerships:
           </p>
           <TrackableLink
             href="mailto:hello@amytangerine.com"
             event="external_link"
-            eventData={{ destination: "email", source_page: "contact" }}
+            eventData={{ destination: "email", email_type: "business", source_page: "contact" }}
             className="inline-block text-[20px] md:text-[24px] font-semibold underline underline-offset-4 decoration-2 hover:opacity-70 transition-opacity"
             style={{ color: "var(--color-orange)" }}
           >
             hello@amytangerine.com
           </TrackableLink>
-          <p
-            className="text-[13px] mt-6 leading-relaxed"
-            style={{ color: "var(--color-text-secondary)" }}
-          >
-            Subject lines that help us route faster:{" "}
-            <em>Press</em>, <em>Wholesale</em>, <em>Partnership</em>,{" "}
-            <em>Happy Mail</em>.
-          </p>
         </div>
       </section>
 

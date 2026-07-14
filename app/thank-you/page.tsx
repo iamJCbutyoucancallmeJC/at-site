@@ -80,11 +80,11 @@ function ThankYouContent() {
       >
         Questions? Reach out at{" "}
         <a
-          href="mailto:hello@amytangerine.com"
+          href="mailto:help@amytangerine.com"
           className="underline underline-offset-2 hover:opacity-70"
           style={{ color: "var(--color-orange)" }}
         >
-          hello@amytangerine.com
+          help@amytangerine.com
         </a>
       </p>
 
