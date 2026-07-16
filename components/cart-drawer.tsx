@@ -9,6 +9,7 @@ import { useCart } from "@/context/cart"
 import { trackEvent } from "@/lib/analytics"
 import { HM_VARIANT_6MONTH_GID } from "@/lib/happy-mail-content"
 import { isChromelessRoute } from "@/lib/chromeless-routes"
+import { stashPendingCartToken } from "@/lib/pending-checkout-tokens"
 
 // Detect local (non-Shopify) variant IDs — checkout not available yet
 function isLocalVariant(variantId: string) {
@@ -103,9 +104,11 @@ export default function CartDrawer() {
       if (!res.ok) throw new Error("checkout failed")
       const { checkoutUrl, cartToken } = await res.json()
       // Stash the cart token so /thank-you can verify the round-trip and
-      // only clear the local cart on a real checkout completion. See t621.
+      // only clear the local cart on a real checkout completion. Stashed as a
+      // set so a checkout started in another tab doesn't clobber this one.
+      // See t621, t646.
       if (cartToken) {
-        try { localStorage.setItem("at-cart-pending-token", cartToken) } catch {}
+        stashPendingCartToken(cartToken)
       }
       window.location.href = checkoutUrl
     } catch {
