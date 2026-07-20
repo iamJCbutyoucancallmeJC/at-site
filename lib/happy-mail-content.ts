@@ -74,6 +74,10 @@ export const HM_FAQ_ITEMS = [
     a: "Around the 15th of each month. You'll get it like a letter from a friend — USPS first-class, no tracking number, usually arrives within a week.",
   },
   {
+    q: "Which month will my first envelope be?",
+    a: "Order by the 15th and this month's envelope is yours. After the 15th, you're in for next month's. It's a real envelope we mail once a month, so there's a cutoff to make the mail run.",
+  },
+  {
     q: "Are the contents available in your shop?",
     a: "Nope. Happy Mail goodies are subscriber-exclusive. That's part of the deal.",
   },
@@ -87,9 +91,11 @@ export const HM_FAQ_ITEMS = [
     a: "Manage your subscription any time in your subscriber account, or email help@amytangerine.com and we'll take care of it. Monthly subscribers can cancel whenever — billing just stops going forward. For 6-Month, cancelling stops your next 6-month renewal; the current six-month term runs to the end. (See “Can I skip or cancel a month?” below for the timing on your final envelope.)",
   },
   {
-    // [t658 addendum] NO SKIP (R11) + cancel timing (R15). ⚠️ For Amy's eye: the "5th" cutoff wording.
+    // [t658 addendum] NO SKIP (R11) + cancel timing (R15).
+    // [t801, 2026-07-20] Cutoff aligned to the 15th (LATE_CUTOFF in zz_System/Scripts/lib/hm_funds_month.py).
+    // Was "before the 5th", which contradicted the first-envelope promise directly above. One cutoff, one date.
     q: "Can I skip or cancel a month?",
-    a: "We don't offer skipping individual months — every subscriber gets each month's envelope while they're subscribed. You can cancel any time, though. Here's the timing: if you cancel before your monthly billing date (which recurs on your original order date) and before the 5th, when we get each month's envelopes ready, your cancellation applies to the current month and you're out cleanly with no final charge. Otherwise, this month's envelope still ships — it's your last — and your cancellation takes effect the following month.",
+    a: "We don't offer skipping individual months — every subscriber gets each month's envelope while they're subscribed. You can cancel any time, though. Here's the timing: if you cancel before your monthly billing date (which recurs on your original order date) and before the 15th, when we get each month's envelopes ready, your cancellation applies to the current month and you're out cleanly with no final charge. Otherwise, this month's envelope still ships — it's your last — and your cancellation takes effect the following month.",
   },
   {
     q: "What if my mail doesn't arrive?",
@@ -173,6 +179,10 @@ export const IHM_FAQ_ITEMS = [
   {
     q: "When does it ship?",
     a: "Around the 15th of each month. It travels as international letter mail, so allow a little extra time — it usually arrives within two to three weeks depending on your country's post.",
+  },
+  {
+    q: "Which month will my first envelope be?",
+    a: "Order by the 15th and this month's envelope is yours. After the 15th, you're in for next month's. It's a real envelope we mail once a month, so there's a cutoff to make the mail run.",
   },
   {
     q: "Are the contents available in your shop?",
