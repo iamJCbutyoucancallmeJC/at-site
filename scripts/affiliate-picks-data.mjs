@@ -18,6 +18,29 @@
 
 export const AFFILIATE_LISTS = [
   {
+    // Amy Tangerine x Creative Memories "On the Bright Side" collection (JC,
+    // 2026-07-31). New collab launch; all 3 SKUs live on Amazon as of add date
+    // (sold by CM Group Holdings dba Creative Memories). sortOrder -1 leads the
+    // page above My Books: new-launch featuring, per JC's "needs to be featured"
+    // directive; easy to renumber once the launch window passes. No listId --
+    // no Amazon idea list for these, so no "See all" deep-link.
+    listId: null,
+    title: "On the Bright Side with Creative Memories",
+    slug: "on-the-bright-side",
+    count: 3,
+    sortOrder: -1,
+    description:
+      "My collection with Creative Memories! Watercolor brights and uplifting phrases designed to keep your memory keeping on the sunny side.",
+    picks: [
+      { asin: "B0H37KJGCH", title: "On the Bright Side Clear Stickers (3 Sheets)",
+        note: "Three sheets of clear stickers with icons and uplifting phrases. They layer right over photos and patterned paper." },
+      { asin: "B0H37HFFGS", title: "On the Bright Side Mat Pack (12 Mats)",
+        note: "Twelve double-sided 4.5x6.5 mats in the collection's watercolor brights. Instant polish behind any photo." },
+      { asin: "B0H37DB753", title: "On the Bright Side Monthly Title Embellishments (12)",
+        note: "Die-cut titles for every month of the year. The easiest way to kick off a monthly page or spread." },
+    ],
+  },
+  {
     // Amy's OWN books (JC-ruled 2026-07-06: merchandise at top of page). Full
     // catalog pulled from her Amazon author page (author B01MZD2H0P) 2026-07-07.
     // Print-edition ASINs preferred for the two trad-published titles (ISBN-10

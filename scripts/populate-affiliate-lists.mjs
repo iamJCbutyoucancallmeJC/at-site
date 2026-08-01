@@ -40,6 +40,11 @@ const CLIENT_SECRET = get("SHOPIFY_ADMIN_CLIENT_SECRET");
 const API = "2026-07";
 const EXECUTE = process.argv.includes("--execute");
 const DELETE = process.argv.includes("--delete");
+// --only <slug>: limit the run to a single list from the data file. Use when
+// adding/editing ONE list so the run can't clobber Shopify-side note edits
+// (Amy edits notes in admin post-publish, d055) on the untouched lists.
+const onlyIdx = process.argv.indexOf("--only");
+const ONLY_SLUG = onlyIdx !== -1 ? process.argv[onlyIdx + 1] : null;
 
 const PICK_TYPE = "app--345947701249--affiliate_pick";
 const LIST_TYPE = "app--345947701249--affiliate_pick_list";
@@ -125,13 +130,18 @@ async function deleteByHandle(token, type, handle, label) {
 }
 
 async function main() {
-  const nPicks = AFFILIATE_LISTS.reduce((n, l) => n + l.picks.length, 0);
+  let lists = AFFILIATE_LISTS;
+  if (ONLY_SLUG) {
+    lists = lists.filter((l) => l.slug === ONLY_SLUG);
+    if (!lists.length) throw new Error(`--only ${ONLY_SLUG}: no list with that slug in affiliate-picks-data.mjs`);
+  }
+  const nPicks = lists.reduce((n, l) => n + l.picks.length, 0);
   console.log(`\n=== populate-affiliate-lists (t816) (${DELETE ? "DELETE " : ""}${EXECUTE ? "EXECUTE" : "DRY-RUN"}) ===`);
-  console.log(`domain: ${DOMAIN}  lists: ${AFFILIATE_LISTS.length}  picks: ${nPicks}\n`);
+  console.log(`domain: ${DOMAIN}  lists: ${lists.length}${ONLY_SLUG ? ` (--only ${ONLY_SLUG})` : ""}  picks: ${nPicks}\n`);
   const token = await mintAdminToken();
 
   if (DELETE) {
-    for (const list of AFFILIATE_LISTS) {
+    for (const list of lists) {
       await deleteByHandle(token, LIST_TYPE, listHandle(list.slug), `List "${list.title}"`);
       for (const p of list.picks) await deleteByHandle(token, PICK_TYPE, pickHandle(p.asin), `Pick ${p.asin}`);
     }
@@ -139,7 +149,7 @@ async function main() {
     return;
   }
 
-  for (const list of AFFILIATE_LISTS) {
+  for (const list of lists) {
     console.log(`\n[${list.title}]  (${list.picks.length} featured / ${list.count} total)`);
     // 1) Upsert each pick, collecting its GID for the list reference.
     const pickIds = [];
