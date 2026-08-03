@@ -21,7 +21,7 @@ import { HM_PRICE_6MONTH } from "@/lib/happy-mail-content"
 
 const OFFER_DISCOUNT = 6
 const OFFER_PRICE = HM_PRICE_6MONTH - OFFER_DISCOUNT // 66 — their original Feb price
-const OFFER_DEADLINE = "August 3"
+const OFFER_DEADLINE = "August 10" // extended with cliff send 3 (JC 2026-08-03); code live thru Sep 1
 
 function readGaClientId(): string {
   try {
