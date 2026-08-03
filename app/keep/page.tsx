@@ -21,7 +21,8 @@ import { HM_PRICE_6MONTH } from "@/lib/happy-mail-content"
 
 const OFFER_DISCOUNT = 6
 const OFFER_PRICE = HM_PRICE_6MONTH - OFFER_DISCOUNT // 66 — their original Feb price
-const OFFER_DEADLINE = "August 10" // extended with cliff send 3 (JC 2026-08-03); code live thru Sep 1
+// No deadline shown (JC 2026-08-03, send-3 "last notice" framing): urgency is finality, not a
+// clock. The ORIGINAL66 code's endsAt (Sep 1) is the real gate; checkout 409s when it dies.
 
 function readGaClientId(): string {
   try {
@@ -181,7 +182,7 @@ export default function KeepPage() {
             </span>
           </div>
           <p className="text-[13px] font-semibold mb-6" style={{ color: "var(--color-teal)" }}>
-            Your original price, through {OFFER_DEADLINE} — applied automatically
+            Your original price — applied automatically
           </p>
 
           {/* CTA button */}
