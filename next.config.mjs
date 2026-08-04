@@ -121,6 +121,19 @@ const nextConfig = {
       { source: "/digishop", destination: "/shop?category=printables", permanent: true },
     ]
   },
+  async headers() {
+    return [
+      {
+        // Camera permission for the photo booth (t897). Carried over verbatim from
+        // ~/amy-photobooth/vercel.json, which set this on the standalone
+        // photobooth.amytangerine.com deployment. Same-origin camera works without
+        // it, but keeping it explicit preserves parity with what shipped before and
+        // states the intent for anything that embeds the page.
+        source: "/photobooth",
+        headers: [{ key: "Permissions-Policy", value: "camera=self" }],
+      },
+    ]
+  },
   images: {
     remotePatterns: [
       {

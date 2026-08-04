@@ -1,0 +1,384 @@
+/* Photo Booth styles — ported verbatim from ~/amy-photobooth/styles.css (t897).
+ *
+ * Two mechanical changes, no visual ones:
+ *  1. Every selector is namespaced `pb-` and scoped under `.pb-root`, because this
+ *     now lives inside at-site where `.container`, `.status`, `.hidden`, `header`,
+ *     `main` and `footer` all mean something else. The original global `*` reset
+ *     and `body {}` rules became `.pb-root` rules for the same reason.
+ *  2. CLASS selectors everywhere (the original leaned on #ids and bare elements).
+ *     Tailwind's preflight sets `img, video, canvas { display: block }` and
+ *     `img, video { height: auto }`; a class beats an element selector regardless
+ *     of source order, so the booth's own sizing/centering survives untouched.
+ *     `.pb-logo` and `.pb-strip-canvas` are explicitly inline-block for that
+ *     reason — preflight would otherwise left-align them inside their centered
+ *     parents.
+ *
+ * Colors are the booth's own (#F7941D / #2DBFB8), NOT at-site's brand tokens
+ * (#FD891C / #00ADB3). Keeping them is what makes the port look unchanged.
+ */
+
+.pb-root,
+.pb-root *,
+.pb-root *::before,
+.pb-root *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.pb-root {
+  --pb-orange: #f7941d;
+  --pb-orange-dark: #e5850f;
+  --pb-teal: #2dbfb8;
+  --pb-teal-dark: #25a8a2;
+  --pb-white: #ffffff;
+  --pb-light-gray: #f8f8f8;
+  --pb-gray: #666666;
+
+  font-family: var(--font-quicksand), "Quicksand", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
+  background: var(--pb-white);
+  color: #333;
+}
+
+.pb-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.pb-header {
+  text-align: center;
+  padding: 10px 0 20px;
+}
+
+.pb-logo {
+  display: inline-block;
+  max-width: 280px;
+  width: 100%;
+  height: auto;
+  margin-bottom: 8px;
+}
+
+.pb-text-logo {
+  font-family: inherit;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--pb-orange);
+  margin-bottom: 4px;
+  letter-spacing: 0.02em;
+}
+
+.pb-tagline {
+  font-size: 0.85rem;
+  color: var(--pb-teal);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.pb-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Camera Preview */
+.pb-camera-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 350px;
+  aspect-ratio: 3/4;
+  background: var(--pb-light-gray);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border: 3px solid var(--pb-orange);
+}
+
+.pb-camera {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1); /* Mirror for selfie */
+}
+
+.pb-preview-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.pb-flip-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--pb-orange);
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 15;
+}
+
+.pb-flip-btn:hover {
+  background: var(--pb-white);
+  transform: scale(1.05);
+}
+
+/* Countdown Overlay */
+.pb-countdown {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 120px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--pb-orange);
+  text-shadow: 0 0 40px rgba(255, 255, 255, 0.9);
+  z-index: 10;
+}
+
+/* Flash Effect */
+.pb-flash {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--pb-white);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 20;
+  animation: pb-flash 0.15s ease-out;
+}
+
+@keyframes pb-flash {
+  0% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Status Text */
+.pb-status {
+  font-size: 0.95rem;
+  color: var(--pb-gray);
+  text-align: center;
+  min-height: 24px;
+  font-weight: 500;
+}
+
+/* Filter Buttons */
+.pb-filters {
+  display: flex;
+  gap: 10px;
+}
+
+.pb-filter-btn {
+  background: var(--pb-white);
+  border: 2px solid var(--pb-light-gray);
+  color: var(--pb-gray);
+  padding: 10px 22px;
+  border-radius: 25px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pb-filter-btn:hover {
+  border-color: var(--pb-orange);
+  color: var(--pb-orange);
+}
+
+.pb-filter-btn.pb-active {
+  background: var(--pb-orange);
+  border-color: var(--pb-orange);
+  color: var(--pb-white);
+}
+
+/* Capture Button */
+.pb-capture-btn {
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  background: transparent;
+  border: 4px solid var(--pb-orange);
+  padding: 4px;
+  cursor: pointer;
+  transition: transform 0.1s;
+  margin-top: 10px;
+}
+
+.pb-capture-btn:hover {
+  transform: scale(1.05);
+}
+
+.pb-capture-btn:active {
+  transform: scale(0.95);
+}
+
+.pb-capture-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pb-capture-inner {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--pb-orange);
+  transition: background 0.2s;
+}
+
+.pb-capture-btn:hover .pb-capture-inner {
+  background: var(--pb-orange-dark);
+}
+
+/* Photo Strip Preview */
+.pb-strip-preview {
+  width: 100%;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.pb-strip-preview h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--pb-orange);
+  margin-bottom: 15px;
+}
+
+.pb-strip-canvas {
+  display: inline-block;
+  max-width: 100%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.pb-strip-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pb-action-btn {
+  padding: 14px 28px;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pb-action-btn:not(.pb-secondary) {
+  background: var(--pb-orange);
+  border: none;
+  color: var(--pb-white);
+}
+
+.pb-action-btn:not(.pb-secondary):hover {
+  background: var(--pb-orange-dark);
+  transform: translateY(-1px);
+}
+
+.pb-action-btn.pb-secondary {
+  background: var(--pb-white);
+  border: 2px solid var(--pb-teal);
+  color: var(--pb-teal);
+}
+
+.pb-action-btn.pb-secondary:hover {
+  background: var(--pb-teal);
+  color: var(--pb-white);
+}
+
+/* Utility */
+.pb-hidden {
+  display: none !important;
+}
+
+/* Footer */
+.pb-footer {
+  text-align: center;
+  padding: 20px 0;
+  margin-top: auto;
+}
+
+.pb-footer a {
+  color: var(--pb-teal);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.pb-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Drop the booth's own wordmark on mobile only (JC, 2026-08-04).
+   The site nav carries the Amy Tangerine wordmark at every width, so the booth's
+   header logo repeats it. On desktop that reads fine and JC wants it kept. On a
+   phone the two stack within one screen and the repeat is the first thing you see,
+   on the one layout where vertical space actually costs something: at 375x812 the
+   capture button was missing the fold by 2px, and reclaiming this header recovers
+   far more than that.
+
+   Breakpoint is 767px, not the booth's own 400px below, on purpose: 767 is where
+   at-site's nav itself switches to the hamburger (Tailwind `md`, components/nav.tsx),
+   so "mobile" here means exactly what the rest of the site means by it.
+
+   The "Photo Booth" tagline stays: it is what tells you which page you are on once
+   the wordmark is gone. .pb-text-logo is the image-load-failure fallback and is
+   hidden alongside, so a failed logo cannot reintroduce the doubled wordmark. */
+@media (max-width: 767px) {
+  .pb-logo,
+  .pb-text-logo {
+    display: none;
+  }
+
+  .pb-header {
+    padding: 2px 0 14px;
+  }
+}
+
+/* Responsive */
+@media (max-width: 400px) {
+  .pb-container {
+    padding: 15px;
+  }
+
+  .pb-logo {
+    max-width: 220px;
+  }
+
+  .pb-camera-wrapper {
+    max-width: 300px;
+  }
+
+  .pb-filter-btn {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+  }
+}

@@ -28,6 +28,10 @@ export type AnalyticsEvent =
   | 'thank_you_cta_click'
   | 'not_found_view'
   | 'error_view'
+  // Photo booth (/photobooth, t897). The standalone subdomain had zero
+  // measurement; these are the two moments worth counting.
+  | 'photobooth_session_start'
+  | 'photobooth_strip_save'
 
 // GA4 standard ecommerce item (items[] on add_to_cart / begin_checkout / purchase).
 export type GA4Item = {

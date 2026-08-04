@@ -22,7 +22,10 @@ type NavItem = { label: string; href?: string; external?: boolean; children?: Na
 const NAV_LINKS: NavItem[] = [
   {
     label: "Fun Stuff",
-    children: [{ label: "Photobooth", href: "https://photobooth.amytangerine.com/", external: true }],
+    // Photobooth moved onto the site as a native route 2026-08-04 (t897): was an
+    // external link to photobooth.amytangerine.com, now /photobooth. Internal, so
+    // no new-tab hop. The old subdomain 301s here once its Vercel domain moves.
+    children: [{ label: "Photobooth", href: "/photobooth" }],
   },
   {
     label: "Shop",
