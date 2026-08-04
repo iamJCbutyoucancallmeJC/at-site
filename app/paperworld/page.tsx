@@ -16,7 +16,7 @@
 import { useState } from "react"
 import Image from "next/image"
 import { trackEvent } from "@/lib/analytics"
-import { HM_PRICE_6MONTH } from "@/lib/happy-mail-content"
+import { HM_PRICE_6MONTH, HM_TESTIMONIALS } from "@/lib/happy-mail-content"
 
 // Event facts (Paper World Stationery Expo — Seattle stop).
 const EVENT = {
@@ -63,20 +63,10 @@ const WHAT_INSIDE = [
   },
 ]
 
-const TESTIMONIALS = [
-  {
-    quote: "I literally squealed when it arrived. So much care in every envelope.",
-    name: "Sarah K.", location: "Portland, OR",
-  },
-  {
-    quote: "I've tried other subscription boxes. Nothing comes close to getting actual mail from Amy.",
-    name: "Melissa T.", location: "Austin, TX",
-  },
-  {
-    quote: "I gave this as a gift and my mom calls me every month when it arrives.",
-    name: "Jess M.", location: "Nashville, TN",
-  },
-]
+// Real subscribers, shared with /happy-mail so the two can't drift apart again.
+// This page's grid is 3-up; the shared list holds 4. Replaced three fabricated
+// placeholders on 2026-08-04. Policy: vault "Amy Tangerine/testimonials.md".
+const TESTIMONIALS = HM_TESTIMONIALS.slice(0, 3)
 
 export default function PaperworldPage() {
   const [loading, setLoading] = useState(false)

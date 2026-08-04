@@ -33,27 +33,43 @@ export const HM_BOX_CONTENTS = [
   { label: "What's inside", body: "Everything that comes each month", img: "/images/happy-mail/whats-inside.jpg" },
 ]
 
-// Testimonials — placeholders until Amy pulls from Instagram DMs/comments
+// Testimonials — REAL subscribers, verbatim from their own emails to hello@.
+// Replaced the four fabricated placeholders on 2026-08-04.
+//
+// Rules before touching this array (full policy: vault
+// "A5 Job/Linslow/Clients/Amy Tangerine/testimonials.md"):
+//   - Words must be genuine and verbatim. Trimming for length is fine and is
+//     marked with an ellipsis. Never compose, paraphrase, merge two customers,
+//     or invent a name or city.
+//   - Display at first name + last initial. That tier needs no permission ask.
+//   - Cities come from the Shopify customer record, not from the email.
+//   - Anyone with a material connection to Amy (friend, collaborator, paid
+//     partner, featured contributor) does NOT go in here anonymized.
 export const HM_TESTIMONIALS = [
   {
-    quote: "I literally squealed when it arrived. Amy puts so much care into every envelope.",
-    name: "Sarah K.",
-    location: "Portland, OR",
+    // Melissa Lima, 2026-07-29, "Your Happy Mail card needs an update" thread.
+    quote: "I absolutely love getting your happy mail and am completely obsessed with it!",
+    name: "Melissa L.",
+    location: "McAllen, TX",
   },
   {
-    quote: "The pieces take my art journal and memory keeper spreads to the next level.",
-    name: "Jo Ann T.",
-    location: "Torrance, CA",
+    // Mary Tomkins, 2026-06-14, after CS fixed her card + shipping address.
+    quote: "It's truly such a happy day when I get the mail and it's there... to get such a little treasure each month is something you couldn't have prepared me for! It's the best!",
+    name: "Mary T.",
+    location: "Los Angeles, CA",
   },
   {
-    quote: "A total no-brainer and a true highlight of my month when it arrives. It gives me the inspiration boost I need to get creative. Thank you!",
-    name: "Nicole M.",
-    location: "Austin, TX",
+    // Angela Tilley, 2026-07-14, reply at renewal. Leading "Thank you for the
+    // discount!" trimmed so it does not read as discount-bought.
+    quote: "Looking forward to automatic renewal and another round of happy mail! It's the little things.",
+    name: "Angela T.",
+    location: "Seaford, VA",
   },
   {
-    quote: "I gave this as a gift and my mom calls me every month when it arrives. She loves it.",
-    name: "Jess M.",
-    location: "Nashville, TN",
+    // Sharon Crouchman, 2026-06-01, on moving to the 6-month plan.
+    quote: "Thank you, Amy!! A forever Team Tangerine!!",
+    name: "Sharon C.",
+    location: "Berkley, MI",
   },
 ]
 
@@ -158,6 +174,9 @@ export const IHM_6MONTH_READY =
   IHM_VARIANT_6MONTH_GID.length > 0 && IHM_SELLING_PLAN_6MONTH.length > 0
 
 // Box contents + testimonials are identical to US HM (same physical envelope).
+// NOTE: the four testimonials are all US subscribers, shown with US cities. That
+// is honest (same envelope, real people) but there is no international quote in
+// the pool yet. Swap one in when a CA/UK/AU subscriber writes one.
 export const IHM_BOX_CONTENTS = HM_BOX_CONTENTS
 export const IHM_TESTIMONIALS = HM_TESTIMONIALS
 
