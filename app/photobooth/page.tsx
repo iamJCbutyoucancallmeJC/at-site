@@ -75,7 +75,12 @@ const IDLE_STATUS = "Tap to start your session"
 // enabled after a Block, so tapping it runs the full 17-second countdown and
 // hands the visitor an all-black photo strip with Amy's watermark on it. Gated,
 // that tap re-requests permission and reports the failure instead.
-const REQUIRE_TAP_TO_START_CAMERA = true
+//
+// REVERSED TO false BY JC, 2026-08-10, after using the gated build: the booth
+// should be live the moment you walk in, like the standalone version was. The
+// black-strip hole stays closed either way — startCapture now re-requests the
+// camera whenever the stream is missing, independent of this flag.
+const REQUIRE_TAP_TO_START_CAMERA = false
 
 function delay(ms: number) {
   return new Promise<void>((resolve) => setTimeout(resolve, ms))
@@ -353,10 +358,10 @@ export default function PhotoboothPage() {
   const startCapture = useCallback(async () => {
     if (capturingRef.current) return
 
-    // Tap-gate: the first tap only turns the camera on, so the permission prompt
-    // is tied to a real user gesture and the visitor gets to frame themselves
-    // before anything counts down. No-op when the gate is off.
-    if (REQUIRE_TAP_TO_START_CAMERA && !streamRef.current) {
+    // No live stream (load-time prompt was blocked/failed, or the tap-gate is on
+    // and this is the first tap): this tap re-requests the camera instead of
+    // counting down over a black frame. Tied to a real user gesture either way.
+    if (!streamRef.current) {
       setStatus("Starting camera...")
       try {
         await startCamera()
