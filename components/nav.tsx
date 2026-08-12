@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
@@ -46,11 +46,13 @@ const NAV_LINKS: NavItem[] = [
   },
 ]
 
-function DesktopDropdownChild({ child, group }: { child: NavChild; group: string }) {
+function DesktopDropdownChild({ child, group, onNavigate }: { child: NavChild; group: string; onNavigate: () => void }) {
   const className = "block px-5 py-2.5 text-base font-semibold transition-colors hover:opacity-80"
   const style = { color: "var(--color-text-primary)" }
-  const onClick = () =>
+  const onClick = () => {
+    onNavigate()
     trackEvent("nav_click", { link_text: child.label, group, mobile_or_desktop: "desktop" })
+  }
 
   return child.external ? (
     <a href={child.href} target="_blank" rel="noopener noreferrer" className={className} style={style} onClick={onClick}>
@@ -65,8 +67,34 @@ function DesktopDropdownChild({ child, group }: { child: NavChild; group: string
 
 export default function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  // Touch devices (iPad lands at md+ so it gets THIS nav, not the mobile one)
+  // have no hover, so dropdowns are state-driven there: first tap on a parent
+  // opens its dropdown, second tap follows the parent's href. Hover behavior
+  // for mouse users is unchanged.
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
+  const [touchDevice, setTouchDevice] = useState(false)
+  const desktopNavRef = useRef<HTMLElement>(null)
   const { count, openCart } = useCart()
   const pathname = usePathname()
+
+  useEffect(() => {
+    setTouchDevice(window.matchMedia("(hover: none)").matches)
+  }, [])
+
+  useEffect(() => {
+    setOpenDropdown(null)
+  }, [pathname])
+
+  useEffect(() => {
+    if (!openDropdown) return
+    const closeOnOutsideTap = (e: PointerEvent) => {
+      if (desktopNavRef.current && !desktopNavRef.current.contains(e.target as Node)) {
+        setOpenDropdown(null)
+      }
+    }
+    document.addEventListener("pointerdown", closeOnOutsideTap)
+    return () => document.removeEventListener("pointerdown", closeOnOutsideTap)
+  }, [openDropdown])
 
   // Chromeless (isolated event) routes render no global nav. See lib/chromeless-routes.
   if (isChromelessRoute(pathname)) return null
@@ -75,6 +103,7 @@ export default function Nav() {
     <>
       {/* Desktop Nav */}
       <nav
+        ref={desktopNavRef}
         className="hidden md:flex items-center h-[72px] px-12 border-b"
         style={{
           background: "var(--color-white)",
@@ -101,10 +130,25 @@ export default function Nav() {
                     href={link.href}
                     className="inline-flex items-center gap-1 text-base font-semibold transition-colors hover:opacity-80 py-2"
                     style={{ color: "var(--color-text-primary)" }}
-                    onClick={() => trackEvent("nav_click", { link_text: link.label, mobile_or_desktop: "desktop" })}
+                    aria-haspopup="true"
+                    aria-expanded={openDropdown === link.label}
+                    onClick={(e) => {
+                      // Touch: first tap opens the dropdown instead of navigating
+                      // (matches what hover gives mouse users); second tap follows.
+                      if (touchDevice && openDropdown !== link.label) {
+                        e.preventDefault()
+                        setOpenDropdown(link.label)
+                        return
+                      }
+                      setOpenDropdown(null)
+                      trackEvent("nav_click", { link_text: link.label, mobile_or_desktop: "desktop" })
+                    }}
                   >
                     {link.label}
-                    <ChevronDown size={16} className="transition-transform group-hover:rotate-180" />
+                    <ChevronDown
+                      size={16}
+                      className={`transition-transform ${openDropdown === link.label ? "rotate-180" : touchDevice ? "" : "group-hover:rotate-180"}`}
+                    />
                   </Link>
                 ) : (
                   <button
@@ -112,12 +156,25 @@ export default function Nav() {
                     className="inline-flex items-center gap-1 text-base font-semibold transition-colors hover:opacity-80 py-2"
                     style={{ color: "var(--color-text-primary)" }}
                     aria-haspopup="true"
+                    aria-expanded={openDropdown === link.label}
+                    onClick={() => setOpenDropdown(openDropdown === link.label ? null : link.label)}
                   >
                     {link.label}
-                    <ChevronDown size={16} className="transition-transform group-hover:rotate-180" />
+                    <ChevronDown
+                      size={16}
+                      className={`transition-transform ${openDropdown === link.label ? "rotate-180" : touchDevice ? "" : "group-hover:rotate-180"}`}
+                    />
                   </button>
                 )}
-                <div className="absolute left-1/2 -translate-x-1/2 top-full pt-1 hidden group-hover:block group-focus-within:block z-50">
+                <div
+                  className={`absolute left-1/2 -translate-x-1/2 top-full pt-1 z-50 ${
+                    openDropdown === link.label
+                      ? "block"
+                      : touchDevice
+                        ? "hidden"
+                        : "hidden group-hover:block group-focus-within:block"
+                  }`}
+                >
                   <div
                     className="min-w-[180px] rounded-lg border py-2 shadow-lg"
                     style={{
@@ -126,7 +183,12 @@ export default function Nav() {
                     }}
                   >
                     {link.children.map((child) => (
-                      <DesktopDropdownChild key={child.href} child={child} group={link.label} />
+                      <DesktopDropdownChild
+                        key={child.href}
+                        child={child}
+                        group={link.label}
+                        onNavigate={() => setOpenDropdown(null)}
+                      />
                     ))}
                   </div>
                 </div>
