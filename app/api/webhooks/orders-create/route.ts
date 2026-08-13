@@ -47,8 +47,26 @@ type ShopifyOrder = {
   name: string
   total_price: string
   currency: string
+  source_name?: string | null
+  tags?: string | null
   note_attributes?: { name: string; value: string }[]
   line_items?: ShopifyLineItem[]
+}
+
+// t1046: every order fires `purchase` here (web, POS booth, Recharge renewals,
+// drafts), which made the GA4 funnel read more purchases than checkout-begins.
+// Classify the order's channel so reports can slice web-only; total revenue
+// reporting stays on Shopify pulls (t906), this is funnel/attribution only.
+// Registered in GA4 as event-scoped custom dimension `order_channel`.
+// (Not exported: Next route files may only export handlers/config.)
+function classifyOrderChannel(order: Pick<ShopifyOrder, "source_name" | "tags">): string {
+  const src = (order.source_name ?? "").toLowerCase()
+  const tags = (order.tags ?? "").toLowerCase()
+  if (src === "subscription_contract" || tags.includes("subscription")) return "subscription"
+  if (src === "pos") return "pos"
+  if (src === "web") return "web"
+  if (src === "shopify_draft_order") return "draft"
+  return src || "other"
 }
 
 export async function POST(request: Request) {
@@ -90,6 +108,8 @@ export async function POST(request: Request) {
     quantity: li.quantity,
   }))
 
+  const orderChannel = classifyOrderChannel(order)
+
   const payload = {
     client_id: clientId,
     // Dedup hint: GA4 ignores a repeat purchase with the same transaction_id,
@@ -101,6 +121,7 @@ export async function POST(request: Request) {
           transaction_id: order.name.replace(/^#/, ""),
           value: Number(order.total_price),
           currency: order.currency,
+          order_channel: orderChannel,
           items,
         },
       },
@@ -120,5 +141,5 @@ export async function POST(request: Request) {
     // Still ack: a failed analytics send should not make Shopify retry forever.
   }
 
-  return NextResponse.json({ ok: true, sent: true, attributed: Boolean(gaClientId) })
+  return NextResponse.json({ ok: true, sent: true, attributed: Boolean(gaClientId), order_channel: orderChannel })
 }
