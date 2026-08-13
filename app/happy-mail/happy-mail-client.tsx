@@ -12,6 +12,7 @@ import Image from "next/image"
 import { useSearchParams } from "next/navigation"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 import FaqAccordion from "@/components/faq-accordion"
+import FirstEnvelopePromise from "@/components/first-envelope-promise"
 import { useCart } from "@/context/cart"
 import { trackEvent } from "@/lib/analytics"
 import {
@@ -138,7 +139,10 @@ export default function HappyMailClient() {
             <SubscribeButton plan="6-month" dark={true} />
           </div>
         </div>
-        <p className="text-center text-[11px] mt-4" style={{ color: "var(--color-text-secondary)" }}>Ships around the 15th.</p>
+        {/* d062 (t1079): date-aware first-envelope promise (replaces the static
+            "Ships around the 15th." line). Wording is Amy-veto-gated via the
+            fall-plan doc; merge to main only after the veto window clears. */}
+        <FirstEnvelopePromise />
       </section>
 
       {/* ── Editorial: a note about Happy Mail (reused from prior site, Amy's voice) ── */}
