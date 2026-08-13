@@ -121,7 +121,9 @@ export const HM_FAQ_ITEMS = [
     q: "Do you ship internationally?",
     // Updated 2026-05-30: points at the new /happy-mail-international landing (not the
     // PDP that 404s for US readers). Intl buyers subscribe there; US gifters email help@.
-    a: `Yes. If you live in Canada, the UK, or Australia, you can subscribe to International Happy Mail at $16/mo USD (shown in your local currency at checkout). The price reflects international postage. If you're in the US and want to send Happy Mail to someone abroad, email help@amytangerine.com and we'll arrange an international gift.`,
+    // [t1076/d051] Shop-orders sentence added 2026-08-12 via the t658 process:
+    // staged as a veto line in fall-2026-plan-for-amy.md, Amy blessed 8/12.
+    a: `Yes. If you live in Canada, the UK, or Australia, you can subscribe to International Happy Mail at $16/mo USD (shown in your local currency at checkout). The price reflects international postage. If you're in the US and want to send Happy Mail to someone abroad, email help@amytangerine.com and we'll arrange an international gift. Shop orders (everything besides Happy Mail) ship internationally at actual USPS rates by weight, shown at checkout before you pay.`,
     link: { href: "/happy-mail-international", label: "International Happy Mail →" },
   },
 ]
