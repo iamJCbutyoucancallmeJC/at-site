@@ -323,6 +323,16 @@ export default function CartDrawer() {
               </span>
             </div>
 
+            {/* d051 (t1076): intl pass-through pricing is deliberate; say it before
+                checkout so a ~$39 USPS first-class rate never lands as a surprise. */}
+            <p
+              className="text-[11px] text-center leading-snug mb-3"
+              style={{ color: "var(--color-text-secondary)" }}
+            >
+              International orders ship at live USPS rates by weight, shown at
+              checkout before you pay.
+            </p>
+
             {hasLocalItems ? (
               <div>
                 <div
