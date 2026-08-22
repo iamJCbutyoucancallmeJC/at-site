@@ -119,6 +119,32 @@ const nextConfig = {
       { source: "/shop/december-map-your-month-making-abundance-possible-44ydf", destination: "/shop/printable-december-map-your-month-making-abundance-possible-44ydf", permanent: true },
       // Old SQS digital-shop section landing -> the live printables category.
       { source: "/digishop", destination: "/shop?category=printables", permanent: true },
+
+      // ---- Printables handle-prefix fix, round 2 (2026-08-21) ----
+      // Same class as the 2026-07-09 block above: live products cut off from their
+      // historic SQS URLs by the `printable-` import prefix. Re-ran the match against
+      // GA4 not_found_view for the 42d SINCE that deploy (so the earlier fixes are not
+      // double-counted) and the live catalog. Covers 88 not_found events in that window.
+      //
+      // EVERY target below was verified to render by querying the SAME Storefront API
+      // the PDP uses (lib/shopify.ts getProductByHandle) -- not the Admin API. That
+      // distinction is the whole check: 30 further old handles DO have a `printable-`
+      // twin in Shopify, but those twins are DRAFT, and the Storefront API never returns
+      // a draft, so redirecting to them would just move the 404. They are listed in
+      // at-404-audit-2026-08-21.md and need a publish decision, not a redirect.
+      { source: "/shop/groundedandguided", destination: "/shop/printable-groundedandguided", permanent: true },
+      { source: "/shop/aprilprintable", destination: "/shop/printable-aprilprintable", permanent: true },
+      { source: "/shop/sept23printable", destination: "/shop/printable-sept23printable", permanent: true },
+      { source: "/shop/thingstoremember", destination: "/shop/printable-thingstoremember", permanent: true },
+      { source: "/shop/november-printable", destination: "/shop/printable-november-printable", permanent: true },
+      { source: "/shop/july23printable", destination: "/shop/printable-july23printable", permanent: true },
+      { source: "/shop/mayprintable", destination: "/shop/printable-mayprintable", permanent: true },
+      { source: "/shop/juneprintable23", destination: "/shop/printable-juneprintable23", permanent: true },
+      { source: "/shop/abundanceallaround", destination: "/shop/printable-abundanceallaround", permanent: true },
+      { source: "/shop/august23printable", destination: "/shop/printable-august23printable", permanent: true },
+      { source: "/shop/december-map-your-month-making-abundance-possible-44ydf-h66m8", destination: "/shop/printable-december-map-your-month-making-abundance-possible-44ydf-h66m8", permanent: true },
+      { source: "/shop/discoveraworld", destination: "/shop/printable-discoveraworld", permanent: true },
+      { source: "/shop/colorsshine", destination: "/shop/printable-colorsshine", permanent: true },
     ]
   },
   async headers() {
