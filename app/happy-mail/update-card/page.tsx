@@ -13,6 +13,7 @@
 import type { Metadata } from "next"
 import Image from "next/image"
 import FaqAccordion from "@/components/faq-accordion"
+import { HM_PORTAL_LOGIN_URL } from "@/lib/happy-mail-content"
 
 export const metadata: Metadata = {
   title: "Updating your Happy Mail card | Amy Tangerine",
@@ -21,7 +22,8 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false }, // support page, keep out of search
 }
 
-const PORTAL_LOGIN_URL = "https://q9x1sj-hc.myshopify.com/tools/recurring/login"
+// One home for this URL: lib/happy-mail-content.ts (the FAQ cancel answer uses it too).
+const PORTAL_LOGIN_URL = HM_PORTAL_LOGIN_URL
 
 const IMG_BASE = "/images/happy-mail/update-card"
 

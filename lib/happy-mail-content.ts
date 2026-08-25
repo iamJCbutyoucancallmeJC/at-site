@@ -6,6 +6,14 @@
 // Edit it here only; both surfaces import from this file. When a centralized FAQ
 // page is built, pull FAQ_ITEMS out of the PDP/landing and point everything here.
 
+// Recharge customer portal login. ONE HOME: /happy-mail/update-card imports this too.
+// There is no deep-linkable portal URL: post-login paths are customer-hash + session-token
+// specific, hash-less paths 404, and ?redirect_url= is ignored (tested live 2026-08-20; see
+// vault Customer Experience/recharge-customer-portal-ui-2026-06-18.md). This login URL is the
+// only stable address we can publish, so any cancel/card directions must spell out the
+// in-portal steps in words.
+export const HM_PORTAL_LOGIN_URL = "https://q9x1sj-hc.myshopify.com/tools/recurring/login"
+
 export const HM_VARIANT_MONTHLY_GID =
   process.env.NEXT_PUBLIC_HM_VARIANT_MONTHLY_GID ?? "gid://shopify/ProductVariant/51926357311808"
 // t764 cutover 2026-06-23: US 6mo migrated flat-price -> per-delivery model.
@@ -103,8 +111,17 @@ export const HM_FAQ_ITEMS = [
   },
   {
     // [t658 addendum] Cancel copy aligned to policy (2026-05-29).
+    // 2026-08-25: added the actual link + the in-portal steps. The old answer said only
+    // "manage your subscription in your subscriber account", which is where it lives but not
+    // how to get there, and two customers ten days apart wrote in saying they could not find
+    // it (Gibbons 8/15 "I see no where to cancel"; Garcia 8/25 "I'm not seeing an option on
+    // the website"). The button is real but sits four steps deep, below Save changes on the
+    // subscription detail page, and cannot be deep-linked. Policy sentences below are
+    // unchanged t658 wording. Account-email line pre-empts the recurring
+    // email-identity-mismatch snag (login codes go to the ACCOUNT email, not the sender's).
     q: "How do I cancel?",
-    a: "Manage your subscription any time in your subscriber account, or email help@amytangerine.com and we'll take care of it. Monthly subscribers can cancel whenever — billing just stops going forward. For 6-Month, cancelling stops your next 6-month renewal; the current six-month term runs to the end. (See “Can I skip or cancel a month?” below for the timing on your final envelope.)",
+    a: "Two ways. Email help@amytangerine.com and we'll take care of it for you, or do it yourself using the link below: enter the email your subscription is under and we'll send you a login code, then choose Subscriptions, tap your subscription, and scroll down to “Cancel subscription.” Monthly subscribers can cancel whenever — billing just stops going forward. For 6-Month, cancelling stops your next 6-month renewal; the current six-month term runs to the end. (See “Can I skip or cancel a month?” below for the timing on your final envelope.)",
+    link: { href: HM_PORTAL_LOGIN_URL, label: "Manage or cancel your subscription →" },
   },
   {
     // [t658 addendum] NO SKIP (R11) + cancel timing (R15).
