@@ -4,6 +4,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { trackEvent } from "@/lib/analytics"
 import { isChromelessRoute } from "@/lib/chromeless-routes"
+import EmailCaptureInline from "@/components/email-capture-inline"
 
 const DESKTOP_LINKS = [
   { label: "Shop", href: "/shop" },
@@ -33,6 +34,9 @@ export default function Footer() {
 
   return (
     <footer style={{ background: "var(--color-text-primary)" }}>
+      {/* Email capture (t1092, D3 inline block) -- renders null until
+          NEXT_PUBLIC_CAPTURE_BLOCKS=1 (Amy aesthetic pass gate) */}
+      <EmailCaptureInline source="footer" dark />
       {/* Desktop */}
       <div className="hidden md:flex items-center justify-between px-12 py-8">
         <p className="text-sm" style={{ color: "rgba(255,255,255,0.5)" }}>

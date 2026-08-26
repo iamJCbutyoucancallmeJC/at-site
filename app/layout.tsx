@@ -56,6 +56,15 @@ export default function RootLayout({
             />
           </>
         )}
+        {/* Klaviyo onsite (t1092): serves Klaviyo-native signup forms (the D3
+            timed/exit-intent popup Amy designs in Klaviyo's builder) once the
+            company id lands in Vercel env. Renders nothing until then. */}
+        {process.env.NEXT_PUBLIC_KLAVIYO_COMPANY_ID && (
+          <Script
+            src={`https://static.klaviyo.com/onsite/js/${process.env.NEXT_PUBLIC_KLAVIYO_COMPANY_ID}/klaviyo.js`}
+            strategy="afterInteractive"
+          />
+        )}
         <CartProvider>
           <Nav />
           {children}

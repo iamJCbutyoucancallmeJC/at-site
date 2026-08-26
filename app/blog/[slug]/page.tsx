@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
+import EmailCaptureInline from "@/components/email-capture-inline"
 import {
   getListablePosts,
   getPostBySlug,
@@ -142,6 +143,9 @@ export default async function BlogPost({
           )}
         </div>
       </article>
+      {/* Email capture (t1092, D3 inline block) -- renders null until
+          NEXT_PUBLIC_CAPTURE_BLOCKS=1 (Amy aesthetic pass gate) */}
+      <EmailCaptureInline source="blog" />
     </>
   )
 }
