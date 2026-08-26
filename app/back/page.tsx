@@ -10,17 +10,14 @@
 // never go stale and the purchase is always a real subscription.
 //
 // Chromeless (lib/chromeless-routes), noindex. The WELCOMEBACK5 $5 first-month
-// thank-you applies automatically through July 31 (once per subscriber); after
-// that the same page keeps working at the regular price.
+// thank-you ran through July 31 2026; its pricing display was retired 2026-08-25
+// (t1159) after headlining the $8 price three weeks past the deadline. The mint
+// flow is untouched and evergreen: the button always works at the regular price.
 
 import { useState } from "react"
 import Image from "next/image"
 import { trackEvent } from "@/lib/analytics"
 import { HM_PRICE_MONTHLY } from "@/lib/happy-mail-content"
-
-const THANKYOU_OFF = 5
-const FIRST_MONTH = HM_PRICE_MONTHLY - THANKYOU_OFF // 8
-const THANKYOU_DEADLINE = "July 31"
 
 function readGaClientId(): string {
   try {
@@ -41,7 +38,7 @@ export default function BackPage() {
 
     trackEvent("hm_subscribe_click", {
       plan: "monthly",
-      price: FIRST_MONTH.toString(),
+      price: HM_PRICE_MONTHLY.toString(),
       source: "back",
       page: "back",
     })
@@ -124,20 +121,14 @@ export default function BackPage() {
           </p>
 
           {/* Price block */}
-          <div className="mb-1">
+          <div className="mb-5">
             <span className="text-[34px] font-bold" style={{ color: "var(--color-text-primary)" }}>
-              ${FIRST_MONTH}
-            </span>
-            <span className="text-[15px] ml-2 line-through" style={{ color: "var(--color-text-secondary, #555)" }}>
               ${HM_PRICE_MONTHLY}
             </span>
             <span className="text-[13px] ml-2" style={{ color: "var(--color-text-secondary, #555)" }}>
-              your first month back · then ${HM_PRICE_MONTHLY}/mo
+              per month · free US shipping
             </span>
           </div>
-          <p className="text-[13px] font-semibold mb-5" style={{ color: "var(--color-teal)" }}>
-            $5 thank-you applied automatically through {THANKYOU_DEADLINE}
-          </p>
 
           <button
             onClick={handleCheckout}
@@ -155,8 +146,6 @@ export default function BackPage() {
 
           <p className="mt-4 text-[12px] leading-relaxed" style={{ color: "var(--color-text-secondary, #555)" }}>
             Renews monthly; cancel anytime and billing stops. Free US shipping.
-            (After {THANKYOU_DEADLINE}, or if you've already used your thank-you,
-            this button simply works at the regular ${HM_PRICE_MONTHLY}/mo.)
           </p>
         </div>
       </section>
