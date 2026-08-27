@@ -1,17 +1,38 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Plus, Minus } from "lucide-react"
 
 type FaqItem = { q: string; a: string; lead?: string; link?: { href: string; label: string } }
 
+// Stable per-question anchor id, e.g. "When does it ship?" -> "faq-when-does-it-ship"
+function faqId(q: string): string {
+  return (
+    "faq-" +
+    q
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+  )
+}
+
 export default function FaqAccordion({ items }: { items: FaqItem[] }) {
   const [open, setOpen] = useState<number | null>(0)
+
+  // On initial load, if the URL hash targets one of our questions, open it and scroll to it.
+  useEffect(() => {
+    const hash = window.location.hash.slice(1)
+    if (!hash) return
+    const index = items.findIndex((item) => faqId(item.q) === hash)
+    if (index === -1) return
+    setOpen(index)
+    document.getElementById(hash)?.scrollIntoView({ behavior: "smooth", block: "start" })
+  }, [items])
 
   return (
     <div className="divide-y" style={{ borderColor: "var(--color-border)" }}>
       {items.map((item, i) => (
-        <div key={i}>
+        <div key={i} id={faqId(item.q)} className="scroll-mt-24">
           <button
             className="w-full flex items-center justify-between gap-4 py-4 text-left"
             onClick={() => setOpen(open === i ? null : i)}
