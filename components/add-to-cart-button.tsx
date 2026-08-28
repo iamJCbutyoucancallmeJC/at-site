@@ -25,10 +25,14 @@ export default function AddToCartButton({
   isSubscription = false,
   sellingPlanId,
 }: Props) {
-  const { addItem } = useCart()
+  const { addItem, hydrated } = useCart()
   const [status, setStatus] = useState<"idle" | "adding" | "added">("idle")
 
   async function handleAddToCart() {
+    // The button stays disabled until the cart context reports `hydrated`, so a
+    // click landing inside the hydration window cannot be swallowed or clobbered.
+    // Belt-and-suspenders with the merging HYDRATE reducer in context/cart.tsx.
+    if (!hydrated) return
     setStatus("adding")
     // Fires the GA4 add_to_cart event (standard ecommerce shape) from the cart
     // context, the single add path. See context/cart.tsx addItem. (t687)
@@ -71,7 +75,7 @@ export default function AddToCartButton({
     return (
       <button
         onClick={handleAddToCart}
-        disabled={status === "adding"}
+        disabled={status === "adding" || !hydrated}
         className="w-full py-3.5 text-[13px] uppercase tracking-[0.12em] font-semibold rounded-full transition-all duration-300 text-white disabled:opacity-70"
         style={{ background: status === "added" ? "var(--color-teal)" : "var(--color-orange)" }}
       >
@@ -85,7 +89,7 @@ export default function AddToCartButton({
   return (
     <button
       onClick={handleAddToCart}
-      disabled={status === "adding"}
+      disabled={status === "adding" || !hydrated}
       className="w-full py-3.5 text-[13px] uppercase tracking-[0.12em] font-semibold rounded-full transition-all duration-300 text-white disabled:opacity-70"
       style={{ background: status === "added" ? "var(--color-teal)" : "var(--color-orange)" }}
     >

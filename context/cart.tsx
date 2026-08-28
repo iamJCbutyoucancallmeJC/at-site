@@ -30,12 +30,15 @@ type CartAction =
   | { type: "OPEN" }
   | { type: "CLOSE" }
   | { type: "HYDRATE"; items: CartItem[] }
+  | { type: "CLEAR" }
 
 type CartContextValue = {
   items: CartItem[]
   count: number
   subtotal: string
   isOpen: boolean
+  /** False until the localStorage read has finished. Adds are unsafe before this. */
+  hydrated: boolean
   addItem: (item: Omit<CartItem, "quantity">) => void
   removeItem: (variantId: string) => void
   updateQty: (variantId: string, quantity: number) => void
@@ -89,8 +92,22 @@ function reducer(state: CartState, action: CartAction): CartState {
       return { ...state, isOpen: true }
     case "CLOSE":
       return { ...state, isOpen: false }
-    case "HYDRATE":
-      return { ...state, items: action.items }
+    case "HYDRATE": {
+      // Merge, never replace. An item added between mount and the hydrate effect
+      // (the hydration window) would otherwise be silently clobbered by the stored
+      // cart: the drawer opens, the item is gone, and nothing errors. That is the
+      // failure the checkout canary caught on 2026-08-27/28.
+      if (state.items.length === 0) return { ...state, items: action.items }
+      const merged = [...action.items]
+      for (const live of state.items) {
+        const at = merged.findIndex((m) => m.variantId === live.variantId)
+        if (at === -1) merged.push(live)
+        else merged[at] = { ...merged[at], quantity: merged[at].quantity + live.quantity }
+      }
+      return { ...state, items: merged }
+    }
+    case "CLEAR":
+      return { ...state, items: [] }
     default:
       return state
   }
@@ -179,7 +196,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }
 
   function clearCart() {
-    dispatch({ type: "HYDRATE", items: [] })
+    dispatch({ type: "CLEAR" })
     // Belt-and-suspenders: directly clear localStorage in case the caller
     // navigates away before the persist effect fires. Note: if the effect
     // DOES fire it wins, re-writing the key as "[]" — an empty cart either
@@ -193,7 +210,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <CartContext.Provider
-      value={{ items: state.items, count, subtotal, isOpen: state.isOpen, addItem, removeItem, updateQty, openCart, closeCart, clearCart }}
+      value={{ items: state.items, count, subtotal, isOpen: state.isOpen, hydrated, addItem, removeItem, updateQty, openCart, closeCart, clearCart }}
     >
       {children}
     </CartContext.Provider>
