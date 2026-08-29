@@ -1,6 +1,6 @@
 // POST /api/checkout/paperworld
 //
-// Direct-to-checkout for the Seattle Paper World event page (t824). Creates a
+// Direct-to-checkout for the Paper World event page (t824, reused per stop). Creates a
 // fresh Shopify cart with the Happy Mail 6-MONTH line, AUTO-APPLIES the QR-gated
 // event discount, and returns the Shopify checkoutUrl for immediate redirect.
 //
@@ -38,7 +38,7 @@ export async function POST(request: Request) {
     // server-side purchase event) and the event source (rides onto the order).
     const attributes = [
       gaClientId && /^\d+\.\d+$/.test(gaClientId) ? { key: "_ga_client_id", value: gaClientId } : null,
-      { key: "_event_source", value: "paperworld-seattle" },
+      { key: "_event_source", value: "paperworld-orlando" },
     ].filter((a): a is { key: string; value: string } => a !== null)
 
     const cart = await createCart(attributes)
