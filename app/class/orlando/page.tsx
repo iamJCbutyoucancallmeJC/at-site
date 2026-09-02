@@ -131,7 +131,7 @@ export default function OrlandoClassPage() {
                 one next to it, and that is exactly the point.
               </p>
               <p>
-                Here are the photos from class. Save any you love, share them wherever you
+                Here are photos from the event. Save any you love, share them wherever you
                 like, and tag me so I can see.
               </p>
               <p>
