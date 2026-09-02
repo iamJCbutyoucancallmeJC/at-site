@@ -89,7 +89,7 @@ const PHOTOS: GalleryPhoto[] = [
 const SPREAD = [
   {
     src: "/images/orlando-2026/orlando-spread-01.jpg",
-    alt: "Amy's new traveler's notebook spread: white and black acrylic, palm-tree rip, pink washi",
+    alt: "Amy's new traveler's notebook spread: white and black acrylic, polka-dot rip from Paper Play 3, palm trees",
     width: 1600,
     height: 1466,
   },
@@ -219,8 +219,8 @@ export default function OrlandoClassPage() {
               Back in the studio
             </h2>
             <p className="text-[14px] max-w-xl mx-auto" style={{ color: "var(--color-text-secondary)" }}>
-              The spread from the note above, made with what was left of the kit. The palm
-              trees are a rip from{" "}
+              The spread from the note above, made with what was left of the kit. The polka
+              dots are a rip from{" "}
               <a
                 href={PAPER_PLAY_3_HREF}
                 target="_blank"
