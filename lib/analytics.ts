@@ -32,6 +32,9 @@ export type AnalyticsEvent =
   // measurement; these are the two moments worth counting.
   | 'photobooth_session_start'
   | 'photobooth_strip_save'
+  // Class follow-up pages (/class/*, t1246): did the class open + save the photos?
+  | 'class_photo_open'
+  | 'class_photo_save'
 
 // GA4 standard ecommerce item (items[] on add_to_cart / begin_checkout / purchase).
 export type GA4Item = {
