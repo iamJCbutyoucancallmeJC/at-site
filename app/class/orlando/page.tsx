@@ -6,8 +6,8 @@
 // sitemap or nav. Keeps the site chrome so the class lands on Amy's site.
 //
 // Copy below is a JC starting point in Amy's voice, pending her pass (same
-// hold as /japan). Photos: Amy's 20 from the room + one from the evening,
-// chronological, resized to 1600px with EXIF stripped (public/images/orlando-2026/).
+// hold as /japan). Photos: 20 from the room + one from the evening (per JC
+// 9/01, shot by participants), chronological, resized to 1600px with EXIF stripped (public/images/orlando-2026/).
 // Take-down promise at the bottom is real: help@ pulls a photo on request.
 //
 // The inline capture block renders null until NEXT_PUBLIC_CAPTURE_BLOCKS=1
@@ -131,8 +131,8 @@ export default function OrlandoClassPage() {
                 one next to it, and that is exactly the point.
               </p>
               <p>
-                Here are the photos I took during class. Save any you love, share them
-                wherever you like, and tag me so I can see.
+                Here are the photos from class. Save any you love, share them wherever you
+                like, and tag me so I can see.
               </p>
               <p>
                 Thank you for spending part of your Saturday with me. A room full of people
