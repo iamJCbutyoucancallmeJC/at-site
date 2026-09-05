@@ -15,6 +15,7 @@ const DESKTOP_LINKS = [
   { label: "Contact", href: "/contact" },
   { label: "Instagram", href: "https://instagram.com/amytangerine" },
   { label: "YouTube", href: "https://youtube.com/@amytangerine" },
+  { label: "Changelog", href: "/changelog" },
 ]
 
 const MOBILE_LINKS = [
@@ -24,6 +25,7 @@ const MOBILE_LINKS = [
   { label: "Happy Mail", href: "/happy-mail" },
   { label: "In Person", href: "/events" },
   { label: "Contact", href: "/contact" },
+  { label: "Changelog", href: "/changelog" },
 ]
 
 export default function Footer() {

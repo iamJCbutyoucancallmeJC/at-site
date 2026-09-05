@@ -87,6 +87,13 @@
   max-width: 560px;
 }
 
+/* Visual examples: a comp, a before, the shipped thing. Small, in a row,
+   hairline-bordered; a caption in the label size. Never wider than the entry. */
+.log .log-figures { display: flex; flex-wrap: wrap; gap: 12px 14px; margin: 14px 0 0; max-width: 560px; }
+.log .log-figure { flex: 1 1 200px; max-width: 272px; margin: 0; padding: 0; }
+.log .log-figure img { display: block; width: 100%; height: auto; border: 1px solid var(--lg-faint); border-radius: 0; }
+.log .log-figure figcaption { font-size: 11.5px; line-height: 1.45; color: var(--lg-dim); margin-top: 6px; text-align: left; }
+
 /* What the entry shaped (jccangilla.com: the essay it fed). */
 .log .log-links { margin: 8px 0 0; font-size: 12.5px; color: var(--lg-faint); }
 .log .log-links a { color: var(--lg-dim); }

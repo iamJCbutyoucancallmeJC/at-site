@@ -4,9 +4,14 @@
     "name": "Amy Tangerine",
     "url": "https://amytangerine.com",
     "home": "/",
-    "noindex": true
+    "noindex": false
   },
   "entries": [
+    {
+      "date": "2026-09-05",
+      "title": "The changelog, public",
+      "summary": "This page: how the site got the way it is, the choices with their alternatives, and the comps beside the shipped thing. A quiet link in the footer."
+    },
     {
       "date": "2026-09-02",
       "title": "A page for the people who were in the room",
@@ -16,11 +21,6 @@
       "date": "2026-08-29",
       "title": "The same printed QR, retargeted",
       "summary": "The event page keeps one fixed address. Per stop, the facts change, the order source changes, and the show discount is reactivated for the window."
-    },
-    {
-      "date": "2026-08-28",
-      "title": "An add can’t land on a cart that isn’t ready",
-      "summary": "A click between mount and hydration used to vanish. Hydration now merges, and Add to Cart waits until the cart is real."
     },
     {
       "date": "2026-08-26",
@@ -57,7 +57,10 @@
     {
       "date": "2026-08-12",
       "title": "Start here: twenty posts, chosen from the data",
-      "summary": "Pageviews over 120 days plus a spread across DIY, journaling, encouragement, and lettering. Near-duplicate guest layouts and personal recaps skipped."
+      "summary": "Pageviews over 120 days plus a spread across DIY, journaling, encouragement, and lettering. Near-duplicate guest layouts and personal recaps skipped.",
+      "figures": [
+        { "src": "/changelog/journal-2026-09.jpg", "alt": "The Journal index with the Start here picks on top", "caption": "The Journal, Start here on top." }
+      ]
     },
     {
       "date": "2026-08-12",
@@ -84,6 +87,9 @@
       "summary": "Its own repo, project, and subdomain retire; the booth becomes a route under Fun Stuff, and the old subdomain redirects here for good.",
       "important": true,
       "note": "New experiments are built as routes under the Fun Stuff nav, not as new subdomains.",
+      "figures": [
+        { "src": "/changelog/photobooth-2026-09.jpg", "alt": "The photobooth page on amytangerine.com", "caption": "The booth as a route on the site." }
+      ],
       "options": [
         { "key": "P1", "title": "Its own subdomain, its own repo", "blurb": "Reachable only as an external nav link; no measurement at all." },
         { "key": "P2", "title": "A route on the site", "picked": "picked 8/4", "blurb": "Look and behavior preserved; the wordmark hides on phones, where the nav already carries it." }
@@ -102,24 +108,28 @@
     {
       "date": "2026-07-14",
       "title": "help@ for orders, hello@ for everything else",
-      "summary": "The contact page splits by inbox, and the subject-line routing goes."
-    },
-    {
-      "date": "2026-07-09",
-      "title": "A sitemap and crawler rules",
-      "summary": "So search engines converge on the live URL set instead of recrawling years of old paths. Non-canonical surfaces are kept out."
+      "summary": "The contact page splits by inbox, and the subject-line routing goes.",
+      "figures": [
+        { "src": "/changelog/contact-2026-09.jpg", "alt": "The contact page with two inboxes", "caption": "Two doors, said plainly." }
+      ]
     },
     {
       "date": "2026-07-07",
       "title": "In Person, and three things in the nav",
-      "summary": "Events redesigned and renamed In Person. The header becomes Fun Stuff, Shop, About Amy, with room to grow under the first.",
+      "summary": "Events redesigned and renamed In Person: upcoming first, city-led cards, recap video slots. The header becomes Fun Stuff, Shop, About Amy.",
       "important": true,
-      "note": "Three top-level items: Fun Stuff (a dropdown, room to grow), Shop, About Amy."
+      "note": "Three top-level items: Fun Stuff (a dropdown, room to grow), Shop, About Amy.",
+      "figures": [
+        { "src": "/changelog/in-person-2026-09.jpg", "alt": "The In Person page", "caption": "In Person: upcoming first, city-led." }
+      ]
     },
     {
       "date": "2026-07-07",
       "title": "A friendlier 404",
-      "summary": "A dead link lands on a page that helps: search, the shop, the way home."
+      "summary": "A dead link lands on a page that helps: three current products, the Journal, a search, the way home.",
+      "figures": [
+        { "src": "/changelog/not-found-2026-09.jpg", "alt": "The not-found page", "caption": "Where a dead link lands." }
+      ]
     },
     {
       "date": "2026-07-06",
@@ -132,29 +142,20 @@
       "summary": "The blog is reinstated with curation and hygiene: legacy paths redirect, thin posts fold, the archive gets a search."
     },
     {
-      "date": "2026-06-26",
-      "title": "Old Squarespace paths land somewhere real",
-      "summary": "A permanent redirect map from the old URL structure to the new, so bookmarks and search results stop dead-ending."
-    },
-    {
       "date": "2026-06-24",
       "title": "Shop My Faves",
-      "summary": "An affiliate page with its own data model behind it; real lists, deep links, images populated from the source."
-    },
-    {
-      "date": "2026-06-19",
-      "title": "Product images come straight from Shopify",
-      "summary": "Served from Shopify’s CDN through a custom loader, off the Vercel optimizer. Deliberate."
-    },
-    {
-      "date": "2026-06-18",
-      "title": "Purchases counted where they happen",
-      "summary": "The purchase event fires server-side from the order webhook with verified totals, in the standard shape."
+      "summary": "An affiliate page with its own data model behind it: real lists, deep links, images populated from the source.",
+      "figures": [
+        { "src": "/changelog/shop-my-faves-2026-09.jpg", "alt": "The Shop My Faves page", "caption": "Shop My Faves." }
+      ]
     },
     {
       "date": "2026-06-12",
       "title": "Printables get their own tab",
-      "summary": "A category tab in the shop, excluded from the default grid. A gated preview for drafts follows."
+      "summary": "A category tab in the shop, excluded from the default grid. A gated preview for drafts follows.",
+      "figures": [
+        { "src": "/changelog/printables-2026-09.jpg", "alt": "The shop with the Printables tab selected", "caption": "The Printables tab." }
+      ]
     },
     {
       "date": "2026-06-03",
@@ -165,6 +166,138 @@
       "date": "2026-06-01",
       "title": "Events collapse to one landing page",
       "summary": "The separate pages fold into a single events surface with a regrounded voice and verified details."
+    },
+    {
+      "date": "2026-05-29",
+      "title": "amytangerine.com goes live",
+      "summary": "DNS flips from Squarespace on the target Friday and the gate comes off. Eight weeks from scaffold to launch.",
+      "important": true,
+      "figures": [
+        { "src": "/changelog/before-squarespace-2026-01.jpg", "alt": "amytangerine.com in January 2026, on Squarespace", "caption": "January 2026: the Squarespace site." },
+        { "src": "/changelog/home-2026-09.jpg", "alt": "The new amytangerine.com homepage", "caption": "The new site." }
+      ]
+    },
+    {
+      "date": "2026-05-29",
+      "title": "Happy Mail: four tiles, fan mail, the truth about six months",
+      "summary": "The hero becomes four real photos of what arrives. “From the mailbox” becomes “Fan mail.” The six-month copy says what it is: a renewing commitment."
+    },
+    {
+      "date": "2026-05-28",
+      "title": "The cosmetic pass, with Amy at the desk",
+      "summary": "The hero becomes the Shine Bright mural shot; the tagline goes full white and bigger. Category tiles get real product shots; the spotlight gets Paper Play 3.",
+      "important": true,
+      "figures": [
+        { "src": "/changelog/hero-placeholder-2026-04.jpg", "alt": "The April placeholder hero image", "caption": "The placeholder hero, April." },
+        { "src": "/changelog/hero-mural-2026-05.jpg", "alt": "Amy in front of the Shine Bright mural", "caption": "The mural shot, Amy’s pick." }
+      ]
+    },
+    {
+      "date": "2026-05-28",
+      "title": "Five Instagram posts, in Amy’s order",
+      "summary": "Six product-photo placeholders give way to five posts she chose, in her order, linking out to her feed."
+    },
+    {
+      "date": "2026-05-27",
+      "title": "Every month, a letter from me",
+      "summary": "Amy picks Option A for Happy Mail: a product-grid hero of what’s in the envelope, plan cards in the same viewport, every button straight to cart. Hand-lettering leaves the marketing.",
+      "important": true,
+      "figures": [
+        { "src": "/changelog/wireframe-happy-mail-2026-04.jpg", "alt": "The April wireframe of the Happy Mail landing page", "caption": "The April wireframe." },
+        { "src": "/changelog/happy-mail-2026-09.jpg", "alt": "The Happy Mail page as shipped", "caption": "Option A, shipped." }
+      ],
+      "options": [
+        { "key": "H1", "title": "The April landing: split hero, the big stamp graphic, pricing below", "blurb": "Pricing cards, What’s Inside, How It Works, a gallery, the FAQ. Photos were placeholders." },
+        { "key": "H2", "title": "Option A: the product-grid hero", "picked": "picked 5/27", "blurb": "Die cuts, sticker sheet, envelope, note: the box contents above the fold, plans right under." }
+      ]
+    },
+    {
+      "date": "2026-05-27",
+      "title": "Contact stays out of the nav",
+      "summary": "The Contact link added to the mobile drawer the night before comes back out. Happy Mail at the top of the drawer stays.",
+      "note": "Don’t incent contact: keep the nav focused on shop, subscribe, brand story."
+    },
+    {
+      "date": "2026-05-27",
+      "title": "The favicon is the tangerine slice",
+      "summary": "Amy’s existing favicon, pulled from the old site and mirrored byte for byte, so the brand survives the cutover in the tab.",
+      "figures": [
+        { "src": "/changelog/favicon-tangerine.png", "alt": "The tangerine slice favicon", "caption": "The slice." }
+      ]
+    },
+    {
+      "date": "2026-05-26",
+      "title": "Seven fixes from friends and family",
+      "summary": "The checkout button resets after eight seconds instead of sticking. Empty categories drop and the grid goes to three. “Image coming soon” replaces the gray box."
+    },
+    {
+      "date": "2026-05-09",
+      "title": "An About page, and thirty-two logos",
+      "summary": "Bio, values, and a collaborations wall of thirty-two brand logos in Amy’s own order, where a text list of six had stood.",
+      "figures": [
+        { "src": "/changelog/about-collaborations-2026-09.jpg", "alt": "The collaborations logo wall on the About page", "caption": "The collaborations wall." }
+      ]
+    },
+    {
+      "date": "2026-04-13",
+      "title": "The logo is the wordmark",
+      "summary": "The text wordmark in the nav gives way to Amy’s own logo image, the slice and the tagline.",
+      "figures": [
+        { "src": "/changelog/logo-wordmark.png", "alt": "The Amy Tangerine logo", "caption": "Her mark, in the header." }
+      ]
+    },
+    {
+      "date": "2026-04-11",
+      "title": "D3: editorial, with color",
+      "summary": "Seven homepages on staging, each built to test one question. Amy picked D3 on April 14: the cinematic hero with teal and orange section grounds.",
+      "important": true,
+      "figures": [
+        { "src": "/changelog/home-categories-2026-09.jpg", "alt": "The teal category grid on the homepage", "caption": "D3 shipped: the teal category grid." }
+      ],
+      "options": [
+        { "key": "A", "title": "v2 Current", "blurb": "The control: the existing layout with the real colors and font." },
+        { "key": "B", "title": "Amy’s World", "blurb": "A portal to everything she does: books, workshops, podcast; a personal headline." },
+        { "key": "C", "title": "Craft Feel", "blurb": "Hand-drawn accents, softer cards, a warm overlay. Personality over grid." },
+        { "key": "D", "title": "Editorial", "blurb": "Cinematic hero, tight density, ghost buttons." },
+        { "key": "D1", "title": "Editorial + Playful", "blurb": "D with squiggly underlines and doodles." },
+        { "key": "D2", "title": "Editorial + Promo", "blurb": "D with a Happy Mail conversion hero." },
+        { "key": "D3", "title": "Editorial + Color", "picked": "picked 4/14", "blurb": "D with teal and orange section backgrounds." }
+      ]
+    },
+    {
+      "date": "2026-04-11",
+      "title": "Eight nav items become three, and Happy Mail gets a button",
+      "summary": "The old nav had eight items and no Happy Mail at all. The new one: Shop, Photobooth, About, and a Happy Mail button that never leaves the header.",
+      "figures": [
+        { "src": "/changelog/wireframe-nav-2026-04.jpg", "alt": "The April nav wireframe", "caption": "The nav wireframe, April 2." }
+      ]
+    },
+    {
+      "date": "2026-04-11",
+      "title": "Shop, cart, and product pages",
+      "summary": "A catalog from Shopify, the shop grid, product pages, and a cart drawer with a count badge. Prices live from the store, never typed in."
+    },
+    {
+      "date": "2026-04-11",
+      "title": "The Happy Mail landing page",
+      "summary": "A page instead of a product listing: pricing cards, What’s Inside, How It Works, past months, testimonials, the FAQ. Every subscribe button measured."
+    },
+    {
+      "date": "2026-04-06",
+      "title": "The real brand, not the wireframe’s guess",
+      "summary": "One orange, not two; a brighter teal; pure white and true black; Epilogue. Pulled from the live site instead of estimated.",
+      "options": [
+        { "key": "T1", "title": "The wireframe palette", "blurb": "Golden and coral oranges, a sage teal, cream paper, Nunito Sans." },
+        { "key": "T2", "title": "The live site’s own tokens", "picked": "picked 4/6", "blurb": "#FD891C, #00ADB3, white, black, Epilogue. Not a creative choice: her brand." }
+      ]
+    },
+    {
+      "date": "2026-04-04",
+      "title": "A prototype instead of a Figma file",
+      "summary": "Wireframes as HTML pages, then a Next.js scaffold the same day. Amy reviews a working site, not a mockup.",
+      "figures": [
+        { "src": "/changelog/wireframe-homepage-2026-04.jpg", "alt": "The April 4 homepage wireframe", "caption": "The homepage wireframe, April 4." }
+      ]
     }
   ]
 }

@@ -29,6 +29,7 @@ const STATIC_PATHS = [
   "/paperworld",
   "/blog",
   "/blog/archive",
+  "/changelog",
 ]
 
 const REDIRECTING_PRODUCT_HANDLES = new Set(["happy-mail", "happy-mail-international"])

@@ -21,6 +21,9 @@ import type { ReactNode } from 'react';
  * one entry in three, never all: JC's own language, moving toward neutral
  * analytical explanation at his cadence. Do not polish notes ahead of him.
  *
+ * Figures (9/5, JC: the AT log needed visual examples of the choices): a
+ * small row of images under the summary, a comp beside the shipped thing.
+ *
  * v2 (after the 9/5 rollout): `hand` notes, JC's actual handwriting
  * photographed into the margin, two pens as two registers (pink = felt,
  * blue = thought), with a typed transcript beneath for legibility.
@@ -30,6 +33,7 @@ export const CHANGELOG_SCHEMA_VERSION = 1;
 
 export type ChangelogOption = { key: string; title: string; blurb: string; picked?: string };
 export type ChangelogLink = { label: string; href: string };
+export type ChangelogFigure = { src: string; alt: string; caption?: string };
 export type ChangelogHand = { src: string; transcript: string; pen: 'pink' | 'blue' };
 export type ChangelogRegister = 'felt' | 'thought';
 
@@ -43,6 +47,7 @@ export type ChangelogEntry = {
   hand?: ChangelogHand; // v2: the photographed handwriting
   options?: ChangelogOption[]; // what else was on the table
   links?: ChangelogLink[]; // what the entry shaped (jccangilla: the essays)
+  figures?: ChangelogFigure[]; // visual examples: a comp, a before, the shipped thing
   draft?: boolean; // seeded from git, not yet pruned: never rendered
 };
 
@@ -128,6 +133,17 @@ export function Changelog({ data, as = 'main', masthead = true, intro, className
                 <div className="log-date">{e.date}</div>
                 <h2 className="log-title">{e.title}</h2>
                 <p className="log-summary">{e.summary}</p>
+                {e.figures && e.figures.length ? (
+                  <div className="log-figures">
+                    {e.figures.map((f) => (
+                      <figure key={f.src} className="log-figure">
+                        {/* Plain <img>: small, static, one per figure; no optimizer needed. */}
+                        <img src={f.src} alt={f.alt} loading="lazy" />
+                        {f.caption ? <figcaption>{f.caption}</figcaption> : null}
+                      </figure>
+                    ))}
+                  </div>
+                ) : null}
                 {e.links && e.links.length ? (
                   <div className="log-links">
                     {e.links.map((l, j) => (

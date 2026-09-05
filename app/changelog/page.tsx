@@ -4,12 +4,10 @@ import "@/components/changelog/changelog.css"
 import raw from "@/changelog.json"
 
 // The design changelog for amytangerine.com (t1356, built 2026-09-05): how the
-// site got the way it is, newest first, with the maker's notes in the margin.
-//
-// UNLISTED until Amy says yes (JC ruling 9/3): noindex here, absent from
-// app/sitemap.ts, absent from the nav and footer, and NOT added to robots.ts
-// (a Disallow line would publish the path). Notes describe process, never
-// customer or revenue specifics.
+// site got the way it is, newest first, the choices with their alternatives and
+// the comps beside the shipped thing. PUBLIC on JC's word 9/5 ("yes on at"):
+// indexable, in the sitemap, linked from the footer. Notes describe process,
+// never customer or revenue specifics. Figures live in public/changelog/.
 //
 // Component + CSS under components/changelog/ are vendored from the vault's
 // shared module (changelog-sync.py); the record is changelog.json at the repo
@@ -19,7 +17,7 @@ const data = asChangelog(raw)
 export const metadata: Metadata = {
   title: "Changelog | Amy Tangerine",
   description: "How amytangerine.com got the way it is, newest first: the design changelog.",
-  robots: { index: false, follow: false },
+  ...(data.site.noindex ? { robots: { index: false, follow: false } } : {}),
 }
 
 export default function ChangelogPage() {
