@@ -4,8 +4,9 @@ import { useEffect, useState } from "react"
 
 // d062 (t1079): date-aware first-envelope promise, rendered near the subscribe
 // CTA. Policy mirror of zz_System/Scripts/lib/hm_funds_month.py (LATE_CUTOFF = 15,
-// JC-ruled 2026-07-20): a charge on the 1st-14th funds THIS month's envelope; the
-// 15th onward funds NEXT month's. If the policy day changes, change it there first.
+// JC-ruled 2026-07-20; D1 ruled INCLUSIVE 2026-09-02): subscribe on the 1st-15th and
+// your first envelope is THIS month's; the 16th onward, NEXT month's. Same sense as the
+// FAQ's "Order by the 15th" on this page. If the policy day changes, change it there first.
 const LATE_CUTOFF = 15
 
 const MONTHS = [
@@ -30,7 +31,7 @@ export default function FirstEnvelopePromise() {
 
   const thisMonth = MONTHS[now.getMonth()]
   const nextMonth = MONTHS[(now.getMonth() + 1) % 12]
-  const early = now.getDate() < LATE_CUTOFF
+  const early = now.getDate() <= LATE_CUTOFF
 
   return (
     <p className="text-center text-[11px] mt-4" style={style}>
