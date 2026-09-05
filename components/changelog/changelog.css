@@ -169,10 +169,11 @@
   text-transform: uppercase;
 }
 
-/* v2: the hand note. The wrinkle is the point; the transcript is for legibility. */
-.log .log-hand { margin: 0 0 10px; padding: 0; }
-.log .log-hand img { display: block; max-width: 100%; height: auto; border: 0; border-radius: 0; }
-.log .log-hand-text { font-size: 12px; line-height: 1.5; color: var(--lg-dim); margin-top: 6px; text-align: left; }
+/* The hand note: JC's handwriting, photographed, as if written in this margin.
+   No box, no background; the who tag sits under it in the label voice. */
+.log .log-note.log-note-hand { border: 0; padding: 0; margin-top: 8px; background: none; }
+.log .log-note.log-note-hand img { display: block; width: 100%; height: auto; border: 0; border-radius: 0; }
+.log .log-note.log-note-hand .who { position: static; display: inline-block; background: none; padding: 0; margin-top: 8px; }
 
 @media (max-width: 760px) {
   .log .log-entry { grid-template-columns: 1fr; gap: 14px; }
