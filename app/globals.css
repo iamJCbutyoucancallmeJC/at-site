@@ -142,3 +142,15 @@ body {
   border-top: 1px solid var(--color-border);
   margin: 2rem 0;
 }
+
+/* /changelog (t1356, 2026-09-05): the network's design-changelog pattern in Amy's
+   palette. Component + CSS are vendored copies under components/changelog/ (source:
+   the vault's changelog-shared); only the tokens below are this site's. Unlisted
+   until Amy's yes: see app/changelog/page.tsx. */
+.at-log {
+  --log-bg: var(--color-white);
+  --log-text: var(--color-text-primary);
+  --log-dim: var(--color-text-secondary);
+  --log-faint: #8a8a8a;
+  --log-pop: var(--color-orange);
+}

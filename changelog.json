@@ -1,0 +1,170 @@
+{
+  "version": 1,
+  "site": {
+    "name": "Amy Tangerine",
+    "url": "https://amytangerine.com",
+    "home": "/",
+    "noindex": true
+  },
+  "entries": [
+    {
+      "date": "2026-09-02",
+      "title": "A page for the people who were in the room",
+      "summary": "After the Orlando workshop: Amy’s note, the photos from the class, and a Back in the studio section. Unlisted: no index, no nav, no sitemap. The site chrome stays."
+    },
+    {
+      "date": "2026-08-29",
+      "title": "The same printed QR, retargeted",
+      "summary": "The event page keeps one fixed address. Per stop, the facts change, the order source changes, and the show discount is reactivated for the window."
+    },
+    {
+      "date": "2026-08-28",
+      "title": "An add can’t land on a cart that isn’t ready",
+      "summary": "A click between mount and hydration used to vanish. Hydration now merges, and Add to Cart waits until the cart is real."
+    },
+    {
+      "date": "2026-08-26",
+      "title": "Every FAQ answer has its own address",
+      "summary": "An anchor per question, opening on arrival, so a reply can point at one answer."
+    },
+    {
+      "date": "2026-08-25",
+      "title": "Email capture waits behind a switch",
+      "summary": "Capture blocks in the footer and at the tail of posts render nothing until the switch flips after Amy’s aesthetic pass.",
+      "important": true,
+      "note": "Advance to the endpoint; pause at the aesthetic call."
+    },
+    {
+      "date": "2026-08-25",
+      "title": "A landing for the YouTube description",
+      "summary": "A seen-it-on-YouTube hero, a video embed once one is picked, a channel-scoped first-month offer, email capture. Unlisted."
+    },
+    {
+      "date": "2026-08-25",
+      "title": "The expired price comes off the page",
+      "summary": "The re-collection page headlined an offer three weeks past its deadline. It shows the regular price honestly now."
+    },
+    {
+      "date": "2026-08-12",
+      "title": "The first envelope, promised by date",
+      "summary": "The line under the plan cards computes which month’s envelope your order funds, from today’s date. The wording went to Amy as a veto line before it merged."
+    },
+    {
+      "date": "2026-08-12",
+      "title": "International shipping, said before you pay",
+      "summary": "One line in the cart drawer: international orders ship at live USPS rates by weight, shown at checkout. No rate hardcoded."
+    },
+    {
+      "date": "2026-08-12",
+      "title": "Start here: twenty posts, chosen from the data",
+      "summary": "Pageviews over 120 days plus a spread across DIY, journaling, encouragement, and lettering. Near-duplicate guest layouts and personal recaps skipped."
+    },
+    {
+      "date": "2026-08-12",
+      "title": "Dropdowns that open on a tap",
+      "summary": "iPad portrait is the desktop breakpoint, and touch has no hover. First tap opens the menu, second follows the link; mouse behavior unchanged."
+    },
+    {
+      "date": "2026-08-10",
+      "title": "The camera comes on when the page loads",
+      "summary": "The August 4 tap gate made visitors hit the button before the camera woke. Used live, the original behavior came back, with a guard for a missing stream.",
+      "options": [
+        { "key": "C1", "title": "Tap to start the camera", "picked": "picked 8/4", "blurb": "Permission is per origin and sticky; one reflexive Block would kill the camera for the whole site." },
+        { "key": "C2", "title": "Prompt on load, guard the missing stream", "picked": "picked 8/10", "blurb": "The flag stays as the one-word switch." }
+      ]
+    },
+    {
+      "date": "2026-08-04",
+      "title": "Real subscribers replace the placeholder quotes",
+      "summary": "Four subscribers in their own words, first name and last initial, from one shared array for every page that shows them."
+    },
+    {
+      "date": "2026-08-04",
+      "title": "The photobooth moves onto the site",
+      "summary": "Its own repo, project, and subdomain retire; the booth becomes a route under Fun Stuff, and the old subdomain redirects here for good.",
+      "important": true,
+      "note": "New experiments are built as routes under the Fun Stuff nav, not as new subdomains.",
+      "options": [
+        { "key": "P1", "title": "Its own subdomain, its own repo", "blurb": "Reachable only as an external nav link; no measurement at all." },
+        { "key": "P2", "title": "A route on the site", "picked": "picked 8/4", "blurb": "Look and behavior preserved; the wordmark hides on phones, where the nav already carries it." }
+      ]
+    },
+    {
+      "date": "2026-07-31",
+      "title": "A collaboration leads the faves page",
+      "summary": "A three-item collection opens Shop My Faves. Single-list refreshes can no longer clobber edits on the others."
+    },
+    {
+      "date": "2026-07-20",
+      "title": "One cutoff: the 15th",
+      "summary": "The first-envelope FAQ lands on both Happy Mail pages, and the cancel answer that said “before the 5th” now agrees with it."
+    },
+    {
+      "date": "2026-07-14",
+      "title": "help@ for orders, hello@ for everything else",
+      "summary": "The contact page splits by inbox, and the subject-line routing goes."
+    },
+    {
+      "date": "2026-07-09",
+      "title": "A sitemap and crawler rules",
+      "summary": "So search engines converge on the live URL set instead of recrawling years of old paths. Non-canonical surfaces are kept out."
+    },
+    {
+      "date": "2026-07-07",
+      "title": "In Person, and three things in the nav",
+      "summary": "Events redesigned and renamed In Person. The header becomes Fun Stuff, Shop, About Amy, with room to grow under the first.",
+      "important": true,
+      "note": "Three top-level items: Fun Stuff (a dropdown, room to grow), Shop, About Amy."
+    },
+    {
+      "date": "2026-07-07",
+      "title": "A friendlier 404",
+      "summary": "A dead link lands on a page that helps: search, the shop, the way home."
+    },
+    {
+      "date": "2026-07-06",
+      "title": "Shop My Faves nests under Shop; My Books joins",
+      "summary": "The affiliate page becomes a child of Shop, and Amy’s own titles get a section."
+    },
+    {
+      "date": "2026-07-03",
+      "title": "The Journal comes back",
+      "summary": "The blog is reinstated with curation and hygiene: legacy paths redirect, thin posts fold, the archive gets a search."
+    },
+    {
+      "date": "2026-06-26",
+      "title": "Old Squarespace paths land somewhere real",
+      "summary": "A permanent redirect map from the old URL structure to the new, so bookmarks and search results stop dead-ending."
+    },
+    {
+      "date": "2026-06-24",
+      "title": "Shop My Faves",
+      "summary": "An affiliate page with its own data model behind it; real lists, deep links, images populated from the source."
+    },
+    {
+      "date": "2026-06-19",
+      "title": "Product images come straight from Shopify",
+      "summary": "Served from Shopify’s CDN through a custom loader, off the Vercel optimizer. Deliberate."
+    },
+    {
+      "date": "2026-06-18",
+      "title": "Purchases counted where they happen",
+      "summary": "The purchase event fires server-side from the order webhook with verified totals, in the standard shape."
+    },
+    {
+      "date": "2026-06-12",
+      "title": "Printables get their own tab",
+      "summary": "A category tab in the shop, excluded from the default grid. A gated preview for drafts follows."
+    },
+    {
+      "date": "2026-06-03",
+      "title": "Tokyo Takeover: the gallery and the waitlist",
+      "summary": "Real photos from Tokyo and Amy’s copy; the waitlist asks for one name field to match the list it feeds."
+    },
+    {
+      "date": "2026-06-01",
+      "title": "Events collapse to one landing page",
+      "summary": "The separate pages fold into a single events surface with a regrounded voice and verified details."
+    }
+  ]
+}

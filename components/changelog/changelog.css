@@ -1,0 +1,173 @@
+/* GENERATED COPY. Do not edit here.
+   Source: Claudesidian vault, zz_System/Scripts/changelog-shared/changelog.css
+   Propagate with: python3 zz_System/Scripts/changelog-sync.py */
+
+/* ---- The design changelog: the entry in the main column, the maker's note in
+   the right third (mirrors the jccangilla.com essay marginalia); reverse
+   chronological; the options open in place. No rules: whitespace and the
+   date separate entries. Locked on mymorningquestions.com 2026-09-03.
+
+   ONE CSS for every site in the network. A site tints it by setting the
+   --log-* tokens on the .log root (or a wrapper); each token falls back to the
+   MMQ names, then to MMQ's values. Type: the serif face is a token; body copy
+   and labels inherit the host site's fonts unless the site overrides them. ---- */
+
+.log {
+  --lg-bg: var(--log-bg, var(--bg, #fafafa));
+  --lg-text: var(--log-text, var(--text, #1a1a1a));
+  --lg-dim: var(--log-dim, var(--dim, #666));
+  --lg-faint: var(--log-faint, var(--faint, #999));
+  --lg-pop: var(--log-pop, var(--pop, #185fa5));
+  --lg-serif: var(--log-font-serif, Georgia, 'Iowan Old Style', 'Times New Roman', serif);
+  color: var(--lg-text);
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 48px 24px 96px;
+  box-sizing: border-box;
+}
+
+.log a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.log a:hover { text-decoration: none; color: var(--lg-pop); }
+
+.log .log-masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 64px;
+}
+.log .log-masthead .site { font-weight: 700; letter-spacing: 0.02em; font-size: 23px; }
+.log .log-masthead .date { color: var(--lg-dim); font-size: 13px; }
+
+.log .log-intro {
+  color: var(--lg-dim);
+  font-size: 13px;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 0 40px;
+}
+
+.log .log-list { list-style: none; margin: 0; padding: 0; }
+
+.log .log-entry {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 20px 56px;
+  padding: 26px 0 30px;
+  margin: 0;
+  align-items: start;
+}
+
+.log .log-date {
+  color: var(--lg-faint);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+
+.log .log-title {
+  font-family: var(--lg-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 1.35;
+  letter-spacing: 0;
+  color: var(--lg-text);
+  margin: 0 0 8px;
+  padding: 0;
+}
+
+.log .log-entry.important .log-title { font-size: 21px; }
+
+.log .log-summary {
+  font-size: 14.5px;
+  line-height: 1.65;
+  margin: 0;
+  max-width: 560px;
+}
+
+/* What the entry shaped (jccangilla.com: the essay it fed). */
+.log .log-links { margin: 8px 0 0; font-size: 12.5px; color: var(--lg-faint); }
+.log .log-links a { color: var(--lg-dim); }
+
+.log .log-choice { margin-top: 14px; }
+
+.log .log-choice summary {
+  cursor: pointer;
+  font-family: var(--lg-serif);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--lg-dim);
+  list-style: none;
+}
+
+.log .log-choice summary::-webkit-details-marker { display: none; }
+.log .log-choice summary::before { content: '\25B8'; margin-right: 8px; font-size: 11px; }
+.log .log-choice[open] summary::before { content: '\25BE'; }
+.log .log-choice summary:hover { color: var(--lg-pop); }
+
+.log .log-choice ul { list-style: none; margin: 12px 0 0; padding: 0 0 0 20px; }
+
+.log .log-choice li { margin: 0 0 12px; font-size: 13.5px; line-height: 1.55; }
+
+.log .log-opt-key { color: var(--lg-faint); margin-right: 10px; }
+
+.log .log-opt-title { color: var(--lg-text); }
+
+.log .log-choice li.picked .log-opt-title { color: var(--lg-text); }
+.log .log-choice li:not(.picked) .log-opt-title { color: var(--lg-dim); }
+
+.log .log-opt-blurb { color: var(--lg-dim); font-size: 13px; padding-left: 30px; }
+
+/* The pick stamp: uneven ink-stamp corners, no tilt (JC 8/26: the unevenness,
+   not the off-kilter). Sits on its own line, never over a title. */
+.log .log-pick {
+  display: inline-block;
+  font: inherit;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  margin: 6px 0 2px 30px;
+  color: var(--lg-text);
+  background: none;
+  border: 1.5px solid var(--lg-text);
+  border-radius: 5px 2px 6px 3px / 3px 6px 2px 5px;
+}
+
+.log .log-choice-link { margin: 6px 0 0 20px; font-size: 12px; }
+.log .log-choice-link a { color: var(--lg-faint); }
+
+/* The note: the maker's hand, in the quiet box (the treatment for the lived). */
+.log .log-note {
+  position: relative;
+  border: 1px solid var(--lg-text);
+  padding: 14px 16px 16px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--lg-text);
+  margin: 22px 0 0;
+}
+
+.log .log-note .who {
+  position: absolute;
+  bottom: -9px;
+  right: 14px;
+  background: var(--lg-bg);
+  padding: 0 8px;
+  color: var(--lg-dim);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* v2: the hand note. The wrinkle is the point; the transcript is for legibility. */
+.log .log-hand { margin: 0 0 10px; padding: 0; }
+.log .log-hand img { display: block; max-width: 100%; height: auto; border: 0; border-radius: 0; }
+.log .log-hand-text { font-size: 12px; line-height: 1.5; color: var(--lg-dim); margin-top: 6px; text-align: left; }
+
+@media (max-width: 760px) {
+  .log .log-entry { grid-template-columns: 1fr; gap: 14px; }
+  .log .log-note { margin-top: 4px; }
+}
