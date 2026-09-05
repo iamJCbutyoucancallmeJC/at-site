@@ -392,12 +392,12 @@
     {
       "date": "2026-04-11",
       "title": "Eight nav items become three, and Happy Mail gets a button",
-      "summary": "The old nav had eight items and no Happy Mail at all. The new one: Shop, Photobooth, About, and a Happy Mail button that never leaves the header.",
+      "summary": "The old nav ran to eight items by spring and had no Happy Mail at all. The new one: Shop, Photobooth, About, and a Happy Mail button that never leaves the header.",
       "figures": [
         {
           "src": "/changelog/old-header-2026-01.jpg",
           "alt": "The old amytangerine.com header: eight nav items, no Happy Mail",
-          "caption": "The old header, January 2026: eight items, no Happy Mail."
+          "caption": "The old header, January 2026: seven links, a login button, no Happy Mail."
         },
         {
           "src": "/changelog/wireframe-nav-2026-04.jpg",
