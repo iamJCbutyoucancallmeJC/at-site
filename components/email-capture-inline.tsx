@@ -5,8 +5,10 @@
 // Klaviyo profile's signup_source property (per utm-convention.md in the
 // vault). GATED: renders nothing unless NEXT_PUBLIC_CAPTURE_BLOCKS === "1" --
 // the advance-then-regate hold for Amy's aesthetic pass. Flip the env var in
-// Vercel to go live; no code change. The timed/exit-intent POPUP half of D3 is
-// a Klaviyo-native form built in Klaviyo's builder and served by the klaviyo.js
+// Vercel to go live; no code change. `force` bypasses the gate for a surface
+// that is unlisted anyway (/join). `compact` drops the heading + blurb so a
+// page can supply its own. The timed/exit-intent POPUP half of D3 is a
+// Klaviyo-native form built in Klaviyo's builder and served by the klaviyo.js
 // snippet in app/layout.tsx (gated on NEXT_PUBLIC_KLAVIYO_COMPANY_ID).
 
 import { useState } from "react"
@@ -17,14 +19,18 @@ const ENABLED = process.env.NEXT_PUBLIC_CAPTURE_BLOCKS === "1"
 export default function EmailCaptureInline({
   source,
   dark = false,
+  force = false,
+  compact = false,
 }: {
   source: string
   dark?: boolean
+  force?: boolean
+  compact?: boolean
 }) {
   const [email, setEmail] = useState("")
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle")
 
-  if (!ENABLED) return null
+  if (!ENABLED && !force) return null
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -48,13 +54,17 @@ export default function EmailCaptureInline({
   const sub = dark ? "rgba(255,255,255,0.6)" : "var(--color-text-secondary, #555)"
 
   return (
-    <div className="max-w-xl mx-auto px-6 py-10 text-center">
-      <h3 className="text-[18px] font-bold mb-1" style={{ color: text }}>
-        Letters from Amy
-      </h3>
-      <p className="text-[13px] mb-5" style={{ color: sub }}>
-        What she&apos;s making, right to your inbox.
-      </p>
+    <div className={compact ? "max-w-xl mx-auto text-center" : "max-w-xl mx-auto px-6 py-10 text-center"}>
+      {!compact && (
+        <>
+          <h3 className="text-[18px] font-bold mb-1" style={{ color: text }}>
+            Letters from Amy
+          </h3>
+          <p className="text-[13px] mb-5" style={{ color: sub }}>
+            What she&apos;s making, right to your inbox.
+          </p>
+        </>
+      )}
       {state === "done" ? (
         <p className="text-[14px] font-semibold" style={{ color: "var(--color-teal)" }}>
           You&apos;re on the list. Talk soon!
@@ -82,7 +92,7 @@ export default function EmailCaptureInline({
       )}
       {state === "error" && (
         <p className="mt-3 text-[13px]" style={{ color: "#c0392b" }}>
-          That didn&apos;t go through — mind trying again?
+          That didn&apos;t go through. Mind trying again?
         </p>
       )}
     </div>

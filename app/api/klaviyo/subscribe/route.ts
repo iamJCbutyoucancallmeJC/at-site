@@ -1,26 +1,30 @@
 // POST /api/klaviyo/subscribe
 //
-// Klaviyo email capture for the AT site (t1096 first consumer: the /happy-mail/yt
-// landing; t1092 inline/footer blocks reuse this). Uses Klaviyo's CLIENT
-// subscription endpoint, which needs only the public company id (site id), not
-// the private key -- the standard onsite-capture pattern.
+// Klaviyo email capture for the AT site (t1092 inline/footer blocks, /join,
+// and the /happy-mail/yt landing, t1096). Uses Klaviyo's CLIENT subscription
+// endpoint, which needs only the public company id (site id), never the
+// private key -- the standard onsite-capture pattern.
 //
 // Payload in: { email, source, listId? }. `source` becomes the profile's
 // `signup_source` custom property (the semantic source of truth per the
-// waitlist route's tagging principle -- list membership is not the source).
+// waitlist route's tagging principle -- list membership is not the source)
+// and also the consent record's custom_source, which is what Klaviyo shows in
+// the profile's timeline ("Subscribed via amytangerine.com footer").
 //
-// Behavior when NEXT_PUBLIC_KLAVIYO_COMPANY_ID is unset (deliberate fail-open,
-// same pattern as /api/newsletter and /api/waitlist): returns 200 with
-// {queued: true} and logs the signup to the Vercel function log, so the page
-// works before the env var lands and emails are recoverable from logs. The AT
-// Klaviyo account is live (t1090); set the env vars in Vercel when wiring:
+// Klaviyo's client endpoint REQUIRES a list relationship (docs, revision
+// 2025-07-15), so the default list is part of the wiring, not an option:
 //   NEXT_PUBLIC_KLAVIYO_COMPANY_ID = the account's public API key / site id
-//   KLAVIYO_YT_LIST_ID             = default list for youtube-landing signups
+//   KLAVIYO_NEWSLETTER_LIST_ID     = the newsletter list new signups join
+// Behavior while either is unset (deliberate fail-open, same pattern as
+// /api/newsletter and /api/waitlist): returns 200 with {queued: true} and logs
+// the signup to the Vercel function log, so the page works before the env vars
+// land and emails are recoverable from logs.
 
 import { NextResponse } from "next/server"
 
 const COMPANY_ID = process.env.NEXT_PUBLIC_KLAVIYO_COMPANY_ID
-const DEFAULT_LIST_ID = process.env.KLAVIYO_YT_LIST_ID
+const DEFAULT_LIST_ID = process.env.KLAVIYO_NEWSLETTER_LIST_ID
+const KLAVIYO_REVISION = "2025-07-15"
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -37,8 +41,11 @@ export async function POST(request: Request) {
     const signupSource = (source || "at-site").slice(0, 64)
     const list = listId || DEFAULT_LIST_ID
 
-    if (!COMPANY_ID) {
-      console.log("[klaviyo subscribe] fail-open (no company id): ", JSON.stringify({ email, signupSource }))
+    if (!COMPANY_ID || !list) {
+      console.log(
+        "[klaviyo subscribe] fail-open (missing company id or list): ",
+        JSON.stringify({ email, signupSource, hasCompanyId: !!COMPANY_ID, hasList: !!list }),
+      )
       return NextResponse.json({ queued: true })
     }
 
@@ -46,17 +53,19 @@ export async function POST(request: Request) {
       data: {
         type: "subscription",
         attributes: {
+          custom_source: `amytangerine.com ${signupSource}`,
           profile: {
             data: {
               type: "profile",
               attributes: {
                 email,
                 properties: { signup_source: signupSource },
+                subscriptions: { email: { marketing: { consent: "SUBSCRIBED" } } },
               },
             },
           },
         },
-        ...(list ? { relationships: { list: { data: { type: "list", id: list } } } } : {}),
+        relationships: { list: { data: { type: "list", id: list } } },
       },
     }
 
@@ -64,7 +73,7 @@ export async function POST(request: Request) {
       `https://a.klaviyo.com/client/subscriptions/?company_id=${encodeURIComponent(COMPANY_ID)}`,
       {
         method: "POST",
-        headers: { "Content-Type": "application/json", revision: "2024-10-15" },
+        headers: { "Content-Type": "application/json", revision: KLAVIYO_REVISION },
         body: JSON.stringify(body),
       },
     )
