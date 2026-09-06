@@ -56,7 +56,7 @@ export default function NewsletterForm({ sourcePage = 'homepage' }: { sourcePage
         }}
         role="status"
       >
-        Thanks! Check your inbox.
+        You&apos;re on the list. Talk soon!
       </div>
     )
   }

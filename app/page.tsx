@@ -283,10 +283,10 @@ export default async function HomePage() {
             style={{ background: "var(--color-orange)" }}
           >
             <h2 className="text-[15px] md:text-[18px] uppercase tracking-[0.12em] font-semibold mb-3 text-white">
-              Stay in the Loop
+              Keep up with Amy
             </h2>
             <p className="text-[13px] md:text-[14px] mb-3 text-white/80">
-              New drops, workshops, and behind-the-scenes — straight to your inbox.
+              What she's making, right to your inbox.
             </p>
             <NewsletterForm sourcePage="homepage" />
           </div>

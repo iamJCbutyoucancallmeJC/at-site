@@ -28,6 +28,13 @@ const MOBILE_LINKS = [
   { label: "Changelog", href: "/changelog" },
 ]
 
+// Pages that already carry a capture form of their own (JC 9/6: two on one
+// page is one too many).
+function hasOwnCaptureForm(pathname: string | null): boolean {
+  if (!pathname) return false
+  return pathname === "/" || pathname === "/join" || pathname.startsWith("/v/")
+}
+
 export default function Footer() {
   const pathname = usePathname()
 
@@ -37,9 +44,10 @@ export default function Footer() {
   return (
     <footer style={{ background: "var(--color-text-primary)" }}>
       {/* Email capture (t1092, D3 inline block) -- renders null until
-          NEXT_PUBLIC_CAPTURE_BLOCKS=1 (Amy aesthetic pass gate). Skipped on
-          /join, whose whole body is already the form. */}
-      {pathname !== "/join" && <EmailCaptureInline source="footer" dark />}
+          NEXT_PUBLIC_CAPTURE_BLOCKS=1 (Amy aesthetic pass gate). One form per
+          page: skipped on /join (the page is the form) and on the homepage and
+          its /v/ variants, which carry their own "Keep up with Amy" box. */}
+      {!hasOwnCaptureForm(pathname) && <EmailCaptureInline source="footer" dark />}
       {/* Desktop */}
       <div className="hidden md:flex items-center justify-between px-12 py-8">
         <p className="text-sm" style={{ color: "rgba(255,255,255,0.5)" }}>
