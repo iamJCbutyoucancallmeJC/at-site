@@ -58,7 +58,7 @@ export default function EmailCaptureInline({
       {!compact && (
         <>
           <h3 className="text-[18px] font-bold mb-1" style={{ color: text }}>
-            Letters from Amy
+            Keep up with Amy
           </h3>
           <p className="text-[13px] mb-5" style={{ color: sub }}>
             What she&apos;s making, right to your inbox.

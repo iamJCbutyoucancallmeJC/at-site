@@ -35,6 +35,10 @@ export type AnalyticsEvent =
   // Class follow-up pages (/class/*, t1246): did the class open + save the photos?
   | 'class_photo_open'
   | 'class_photo_save'
+  // Klaviyo-native popup (t1092): the site's own newsletter_signup fires on
+  // submit via components/klaviyo-forms-bridge.tsx; these two frame it.
+  | 'popup_open'
+  | 'popup_close'
 
 // GA4 standard ecommerce item (items[] on add_to_cart / begin_checkout / purchase).
 export type GA4Item = {
