@@ -1,32 +1,23 @@
 // POST /api/newsletter
-// Forwards an email signup to a Kajabi opt-in form.
+// The homepage newsletter form (components/newsletter-form.tsx, sourcePage
+// "homepage"; also the /v/events variant).
 //
-// The newsletter forms (components/newsletter-form.tsx +
-// components/newsletter-form-warm.tsx) were decorative pre-launch -- submit
-// handlers only fired the `newsletter_signup` analytics event but never read
-// the input or POSTed anywhere. Heidi-era FNF would have silently lost emails;
-// public launch would lose them at scale. This route closes the gap.
+// 2026-09-06 (t1092): signups go to KLAVIYO, the system of record since the
+// account, sending domain and paid tier went live 9/1. Before this the route
+// forwarded to a Kajabi opt-in form, so homepage signups between the 8/26
+// Kajabi export and 9/6 sit only in Kajabi (catch-up export noted in the
+// capture runbook). The Kajabi POST below is kept ONLY as the fallback when
+// Klaviyo is not configured, so the form never loses an address in any
+// environment; it is dead code in production.
 //
-// Kajabi's REST API is gated behind Pro plan / $25/mo add-on. Amy is on Basic.
-// But Kajabi opt-in forms have public submission endpoints on all plans, so
-// we POST directly to the form-submission URL using application/x-www-form-
-// urlencoded (Kajabi's form-engine format). See kajabi-api-reference.md and
-// daily-note Wed PM Capture for context.
+// Env: NEXT_PUBLIC_KLAVIYO_COMPANY_ID + KLAVIYO_NEWSLETTER_LIST_ID (Klaviyo);
+// KAJABI_NEWSLETTER_FORM_URL / KAJABI_NEWSLETTER_FORM_FIELD (legacy fallback).
 //
-// Env vars (set in Vercel Production env):
-//   KAJABI_NEWSLETTER_FORM_URL = full submission endpoint
-//     (e.g. https://amytangerine.kajabi.com/forms/<id>/submissions)
-//   KAJABI_NEWSLETTER_FORM_FIELD = name attribute of the email input on the
-//     Kajabi form (defaults to "form_submission[email]" which is the Kajabi
-//     default; some form configurations use "email" instead)
-//
-// Behavior when env is unset:
-//   Returns 200 with `{queued: true}` and logs the submission to console.
-//   This is a deliberate fail-open: if the env var isn't set Friday but
-//   public traffic submits, we don't lose the email, we just queue it for
-//   manual reconciliation from Vercel function logs. Better than 500ing.
+// Behavior when neither is configured: 200 {queued: true} + console log
+// (deliberate fail-open; Vercel function logs preserve the email).
 
 import { NextResponse } from "next/server"
+import { klaviyoConfigured, klaviyoSubscribe } from "@/lib/klaviyo-subscribe"
 
 const KAJABI_FORM_URL = process.env.KAJABI_NEWSLETTER_FORM_URL
 const KAJABI_EMAIL_FIELD = process.env.KAJABI_NEWSLETTER_FORM_FIELD ?? "form_submission[email]"
@@ -51,7 +42,18 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Please enter a valid email" }, { status: 400 })
   }
 
-  // Fail-open: if Kajabi form URL isn't configured yet, log + return 200.
+  // Klaviyo is the system of record (t1092, 9/6).
+  if (klaviyoConfigured()) {
+    const result = await klaviyoSubscribe(email, source)
+    if (!result.ok) {
+      console.error("[newsletter] klaviyo upstream error", result.status, result.detail)
+      return NextResponse.json({ error: "Signup didn't go through. Please try again." }, { status: 502 })
+    }
+    return NextResponse.json({ ok: true, subscribed: true })
+  }
+
+  // Legacy fallback (Kajabi opt-in form), only when Klaviyo is unconfigured.
+  // Fail-open: if the Kajabi form URL isn't configured either, log + return 200.
   // Vercel function logs preserve the email so we can recover them.
   if (!KAJABI_FORM_URL) {
     console.log(`[newsletter] queued (KAJABI_NEWSLETTER_FORM_URL unset): email=${email} source=${source}`)
