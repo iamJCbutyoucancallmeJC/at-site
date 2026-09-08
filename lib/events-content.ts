@@ -12,8 +12,10 @@
 //   - Guest appearances with nothing beyond a description still link out to
 //     the host's site only (detailPage: false).
 //
-// Facts verified 2026-07-07 (event sites + web). Open slots JC fills during
-// review: Stationery Fest booth/days, Anaheim recap video, Village Well date.
+// Facts verified 2026-07-07 (event sites + web); fall 2026 stops added 2026-09-08
+// (Paper World Anaheim from paperworldstationeryexpo.com, Little Craft Fest
+// workshops from Amy's two Little Craft Place listings, sent 2026-09-04).
+// Open slots JC fills during review: Orlando recap video, Village Well date.
 
 export type SiteEvent = {
   slug: string
@@ -31,6 +33,7 @@ export type SiteEvent = {
   eventUrl?: string // the event's own site
   ticketUrl?: string
   details?: string[] // fact bullets (booth number, hours) -- JC fills in
+  links?: { label: string; href: string }[] // more than one thing to book (workshops sold by the host)
   recap?: {
     youtubeId?: string // Amy's recap video (click-to-play embed)
     videoTitle?: string
@@ -42,40 +45,52 @@ export type SiteEvent = {
 export const EVENTS: SiteEvent[] = [
   // ── Upcoming ──
   {
-    slug: "stationery-fest",
-    status: "upcoming",
-    title: "Stationery Fest 2026",
-    label: "Stationery Festival",
-    city: "Brooklyn, NY",
-    venue: "Industry City",
-    dates: "July 30 – August 1, 2026",
-    sortDate: "2026-07-30",
-    blurb:
-      "Three days, 200+ stationery brands, and thousands of paper people in one place. Amy will be there all three days.",
-    // Compound calendar (2026-07-07): Amy is WALKING the fest, not exhibiting.
-    meetAmy:
-      "Amy's walking the fest all three days, exploring the aisles with the rest of us paper people. If you spot her, say hi.",
-    detailPage: true,
-    eventUrl: "https://stationeryfestival.com/",
-    ticketUrl: "https://stationeryfestival.com/ticket",
-    details: ["571 2nd Avenue, Brooklyn, NY 11232"],
-  },
-  {
-    slug: "paper-world-orlando",
+    slug: "paper-world-anaheim-september",
     status: "upcoming",
     title: "Paper World Stationery Expo",
     label: "Stationery Expo",
-    city: "Orlando, FL",
-    venue: "Hilton Orlando",
-    dates: "August 29, 2026",
-    sortDate: "2026-08-29",
+    city: "Anaheim, CA",
+    venue: "Anaheim Marriott",
+    dates: "September 19, 2026",
+    sortDate: "2026-09-19",
     blurb:
-      "Paper World heads to Florida: 50+ curated stationery vendors, workshops, hands-on experiences, and a whole day of paper people. Amy's third Paper World this year.",
+      "Paper World comes back to Anaheim: 50+ curated stationery vendors, workshops, the Paper Lounge, and a full Saturday of paper people. Amy's fourth Paper World this year, and the closest one to home.",
     meetAmy:
       "Stop by Amy's table to shop her supplies in person, see new goodies first, and say hi. She loves meeting people who make things.",
     detailPage: true,
     eventUrl: "https://www.paperworldstationeryexpo.com/",
-    ticketUrl: "https://www.tickettailor.com/events/paperworldstationeryexpo",
+    ticketUrl: "https://www.paperworldstationeryexpo.com/tickets-anaheim",
+    details: [
+      "Anaheim Marriott, 700 W Convention Way, Anaheim, CA 92802",
+      "Saturday, September 19 · VIP 11am–6pm · General admission 1pm–6pm",
+    ],
+  },
+  {
+    slug: "little-craft-fest-fall-2026",
+    status: "upcoming",
+    title: "Fall Market + Spooky Little Craft Fest",
+    label: "Workshops",
+    city: "Conroe, TX",
+    venue: "Hyatt Regency Conroe",
+    dates: "October 23–25, 2026",
+    sortDate: "2026-10-23",
+    blurb:
+      "Amy is back near Houston for Little Craft Fest's spooky fall edition, teaching two Traveler's Notebook workshops. Each comes with a kit made just for that class, exclusive sticker sheets, and a few never-before-released goodies.",
+    meetAmy:
+      "Take a class with Amy. Seats are sold through Little Craft Place; bring scissors, glue, and a favorite pen or two, and the kit covers the rest.",
+    detailPage: true,
+    eventUrl: "https://www.littlecraftfest.com/",
+    details: ["Hyatt Regency Conroe, 1001 Grand Central Parkway, Conroe, TX 77304 · Mesquite Room, 2nd floor"],
+    links: [
+      {
+        label: "BIG LOVE Traveler's Notebook Workshop · Fri Oct 23, 3:30–5pm or Sun Oct 25, 11am–12:30pm",
+        href: "https://www.littlecraftplace.com/products/big-love-travelers-notebook-workshop-by-amy-tangerine",
+      },
+      {
+        label: "COLLECT AND CREATE Traveler's Notebook + Trinket Tin Workshop · Sat Oct 24, 5:30–7pm",
+        href: "https://www.littlecraftplace.com/products/collect-and-create-travelers-notebook-trinket-tin-workshop-by-amy-tangerine",
+      },
+    ],
   },
   {
     slug: "village-well",
@@ -93,6 +108,51 @@ export const EVENTS: SiteEvent[] = [
   },
 
   // ── Past ──
+  {
+    slug: "paper-world-orlando",
+    status: "past",
+    title: "Paper World Stationery Expo",
+    label: "Stationery Expo",
+    city: "Orlando, FL",
+    venue: "Hilton Orlando",
+    dates: "August 29, 2026",
+    sortDate: "2026-08-29",
+    blurb:
+      "Paper World's Florida stop: 50+ curated stationery vendors, workshops, and a whole day of paper people. Amy taught a Traveler's Notebook class and shopped her supplies from her table.",
+    detailPage: true,
+    eventUrl: "https://www.paperworldstationeryexpo.com/",
+    // Orlando recap video: slot for JC once Amy posts one. Until then the page
+    // points to her channels.
+    recap: {
+      links: [
+        { label: "Amy on YouTube", href: "https://youtube.com/@amytangerine" },
+        { label: "Amy on Instagram", href: "https://instagram.com/amytangerine" },
+      ],
+    },
+  },
+  {
+    slug: "stationery-fest",
+    status: "past",
+    title: "Stationery Fest 2026",
+    label: "Stationery Festival",
+    city: "Brooklyn, NY",
+    venue: "Industry City",
+    dates: "July 30 – August 1, 2026",
+    sortDate: "2026-07-30",
+    blurb:
+      "Three days, 200+ stationery brands, and thousands of paper people in one place. Amy walked all three days and came home with a Traveler's Notebook full of it.",
+    detailPage: true,
+    eventUrl: "https://stationeryfestival.com/",
+    recap: {
+      youtubeId: "2iEXFg7RhcM",
+      videoTitle: "My First NY Stationery Fest! Vlog + Traveler's Notebook",
+    },
+    photos: [
+      "https://i.ytimg.com/vi/2iEXFg7RhcM/hq1.jpg",
+      "https://i.ytimg.com/vi/2iEXFg7RhcM/hq2.jpg",
+      "https://i.ytimg.com/vi/2iEXFg7RhcM/hq3.jpg",
+    ],
+  },
   {
     slug: "paper-world-seattle",
     status: "past",

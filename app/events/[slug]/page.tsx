@@ -91,6 +91,26 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
           </ul>
         )}
 
+        {/* More than one thing to book (workshops sold by the host): one link each */}
+        {event.links && event.links.length > 0 && !isPast && (
+          <div className="mt-6 flex flex-col items-stretch gap-3">
+            {event.links.map((link) => (
+              <TrackableLink
+                key={link.href}
+                href={link.href}
+                event="event_cta_click"
+                eventData={{ event_slug: event.slug, cta: "workshop", source_page: sourcePage }}
+                className="block px-6 py-3 text-[13px] md:text-[14px] font-semibold rounded-full text-white transition-all duration-300 hover:opacity-90"
+                style={{ background: "var(--color-orange)" }}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {link.label}
+              </TrackableLink>
+            ))}
+          </div>
+        )}
+
         {/* CTAs: tickets (primary) + event site (secondary) */}
         {(event.ticketUrl || event.eventUrl) && !isPast && (
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
