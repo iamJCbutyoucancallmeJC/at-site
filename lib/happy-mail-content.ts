@@ -12,7 +12,10 @@
 // vault Customer Experience/recharge-customer-portal-ui-2026-06-18.md). This login URL is the
 // only stable address we can publish, so any cancel/card directions must spell out the
 // in-portal steps in words.
-export const HM_PORTAL_LOGIN_URL = "https://q9x1sj-hc.myshopify.com/tools/recurring/login"
+// 2026-09-09 (t1428): branded domain. The myshopify URL 301s here anyway (verified 8/31 and
+// 9/9); to a confused subscriber "q9x1sj-hc.myshopify.com" reads like a phishing redirect while
+// shop.amytangerine.com is the domain their account already lives on.
+export const HM_PORTAL_LOGIN_URL = "https://shop.amytangerine.com/tools/recurring/login"
 
 export const HM_VARIANT_MONTHLY_GID =
   process.env.NEXT_PUBLIC_HM_VARIANT_MONTHLY_GID ?? "gid://shopify/ProductVariant/51926357311808"
@@ -98,8 +101,34 @@ export const HM_FAQ_ITEMS = [
     a: "Around the 15th of each month. You'll get it like a letter from a friend — USPS first-class, no tracking number, usually arrives within a week.",
   },
   {
+    // [t1428, 2026-09-09] Gap 2 of the 8/31 ticket-log read (faq-gaps-from-tickets-2026-08-31.md):
+    // four tickets that were not about cancelling asked where to log in (Adams 6/30, Sanders
+    // 6/30, Reese 6/19, Wallace 8/31), and the only signposted route to the subscriber account
+    // was inside "How do I cancel?". Two hard-won lines: login codes go to the email the
+    // subscription is under; the subscriber account is separate from the shop account.
+    // Copy JC-approved 9/9 at the console queue ("you fix this, i'm ok"); Amy edits in place.
+    q: "Where do I manage my subscription?",
+    a: "Your subscription lives in its own subscriber account, which is separate from the shop account you use to place orders. Use the link below, enter the email your subscription is under, and we'll send you a login code, no password needed. Inside you'll find your next envelope, your billing date, your order history, and the place to update your shipping address or your card. If the code doesn't arrive, it's almost always because the subscription is under a different email than the one you typed. Email help@amytangerine.com and we'll point you to the right one.",
+    link: { href: HM_PORTAL_LOGIN_URL, label: "Manage your subscription →" },
+  },
+  {
+    // [t1428, 2026-09-09] Gap 1 of the same read: no address-change question existed on the site
+    // at all (Stevens 8/17 edited the shop address and the envelope still went to the old one).
+    // A week before the 15th matches the mail-run cutoff the operation honors.
+    q: "How do I change my shipping address?",
+    a: "Two ways. Email help@amytangerine.com with your new address, or change it yourself in your subscriber account: sign in with the link below, open your subscription, and edit the shipping address there. Either way, get it to us at least a week before the 15th so it makes that month's mail run. One thing worth knowing: changing the address on your shop account or with the post office doesn't move your subscription. Your subscription keeps its own address, and that's the one your envelope is printed from.",
+    link: { href: HM_PORTAL_LOGIN_URL, label: "Sign in to your subscriber account →" },
+  },
+  {
     q: "Which month will my first envelope be?",
     a: "Order by the 15th and this month's envelope is yours. After the 15th, you're in for next month's. It's a real envelope we mail once a month, so there's a cutoff to make the mail run.",
+  },
+  {
+    // [t1428, 2026-09-09] Gap 3 of the 8/31 read: nothing said when you get billed. Billing
+    // recurs on the original order date (Recharge); the skip/cancel item below already relies
+    // on that fact without stating it anywhere a subscriber would look first.
+    q: "When am I billed?",
+    a: "On the date you first subscribed, and then on that date going forward: every month if you're Monthly, every six months if you're on 6-Month. Your exact next date is in your subscriber account. If you'd rather be billed on a different day of the month, email help@amytangerine.com and we'll move it.",
   },
   {
     q: "Are the contents available in your shop?",
