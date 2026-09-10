@@ -6,6 +6,7 @@ import type { Metadata } from "next"
 // strategy changes more than once a year.
 export const metadata: Metadata = {
   title: "Happy Mail Subscription | Amy Tangerine",
+  alternates: { canonical: "/happy-mail" },
   // [t658] 6-month meta corrected (2026-05-29): was "$72 for 6 months. Cancel anytime." — "cancel anytime" overstates the
   // 6-month, which is a renewing commitment (cancel stops next renewal, not the current term). Options:
   //   A (live): "$13/month or $72 every 6 months. Monthly cancels anytime; 6-month is a renewing commitment."

@@ -3,6 +3,7 @@
 // Design: teal category bg, orange newsletter panel, teal Instagram bar, orange accent strip
 
 import Image from "next/image"
+import type { Metadata } from "next"
 import NewsletterForm from "@/components/newsletter-form"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 import TrackableLink from "@/components/trackable-link"
@@ -12,6 +13,10 @@ import { shopifyImageUrl, isShopifyCdn } from "@/lib/shopify-image-loader"
 
 // Dynamic rendering: new-arrivals section varies by visitor country (Markets-scoped products).
 export const dynamic = "force-dynamic"
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+}
 
 const CATEGORIES = [
   // Stickers tile: swapped 2026-05-28 (prior was hearthealinghappiness-sticker-book which is sold out qty -2).
