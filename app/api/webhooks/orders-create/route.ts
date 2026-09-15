@@ -1,17 +1,19 @@
 // POST /api/webhooks/orders-create
 //
 // Shopify orders/create webhook -> GA4 server-side `purchase` event via the
-// Measurement Protocol. This catches EVERY order regardless of checkout path
-// (Shop Pay, plain card, draft, POS), which the browser /thank-you approach
-// could not: Shop Pay keeps the buyer on Shopify's own thank-you page and never
-// redirects back to our site. See t687.
+// Measurement Protocol for orders that have no browser completion event (POS,
+// Recharge renewals/prepaid cycles, drafts). Shopify's Google & YouTube pixel is
+// authoritative for browser checkouts because it carries the real session.
+// Sending both sources double-counted every web purchase after 2026-08-20; using
+// one transaction_id for both would not be safe because GA4 keeps the first event,
+// which can be this sessionless webhook. See t687 and t1485.
 //
-// Session stitching: the GA client_id is captured browser-side at checkout
+// Identity stitching: the GA client_id is captured browser-side at checkout
 // (cart-drawer readGaClientId) and stored as the `_ga_client_id` cart attribute,
-// which rides through to the order's note_attributes. We read it back here so
-// the purchase joins the buyer's existing GA4 session instead of looking like a
-// brand-new anonymous user. If it's missing (consent-blocked, etc.) we fall back
-// to a deterministic synthetic id so revenue is still counted, just unattributed.
+// which rides through to the order's note_attributes. We read it back here so a
+// non-browser purchase can retain the buyer's GA identity/first-touch context.
+// Without a session_id it remains session-unattributed. If client_id is missing
+// (consent-blocked, etc.) we fall back to a deterministic synthetic id.
 
 import { NextResponse } from "next/server"
 
@@ -21,6 +23,7 @@ export const runtime = "nodejs" // need the raw body for HMAC; keep it simple
 const SHOPIFY_WEBHOOK_SECRET = process.env.SHOPIFY_WEBHOOK_SECRET ?? ""
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? ""
 const GA_MP_API_SECRET = process.env.GA_MP_API_SECRET ?? ""
+const SHOPIFY_HEADLESS_APP_SOURCE = process.env.SHOPIFY_HEADLESS_APP_ID || "345947701249"
 
 // Verify the Shopify webhook HMAC (base64 of HMAC-SHA256 over the raw body).
 async function verifyShopifyHmac(rawBody: string, headerHmac: string): Promise<boolean> {
@@ -69,6 +72,16 @@ function classifyOrderChannel(order: Pick<ShopifyOrder, "source_name" | "tags">)
   return src || "other"
 }
 
+// Shopify identifies ordinary Online Store checkouts as `web` and checkouts
+// created by at-site's Storefront API as the headless app id. Both complete in a
+// browser and are already covered by Shopify's Google & YouTube customer-event
+// pixel. Recharge-owned sources (294517 and subscription_contract_checkout_one),
+// POS and drafts do not fire that pixel and must continue through this webhook.
+function hasShopifyBrowserPurchase(order: Pick<ShopifyOrder, "source_name">): boolean {
+  const src = String(order.source_name ?? "").toLowerCase()
+  return src === "web" || src === SHOPIFY_HEADLESS_APP_SOURCE
+}
+
 export async function POST(request: Request) {
   // Read the raw body BEFORE parsing — HMAC is over the exact bytes Shopify sent.
   const rawBody = await request.text()
@@ -81,16 +94,32 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "invalid hmac" }, { status: 401 })
   }
 
-  if (!GA_MEASUREMENT_ID || !GA_MP_API_SECRET) {
-    console.error("[orders-create] GA env missing; acking webhook without sending")
-    return NextResponse.json({ ok: true, sent: false, reason: "ga-env-missing" })
-  }
-
   let order: ShopifyOrder
   try {
     order = JSON.parse(rawBody)
   } catch {
     return NextResponse.json({ error: "bad json" }, { status: 400 })
+  }
+
+  const orderChannel = classifyOrderChannel(order)
+
+  if (hasShopifyBrowserPurchase(order)) {
+    return NextResponse.json({
+      ok: true,
+      sent: false,
+      reason: "shopify-browser-pixel-authoritative",
+      order_channel: orderChannel,
+    })
+  }
+
+  if (!GA_MEASUREMENT_ID || !GA_MP_API_SECRET) {
+    console.error("[orders-create] GA env missing; acking webhook without sending")
+    return NextResponse.json({
+      ok: true,
+      sent: false,
+      reason: "ga-env-missing",
+      order_channel: orderChannel,
+    })
   }
 
   // Pull the GA client_id we stashed at checkout. note_attributes mirror the
@@ -107,8 +136,6 @@ export async function POST(request: Request) {
     price: Number(li.price),
     quantity: li.quantity,
   }))
-
-  const orderChannel = classifyOrderChannel(order)
 
   const payload = {
     client_id: clientId,
