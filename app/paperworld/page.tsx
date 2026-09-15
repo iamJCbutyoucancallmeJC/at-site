@@ -1,8 +1,8 @@
 "use client"
 
 // Paper World Stationery Expo event landing page (t824; reused per stop —
-// Seattle June 2026, Orlando August 2026: swap EVENT below + the discount
-// window in Shopify, the printed QR stays the same).
+// Seattle June 2026, Orlando August 2026, Anaheim September 2026: swap EVENT
+// below + the discount window in Shopify, the printed QR stays the same).
 // - Isolated layout (no nav/footer/cart) — reached via the QR code on Amy's booth.
 // - Happy Mail 6-Month subscription, event-only price ($72 → $66 with the
 //   auto-applied PAPERWORLD code).
@@ -20,12 +20,12 @@ import Image from "next/image"
 import { trackEvent } from "@/lib/analytics"
 import { HM_PRICE_6MONTH, HM_TESTIMONIALS } from "@/lib/happy-mail-content"
 
-// Event facts (Paper World Stationery Expo — Orlando stop).
+// Event facts (Paper World Stationery Expo — Anaheim stop).
 const EVENT = {
   name: "Paper World Stationery Expo",
-  city: "Orlando",
-  dateLabel: "Saturday, August 29",
-  venue: "Hilton Orlando",
+  city: "Anaheim",
+  dateLabel: "Saturday, September 19",
+  venue: "Anaheim Marriott",
 }
 
 // $72 base, $6 off at the show.

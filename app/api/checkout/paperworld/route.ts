@@ -38,7 +38,7 @@ export async function POST(request: Request) {
     // server-side purchase event) and the event source (rides onto the order).
     const attributes = [
       gaClientId && /^\d+\.\d+$/.test(gaClientId) ? { key: "_ga_client_id", value: gaClientId } : null,
-      { key: "_event_source", value: "paperworld-orlando" },
+      { key: "_event_source", value: "paperworld-anaheim" },
     ].filter((a): a is { key: string; value: string } => a !== null)
 
     const cart = await createCart(attributes)
