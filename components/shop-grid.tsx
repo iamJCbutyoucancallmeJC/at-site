@@ -116,7 +116,7 @@ export default function ShopGrid({
           </p>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-            {products.map((product) => {
+            {products.map((product, index) => {
               const img = product.images.nodes[0]
               const priceStr = formatPrice(product.priceRange.minVariantPrice)
               const tileHref =
@@ -135,12 +135,33 @@ export default function ShopGrid({
                 >
                   {/* Image */}
                   <div className="relative aspect-square overflow-hidden rounded-lg mb-3 bg-gray-50">
-                    {img ? (
-                      <Image
+                    {img && isShopifyCdn(img.url) ? (
+                      // Native srcSet keeps resizing on Shopify's CDN. Next's
+                      // unoptimized Image drops srcSet, so sizes alone did not
+                      // stop phones from downloading every tile at 700px.
+                      <img
                         src={shopifyImageUrl(img.url, 700)}
-                        unoptimized={isShopifyCdn(img.url)}
+                        srcSet={[240, 360, 480, 640, 800, 1080, 1440]
+                          .filter((width) => width < img.width)
+                          .concat(Math.min(img.width, 1920))
+                          .map((width) => `${shopifyImageUrl(img.url, width)} ${width}w`)
+                          .join(", ")}
+                        sizes="(min-width: 1024px) calc((100vw - 152px) / 4), (min-width: 768px) calc((100vw - 128px) / 3), calc((100vw - 48px) / 2)"
+                        width={img.width}
+                        height={img.height}
+                        alt={img.altText ?? product.title}
+                        loading={index < 2 ? "eager" : "lazy"}
+                        fetchPriority={index === 0 ? "high" : undefined}
+                        decoding="async"
+                        className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    ) : img ? (
+                      <Image
+                        src={img.url}
                         alt={img.altText ?? product.title}
                         fill
+                        loading={index < 2 ? "eager" : "lazy"}
+                        fetchPriority={index === 0 ? "high" : undefined}
                         className="object-cover group-hover:scale-105 transition-transform duration-500"
                         sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                       />
