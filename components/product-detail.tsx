@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { formatPrice, type ShopifyProduct } from "@/lib/shopify"
+import { formatDisplayPrice } from "@/lib/display-price"
 import { shopifyImageUrl, isShopifyCdn } from "@/lib/shopify-image-loader"
 import TrackableLink from "@/components/trackable-link"
 import AddToCartButton from "@/components/add-to-cart-button"
@@ -298,7 +299,7 @@ export default function ProductDetail({
                     {related.title}
                   </p>
                   <p className="text-[12px]" style={{ color: "var(--color-text-secondary)" }}>
-                    {formatPrice(related.priceRange.minVariantPrice)}
+                    {formatDisplayPrice(related)}
                   </p>
                 </TrackableLink>
               )

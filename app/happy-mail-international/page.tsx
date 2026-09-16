@@ -13,7 +13,8 @@
 // not only at checkout. Requires force-dynamic (reads per-request country).
 
 import type { Metadata } from "next"
-import { getProductByHandle, formatPrice } from "@/lib/shopify"
+import { getProductByHandle } from "@/lib/shopify"
+import { formatDisplayPrice } from "@/lib/display-price"
 import { getVisitorCountry } from "@/lib/geo"
 import HappyMailInternationalClient from "./happy-mail-international-client"
 
@@ -32,7 +33,7 @@ export default async function HappyMailInternationalPage() {
   const country = await getVisitorCountry()
   const product = await getProductByHandle("happy-mail-international", country)
   const localizedPrice = product
-    ? formatPrice(product.priceRange.minVariantPrice) // e.g. "CA$23.00", "£13.00", "$16.00"
+    ? formatDisplayPrice(product) // e.g. "CA$23.00", "£13.00", "$16.00"
     : null
 
   return <HappyMailInternationalClient localizedPrice={localizedPrice} />

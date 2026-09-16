@@ -1,5 +1,6 @@
 import Image from "next/image"
-import { formatPrice, type ShopifyProduct } from "@/lib/shopify"
+import { type ShopifyProduct } from "@/lib/shopify"
+import { formatDisplayPrice } from "@/lib/display-price"
 import { shopifyImageUrl, isShopifyCdn } from "@/lib/shopify-image-loader"
 import TrackableLink from "@/components/trackable-link"
 
@@ -118,7 +119,9 @@ export default function ShopGrid({
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
             {products.map((product, index) => {
               const img = product.images.nodes[0]
-              const priceStr = formatPrice(product.priceRange.minVariantPrice)
+              // Not minVariantPrice: the HM products' cheapest variant is a per-delivery
+              // prepaid price nobody pays ($12 on a $13/mo product). See lib/display-price.ts.
+              const priceStr = formatDisplayPrice(product)
               const tileHref =
                 useLandingPages && product.handle === "happy-mail"
                   ? "/happy-mail"
