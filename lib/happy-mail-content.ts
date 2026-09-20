@@ -116,8 +116,10 @@ export const HM_FAQ_ITEMS = [
     // at all (Stevens 8/17 edited the shop address and the envelope still went to the old one).
     // A week before the 15th matches the mail-run cutoff the operation honors.
     q: "How do I change my shipping address?",
-    a: "Two ways. Email help@amytangerine.com with your new address, or change it yourself in your subscriber account: sign in with the link below, open your subscription, and edit the shipping address there. Either way, get it to us at least a week before the 15th so it makes that month's mail run. One thing worth knowing: changing the address on your shop account or with the post office doesn't move your subscription. Your subscription keeps its own address, and that's the one your envelope is printed from.",
-    link: { href: HM_PORTAL_LOGIN_URL, label: "Sign in to your subscriber account →" },
+    // [t1277, 2026-09-20] link now points at the step-by-step walkthrough page (which
+    // carries the portal sign-in link itself) instead of straight at the portal.
+    a: "Two ways. Email help@amytangerine.com with your new address, or change it yourself in your subscriber account: sign in, open your subscription, and edit the shipping address there. The walkthrough below shows every step with screenshots. Either way, get it to us at least a week before the 15th so it makes that month's mail run. One thing worth knowing: changing the address on your shop account or with the post office doesn't move your subscription. Your subscription keeps its own address, and that's the one your envelope is printed from.",
+    link: { href: "/happy-mail/update-address", label: "How to change your address, step by step →" },
   },
   {
     q: "Which month will my first envelope be?",
