@@ -31,6 +31,7 @@ const STATIC_PATHS = [
   "/blog/archive",
   "/changelog",
   "/join",
+  "/creativity",
 ]
 
 const REDIRECTING_PRODUCT_HANDLES = new Set(["happy-mail", "happy-mail-international"])

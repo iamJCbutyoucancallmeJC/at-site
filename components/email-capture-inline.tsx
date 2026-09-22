@@ -21,11 +21,16 @@ export default function EmailCaptureInline({
   dark = false,
   force = false,
   compact = false,
+  doneMessage = "You're on the list. Talk soon!",
+  buttonLabel = "Sign me up",
 }: {
   source: string
   dark?: boolean
   force?: boolean
   compact?: boolean
+  /** Replaces the default confirmation line (e.g. a lead-magnet page says what arrives). */
+  doneMessage?: string
+  buttonLabel?: string
 }) {
   const [email, setEmail] = useState("")
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle")
@@ -67,7 +72,7 @@ export default function EmailCaptureInline({
       )}
       {state === "done" ? (
         <p className="text-[14px] font-semibold" style={{ color: "var(--color-teal)" }}>
-          You&apos;re on the list. Talk soon!
+          {doneMessage}
         </p>
       ) : (
         <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -86,7 +91,7 @@ export default function EmailCaptureInline({
             className="px-7 py-3 rounded-full text-[12px] font-bold uppercase tracking-[0.1em] text-white disabled:opacity-60"
             style={{ background: "var(--color-orange)" }}
           >
-            {state === "sending" ? "Sending..." : "Sign me up"}
+            {state === "sending" ? "Sending..." : buttonLabel}
           </button>
         </form>
       )}
