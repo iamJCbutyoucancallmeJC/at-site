@@ -64,7 +64,7 @@ export const AFFILIATE_LISTS = [
         note: "The one that started it all. A book you're supposed to cut up! Tear out the pages and make them yours." },
       { asin: "0241465699", title: "Making Memories",
         note: "My book on mindful memory keeping: journaling, scrapbooking, and finding a little calm every day." },
-      { asin: "0692816127", title: "Craft a Life You Love",
+      { asin: "B078W7LJ13", title: "Craft a Life You Love",
         note: "My heart in book form. 25 practices for infusing creativity, fun, and intention into your every day." },
     ],
   },

@@ -16,6 +16,10 @@ const nextConfig = {
       { source: "/hm", destination: "/happy-mail", permanent: false },
       // Short path for Junklub event QR code handouts
       { source: "/jl", destination: "/junklub", permanent: false },
+      // Craft A Life You Love is out of print (d076, resolved 2026-09-22: Amy is pursuing
+      // the rights to self-publish; interim = point at the $9.99 Kindle/Audible edition).
+      // /amys-book is the old Squarespace address, still indexed and bookmarked; 404 since launch (t1451).
+      { source: "/amys-book", destination: "https://www.amazon.com/dp/B078W7LJ13?tag=atwbsite-20", permanent: false },
 
       // ---- Squarespace -> Next.js launch redirect map (2026-06-26, t421-class) ----
       // The pre-launch PRD (sections 6/8) called for a 301 map from the old SQS URL
