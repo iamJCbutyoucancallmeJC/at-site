@@ -45,7 +45,7 @@ export default function CreativityPrintablePage() {
           10 ways to reconnect with your creativity
         </h1>
         <p className="text-[15px] leading-relaxed" style={{ color: "var(--color-text-primary)" }}>
-          When I drift away from making things, these are the ten things that bring me
+          When I drift away from making stuff, these are the ten things that bring me
           back. I talk through all of them in the video below, and I hand-lettered the
           list so it can live on your desk. The sheet is free when you join my newsletter.
         </p>

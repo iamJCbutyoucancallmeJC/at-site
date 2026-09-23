@@ -211,7 +211,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
             {comingSoon
               ? "Want the details the moment they land?"
               : isPast
-                ? "Wish you'd been there?"
+                ? "Missed this one?"
                 : "Can't make it this time?"}
           </h2>
           <p className="text-[14px] md:text-[15px] text-white/90 mb-5 leading-relaxed">

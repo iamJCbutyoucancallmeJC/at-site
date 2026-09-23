@@ -94,17 +94,17 @@ export const EVENTS: SiteEvent[] = [
   },
   {
     slug: "village-well",
-    status: "coming-soon",
-    title: "Artist Showing at Village Well",
-    label: "Artist Showing",
+    status: "upcoming",
+    title: "Art Show at Village Well",
+    label: "Art Show",
     city: "Culver City, CA",
     venue: "Village Well Books & Coffee",
-    dates: "Details coming soon",
-    sortDate: "2026-12-31",
+    dates: "Up now through early October",
+    sortDate: "2026-10-06",
     blurb:
-      "Amy's work is coming to the coziest bookstore-café on the west side. Dates and details soon. Get on the list and you'll hear first.",
+      "Amy's paintings are on the walls of the coziest bookstore-café on the west side, and they stay up through about October 6. Drop in any day the shop is open; the work is for sale, and the coffee is good.",
     detailPage: true,
-    eventUrl: "https://villagewell.com/",
+    eventUrl: "https://villagewell.com/community/art-gallery",
   },
 
   // ── Past ──
