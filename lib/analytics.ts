@@ -11,6 +11,7 @@ export type AnalyticsEvent =
   | 'begin_checkout'
   | 'newsletter_signup'
   | 'waitlist_signup'
+  | 'back_in_stock_signup'
   | 'event_cta_click'
   | 'affiliate_click'
   | 'section_link_click'

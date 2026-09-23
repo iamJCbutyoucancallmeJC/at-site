@@ -64,3 +64,46 @@ export async function klaviyoSubscribe(
   }
   return { ok: true }
 }
+
+// Back-in-stock signup (t1093, 2026-09-22). Klaviyo's CLIENT back-in-stock
+// endpoint, public company id only. The variant must exist in Klaviyo's
+// Shopify-synced catalog, addressed as $shopify:::$default:::<numeric id>
+// (proven 202 on 9/22 with the Junk Journal sticker book). Klaviyo holds the
+// subscription and fires "Subscribed to Back in Stock", which starts flow
+// RMPUzd ("Back in stock: It is back"), whose first step is a Back in stock
+// delay that holds each subscriber until the variant restocks (the delay was
+// added on the canvas 9/22; without it the flow emails at signup). No marketing consent is given here:
+// the shopper asked for one email about one item, not the newsletter.
+export async function klaviyoBackInStock(
+  email: string,
+  variantGid: string,
+): Promise<KlaviyoSubscribeResult> {
+  if (!COMPANY_ID) return { ok: false, status: 0, detail: "not configured" }
+  const numericId = variantGid.split("/").pop() || ""
+  if (!/^\d+$/.test(numericId)) return { ok: false, status: 400, detail: "bad variant id" }
+  const body = {
+    data: {
+      type: "back-in-stock-subscription",
+      attributes: {
+        channels: ["EMAIL"],
+        profile: { data: { type: "profile", attributes: { email } } },
+      },
+      relationships: {
+        variant: { data: { type: "catalog-variant", id: `$shopify:::$default:::${numericId}` } },
+      },
+    },
+  }
+  const res = await fetch(
+    `https://a.klaviyo.com/client/back-in-stock-subscriptions/?company_id=${encodeURIComponent(COMPANY_ID)}`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json", revision: KLAVIYO_REVISION },
+      body: JSON.stringify(body),
+    },
+  )
+  if (!res.ok) {
+    const detail = await res.text().catch(() => "")
+    return { ok: false, status: res.status, detail: detail.slice(0, 300) }
+  }
+  return { ok: true }
+}

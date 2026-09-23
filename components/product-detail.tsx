@@ -5,6 +5,7 @@ import { shopifyImageUrl, isShopifyCdn } from "@/lib/shopify-image-loader"
 import TrackableLink from "@/components/trackable-link"
 import AddToCartButton from "@/components/add-to-cart-button"
 import ProductImageGallery from "@/components/product-image-gallery"
+import BackInStockForm from "@/components/back-in-stock-form"
 
 // Tags that are functional/internal, not customer-facing descriptors -- never
 // shown in the PDP tag row. `preview-ready` is preview plumbing; the category +
@@ -186,6 +187,9 @@ export default function ProductDetail({
               >
                 Sold Out
               </div>
+            )}
+            {!product.availableForSale && mainVariant && (
+              <BackInStockForm variantId={mainVariant.id} productHandle={slug} />
             )}
 
             {/* Free shipping callout */}
