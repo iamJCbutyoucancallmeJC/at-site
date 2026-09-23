@@ -16,6 +16,7 @@ import { notFound } from "next/navigation"
 import WaitlistForm from "@/components/waitlist-form"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 import TrackableLink from "@/components/trackable-link"
+import Image from "next/image"
 import RecapVideo from "@/components/events/recap-video"
 import { detailPageEvents, getEvent } from "@/lib/events-content"
 
@@ -143,6 +144,32 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
           </div>
         )}
       </section>
+
+      {/* ── Photos (any status; the same set the index card shows, larger) ── */}
+      {event.photos && event.photos.length > 0 && (
+        <section className="px-6 pb-12 md:pb-16">
+          <div className="max-w-3xl mx-auto grid grid-cols-3 gap-2 md:gap-3">
+            {event.photos.map((src, i) => (
+              <a
+                key={src}
+                href={src}
+                target="_blank"
+                rel="noopener"
+                className="relative aspect-[4/5] overflow-hidden rounded-xl block"
+                style={{ background: "var(--color-gray-light)" }}
+              >
+                <Image
+                  src={src}
+                  alt={`${event.title} photo ${i + 1}`}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 33vw, 250px"
+                />
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* ── Recap (past events) ── */}
       {isPast && event.recap && (

@@ -57,6 +57,13 @@ export const EVENTS: SiteEvent[] = [
       "Paper World's fourth stop of the year and the closest one to home: 50+ stationery vendors, the Paper Lounge, and a sold-out Traveler's Notebook Workshop an hour from the studio.",
     detailPage: true,
     eventUrl: "https://www.paperworldstationeryexpo.com/",
+    // Three no-face shots from the class (pages and hands only); the full set
+    // lives on the unlisted /class/anaheim page for the people in the room.
+    photos: [
+      "/images/anaheim-2026/anaheim-01.jpg",
+      "/images/anaheim-2026/anaheim-07.jpg",
+      "/images/anaheim-2026/anaheim-08.jpg",
+    ],
     // The class photo page is unlisted (for the people in the room), so the
     // public recap points at her channels, same as Orlando.
     recap: {
@@ -106,6 +113,12 @@ export const EVENTS: SiteEvent[] = [
       "Amy's paintings are on the walls of the coziest bookstore-café on the west side, and they stay up through about October 6. Drop in any day the shop is open; the work is for sale, and the coffee is good.",
     detailPage: true,
     eventUrl: "https://villagewell.com/community/art-gallery",
+    // Amy's three, texted 9/23: the wall, a table of people making at the gallery, Amy with friends in front of the work.
+    photos: [
+      "/images/village-well-2026/village-well-03.jpg",
+      "/images/village-well-2026/village-well-02.jpg",
+      "/images/village-well-2026/village-well-01.jpg",
+    ],
   },
 
   // ── Past ──
