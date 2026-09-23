@@ -24,6 +24,7 @@ import {
   HM_PRICE_6MONTH as PRICE_6MONTH,
   HM_BOX_CONTENTS as BOX_CONTENTS,
   HM_TESTIMONIALS as TESTIMONIALS,
+  HM_RECENT_ENVELOPES as RECENT_ENVELOPES,
   HM_FAQ_ITEMS as FAQ_ITEMS,
 } from "@/lib/happy-mail-content"
 
@@ -185,8 +186,28 @@ export default function HappyMailClient() {
         </div>
       </section>
 
+      {RECENT_ENVELOPES.length > 0 && (
+        <section id="inside" className="py-12 md:py-16 px-4 md:px-10">
+          <h2 className="text-[15px] md:text-[17px] uppercase tracking-[0.12em] font-semibold text-center mb-8 md:mb-10" style={{ color: "var(--color-text-primary)" }}>
+            Recent envelopes
+          </h2>
+          <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {RECENT_ENVELOPES.map((e) => (
+              <figure key={e.month}>
+                <div className="relative aspect-square bg-gray-50 rounded-xl overflow-hidden mb-2">
+                  <Image src={e.img} alt={`${e.month} Happy Mail envelope`} fill className="object-cover" sizes="(max-width: 640px) 100vw, 33vw" />
+                </div>
+                <figcaption className="text-[13px] font-semibold" style={{ color: "var(--color-text-primary)" }}>{e.month}</figcaption>
+                {e.caption && <p className="text-[12px] leading-snug" style={{ color: "var(--color-text-secondary)" }}>{e.caption}</p>}
+              </figure>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* ── Testimonials ── */}
       <section
+        id="fan-mail"
         className="py-12 md:py-16 px-4 md:px-10"
         style={{ background: "var(--color-gray-light)" }}
       >

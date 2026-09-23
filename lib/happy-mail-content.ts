@@ -44,6 +44,14 @@ export const HM_BOX_CONTENTS = [
   { label: "What's inside", body: "Everything that comes each month", img: "/images/happy-mail/whats-inside.jpg" },
 ]
 
+// Recent envelopes: one entry per month, newest first, from Amy's flat-lay photos.
+// The /happy-mail "Recent envelopes" strip (anchor #inside) renders only when
+// this has entries. Welcome letter 3 (Klaviyo flow Smbfkz) links there, so keep
+// at least the last three months once photos exist. Never use a stock or
+// product-render image here: the point is what actually went out.
+export type HmEnvelope = { month: string; img: string; caption?: string }
+export const HM_RECENT_ENVELOPES: HmEnvelope[] = []
+
 // Testimonials — REAL subscribers, verbatim from their own emails to hello@.
 // Replaced the four fabricated placeholders on 2026-08-04.
 //
