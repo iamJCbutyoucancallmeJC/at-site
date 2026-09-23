@@ -46,7 +46,7 @@ export const EVENTS: SiteEvent[] = [
   // ── Upcoming ──
   {
     slug: "paper-world-anaheim-september",
-    status: "upcoming",
+    status: "past",
     title: "Paper World Stationery Expo",
     label: "Stationery Expo",
     city: "Anaheim, CA",
@@ -54,16 +54,17 @@ export const EVENTS: SiteEvent[] = [
     dates: "September 19, 2026",
     sortDate: "2026-09-19",
     blurb:
-      "Paper World comes back to Anaheim: 50+ curated stationery vendors, workshops, the Paper Lounge, and a full Saturday of paper people. Amy's fourth Paper World this year, and the closest one to home.",
-    meetAmy:
-      "Stop by Amy's table to shop her supplies in person, see new goodies first, and say hi. She loves meeting people who make things.",
+      "Paper World's fourth stop of the year and the closest one to home: 50+ stationery vendors, the Paper Lounge, and a sold-out Traveler's Notebook Workshop an hour from the studio.",
     detailPage: true,
     eventUrl: "https://www.paperworldstationeryexpo.com/",
-    ticketUrl: "https://www.paperworldstationeryexpo.com/tickets-anaheim",
-    details: [
-      "Anaheim Marriott, 700 W Convention Way, Anaheim, CA 92802",
-      "Saturday, September 19 · VIP 11am–6pm · General admission 1pm–6pm",
-    ],
+    // The class photo page is unlisted (for the people in the room), so the
+    // public recap points at her channels, same as Orlando.
+    recap: {
+      links: [
+        { label: "Amy on YouTube", href: "https://youtube.com/@amytangerine" },
+        { label: "Amy on Instagram", href: "https://instagram.com/amytangerine" },
+      ],
+    },
   },
   {
     slug: "little-craft-fest-fall-2026",
