@@ -132,7 +132,7 @@ export default function AnaheimClassPage() {
               <p>
                 Save any you love, share them wherever you like, and tag me so I can see.
               </p>
-              <p>Thank you for being you, and for being close enough to come.</p>
+              <p>Thank you for being you.</p>
             </div>
             <p
               className="mt-6 text-[18px] font-semibold"
