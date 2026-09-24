@@ -30,9 +30,13 @@ const MOBILE_LINKS = [
 
 // Pages that already carry a capture form of their own (JC 9/6: two on one
 // page is one too many).
+// Keep in sync with every page that renders WaitlistForm or EmailCaptureInline
+// itself (JC 9/23: event detail pages were showing both).
+const OWN_FORM_EXACT = ["/", "/join", "/creativity", "/events", "/japan"]
+const OWN_FORM_PREFIXES = ["/v/", "/events/", "/blog/", "/class/"]
 function hasOwnCaptureForm(pathname: string | null): boolean {
   if (!pathname) return false
-  return pathname === "/" || pathname === "/join" || pathname === "/creativity" || pathname.startsWith("/v/")
+  return OWN_FORM_EXACT.includes(pathname) || OWN_FORM_PREFIXES.some((p) => pathname.startsWith(p))
 }
 
 export default function Footer() {
