@@ -6,6 +6,11 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  // Class printables are read from disk by app/classes/[slug]/files (t1102);
+  // they live outside /public on purpose, so trace them into the function.
+  outputFileTracingIncludes: {
+    "/classes/[slug]/files/[file]": ["./content/classes/**/*"],
+  },
   async redirects() {
     return [
       // Houston conference cohort closed 2026-06-16 (t659): finite 6-month, 11 subs ride to

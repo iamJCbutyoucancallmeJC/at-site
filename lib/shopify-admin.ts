@@ -1,5 +1,7 @@
 /**
- * Shopify ADMIN API client -- PREVIEW USE ONLY.
+ * Shopify ADMIN API client -- server-only writes and preview reads.
+ * (Was "preview use only"; since 2026-09-23 lib/class-grant.ts also uses
+ * adminFetch to stamp class access links on orders, t1102.)
  *
  * The public site reads via the Storefront API (lib/shopify.ts), which can only
  * see ACTIVE products published to the Online Store. This module reads via the

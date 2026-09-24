@@ -14,8 +14,16 @@
 // non-browser purchase can retain the buyer's GA identity/first-touch context.
 // Without a session_id it remains session-unattributed. If client_id is missing
 // (consent-blocked, etc.) we fall back to a deterministic synthetic id.
+//
+// Second job (t1102, 2026-09-23): class access. Every order is checked for a
+// class product (lib/classes.ts); a hit mints the buyer's permanent magic link,
+// fires the Klaviyo "Class access granted" event and stamps the link on the
+// order (lib/class-grant.ts). This runs for EVERY channel, before the
+// browser-pixel early return below, because a class bought at web checkout is
+// exactly the case the pixel covers for GA4 and this must still grant.
 
 import { NextResponse } from "next/server"
+import { grantClassAccess } from "@/lib/class-grant"
 
 export const dynamic = "force-dynamic"
 export const runtime = "nodejs" // need the raw body for HMAC; keep it simple
@@ -44,7 +52,7 @@ async function verifyShopifyHmac(rawBody: string, headerHmac: string): Promise<b
   return diff === 0
 }
 
-type ShopifyLineItem = { sku: string | null; title: string | null; price: string; quantity: number }
+type ShopifyLineItem = { sku: string | null; title: string | null; price: string; quantity: number; product_id?: number | null }
 type ShopifyOrder = {
   id: number
   name: string
@@ -52,6 +60,9 @@ type ShopifyOrder = {
   currency: string
   source_name?: string | null
   tags?: string | null
+  email?: string | null
+  contact_email?: string | null
+  customer?: { email?: string | null; first_name?: string | null } | null
   note_attributes?: { name: string; value: string }[]
   line_items?: ShopifyLineItem[]
 }
@@ -103,12 +114,23 @@ export async function POST(request: Request) {
 
   const orderChannel = classifyOrderChannel(order)
 
+  // Class access (t1102). Best-effort; never blocks the ack. The ack carries
+  // only status words, never the link: Shopify keeps webhook responses in its
+  // delivery log and the link is the credential.
+  let classes: { slug: string; klaviyo: string; metafield: string }[] = []
+  try {
+    classes = (await grantClassAccess(order)).map((g) => ({ slug: g.slug, klaviyo: g.klaviyo, metafield: g.metafield }))
+  } catch (err) {
+    console.error("[orders-create] class grant failed:", err)
+  }
+
   if (hasShopifyBrowserPurchase(order)) {
     return NextResponse.json({
       ok: true,
       sent: false,
       reason: "shopify-browser-pixel-authoritative",
       order_channel: orderChannel,
+      classes,
     })
   }
 
@@ -119,6 +141,7 @@ export async function POST(request: Request) {
       sent: false,
       reason: "ga-env-missing",
       order_channel: orderChannel,
+      classes,
     })
   }
 
@@ -168,5 +191,5 @@ export async function POST(request: Request) {
     // Still ack: a failed analytics send should not make Shopify retry forever.
   }
 
-  return NextResponse.json({ ok: true, sent: true, attributed: Boolean(gaClientId), order_channel: orderChannel })
+  return NextResponse.json({ ok: true, sent: true, attributed: Boolean(gaClientId), order_channel: orderChannel, classes })
 }
