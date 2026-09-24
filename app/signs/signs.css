@@ -1,0 +1,273 @@
+/* Sign maker styles (/signs, t1378 prototype).
+ *
+ * Namespaced `sg-` and scoped under `.sg-root`, same reasoning as
+ * app/photobooth/photobooth.css: this lives inside at-site where generic class
+ * names already mean something. Class selectors everywhere so Tailwind's
+ * preflight (`canvas { display: block }` etc.) never wins on specificity.
+ *
+ * Colors are the site's real brand tokens (globals.css: --color-orange
+ * #FD891C, --color-teal #00ADB3), not the photobooth's own pair, because this
+ * page has no standalone look to preserve.
+ */
+
+.sg-root,
+.sg-root *,
+.sg-root *::before,
+.sg-root *::after {
+  box-sizing: border-box;
+}
+
+.sg-root {
+  --sg-orange: var(--color-orange, #fd891c);
+  --sg-orange-dark: var(--color-orange-dark, #e57510);
+  --sg-teal: var(--color-teal, #00adb3);
+  --sg-teal-dark: var(--color-teal-dark, #009399);
+  --sg-border: var(--color-border, #e5e5e5);
+  --sg-gray: var(--color-text-secondary, #555555);
+  --sg-light: var(--color-gray-light, #f3f5f7);
+
+  font-family: var(--font-quicksand), "Quicksand", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
+  background: var(--color-white, #ffffff);
+  color: var(--color-text-primary, #000000);
+}
+
+.sg-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 20px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sg-header {
+  text-align: center;
+}
+
+.sg-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--sg-orange);
+  letter-spacing: 0.01em;
+  margin: 0 0 4px;
+}
+
+.sg-tagline {
+  font-size: 0.9rem;
+  color: var(--sg-gray);
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Board preview */
+.sg-board-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.sg-canvas {
+  display: block;
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
+}
+
+.sg-status {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--sg-gray);
+  min-height: 20px;
+  margin: 0;
+}
+
+/* Controls */
+.sg-controls {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  max-width: 620px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.sg-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sg-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sg-gray);
+}
+
+.sg-textarea {
+  width: 100%;
+  min-height: 84px;
+  padding: 12px 14px;
+  border: 2px solid var(--sg-border);
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.35;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.sg-textarea:focus {
+  border-color: var(--sg-orange);
+}
+
+.sg-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sg-chip {
+  background: #fff;
+  border: 2px solid var(--sg-border);
+  color: var(--sg-gray);
+  padding: 8px 16px;
+  border-radius: 22px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.15s;
+  line-height: 1;
+}
+
+.sg-chip:hover {
+  border-color: var(--sg-orange);
+  color: var(--sg-orange);
+}
+
+.sg-chip.sg-active {
+  background: var(--sg-orange);
+  border-color: var(--sg-orange);
+  color: #fff;
+}
+
+/* Color swatches: the chip's background IS the letter color. */
+.sg-swatch {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 2px var(--sg-border);
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.sg-swatch:hover {
+  transform: scale(1.08);
+}
+
+.sg-swatch.sg-active {
+  box-shadow: 0 0 0 3px var(--sg-orange);
+}
+
+/* Board finish swatches are wider so the grain reads. */
+.sg-finish {
+  width: 64px;
+  height: 36px;
+  border-radius: 8px;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 2px var(--sg-border);
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.sg-finish:hover {
+  transform: scale(1.05);
+}
+
+.sg-finish.sg-active {
+  box-shadow: 0 0 0 3px var(--sg-orange);
+}
+
+.sg-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.sg-btn {
+  padding: 14px 28px;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sg-btn:not(.sg-secondary) {
+  background: var(--sg-orange);
+  border: none;
+  color: #fff;
+}
+
+.sg-btn:not(.sg-secondary):hover {
+  background: var(--sg-orange-dark);
+  transform: translateY(-1px);
+}
+
+.sg-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.sg-btn.sg-secondary {
+  background: #fff;
+  border: 2px solid var(--sg-teal);
+  color: var(--sg-teal);
+}
+
+.sg-btn.sg-secondary:hover {
+  background: var(--sg-teal);
+  color: #fff;
+}
+
+.sg-note {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--sg-gray);
+  margin: 0;
+}
+
+@media (min-width: 640px) {
+  .sg-controls {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sg-field.sg-wide {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 400px) {
+  .sg-container {
+    padding: 16px 14px 32px;
+  }
+
+  .sg-chip {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+}

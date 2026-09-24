@@ -33,6 +33,9 @@ export type AnalyticsEvent =
   // measurement; these are the two moments worth counting.
   | 'photobooth_session_start'
   | 'photobooth_strip_save'
+  // Sign maker (/signs, t1378): a phrase rendered on the board, and the PNG saved.
+  | 'signs_render'
+  | 'signs_save'
   // Class follow-up pages (/class/*, t1246): did the class open + save the photos?
   | 'class_photo_open'
   | 'class_photo_save'
