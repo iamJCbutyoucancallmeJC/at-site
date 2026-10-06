@@ -307,10 +307,10 @@ export const IHM_FAQ_ITEMS = [
 // checkout backstops agree. Client components must call hmIsClosed() only after
 // mount (see components/hm-closed.tsx) or the server and browser render differ.
 // ---------------------------------------------------------------------------
-export const HM_CLOSED_MONTH: string | null = null
+export const HM_CLOSED_MONTH: string | null = "2026-10"
 export const HM_REOPEN_DAY = 16 // closed through the 15th; the 16th already promises next month
 // Klaviyo list "Happy Mail waitlist: October 2026". List ids are not secret.
-export const HM_WAITLIST_LIST_ID = ""
+export const HM_WAITLIST_LIST_ID = "RbXtks"
 export const HM_WAITLIST_SOURCE = "hm-waitlist-oct-2026"
 
 export function hmPacificYmd(now: Date = new Date()): { ym: string; day: number } {
