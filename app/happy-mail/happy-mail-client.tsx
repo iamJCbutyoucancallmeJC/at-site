@@ -13,6 +13,8 @@ import { useSearchParams } from "next/navigation"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 import FaqAccordion from "@/components/faq-accordion"
 import FirstEnvelopePromise from "@/components/first-envelope-promise"
+import HmWaitlistForm from "@/components/hm-waitlist-form"
+import { useHmClosed, HmButtonPlaceholder } from "@/components/hm-closed"
 import { useCart } from "@/context/cart"
 import { trackEvent } from "@/lib/analytics"
 import {
@@ -26,6 +28,7 @@ import {
   HM_TESTIMONIALS as TESTIMONIALS,
   HM_RECENT_ENVELOPES as RECENT_ENVELOPES,
   HM_FAQ_ITEMS as FAQ_ITEMS,
+  hmFaqForState,
 } from "@/lib/happy-mail-content"
 
 function SubscribeButton({ plan, dark = true }: { plan: "monthly" | "6-month"; dark?: boolean }) {
@@ -63,6 +66,8 @@ export default function HappyMailClient() {
   // /shop/happy-mail), pre-emphasize the 6-Month card and scroll the plan picker into
   // view so the customer lands on the plan they clicked. 2026-05-30.
   const [highlight6mo, setHighlight6mo] = useState(false)
+  // October 2026 cap (t1702): null until mounted, then closed/open in Pacific time.
+  const closed = useHmClosed()
   useEffect(() => {
     if (searchParams.get("plan") !== "6-month") return
     setHighlight6mo(true)
@@ -102,6 +107,11 @@ export default function HappyMailClient() {
       </section>
 
       <section id="subscribe" className="px-4 md:px-10 pb-12 md:pb-16">
+        {closed ? (
+          <div className="max-w-2xl mx-auto">
+            <HmWaitlistForm page="happy-mail" />
+          </div>
+        ) : (
         <div className="max-w-2xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div className="rounded-2xl p-5 border" style={{ background: "var(--color-white)", borderColor: "var(--color-border)" }}>
             <p className="text-[11px] uppercase tracking-[0.15em] font-semibold mb-2" style={{ color: "var(--color-text-secondary)" }}>Monthly</p>
@@ -110,7 +120,7 @@ export default function HappyMailClient() {
               <span className="text-[13px] mb-1" style={{ color: "var(--color-text-secondary)" }}>/month</span>
             </div>
             <p className="text-[11px] mb-4" style={{ color: "var(--color-text-secondary)" }}>Renews monthly · cancel anytime</p>
-            <SubscribeButton plan="monthly" dark={false} />
+            {closed === null ? <HmButtonPlaceholder /> : <SubscribeButton plan="monthly" dark={false} />}
           </div>
           <div
             ref={sixMonthRef}
@@ -137,13 +147,20 @@ export default function HappyMailClient() {
                 Final wording is JC+Amy's call — do not mark t658 done. */}
             <p className="text-[20px] md:text-[22px] font-extrabold leading-none mb-0.5" style={{ color: "var(--color-teal)" }}>Save $6</p>
             <p className="text-[11px] mb-4" style={{ color: "var(--color-text-secondary)" }}>billed every 6 months</p>
-            <SubscribeButton plan="6-month" dark={true} />
+            {closed === null ? <HmButtonPlaceholder /> : <SubscribeButton plan="6-month" dark={true} />}
           </div>
         </div>
+        )}
         {/* d062 (t1079): date-aware first-envelope promise (replaces the static
             "Ships around the 15th." line). Wording is Amy-veto-gated via the
             fall-plan doc; merge to main only after the veto window clears. */}
-        <FirstEnvelopePromise />
+        {closed ? (
+          <p className="text-center text-[11px] mt-4" style={{ color: "var(--color-text-secondary)" }}>
+            Happy Mail reopens October 16. Envelopes ship around the 15th.
+          </p>
+        ) : (
+          <FirstEnvelopePromise />
+        )}
       </section>
 
       {/* ── Editorial: a note about Happy Mail (reused from prior site, Amy's voice) ── */}
@@ -255,7 +272,7 @@ export default function HappyMailClient() {
           >
             Questions?
           </h2>
-          <FaqAccordion items={FAQ_ITEMS} />
+          <FaqAccordion items={hmFaqForState(FAQ_ITEMS, closed === true)} />
         </div>
       </section>
     </main>

@@ -6,6 +6,7 @@
 
 import { NextResponse } from "next/server"
 import { createCart, addToCart, extractCartToken } from "@/lib/shopify"
+import { hmIsClosed, hmCapVariantGids } from "@/lib/happy-mail-content"
 
 const RETURN_BASE = "https://amytangerine.com/thank-you"
 
@@ -18,6 +19,20 @@ export async function POST(request: Request) {
 
     if (!Array.isArray(items) || items.length === 0) {
       return NextResponse.json({ error: "No items" }, { status: 400 })
+    }
+
+    // October 2026 cap (t1702): a Happy Mail subscription already sitting in the
+    // cart drawer must not check out while closed. The page hides the buttons; this
+    // is the backstop for carts filled before the flip (and for cached pages).
+    if (hmIsClosed()) {
+      const capped = hmCapVariantGids()
+      const blocked = items.find((it) => it.sellingPlanId && capped.has(it.variantId))
+      if (blocked) {
+        return NextResponse.json(
+          { closed: true, error: "October Happy Mail is full. Remove it from your cart to check out, or join the waitlist at /happy-mail." },
+          { status: 409 },
+        )
+      }
     }
 
     // Attach the GA client_id as a cart attribute so it rides through every

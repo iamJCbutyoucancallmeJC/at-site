@@ -21,7 +21,7 @@
 
 import { NextResponse } from "next/server"
 import { createCart, addToCart, applyDiscountCode, extractCartToken } from "@/lib/shopify"
-import { HM_VARIANT_6MONTH_GID, HM_SELLING_PLAN_6MO } from "@/lib/happy-mail-content"
+import { HM_VARIANT_6MONTH_GID, HM_SELLING_PLAN_6MO, hmIsClosed } from "@/lib/happy-mail-content"
 
 const RETURN_BASE = "https://amytangerine.com/thank-you"
 
@@ -32,6 +32,10 @@ const EVENT_DISCOUNT_CODE = process.env.NEXT_PUBLIC_PAPERWORLD_DISCOUNT_CODE ?? 
 
 export async function POST(request: Request) {
   try {
+    // October 2026 cap (t1702): no new Happy Mail subscription while closed.
+    if (hmIsClosed()) {
+      return NextResponse.json({ closed: true, error: "October is full. Happy Mail reopens October 16." }, { status: 409 })
+    }
     const { gaClientId } = (await request.json().catch(() => ({}))) as { gaClientId?: string }
 
     // Stamp the GA client_id (so the orders/create webhook attributes the

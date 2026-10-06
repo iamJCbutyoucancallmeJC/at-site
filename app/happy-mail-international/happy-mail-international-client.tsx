@@ -17,6 +17,8 @@
 import Image from "next/image"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 import FaqAccordion from "@/components/faq-accordion"
+import HmWaitlistForm from "@/components/hm-waitlist-form"
+import { useHmClosed, HmButtonPlaceholder } from "@/components/hm-closed"
 import TrackableLink from "@/components/trackable-link"
 import { useCart } from "@/context/cart"
 import { trackEvent } from "@/lib/analytics"
@@ -28,6 +30,7 @@ import {
   IHM_SELLING_PLAN_6MONTH,
   IHM_PRICE_6MONTH_USD as PRICE_6MONTH,
   IHM_6MONTH_READY,
+  hmFaqForState,
   IHM_BOX_CONTENTS as BOX_CONTENTS,
   IHM_TESTIMONIALS as TESTIMONIALS,
   IHM_FAQ_ITEMS as FAQ_ITEMS,
@@ -76,6 +79,8 @@ export default function HappyMailInternationalClient({ localizedPrice }: { local
   // localizedPrice is the MONTHLY @inContext price string from Shopify (e.g. "CA$23.00", "£13.00").
   // Falls back to the flat USD label when absent (US visitor / local dev / no geo header).
   const priceLabel = localizedPrice ?? `$${PRICE}.00`
+  // October 2026 cap (t1702): international envelopes count against the same 444.
+  const closed = useHmClosed()
   return (
     <main className="min-h-screen" style={{ background: "var(--color-white)" }}>
       <PageEngagementTracker page="happy-mail-international" />
@@ -113,6 +118,11 @@ export default function HappyMailInternationalClient({ localizedPrice }: { local
 
       {/* ── Subscribe (two-tier: Monthly + 6-Month, both live) ── */}
       <section id="subscribe" className="px-4 md:px-10 pb-12 md:pb-16">
+        {closed ? (
+          <div className="max-w-2xl mx-auto">
+            <HmWaitlistForm page="happy-mail-international" />
+          </div>
+        ) : (
         <div className={`mx-auto grid gap-4 ${IHM_6MONTH_READY ? "max-w-2xl sm:grid-cols-2" : "max-w-md"}`}>
           {/* Monthly */}
           <div className="rounded-2xl p-6 border-2 relative flex flex-col" style={{ background: "var(--color-white)", borderColor: "var(--color-border)" }}>
@@ -122,7 +132,7 @@ export default function HappyMailInternationalClient({ localizedPrice }: { local
               <span className="text-[13px] mb-1" style={{ color: "var(--color-text-secondary)" }}>/month</span>
             </div>
             <p className="text-[11px] mb-4 flex-1" style={{ color: "var(--color-text-secondary)" }}>Postage included · cancel anytime</p>
-            <SubscribeButton plan="monthly" label={`Subscribe · ${priceLabel}/mo`} />
+            {closed === null ? <HmButtonPlaceholder /> : <SubscribeButton plan="monthly" label={`Subscribe · ${priceLabel}/mo`} />}
           </div>
 
           {/* 6-Month (renders only when the tier is live) */}
@@ -135,13 +145,18 @@ export default function HappyMailInternationalClient({ localizedPrice }: { local
                 <span className="text-[13px] mb-1" style={{ color: "var(--color-text-secondary)" }}>/6 months</span>
               </div>
               <p className="text-[11px] mb-4 flex-1" style={{ color: "var(--color-text-secondary)" }}>Billed once every 6 months · postage included · shown in your local currency at checkout</p>
-              <SubscribeButton plan="6-month" label={`Subscribe · $${PRICE_6MONTH}/6mo`} />
+              {closed === null ? <HmButtonPlaceholder /> : <SubscribeButton plan="6-month" label={`Subscribe · $${PRICE_6MONTH}/6mo`} />}
             </div>
           )}
         </div>
+        )}
+        {closed ? (
+          <p className="text-center text-[11px] mt-4" style={{ color: "var(--color-text-secondary)" }}>Happy Mail reopens October 16. Ships around the 15th. International postage included.</p>
+        ) : (
         <p className="text-center text-[11px] mt-4" style={{ color: "var(--color-text-secondary)" }}>
           <span className="font-semibold" style={{ color: "var(--color-orange)" }}>First in your market</span> — subscribe now and lock in this rate. Ships around the 15th. International postage included.
         </p>
+        )}
       </section>
 
       {/* ── Editorial ── */}
@@ -211,7 +226,7 @@ export default function HappyMailInternationalClient({ localizedPrice }: { local
           <h2 className="text-[15px] md:text-[17px] uppercase tracking-[0.12em] font-semibold mb-8" style={{ color: "var(--color-text-primary)" }}>
             Questions?
           </h2>
-          <FaqAccordion items={FAQ_ITEMS} />
+          <FaqAccordion items={hmFaqForState(FAQ_ITEMS, closed === true)} />
         </div>
       </section>
     </main>

@@ -19,13 +19,17 @@
 
 import { NextResponse } from "next/server"
 import { createCart, addToCart, applyDiscountCode, extractCartToken } from "@/lib/shopify"
-import { HM_VARIANT_MONTHLY_GID, HM_SELLING_PLAN_1MO } from "@/lib/happy-mail-content"
+import { HM_VARIANT_MONTHLY_GID, HM_SELLING_PLAN_1MO, hmIsClosed } from "@/lib/happy-mail-content"
 
 const RETURN_BASE = "https://amytangerine.com/thank-you"
 const YT_DISCOUNT_CODE = process.env.NEXT_PUBLIC_YT_DISCOUNT_CODE ?? "YTHM9"
 
 export async function POST(request: Request) {
   try {
+    // October 2026 cap (t1702): no new Happy Mail subscription while closed.
+    if (hmIsClosed()) {
+      return NextResponse.json({ closed: true, error: "October is full. Happy Mail reopens October 16." }, { status: 409 })
+    }
     const { gaClientId } = (await request.json().catch(() => ({}))) as { gaClientId?: string }
 
     const attributes = [
