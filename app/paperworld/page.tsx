@@ -18,6 +18,7 @@
 import { useState } from "react"
 import Image from "next/image"
 import { trackEvent } from "@/lib/analytics"
+import { useHmClosed } from "@/components/hm-closed"
 import { HM_PRICE_6MONTH, HM_TESTIMONIALS } from "@/lib/happy-mail-content"
 
 // Event facts (Paper World Stationery Expo — Anaheim stop).
@@ -73,6 +74,8 @@ const TESTIMONIALS = HM_TESTIMONIALS.slice(0, 3)
 export default function PaperworldPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
+  // October 2026 cap (t1702): closed notice instead of the button; the route 409s too.
+  const closed = useHmClosed()
 
   async function handleCheckout() {
     setLoading(true)
@@ -198,6 +201,9 @@ export default function PaperworldPage() {
           </p>
 
           {/* CTA button */}
+          {closed ? (
+            <p className="text-[14px] font-semibold" style={{ color: "var(--color-orange)" }}>October is full. Happy Mail reopens October 16. <a href="/happy-mail" className="underline">Join the waitlist</a></p>
+          ) : (
           <button
             onClick={handleCheckout}
             disabled={loading}
@@ -206,6 +212,7 @@ export default function PaperworldPage() {
           >
             {loading ? "One moment..." : `Subscribe — $${EVENT_PRICE}`}
           </button>
+          )}
 
           {error && (
             <p className="mt-3 text-[12px]" style={{ color: "#c0392b" }}>

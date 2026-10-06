@@ -291,3 +291,63 @@ export const IHM_FAQ_ITEMS = [
     link: { href: "/happy-mail", label: "US Happy Mail →" },
   },
 ]
+
+// ---------------------------------------------------------------------------
+// October 2026 cap (JC + Amy 2026-10-05; waitlist version JC 2026-10-06; t1702).
+// October's envelope carries a mini print and only 444 exist, so October closes at
+// 430 and a waitlist replaces the buy buttons until the reopen. Runbook in the
+// vault: Happy Mail/october-cap-runbook-2026-10-05.md.
+//
+// ONE SWITCH: HM_CLOSED_MONTH. null = open (normal site). "2026-10" = closed for
+// that month through the day before HM_REOPEN_DAY, Pacific time. On the reopen
+// day the switch goes inert on its own: no deploy needed. Set it back to null
+// before the next month as cleanup.
+//
+// Pacific everywhere (server routes and the browser alike) so the page and the
+// checkout backstops agree. Client components must call hmIsClosed() only after
+// mount (see components/hm-closed.tsx) or the server and browser render differ.
+// ---------------------------------------------------------------------------
+export const HM_CLOSED_MONTH: string | null = null
+export const HM_REOPEN_DAY = 16 // closed through the 15th; the 16th already promises next month
+// Klaviyo list "Happy Mail waitlist: October 2026". List ids are not secret.
+export const HM_WAITLIST_LIST_ID = ""
+export const HM_WAITLIST_SOURCE = "hm-waitlist-oct-2026"
+
+export function hmPacificYmd(now: Date = new Date()): { ym: string; day: number } {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/Los_Angeles",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(now)
+  const get = (t: string) => parts.find((p) => p.type === t)?.value ?? ""
+  return { ym: `${get("year")}-${get("month")}`, day: Number(get("day")) }
+}
+
+export function hmIsClosed(now: Date = new Date()): boolean {
+  if (!HM_CLOSED_MONTH) return false
+  const { ym, day } = hmPacificYmd(now)
+  return ym === HM_CLOSED_MONTH && day < HM_REOPEN_DAY
+}
+
+// Copy shown while closed. Amy ok'd the waitlist wording 2026-10-06.
+export const HM_CLOSED_HEADLINE = "October's envelopes are all spoken for."
+export const HM_CLOSED_BODY =
+  "Leave your email and we'll tell you the moment Happy Mail opens again on October 16. Your first envelope will be November's."
+export const HM_CLOSED_FAQ_ANSWER =
+  "October is full: every October envelope is spoken for. Happy Mail opens again on October 16, and anyone who subscribes then gets November's envelope first. Leave your email above and we'll tell you the moment it reopens."
+
+// Swap the first-envelope FAQ answer while closed. The FAQ_ITEMS arrays above are
+// t658-locked policy copy; this leaves them untouched and only changes the render.
+export function hmFaqForState<T extends { q: string; a: string }>(items: T[], closed: boolean): T[] {
+  if (!closed) return items
+  return items.map((it) =>
+    it.q === "Which month will my first envelope be?" ? { ...it, a: HM_CLOSED_FAQ_ANSWER } : it,
+  )
+}
+
+// Variants that count against the October cap: every HM / IHM subscription variant
+// the site can put in a cart. /api/checkout/cart refuses these while closed.
+export function hmCapVariantGids(): Set<string> {
+  return new Set([HM_VARIANT_MONTHLY_GID, HM_VARIANT_6MONTH_GID, IHM_VARIANT_GID, IHM_VARIANT_6MONTH_GID])
+}

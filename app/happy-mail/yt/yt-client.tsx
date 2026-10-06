@@ -4,6 +4,8 @@ import { useState } from "react"
 import Image from "next/image"
 import { trackEvent } from "@/lib/analytics"
 import { HM_PRICE_MONTHLY } from "@/lib/happy-mail-content"
+import HmWaitlistForm from "@/components/hm-waitlist-form"
+import { useHmClosed, HmButtonPlaceholder } from "@/components/hm-closed"
 
 const YT_OFF = 4
 const FIRST_MONTH = HM_PRICE_MONTHLY - YT_OFF // 9
@@ -22,6 +24,8 @@ export default function YtLandingClient({ videoId }: { videoId: string }) {
   const [error, setError] = useState("")
   const [email, setEmail] = useState("")
   const [emailState, setEmailState] = useState<"idle" | "sending" | "done" | "error">("idle")
+  // October 2026 cap (t1702). Amy's video sends people here, so this page gets the waitlist.
+  const closed = useHmClosed()
 
   async function handleCheckout() {
     setLoading(true)
@@ -125,6 +129,12 @@ export default function YtLandingClient({ videoId }: { videoId: string }) {
             studio you&apos;ve been watching, mailed to you once a month.
           </p>
 
+          {closed ? (
+            <div className="mt-5">
+              <HmWaitlistForm page="happy-mail-yt" compact />
+            </div>
+          ) : (
+          <>
           {/* Price block */}
           <div className="mb-1 mt-5">
             <span className="text-[34px] font-bold" style={{ color: "var(--color-text-primary)" }}>
@@ -141,6 +151,7 @@ export default function YtLandingClient({ videoId }: { videoId: string }) {
             YouTube thank-you applied automatically at checkout
           </p>
 
+          {closed === null ? <HmButtonPlaceholder /> : (
           <button
             onClick={handleCheckout}
             disabled={loading}
@@ -149,6 +160,7 @@ export default function YtLandingClient({ videoId }: { videoId: string }) {
           >
             {loading ? "One moment..." : "Get Happy Mail"}
           </button>
+          )}
           {error && (
             <p className="mt-3 text-[13px]" style={{ color: "#c0392b" }}>
               {error}
@@ -160,6 +172,8 @@ export default function YtLandingClient({ videoId }: { videoId: string }) {
             Free US shipping. (Already used your YouTube thank-you? The button
             simply works at the regular price.)
           </p>
+          </>
+          )}
         </div>
       </section>
 
