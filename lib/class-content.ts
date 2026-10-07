@@ -3,7 +3,7 @@
 
 import "server-only"
 import type { ClassDay } from "@/content/classes/glimmers"
-import { GLIMMERS_DAYS } from "@/content/classes/glimmers"
+import { GLIMMERS_DAYS, GLIMMERS_CONTAINER, type ContainerCue } from "@/content/classes/glimmers"
 
 const DAYS_BY_SLUG: Record<string, ClassDay[]> = {
   glimmers: GLIMMERS_DAYS,
@@ -21,4 +21,12 @@ export function getClassDay(slug: string, n: number): ClassDay | null {
 // allow-list the files route checks before touching the filesystem.
 export function isClassFile(slug: string, name: string): boolean {
   return getClassDays(slug).some((d) => d.files?.some((f) => f.name === name))
+}
+
+const CONTAINER_BY_SLUG: Record<string, { welcome: ContainerCue[]; walkthrough: ContainerCue[] }> = {
+  glimmers: GLIMMERS_CONTAINER,
+}
+
+export function getContainerCues(slug: string, which: "welcome" | "walkthrough"): ContainerCue[] {
+  return CONTAINER_BY_SLUG[slug]?.[which] ?? []
 }

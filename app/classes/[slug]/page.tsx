@@ -6,7 +6,11 @@ import { notFound } from "next/navigation"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 import { getClass, isDayOpen, unlockDate, formatUnlockDate } from "@/lib/classes"
 import { getClassClaim } from "@/lib/class-session"
-import { getClassDays } from "@/lib/class-content"
+import { getClassDays, getContainerCues } from "@/lib/class-content"
+import { getAnswers } from "@/lib/class-answers"
+import { playbackSource } from "@/lib/video"
+import GuidedPlayer from "@/components/class/guided-player"
+import PromptBlock from "@/components/class/prompt-block"
 
 export const dynamic = "force-dynamic"
 
@@ -57,6 +61,8 @@ export default async function ClassHome({
 
   const days = getClassDays(slug)
   const now = new Date()
+  const answers = await getAnswers(claim)
+  const welcome = c.welcomeVideo ? await playbackSource(c.welcomeVideo) : null
 
   return (
     <main className="max-w-2xl mx-auto px-6 pt-16 pb-24">
@@ -69,6 +75,18 @@ export default async function ClassHome({
       </h1>
       <p className="text-[16px] leading-relaxed mb-10" style={{ color: "var(--color-text-secondary)" }}>
         {c.tagline}
+      </p>
+
+      {welcome ? (
+        <section className="mb-14">
+          <GuidedPlayer slug={slug} hls={welcome.hls} poster={welcome.poster} cues={getContainerCues(slug, "welcome")} answers={answers} />
+        </section>
+      ) : null}
+
+      <p className="text-[14px] mb-10">
+        <Link href={`/classes/${slug}/how`} className="underline underline-offset-4" style={{ color: "var(--color-orange)" }}>
+          How the class works
+        </Link>
       </p>
 
       <ol className="divide-y" style={{ borderColor: "var(--color-border)" }}>
@@ -94,6 +112,18 @@ export default async function ClassHome({
           )
         })}
       </ol>
+
+      <section className="mt-16 max-w-[520px]">
+        <PromptBlock
+          slug={slug}
+          promptKey="question"
+          headline="Have a question for Amy?"
+          instruction="Leave it here. She collects them and answers on camera in the middle of the month, and that video lands on this page."
+          initial={answers["question"] ?? ""}
+          placeholder="Your question"
+          compact
+        />
+      </section>
 
       <p className="mt-12 text-[13px] leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
         Order #{claim.orderRef}. Questions or a lost link:{" "}

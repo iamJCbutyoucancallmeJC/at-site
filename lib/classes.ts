@@ -27,6 +27,10 @@ export type ClassDef = {
   days: number
   // A one-line promise shown above the day list.
   tagline: string
+  // Container videos (Bunny Stream GUIDs; scripts/bunny-upload.mjs prints them).
+  // welcome plays on the class home; walkthrough is linked from "How the class works".
+  welcomeVideo?: string
+  walkthroughVideo?: string
 }
 
 export const CLASSES: ClassDef[] = [
@@ -41,6 +45,9 @@ export const CLASSES: ClassDef[] = [
     startDate: "2026-09-01", // staging: every day already open so JC can walk it
     days: 30,
     tagline: "Thirty days of noticing the small good things, one prompt a day.",
+    // Set after the Oct 8 shoot: paste the GUIDs bunny-upload.mjs prints.
+    welcomeVideo: process.env.GLIMMERS_WELCOME_VIDEO_ID || undefined,
+    walkthroughVideo: process.env.GLIMMERS_WALKTHROUGH_VIDEO_ID || undefined,
   },
 ]
 
