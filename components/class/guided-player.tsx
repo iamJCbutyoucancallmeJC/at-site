@@ -46,9 +46,15 @@ export default function GuidedPlayer({ slug, hls, hlsQuery = "", mp4, poster, cu
 
   // Attach the stream. hls.js wherever MSE exists (so the directory token can
   // ride on every child request); otherwise the signed MP4 (iOS Safari).
+  // Keyed on the video PATH, not the full URL: a re-signed URL for the same
+  // video (new token/expiry after a server re-render) must not re-attach.
+  const hlsPath = hls.split("?")[0]
+  const latest = useRef({ hls, hlsQuery, mp4 })
+  latest.current = { hls, hlsQuery, mp4 }
   useEffect(() => {
     const el = video.current
     if (!el) return
+    const { hls, hlsQuery, mp4 } = latest.current
     let hlsInst: { destroy: () => void } | null = null
     let cancelled = false
     import("hls.js").then(({ default: Hls }) => {
@@ -67,7 +73,8 @@ export default function GuidedPlayer({ slug, hls, hlsQuery = "", mp4, poster, cu
       hlsInst = h
     })
     return () => { cancelled = true; hlsInst?.destroy() }
-  }, [hls, hlsQuery, mp4])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hlsPath])
 
   // Cue tracking.
   function onTime() {

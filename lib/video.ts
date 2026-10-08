@@ -38,7 +38,11 @@ export async function playbackSource(videoId: string, ttlSeconds = 6 * 3600, mp4
   if (!TOKEN_KEY) {
     return { hls: `${base}/playlist.m3u8`, hlsQuery: "", mp4: `${base}/play_${mp4Res}.mp4`, poster: `${base}/thumbnail.jpg` }
   }
-  const expires = Math.floor(Date.now() / 1000) + ttlSeconds
+  // Expiry snaps to a window boundary so repeated renders of the same page
+  // produce the SAME signed URL for hours: a React Server Component refresh
+  // mid-playback otherwise hands the player a "new" URL and resets it.
+  const window = Math.max(600, ttlSeconds)
+  const expires = (Math.floor(Date.now() / 1000 / window) + 2) * window
   const dirToken = await sign(`${TOKEN_KEY}${dir}${expires}token_path=${dir}`)
   const hlsQuery = `token=${dirToken}&expires=${expires}&token_path=${encodeURIComponent(dir)}`
   const file = async (name: string) => `${base}/${name}?token=${await sign(`${TOKEN_KEY}${dir}${name}${expires}`)}&expires=${expires}`
