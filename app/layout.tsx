@@ -6,7 +6,7 @@ import Script from "next/script"
 import Nav from "@/components/nav"
 import Footer from "@/components/footer"
 import CartDrawer from "@/components/cart-drawer"
-import KlaviyoFormsBridge from "@/components/klaviyo-forms-bridge"
+import KlaviyoOnsite from "@/components/klaviyo-onsite"
 import { CartProvider } from "@/context/cart"
 import "./globals.css"
 
@@ -59,15 +59,10 @@ export default function RootLayout({
         )}
         {/* Klaviyo onsite (t1092): serves Klaviyo-native signup forms (the D3
             timed/exit-intent popup Amy designs in Klaviyo's builder) once the
-            company id lands in Vercel env. Renders nothing until then. */}
+            company id lands in Vercel env. Renders nothing until then, and
+            nothing on chromeless routes (components/klaviyo-onsite, t1101). */}
         {process.env.NEXT_PUBLIC_KLAVIYO_COMPANY_ID && (
-          <>
-            <Script
-              src={`https://static.klaviyo.com/onsite/js/${process.env.NEXT_PUBLIC_KLAVIYO_COMPANY_ID}/klaviyo.js`}
-              strategy="afterInteractive"
-            />
-            <KlaviyoFormsBridge />
-          </>
+          <KlaviyoOnsite companyId={process.env.NEXT_PUBLIC_KLAVIYO_COMPANY_ID} />
         )}
         <CartProvider>
           <Nav />

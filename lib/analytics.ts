@@ -40,6 +40,8 @@ export type AnalyticsEvent =
   // submit via components/klaviyo-forms-bridge.tsx; these two frame it.
   | 'popup_open'
   | 'popup_close'
+  // Event kit (t1101): the booth capture form on /events/<slug>/booth.
+  | 'event_booth_signup'
 
 // GA4 standard ecommerce item (items[] on add_to_cart / begin_checkout / purchase).
 export type GA4Item = {
