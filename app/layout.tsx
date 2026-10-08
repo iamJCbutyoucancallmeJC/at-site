@@ -22,6 +22,10 @@ export const metadata: Metadata = {
     url: "https://amytangerine.com",
     siteName: "Amy Tangerine",
     type: "website",
+    // Default share image (design critic 2026-10). Pages that define their own
+    // openGraph block (app/happy-mail/layout.tsx, app/blog/page.tsx) replace
+    // this object wholesale, so they need their own `images` to show one.
+    images: [{ url: "https://www.amytangerine.com/og.png", width: 1200, height: 630 }],
   },
 }
 

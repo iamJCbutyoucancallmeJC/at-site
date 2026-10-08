@@ -259,11 +259,20 @@ export default function Nav() {
         }}
       >
         <button
-          className="w-11 h-11 flex items-center justify-center"
+          className="relative w-11 h-11 flex items-center justify-center"
           onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          aria-label={mobileOpen ? "Close menu" : `Open menu${count > 0 ? ` (cart: ${count} items)` : ""}`}
         >
           {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+          {/* Cart count rides on the menu button now that the cart row lives in the drawer. */}
+          {!mobileOpen && count > 0 && (
+            <span
+              className="absolute top-1 right-1 w-4 h-4 flex items-center justify-center text-[9px] font-bold rounded-full text-white"
+              style={{ background: "var(--color-orange)" }}
+            >
+              {count > 9 ? "9+" : count}
+            </span>
+          )}
         </button>
 
         <Link href="/" className="absolute left-1/2 -translate-x-1/2">
@@ -277,22 +286,23 @@ export default function Nav() {
           />
         </Link>
 
-        <button
-          onClick={openCart}
-          className="relative w-11 h-11 flex items-center justify-center"
-          style={{ color: "var(--color-text-primary)" }}
-          aria-label={`Cart${count > 0 ? ` (${count} items)` : ""}`}
+        {/* Happy Mail pill stays visible on phones (design critic 2026-10, F12):
+            it is the store's main line and used to live only inside the drawer.
+            Compact version of the desktop pill; the drawer keeps the full one.
+            The cart button moved into the drawer: menu + centered logo + pill +
+            cart did not fit a 390px row without the pill running into the logo.
+            Adding to cart still opens the cart drawer on its own (context/cart). */}
+        <Link
+          href="/happy-mail"
+          className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-full text-[11px] font-bold text-white whitespace-nowrap"
+          style={{
+            background: "var(--color-orange)",
+            boxShadow: "0 2px 8px rgba(253,137,28,0.3)",
+          }}
+          onClick={() => trackEvent("nav_click", { link_text: "Happy Mail", mobile_or_desktop: "mobile" })}
         >
-          <ShoppingBag size={22} />
-          {count > 0 && (
-            <span
-              className="absolute top-1 right-1 w-4 h-4 flex items-center justify-center text-[9px] font-bold rounded-full text-white"
-              style={{ background: "var(--color-orange)" }}
-            >
-              {count > 9 ? "9+" : count}
-            </span>
-          )}
-        </button>
+          <span className="text-[10px]">♥</span> Happy Mail
+        </Link>
       </nav>
 
       {/* Mobile Drawer */}
@@ -302,6 +312,26 @@ export default function Nav() {
           style={{ background: "var(--color-white)" }}
         >
           <div className="flex flex-col p-6 gap-2">
+            <button
+              type="button"
+              onClick={() => { setMobileOpen(false); openCart() }}
+              className="flex items-center justify-between text-lg font-semibold py-3 border-b"
+              style={{ color: "var(--color-text-primary)", borderColor: "var(--color-border)" }}
+              aria-label={`Cart${count > 0 ? ` (${count} items)` : ""}`}
+            >
+              <span className="inline-flex items-center gap-3">
+                <ShoppingBag size={22} />
+                Cart
+              </span>
+              {count > 0 && (
+                <span
+                  className="min-w-6 h-6 px-1.5 flex items-center justify-center text-[12px] font-bold rounded-full text-white"
+                  style={{ background: "var(--color-orange)" }}
+                >
+                  {count > 9 ? "9+" : count}
+                </span>
+              )}
+            </button>
             <Link
               href="/happy-mail"
               className="inline-flex items-center justify-center gap-2 py-3 mb-3 rounded-full text-base font-bold text-white"
