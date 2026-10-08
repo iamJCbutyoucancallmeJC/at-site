@@ -33,3 +33,5 @@ scripts/blog-migration/images/
 # Python
 __pycache__/
 *.pyc
+scripts/blog-automation/work/
+scripts/blog-automation/images/

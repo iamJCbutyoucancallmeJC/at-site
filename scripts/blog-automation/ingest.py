@@ -1,18 +1,16 @@
 #!/usr/bin/env python3
 """
-Step 1 of the ongoing-post pipeline (t813): INGEST a newsletter source.
-
-Current reality (2026-07-08): ingest is MANUAL-PASTE / export based. Kajabi has
-no email API (see project_at_email_analytics_gap), so a human (or an agent with
-the newsletter on screen) drops the newsletter into scripts/blog-automation/inbox/
-as .html (a Kajabi "view in browser" save / email export) or .txt/.md (pasted
-text). This script normalizes whatever landed into a work bundle for draft.py.
+Step 1 (manual variant) of the ongoing-post pipeline (t813): INGEST a
+newsletter from a FILE. The live path is ingest-klaviyo.py (Amy's newsletter is
+a Klaviyo campaign since 2026-09); this script remains for anything that is not
+a campaign: a pasted text, a saved "view in browser" HTML, a one-off source.
+Drop the file into scripts/blog-automation/inbox/ and run this; it produces the
+same work bundle draft.py reads.
 
 Usage:
   python3 ingest.py --list                 # show inbox contents
   python3 ingest.py <file>                 # file path, or bare name in inbox/
   python3 ingest.py <file> --id my-id      # override the work-bundle id
-  python3 ingest.py --from-kajabi          # NOT IMPLEMENTED (stub, see below)
 
 Output: work/<id>/
   source.<ext>   verbatim copy of the input
@@ -39,20 +37,6 @@ except ImportError:
 TEXT_EXTS = {".txt", ".md"}
 HTML_EXTS = {".html", ".htm"}
 
-KAJABI_TODO = """\
---from-kajabi is a STUB. Kajabi has no email API (verified during the AT email
-analytics work, 2026-06); there is nothing to connect to programmatically.
-
-TODO if this ever becomes real:
-  - If AT email lands on Klaviyo (per the t773/Shape-E migration), implement this
-    against the Klaviyo Campaigns API (GET /api/campaigns + template HTML) and
-    rename the flag --from-klaviyo.
-  - Until then the supported path is manual: save the sent newsletter as HTML
-    ("view in browser" -> save page) or paste its text into a .txt/.md file,
-    drop it in scripts/blog-automation/inbox/, and run: python3 ingest.py <file>
-"""
-
-
 def clean_html(soup: BeautifulSoup) -> str:
     for tag in soup(["script", "style", "head", "meta", "link", "title"]):
         tag.decompose()
@@ -75,11 +59,7 @@ def main() -> None:
     ap.add_argument("source", nargs="?", help="newsletter file (path, or bare name resolved in inbox/)")
     ap.add_argument("--id", help="work-bundle id (default: YYYY-MM-DD-<file-stem>)")
     ap.add_argument("--list", action="store_true", help="list inbox contents")
-    ap.add_argument("--from-kajabi", action="store_true", help="live Kajabi pull (stub, not implemented)")
     args = ap.parse_args()
-
-    if args.from_kajabi:
-        sys.exit(KAJABI_TODO)
 
     if args.list:
         files = [f for f in sorted(store.INBOX.iterdir()) if f.is_file() and f.name != ".gitkeep"]
@@ -90,7 +70,7 @@ def main() -> None:
         return
 
     if not args.source:
-        ap.error("give a newsletter file (or --list / --from-kajabi)")
+        ap.error("give a newsletter file (or --list); for the live newsletter use ingest-klaviyo.py")
 
     src = Path(args.source)
     if not src.exists():
@@ -130,7 +110,9 @@ def main() -> None:
     (work / "source.txt").write_text(text)
     meta = {
         "id": work_id,
+        "source": "file",
         "source_file": src.name,
+        "subject": title_guess,
         "title_guess": title_guess,
         "ingested_at": datetime.now().astimezone().isoformat(timespec="seconds"),
         "status": "ingested",

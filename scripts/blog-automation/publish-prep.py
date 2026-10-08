@@ -1,21 +1,17 @@
 #!/usr/bin/env python3
 """
-Step 3 of the ongoing-post pipeline (t813): PUBLISH-PREP + EDIT-EXISTING.
+Store housekeeping for the ongoing-post pipeline (t813). The main flow is
+ingest-klaviyo.py -> draft.py -> edit-post.py -> approve.py; this file holds the
+manual and recovery paths. Nothing here commits or deploys.
 
-Nothing here deploys. This step writes an approved draft into the blog store the
-site serves (content/blog/posts/<slug>.json + _posts.json), leaving the change
-UNCOMMITTED for a human to review the git diff and push. Deploy = a person (or a
-future hook), never this script (the classifier blocks Claude from pushing client
-content anyway).
-
-Three jobs:
-
-  publish   take work/<id>/draft.json -> live store (upsert)
-  edit      pull an existing post OUT to a file, or push an edited file back IN
-  retract   remove an ONGOING post (refuses to touch the migrated legacy corpus)
+  publish        place a hand-edited work/<id>/draft.json into the store AS A DRAFT
+                 (draft.py normally does this itself; use after editing draft.json by hand)
+  edit           pull an existing post OUT to a file, or push an edited file back IN
+                 (the manual alternative to edit-post.py; the prior version is kept)
+  retract        remove an ONGOING post (refuses to touch the migrated legacy corpus)
+  rebuild-index  regenerate _posts.json from posts/ after a legacy extract.py re-run
 
 Usage:
-  # publish an approved draft
   python3 publish-prep.py publish <work-id> [--force]
 
   # edit-existing: check a post out, edit the file, check it back in
@@ -37,10 +33,8 @@ import store
 
 
 def _print_next_steps(f: Path) -> None:
-    print(f"Wrote {f} (and updated _posts.json). Nothing deployed.")
-    print("Review + publish:")
-    print("  git -C ~/at-site add content/blog && git -C ~/at-site diff --staged")
-    print("  # preview locally (npm run dev), then a HUMAN commits + pushes.")
+    print(f"Wrote {f.relative_to(store.REPO)} (and updated _posts.json). Nothing committed or deployed.")
+    print(f"  git -C {store.REPO} diff -- content/blog")
 
 
 def cmd_publish(args) -> None:
@@ -48,10 +42,12 @@ def cmd_publish(args) -> None:
     if not draft.exists():
         sys.exit(f"No draft.json in {draft.parent}. Run draft.py first.")
     post = json.loads(draft.read_text())
+    post["draft"] = True
     if store.load_post(post["slug"]) and not args.force:
-        sys.exit(f"Post '{post['slug']}' already exists. Use edit, or --force to overwrite.")
+        sys.exit(f"Post '{post['slug']}' already exists. Use edit-post.py, or --force to overwrite.")
     f = store.save_post(post)
     _print_next_steps(f)
+    print(f"  stored as a DRAFT; approve.py {post['slug']} publishes it.")
 
 
 def cmd_edit(args) -> None:
@@ -69,8 +65,12 @@ def cmd_edit(args) -> None:
     post = json.loads(Path(args.in_).read_text())
     if post.get("slug") != args.slug:
         sys.exit(f"slug in file ({post.get('slug')!r}) != {args.slug!r}. Refusing to write.")
+    prior = store.load_post(args.slug)
+    if prior:
+        kept = store.save_revision(prior, reason=f"manual edit via publish-prep.py --in {args.in_}")
+        print(f"Prior version kept at {kept.relative_to(store.REPO)}")
     # keep imageCount honest after a body edit
-    post["imageCount"] = str(store.count_images(post.get("body", "")))
+    post["imageCount"] = store.count_images(post.get("body", ""))
     f = store.save_post(post)
     _print_next_steps(f)
 
@@ -95,7 +95,7 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
 
-    p = sub.add_parser("publish", help="approved draft -> live store")
+    p = sub.add_parser("publish", help="hand-edited work/<id>/draft.json -> store, as a draft")
     p.add_argument("work_id")
     p.add_argument("--force", action="store_true", help="overwrite an existing slug")
     p.set_defaults(func=cmd_publish)
