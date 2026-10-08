@@ -34,7 +34,7 @@ export default async function ClassHowPage({ params }: { params: Promise<{ slug:
         How the class works
       </p>
       {src ? (
-        <GuidedPlayer slug={slug} hls={src.hls} poster={src.poster} cues={getContainerCues(slug, "walkthrough")} answers={answers} />
+        <GuidedPlayer slug={slug} hls={src.hls} hlsQuery={src.hlsQuery} mp4={src.mp4} poster={src.poster} cues={getContainerCues(slug, "walkthrough")} answers={answers} />
       ) : (
         <p className="text-[16px] leading-relaxed max-w-2xl" style={{ color: "var(--color-text-secondary)" }}>
           The walkthrough video is on its way. Each day a new prompt opens at the top of the class page and stays open. Read it, write the date, write two or three lines. Some days that is it.

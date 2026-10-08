@@ -20,6 +20,8 @@ export type PlayerCue = {
 type Props = {
   slug: string
   hls: string
+  hlsQuery?: string // appended to every child playlist/segment request (Bunny directory token)
+  mp4?: string // signed fallback for browsers without MSE (iOS Safari)
   poster?: string
   cues?: PlayerCue[]
   answers?: Record<string, string>
@@ -32,7 +34,7 @@ function fmt(s: number) {
   return `${m}:${String(r).padStart(2, "0")}`
 }
 
-export default function GuidedPlayer({ slug, hls, poster, cues = [], answers = {}, autoplay = false }: Props) {
+export default function GuidedPlayer({ slug, hls, hlsQuery = "", mp4, poster, cues = [], answers = {}, autoplay = false }: Props) {
   const video = useRef<HTMLVideoElement>(null)
   const [t, setT] = useState(0)
   const [dur, setDur] = useState(0)
@@ -42,24 +44,30 @@ export default function GuidedPlayer({ slug, hls, poster, cues = [], answers = {
   const held = useRef<string | null>(null)
   const sorted = useMemo(() => [...cues].sort((a, b) => a.at - b.at), [cues])
 
-  // Attach the stream: Safari plays HLS natively, everyone else gets hls.js.
+  // Attach the stream. hls.js wherever MSE exists (so the directory token can
+  // ride on every child request); otherwise the signed MP4 (iOS Safari).
   useEffect(() => {
     const el = video.current
     if (!el) return
     let hlsInst: { destroy: () => void } | null = null
-    if (el.canPlayType("application/vnd.apple.mpegurl")) {
-      el.src = hls
-    } else {
-      import("hls.js").then(({ default: Hls }) => {
-        if (!Hls.isSupported()) { el.src = hls; return }
-        const h = new Hls()
-        h.loadSource(hls)
-        h.attachMedia(el)
-        hlsInst = h
+    let cancelled = false
+    import("hls.js").then(({ default: Hls }) => {
+      if (cancelled) return
+      if (!Hls.isSupported()) {
+        el.src = mp4 || hls
+        return
+      }
+      const h = new Hls({
+        xhrSetup: (xhr, url) => {
+          if (hlsQuery && !url.includes("token=")) xhr.open("GET", url + (url.includes("?") ? "&" : "?") + hlsQuery, true)
+        },
       })
-    }
-    return () => { hlsInst?.destroy() }
-  }, [hls])
+      h.loadSource(hls)
+      h.attachMedia(el)
+      hlsInst = h
+    })
+    return () => { cancelled = true; hlsInst?.destroy() }
+  }, [hls, hlsQuery, mp4])
 
   // Cue tracking.
   function onTime() {

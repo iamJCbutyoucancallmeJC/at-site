@@ -67,6 +67,8 @@ export default async function ClassDayPage({ params }: { params: Promise<{ slug:
         <GuidedPlayer
           slug={slug}
           hls={src.hls}
+          hlsQuery={src.hlsQuery}
+          mp4={src.mp4}
           poster={src.poster}
           answers={answers}
           cues={[

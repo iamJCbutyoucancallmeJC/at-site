@@ -79,7 +79,7 @@ export default async function ClassHome({
 
       {welcome ? (
         <section className="mb-14">
-          <GuidedPlayer slug={slug} hls={welcome.hls} poster={welcome.poster} cues={getContainerCues(slug, "welcome")} answers={answers} />
+          <GuidedPlayer slug={slug} hls={welcome.hls} hlsQuery={welcome.hlsQuery} mp4={welcome.mp4} poster={welcome.poster} cues={getContainerCues(slug, "welcome")} answers={answers} />
         </section>
       ) : null}
 
