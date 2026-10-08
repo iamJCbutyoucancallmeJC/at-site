@@ -29,6 +29,10 @@ export type PostMeta = {
   legacyPath: string
   legacyFile: string
   imageCount: number
+  // Ongoing-post drafts (scripts/blog-automation): written to the store but kept
+  // out of every listing surface until approve.py removes the flag. The page
+  // still builds at /blog/<slug> (noindex) so Amy can read it at a real URL.
+  draft?: boolean
 }
 
 export type Post = PostMeta & { body: string }
@@ -73,12 +77,21 @@ export function curationOf(slug: string): CurationTreatment {
 }
 
 // Every post that may appear as a destination: the full corpus MINUS the redirect
-// tier (those 301 to /blog and must not be linked, built, or listed anywhere).
-// This is the base for all listing surfaces (archive, tag, search, static params).
+// tier (those 301 to /blog and must not be linked, built, or listed anywhere) and
+// MINUS unpublished drafts. This is the base for all listing surfaces (feed,
+// archive, tag, search, sitemap, featured, start-here).
 export const getListablePosts = cache((): PostMeta[] => {
   const curation = getCuration()
-  return getAllPostsMeta().filter((p) => curation.get(p.slug) !== "redirect")
+  return getAllPostsMeta().filter(
+    (p) => curation.get(p.slug) !== "redirect" && p.draft !== true
+  )
 })
+
+// Unpublished drafts from the post-automation pipeline: built and served at
+// /blog/<slug> for the voice pass, listed nowhere, noindex.
+export const getDraftPosts = cache((): PostMeta[] =>
+  getAllPostsMeta().filter((p) => p.draft === true)
+)
 
 // Recent default feed: the front door. Last ~5 years of voice, not the 1,300-post
 // wall, and MINUS obvious promo (per the PRD curation model): archive-only posts

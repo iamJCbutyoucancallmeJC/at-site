@@ -4,6 +4,7 @@ import PageEngagementTracker from "@/components/page-engagement-tracker"
 import EmailCaptureInline from "@/components/email-capture-inline"
 import {
   getListablePosts,
+  getDraftPosts,
   getPostBySlug,
   formatDate,
   tagToSlug,
@@ -11,11 +12,12 @@ import {
 } from "@/lib/blog"
 
 // Static at build time. Built from the listable set (redirect-tier ephemera is
-// excluded -- those 301 to /blog in next.config, so no page is generated for them).
+// excluded -- those 301 to /blog in next.config, so no page is generated for them)
+// PLUS unlisted drafts, so a draft has a real preview URL on the branch deploy.
 // New posts (added to content/blog) need a rebuild to appear; dynamicParams stays
 // default (true) so a slug not in the build list renders on demand.
 export async function generateStaticParams() {
-  return getListablePosts().map((p) => ({ slug: p.slug }))
+  return [...getListablePosts(), ...getDraftPosts()].map((p) => ({ slug: p.slug }))
 }
 
 export async function generateMetadata({
@@ -30,6 +32,8 @@ export async function generateMetadata({
   return {
     title: `${post.title} | Amy Tangerine`,
     description,
+    // Drafts are reachable by URL for the voice pass but must not be indexed.
+    ...(post.draft ? { robots: { index: false, follow: false } } : {}),
     openGraph: {
       title: post.title,
       description,
@@ -64,6 +68,21 @@ export default async function BlogPost({
           >
             ← The Journal
           </Link>
+
+          {/* Draft banner: the post-automation pipeline wrote this post but no one
+              has approved it yet. Unlisted, noindex; approve.py clears the flag. */}
+          {post.draft && (
+            <aside
+              className="mb-8 rounded-xl px-5 py-3 text-[13px] font-semibold uppercase tracking-[0.12em]"
+              style={{
+                background: "var(--color-gray-light)",
+                color: "var(--color-text-secondary)",
+                borderLeft: "3px solid var(--color-orange)",
+              }}
+            >
+              Draft preview. Not published, not listed.
+            </aside>
+          )}
 
           <header className="mb-10">
             <time
