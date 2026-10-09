@@ -234,8 +234,13 @@ export function getGlimmersDay(n: number): ClassDay | null {
 // via env; the timestamps are set after the Oct 8 shoot once the cuts exist).
 export type ContainerCue = Cue & { headline: string; instruction?: string }
 export const GLIMMERS_CONTAINER: { welcome: ContainerCue[]; walkthrough: ContainerCue[] } = {
-  // Script 2, the welcome. One optional pause near the end: "A journal. Any journal."
-  welcome: [],
+  // Script 2, the welcome, cut 10/9 (0:53, Bunny "glimmers-welcome"). Beats measured on the cut:
+  // 0:02 "Welcome to day one", 0:19 "What you need. A journal. Any journal.", 0:34 "The one rule."
+  welcome: [
+    { at: 2.4, key: "welcome-here", headline: "You're in.", instruction: "Each morning a new prompt opens and stays open. Nothing is lost if you start late." },
+    { at: 19.5, key: "welcome-journal", headline: "Any journal.", instruction: "Which notebook will you use? Name it here so it is real.", pause: true },
+    { at: 34.4, key: "welcome-rule", headline: "The one rule.", instruction: "Do not try to catch up. Do not make it good. One small good thing a day." },
+  ],
   // Script 3, the walkthrough. Beat 3 does a prompt for real; the student does one too.
   walkthrough: [
     { at: 60, key: "walkthrough-try", headline: "Try one now.", instruction: "Read the prompt, write the date, two or three lines. That is a day.", pause: true },
