@@ -50,7 +50,7 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     day: 2,
     title: "Create your Glimmers & Gratitude journal",
     // Amy to camera, shot 10/8, square cut 10/9 (Bunny "glimmers-d02")
-    video: { id: "d1f19e8e-ba09-4461-857d-947d6eea3be1", cues: [{ at: 9.5, key: "d02" }] },
+    video: { id: "2bbb86ad-cd0d-4afb-ac40-515c4ad07a13", cues: [{ at: 7.0, key: "d02" }] },
     prompt: { key: "d02", headline: "Where will your glimmers go?", instruction: "Make a fun place for them. Any notebook works." },
     body: ["Find joy in the ordinary and put it into your dedicated notebook. Make your life more abundant with the little things that add up big time."],
     files: [{ name: "printable-1-journal-setup.pdf", label: "Printable (PDF)" }],
@@ -77,7 +77,7 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     day: 6,
     title: "Mondays are a fresh start",
     // Amy to camera, shot 10/8, square cut 10/9 (Bunny "glimmers-d06")
-    video: { id: "ba4f2f4d-c1bd-4a9e-829e-03fccc4ddc3d", cues: [{ at: 2.4, key: "d06" }] },
+    video: { id: "1fe38673-fc9b-49c4-a525-89ac24817c0f", cues: [{ at: 2.4, key: "d06" }] },
     prompt: { key: "d06", headline: "What does your typical Monday feel like?", instruction: "Now imagine it as a fresh start. How would you reframe it?" },
     body: ["Describe the routine and the feelings it evokes. Then set one positive intention for the week."],
   },
@@ -109,7 +109,7 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     day: 11,
     title: "Ideas",
     // Amy to camera, shot 10/8, square cut 10/9 (Bunny "glimmers-d11")
-    video: { id: "424805ae-b588-42bd-80e6-60dd017bf72f", cues: [{ at: 8.8, key: "d11" }] },
+    video: { id: "ee45a437-ee2b-4476-b9b9-9cd8faabe7a7", cues: [{ at: 9.6, key: "d11" }] },
     prompt: { key: "d11", headline: "How are you sparking ideas that inspire you?", instruction: "Write something about your outlook on ideas." },
     body: ["Cut out the Ideas tag and glue it in."],
     files: [{ name: "printable-2-ideas-tag.pdf", label: "Printable (PDF)" }],
@@ -136,7 +136,7 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     day: 15,
     title: "Too good to be true",
     // Amy to camera, shot 10/8, square cut 10/9 (Bunny "glimmers-d15")
-    video: { id: "44fa3f8f-ba88-4595-b4c6-a34c08eb7ad0", cues: [{ at: 1.6, key: "d15" }] },
+    video: { id: "de32d480-3304-4771-926b-f0b06394bef2", cues: [{ at: 1.6, key: "d15" }] },
     prompt: { key: "d15", headline: "What old idea no longer serves you?", instruction: "Make the perspective shift. Turn it into a fresh, positive one." },
     body: ["Magazine headings make good journal phrases."],
   },
@@ -156,7 +156,7 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     day: 18,
     title: "Work in progress",
     // Amy to camera, shot 10/8, square cut 10/9 (Bunny "glimmers-d18")
-    video: { id: "ecef6d56-7d3c-4dc1-b1a0-52e6dc733ae2", cues: [{ at: 5.3, key: "d18" }] },
+    video: { id: "5fe8ebcc-01c4-4f30-8f67-8717847bfd86", cues: [{ at: 5.3, key: "d18" }] },
     prompt: { key: "d18", headline: "Where have you let yourself be imperfect?", instruction: "How did it grow you?" },
     body: ["Explore being a work in progress and the beauty in imperfection."],
     files: [{ name: "printable-3-work-in-progress.pdf", label: "Printable (PDF)" }],
@@ -207,7 +207,7 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     day: 26,
     title: "Nourishing",
     // Amy to camera, shot 10/8, square cut 10/9 (Bunny "glimmers-d26")
-    video: { id: "4e2be007-d362-4cb4-ade7-0f73f1371d72", cues: [{ at: 7.2, key: "d26" }] },
+    video: { id: "38732fdc-0f65-433b-bd94-8684c92baa7d", cues: [{ at: 7.2, key: "d26" }] },
     prompt: { key: "d26", headline: "Who made your meals this week?", instruction: "Give a shout-out to the meals and the maker. Bonus points for food stickers." },
     body: [],
     files: [{ name: "printable-4-nourishing.pdf", label: "Printable (PDF)" }],
@@ -234,7 +234,7 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     day: 30,
     title: "Thirty little pages",
     // Amy to camera, shot 10/8, square cut 10/9 (Bunny "glimmers-d30")
-    video: { id: "ce1f6c03-6405-4619-a496-57c4042d52eb", cues: [{ at: 4.0, key: "d30" }] },
+    video: { id: "8c6a4560-3102-41f8-a809-056dcde70aa9", cues: [{ at: 4.0, key: "d30" }] },
     prompt: { key: "d30", headline: "Read back through the month. What do you notice?", instruction: "Everything you wrote is below. Take your time." },
     body: ["Gratitude is not a 30-day practice, it's a lifelong one. Your journal is not complete, it is full."],
   },
