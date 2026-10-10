@@ -173,7 +173,7 @@ export const getFeatured = cache((): FeaturedPost[] => {
   }>
   const bySlug = new Map(getListablePosts().map((p) => [p.slug, p]))
   return entries
-    .map((e) => {
+    .map((e): FeaturedPost | null => {
       const meta = bySlug.get(e.slug)
       if (!meta) return null
       return {

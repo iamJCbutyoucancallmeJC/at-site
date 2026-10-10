@@ -9,6 +9,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
+import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 import FaqAccordion from "@/components/faq-accordion"
@@ -107,6 +108,9 @@ export default function HappyMailClient() {
       </section>
 
       <section id="subscribe" className="px-4 md:px-10 pb-12 md:pb-16">
+        <p className="max-w-2xl mx-auto mb-7 p-4 rounded-lg text-center bg-[var(--color-orange-light)]">
+          Giving Happy Mail to someone? <Link className="font-semibold underline underline-offset-4" href="/gift">Give six months for $72</Link>. They redeem with their own address.
+        </p>
         {closed ? (
           <div className="max-w-2xl mx-auto">
             <HmWaitlistForm page="happy-mail" />
