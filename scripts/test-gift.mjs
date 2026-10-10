@@ -20,9 +20,9 @@ try {
   assert.equal(attributes.__rc_gift_recipient_first_name, "Test")
   assert.equal(attributes.__rc_gift_recipient_last_name, "Recipient")
   assert.equal(attributes.__rc_gift_sender_name, "Giver")
-  assert.match(attributes.__rc_gift_recipient_note, /Hello[\s\S]*6-Month[\s\S]*January 2027/)
+  assert.match(attributes.__rc_gift_recipient_note, /Hello[\s\S]*6-Month \(per-delivery\)[\s\S]*January 2027/)
   assert.equal(attributes.__rc_gift_notification_scheduled_at, undefined, "A January start request must not delay the redemption email")
-  assert.match(giftProperties({ ...gift, start: "next" }).find((a) => a.key === "__rc_gift_recipient_note").value, /next available envelope/)
+  assert.match(giftProperties({ ...gift, start: "next" }).find((a) => a.key === "__rc_gift_recipient_note").value, /next batch/)
   console.log("Gift validation and Recharge property contract passed")
 } finally {
   fs.rmSync(dir, { recursive: true, force: true })

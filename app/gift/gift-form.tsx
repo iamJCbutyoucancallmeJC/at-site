@@ -39,7 +39,7 @@ export default function GiftForm({ available, closed }: { available: boolean; cl
           <legend className="font-semibold mb-3">When would you like their mail to start?</legend>
           <label className="flex items-start gap-3 border rounded-lg p-4 mb-3 border-[var(--color-border)] cursor-pointer"><input className="mt-1" type="radio" name="start" value="next" defaultChecked />With the next available envelope</label>
           <label className="flex items-start gap-3 border rounded-lg p-4 border-[var(--color-border)] cursor-pointer"><input className="mt-1" type="radio" name="start" value="january" />In January 2027</label>
-          <p id="gift-start-help" className="text-sm leading-relaxed mt-3 text-[var(--color-text-secondary)]">We include this request in their gift email. They confirm the actual start date when redeeming. Choosing January does not delay the email.</p>
+          <p id="gift-start-help" className="text-sm leading-relaxed mt-3 text-[var(--color-text-secondary)]">Their gift email goes out right away either way. If you choose January, we set their first envelope to January 2027 after they redeem.</p>
         </fieldset>
       </fieldset>
       <p className="text-sm leading-relaxed">At checkout, use your own details. Your recipient enters their address separately when they redeem.</p>

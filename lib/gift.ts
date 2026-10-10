@@ -37,7 +37,13 @@ export function parseGiftDetails(value: unknown): GiftDetails | null {
 // or an automatic subscription start. Affinity owns the actual start date.
 export function giftProperties(gift: GiftDetails) {
   const start = gift.start === "january" ? "January 2027" : "the next available envelope"
-  const instructions = `Your gift is for six months of Happy Mail. Please choose the 6-Month option and start with ${start} when you redeem. Enter your own shipping address.`
+  // Recharge's redemption picker shows every Happy Mail variant and its own start-date
+  // picker allows only today or tomorrow (verified 2026-10-10). So the note names the one
+  // right pick, and a January request is OURS to honor: hm-gift-watch.py moves the first
+  // charge to January after redemption. Never promise the recipient a date picker.
+  const instructions = gift.start === "january"
+    ? `When you redeem, choose "6-Month (per-delivery)" and its 6-month plan: your gift covers all six envelopes. Enter your own shipping address. ${gift.senderName} asked for your mail to start in January 2027, so we will set your first envelope to January for you.`
+    : `When you redeem, choose "6-Month (per-delivery)" and its 6-month plan: your gift covers all six envelopes. Enter your own shipping address, and your first envelope goes out with the next batch.`
   return [
     { key: "__rc_gift_recipient_email", value: gift.email },
     { key: "__rc_gift_recipient_first_name", value: gift.firstName },

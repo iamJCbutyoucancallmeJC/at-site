@@ -35,14 +35,14 @@ export default async function GiftPage() {
           <ol className="list-decimal pl-5 space-y-3 leading-relaxed">
             <li>Buy the $72 gift using your own billing details.</li>
             <li>They receive an email with your note and a redemption link.</li>
-            <li>They choose the 6-Month option, their start date, and their own shipping address.</li>
+            <li>They enter their own shipping address and pick the six-month plan. Their gift covers all six envelopes.</li>
           </ol>
           <p className="text-sm leading-relaxed mt-5">This gift is for US delivery. For an international gift, <a className="underline" href="mailto:help@amytangerine.com">email help@amytangerine.com</a> before ordering.</p>
         </div>
         <section aria-labelledby="gift-form-title" className="md:pt-2">
           <h2 id="gift-form-title" className="text-2xl font-bold">Six months of Happy Mail</h2>
           <p className="text-3xl font-semibold mt-3 mb-2">$72 <span className="text-base font-normal">USD</span></p>
-          <p className="text-sm leading-relaxed mb-7">One gift payment. No renewal on your card. The gift provides $72 toward Happy Mail; your recipient selects the six-month plan when redeeming.</p>
+          <p className="text-sm leading-relaxed mb-7">One gift payment. No renewal on your card. Your $72 covers all six envelopes. Your recipient picks the six-month plan when redeeming.</p>
           <GiftForm available={available && !closed} closed={closed} />
         </section>
       </div>
