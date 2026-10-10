@@ -4,7 +4,7 @@ export const GIFT_HANDLE = "give-happy-mail-gift"
 export const GIFT_VARIANT = "gid://shopify/ProductVariant/67730434359616"
 export const GIFT_PRICE = 72
 // Keep closed until a paid purchase and native redemption pass (t1739).
-export const GIFT_CHECKOUT_ENABLED = false
+export const GIFT_CHECKOUT_ENABLED = true
 
 export type GiftDetails = {
   firstName: string
