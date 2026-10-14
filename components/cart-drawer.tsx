@@ -8,7 +8,7 @@ import { X, Minus, Plus, ShoppingBag } from "lucide-react"
 import { useCart } from "@/context/cart"
 import { trackEvent } from "@/lib/analytics"
 import { HM_VARIANT_6MONTH_GID } from "@/lib/happy-mail-content"
-import { isChromelessRoute } from "@/lib/chromeless-routes"
+import { isChromelessRoute, isQuietRoute } from "@/lib/chromeless-routes"
 import { stashPendingCartToken } from "@/lib/pending-checkout-tokens"
 
 // Detect local (non-Shopify) variant IDs — checkout not available yet
@@ -130,7 +130,7 @@ export default function CartDrawer() {
   // Chromeless (isolated event) routes have no cart drawer — checkout is a
   // single direct-to-Shopify redirect. Guard placed AFTER all hooks so hook
   // order stays stable across renders. See lib/chromeless-routes.
-  if (isChromelessRoute(pathname)) return null
+  if (isChromelessRoute(pathname) || isQuietRoute(pathname)) return null
 
   return (
     <>

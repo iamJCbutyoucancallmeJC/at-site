@@ -12,6 +12,7 @@ import { notFound, redirect } from "next/navigation"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 import PromptBlock from "@/components/class/prompt-block"
 import GuidedPlayer from "@/components/class/guided-player"
+import DemoPlayer from "@/components/class/demo-player"
 import { getClass, isDayOpen, unlockDate, formatUnlockDate } from "@/lib/classes"
 import { getClassClaim } from "@/lib/class-session"
 import { getClassDay, getClassDays } from "@/lib/class-content"
@@ -39,6 +40,7 @@ export default async function ClassDayPage({ params }: { params: Promise<{ slug:
   const day = open ? getClassDay(slug, n) : null
   const answers = open ? await getAnswers(claim) : {}
   const src = day?.video ? await playbackSource(day.video.id) : null
+  const demo = day?.demo ? await playbackSource(day.demo.id) : null
   const quote = day?.prompt.quoteBack && answers[day.prompt.quoteBack]
     ? { label: "You wrote earlier:", text: answers[day.prompt.quoteBack] }
     : null
@@ -111,6 +113,11 @@ export default async function ClassDayPage({ params }: { params: Promise<{ slug:
                   {p}
                 </p>
               ))}
+            </div>
+          ) : null}
+          {demo && day.demo ? (
+            <div className="mt-12">
+              <DemoPlayer hls={demo.hls} hlsQuery={demo.hlsQuery} mp4={demo.mp4} poster={demo.poster} caption={day.demo.caption} />
             </div>
           ) : null}
           {day.files?.length ? (

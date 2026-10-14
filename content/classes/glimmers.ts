@@ -39,6 +39,9 @@ export type ClassDay = {
   // Amy's page photo for the day (path under /public is fine: photos are not secret).
   photo?: { src: string; alt: string }
   video?: ClassVideo
+  // A longer landscape "here is mine" video under the steps (Amy's 2023 page
+  // videos from Kajabi, 10/14). Plain player, no cues.
+  demo?: { id: string; caption: string }
   // Optional printable(s): file names inside content/classes/<slug>/files/.
   files?: { name: string; label: string }[]
 }
@@ -53,8 +56,9 @@ export const GLIMMERS_DAYS: ClassDay[] = [
   {
     day: 2,
     title: "Create your Glimmers & Gratitude journal",
-    // Amy to camera, shot 10/8, square cut 10/9 (Bunny "glimmers-d02")
-    video: { id: "2bbb86ad-cd0d-4afb-ac40-515c4ad07a13", cues: [{ at: 7.0, key: "d02" }] },
+    // Amy to camera, shot 10/8; Amy-only re-cut 10/14 (Bunny "glimmers-d02"): the 10/9 cut
+    // carried JC's "Make a fun place for your glimmers to go". 6.4 s.
+    video: { id: "174e83b7-c2db-4770-a335-3bfca0b486bb", cues: [{ at: 6.1, key: "d02" }] },
     prompt: { key: "d02", steps: ["Pick the notebook. Any notebook works.", "Write today's date on the first page.", "Make a fun place for your glimmers to go: a title, a doodle, a strip of tape.", "Print the journal-setup page and glue it in, if you want it."] },
     body: [],
     files: [{ name: "printable-1-journal-setup.pdf", label: "Printable (PDF)" }],
@@ -62,7 +66,10 @@ export const GLIMMERS_DAYS: ClassDay[] = [
   {
     day: 3,
     title: "Expanding your practice",
-    prompt: { key: "d03", steps: ["Look back at your first two pages and add one thing you missed.", "Try an acronym for GRATITUDE: one word per letter."] },
+    // Amy to camera, shot 10/8 (IMG_4952), Amy-only cut 10/14 (Bunny "glimmers-d03"):
+    // "I am so happy you're here. It's day three. What was one small good thing today?"
+    video: { id: "aee663f5-38c5-4163-b0f6-227444267756", cues: [{ at: 4.8, key: "d03" }] },
+    prompt: { key: "d03", steps: ["Name one small good thing from today. One sentence.", "Look back at your first two pages and add one thing you missed.", "Try an acronym for GRATITUDE: one word per letter."] },
     body: [],
   },
   {
@@ -74,6 +81,9 @@ export const GLIMMERS_DAYS: ClassDay[] = [
   {
     day: 5,
     title: "Include a photo of you",
+    // Amy's 2023 page video from Kajabi (glimmers-kajabi-video-pull-runbook). 9/23 ruled "no 2023
+    // replays"; JC asked for them 10/14. Wired for his read; Amy may still veto.
+    demo: { id: "ddc2c784-62df-4c75-9120-302efa75ae0f", caption: "Amy's page, from the 2023 class." },
     prompt: { key: "d05", steps: ["Take a selfie smiling, or pick a recent photo you like.", "Print it and glue it in.", "Write what you're grateful for right now, and the story behind the photo."] },
     body: [],
   },
@@ -114,8 +124,8 @@ export const GLIMMERS_DAYS: ClassDay[] = [
   {
     day: 11,
     title: "Ideas",
-    // Amy to camera, shot 10/8, square cut 10/9 (Bunny "glimmers-d11")
-    video: { id: "ee45a437-ee2b-4476-b9b9-9cd8faabe7a7", cues: [{ at: 9.6, key: "d11" }] },
+    // Amy to camera, shot 10/8; Amy-only re-cut 10/14 (Bunny "glimmers-d11"), 8.5 s.
+    video: { id: "20dd7640-731f-4edb-9eb8-65d7080045b8", cues: [{ at: 8.2, key: "d11" }] },
     prompt: { key: "d11", steps: ["Print the Ideas tag, cut it out, and glue it in.", "Write about your outlook on ideas.", "How are you sparking ideas that inspire you?"] },
     body: [],
     files: [{ name: "printable-2-ideas-tag.pdf", label: "Printable (PDF)" }],
@@ -156,6 +166,9 @@ export const GLIMMERS_DAYS: ClassDay[] = [
   {
     day: 17,
     title: "Celebrating the everyday",
+    // Amy's 2023 page video from Kajabi (glimmers-kajabi-video-pull-runbook). 9/23 ruled "no 2023
+    // replays"; JC asked for them 10/14. Wired for his read; Amy may still veto.
+    demo: { id: "c304418f-758b-43a3-a1b1-4e6166474bbb", caption: "Amy's page, from the 2023 class." },
     prompt: { key: "d17", steps: ["Pick a quote that resonates with you right now.", "Write it in your notebook with the supplies on hand, any way that delights you."] },
     body: [],
   },
@@ -177,6 +190,9 @@ export const GLIMMERS_DAYS: ClassDay[] = [
   {
     day: 20,
     title: "Ticket or token",
+    // Amy's 2023 page video from Kajabi (glimmers-kajabi-video-pull-runbook). 9/23 ruled "no 2023
+    // replays"; JC asked for them 10/14. Wired for his read; Amy may still veto.
+    demo: { id: "f70f372e-a588-4040-9f9f-206db3a627d9", caption: "Amy's page, from the 2023 class." },
     prompt: { key: "d20", steps: ["Find a ticket stub or a small token with a story.", "Glue it in.", "Write the quirky story tied to it, and how it captures the moment."] },
     body: [],
   },
@@ -240,8 +256,11 @@ export const GLIMMERS_DAYS: ClassDay[] = [
   {
     day: 30,
     title: "Thirty little pages",
-    // Amy to camera, shot 10/8, square cut 10/9 (Bunny "glimmers-d30")
-    video: { id: "8c6a4560-3102-41f8-a809-056dcde70aa9", cues: [{ at: 4.0, key: "d30" }] },
+    // Amy's 2023 page video from Kajabi (glimmers-kajabi-video-pull-runbook). 9/23 ruled "no 2023
+    // replays"; JC asked for them 10/14. Wired for his read; Amy may still veto.
+    demo: { id: "82e7bd94-7a67-4fec-8374-773b6e9c6002", caption: "Amy's journal at the end of the 2023 class." },
+    // Amy to camera, shot 10/8; Amy-only re-cut 10/14 (Bunny "glimmers-d30"), 4.4 s.
+    video: { id: "931c0e77-09d0-4d97-b614-89a171df0ee0", cues: [{ at: 4.1, key: "d30" }] },
     prompt: { key: "d30", steps: ["Read back through the month, page by page.", "Write what you notice.", "Your thirty log lines are below."] },
     body: ["Gratitude is not a 30-day practice, it's a lifelong one. Your journal is not complete, it is full."],
   },

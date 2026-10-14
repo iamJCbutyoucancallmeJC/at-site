@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { trackEvent } from "@/lib/analytics"
-import { isChromelessRoute } from "@/lib/chromeless-routes"
+import { isChromelessRoute, isQuietRoute } from "@/lib/chromeless-routes"
 import KeepUpCard from "@/components/keep-up-card"
 
 // Same env gate the old footer block (EmailCaptureInline) honored: Amy's
@@ -48,6 +48,16 @@ export default function Footer() {
 
   // Chromeless (isolated event) routes render no global footer. See lib/chromeless-routes.
   if (isChromelessRoute(pathname)) return null
+
+  // Quiet routes (the gated class pages): one line, no link rows, no capture.
+  if (isQuietRoute(pathname)) {
+    return (
+      <footer className="px-5 md:px-12 py-8 text-center md:text-left text-xs" style={{ background: "var(--color-text-primary)", color: "rgba(255,255,255,0.6)" }}>
+        &copy; {new Date().getFullYear()} Amy Tangerine &middot;{" "}
+        <Link href="/" style={{ color: "rgba(255,255,255,0.8)" }}>amytangerine.com</Link>
+      </footer>
+    )
+  }
 
   return (
     <footer style={{ background: "var(--color-text-primary)" }}>

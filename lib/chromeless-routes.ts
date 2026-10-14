@@ -28,3 +28,20 @@ export function isChromelessRoute(pathname: string | null | undefined): boolean 
     (prefix) => pathname === prefix || pathname.startsWith(prefix + "/"),
   )
 }
+
+// Quiet routes keep a one-line header and footer but drop the site's nav,
+// dropdowns, Happy Mail pill, cart and link rows. The gated class pages
+// (JC 10/14): someone who paid for the class should not be kept up with the
+// store while they are in it. Nav, Footer and CartDrawer consult this too.
+const QUIET_PREFIXES = ["/classes"]
+
+export function isQuietRoute(pathname: string | null | undefined): boolean {
+  if (!pathname) return false
+  return QUIET_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(prefix + "/"))
+}
+
+// For a quiet class route, the class home it belongs to (/classes/<slug>).
+export function quietHome(pathname: string | null | undefined): string {
+  const m = pathname?.match(/^\/classes\/([^/]+)/)
+  return m ? `/classes/${m[1]}` : "/"
+}

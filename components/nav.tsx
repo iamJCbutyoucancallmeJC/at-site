@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation"
 import { Menu, X, ShoppingBag, ChevronDown } from "lucide-react"
 import { trackEvent } from "@/lib/analytics"
 import { useCart } from "@/context/cart"
-import { isChromelessRoute } from "@/lib/chromeless-routes"
+import { isChromelessRoute, isQuietRoute, quietHome } from "@/lib/chromeless-routes"
 
 // Nav restructure (2026-07-07, per JC): three top-level items.
 //   Fun Stuff (dropdown, room to grow) / Shop (unchanged) / About Amy (dropdown)
@@ -98,6 +98,35 @@ export default function Nav() {
 
   // Chromeless (isolated event) routes render no global nav. See lib/chromeless-routes.
   if (isChromelessRoute(pathname)) return null
+
+  // Quiet routes (the gated class pages): the logo, which goes back to the class
+  // home, and a help address. No dropdowns, no Happy Mail pill, no cart.
+  if (isQuietRoute(pathname)) {
+    return (
+      <nav
+        className="flex items-center justify-between h-14 md:h-[72px] px-5 md:px-12 border-b"
+        style={{ background: "var(--color-white)", borderColor: "var(--color-border)" }}
+      >
+        <Link href={quietHome(pathname)} className="shrink-0" aria-label="Class home">
+          <Image
+            src="/images/amy-tangerine-logo.png"
+            alt="Amy Tangerine"
+            width={180}
+            height={72}
+            className="h-8 md:h-12 w-auto object-contain"
+            priority
+          />
+        </Link>
+        <a
+          href="mailto:help@amytangerine.com"
+          className="text-[13px] md:text-sm underline underline-offset-4"
+          style={{ color: "var(--color-text-secondary)" }}
+        >
+          help@amytangerine.com
+        </a>
+      </nav>
+    )
+  }
 
   return (
     <>
