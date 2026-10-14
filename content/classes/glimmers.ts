@@ -135,8 +135,9 @@ export const GLIMMERS_DAYS: ClassDay[] = [
   {
     day: 15,
     title: "Too good to be true",
-    // Amy to camera, shot 10/8, square cut 10/9 (Bunny "glimmers-d15")
-    video: { id: "de32d480-3304-4771-926b-f0b06394bef2", cues: [{ at: 1.6, key: "d15" }] },
+    // Amy's 10/8 "Mid-month check-in" line is on Bunny as glimmers-d15 (de32d480), 2.2 s. Pulled
+    // from the page 10/14: a two-second clip that does not say the prompt reads as a glitch.
+    // Re-wire if the reshoot gives Day 15 a real read.
     prompt: { key: "d15", headline: "What old idea no longer serves you?", instruction: "Make the perspective shift. Turn it into a fresh, positive one." },
     body: ["Magazine headings make good journal phrases."],
   },
@@ -248,12 +249,14 @@ export function getGlimmersDay(n: number): ClassDay | null {
 // via env; the timestamps are set after the Oct 8 shoot once the cuts exist).
 export type ContainerCue = Cue & { headline: string; instruction?: string }
 export const GLIMMERS_CONTAINER: { welcome: ContainerCue[]; walkthrough: ContainerCue[] } = {
-  // Script 2, the welcome, cut 10/9 (0:53, Bunny "glimmers-welcome"). Beats measured on the cut:
-  // 0:02 "Welcome to day one", 0:19 "What you need. A journal. Any journal.", 0:34 "The one rule."
+  // Script 2, the welcome, cut 10/9 (0:53, Bunny "glimmers-welcome"). Beats re-measured 10/14
+  // with word-level whisper on the shipped cut: 0:03 "Welcome to day one", 0:20 "What you need",
+  // 0:22-0:23 "A journal. Any journal.", 0:40.9 "The one rule." The journal cue pauses AFTER she
+  // has said the line, not on "What you need"; the rule cue had been firing 6 s early.
   welcome: [
     { at: 2.4, key: "welcome-here", headline: "You're in.", instruction: "Each morning a new prompt opens and stays open. Nothing is lost if you start late." },
-    { at: 19.5, key: "welcome-journal", headline: "Any journal.", instruction: "Which notebook will you use? Name it here so it is real.", pause: true },
-    { at: 34.4, key: "welcome-rule", headline: "The one rule.", instruction: "Do not try to catch up. Do not make it good. One small good thing a day." },
+    { at: 23.6, key: "welcome-journal", headline: "Any journal.", instruction: "Which notebook will you use? Name it here so it is real.", pause: true },
+    { at: 40.9, key: "welcome-rule", headline: "The one rule.", instruction: "Do not try to catch up. Do not make it good. One small good thing a day." },
   ],
   // Script 3, the walkthrough. Beat 3 does a prompt for real; the student does one too.
   walkthrough: [

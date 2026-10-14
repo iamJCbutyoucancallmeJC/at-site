@@ -52,6 +52,11 @@ export default async function ClassDayPage({ params }: { params: Promise<{ slug:
       </p>
       <p className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-6" style={link}>
         Day {n} of {c.days}
+        {open && day ? (
+          <span className="normal-case tracking-normal font-medium" style={{ color: "var(--color-text-secondary)" }}>
+            {"  "}&middot;{"  "}{day.title}
+          </span>
+        ) : null}
       </p>
 
       {!open || !day ? (
@@ -71,6 +76,7 @@ export default async function ClassDayPage({ params }: { params: Promise<{ slug:
           mp4={src.mp4}
           poster={src.poster}
           answers={answers}
+          open
           cues={[
             ...(day.video.cues ?? []).map((cue) => ({ ...cue, headline: day.prompt.headline, instruction: day.prompt.instruction, quoteBack: quote })),
             ...((day.video.cues ?? []).length ? [] : [{ at: 0, key: day.prompt.key, headline: day.prompt.headline, instruction: day.prompt.instruction, quoteBack: quote }]),

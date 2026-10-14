@@ -15,9 +15,11 @@ export type PromptBlockProps = {
   placeholder?: string
   onChange?: (text: string) => void
   compact?: boolean
+  // The small-caps label over the field; "Your saved answer" by default.
+  label?: string
 }
 
-export default function PromptBlock({ slug, promptKey, headline, instruction, quoteBack, initial = "", placeholder = "Write here", onChange, compact }: PromptBlockProps) {
+export default function PromptBlock({ slug, promptKey, headline, instruction, quoteBack, initial = "", placeholder = "Write here", onChange, compact, label = "Your saved answer" }: PromptBlockProps) {
   const [text, setText] = useState(initial)
   const [state, setState] = useState<"idle" | "saving" | "saved" | "error">("idle")
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -70,7 +72,7 @@ export default function PromptBlock({ slug, promptKey, headline, instruction, qu
       ) : null}
       <div className="flex items-baseline justify-between mb-2">
         <span className="text-[11px] uppercase tracking-[0.18em] font-semibold" style={{ color: "var(--color-text-primary)" }}>
-          Your saved answer
+          {label}
         </span>
         <span className="text-[11px]" style={{ color: state === "error" ? "#b00020" : "var(--color-text-secondary)" }} aria-live="polite">
           {state === "saving" ? "saving" : state === "saved" ? "saved" : state === "error" ? "not saved, try again" : ""}

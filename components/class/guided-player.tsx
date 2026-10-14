@@ -26,6 +26,13 @@ type Props = {
   cues?: PlayerCue[]
   answers?: Record<string, string>
   autoplay?: boolean
+  // Day pages: the prompt column is visible from the start (the video is Amy
+  // reading the prompt, not a reveal), so a student who never presses play
+  // still sees the question and the field.
+  open?: boolean
+  // CSS object-position for the circle crop, e.g. "38% 50%" when the subject
+  // sits left of centre in a landscape master.
+  focus?: string
 }
 
 function fmt(s: number) {
@@ -34,15 +41,17 @@ function fmt(s: number) {
   return `${m}:${String(r).padStart(2, "0")}`
 }
 
-export default function GuidedPlayer({ slug, hls, hlsQuery = "", mp4, poster, cues = [], answers = {}, autoplay = false }: Props) {
+export default function GuidedPlayer({ slug, hls, hlsQuery = "", mp4, poster, cues = [], answers = {}, autoplay = false, open = false, focus }: Props) {
   const video = useRef<HTMLVideoElement>(null)
   const [t, setT] = useState(0)
   const [dur, setDur] = useState(0)
   const [paused, setPaused] = useState(true)
-  const [active, setActive] = useState<PlayerCue | null>(null)
-  const [local, setLocal] = useState<Record<string, string>>(answers)
-  const held = useRef<string | null>(null)
   const sorted = useMemo(() => [...cues].sort((a, b) => a.at - b.at), [cues])
+  const [active, setActive] = useState<PlayerCue | null>(() => (open ? sorted[0] ?? null : null))
+  const [local, setLocal] = useState<Record<string, string>>(answers)
+  // True while a pause:true cue is holding the video (cleared when it plays again).
+  const [holding, setHolding] = useState(false)
+  const held = useRef<string | null>(null)
 
   // Attach the stream. hls.js wherever MSE exists (so the directory token can
   // ride on every child request); otherwise the signed MP4 (iOS Safari).
@@ -68,6 +77,12 @@ export default function GuidedPlayer({ slug, hls, hlsQuery = "", mp4, poster, cu
           if (hlsQuery && !url.includes("token=")) xhr.open("GET", url + (url.includes("?") ? "&" : "?") + hlsQuery, true)
         },
       })
+      // Duration from the manifest, so the scrubber reads 0:52 (and the cue
+      // ticks render) before the student presses play.
+      h.on(Hls.Events.LEVEL_LOADED, (_e, data) => {
+        const total = data?.details?.totalduration
+        if (total && Number.isFinite(total)) setDur(total)
+      })
       h.loadSource(hls)
       h.attachMedia(el)
       hlsInst = h
@@ -82,11 +97,15 @@ export default function GuidedPlayer({ slug, hls, hlsQuery = "", mp4, poster, cu
     if (!el) return
     const now = el.currentTime
     setT(now)
-    const cue = sorted.filter((c) => now >= c.at).at(-1) ?? null
+    const passed = sorted.filter((c) => now >= c.at).at(-1) ?? null
+    // In open mode the column never collapses: before the first cue it shows
+    // the first cue's prompt.
+    const cue = passed ?? (open ? sorted[0] ?? null : null)
     if (cue?.key !== active?.key) {
       setActive(cue)
       if (cue?.pause && held.current !== cue.key && !(local[cue.key] ?? "").trim()) {
         held.current = cue.key
+        setHolding(true)
         el.pause()
       }
     }
@@ -125,9 +144,10 @@ export default function GuidedPlayer({ slug, hls, hlsQuery = "", mp4, poster, cu
             preload="metadata"
             onTimeUpdate={onTime}
             onLoadedMetadata={() => setDur(video.current?.duration ?? 0)}
-            onPlay={() => setPaused(false)}
+            onPlay={() => { setPaused(false); setHolding(false) }}
             onPause={() => setPaused(true)}
             className="absolute inset-0 w-full h-full object-cover"
+            style={focus ? { objectPosition: focus } : undefined}
           />
           {paused ? (
             <span className="absolute inset-0 grid place-items-center" style={{ background: "rgba(255,255,255,0.35)" }}>
@@ -175,6 +195,11 @@ export default function GuidedPlayer({ slug, hls, hlsQuery = "", mp4, poster, cu
         </div>
         <span className="w-10 tabular-nums">{fmt(dur)}</span>
       </div>
+      {holding ? (
+        <p className="mt-3 text-center text-[13px] italic" style={{ color: "var(--color-text-secondary)" }} aria-live="polite">
+          Write a line, or press play to keep going.
+        </p>
+      ) : null}
     </div>
   )
 }

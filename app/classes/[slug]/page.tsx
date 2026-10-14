@@ -4,7 +4,7 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
-import { getClass, isDayOpen, unlockDate, formatUnlockDate } from "@/lib/classes"
+import { getClass, isDayOpen, unlockDate, formatUnlockDate, laDate } from "@/lib/classes"
 import { getClassClaim } from "@/lib/class-session"
 import { getClassDays, getContainerCues } from "@/lib/class-content"
 import { getAnswers } from "@/lib/class-answers"
@@ -61,6 +61,10 @@ export default async function ClassHome({
 
   const days = getClassDays(slug)
   const now = new Date()
+  // The day that unlocked today, if the class is running; marked in the list so
+  // a returning student does not have to count.
+  const today = laDate(now)
+  const todayN = Array.from({ length: c.days }, (_, i) => i + 1).find((n) => unlockDate(c, n) === today) ?? null
   const answers = await getAnswers(claim)
   const welcome = c.welcomeVideo ? await playbackSource(c.welcomeVideo) : null
 
@@ -79,7 +83,8 @@ export default async function ClassHome({
 
       {welcome ? (
         <section className="mb-14">
-          <GuidedPlayer slug={slug} hls={welcome.hls} hlsQuery={welcome.hlsQuery} mp4={welcome.mp4} poster={welcome.poster} cues={getContainerCues(slug, "welcome")} answers={answers} />
+          {/* The welcome master is landscape with Amy left of centre; 38% keeps her in the circle. */}
+          <GuidedPlayer slug={slug} hls={welcome.hls} hlsQuery={welcome.hlsQuery} mp4={welcome.mp4} poster={welcome.poster} cues={getContainerCues(slug, "welcome")} answers={answers} focus="38% 50%" />
         </section>
       ) : null}
 
@@ -100,9 +105,16 @@ export default async function ClassHome({
                 Day {n}
               </span>
               {open ? (
-                <Link href={`/classes/${slug}/day/${n}`} className="text-[17px] font-semibold underline-offset-4 hover:underline" style={{ color: "var(--color-text-primary)" }}>
-                  {label}
-                </Link>
+                <span className="flex items-baseline gap-3 flex-wrap">
+                  <Link href={`/classes/${slug}/day/${n}`} className="text-[17px] font-semibold underline-offset-4 hover:underline" style={{ color: "var(--color-text-primary)" }}>
+                    {label}
+                  </Link>
+                  {n === todayN ? (
+                    <span className="text-[11px] uppercase tracking-[0.12em] font-semibold" style={{ color: "var(--color-orange)" }}>
+                      Today
+                    </span>
+                  ) : null}
+                </span>
               ) : (
                 <span className="text-[15px]" style={{ color: "var(--color-text-secondary)" }}>
                   Opens {formatUnlockDate(unlockDate(c, n))}
@@ -121,6 +133,7 @@ export default async function ClassHome({
           instruction="Leave it here. She collects them and answers on camera in the middle of the month, and that video lands on this page."
           initial={answers["question"] ?? ""}
           placeholder="Your question"
+          label="Your question"
           compact
         />
       </section>
