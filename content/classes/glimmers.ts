@@ -81,8 +81,8 @@ export const GLIMMERS_DAYS: ClassDay[] = [
   {
     day: 5,
     title: "Include a photo of you",
-    // Amy's 2023 page video from Kajabi (glimmers-kajabi-video-pull-runbook). 9/23 ruled "no 2023
-    // replays"; JC asked for them 10/14. Wired for his read; Amy may still veto.
+    // Amy's 2023 page video from Kajabi (glimmers-kajabi-video-pull-runbook). JC ruled 10/14:
+    // in the class, on his call (supersedes the 9/23 "no 2023 replays" line for these four).
     demo: { id: "ddc2c784-62df-4c75-9120-302efa75ae0f", caption: "Amy's page, from the 2023 class." },
     prompt: { key: "d05", steps: ["Take a selfie smiling, or pick a recent photo you like.", "Print it and glue it in.", "Write what you're grateful for right now, and the story behind the photo."] },
     body: [],
@@ -166,8 +166,8 @@ export const GLIMMERS_DAYS: ClassDay[] = [
   {
     day: 17,
     title: "Celebrating the everyday",
-    // Amy's 2023 page video from Kajabi (glimmers-kajabi-video-pull-runbook). 9/23 ruled "no 2023
-    // replays"; JC asked for them 10/14. Wired for his read; Amy may still veto.
+    // Amy's 2023 page video from Kajabi (glimmers-kajabi-video-pull-runbook). JC ruled 10/14:
+    // in the class, on his call (supersedes the 9/23 "no 2023 replays" line for these four).
     demo: { id: "c304418f-758b-43a3-a1b1-4e6166474bbb", caption: "Amy's page, from the 2023 class." },
     prompt: { key: "d17", steps: ["Pick a quote that resonates with you right now.", "Write it in your notebook with the supplies on hand, any way that delights you."] },
     body: [],
@@ -190,8 +190,8 @@ export const GLIMMERS_DAYS: ClassDay[] = [
   {
     day: 20,
     title: "Ticket or token",
-    // Amy's 2023 page video from Kajabi (glimmers-kajabi-video-pull-runbook). 9/23 ruled "no 2023
-    // replays"; JC asked for them 10/14. Wired for his read; Amy may still veto.
+    // Amy's 2023 page video from Kajabi (glimmers-kajabi-video-pull-runbook). JC ruled 10/14:
+    // in the class, on his call (supersedes the 9/23 "no 2023 replays" line for these four).
     demo: { id: "f70f372e-a588-4040-9f9f-206db3a627d9", caption: "Amy's page, from the 2023 class." },
     prompt: { key: "d20", steps: ["Find a ticket stub or a small token with a story.", "Glue it in.", "Write the quirky story tied to it, and how it captures the moment."] },
     body: [],
@@ -256,8 +256,8 @@ export const GLIMMERS_DAYS: ClassDay[] = [
   {
     day: 30,
     title: "Thirty little pages",
-    // Amy's 2023 page video from Kajabi (glimmers-kajabi-video-pull-runbook). 9/23 ruled "no 2023
-    // replays"; JC asked for them 10/14. Wired for his read; Amy may still veto.
+    // Amy's 2023 page video from Kajabi (glimmers-kajabi-video-pull-runbook). JC ruled 10/14:
+    // in the class, on his call (supersedes the 9/23 "no 2023 replays" line for these four).
     demo: { id: "82e7bd94-7a67-4fec-8374-773b6e9c6002", caption: "Amy's journal at the end of the 2023 class." },
     // Amy to camera, shot 10/8; Amy-only re-cut 10/14 (Bunny "glimmers-d30"), 4.4 s.
     video: { id: "931c0e77-09d0-4d97-b614-89a171df0ee0", cues: [{ at: 4.1, key: "d30" }] },
