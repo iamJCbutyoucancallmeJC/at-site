@@ -146,7 +146,8 @@ export const HM_FAQ_ITEMS = [
   },
   {
     q: "Can I send it as a gift?",
-    a: "Yes. At checkout, enter your recipient's shipping address. The 6-Month option is the most popular gift choice — they'll get mail from Amy for half a year.",
+    a: "Visit our gift page for six-month gifts and current availability. Please don't buy a gift as another subscription on your account. Your recipient receives an email and redeems with their own email and shipping address. Use your own details at checkout; their gift stays separate from your subscription.",
+    link: { href: "/gift", label: "Give six months of Happy Mail" },
   },
   {
     // [t658 addendum] Cancel copy aligned to policy (2026-05-29).
@@ -267,9 +268,10 @@ export const IHM_FAQ_ITEMS = [
   },
   {
     q: "Can I send it as a gift?",
-    // Within-market only. Cross-border gifting (e.g. a US buyer -> intl recipient) is NOT
-    // self-serve yet (concierge via help@). Do NOT promise a cross-border gift here.
-    a: "Yes. At checkout, enter your recipient's shipping address in Canada, the UK, or Australia, and the mail goes straight to them. (Sending from the US to a friend abroad? Email help@amytangerine.com and we'll set that up for you.)",
+    // The native $72 gift is US-only. Retire the old second-plan-on-giver advice
+    // internationally too; support must arrange a separate recipient account.
+    a: "For a gift to Canada, the UK, or Australia, email help@amytangerine.com before ordering so we can arrange it under your recipient's own email and address. The $72 six-month gift on our gift page is for US delivery.",
+    link: { href: "/gift", label: "About Happy Mail gifts" },
   },
   {
     q: "How do I cancel?",

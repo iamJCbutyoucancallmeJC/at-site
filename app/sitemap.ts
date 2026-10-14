@@ -20,6 +20,7 @@ const STATIC_PATHS = [
   "/shop",
   "/shop-my-faves",
   "/happy-mail",
+  "/gift",
   "/happy-mail-international",
   "/about",
   "/contact",

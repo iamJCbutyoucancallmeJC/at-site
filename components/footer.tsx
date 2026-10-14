@@ -4,7 +4,11 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { trackEvent } from "@/lib/analytics"
 import { isChromelessRoute } from "@/lib/chromeless-routes"
-import EmailCaptureInline from "@/components/email-capture-inline"
+import KeepUpCard from "@/components/keep-up-card"
+
+// Same env gate the old footer block (EmailCaptureInline) honored: Amy's
+// aesthetic-pass hold on capture blocks (t1092). Flip in Vercel, no code change.
+const CAPTURE_BLOCKS = process.env.NEXT_PUBLIC_CAPTURE_BLOCKS === "1"
 
 const DESKTOP_LINKS = [
   { label: "Shop", href: "/shop" },
@@ -50,8 +54,10 @@ export default function Footer() {
       {/* Email capture (t1092, D3 inline block) -- renders null until
           NEXT_PUBLIC_CAPTURE_BLOCKS=1 (Amy aesthetic pass gate). One form per
           page: skipped on /join and /creativity (the page is the form) and on the homepage and
-          its /v/ variants, which carry their own "Keep up with Amy" box. */}
-      {!hasOwnCaptureForm(pathname) && <EmailCaptureInline source="footer" dark />}
+          its /v/ variants, which carry their own "Keep up with Amy" box.
+          Design critic 2026-10 (F15): this is the homepage's orange card, not a
+          second black-band design; see components/keep-up-card.tsx. */}
+      {CAPTURE_BLOCKS && !hasOwnCaptureForm(pathname) && <KeepUpCard sourcePage="footer" />}
       {/* Desktop */}
       <div className="hidden md:flex items-center justify-between px-12 py-8">
         <p className="text-sm" style={{ color: "rgba(255,255,255,0.5)" }}>

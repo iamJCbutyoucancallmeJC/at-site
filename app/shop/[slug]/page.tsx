@@ -3,6 +3,7 @@ import { getProductByHandle, getAllProducts } from "@/lib/shopify"
 import { getVisitorCountry, isInternational } from "@/lib/geo"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 import ProductDetail from "@/components/product-detail"
+import { GIFT_HANDLE } from "@/lib/gift"
 
 // Dynamic rendering: PDP varies by visitor country (Markets-scoped products).
 export const dynamic = "force-dynamic"
@@ -36,6 +37,8 @@ export default async function ProductPage({
   searchParams: Promise<{ plan?: string }>
 }) {
   const { slug } = await params
+
+  if (slug === GIFT_HANDLE) redirect("/gift")
 
   // Happy Mail has no standalone PDP. It's one Shopify product with two plan variants
   // (Monthly $13 / 6-Month $72), and /happy-mail is its canonical page (photos, both

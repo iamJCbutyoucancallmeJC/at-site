@@ -17,6 +17,32 @@
 // workshops from Amy's two Little Craft Place listings, sent 2026-09-04).
 // Open slots JC fills during review: Orlando recap video, Village Well date.
 
+// ── Booth kit (t1101, 2026-10-07) ───────────────────────────────────────────
+// One block per event drives everything the booth needs: the QR landing page
+// (/events/<slug>/booth, chromeless + noindex), the event checkout route
+// (/api/checkout/event), the booth capture route (/api/events/capture), and
+// scripts/event-qr.py. Adding a show = filling this block on its entry.
+// Replaces the hand-edited /paperworld one-off; /paperworld is now a fixed
+// alias (qrAlias) so the printed QR keeps landing.
+export type BoothOffer = {
+  code: string // Shopify discount code: created in admin, scoped to the show window (runbook)
+  kind: "hm-6month" | "shop" // hm-6month: direct checkout, code auto-applied. shop: show the code, link to /shop
+  amountOff: number // dollars off, for the price display
+  headline: string
+  terms: string // the fine print, in Amy's words
+}
+
+export type EventBooth = {
+  eventSource: string // _event_source cart attribute + Klaviyo signup_source (utm-convention.md)
+  qrAlias?: string // fixed short path the printed QR encodes ("paperworld" -> /paperworld)
+  boothNumber?: string
+  hours?: string[] // one line per day, venue local time
+  bring?: string[] // what Amy is bringing to the table
+  offer?: BoothOffer
+  captureHeading?: string
+  captureBlurb?: string
+}
+
 export type SiteEvent = {
   slug: string
   status: "upcoming" | "coming-soon" | "past"
@@ -40,6 +66,7 @@ export type SiteEvent = {
     links?: { label: string; href: string }[] // other places Amy documented it
   }
   photos?: string[] // local /public images shown on the index card
+  booth?: EventBooth // present = this event has a booth QR page (see the kit block above)
 }
 
 export const EVENTS: SiteEvent[] = [
@@ -72,6 +99,21 @@ export const EVENTS: SiteEvent[] = [
         { label: "Amy on Instagram", href: "https://instagram.com/amytangerine" },
       ],
     },
+    // First kit instance: the facts the hand-built /paperworld page carried
+    // (commit 826a509). The printed Paper World QR encodes /paperworld, which
+    // resolves to whichever stop carries qrAlias "paperworld" (next upcoming,
+    // else the latest past one). The PAPERWORLD code expired 2026-09-26.
+    booth: {
+      eventSource: "paperworld-anaheim",
+      qrAlias: "paperworld",
+      offer: {
+        code: "PAPERWORLD",
+        kind: "hm-6month",
+        amountOff: 6,
+        headline: "Six months of mail from me.",
+        terms: "Show price for friends who stopped by the booth: one payment of $66 instead of $72. Good through about a week after the show.",
+      },
+    },
   },
   {
     slug: "little-craft-fest-fall-2026",
@@ -99,6 +141,34 @@ export const EVENTS: SiteEvent[] = [
         href: "https://www.littlecraftplace.com/products/collect-and-create-travelers-notebook-trinket-tin-workshop-by-amy-tangerine",
       },
     ],
+    // Second kit instance; first out-of-state run of the Events (pop-up) POS
+    // location. Open slots are marked AMY or JC; the page hides empty ones.
+    booth: {
+      eventSource: "lcf-conroe-2026",
+      // AMY: booth/table number comes with Eunice's floor plan (second table asked 9/23).
+      boothNumber: undefined,
+      // Marketplace hours from littlecraftfest.com/pages/event-guide, read 2026-10-07.
+      hours: ["Friday Oct 23 and Saturday Oct 24: 10am to 6pm", "Sunday Oct 25: 9am to 5pm"],
+      // AMY: draft from the 9/23 sitting; confirm against Ahpo's packing list at the 10/16 POS prep.
+      bring: [
+        "Sticker books and the newest sticker sheets",
+        "Stamp sets",
+        "Zebra pens and ink",
+        "Kits for the two Traveler's Notebook workshops",
+      ],
+      // JC: PROPOSED code, not created in Shopify yet. The checkout route 409s
+      // (button reads "event discount isn't active yet") until the code exists
+      // and is ACTIVE for the show window. Runbook step 3.
+      offer: {
+        code: "LITTLECRAFT",
+        kind: "hm-6month",
+        amountOff: 6,
+        headline: "Six months of mail from me, at the show price.",
+        terms: "$6 off the Happy Mail 6-month subscription for friends who found the table: one payment of $66 instead of $72. Good through about a week after the show. US addresses only.",
+      },
+      captureHeading: "Not ready to subscribe? Stay in touch.",
+      captureBlurb: "Leave your email and Amy will send a note after the show with photos and what is new.",
+    },
   },
   {
     slug: "village-well",
@@ -282,4 +352,28 @@ export function eventHref(e: SiteEvent): string {
 // True when the card link leaves the site (guest link-outs).
 export function isExternalHref(e: SiteEvent): boolean {
   return !e.detailPage && !e.internalHref
+}
+
+// ── Booth kit helpers (t1101) ──
+
+export function boothEvents(): SiteEvent[] {
+  return EVENTS.filter((e) => e.booth)
+}
+
+export function getBoothEvent(slug: string): SiteEvent | undefined {
+  return EVENTS.find((e) => e.slug === slug && e.booth)
+}
+
+export function boothPath(e: SiteEvent): string {
+  return `/events/${e.slug}/booth`
+}
+
+// The printed QR encodes a fixed short path (/paperworld). It lands on the
+// booth page of the soonest upcoming event carrying that alias or, between
+// stops, the most recent past one (where the offer reads as ended).
+export function resolveQrAlias(alias: string): SiteEvent | undefined {
+  const matches = EVENTS.filter((e) => e.booth?.qrAlias === alias)
+  const upcoming = matches.filter((e) => e.status !== "past").sort((a, b) => a.sortDate.localeCompare(b.sortDate))
+  if (upcoming[0]) return upcoming[0]
+  return [...matches].sort((a, b) => b.sortDate.localeCompare(a.sortDate))[0]
 }

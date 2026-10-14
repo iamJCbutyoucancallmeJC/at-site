@@ -4,7 +4,7 @@
 
 import Image from "next/image"
 import type { Metadata } from "next"
-import NewsletterForm from "@/components/newsletter-form"
+import KeepUpCard from "@/components/keep-up-card"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 import TrackableLink from "@/components/trackable-link"
 import { getAllProducts, formatPrice } from "@/lib/shopify"
@@ -145,7 +145,12 @@ export default async function HomePage() {
                 sizes="(max-width: 768px) 50vw, 25vw"
               />
               <div className="absolute inset-0 bg-black/15 group-hover:bg-black/25 transition-colors duration-300" />
-              <span className="absolute bottom-3 left-3 md:bottom-4 md:left-4 text-[13px] md:text-[15px] uppercase tracking-[0.1em] font-semibold text-white">
+              {/* Label on a solid bar (design critic 2026-10, F13): the corner caps
+                  over busy product photos did not read on phones. Same type style. */}
+              <span
+                className="absolute inset-x-0 bottom-0 px-1.5 md:px-3 py-2 md:py-2.5 text-center text-[13px] md:text-[15px] uppercase tracking-[0.1em] font-semibold leading-tight"
+                style={{ background: "var(--color-white)", color: "var(--color-text-primary)" }}
+              >
                 {cat.name}
               </span>
             </TrackableLink>
@@ -281,20 +286,8 @@ export default async function HomePage() {
             </TrackableLink>
           </div>
 
-          {/* Newsletter */}
-          <div
-            id="newsletter"
-            className="md:flex-1 px-6 md:px-10 py-8 md:py-10 rounded-none md:rounded-r-lg flex flex-col justify-center scroll-mt-24"
-            style={{ background: "var(--color-orange)" }}
-          >
-            <h2 className="text-[15px] md:text-[18px] uppercase tracking-[0.12em] font-semibold mb-3 text-white">
-              Keep up with Amy
-            </h2>
-            <p className="text-[13px] md:text-[14px] mb-3 text-white/80">
-              What she's making, right to your inbox.
-            </p>
-            <NewsletterForm sourcePage="homepage" />
-          </div>
+          {/* Newsletter: the site's one capture card (components/keep-up-card.tsx) */}
+          <KeepUpCard sourcePage="homepage" layout="panel" id="newsletter" />
         </div>
       </section>
 

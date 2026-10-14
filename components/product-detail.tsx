@@ -144,6 +144,7 @@ export default function ProductDetail({
                 >
                   See what's inside, how it ships, and how to gift it →
                 </TrackableLink>
+                <p className="mt-2"><a href="/gift" className="font-semibold underline">Give six months of Happy Mail for $72</a>. Your recipient redeems with their own address.</p>
               </div>
             )}
 

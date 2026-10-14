@@ -92,6 +92,19 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
           </ul>
         )}
 
+        {/* Booth facts from the event kit (t1101): public, so a reader can plan a visit */}
+        {event.booth && !isPast && (event.booth.boothNumber || (event.booth.hours && event.booth.hours.length > 0) || (event.booth.bring && event.booth.bring.length > 0)) && (
+          <div className="mt-6 space-y-2 text-[14px] md:text-[15px]" style={{ color: "var(--color-text-primary)" }}>
+            {event.booth.boothNumber && <p className="font-semibold">Find Amy at {event.booth.boothNumber}</p>}
+            {event.booth.hours?.map((h) => (
+              <p key={h} className="font-semibold">{h}</p>
+            ))}
+            {event.booth.bring && event.booth.bring.length > 0 && (
+              <p style={{ color: "var(--color-text-secondary)" }}>On the table: {event.booth.bring.join(", ").toLowerCase()}.</p>
+            )}
+          </div>
+        )}
+
         {/* More than one thing to book (workshops sold by the host): one link each */}
         {event.links && event.links.length > 0 && !isPast && (
           <div className="mt-6 flex flex-col items-stretch gap-3">

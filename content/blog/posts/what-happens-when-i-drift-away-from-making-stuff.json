@@ -1,0 +1,48 @@
+{
+  "slug": "what-happens-when-i-drift-away-from-making-stuff",
+  "title": "What happens when I drift away from making stuff",
+  "date": "2026-10-07",
+  "datePublishedISO": "2026-10-07T18:24:27-0700",
+  "tags": [
+    "Video",
+    "Printables",
+    "Events"
+  ],
+  "excerpt": "I have been on the road a lot lately and I got to meet so many of you in person: Paper World in Orlando, then Paper World in Anaheim. It's truly incredible to be able to connect with you all and see your smiling faces.",
+  "body": "<p>I have been on the road a lot lately and I got to meet so many of you in person: Paper World in Orlando, then Paper World in Anaheim. It's truly incredible to be able to connect with you all and see your smiling faces. I will never take for granted how excited we all get about our crafty hobbies. I'm also always blown away by what you make with the supplies I dream up. Your creative twist is one of my favorite parts of this dream job.</p><p>If I cannot see you in person, the easiest way to spend time with me is the videos. The newest one is about what happens when I drift away from making stuff, and the ten things that bring me back. I hand-lettered the list so it can live on your desk, and it is yours free right here: <a href=\"https://www.amytangerine.com/creativity\">10 ways to reconnect with your creativity</a></p><p>I'm leaning into #2 &amp; #6 this season. How about you?</p><figure><img alt=\"My paintings on the wall at Village Well in Culver City\" src=\"https://cdn.shopify.com/s/files/1/0981/5667/5392/files/57781917993023c5.jpg?v=1791422670\"/></figure><p>My paintings were up on the walls at Village Well in Culver City through about October 6. <a href=\"https://www.amytangerine.com/events/village-well\">Details here</a>.</p>",
+  "legacyPath": "",
+  "legacyFile": "",
+  "imageCount": 1,
+  "draft": true,
+  "source": {
+    "work_id": "2026-09-25-creativity-2026-09-25",
+    "kind": "klaviyo-campaign",
+    "campaign_id": "01M3AQ6QPS68P1M332AKYN8MKF",
+    "campaign_name": "creativity-2026-09-25",
+    "subject": "What happens when I drift away from making stuff",
+    "send_date": "2026-09-25",
+    "drafted_at": "2026-10-07T18:24:27-0700",
+    "model": "sonnet",
+    "notes": "Time-bound items: the Village Well show ran through about Oct 6 (today is Oct 7), so I rewrote it in past tense and dropped 'Go have a coffee with them'. Check that the events/village-well page still makes sense now that the show is over, or remove that link. 'Anaheim last weekend' became just 'Anaheim' because the exact event name and dates are not in the source. 'Right now' was removed from the videos line to keep it evergreen. Dropped the 'Hi friend,' greeting, the 'xo, Amy' sign-off and the logo image. The source does not give a URL for the video itself, so there is no direct link to it. Add one if you have it. The post ends on the 'How about you?' question and the image, so you may want a closing line in Amy's words.",
+    "rehost": {
+      "rehosted": [
+        {
+          "from": "https://d3k81ch9hvuctc.cloudfront.net/company/SpEwEJ/images/16816139-e98d-4841-b84b-b60d2681ce5b.jpeg",
+          "to": "https://cdn.shopify.com/s/files/1/0981/5667/5392/files/57781917993023c5.jpg?v=1791422670"
+        }
+      ],
+      "already_mapped": [],
+      "failed": [],
+      "external_left": []
+    },
+    "edits": [
+      {
+        "at": "2026-10-07T18:27:10-0700",
+        "instruction": "In the first sentence, change 'then Anaheim' to 'then Paper World in Anaheim', since both shows were Paper World. Change nothing else.",
+        "model": "sonnet",
+        "notes": "Changed 'then Anaheim' to 'then Paper World in Anaheim' in the first sentence and refreshed the excerpt to match. Nothing else touched.",
+        "prior": "content/blog/revisions/what-happens-when-i-drift-away-from-making-stuff/2026-10-07T182710.json"
+      }
+    ]
+  }
+}

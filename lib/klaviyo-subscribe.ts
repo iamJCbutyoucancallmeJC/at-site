@@ -22,14 +22,23 @@ export type KlaviyoSubscribeResult =
   | { ok: true }
   | { ok: false; status: number; detail: string }
 
+// Optional extras (event kit, t1101): a first name and more profile properties
+// alongside signup_source. Properties, not list membership, carry the meaning.
+export type KlaviyoSubscribeExtras = {
+  firstName?: string
+  properties?: Record<string, string | number | boolean>
+}
+
 export async function klaviyoSubscribe(
   email: string,
   source: string,
   listId?: string,
+  extras: KlaviyoSubscribeExtras = {},
 ): Promise<KlaviyoSubscribeResult> {
   const list = listId || DEFAULT_LIST_ID
   if (!COMPANY_ID || !list) return { ok: false, status: 0, detail: "not configured" }
   const signupSource = (source || "at-site").slice(0, 64)
+  const firstName = extras.firstName?.trim().slice(0, 64)
   const body = {
     data: {
       type: "subscription",
@@ -40,7 +49,8 @@ export async function klaviyoSubscribe(
             type: "profile",
             attributes: {
               email,
-              properties: { signup_source: signupSource },
+              ...(firstName ? { first_name: firstName } : {}),
+              properties: { ...(extras.properties ?? {}), signup_source: signupSource },
               subscriptions: { email: { marketing: { consent: "SUBSCRIBED" } } },
             },
           },

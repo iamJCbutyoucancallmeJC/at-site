@@ -204,7 +204,8 @@ export async function getAllProducts(country?: string): Promise<ShopifyProduct[]
   `
 
   const data = await shopifyFetch<{ products: { nodes: ShopifyProduct[] } }>(query, ctx.vars)
-  return data.products.nodes
+  // Gift products must always go through /gift's required recipient form.
+  return data.products.nodes.filter((p) => !p.tags.includes("Recharge Gift Product"))
 }
 
 export async function getProductByHandle(handle: string, country?: string): Promise<ShopifyProduct | null> {
@@ -296,6 +297,27 @@ const CART_FRAGMENT = `
 // them to fire a server-side GA4 purchase event with the right session. This is
 // how we attribute revenue from Shop Pay buyers who never return to /thank-you.
 export type CartAttribute = { key: string; value: string }
+
+export async function createGiftCart(variantId: string, attributes: CartAttribute[]): Promise<ShopifyCart> {
+  const query = `
+    ${IMAGE_FRAGMENT}
+    ${PRICE_FRAGMENT}
+    ${CART_FRAGMENT}
+    mutation GiftCart($input: CartInput!) {
+      cartCreate(input: $input) {
+        cart { ...CartFragment }
+        userErrors { field message }
+      }
+    }
+  `
+  const data = await shopifyFetch<{ cartCreate: { cart: ShopifyCart | null; userErrors: { message: string }[] } }>(query, {
+    input: { lines: [{ merchandiseId: variantId, quantity: 1, attributes }] },
+  })
+  if (data.cartCreate.userErrors.length || !data.cartCreate.cart || data.cartCreate.cart.lines.nodes.length !== 1) {
+    throw new Error("Gift cart creation failed")
+  }
+  return data.cartCreate.cart
+}
 
 export async function createCart(attributes?: CartAttribute[]): Promise<ShopifyCart> {
   const query = `

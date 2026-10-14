@@ -7,6 +7,7 @@
 import { NextResponse } from "next/server"
 import { createCart, addToCart, extractCartToken } from "@/lib/shopify"
 import { hmIsClosed, hmCapVariantGids } from "@/lib/happy-mail-content"
+import { GIFT_VARIANT } from "@/lib/gift"
 
 const RETURN_BASE = "https://amytangerine.com/thank-you"
 
@@ -19,6 +20,10 @@ export async function POST(request: Request) {
 
     if (!Array.isArray(items) || items.length === 0) {
       return NextResponse.json({ error: "No items" }, { status: 400 })
+    }
+
+    if (items.some((item) => item.variantId === GIFT_VARIANT)) {
+      return NextResponse.json({ error: "Please order Happy Mail gifts at /gift so your recipient gets their redemption email." }, { status: 400 })
     }
 
     // October 2026 cap (t1702): a Happy Mail subscription already sitting in the
