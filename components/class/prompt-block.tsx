@@ -10,6 +10,8 @@ export type PromptBlockProps = {
   promptKey: string
   headline: string
   instruction?: string
+  steps?: string[] // numbered instructions for the paper page
+  noField?: boolean // headline, line and steps only
   quoteBack?: { label: string; text: string } | null
   initial?: string
   placeholder?: string
@@ -19,7 +21,7 @@ export type PromptBlockProps = {
   label?: string
 }
 
-export default function PromptBlock({ slug, promptKey, headline, instruction, quoteBack, initial = "", placeholder = "Write here", onChange, compact, label = "Your saved answer" }: PromptBlockProps) {
+export default function PromptBlock({ slug, promptKey, headline, instruction, steps, noField, quoteBack, initial = "", placeholder = "Write here", onChange, compact, label = "Your note" }: PromptBlockProps) {
   const [text, setText] = useState(initial)
   const [state, setState] = useState<"idle" | "saving" | "saved" | "error">("idle")
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -65,11 +67,19 @@ export default function PromptBlock({ slug, promptKey, headline, instruction, qu
           {instruction}
         </p>
       ) : null}
+      {steps?.length ? (
+        <ol className="list-decimal pl-6 space-y-3 mb-8 text-[17px] leading-relaxed marker:font-semibold" style={{ color: "var(--color-text-primary)" }}>
+          {steps.map((step, i) => (
+            <li key={i} className="pl-1">{step}</li>
+          ))}
+        </ol>
+      ) : null}
       {quoteBack?.text ? (
         <p className="text-[15px] italic leading-relaxed mb-7" style={{ color: "var(--color-text-secondary)" }}>
           {quoteBack.label} <span className="not-italic font-medium" style={{ color: "var(--color-orange)" }}>{quoteBack.text}</span>
         </p>
       ) : null}
+      {noField ? null : (<>
       <div className="flex items-baseline justify-between mb-2">
         <span className="text-[11px] uppercase tracking-[0.18em] font-semibold" style={{ color: "var(--color-text-primary)" }}>
           {label}
@@ -88,6 +98,7 @@ export default function PromptBlock({ slug, promptKey, headline, instruction, qu
         className="w-full bg-transparent resize-none outline-none text-[16px] leading-relaxed py-2 border-b-2"
         style={{ color: "var(--color-text-primary)", borderColor: "var(--color-orange)" }}
       />
+      </>)}
     </div>
   )
 }

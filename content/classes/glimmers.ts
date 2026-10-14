@@ -12,14 +12,19 @@ import "server-only"
 export type Cue = {
   at: number // seconds into the video when the prompt column appears
   key: string // saved-answer key, e.g. "d07" or "welcome-grateful"
-  pause?: boolean // hold the video until the student types or clicks play
+  pause?: boolean // hold the video until the student types or clicks play (unused since 10/14: nothing waits on typing)
+  noField?: boolean // headline and line only, no text field
+  label?: string // small-caps label over the field
 }
 
+// The day's instructions for the PAPER page, as numbered steps (JC ruled
+// 10/14: the journal is the class; the page tells you what to do in it). The
+// field under the steps is an optional one-line log of what went on the page,
+// which Day 30 lists in order.
 export type Prompt = {
-  key: string // the saved-answer key for the day
-  headline: string
-  instruction?: string // one italic line
-  quoteBack?: string // key of an earlier answer to show in orange above the field
+  key: string // the saved-log key for the day
+  steps: string[]
+  quoteBack?: string // key of an earlier log line to show in orange above the field
 }
 
 export type ClassVideo = { id: string; cues?: Cue[] }
@@ -27,8 +32,7 @@ export type ClassVideo = { id: string; cues?: Cue[] }
 export type ClassDay = {
   day: number
   title: string
-  // The one question of the day, rendered Lightbulb-style beside the circle
-  // video (if any) or on its own.
+  // The day's steps, rendered beside the circle video (if any) or on their own.
   prompt: Prompt
   // Paragraphs of longer prose under the prompt, plain text.
   body: string[]
@@ -43,35 +47,35 @@ export const GLIMMERS_DAYS: ClassDay[] = [
   {
     day: 1,
     title: "Why Glimmers & Gratitude? Why now?",
-    prompt: { key: "d01", headline: "What is one glimmer from today?", instruction: "The light through a window. The first sip. A song you forgot you loved. One sentence." },
-    body: ["A glimmer is a small moment that makes you feel safe, calm, or quietly glad. The opposite of a trigger.", "Today, notice one. Write it down in a sentence. That is the whole practice."],
+    prompt: { key: "d01", steps: ["Open your journal to a fresh page and write the date.", "Notice one glimmer from today: the light through a window, the first sip, a song you forgot you loved.", "Write it down in one sentence. That is the whole practice."] },
+    body: ["A glimmer is a small moment that makes you feel safe, calm, or quietly glad. The opposite of a trigger."],
   },
   {
     day: 2,
     title: "Create your Glimmers & Gratitude journal",
     // Amy to camera, shot 10/8, square cut 10/9 (Bunny "glimmers-d02")
     video: { id: "2bbb86ad-cd0d-4afb-ac40-515c4ad07a13", cues: [{ at: 7.0, key: "d02" }] },
-    prompt: { key: "d02", headline: "Where will your glimmers go?", instruction: "Make a fun place for them. Any notebook works." },
-    body: ["Find joy in the ordinary and put it into your dedicated notebook. Make your life more abundant with the little things that add up big time."],
+    prompt: { key: "d02", steps: ["Pick the notebook. Any notebook works.", "Write today's date on the first page.", "Make a fun place for your glimmers to go: a title, a doodle, a strip of tape.", "Print the journal-setup page and glue it in, if you want it."] },
+    body: [],
     files: [{ name: "printable-1-journal-setup.pdf", label: "Printable (PDF)" }],
   },
   {
     day: 3,
     title: "Expanding your practice",
-    prompt: { key: "d03", headline: "What does gratitude spell out for you?", instruction: "Try an acronym: one word per letter." },
-    body: ["A day for widening the lens. Look back at your first two pages and add one more thing you missed."],
+    prompt: { key: "d03", steps: ["Look back at your first two pages and add one thing you missed.", "Try an acronym for GRATITUDE: one word per letter."] },
+    body: [],
   },
   {
     day: 4,
     title: "Somebody loves you",
-    prompt: { key: "d04", headline: "Who put something kind in your hands lately?", instruction: "A handwritten note or card. Add it to the journal." },
-    body: ["It doesn't have to be anything big. If you don't have one, ask someone to write something in it for you."],
+    prompt: { key: "d04", steps: ["Find a handwritten note or card someone gave you.", "Add it to the journal. It does not have to be anything big.", "If you don't have one, ask someone to write a line in your journal for you."] },
+    body: [],
   },
   {
     day: 5,
     title: "Include a photo of you",
-    prompt: { key: "d05", headline: "What are you grateful for in this photo?", instruction: "Take a selfie smiling, or use a recent one. Print it and glue it in." },
-    body: ["Write what you're currently grateful for and the story behind the photo."],
+    prompt: { key: "d05", steps: ["Take a selfie smiling, or pick a recent photo you like.", "Print it and glue it in.", "Write what you're grateful for right now, and the story behind the photo."] },
+    body: [],
   },
   {
     day: 6,
@@ -80,31 +84,31 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     // What was one small good thing today?" JC ruled 10/14: the prompt matches the clip.
     // (Last year's "Mondays are a fresh start" landed on a Friday this year anyway.)
     video: { id: "1fe38673-fc9b-49c4-a525-89ac24817c0f", cues: [{ at: 2.4, key: "d06" }] },
-    prompt: { key: "d06", headline: "What was one small good thing today?", instruction: "Just the one. A sentence is plenty." },
+    prompt: { key: "d06", steps: ["Write the date.", "Name one small good thing from today. One sentence is plenty."] },
     body: ["Almost a week in. This is the whole practice in one question, so today is a plain day: name it, write it down, done."],
   },
   {
     day: 7,
     title: "Paying it forward",
-    prompt: { key: "d07", headline: "When did someone's kindness change your day?", instruction: "Tell the story, then name one way to pass it on." },
+    prompt: { key: "d07", steps: ["Think of a time someone's kindness changed your day.", "Tell the story on the page.", "Name one way to pass it on this week."] },
     body: [],
   },
   {
     day: 8,
     title: "Looking back",
-    prompt: { key: "d08", headline: "What was an everyday sweet moment this week?", instruction: "Look for a throughline. How can you keep noticing them?" },
+    prompt: { key: "d08", steps: ["Read back through this week's pages.", "Write down one everyday sweet moment you noticed.", "Look for a throughline. How can you keep noticing them?"] },
     body: [],
   },
   {
     day: 9,
     title: "Pencil it in",
-    prompt: { key: "d09", headline: "What everyday object holds meaning for you?", instruction: "Sketch it. This is not about talent, it's about the joy of making a mark." },
+    prompt: { key: "d09", steps: ["Pick an everyday object that holds meaning for you.", "Sketch it. This is not about talent, it's about the joy of making a mark.", "Add a line about why it matters."] },
     body: ["Let go of the idea that you can't draw."],
   },
   {
     day: 10,
     title: "Be free",
-    prompt: { key: "d10", headline: "What does freedom feel like to you?", instruction: "What do you do with your free time? Which parts of freedom are you most grateful for?" },
+    prompt: { key: "d10", steps: ["Write what freedom feels like to you.", "List what you do with your free time.", "Circle the parts of freedom you're most grateful for."] },
     body: [],
   },
   {
@@ -112,26 +116,26 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     title: "Ideas",
     // Amy to camera, shot 10/8, square cut 10/9 (Bunny "glimmers-d11")
     video: { id: "ee45a437-ee2b-4476-b9b9-9cd8faabe7a7", cues: [{ at: 9.6, key: "d11" }] },
-    prompt: { key: "d11", headline: "How are you sparking ideas that inspire you?", instruction: "Write something about your outlook on ideas." },
-    body: ["Cut out the Ideas tag and glue it in."],
+    prompt: { key: "d11", steps: ["Print the Ideas tag, cut it out, and glue it in.", "Write about your outlook on ideas.", "How are you sparking ideas that inspire you?"] },
+    body: [],
     files: [{ name: "printable-2-ideas-tag.pdf", label: "Printable (PDF)" }],
   },
   {
     day: 12,
     title: "Rest",
-    prompt: { key: "d12", headline: "What is your relationship with rest?", instruction: "Find a quote about rest that resonates and write it down." },
+    prompt: { key: "d12", steps: ["Write a few lines about your relationship with rest.", "Find a quote about rest that resonates and copy it onto the page."] },
     body: ["Rest is not the absence of activity but the presence of peace."],
   },
   {
     day: 13,
     title: "Finding light in the shadows",
-    prompt: { key: "d13", headline: "Think of a recent low-energy day. What were three glimmers in it?", instruction: "Give thanks for them. How did noticing change the day?" },
+    prompt: { key: "d13", steps: ["Think of a recent low-energy day.", "Write three glimmers that were in it anyway.", "Give thanks for them. How did noticing change the day?"] },
     body: [],
   },
   {
     day: 14,
     title: "A beautiful mess",
-    prompt: { key: "d14", headline: "What mess, little or big, could be reframed as beautiful?", instruction: "Journal about it." },
+    prompt: { key: "d14", steps: ["Pick a mess, little or big, from your life right now.", "Journal about how it could be reframed as beautiful."] },
     body: [],
   },
   {
@@ -140,19 +144,19 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     // Amy's 10/8 "Mid-month check-in" line is on Bunny as glimmers-d15 (de32d480), 2.2 s. Pulled
     // from the page 10/14: a two-second clip that does not say the prompt reads as a glitch.
     // Re-wire if the reshoot gives Day 15 a real read.
-    prompt: { key: "d15", headline: "What old idea no longer serves you?", instruction: "Make the perspective shift. Turn it into a fresh, positive one." },
-    body: ["Magazine headings make good journal phrases."],
+    prompt: { key: "d15", steps: ["Name an old idea that no longer serves you.", "Turn it into a fresh, positive one on the page.", "Magazine headings make good journal phrases, if you have one around."] },
+    body: [],
   },
   {
     day: 16,
     title: "Live session",
-    prompt: { key: "d16", headline: "How can you create more space for receiving?", instruction: "The recording of the live lands here." },
-    body: [],
+    prompt: { key: "d16", steps: ["How can you create more space for receiving? Write a few lines."] },
+    body: ["The Q&A video, answering the questions from the box on the class page, lands there in the middle of the month."],
   },
   {
     day: 17,
     title: "Celebrating the everyday",
-    prompt: { key: "d17", headline: "What quote resonates with you right now?", instruction: "Write it in your notebook with the supplies on hand, any way that delights you." },
+    prompt: { key: "d17", steps: ["Pick a quote that resonates with you right now.", "Write it in your notebook with the supplies on hand, any way that delights you."] },
     body: [],
   },
   {
@@ -160,50 +164,50 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     title: "Work in progress",
     // Amy to camera, shot 10/8, square cut 10/9 (Bunny "glimmers-d18")
     video: { id: "5fe8ebcc-01c4-4f30-8f67-8717847bfd86", cues: [{ at: 5.3, key: "d18" }] },
-    prompt: { key: "d18", headline: "Where have you let yourself be imperfect?", instruction: "How did it grow you?" },
-    body: ["Explore being a work in progress and the beauty in imperfection."],
+    prompt: { key: "d18", steps: ["Print the Work in Progress page and add it to your journal.", "Write about where you have let yourself be imperfect.", "How did it grow you?"] },
+    body: [],
     files: [{ name: "printable-3-work-in-progress.pdf", label: "Printable (PDF)" }],
   },
   {
     day: 19,
     title: "Finding comfort",
-    prompt: { key: "d19", headline: "What brings you comfort?", instruction: "Add it to your journal in a creative way. A list is fine." },
-    body: ["Tea, blankets, hugs, rain, a stroll, a candle."],
+    prompt: { key: "d19", steps: ["List what brings you comfort: tea, blankets, hugs, rain, a stroll, a candle.", "Add it to your journal in a creative way. A list is fine."] },
+    body: [],
   },
   {
     day: 20,
     title: "Ticket or token",
-    prompt: { key: "d20", headline: "What quirky story is tied to one of your ticket stubs?", instruction: "Include the stub. How does it capture the moment?" },
+    prompt: { key: "d20", steps: ["Find a ticket stub or a small token with a story.", "Glue it in.", "Write the quirky story tied to it, and how it captures the moment."] },
     body: [],
   },
   {
     day: 21,
     title: "Embracing chaos",
-    prompt: { key: "d21", headline: "How do you embrace beautiful chaos?", instruction: "Take some of those supplies you love and create just for the sake of it." },
+    prompt: { key: "d21", steps: ["Take some of the supplies you love and create just for the sake of it.", "No plan beyond that. Write a line about how it felt."] },
     body: [],
   },
   {
     day: 22,
     title: "Habits and happiness",
-    prompt: { key: "d22", headline: "Which habits bring you joy?", instruction: "You're past the 21 days. What have you noticed about habits and happiness?" },
+    prompt: { key: "d22", steps: ["You're past the 21 days. Write what you've noticed about habits and happiness.", "List the habits that bring you joy."] },
     body: [],
   },
   {
     day: 23,
     title: "Giving thanks",
-    prompt: { key: "d23", headline: "What ordinary thing did you notice today?", instruction: "Take a photo or a little video, write about it, give thanks." },
+    prompt: { key: "d23", steps: ["Notice one ordinary thing today.", "Take a photo or a little video of it.", "Write about it and give thanks."] },
     body: [],
   },
   {
     day: 24,
     title: "Things people say",
-    prompt: { key: "d24", headline: "What did someone say that delighted you?", instruction: "Write it down." },
+    prompt: { key: "d24", steps: ["Write down something someone said that delighted you.", "Add who said it and when."] },
     body: [],
   },
   {
     day: 25,
     title: "Where you live",
-    prompt: { key: "d25", headline: "What do you love about where you live?" },
+    prompt: { key: "d25", steps: ["Write what you love about where you live."] },
     body: [],
   },
   {
@@ -211,26 +215,26 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     title: "Nourishing",
     // Amy to camera, shot 10/8, square cut 10/9 (Bunny "glimmers-d26")
     video: { id: "38732fdc-0f65-433b-bd94-8684c92baa7d", cues: [{ at: 7.2, key: "d26" }] },
-    prompt: { key: "d26", headline: "Who made your meals this week?", instruction: "Give a shout-out to the meals and the maker. Bonus points for food stickers." },
+    prompt: { key: "d26", steps: ["Print the Nourishing page and add it in.", "Give a shout-out to this week's meals and whoever made them.", "Bonus points for food stickers."] },
     body: [],
     files: [{ name: "printable-4-nourishing.pdf", label: "Printable (PDF)" }],
   },
   {
     day: 27,
     title: "Progress over perfection",
-    prompt: { key: "d27", headline: "Where have you seen progress recently?", instruction: "How has gratitude played a role in appreciating the change?" },
+    prompt: { key: "d27", steps: ["Write about where you have seen progress recently.", "How has gratitude played a role in appreciating the change?"] },
     body: [],
   },
   {
     day: 28,
     title: "Embracing contrast",
-    prompt: { key: "d28", headline: "Can you be grateful for something you wish had never happened?", instruction: "If that feels too deep, find a quote that resonates instead." },
+    prompt: { key: "d28", steps: ["Can you be grateful for something you wish had never happened? Write about it.", "If that feels too deep, find a quote that resonates instead."] },
     body: [],
   },
   {
     day: 29,
     title: "In your dreams",
-    prompt: { key: "d29", headline: "Are you dreaming big enough?", instruction: "What does following your dreams unlock? Are you taking action?" },
+    prompt: { key: "d29", steps: ["Are you dreaming big enough? Write about it.", "What does following your dreams unlock? Are you taking action?"] },
     body: [],
   },
   {
@@ -238,7 +242,7 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     title: "Thirty little pages",
     // Amy to camera, shot 10/8, square cut 10/9 (Bunny "glimmers-d30")
     video: { id: "8c6a4560-3102-41f8-a809-056dcde70aa9", cues: [{ at: 4.0, key: "d30" }] },
-    prompt: { key: "d30", headline: "Read back through the month. What do you notice?", instruction: "Everything you wrote is below. Take your time." },
+    prompt: { key: "d30", steps: ["Read back through the month, page by page.", "Write what you notice.", "Your thirty log lines are below."] },
     body: ["Gratitude is not a 30-day practice, it's a lifelong one. Your journal is not complete, it is full."],
   },
 ]
@@ -255,13 +259,14 @@ export const GLIMMERS_CONTAINER: { welcome: ContainerCue[]; walkthrough: Contain
   // with word-level whisper on the shipped cut: 0:03 "Welcome to day one", 0:20 "What you need",
   // 0:22-0:23 "A journal. Any journal.", 0:40.9 "The one rule." The journal cue pauses AFTER she
   // has said the line, not on "What you need"; the rule cue had been firing 6 s early.
+  // Only the notebook beat has a field (naming it has no paper home); the video never holds.
   welcome: [
-    { at: 2.4, key: "welcome-here", headline: "You're in.", instruction: "Each morning a new prompt opens and stays open. Nothing is lost if you start late." },
-    { at: 23.6, key: "welcome-journal", headline: "Any journal.", instruction: "Which notebook will you use? Name it here so it is real.", pause: true },
-    { at: 40.9, key: "welcome-rule", headline: "The one rule.", instruction: "Do not try to catch up. Do not make it good. One small good thing a day." },
+    { at: 2.4, key: "welcome-here", headline: "You're in.", instruction: "Each morning a new day opens and stays open. Nothing is lost if you start late.", noField: true },
+    { at: 23.6, key: "welcome-journal", headline: "Any journal.", instruction: "Which notebook will you use? Name it here so it is real.", label: "Your notebook" },
+    { at: 40.9, key: "welcome-rule", headline: "The one rule.", instruction: "Do not try to catch up. Do not make it good. One small good thing a day.", noField: true },
   ],
-  // Script 3, the walkthrough. Beat 3 does a prompt for real; the student does one too.
+  // Script 3, the walkthrough. Beat 3 does a prompt for real; the student does one too, on paper.
   walkthrough: [
-    { at: 60, key: "walkthrough-try", headline: "Try one now.", instruction: "Read the prompt, write the date, two or three lines. That is a day.", pause: true },
+    { at: 60, key: "walkthrough-try", headline: "Try one now.", instruction: "Read the steps, write the date, two or three lines. That is a day.", noField: true },
   ],
 }

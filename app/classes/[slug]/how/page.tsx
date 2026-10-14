@@ -37,8 +37,8 @@ export default async function ClassHowPage({ params }: { params: Promise<{ slug:
         <GuidedPlayer slug={slug} hls={src.hls} hlsQuery={src.hlsQuery} mp4={src.mp4} poster={src.poster} cues={getContainerCues(slug, "walkthrough")} answers={answers} />
       ) : (
         <div className="max-w-2xl space-y-5 text-[17px] leading-relaxed" style={{ color: "var(--color-text-primary)" }}>
-          <p>Each morning a new day opens on the class page and stays open. Open it, read the question, write the date in your journal, write two or three lines. Some days that is it. Some days you add a scrap or a sticker.</p>
-          <p>There is a field under every question. Whatever you type there is saved to this class, on any device you open your link on, and on Day 30 all thirty show up in a row.</p>
+          <p>Each morning a new day opens on the class page and stays open. Open it, read the steps, and do them in your journal: write the date, write two or three lines. Some days that is it. Some days you add a scrap or a sticker.</p>
+          <p>Under the steps there is one line where you can note what went on the page. It is optional. Whatever you leave there is saved to this class, on any device you open your link on, and on Day 30 all thirty lines show up in a row.</p>
           <p>Four of the days have a printable: Days 2, 11, 18 and 26. Print them once, or do not print them at all. They are there if you want a place to keep the list.</p>
           <p>If you have a question, there is a box at the bottom of the class page. Amy collects them, answers on camera in the middle of the month, and that video lands on the class page.</p>
           <p>Do not try to catch up. Do not make it good. One small good thing a day, somewhere you can find it later.</p>

@@ -21,6 +21,9 @@ import { playbackSource } from "@/lib/video"
 export const dynamic = "force-dynamic"
 
 const link = { color: "var(--color-orange)" }
+// The field under the steps is a log of the paper page, not the answer (10/14).
+const LOG_LABEL = "Your page, in a line"
+const LOG_PLACEHOLDER = "What went on the page? (optional)"
 
 export default async function ClassDayPage({ params }: { params: Promise<{ slug: string; n: string }> }) {
   const { slug, n: nRaw } = await params
@@ -52,11 +55,6 @@ export default async function ClassDayPage({ params }: { params: Promise<{ slug:
       </p>
       <p className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-6" style={link}>
         Day {n} of {c.days}
-        {open && day ? (
-          <span className="normal-case tracking-normal font-medium" style={{ color: "var(--color-text-secondary)" }}>
-            {"  "}&middot;{"  "}{day.title}
-          </span>
-        ) : null}
       </p>
 
       {!open || !day ? (
@@ -78,8 +76,8 @@ export default async function ClassDayPage({ params }: { params: Promise<{ slug:
           answers={answers}
           open
           cues={[
-            ...(day.video.cues ?? []).map((cue) => ({ ...cue, headline: day.prompt.headline, instruction: day.prompt.instruction, quoteBack: quote })),
-            ...((day.video.cues ?? []).length ? [] : [{ at: 0, key: day.prompt.key, headline: day.prompt.headline, instruction: day.prompt.instruction, quoteBack: quote }]),
+            ...(day.video.cues ?? []).map((cue) => ({ ...cue, headline: day.title, steps: day.prompt.steps, label: LOG_LABEL, quoteBack: quote })),
+            ...((day.video.cues ?? []).length ? [] : [{ at: 0, key: day.prompt.key, headline: day.title, steps: day.prompt.steps, label: LOG_LABEL, quoteBack: quote }]),
           ]}
         />
       ) : (
@@ -93,8 +91,10 @@ export default async function ClassDayPage({ params }: { params: Promise<{ slug:
             <PromptBlock
               slug={slug}
               promptKey={day.prompt.key}
-              headline={day.prompt.headline}
-              instruction={day.prompt.instruction}
+              headline={day.title}
+              steps={day.prompt.steps}
+              label={LOG_LABEL}
+              placeholder={LOG_PLACEHOLDER}
               quoteBack={quote}
               initial={answers[day.prompt.key] ?? ""}
             />
@@ -133,6 +133,9 @@ export default async function ClassDayPage({ params }: { params: Promise<{ slug:
               <p className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-6" style={link}>
                 Your thirty little pages
               </p>
+              <p className="text-[15px] italic mb-8" style={{ color: "var(--color-text-secondary)" }}>
+                The line you left on each day. The pages themselves are in your journal.
+              </p>
               <ol className="space-y-6">
                 {allDays.map((d) => (
                   <li key={d.day}>
@@ -140,7 +143,7 @@ export default async function ClassDayPage({ params }: { params: Promise<{ slug:
                       Day {d.day}: {d.title}
                     </p>
                     <p className="text-[16px] leading-relaxed whitespace-pre-wrap" style={{ color: answers[d.prompt.key] ? "var(--color-text-primary)" : "var(--color-text-secondary)" }}>
-                      {answers[d.prompt.key] || "(nothing written)"}
+                      {answers[d.prompt.key] || "(no note)"}
                     </p>
                   </li>
                 ))}
