@@ -16,6 +16,7 @@ export type PlayerCue = {
   steps?: string[]
   noField?: boolean
   label?: string
+  placeholder?: string
   quoteBack?: { label: string; text: string } | null
   pause?: boolean
 }
@@ -172,7 +173,7 @@ export default function GuidedPlayer({ slug, hls, hlsQuery = "", mp4, poster, cu
               steps={active.steps}
               noField={active.noField}
               label={active.label}
-              placeholder={active.label ? undefined : "What went on the page? (optional)"}
+              placeholder={active.placeholder}
               quoteBack={active.quoteBack ?? null}
               initial={local[active.key] ?? ""}
               compact

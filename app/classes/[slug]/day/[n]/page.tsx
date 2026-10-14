@@ -76,8 +76,8 @@ export default async function ClassDayPage({ params }: { params: Promise<{ slug:
           answers={answers}
           open
           cues={[
-            ...(day.video.cues ?? []).map((cue) => ({ ...cue, headline: day.title, steps: day.prompt.steps, label: LOG_LABEL, quoteBack: quote })),
-            ...((day.video.cues ?? []).length ? [] : [{ at: 0, key: day.prompt.key, headline: day.title, steps: day.prompt.steps, label: LOG_LABEL, quoteBack: quote }]),
+            ...(day.video.cues ?? []).map((cue) => ({ ...cue, headline: day.title, steps: day.prompt.steps, label: LOG_LABEL, placeholder: LOG_PLACEHOLDER, quoteBack: quote })),
+            ...((day.video.cues ?? []).length ? [] : [{ at: 0, key: day.prompt.key, headline: day.title, steps: day.prompt.steps, label: LOG_LABEL, placeholder: LOG_PLACEHOLDER, quoteBack: quote }]),
           ]}
         />
       ) : (
