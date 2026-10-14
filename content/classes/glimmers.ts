@@ -75,11 +75,13 @@ export const GLIMMERS_DAYS: ClassDay[] = [
   },
   {
     day: 6,
-    title: "Mondays are a fresh start",
-    // Amy to camera, shot 10/8, square cut 10/9 (Bunny "glimmers-d06")
+    title: "One small good thing",
+    // Amy to camera, shot 10/8, square cut 10/9 (Bunny "glimmers-d06"): "Welcome to Day 6.
+    // What was one small good thing today?" JC ruled 10/14: the prompt matches the clip.
+    // (Last year's "Mondays are a fresh start" landed on a Friday this year anyway.)
     video: { id: "1fe38673-fc9b-49c4-a525-89ac24817c0f", cues: [{ at: 2.4, key: "d06" }] },
-    prompt: { key: "d06", headline: "What does your typical Monday feel like?", instruction: "Now imagine it as a fresh start. How would you reframe it?" },
-    body: ["Describe the routine and the feelings it evokes. Then set one positive intention for the week."],
+    prompt: { key: "d06", headline: "What was one small good thing today?", instruction: "Just the one. A sentence is plenty." },
+    body: ["Almost a week in. This is the whole practice in one question, so today is a plain day: name it, write it down, done."],
   },
   {
     day: 7,
