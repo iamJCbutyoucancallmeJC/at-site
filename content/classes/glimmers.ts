@@ -6,6 +6,9 @@
 // Files named here are served from content/classes/glimmers/files/ by the
 // gated files route, never from /public. Video ids are Bunny Stream GUIDs
 // (scripts/bunny-upload.mjs prints them); videos never live in the repo.
+// Every clip is normalized to -11 LUFS integrated, true peak under -1 dB
+// (JC 10/14: same level everywhere, louder than the -14 first pass); the
+// finals live in ~/Movies/AT/glimmers-final/ under their Bunny titles.
 
 import "server-only"
 
@@ -58,7 +61,9 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     title: "Create your Glimmers & Gratitude journal",
     // Amy to camera, shot 10/8; Amy-only re-cut 10/14 (Bunny "glimmers-d02"): the 10/9 cut
     // carried JC's "Make a fun place for your glimmers to go". 6.4 s.
-    video: { id: "174e83b7-c2db-4770-a335-3bfca0b486bb", cues: [{ at: 6.1, key: "d02" }] },
+    video: { id: "fc46fd24-9302-4fe2-9e5e-418a3d4c2904", cues: [{ at: 6.1, key: "d02" }] },
+    // Amy's 2023 journal-setup video from Kajabi, 25 min. JC ruled 10/14: in, under the steps.
+    demo: { id: "86628475-cb90-45ea-9d40-32a7a4e661bb", caption: "Amy setting up her journal, from the 2023 class. Twenty-five minutes; watch what you like." },
     prompt: { key: "d02", steps: ["Pick the notebook. Any notebook works.", "Write today's date on the first page.", "Make a fun place for your glimmers to go: a title, a doodle, a strip of tape.", "Print the journal-setup page and glue it in, if you want it."] },
     body: [],
     files: [{ name: "printable-1-journal-setup.pdf", label: "Printable (PDF)" }],
@@ -68,7 +73,7 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     title: "Expanding your practice",
     // Amy to camera, shot 10/8 (IMG_4952), Amy-only cut 10/14 (Bunny "glimmers-d03"):
     // "I am so happy you're here. It's day three. What was one small good thing today?"
-    video: { id: "aee663f5-38c5-4163-b0f6-227444267756", cues: [{ at: 4.8, key: "d03" }] },
+    video: { id: "990a4ed9-9564-4e74-bd82-3d8226891315", cues: [{ at: 4.8, key: "d03" }] },
     prompt: { key: "d03", steps: ["Name one small good thing from today. One sentence.", "Look back at your first two pages and add one thing you missed.", "Try an acronym for GRATITUDE: one word per letter."] },
     body: [],
   },
@@ -83,7 +88,7 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     title: "Include a photo of you",
     // Amy's 2023 page video from Kajabi (glimmers-kajabi-video-pull-runbook). JC ruled 10/14:
     // in the class, on his call (supersedes the 9/23 "no 2023 replays" line for these four).
-    demo: { id: "ddc2c784-62df-4c75-9120-302efa75ae0f", caption: "Amy's page, from the 2023 class." },
+    demo: { id: "13a37ba2-fe55-4583-a2db-22cc89e29ee7", caption: "Amy's page, from the 2023 class." },
     prompt: { key: "d05", steps: ["Take a selfie smiling, or pick a recent photo you like.", "Print it and glue it in.", "Write what you're grateful for right now, and the story behind the photo."] },
     body: [],
   },
@@ -93,7 +98,7 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     // Amy to camera, shot 10/8, square cut 10/9 (Bunny "glimmers-d06"): "Welcome to Day 6.
     // What was one small good thing today?" JC ruled 10/14: the prompt matches the clip.
     // (Last year's "Mondays are a fresh start" landed on a Friday this year anyway.)
-    video: { id: "1fe38673-fc9b-49c4-a525-89ac24817c0f", cues: [{ at: 2.4, key: "d06" }] },
+    video: { id: "3d51088a-8a2f-451a-8d4f-5c4f1ab151ca", cues: [{ at: 2.4, key: "d06" }] },
     prompt: { key: "d06", steps: ["Write the date.", "Name one small good thing from today. One sentence is plenty."] },
     body: ["Almost a week in. This is the whole practice in one question, so today is a plain day: name it, write it down, done."],
   },
@@ -125,7 +130,7 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     day: 11,
     title: "Ideas",
     // Amy to camera, shot 10/8; Amy-only re-cut 10/14 (Bunny "glimmers-d11"), 8.5 s.
-    video: { id: "20dd7640-731f-4edb-9eb8-65d7080045b8", cues: [{ at: 8.2, key: "d11" }] },
+    video: { id: "64dd6fa2-1581-4c7f-b27f-465b21cfe392", cues: [{ at: 8.2, key: "d11" }] },
     prompt: { key: "d11", steps: ["Print the Ideas tag, cut it out, and glue it in.", "Write about your outlook on ideas.", "How are you sparking ideas that inspire you?"] },
     body: [],
     files: [{ name: "printable-2-ideas-tag.pdf", label: "Printable (PDF)" }],
@@ -168,7 +173,7 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     title: "Celebrating the everyday",
     // Amy's 2023 page video from Kajabi (glimmers-kajabi-video-pull-runbook). JC ruled 10/14:
     // in the class, on his call (supersedes the 9/23 "no 2023 replays" line for these four).
-    demo: { id: "c304418f-758b-43a3-a1b1-4e6166474bbb", caption: "Amy's page, from the 2023 class." },
+    demo: { id: "8dc2ec28-80a8-409e-b434-2a3614aa99a1", caption: "Amy's page, from the 2023 class." },
     prompt: { key: "d17", steps: ["Pick a quote that resonates with you right now.", "Write it in your notebook with the supplies on hand, any way that delights you."] },
     body: [],
   },
@@ -176,7 +181,7 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     day: 18,
     title: "Work in progress",
     // Amy to camera, shot 10/8, square cut 10/9 (Bunny "glimmers-d18")
-    video: { id: "5fe8ebcc-01c4-4f30-8f67-8717847bfd86", cues: [{ at: 5.3, key: "d18" }] },
+    video: { id: "34fad9d1-6fd3-4ff4-967d-431d19b263d4", cues: [{ at: 5.3, key: "d18" }] },
     prompt: { key: "d18", steps: ["Print the Work in Progress page and add it to your journal.", "Write about where you have let yourself be imperfect.", "How did it grow you?"] },
     body: [],
     files: [{ name: "printable-3-work-in-progress.pdf", label: "Printable (PDF)" }],
@@ -192,7 +197,7 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     title: "Ticket or token",
     // Amy's 2023 page video from Kajabi (glimmers-kajabi-video-pull-runbook). JC ruled 10/14:
     // in the class, on his call (supersedes the 9/23 "no 2023 replays" line for these four).
-    demo: { id: "f70f372e-a588-4040-9f9f-206db3a627d9", caption: "Amy's page, from the 2023 class." },
+    demo: { id: "44d91e54-4030-4ae4-9ca8-5bd86844ccbb", caption: "Amy's page, from the 2023 class." },
     prompt: { key: "d20", steps: ["Find a ticket stub or a small token with a story.", "Glue it in.", "Write the quirky story tied to it, and how it captures the moment."] },
     body: [],
   },
@@ -230,7 +235,7 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     day: 26,
     title: "Nourishing",
     // Amy to camera, shot 10/8, square cut 10/9 (Bunny "glimmers-d26")
-    video: { id: "38732fdc-0f65-433b-bd94-8684c92baa7d", cues: [{ at: 7.2, key: "d26" }] },
+    video: { id: "136146a1-7e59-47f2-8b3b-c7a8a684e352", cues: [{ at: 7.2, key: "d26" }] },
     prompt: { key: "d26", steps: ["Print the Nourishing page and add it in.", "Give a shout-out to this week's meals and whoever made them.", "Bonus points for food stickers."] },
     body: [],
     files: [{ name: "printable-4-nourishing.pdf", label: "Printable (PDF)" }],
@@ -258,9 +263,9 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     title: "Thirty little pages",
     // Amy's 2023 page video from Kajabi (glimmers-kajabi-video-pull-runbook). JC ruled 10/14:
     // in the class, on his call (supersedes the 9/23 "no 2023 replays" line for these four).
-    demo: { id: "82e7bd94-7a67-4fec-8374-773b6e9c6002", caption: "Amy's journal at the end of the 2023 class." },
+    demo: { id: "1d56473f-eea7-44ae-94d8-720df3356722", caption: "Amy's journal at the end of the 2023 class." },
     // Amy to camera, shot 10/8; Amy-only re-cut 10/14 (Bunny "glimmers-d30"), 4.4 s.
-    video: { id: "931c0e77-09d0-4d97-b614-89a171df0ee0", cues: [{ at: 4.1, key: "d30" }] },
+    video: { id: "8bf24e75-84aa-4a26-b884-a64e268b1ed8", cues: [{ at: 4.1, key: "d30" }] },
     prompt: { key: "d30", steps: ["Read back through the month, page by page.", "Write what you notice.", "Your thirty log lines are below."] },
     body: ["Gratitude is not a 30-day practice, it's a lifelong one. Your journal is not complete, it is full."],
   },
