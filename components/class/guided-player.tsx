@@ -197,7 +197,9 @@ export default function GuidedPlayer({ slug, hls, hlsQuery = "", mp4, poster, cu
             className="class-scrub w-full"
             style={{ ["--pct" as string]: `${dur ? (t / dur) * 100 : 0}%` }}
           />
-          {dur > 0 ? sorted.map((c) => (
+          {/* Cue ticks only matter when a cue changes the page; in open mode the column is
+              already there, so the end-of-read cue would just be a stray mark near the end. */}
+          {dur > 0 && !open ? sorted.map((c) => (
             <span key={c.key} className="absolute top-1 bottom-1 w-px pointer-events-none" style={{ left: `${(c.at / dur) * 100}%`, background: "var(--color-text-secondary)" }} />
           )) : null}
         </div>
