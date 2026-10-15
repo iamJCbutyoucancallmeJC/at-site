@@ -42,6 +42,8 @@ export type AnalyticsEvent =
   | 'popup_close'
   // Event kit (t1101): the booth capture form on /events/<slug>/booth.
   | 'event_booth_signup'
+  // Class sales page (t1102): the Join button on /glimmers and later classes.
+  | 'class_join_click'
 
 // GA4 standard ecommerce item (items[] on add_to_cart / begin_checkout / purchase).
 export type GA4Item = {

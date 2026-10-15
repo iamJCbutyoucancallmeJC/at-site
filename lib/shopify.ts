@@ -204,8 +204,10 @@ export async function getAllProducts(country?: string): Promise<ShopifyProduct[]
   `
 
   const data = await shopifyFetch<{ products: { nodes: ShopifyProduct[] } }>(query, ctx.vars)
-  // Gift products must always go through /gift's required recipient form.
-  return data.products.nodes.filter((p) => !p.tags.includes("Recharge Gift Product"))
+  // Gift products must always go through /gift's required recipient form, and
+  // classes (productType "Class", lib/classes.ts) sell from their own pages, not
+  // the grids: a class in the shop grid would check out without its sales page.
+  return data.products.nodes.filter((p) => !p.tags.includes("Recharge Gift Product") && p.productType !== "Class")
 }
 
 export async function getProductByHandle(handle: string, country?: string): Promise<ShopifyProduct | null> {

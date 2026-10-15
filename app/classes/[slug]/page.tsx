@@ -11,6 +11,7 @@ import { getAnswers } from "@/lib/class-answers"
 import { playbackSource } from "@/lib/video"
 import GuidedPlayer from "@/components/class/guided-player"
 import QuestionBox from "@/components/class/question-box"
+import DemoPlayer from "@/components/class/demo-player"
 import { myQuestions, QUESTION_MAX_CHARS } from "@/lib/class-questions"
 
 export const dynamic = "force-dynamic"
@@ -69,6 +70,8 @@ export default async function ClassHome({
   const answers = await getAnswers(claim)
   const asked = await myQuestions(claim)
   const welcome = c.welcomeVideo ? await playbackSource(c.welcomeVideo) : null
+  // The mid-month Q&A video, once Amy has recorded it (t1651): under the box it answers.
+  const qa = c.qaVideo ? await playbackSource(c.qaVideo) : null
 
   return (
     <main className="max-w-2xl mx-auto px-6 pt-16 pb-24">
@@ -130,6 +133,15 @@ export default async function ClassHome({
       <section className="mt-16 max-w-[520px]">
         <QuestionBox slug={slug} initial={asked} max={QUESTION_MAX_CHARS} />
       </section>
+
+      {qa ? (
+        <section className="mt-14">
+          <p className="text-[11px] uppercase tracking-[0.18em] font-semibold mb-4" style={{ color: "var(--color-text-secondary)" }}>
+            Amy answers your questions
+          </p>
+          <DemoPlayer hls={qa.hls} hlsQuery={qa.hlsQuery} mp4={qa.mp4} poster={qa.poster} caption="Recorded in the middle of the month, from the questions left in the box." />
+        </section>
+      ) : null}
 
       <p className="mt-12 text-[13px] leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
         Order #{claim.orderRef}. Questions or a lost link:{" "}
