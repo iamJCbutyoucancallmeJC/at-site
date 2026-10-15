@@ -16,15 +16,18 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 import JoinClassButton from "@/components/class/join-class-button"
+import DemoPlayer from "@/components/class/demo-player"
 import { getClass, salesPageVisible, formatUnlockDate } from "@/lib/classes"
 import { getProductByHandle } from "@/lib/shopify"
+import { playbackSource } from "@/lib/video"
 
 export const dynamic = "force-dynamic"
 
 const SLUG = "glimmers"
-// v1 "the class is open" (shot 10/8, public): a YouTube unlisted upload under
-// Amy's channel. Renders a player under the hero once the id is set.
-const OPEN_VIDEO_YOUTUBE_ID = process.env.GLIMMERS_OPEN_VIDEO_YOUTUBE_ID ?? ""
+// Alumni codes arrive as /glimmers?code=GLIMMERS-XXXXXX from the Klaviyo email and are
+// applied at checkout by the Join button (app/api/checkout/class). Shape-checked here so
+// nothing else from the query string travels.
+const CODE_SHAPE = /^[A-Z0-9-]{4,40}$/
 
 export const metadata: Metadata = {
   title: "Glimmers and Gratitude | Amy Tangerine",
@@ -53,9 +56,13 @@ const QUESTIONS: [string, string][] = [
   ["How long do I have access?", "For good. The link in your email never expires."],
 ]
 
-export default async function GlimmersSalesPage() {
+export default async function GlimmersSalesPage({ searchParams }: { searchParams: Promise<{ code?: string }> }) {
   const c = getClass(SLUG)
   if (!c || !salesPageVisible(c)) notFound()
+  const sp = await searchParams
+  const code = typeof sp.code === "string" && CODE_SHAPE.test(sp.code.trim().toUpperCase()) ? sp.code.trim().toUpperCase() : ""
+  // v1 "the class is open" (shot 10/8, re-cut 10/15 without the Amazon line), on Bunny.
+  const open = c.openVideo ? await playbackSource(c.openVideo) : null
 
   let available = false
   let price = dollars(c.sales.price)
@@ -68,7 +75,7 @@ export default async function GlimmersSalesPage() {
     }
   } catch { /* Shopify down: the page still reads; the button says not yet. */ }
   const notYet = `Checkout opens ${formatUnlockDate(c.sales.onSaleDate)}. Day 1 is Sunday, November 1.`
-  const joinLabel = `Join the class, ${price}`
+  const joinLabel = code ? "Join the class with your code" : `Join the class, ${price}`
   const secondary = "text-[var(--color-text-secondary)]"
 
   return (
@@ -84,10 +91,14 @@ export default async function GlimmersSalesPage() {
           <p className="text-lg md:text-xl leading-relaxed mb-8">
             Thirty days of noticing the small good things. One prompt a day, in your own journal, starting November 1.
           </p>
-          <JoinClassButton slug={SLUG} available={available} label={joinLabel} notYet={notYet} />
+          <JoinClassButton slug={SLUG} available={available} label={joinLabel} notYet={notYet} code={code} />
+          {code ? (
+            <p className="text-sm leading-relaxed mt-5" style={{ color: "var(--color-text-primary)" }}>
+              Your returning-student code <span className="font-semibold">{code}</span> is applied at checkout, so your price is $10.
+            </p>
+          ) : null}
           <p className={`text-sm leading-relaxed mt-5 ${secondary}`}>
-            Took the class in 2023? Your link is in your inbox.
-            {" "}
+            {code ? "" : "Took the class in 2023? Your link is in your inbox. "}
             Already in the class?{" "}
             <Link href={`/classes/${SLUG}`} className="underline underline-offset-4" style={{ color: "var(--color-text-primary)" }}>
               Open it
@@ -108,17 +119,9 @@ export default async function GlimmersSalesPage() {
         </figure>
       </section>
 
-      {OPEN_VIDEO_YOUTUBE_ID ? (
+      {open ? (
         <section className="mt-14 md:mt-20 max-w-3xl">
-          <div className="relative w-full overflow-hidden rounded-2xl" style={{ paddingTop: "56.25%", background: "var(--color-gray-light)" }}>
-            <iframe
-              className="absolute inset-0 w-full h-full"
-              src={`https://www.youtube-nocookie.com/embed/${OPEN_VIDEO_YOUTUBE_ID}?rel=0`}
-              title="Amy on Glimmers and Gratitude"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-          </div>
+          <DemoPlayer hls={open.hls} hlsQuery={open.hlsQuery} mp4={open.mp4} poster={open.poster} caption="Amy on the class, a minute and a quarter." />
         </section>
       ) : null}
 
@@ -182,7 +185,7 @@ export default async function GlimmersSalesPage() {
         <h2 className="text-2xl font-bold mb-3">The price</h2>
         <p className="text-3xl font-semibold mb-2">{price} <span className="text-base font-normal">USD</span></p>
         <p className="text-lg leading-relaxed mb-7">For the class, with lifetime access.</p>
-        <JoinClassButton slug={SLUG} available={available} label={joinLabel} notYet={notYet} />
+        <JoinClassButton slug={SLUG} available={available} label={joinLabel} notYet={notYet} code={code} />
         <p className="text-base leading-relaxed mt-7">
           If you took Glimmers and Gratitude in 2023, your price is $10. Check your email for your link, or write to{" "}
           <a href="mailto:help@amytangerine.com" className="underline underline-offset-4">help@amytangerine.com</a>{" "}
@@ -205,7 +208,7 @@ export default async function GlimmersSalesPage() {
       {available ? (
         <section className="mt-14 md:mt-20 max-w-3xl">
           <p className="text-lg leading-relaxed mb-6">Day 1 opens Sunday, November 1.</p>
-          <JoinClassButton slug={SLUG} available={available} label={joinLabel} notYet={notYet} />
+          <JoinClassButton slug={SLUG} available={available} label={joinLabel} notYet={notYet} code={code} />
         </section>
       ) : null}
     </main>

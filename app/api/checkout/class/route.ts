@@ -8,15 +8,18 @@
 
 import { NextResponse } from "next/server"
 import { getClass, salesPageVisible, formatUnlockDate } from "@/lib/classes"
-import { addToCart, createCart, getProductByHandle } from "@/lib/shopify"
+import { addToCart, applyDiscountCode, createCart, getProductByHandle } from "@/lib/shopify"
 
 export const dynamic = "force-dynamic"
 
 export async function POST(request: Request) {
   let slug = ""
+  let code = ""
   try {
-    const body = (await request.json()) as { slug?: unknown }
+    const body = (await request.json()) as { slug?: unknown; code?: unknown }
     slug = typeof body.slug === "string" ? body.slug : ""
+    code = typeof body.code === "string" ? body.code.trim().toUpperCase() : ""
+    if (code && !/^[A-Z0-9-]{4,40}$/.test(code)) code = ""
   } catch {
     return NextResponse.json({ error: "Bad request." }, { status: 400 })
   }
@@ -31,7 +34,17 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: notYet }, { status: 409 })
     }
     const cart = await createCart([{ key: "Class", value: c.title }])
-    const filled = await addToCart(cart.id, variant.id, 1)
+    let filled = await addToCart(cart.id, variant.id, 1)
+    if (code) {
+      // An alumni code from the email link. Shopify answers applicable:false for a used,
+      // expired or unknown code (not an error), and then the buyer must not sail on to a
+      // full-price checkout by accident.
+      filled = await applyDiscountCode(cart.id, [code])
+      const ok = filled.discountCodes?.some((d) => d.code.toUpperCase() === code && d.applicable)
+      if (!ok) {
+        return NextResponse.json({ error: `That code (${code}) has already been used or is not valid. Write to help@amytangerine.com and we will sort it out.` }, { status: 409 })
+      }
+    }
     if (!filled.checkoutUrl) throw new Error("no checkoutUrl")
     return NextResponse.json({ checkoutUrl: filled.checkoutUrl })
   } catch (e) {

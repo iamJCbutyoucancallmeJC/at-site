@@ -7,7 +7,7 @@
 import { useState } from "react"
 import { trackEvent } from "@/lib/analytics"
 
-export default function JoinClassButton({ slug, available, label, notYet }: { slug: string; available: boolean; label: string; notYet: string }) {
+export default function JoinClassButton({ slug, available, label, notYet, code = "" }: { slug: string; available: boolean; label: string; notYet: string; code?: string }) {
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState("")
 
@@ -17,7 +17,7 @@ export default function JoinClassButton({ slug, available, label, notYet }: { sl
     setError("")
     trackEvent("class_join_click", { class: slug })
     try {
-      const response = await fetch("/api/checkout/class", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ slug }) })
+      const response = await fetch("/api/checkout/class", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(code ? { slug, code } : { slug }) })
       const result = await response.json()
       if (!response.ok || !result.checkoutUrl) throw new Error(result.error || "Checkout could not open. Please try again.")
       window.location.assign(result.checkoutUrl)

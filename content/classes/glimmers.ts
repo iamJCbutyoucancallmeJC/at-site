@@ -164,7 +164,9 @@ export const GLIMMERS_DAYS: ClassDay[] = [
   },
   {
     day: 16,
-    title: "Live session",
+    // Was "Live session" from the 2023 Sheet; the Q&A is a video now (9/23 ruling), so the
+    // title says what the day is (JC 10/15: nothing false stays). Amy's prompt pass may rename it.
+    title: "Room to receive",
     prompt: { key: "d16", steps: ["How can you create more space for receiving? Write a few lines."] },
     body: ["The Q&A video, answering the questions from the box on the class page, lands there in the middle of the month."],
   },

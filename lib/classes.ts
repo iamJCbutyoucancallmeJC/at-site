@@ -34,6 +34,9 @@ export type ClassDef = {
   // The mid-month Q&A: Amy answers the questions from the box on camera and the
   // video plays on the class home under the box once this is set (t1651).
   qaVideo?: string
+  // The public "the class is open" video (script 1), on the sales page. Same Bunny
+  // library, signed server-side like the class clips; nothing goes to YouTube.
+  openVideo?: string
   // The public sales page for the class (app/<path>/page.tsx reads this row).
   sales: {
     path: string // e.g. "/glimmers"
@@ -71,6 +74,7 @@ export const CLASSES: ClassDef[] = [
     welcomeVideo: process.env.GLIMMERS_WELCOME_VIDEO_ID || undefined,
     walkthroughVideo: process.env.GLIMMERS_WALKTHROUGH_VIDEO_ID || undefined,
     qaVideo: process.env.GLIMMERS_QA_VIDEO_ID || undefined,
+    openVideo: process.env.GLIMMERS_OPEN_VIDEO_ID || undefined,
     sales: {
       path: "/glimmers",
       live: false, // flip at the Oct 26 on-sale, in the same commit as class-go-live --open
