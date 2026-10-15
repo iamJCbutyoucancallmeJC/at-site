@@ -31,9 +31,3 @@ export async function saveAnswer(claim: ClassClaim, key: string, body: string): 
     values (${claim.slug}, ${th}, ${key}, ${body})
     on conflict (class_slug, token_hash, key) do update set body = excluded.body, updated_at = now()`
 }
-
-// For JC: every question submitted (key = 'question'), newest first.
-export async function listQuestions(slug: string): Promise<{ body: string; updated_at: string }[]> {
-  if (!dbConfigured()) return []
-  return (await db()`select body, updated_at::text from class_answers where class_slug = ${slug} and key = 'question' and length(body) > 0 order by updated_at desc`) as { body: string; updated_at: string }[]
-}

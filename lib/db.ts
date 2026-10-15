@@ -1,4 +1,4 @@
-// Neon Postgres for class state (saved answers, the question box). Database
+// Neon Postgres for class state (saved answers in class_answers, the question box in class_questions). Database
 // `at_classes` in the shared Neon project (created 2026-10-07). Server-only.
 // Absent DATABASE_URL = the feature degrades: pages render, saving fails loudly.
 

@@ -10,7 +10,8 @@ import { getClassDays, getContainerCues } from "@/lib/class-content"
 import { getAnswers } from "@/lib/class-answers"
 import { playbackSource } from "@/lib/video"
 import GuidedPlayer from "@/components/class/guided-player"
-import PromptBlock from "@/components/class/prompt-block"
+import QuestionBox from "@/components/class/question-box"
+import { myQuestions, QUESTION_MAX_CHARS } from "@/lib/class-questions"
 
 export const dynamic = "force-dynamic"
 
@@ -66,6 +67,7 @@ export default async function ClassHome({
   const today = laDate(now)
   const todayN = Array.from({ length: c.days }, (_, i) => i + 1).find((n) => unlockDate(c, n) === today) ?? null
   const answers = await getAnswers(claim)
+  const asked = await myQuestions(claim)
   const welcome = c.welcomeVideo ? await playbackSource(c.welcomeVideo) : null
 
   return (
@@ -126,16 +128,7 @@ export default async function ClassHome({
       </ol>
 
       <section className="mt-16 max-w-[520px]">
-        <PromptBlock
-          slug={slug}
-          promptKey="question"
-          headline="Have a question for Amy?"
-          instruction="Leave it here. She collects them and answers on camera in the middle of the month, and that video lands on this page."
-          initial={answers["question"] ?? ""}
-          placeholder="Your question"
-          label="Your question"
-          compact
-        />
+        <QuestionBox slug={slug} initial={asked} max={QUESTION_MAX_CHARS} />
       </section>
 
       <p className="mt-12 text-[13px] leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
