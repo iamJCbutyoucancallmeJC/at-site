@@ -212,9 +212,10 @@ export default function HappyMailClient() {
           <h2 className="text-[15px] md:text-[17px] uppercase tracking-[0.12em] font-semibold text-center mb-8 md:mb-10" style={{ color: "var(--color-text-primary)" }}>
             Recent envelopes
           </h2>
-          <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {RECENT_ENVELOPES.map((e) => (
-              <figure key={e.month}>
+          {/* Flex, not a 3-col grid: one or two months center instead of hugging the left. */}
+          <div className="max-w-5xl mx-auto flex flex-wrap justify-center gap-4">
+            {RECENT_ENVELOPES.slice(0, 3).map((e) => (
+              <figure key={e.month} className="w-full sm:w-[calc((100%-2rem)/3)]">
                 <div className="relative aspect-square bg-gray-50 rounded-xl overflow-hidden mb-2">
                   <Image src={e.img} alt={`${e.month} Happy Mail envelope`} fill className="object-cover" sizes="(max-width: 640px) 100vw, 33vw" />
                 </div>
