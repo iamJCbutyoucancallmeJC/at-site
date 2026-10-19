@@ -50,7 +50,9 @@ export const HM_BOX_CONTENTS = [
 // at least the last three months once photos exist. Never use a stock or
 // product-render image here: the point is what actually went out.
 export type HmEnvelope = { month: string; img: string; caption?: string }
-export const HM_RECENT_ENVELOPES: HmEnvelope[] = []
+export const HM_RECENT_ENVELOPES: HmEnvelope[] = [
+  { month: "April 2026", img: "/images/happy-mail/envelopes/2026-04.jpg" },
+]
 
 // Testimonials — REAL subscribers, verbatim from their own emails to hello@.
 // Replaced the four fabricated placeholders on 2026-08-04.
