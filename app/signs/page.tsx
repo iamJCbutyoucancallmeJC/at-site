@@ -1,40 +1,39 @@
 "use client"
 
-// /signs — sign-style phrase generator (t1378, PROTOTYPE).
+// /signs — the sign maker (t1378).
 //
-// Amy types a phrase ("It's a beautiful day") and it renders the way her
-// hand-painted wooden signs look: imperfect brushed letters on a board,
-// auto-wrapped and justified to the board width, in a Standard (3:2) or Long
-// (4:1) board, in a Standard or Messy hand. She saves the PNG and cuts stickers
+// Amy types a phrase ("It's a beautiful day") and it goes up on a board the way
+// the sign in her reference photo does. She saves the PNG and cuts stickers
 // from it. Lives as an at-site route under the "Fun Stuff" nav like /photobooth
 // (the standing rule: experiments are routes, never subdomains).
 //
-// STYLE IS A PLACEHOLDER. Amy's sign photo was meant to be the style reference
-// and it is not on disk anywhere (iMessage, Gmail, vault all searched), so the
-// look here is a generic hand-painted approximation. Every knob that should
-// move once the photo is in hand is a named constant in the "Tunable style
-// parameters" block below: per-letter jitter, baseline wobble, rotation, stroke
-// passes and spread (brush roughness), paint opacity, dry-brush speckling, the
-// two board finishes, and the letter palette. Nothing about the look is buried
-// in the drawing code; tune the constants, not the functions.
+// THE REFERENCE. Amy's photo (emailed 2026-08-11, "Another dream project for
+// Claude", IMG_1749.jpg; vault copy: A5 Job/Linslow/Clients/Amy Tangerine/
+// Website Redesign/sign-maker-reference-2026-08-11.jpg) is NOT a painted wooden
+// sign. It is a slide-in letter board from a farmers market: a white panel with
+// horizontal cream rails, and each letter printed in heavy condensed black caps
+// on its own white card, tucked under a rail. The cards sit a little crooked
+// and at slightly different heights, the black is sun-faded into grey clouds,
+// a space is a blank card, and one S went in upside down. "What I like about
+// this is it's a little imperfect. I don't like that in fonts." That is the
+// whole brief, so everything below models cards in rails, not brush strokes.
 //
-// Renderer: plain <canvas>, no new npm dependencies. Every glyph is drawn as
-// several slightly offset stroke+fill passes with varying alpha and rounded
-// caps (a brush laying paint down more than once), with a per-letter rotation
-// and baseline offset seeded from the phrase, so the same phrase renders the
-// same way every time and a tiny edit does not reshuffle every letter. "Messy"
-// is the same machinery with the amplitudes raised. Letters are painted onto
-// their own layer, dry-brush speckles are erased from that layer, and the layer
-// is composited onto the board at paint opacity.
+// Renderer: plain <canvas>, no new npm dependencies. Letters are Anton (Google
+// Fonts via next/font, the nearest free face to the photo's condensed
+// grotesque). Layout picks the largest card size whose greedy word wrap fits
+// the board (cards are uniform width like a real letter set; wide letters get
+// squeezed, never a bigger card), then draws every rail the board has room for
+// so unused rails read as empty rails. Each card's nudge, tilt, slump, flip and
+// fade is seeded from the phrase and the style, so the same phrase renders the
+// same way every time and a one-letter edit does not reshuffle the rest.
+// "Messy" is the same machinery with the amplitudes raised.
 //
-// Font: Quicksand 700, the one Google Font the site already loads (for the
-// photobooth). app/signs/layout.tsx loads it via next/font; this file reads the
-// resolved family off the CSS variable at runtime so the canvas can use it, and
-// waits for document.fonts before the first paint.
+// Every knob that shapes the look is a named constant in the "Tunable style
+// parameters" block. Tune the constants, not the functions.
 //
-// Save: PNG exported at 2x the on-screen board (2400x1600 standard, 3200x800
-// long) for sticker printing, with a small "amytangerine.com" mark. Web Share
-// first (iOS share sheet), download fallback, same path as the photobooth.
+// Save: PNG at 2x the on-screen board (1800x3000 standard, 3600x900 long) for
+// sticker printing, with a small "amytangerine.com" mark. Web Share first (iOS
+// share sheet), download fallback, the photobooth's path.
 //
 // GA4 via the house trackEvent: signs_render (a phrase rendered; deduped per
 // distinct phrase+settings) and signs_save (PNG shared or downloaded).
@@ -44,159 +43,149 @@ import { trackEvent } from "@/lib/analytics"
 import "./signs.css"
 
 // ── Tunable style parameters ────────────────────────────────────────────────
-// PLACEHOLDER values until Amy's sign photo is used to tune them.
 
 type BoardSizeId = "standard" | "long"
 type StyleId = "standard" | "messy"
-type FinishId = "natural" | "white"
 
 // Board dimensions in logical pixels. The preview canvas is this size; the
-// saved PNG is EXPORT_SCALE times it.
-const BOARD_SIZES: { id: BoardSizeId; label: string; width: number; height: number }[] = [
-  { id: "standard", label: "Standard 3:2", width: 1200, height: 800 },
-  { id: "long", label: "Long 4:1", width: 1600, height: 400 },
+// saved PNG is EXPORT_SCALE times it. "Standard" is a 4:5 portrait: the photo
+// is taller (3:5), but at that shape a nine-letter word leaves half the rails
+// empty, and at 4:5 the photo's own phrase lands as it does in the photo (four
+// lines, four rails). "Long" is a banner, one or two rails. maxCardH caps the
+// card height as a fraction of board height so a two-word phrase does not
+// become two giant cards.
+const BOARD_SIZES: { id: BoardSizeId; label: string; width: number; height: number; maxCardH: number }[] = [
+  { id: "standard", label: "Standard", width: 900, height: 1125, maxCardH: 0.2 },
+  { id: "long", label: "Long", width: 1800, height: 450, maxCardH: 0.6 },
 ]
 
 const EXPORT_SCALE = 2
 
-// Per-hand amplitudes. Fractions are of the line's font size unless noted.
+// Card and rail geometry, measured off the photo (cards about 180x330 on a
+// 1178x2014 frame, strips about 50 tall, four rails).
+const CARD = {
+  aspect: 0.56, // card width / card height
+  gap: 0.035, // gap between neighbouring cards, of card width
+  blankFrac: 0.72, // a space is a blank card this wide
+  narrowFrac: 0.58, // punctuation sits on a narrower card
+  letterH: 0.76, // cap height as a fraction of card height
+  letterW: 0.66, // the width a letter is stretched toward, of card width (the photo's face is wider than Anton)
+  maxStretch: 1.45, // never widen a glyph more than this
+  maxLetterW: 0.86, // a letter may use this much of the card width before it is squeezed
+  stripH: 0.15, // rail strip height, of card height
+  tuck: 0.5, // fraction of the strip that overlaps the card top
+  railGap: 0.07, // room under a card before the next strip, of card height
+}
+
+const LAYOUT = {
+  padX: 0.08, // side margin, of board width
+  padY: 0.05, // top/bottom margin, of board height
+  minCardH: 0.028, // of board height; below this the phrase is just too long
+  shrinkStep: 0.95, // card-size search step
+}
+
+// Per-style amplitudes. Fractions are of card width (dx) or card height (dy,
+// slump) unless noted.
 type StyleParams = {
   label: string
-  jitterX: number // per-letter horizontal nudge
-  baselineWobble: number // per-letter vertical nudge
-  rotationDeg: number // per-letter rotation, degrees either way
-  scaleJitter: number // per-letter size variance (0.05 = +/-5%)
-  lineDrift: number // whole-line vertical drift
-  lineTiltDeg: number // whole-line tilt, degrees either way
-  strokePasses: number // offset stroke+fill passes per glyph (brush layering)
-  strokeSpread: number // max offset of each pass
-  strokeWidth: number // outline width of each pass
-  passOpacityMin: number // alpha range for the passes
-  passOpacityMax: number
-  paintOpacity: number // whole letter layer over the board
-  drySpeckles: number // dry-brush gaps erased per glyph (0 = none)
-  speckleSize: number // max speckle radius
+  cardDx: number // per-card horizontal nudge
+  cardDy: number // per-card vertical nudge
+  cardTiltDeg: number // per-card tilt, degrees either way
+  slumpChance: number // chance a card has slipped down its rail
+  slump: number // how far a slipped card drops
+  lineShift: number // whole-line horizontal drift, of board width
+  flipSymmetric: number // chance an S/N/Z/H/I/O/X goes in upside down (reads almost right, like the photo)
+  flipAny: number // chance any other letter goes in upside down
+  fadePatches: number // sun-fade clouds per letter
+  fadeMin: number // cloud alpha range
+  fadeMax: number
+  inkVariance: number // per-letter lightening of the ink, 0..1
+  cardTone: number // per-card greying of the white card, 0..1
 }
 
 const STYLES: Record<StyleId, StyleParams> = {
   standard: {
     label: "Standard",
-    jitterX: 0.015,
-    baselineWobble: 0.03,
-    rotationDeg: 2.5,
-    scaleJitter: 0.04,
-    lineDrift: 0.02,
-    lineTiltDeg: 0.4,
-    strokePasses: 3,
-    strokeSpread: 0.012,
-    strokeWidth: 0.035,
-    passOpacityMin: 0.55,
-    passOpacityMax: 0.85,
-    paintOpacity: 0.94,
-    drySpeckles: 3,
-    speckleSize: 0.02,
+    cardDx: 0.03,
+    cardDy: 0.03,
+    cardTiltDeg: 1.4,
+    slumpChance: 0.2,
+    slump: 0.03,
+    lineShift: 0.008,
+    flipSymmetric: 0.12,
+    flipAny: 0,
+    fadePatches: 3,
+    fadeMin: 0.18,
+    fadeMax: 0.45,
+    inkVariance: 0.06,
+    cardTone: 0.03,
   },
   messy: {
     label: "Messy",
-    jitterX: 0.04,
-    baselineWobble: 0.09,
-    rotationDeg: 8,
-    scaleJitter: 0.12,
-    lineDrift: 0.06,
-    lineTiltDeg: 1.5,
-    strokePasses: 5,
-    strokeSpread: 0.03,
-    strokeWidth: 0.045,
-    passOpacityMin: 0.4,
-    passOpacityMax: 0.8,
-    paintOpacity: 0.9,
-    drySpeckles: 9,
-    speckleSize: 0.035,
+    cardDx: 0.07,
+    cardDy: 0.07,
+    cardTiltDeg: 4.5,
+    slumpChance: 0.35,
+    slump: 0.1,
+    lineShift: 0.03,
+    flipSymmetric: 0.3,
+    flipAny: 0.07,
+    fadePatches: 5,
+    fadeMin: 0.3,
+    fadeMax: 0.65,
+    inkVariance: 0.14,
+    cardTone: 0.06,
   },
 }
 
-// Letter colors. The first two are the site's brand orange and teal
-// (app/globals.css); the rest are sign-paint guesses.
-const LETTER_COLORS: { id: string; label: string; hex: string }[] = [
-  { id: "white", label: "White", hex: "#F7F3EA" },
-  { id: "black", label: "Black", hex: "#1F1B18" },
+// Letters that still read when a card goes in upside down.
+const SYMMETRIC_LETTERS = new Set(["S", "N", "Z", "H", "I", "O", "X", "0", "8"])
+
+// Characters that sit on a narrow card.
+const NARROW_CHARS = new Set(["'", "’", ",", ".", "!", "?", ":", ";", "-", "|", "‘", '"', "“", "”"])
+
+// Ink. Black is the photo; the rest are for stickers that want colour. The
+// orange and teal are the site's brand pair (app/globals.css).
+const INKS: { id: string; label: string; hex: string }[] = [
+  { id: "black", label: "Black", hex: "#171717" },
+  { id: "red", label: "Red", hex: "#B5281E" },
+  { id: "navy", label: "Navy", hex: "#1F2F4D" },
   { id: "orange", label: "Orange", hex: "#FD891C" },
   { id: "teal", label: "Teal", hex: "#00ADB3" },
-  { id: "pink", label: "Pink", hex: "#E8557A" },
-  { id: "navy", label: "Navy", hex: "#23395B" },
-  { id: "mustard", label: "Mustard", hex: "#E0A526" },
-  { id: "sage", label: "Sage", hex: "#7C9A6E" },
 ]
 
-// Board finishes. grainAlpha scales every grain/seam line; edgeShade is the
-// darkening at the board's edges.
-type Finish = {
-  id: FinishId
-  label: string
-  base: string
-  baseLight: string
-  grainDark: string
-  grainLight: string
-  grainAlpha: number
-  seam: string
-  edgeShade: number
-  watermark: string
-}
-
-const FINISHES: Finish[] = [
-  {
-    id: "natural",
-    label: "Natural wood",
-    base: "#B98B5A",
-    baseLight: "#CFA574",
-    grainDark: "#7E5A34",
-    grainLight: "#E2BE8F",
-    grainAlpha: 0.32,
-    seam: "#6E4B2A",
-    edgeShade: 0.28,
-    watermark: "rgba(40, 24, 10, 0.55)",
-  },
-  {
-    id: "white",
-    label: "White-washed",
-    base: "#EFE9DE",
-    baseLight: "#F8F4EC",
-    grainDark: "#B9AD9A",
-    grainLight: "#FFFFFF",
-    grainAlpha: 0.22,
-    seam: "#C9BFAE",
-    edgeShade: 0.14,
-    watermark: "rgba(60, 50, 40, 0.5)",
-  },
-]
-
-// Layout, as fractions of board width/height.
-const LAYOUT = {
-  padX: 0.07, // side margin
-  padY: 0.11, // top/bottom margin
-  lineHeight: 1.12, // line box, in font sizes
-  lineGap: 0.12, // extra space between lines, in font sizes
-  maxFontFrac: 0.5, // font size ceiling as a fraction of board height
-  minFontFrac: 0.05, // floor; below this the phrase is just too long
-  maxWordGap: 1.1, // justify: max extra space per word gap, in font sizes
-  maxLetterGap: 0.28, // justify: max extra tracking per letter, in font sizes
-  grainLinesPerPlank: 14,
-  plankHeight: 270, // logical px; boards taller than this get seams
+// Board and card colours, from the photo.
+const BOARD = {
+  panel: "#ECEDED", // the white-painted panel behind the rails, a touch cool
+  panelLight: "#F5F5F4",
+  groove: "rgba(0, 0, 0, 0.04)", // faint vertical siding lines
+  grooveCount: 5,
+  vignette: 0.07,
+  strip: "#E5E2D9", // the cream rail strips
+  stripHighlight: "rgba(255, 255, 255, 0.55)",
+  stripShadow: 0.14, // shadow the strip throws on the cards under it
+  card: "#FBFBF9",
+  cardEdge: "rgba(0, 0, 0, 0.08)",
+  cardShadow: "rgba(0, 0, 0, 0.18)",
+  fade: [236, 236, 232] as [number, number, number], // sun-fade clouds pull the ink toward this
 }
 
 const WATERMARK = {
   text: "amytangerine.com",
-  sizeFrac: 0.016, // of board width
-  inset: 0.02, // of board width, from the bottom-right corner
+  sizeFrac: 0.022, // of the board's shorter side
+  inset: 0.018, // of the board's shorter side, from the bottom-right corner
+  color: "rgba(60, 60, 60, 0.45)",
 }
 
 const DEFAULT_PHRASE = "It's a beautiful day"
 const RENDER_DEBOUNCE_MS = 220
+const FALLBACK_LETTER_FONT = "Impact, 'Arial Narrow', sans-serif"
+const FALLBACK_UI_FONT = "sans-serif"
 
 // ── Seeded randomness ───────────────────────────────────────────────────────
 // cyrb53-style string hash into a mulberry32 stream. Seeded from the phrase and
-// the style so a re-render is stable and a one-letter edit keeps most letters
-// where they were (each letter draws from the stream by its own index).
+// the settings so a re-render is stable and a one-letter edit keeps most cards
+// where they were (each card draws from the stream by its own index).
 
 function hashString(str: string): number {
   let h1 = 0xdeadbeef
@@ -226,41 +215,89 @@ function spread(rand: () => number, amp: number) {
   return (rand() * 2 - 1) * amp
 }
 
-// Per-letter RNG: one stream per (seed, letter index), so letter 7 gets the same
-// quirks whether or not letter 3 changed.
-function letterRand(seed: number, index: number) {
+// Per-card RNG: one stream per (seed, card index), so card 7 gets the same
+// quirks whether or not card 3 changed.
+function cardRand(seed: number, index: number) {
   return mulberry32((seed ^ Math.imul(index + 1, 0x9e3779b1)) >>> 0)
+}
+
+// ── Colour helpers ──────────────────────────────────────────────────────────
+
+function hexToRgb(hex: string): [number, number, number] {
+  const n = parseInt(hex.slice(1), 16)
+  return [(n >> 16) & 255, (n >> 8) & 255, n & 255]
+}
+
+function mix(a: [number, number, number], b: [number, number, number], t: number) {
+  const r = Math.round(a[0] + (b[0] - a[0]) * t)
+  const g = Math.round(a[1] + (b[1] - a[1]) * t)
+  const bl = Math.round(a[2] + (b[2] - a[2]) * t)
+  return `rgb(${r}, ${g}, ${bl})`
 }
 
 // ── Layout ──────────────────────────────────────────────────────────────────
 
-type Glyph = { ch: string; x: number; w: number } // x = left edge, in board px
-type Line = { glyphs: Glyph[]; baseline: number; index: number }
+type CardKind = "letter" | "blank"
+type Card = { kind: CardKind; ch: string; x: number; w: number; index: number } // x = left edge, board px
+type Line = { cards: Card[]; width: number; rail: number }
+
+type Layout = {
+  cardH: number
+  cardW: number
+  fontSize: number
+  stripH: number
+  pitch: number
+  blockTop: number
+  railsTotal: number
+  lines: Line[]
+  overflow: boolean
+}
 
 type Measurer = (ch: string, fontSize: number) => number
 
-// Greedy word wrap at a given font size. Returns null if a single word is wider
-// than the line.
-function wrapParagraph(
-  words: string[],
-  fontSize: number,
-  innerW: number,
-  measure: Measurer,
-): string[][] | null {
-  const lines: string[][] = []
-  let current: string[] = []
-  let currentW = 0
-  const spaceW = measure(" ", fontSize)
+// Split the phrase into paragraphs of words, each word a list of uppercase
+// characters. A letter board is capitals; what she typed stays in the box.
+function tokenize(phrase: string): string[][][] {
+  return phrase
+    .split("\n")
+    .map((p) =>
+      p
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean)
+        .map((word) => Array.from(word.toLocaleUpperCase("en-US"))),
+    )
+    .filter((words) => words.length > 0)
+}
 
+function cardWidthFor(ch: string, cardW: number) {
+  return NARROW_CHARS.has(ch) ? cardW * CARD.narrowFrac : cardW
+}
+
+function wordWidth(word: string[], cardW: number, gap: number) {
+  let w = 0
+  word.forEach((ch, i) => {
+    w += cardWidthFor(ch, cardW) + (i < word.length - 1 ? gap : 0)
+  })
+  return w
+}
+
+// Greedy word wrap at a given card size. Returns null if one word is wider
+// than the rail.
+function wrapParagraph(words: string[][], cardW: number, gap: number, innerW: number): string[][][] | null {
+  const blankW = cardW * CARD.blankFrac
+  const lines: string[][][] = []
+  let current: string[][] = []
+  let currentW = 0
   for (const word of words) {
-    const w = wordWidth(word, fontSize, measure)
+    const w = wordWidth(word, cardW, gap)
     if (w > innerW) return null
     if (current.length === 0) {
       current = [word]
       currentW = w
-    } else if (currentW + spaceW + w <= innerW) {
+    } else if (currentW + gap + blankW + gap + w <= innerW) {
       current.push(word)
-      currentW += spaceW + w
+      currentW += gap + blankW + gap + w
     } else {
       lines.push(current)
       current = [word]
@@ -271,39 +308,56 @@ function wrapParagraph(
   return lines
 }
 
-function wordWidth(word: string, fontSize: number, measure: Measurer) {
-  let w = 0
-  for (const ch of word) w += measure(ch, fontSize)
-  return w
-}
-
-// Find the largest font size whose greedy wrap fits the board, then place every
-// glyph: each line justified to the inner width (extra space into word gaps
-// first, then letter tracking, both capped; whatever is left centers the line).
+// Find the largest card size whose wrap fits the board, then place every card.
+// Lines are centred in their rails; the rails fill the board so the empty ones
+// show, like a real letter board with a short message on it.
 function layoutPhrase(
   phrase: string,
-  boardW: number,
-  boardH: number,
-  measure: Measurer,
-): { lines: Line[]; fontSize: number } {
-  const paragraphs = phrase
-    .split("\n")
-    .map((p) => p.trim().split(/\s+/).filter(Boolean))
-    .filter((words) => words.length > 0)
+  board: (typeof BOARD_SIZES)[number],
+  fontSizeFor: (cardH: number) => number,
+): Layout {
+  const W = board.width
+  const H = board.height
+  const innerW = W * (1 - 2 * LAYOUT.padX)
+  const innerH = H * (1 - 2 * LAYOUT.padY)
+  const paragraphs = tokenize(phrase)
 
-  if (paragraphs.length === 0) return { lines: [], fontSize: 0 }
+  const geometry = (cardH: number) => {
+    const cardW = cardH * CARD.aspect
+    const gap = cardW * CARD.gap
+    const stripH = cardH * CARD.stripH
+    const pitch = stripH * (1 - CARD.tuck) + cardH * (1 + CARD.railGap)
+    return { cardW, gap, stripH, pitch }
+  }
 
-  const innerW = boardW * (1 - 2 * LAYOUT.padX)
-  const innerH = boardH * (1 - 2 * LAYOUT.padY)
-  const fsMax = boardH * LAYOUT.maxFontFrac
-  const fsMin = boardH * LAYOUT.minFontFrac
+  const empty = (cardH: number): Layout => {
+    const g = geometry(cardH)
+    const railsTotal = Math.max(1, Math.floor((innerH - g.stripH) / g.pitch))
+    const blockH = railsTotal * g.pitch + g.stripH
+    return {
+      cardH,
+      cardW: g.cardW,
+      fontSize: fontSizeFor(cardH),
+      stripH: g.stripH,
+      pitch: g.pitch,
+      blockTop: H * LAYOUT.padY + (innerH - blockH) / 2,
+      railsTotal,
+      lines: [],
+      overflow: false,
+    }
+  }
 
-  let chosen: { fontSize: number; wrapped: string[][] } | null = null
-  for (let fs = fsMax; fs >= fsMin; fs *= 0.96) {
-    const wrapped: string[][] = []
+  const maxCardH = H * board.maxCardH
+  const minCardH = H * LAYOUT.minCardH
+  if (paragraphs.length === 0) return empty(maxCardH)
+
+  let chosen: { cardH: number; wrapped: string[][][]; overflow: boolean } | null = null
+  for (let cardH = maxCardH; cardH >= minCardH; cardH *= LAYOUT.shrinkStep) {
+    const g = geometry(cardH)
+    const wrapped: string[][][] = []
     let ok = true
     for (const words of paragraphs) {
-      const lines = wrapParagraph(words, fs, innerW, measure)
+      const lines = wrapParagraph(words, g.cardW, g.gap, innerW)
       if (!lines) {
         ok = false
         break
@@ -311,69 +365,63 @@ function layoutPhrase(
       wrapped.push(...lines)
     }
     if (!ok) continue
-    const n = wrapped.length
-    const blockH = n * fs * LAYOUT.lineHeight + (n - 1) * fs * LAYOUT.lineGap
-    if (blockH <= innerH) {
-      chosen = { fontSize: fs, wrapped }
+    if (wrapped.length * g.pitch + g.stripH <= innerH) {
+      chosen = { cardH, wrapped, overflow: false }
       break
     }
   }
   if (!chosen) {
-    // Too long even at the floor: lay it out at the floor size anyway and let
-    // it overflow rather than render nothing. (Long phrases are her problem to
-    // shorten; the status line says so.)
-    const wrapped: string[][] = []
+    // Too long even at the floor: lay it out at the floor size and let it run
+    // off the board rather than render nothing. The status line says so.
+    const g = geometry(minCardH)
+    const wrapped: string[][][] = []
     for (const words of paragraphs) {
-      const lines = wrapParagraph(words, fsMin, innerW, measure) ?? [words]
-      wrapped.push(...lines)
+      wrapped.push(...(wrapParagraph(words, g.cardW, g.gap, innerW) ?? [words]))
     }
-    chosen = { fontSize: fsMin, wrapped }
+    chosen = { cardH: minCardH, wrapped, overflow: true }
   }
 
-  const { fontSize: fs, wrapped } = chosen
-  const n = wrapped.length
-  const lineStep = fs * (LAYOUT.lineHeight + LAYOUT.lineGap)
-  const blockH = n * fs * LAYOUT.lineHeight + (n - 1) * fs * LAYOUT.lineGap
-  const blockTop = (boardH - blockH) / 2
-  const capH = fs * 0.7 // Quicksand cap height is roughly 0.7em
-  const left = boardW * LAYOUT.padX
-  const spaceW = measure(" ", fs)
+  const { cardH, wrapped, overflow } = chosen
+  const g = geometry(cardH)
+  const blankW = g.cardW * CARD.blankFrac
+  const railsTotal = Math.max(wrapped.length, Math.floor((innerH - g.stripH) / g.pitch))
+  const blockH = railsTotal * g.pitch + g.stripH
+  const blockTop = H * LAYOUT.padY + (innerH - blockH) / 2
+  const firstRail = Math.floor((railsTotal - wrapped.length) / 2)
+  const left = W * LAYOUT.padX
 
-  const lines: Line[] = wrapped.map((words, i) => {
-    const baseline = blockTop + i * lineStep + (fs * LAYOUT.lineHeight - capH) / 2 + capH
-    const natural =
-      words.reduce((sum, w) => sum + wordWidth(w, fs, measure), 0) + spaceW * (words.length - 1)
-    const letterCount = words.reduce((sum, w) => sum + Array.from(w).length, 0)
-    const gaps = words.length - 1
-    let extra = Math.max(0, innerW - natural)
-
-    let wordGap = 0
-    if (gaps > 0) {
-      wordGap = Math.min(extra / gaps, fs * LAYOUT.maxWordGap)
-      extra -= wordGap * gaps
-    }
-    const letterSlots = letterCount - words.length // gaps between letters inside words
-    let letterGap = 0
-    if (letterSlots > 0) {
-      letterGap = Math.min(extra / letterSlots, fs * LAYOUT.maxLetterGap)
-      extra -= letterGap * letterSlots
-    }
-
-    const glyphs: Glyph[] = []
-    let x = left + extra / 2 // center whatever could not be justified away
+  let cardIndex = 0
+  const lines: Line[] = wrapped.map((words, li) => {
+    const cards: Card[] = []
+    let x = 0
     words.forEach((word, wi) => {
-      const chars = Array.from(word)
-      chars.forEach((ch, ci) => {
-        const w = measure(ch, fs)
-        glyphs.push({ ch, x, w })
-        x += w + (ci < chars.length - 1 ? letterGap : 0)
+      word.forEach((ch) => {
+        const w = cardWidthFor(ch, g.cardW)
+        cards.push({ kind: "letter", ch, x, w, index: cardIndex++ })
+        x += w + g.gap
       })
-      if (wi < words.length - 1) x += spaceW + wordGap
+      if (wi < words.length - 1) {
+        cards.push({ kind: "blank", ch: " ", x, w: blankW, index: cardIndex++ })
+        x += blankW + g.gap
+      }
     })
-    return { glyphs, baseline, index: i }
+    const width = x - g.gap
+    const offset = left + (innerW - width) / 2
+    for (const c of cards) c.x += offset
+    return { cards, width, rail: firstRail + li }
   })
 
-  return { lines, fontSize: fs }
+  return {
+    cardH,
+    cardW: g.cardW,
+    fontSize: fontSizeFor(cardH),
+    stripH: g.stripH,
+    pitch: g.pitch,
+    blockTop,
+    railsTotal,
+    lines,
+    overflow,
+  }
 }
 
 // ── Drawing ─────────────────────────────────────────────────────────────────
@@ -382,128 +430,126 @@ type SignOptions = {
   phrase: string
   size: BoardSizeId
   style: StyleId
-  colorHex: string
-  finish: Finish
-  fontFamily: string
+  inkHex: string
+  letterFont: string
+  uiFont: string
 }
 
-function fontSpec(fontSize: number, family: string) {
-  return `700 ${fontSize}px ${family}`
+function letterFontSpec(fontSize: number, family: string) {
+  return `400 ${fontSize}px ${family}`
 }
 
-function drawBoard(ctx: CanvasRenderingContext2D, W: number, H: number, finish: Finish, seed: number) {
+function drawPanel(ctx: CanvasRenderingContext2D, W: number, H: number, seed: number) {
   const rand = mulberry32(seed ^ 0x5eed)
 
-  // Base with a soft diagonal light.
   const base = ctx.createLinearGradient(0, 0, W, H)
-  base.addColorStop(0, finish.baseLight)
-  base.addColorStop(0.5, finish.base)
-  base.addColorStop(1, finish.baseLight)
+  base.addColorStop(0, BOARD.panelLight)
+  base.addColorStop(0.55, BOARD.panel)
+  base.addColorStop(1, BOARD.panelLight)
   ctx.fillStyle = base
   ctx.fillRect(0, 0, W, H)
 
-  // Planks: a tall board is several boards nailed together.
-  const plankCount = Math.max(1, Math.round(H / LAYOUT.plankHeight))
-  const plankH = H / plankCount
-
-  for (let p = 0; p < plankCount; p++) {
-    const top = p * plankH
-    // Each plank gets its own tone shift so the seams read.
-    ctx.globalAlpha = 0.08
-    ctx.fillStyle = rand() > 0.5 ? finish.grainDark : finish.grainLight
-    ctx.fillRect(0, top, W, plankH)
-    ctx.globalAlpha = 1
-
-    // Grain: long wavy strokes, dark and light, biased to the plank's middle.
-    for (let i = 0; i < LAYOUT.grainLinesPerPlank; i++) {
-      const y0 = top + plankH * (0.05 + rand() * 0.9)
-      const amp = plankH * (0.02 + rand() * 0.06)
-      const dark = rand() > 0.45
-      ctx.strokeStyle = dark ? finish.grainDark : finish.grainLight
-      ctx.globalAlpha = finish.grainAlpha * (0.35 + rand() * 0.65)
-      ctx.lineWidth = 0.6 + rand() * 2.2
-      ctx.lineCap = "round"
-      ctx.beginPath()
-      const segments = 6 + Math.floor(rand() * 5)
-      const xStart = -W * 0.05 + rand() * W * 0.15
-      const xEnd = W * 0.9 + rand() * W * 0.15
-      ctx.moveTo(xStart, y0)
-      let px = xStart
-      let py = y0
-      for (let s = 1; s <= segments; s++) {
-        const nx = xStart + ((xEnd - xStart) * s) / segments
-        const ny = y0 + spread(rand, amp)
-        const cx = (px + nx) / 2 + spread(rand, W * 0.02)
-        const cy = (py + ny) / 2 + spread(rand, amp)
-        ctx.quadraticCurveTo(cx, cy, nx, ny)
-        px = nx
-        py = ny
-      }
-      ctx.stroke()
-    }
-
-    // Seam under each plank but the last.
-    if (p < plankCount - 1) {
-      const y = top + plankH
-      ctx.globalAlpha = 0.55
-      ctx.strokeStyle = finish.seam
-      ctx.lineWidth = 2
-      ctx.beginPath()
-      ctx.moveTo(0, y)
-      ctx.lineTo(W, y)
-      ctx.stroke()
-      ctx.globalAlpha = 0.35
-      ctx.strokeStyle = finish.grainLight
-      ctx.beginPath()
-      ctx.moveTo(0, y + 2)
-      ctx.lineTo(W, y + 2)
-      ctx.stroke()
-    }
-  }
-  ctx.globalAlpha = 1
-
-  // Edge shading: the board is a slab, not a flat rectangle.
-  const edge = Math.min(W, H) * 0.06
-  const shade = `rgba(30, 18, 8, ${finish.edgeShade})`
-  const clear = "rgba(30, 18, 8, 0)"
-  const sides: [number, number, number, number][] = [
-    [0, 0, edge, 0],
-    [W, 0, W - edge, 0],
-    [0, 0, 0, edge],
-    [0, H, 0, H - edge],
-  ]
-  for (const [x0, y0, x1, y1] of sides) {
-    const g = ctx.createLinearGradient(x0, y0, x1, y1)
-    g.addColorStop(0, shade)
-    g.addColorStop(1, clear)
-    ctx.fillStyle = g
-    ctx.fillRect(0, 0, W, H)
+  // Faint vertical siding lines, unevenly spaced.
+  ctx.strokeStyle = BOARD.groove
+  ctx.lineWidth = 1.2
+  for (let i = 1; i <= BOARD.grooveCount; i++) {
+    const x = (W * i) / (BOARD.grooveCount + 1) + spread(rand, W * 0.02)
+    ctx.beginPath()
+    ctx.moveTo(x, 0)
+    ctx.lineTo(x + spread(rand, 2), H)
+    ctx.stroke()
   }
 
-  // A thin light bevel along the top and left.
-  ctx.globalAlpha = 0.35
-  ctx.strokeStyle = finish.grainLight
-  ctx.lineWidth = 3
-  ctx.beginPath()
-  ctx.moveTo(1.5, H)
-  ctx.lineTo(1.5, 1.5)
-  ctx.lineTo(W, 1.5)
-  ctx.stroke()
-  ctx.globalAlpha = 1
+  // Vignette: the panel is lit from the middle.
+  const v = ctx.createRadialGradient(W / 2, H / 2, Math.min(W, H) * 0.3, W / 2, H / 2, Math.max(W, H) * 0.75)
+  v.addColorStop(0, "rgba(0, 0, 0, 0)")
+  v.addColorStop(1, `rgba(0, 0, 0, ${BOARD.vignette})`)
+  ctx.fillStyle = v
+  ctx.fillRect(0, 0, W, H)
 }
 
-// Paint the letters onto a separate transparent layer the size of the board,
-// then return it. The caller composites it at paint opacity.
+type PlacedCard = {
+  card: Card
+  cx: number
+  cy: number
+  tilt: number
+  flip: boolean
+  tone: number
+  ink: string
+  rand: () => number
+}
+
+// Where each card actually sits once its quirks are applied.
+function placeCards(layout: Layout, style: StyleParams, inkHex: string, W: number, seed: number): PlacedCard[] {
+  const ink = hexToRgb(inkHex)
+  const white: [number, number, number] = [255, 255, 255]
+  const placed: PlacedCard[] = []
+  for (const line of layout.lines) {
+    const lineRand = mulberry32((seed ^ Math.imul(line.rail + 101, 0x85ebca6b)) >>> 0)
+    const shift = spread(lineRand, style.lineShift * W)
+    const cardTop = layout.blockTop + line.rail * layout.pitch + layout.stripH * (1 - CARD.tuck)
+    for (const card of line.cards) {
+      const rand = cardRand(seed, card.index)
+      const dx = spread(rand, style.cardDx * layout.cardW)
+      const dy = spread(rand, style.cardDy * layout.cardH)
+      const slump = rand() < style.slumpChance ? rand() * style.slump * layout.cardH : 0
+      const tilt = (spread(rand, style.cardTiltDeg) * Math.PI) / 180
+      const tone = rand() * style.cardTone
+      let flip = false
+      if (card.kind === "letter") {
+        const roll = rand()
+        flip = SYMMETRIC_LETTERS.has(card.ch) ? roll < style.flipSymmetric : roll < style.flipAny
+      }
+      const lighten = rand() * style.inkVariance
+      placed.push({
+        card,
+        cx: card.x + card.w / 2 + dx + shift,
+        cy: cardTop + layout.cardH / 2 + dy + slump,
+        tilt,
+        flip,
+        tone,
+        ink: mix(ink, white, lighten),
+        rand,
+      })
+    }
+  }
+  return placed
+}
+
+function drawCards(ctx: CanvasRenderingContext2D, placed: PlacedCard[], layout: Layout) {
+  const cardRgb = hexToRgb(BOARD.card)
+  const grey: [number, number, number] = [205, 205, 200]
+  for (const p of placed) {
+    ctx.save()
+    ctx.translate(p.cx, p.cy)
+    ctx.rotate(p.tilt)
+    ctx.shadowColor = BOARD.cardShadow
+    ctx.shadowBlur = layout.cardH * 0.03
+    ctx.shadowOffsetX = 0
+    ctx.shadowOffsetY = layout.cardH * 0.012
+    ctx.fillStyle = mix(cardRgb, grey, p.tone)
+    ctx.fillRect(-p.card.w / 2, -layout.cardH / 2, p.card.w, layout.cardH)
+    ctx.shadowColor = "transparent"
+    ctx.shadowBlur = 0
+    ctx.shadowOffsetY = 0
+    ctx.strokeStyle = BOARD.cardEdge
+    ctx.lineWidth = 1
+    ctx.strokeRect(-p.card.w / 2, -layout.cardH / 2, p.card.w, layout.cardH)
+    ctx.restore()
+  }
+}
+
+// Letters go on their own transparent layer so the sun-fade can be painted
+// into the ink alone (source-atop) before the layer lands on the cards.
 function paintLetters(
   W: number,
   H: number,
   scale: number,
-  lines: Line[],
-  fontSize: number,
+  placed: PlacedCard[],
+  layout: Layout,
   style: StyleParams,
-  colorHex: string,
   family: string,
-  seed: number,
+  capRatio: number,
 ): HTMLCanvasElement | null {
   const layer = document.createElement("canvas")
   layer.width = Math.round(W * scale)
@@ -512,89 +558,83 @@ function paintLetters(
   if (!ctx) return null
   ctx.scale(scale, scale)
 
-  ctx.font = fontSpec(fontSize, family)
+  const fs = layout.fontSize
+  const capH = fs * capRatio
+  ctx.font = letterFontSpec(fs, family)
+  ctx.textAlign = "center"
   ctx.textBaseline = "alphabetic"
-  ctx.textAlign = "left"
-  ctx.lineJoin = "round"
-  ctx.lineCap = "round"
-  ctx.fillStyle = colorHex
-  ctx.strokeStyle = colorHex
 
-  const fs = fontSize
-  const boxes: { x: number; y: number; w: number; h: number }[] = []
-  let letterIndex = 0
-
-  for (const line of lines) {
-    const lineRand = mulberry32((seed ^ Math.imul(line.index + 101, 0x85ebca6b)) >>> 0)
-    const drift = spread(lineRand, style.lineDrift * fs)
-    const tilt = (spread(lineRand, style.lineTiltDeg) * Math.PI) / 180
-    const lineMidX = W / 2
-
-    for (const g of line.glyphs) {
-      const rand = letterRand(seed, letterIndex++)
-      const dx = spread(rand, style.jitterX * fs)
-      const dy = spread(rand, style.baselineWobble * fs)
-      const rot = (spread(rand, style.rotationDeg) * Math.PI) / 180
-      const sc = 1 + spread(rand, style.scaleJitter)
-
-      // Line tilt pivots around the line's center; letters ride it.
-      const relX = g.x + g.w / 2 - lineMidX
-      const tiltDy = Math.sin(tilt) * relX
-      const cx = g.x + g.w / 2 + dx
-      const cy = line.baseline + drift + tiltDy + dy
-
-      ctx.save()
-      ctx.translate(cx, cy)
-      ctx.rotate(rot + tilt)
-      ctx.scale(sc, sc)
-      ctx.lineWidth = style.strokeWidth * fs
-
-      for (let p = 0; p < style.strokePasses; p++) {
-        const ox = spread(rand, style.strokeSpread * fs)
-        const oy = spread(rand, style.strokeSpread * fs)
-        const alpha = style.passOpacityMin + rand() * (style.passOpacityMax - style.passOpacityMin)
-        ctx.globalAlpha = alpha
-        ctx.strokeText(g.ch, -g.w / 2 + ox, oy)
-        ctx.globalAlpha = Math.min(1, alpha + 0.1)
-        ctx.fillText(g.ch, -g.w / 2 + ox, oy)
-      }
-      ctx.restore()
-
-      boxes.push({ x: cx - (g.w / 2) * sc - fs * 0.05, y: cy - fs * 0.8, w: g.w * sc + fs * 0.1, h: fs * 1.05 })
-    }
+  const letters = placed.filter((p) => p.card.kind === "letter")
+  for (const p of letters) {
+    const adv = ctx.measureText(p.card.ch).width
+    const maxW = p.card.w * CARD.maxLetterW
+    // Widen toward the photo's heavier face, within the card; squeeze if the
+    // glyph is wider than the card allows (W and M on a narrow card).
+    const wanted = Math.min(maxW, Math.max(adv, p.card.w * CARD.letterW, 0), adv * CARD.maxStretch)
+    const sx = adv > 0 ? wanted / adv : 1
+    ctx.save()
+    ctx.translate(p.cx, p.cy)
+    ctx.rotate(p.tilt + (p.flip ? Math.PI : 0))
+    ctx.scale(sx, 1)
+    ctx.fillStyle = p.ink
+    ctx.fillText(p.card.ch, 0, capH / 2)
+    ctx.restore()
   }
-  ctx.globalAlpha = 1
 
-  // Dry brush: erase small speckles inside the glyph boxes so the paint looks
-  // like it skipped over the grain here and there.
-  if (style.drySpeckles > 0) {
-    const rand = mulberry32(seed ^ 0xd17b)
-    ctx.globalCompositeOperation = "destination-out"
-    for (const box of boxes) {
-      for (let i = 0; i < style.drySpeckles; i++) {
-        const r = fs * style.speckleSize * (0.3 + rand() * 0.7)
-        const x = box.x + rand() * box.w
-        const y = box.y + rand() * box.h
-        ctx.globalAlpha = 0.35 + rand() * 0.5
-        ctx.beginPath()
-        ctx.ellipse(x, y, r, r * (0.4 + rand() * 0.6), rand() * Math.PI, 0, Math.PI * 2)
-        ctx.fill()
+  // Sun-fade: soft clouds painted into the ink only.
+  if (style.fadePatches > 0) {
+    ctx.globalCompositeOperation = "source-atop"
+    const [fr, fg, fb] = BOARD.fade
+    for (const p of letters) {
+      for (let i = 0; i < style.fadePatches; i++) {
+        const x = p.cx + spread(p.rand, p.card.w * 0.5)
+        const y = p.cy + spread(p.rand, layout.cardH * 0.5)
+        const r = layout.cardH * (0.16 + p.rand() * 0.34)
+        const a = style.fadeMin + p.rand() * (style.fadeMax - style.fadeMin)
+        const g = ctx.createRadialGradient(x, y, 0, x, y, r)
+        g.addColorStop(0, `rgba(${fr}, ${fg}, ${fb}, ${a})`)
+        g.addColorStop(1, `rgba(${fr}, ${fg}, ${fb}, 0)`)
+        ctx.fillStyle = g
+        ctx.fillRect(x - r, y - r, r * 2, r * 2)
       }
     }
     ctx.globalCompositeOperation = "source-over"
-    ctx.globalAlpha = 1
   }
 
   return layer
 }
 
-function drawWatermark(ctx: CanvasRenderingContext2D, W: number, H: number, finish: Finish, family: string) {
-  const size = Math.max(10, W * WATERMARK.sizeFrac)
-  ctx.font = fontSpec(size, family)
+// The rail strips go on last so they overlap the card tops (the cards are
+// tucked under them). Every rail the board has room for gets a strip, used or
+// not, plus the closing strip under the last one.
+function drawRails(ctx: CanvasRenderingContext2D, layout: Layout, W: number) {
+  for (let r = 0; r <= layout.railsTotal; r++) {
+    const y = layout.blockTop + r * layout.pitch
+    const h = layout.stripH
+    ctx.fillStyle = BOARD.strip
+    ctx.fillRect(0, y, W, h)
+    ctx.strokeStyle = BOARD.stripHighlight
+    ctx.lineWidth = 1.5
+    ctx.beginPath()
+    ctx.moveTo(0, y + 0.75)
+    ctx.lineTo(W, y + 0.75)
+    ctx.stroke()
+    const shadow = ctx.createLinearGradient(0, y + h, 0, y + h + h * 0.6)
+    shadow.addColorStop(0, `rgba(0, 0, 0, ${BOARD.stripShadow})`)
+    shadow.addColorStop(1, "rgba(0, 0, 0, 0)")
+    ctx.fillStyle = shadow
+    ctx.fillRect(0, y + h, W, h * 0.6)
+  }
+}
+
+function drawWatermark(ctx: CanvasRenderingContext2D, W: number, H: number, uiFont: string) {
+  const short = Math.min(W, H)
+  const size = Math.max(10, short * WATERMARK.sizeFrac)
+  ctx.font = `700 ${size}px ${uiFont}`
   ctx.textAlign = "right"
   ctx.textBaseline = "alphabetic"
-  ctx.fillStyle = finish.watermark
-  ctx.fillText(WATERMARK.text, W - W * WATERMARK.inset, H - W * WATERMARK.inset)
+  ctx.fillStyle = WATERMARK.color
+  ctx.fillText(WATERMARK.text, W - short * WATERMARK.inset, H - short * WATERMARK.inset)
 }
 
 // Draw the whole sign into `canvas` at `scale` times the board's logical size.
@@ -606,48 +646,43 @@ function drawSign(canvas: HTMLCanvasElement, opts: SignOptions, scale: number) {
   canvas.width = Math.round(W * scale)
   canvas.height = Math.round(H * scale)
   const ctx = canvas.getContext("2d")
-  if (!ctx) return { lineCount: 0, fontSize: 0, overflow: false }
+  if (!ctx) return { lineCount: 0, railsTotal: 0, overflow: false }
   ctx.setTransform(1, 0, 0, 1, 0, 0)
   ctx.scale(scale, scale)
 
   const style = STYLES[opts.style]
-  const seed = hashString(`${opts.phrase}|${opts.style}`) >>> 0
+  const seed = hashString(`${opts.phrase}|${opts.style}|${opts.size}`) >>> 0
 
-  drawBoard(ctx, W, H, opts.finish, seed)
+  // How tall a capital is in this font, as a fraction of the font size, so a
+  // card's letter can be sized to the card rather than the other way round.
+  ctx.font = letterFontSpec(100, opts.letterFont)
+  const probe = ctx.measureText("H")
+  const capRatio = probe.actualBoundingBoxAscent > 0 ? probe.actualBoundingBoxAscent / 100 : 0.72
+  const fontSizeFor = (cardH: number) => (cardH * CARD.letterH) / capRatio
 
-  // Measure with the same font the letters are painted in.
-  const measureCache = new Map<string, number>()
-  const measure: Measurer = (ch, fontSize) => {
-    const key = `${fontSize}|${ch}`
-    const hit = measureCache.get(key)
-    if (hit !== undefined) return hit
-    ctx.font = fontSpec(fontSize, opts.fontFamily)
-    const w = ctx.measureText(ch).width
-    measureCache.set(key, w)
-    return w
-  }
+  const layout = layoutPhrase(opts.phrase, board, fontSizeFor)
 
-  const { lines, fontSize } = layoutPhrase(opts.phrase, W, H, measure)
-  const n = lines.length
-  const blockH = n * fontSize * LAYOUT.lineHeight + (n - 1) * fontSize * LAYOUT.lineGap
-  const overflow = blockH > H * (1 - 2 * LAYOUT.padY) + 0.5
-
-  if (lines.length) {
-    const layer = paintLetters(W, H, scale, lines, fontSize, style, opts.colorHex, opts.fontFamily, seed)
+  drawPanel(ctx, W, H, seed)
+  const placed = placeCards(layout, style, opts.inkHex, W, seed)
+  drawCards(ctx, placed, layout)
+  if (placed.length) {
+    const layer = paintLetters(W, H, scale, placed, layout, style, opts.letterFont, capRatio)
     if (layer) {
       ctx.save()
       ctx.setTransform(1, 0, 0, 1, 0, 0)
-      ctx.globalAlpha = style.paintOpacity
       ctx.drawImage(layer, 0, 0)
       ctx.restore()
     }
   }
+  drawRails(ctx, layout, W)
+  drawWatermark(ctx, W, H, opts.uiFont)
 
-  drawWatermark(ctx, W, H, opts.finish, opts.fontFamily)
-  return { lineCount: n, fontSize, overflow }
+  return { lineCount: layout.lines.length, railsTotal: layout.railsTotal, overflow: layout.overflow }
 }
 
 // ── Page ────────────────────────────────────────────────────────────────────
+
+type Fonts = { letter: string; ui: string }
 
 export default function SignsPage() {
   const rootRef = useRef<HTMLDivElement | null>(null)
@@ -658,33 +693,34 @@ export default function SignsPage() {
   const [phrase, setPhrase] = useState(DEFAULT_PHRASE)
   const [size, setSize] = useState<BoardSizeId>("standard")
   const [style, setStyle] = useState<StyleId>("standard")
-  const [colorId, setColorId] = useState(LETTER_COLORS[0].id)
-  const [finishId, setFinishId] = useState<FinishId>("natural")
-  const [fontFamily, setFontFamily] = useState<string | null>(null)
-  const [status, setStatus] = useState("Loading the brush...")
+  const [inkId, setInkId] = useState(INKS[0].id)
+  const [fonts, setFonts] = useState<Fonts | null>(null)
+  const [status, setStatus] = useState("Sorting the letters...")
   const [saving, setSaving] = useState(false)
 
-  const color = LETTER_COLORS.find((c) => c.id === colorId) ?? LETTER_COLORS[0]
-  const finish = FINISHES.find((f) => f.id === finishId) ?? FINISHES[0]
+  const ink = INKS.find((c) => c.id === inkId) ?? INKS[0]
   const boardDims = BOARD_SIZES.find((b) => b.id === size) ?? BOARD_SIZES[0]
 
-  // Resolve the next/font family off the CSS variable and wait for it to load,
-  // so the first canvas paint is in Quicksand and not the fallback.
+  // Resolve the next/font families off their CSS variables (app/signs/
+  // layout.tsx sets them) and wait for the letter font to load, so the first
+  // canvas paint is in Anton and not the fallback.
   useEffect(() => {
     let alive = true
     const root = rootRef.current
     if (!root) return
-    const family = getComputedStyle(root).fontFamily || "sans-serif"
+    const styles = getComputedStyle(root)
+    const letter = styles.getPropertyValue("--font-anton").trim() || FALLBACK_LETTER_FONT
+    const ui = styles.getPropertyValue("--font-quicksand").trim() || FALLBACK_UI_FONT
     const ready = async () => {
       try {
-        await document.fonts.load(fontSpec(40, family))
+        await document.fonts.load(letterFontSpec(40, letter))
       } catch {
         // Some browsers reject a multi-family shorthand; fonts.ready still resolves.
       }
       try {
         await document.fonts.ready
       } catch {}
-      if (alive) setFontFamily(family)
+      if (alive) setFonts({ letter, ui })
     }
     void ready()
     return () => {
@@ -697,17 +733,17 @@ export default function SignsPage() {
       phrase,
       size,
       style,
-      colorHex: color.hex,
-      finish,
-      fontFamily: fontFamily ?? "sans-serif",
+      inkHex: ink.hex,
+      letterFont: fonts?.letter ?? FALLBACK_LETTER_FONT,
+      uiFont: fonts?.ui ?? FALLBACK_UI_FONT,
     }),
-    [phrase, size, style, color.hex, finish, fontFamily],
+    [phrase, size, style, ink.hex, fonts],
   )
 
   // Debounced preview render. Fires signs_render once per distinct
   // phrase+settings so typing a sentence counts as one render, not twenty.
   useEffect(() => {
-    if (!fontFamily) return
+    if (!fonts) return
     if (renderTimer.current) window.clearTimeout(renderTimer.current)
     renderTimer.current = window.setTimeout(() => {
       const canvas = canvasRef.current
@@ -716,24 +752,24 @@ export default function SignsPage() {
       const result = drawSign(canvas, opts, 1)
 
       if (!opts.phrase.trim()) {
-        setStatus("Type a phrase to paint it on the board.")
+        setStatus("Type a phrase to put it up on the board.")
         return
       }
       setStatus(
         result.overflow
-          ? "That is a lot of words for one sign. Shorten it or try the Standard board."
-          : `${result.lineCount} line${result.lineCount === 1 ? "" : "s"}, ${STYLES[opts.style].label.toLowerCase()} hand`,
+          ? "That is a lot of letters for one board. Shorten it or try the Long board."
+          : `${result.lineCount} of ${result.railsTotal} rails, ${STYLES[opts.style].label.toLowerCase()}`,
       )
 
-      const key = [opts.phrase.trim(), opts.size, opts.style, colorId, finishId].join("|")
+      const key = [opts.phrase.trim(), opts.size, opts.style, inkId].join("|")
       if (key !== lastTrackedRef.current) {
         lastTrackedRef.current = key
         trackEvent("signs_render", {
           board: opts.size,
           style: opts.style,
-          color: colorId,
-          finish: finishId,
+          ink: inkId,
           lines: result.lineCount,
+          rails: result.railsTotal,
           chars: opts.phrase.trim().length,
         })
       }
@@ -741,11 +777,11 @@ export default function SignsPage() {
     return () => {
       if (renderTimer.current) window.clearTimeout(renderTimer.current)
     }
-  }, [fontFamily, currentOptions, colorId, finishId])
+  }, [fonts, currentOptions, inkId])
 
   // Export at 2x, Web Share first, download fallback (the photobooth's path).
   const savePng = useCallback(async () => {
-    if (!fontFamily || saving) return
+    if (!fonts || saving) return
     setSaving(true)
     try {
       const opts = currentOptions()
@@ -757,7 +793,7 @@ export default function SignsPage() {
 
       const name = `sign-${Date.now()}.png`
       const file = new File([blob], name, { type: "image/png" })
-      const eventData = { board: opts.size, style: opts.style, color: colorId, finish: finishId }
+      const eventData = { board: opts.size, style: opts.style, ink: inkId }
 
       if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
         try {
@@ -782,14 +818,13 @@ export default function SignsPage() {
     } finally {
       setSaving(false)
     }
-  }, [fontFamily, saving, currentOptions, colorId, finishId])
+  }, [fonts, saving, currentOptions, inkId])
 
   const reset = useCallback(() => {
     setPhrase(DEFAULT_PHRASE)
     setSize("standard")
     setStyle("standard")
-    setColorId(LETTER_COLORS[0].id)
-    setFinishId("natural")
+    setInkId(INKS[0].id)
   }, [])
 
   return (
@@ -797,7 +832,7 @@ export default function SignsPage() {
       <div className="sg-container">
         <header className="sg-header">
           <h1 className="sg-title">Sign Maker</h1>
-          <p className="sg-tagline">Type a phrase. Paint it on a board. Save it for stickers.</p>
+          <p className="sg-tagline">Type a phrase. It goes up on the board, one letter at a time. Save it for stickers.</p>
         </header>
 
         <div className="sg-board-wrap">
@@ -807,7 +842,7 @@ export default function SignsPage() {
             width={boardDims.width}
             height={boardDims.height}
             style={{ aspectRatio: `${boardDims.width} / ${boardDims.height}` }}
-            aria-label={phrase ? `Painted sign reading: ${phrase}` : "Blank painted sign"}
+            aria-label={phrase ? `Letter-board sign reading: ${phrase}` : "Blank letter-board sign"}
             role="img"
           />
         </div>
@@ -847,7 +882,7 @@ export default function SignsPage() {
           </div>
 
           <div className="sg-field">
-            <span className="sg-label">Hand</span>
+            <span className="sg-label">Style</span>
             <div className="sg-row" role="group" aria-label="Lettering style">
               {(Object.keys(STYLES) as StyleId[]).map((id) => (
                 <button
@@ -865,37 +900,17 @@ export default function SignsPage() {
 
           <div className="sg-field">
             <span className="sg-label">Letters</span>
-            <div className="sg-row" role="group" aria-label="Letter color">
-              {LETTER_COLORS.map((c) => (
+            <div className="sg-row" role="group" aria-label="Letter colour">
+              {INKS.map((c) => (
                 <button
                   key={c.id}
                   type="button"
-                  className={`sg-swatch${colorId === c.id ? " sg-active" : ""}`}
+                  className={`sg-swatch${inkId === c.id ? " sg-active" : ""}`}
                   style={{ background: c.hex }}
                   title={c.label}
                   aria-label={c.label}
-                  aria-pressed={colorId === c.id}
-                  onClick={() => setColorId(c.id)}
-                />
-              ))}
-            </div>
-          </div>
-
-          <div className="sg-field">
-            <span className="sg-label">Board finish</span>
-            <div className="sg-row" role="group" aria-label="Board finish">
-              {FINISHES.map((f) => (
-                <button
-                  key={f.id}
-                  type="button"
-                  className={`sg-finish${finishId === f.id ? " sg-active" : ""}`}
-                  style={{
-                    background: `repeating-linear-gradient(180deg, ${f.base} 0 6px, ${f.baseLight} 6px 9px)`,
-                  }}
-                  title={f.label}
-                  aria-label={f.label}
-                  aria-pressed={finishId === f.id}
-                  onClick={() => setFinishId(f.id)}
+                  aria-pressed={inkId === c.id}
+                  onClick={() => setInkId(c.id)}
                 />
               ))}
             </div>
@@ -903,7 +918,7 @@ export default function SignsPage() {
         </div>
 
         <div className="sg-actions">
-          <button type="button" className="sg-btn" onClick={savePng} disabled={!fontFamily || saving}>
+          <button type="button" className="sg-btn" onClick={savePng} disabled={!fonts || saving}>
             {saving ? "Saving..." : "Save PNG"}
           </button>
           <button type="button" className="sg-btn sg-secondary" onClick={reset}>

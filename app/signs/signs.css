@@ -1,4 +1,4 @@
-/* Sign maker styles (/signs, t1378 prototype).
+/* Sign maker styles (/signs, t1378).
  *
  * Namespaced `sg-` and scoped under `.sg-root`, same reasoning as
  * app/photobooth/photobooth.css: this lives inside at-site where generic class
@@ -7,7 +7,8 @@
  *
  * Colors are the site's real brand tokens (globals.css: --color-orange
  * #FD891C, --color-teal #00ADB3), not the photobooth's own pair, because this
- * page has no standalone look to preserve.
+ * page has no standalone look to preserve. The board itself is drawn on the
+ * canvas; nothing here styles the sign.
  */
 
 .sg-root,
@@ -67,12 +68,16 @@
   justify-content: center;
 }
 
+/* The canvas keeps its own aspect (the board's) and fits the viewport both
+   ways: the Standard board is portrait, so height is the binding limit on a
+   laptop; the Long board is a banner, so width is. */
 .sg-canvas {
   display: block;
-  width: 100%;
-  max-width: 900px;
+  width: auto;
   height: auto;
-  border-radius: 6px;
+  max-width: 100%;
+  max-height: 72vh;
+  border-radius: 4px;
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
 }
 
@@ -175,26 +180,6 @@
 }
 
 .sg-swatch.sg-active {
-  box-shadow: 0 0 0 3px var(--sg-orange);
-}
-
-/* Board finish swatches are wider so the grain reads. */
-.sg-finish {
-  width: 64px;
-  height: 36px;
-  border-radius: 8px;
-  border: 3px solid #fff;
-  box-shadow: 0 0 0 2px var(--sg-border);
-  cursor: pointer;
-  padding: 0;
-  transition: transform 0.15s, box-shadow 0.15s;
-}
-
-.sg-finish:hover {
-  transform: scale(1.05);
-}
-
-.sg-finish.sg-active {
   box-shadow: 0 0 0 3px var(--sg-orange);
 }
 
