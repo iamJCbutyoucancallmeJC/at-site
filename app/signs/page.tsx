@@ -23,17 +23,19 @@
 // grotesque). Layout picks the largest card size whose greedy word wrap fits
 // the board (cards are uniform width like a real letter set; wide letters get
 // squeezed, never a bigger card), then draws every rail the board has room for
-// so unused rails read as empty rails. Each card's nudge, tilt, slump, flip and
-// fade is seeded from the phrase and the style, so the same phrase renders the
-// same way every time and a one-letter edit does not reshuffle the rest.
-// "Messy" is the same machinery with the amplitudes raised.
+// so unused rails read as empty rails. Each card's nudge, tilt, slump and flip
+// is seeded from the phrase and the style, so the same phrase renders the same
+// way every time and a one-letter edit does not reshuffle the rest. "Messy" is
+// the same machinery with the amplitudes raised. The photo's sun-fade is left
+// out on purpose: painted onto the letters it read as glare (JC, 10/20).
 //
 // Every knob that shapes the look is a named constant in the "Tunable style
 // parameters" block. Tune the constants, not the functions.
 //
-// Save: PNG at 2x the on-screen board (1800x3000 standard, 3600x900 long) for
-// sticker printing, with a small "amytangerine.com" mark. Web Share first (iOS
-// share sheet), download fallback, the photobooth's path.
+// Save: PNG at 2x the on-screen board (1800x2250 standard, 3600x900 long) for
+// sticker printing, with a small "amytangerine.com" mark centred at the foot
+// (a corner mark gets clipped by rounded message bubbles). Web Share first (iOS
+// share sheet, titled with the phrase), download fallback, the photobooth's path.
 //
 // GA4 via the house trackEvent: signs_render (a phrase rendered; deduped per
 // distinct phrase+settings) and signs_save (PNG shared or downloaded).
@@ -96,9 +98,6 @@ type StyleParams = {
   lineShift: number // whole-line horizontal drift, of board width
   flipSymmetric: number // chance an S/N/Z/H/I/O/X goes in upside down (reads almost right, like the photo)
   flipAny: number // chance any other letter goes in upside down
-  fadePatches: number // sun-fade clouds per letter
-  fadeMin: number // cloud alpha range
-  fadeMax: number
   inkVariance: number // per-letter lightening of the ink, 0..1
   cardTone: number // per-card greying of the white card, 0..1
 }
@@ -114,9 +113,6 @@ const STYLES: Record<StyleId, StyleParams> = {
     lineShift: 0.008,
     flipSymmetric: 0.12,
     flipAny: 0,
-    fadePatches: 3,
-    fadeMin: 0.18,
-    fadeMax: 0.45,
     inkVariance: 0.06,
     cardTone: 0.03,
   },
@@ -130,9 +126,6 @@ const STYLES: Record<StyleId, StyleParams> = {
     lineShift: 0.03,
     flipSymmetric: 0.3,
     flipAny: 0.07,
-    fadePatches: 5,
-    fadeMin: 0.3,
-    fadeMax: 0.65,
     inkVariance: 0.14,
     cardTone: 0.06,
   },
@@ -167,14 +160,14 @@ const BOARD = {
   card: "#FBFBF9",
   cardEdge: "rgba(0, 0, 0, 0.08)",
   cardShadow: "rgba(0, 0, 0, 0.18)",
-  fade: [236, 236, 232] as [number, number, number], // sun-fade clouds pull the ink toward this
 }
 
 const WATERMARK = {
   text: "amytangerine.com",
   sizeFrac: 0.022, // of the board's shorter side
-  inset: 0.018, // of the board's shorter side, from the bottom-right corner
-  color: "rgba(60, 60, 60, 0.45)",
+  minSizeFrac: 0.011, // of the board's width, so the Long board's mark is not tiny
+  inset: 0.012, // of the board's height, from the bottom edge
+  color: "rgba(60, 60, 60, 0.7)",
 }
 
 const DEFAULT_PHRASE = "It's a beautiful day"
@@ -476,7 +469,6 @@ type PlacedCard = {
   flip: boolean
   tone: number
   ink: string
-  rand: () => number
 }
 
 // Where each card actually sits once its quirks are applied.
@@ -509,7 +501,6 @@ function placeCards(layout: Layout, style: StyleParams, inkHex: string, W: numbe
         flip,
         tone,
         ink: mix(ink, white, lighten),
-        rand,
       })
     }
   }
@@ -539,25 +530,13 @@ function drawCards(ctx: CanvasRenderingContext2D, placed: PlacedCard[], layout: 
   }
 }
 
-// Letters go on their own transparent layer so the sun-fade can be painted
-// into the ink alone (source-atop) before the layer lands on the cards.
-function paintLetters(
-  W: number,
-  H: number,
-  scale: number,
+function drawLetters(
+  ctx: CanvasRenderingContext2D,
   placed: PlacedCard[],
   layout: Layout,
-  style: StyleParams,
   family: string,
   capRatio: number,
-): HTMLCanvasElement | null {
-  const layer = document.createElement("canvas")
-  layer.width = Math.round(W * scale)
-  layer.height = Math.round(H * scale)
-  const ctx = layer.getContext("2d")
-  if (!ctx) return null
-  ctx.scale(scale, scale)
-
+) {
   const fs = layout.fontSize
   const capH = fs * capRatio
   ctx.font = letterFontSpec(fs, family)
@@ -580,28 +559,6 @@ function paintLetters(
     ctx.fillText(p.card.ch, 0, capH / 2)
     ctx.restore()
   }
-
-  // Sun-fade: soft clouds painted into the ink only.
-  if (style.fadePatches > 0) {
-    ctx.globalCompositeOperation = "source-atop"
-    const [fr, fg, fb] = BOARD.fade
-    for (const p of letters) {
-      for (let i = 0; i < style.fadePatches; i++) {
-        const x = p.cx + spread(p.rand, p.card.w * 0.5)
-        const y = p.cy + spread(p.rand, layout.cardH * 0.5)
-        const r = layout.cardH * (0.16 + p.rand() * 0.34)
-        const a = style.fadeMin + p.rand() * (style.fadeMax - style.fadeMin)
-        const g = ctx.createRadialGradient(x, y, 0, x, y, r)
-        g.addColorStop(0, `rgba(${fr}, ${fg}, ${fb}, ${a})`)
-        g.addColorStop(1, `rgba(${fr}, ${fg}, ${fb}, 0)`)
-        ctx.fillStyle = g
-        ctx.fillRect(x - r, y - r, r * 2, r * 2)
-      }
-    }
-    ctx.globalCompositeOperation = "source-over"
-  }
-
-  return layer
 }
 
 // The rail strips go on last so they overlap the card tops (the cards are
@@ -628,13 +585,12 @@ function drawRails(ctx: CanvasRenderingContext2D, layout: Layout, W: number) {
 }
 
 function drawWatermark(ctx: CanvasRenderingContext2D, W: number, H: number, uiFont: string) {
-  const short = Math.min(W, H)
-  const size = Math.max(10, short * WATERMARK.sizeFrac)
+  const size = Math.max(10, Math.min(W, H) * WATERMARK.sizeFrac, W * WATERMARK.minSizeFrac)
   ctx.font = `700 ${size}px ${uiFont}`
-  ctx.textAlign = "right"
+  ctx.textAlign = "center"
   ctx.textBaseline = "alphabetic"
   ctx.fillStyle = WATERMARK.color
-  ctx.fillText(WATERMARK.text, W - short * WATERMARK.inset, H - short * WATERMARK.inset)
+  ctx.fillText(WATERMARK.text, W / 2, H - H * WATERMARK.inset)
 }
 
 // Draw the whole sign into `canvas` at `scale` times the board's logical size.
@@ -665,15 +621,7 @@ function drawSign(canvas: HTMLCanvasElement, opts: SignOptions, scale: number) {
   drawPanel(ctx, W, H, seed)
   const placed = placeCards(layout, style, opts.inkHex, W, seed)
   drawCards(ctx, placed, layout)
-  if (placed.length) {
-    const layer = paintLetters(W, H, scale, placed, layout, style, opts.letterFont, capRatio)
-    if (layer) {
-      ctx.save()
-      ctx.setTransform(1, 0, 0, 1, 0, 0)
-      ctx.drawImage(layer, 0, 0)
-      ctx.restore()
-    }
-  }
+  drawLetters(ctx, placed, layout, opts.letterFont, capRatio)
   drawRails(ctx, layout, W)
   drawWatermark(ctx, W, H, opts.uiFont)
 
@@ -791,13 +739,23 @@ export default function SignsPage() {
       const blob = await new Promise<Blob | null>((resolve) => out.toBlob(resolve, "image/png"))
       if (!blob) return
 
-      const name = `sign-${Date.now()}.png`
+      // Named for the phrase, so the file and the share sheet's title (which
+      // Messages puts in as text) say what the sign says, not "Sign".
+      const phraseText = opts.phrase.trim().replace(/\s+/g, " ")
+      const slug = phraseText
+        .toLowerCase()
+        .replace(/[’']/g, "")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "")
+        .slice(0, 48)
+        .replace(/-+$/, "")
+      const name = `amy-tangerine-sign${slug ? `-${slug}` : ""}.png`
       const file = new File([blob], name, { type: "image/png" })
       const eventData = { board: opts.size, style: opts.style, ink: inkId }
 
       if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
         try {
-          await navigator.share({ files: [file], title: "Sign" })
+          await navigator.share({ files: [file], title: phraseText || "Amy Tangerine sign" })
           trackEvent("signs_save", { method: "share", ...eventData })
           return
         } catch (err) {

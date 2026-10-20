@@ -25,10 +25,10 @@ const NAV_LINKS: NavItem[] = [
     // Photobooth moved onto the site as a native route 2026-08-04 (t897): was an
     // external link to photobooth.amytangerine.com, now /photobooth. Internal, so
     // no new-tab hop. The old subdomain 301s here once its Vercel domain moves.
-    // Sign maker (t1378 prototype): hand-painted-sign phrase generator, /signs.
+    // Sign Maker (t1378): letter-board phrase generator, /signs.
     children: [
       { label: "Photobooth", href: "/photobooth" },
-      { label: "Sign maker", href: "/signs" },
+      { label: "Sign Maker", href: "/signs" },
     ],
   },
   {
