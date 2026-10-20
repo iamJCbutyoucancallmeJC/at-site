@@ -33,9 +33,10 @@
 // parameters" block. Tune the constants, not the functions.
 //
 // Save: PNG at 2x the on-screen board (1800x2250 standard, 3600x900 long) for
-// sticker printing, with a small "amytangerine.com" mark centred at the foot
-// (a corner mark gets clipped by rounded message bubbles). Web Share first (iOS
-// share sheet, titled with the phrase), download fallback, the photobooth's path.
+// sticker printing, with Amy's logo centred at the foot (JC, 10/20: her brand,
+// not just her name; a corner mark gets clipped by rounded message bubbles).
+// Web Share first (iOS share sheet, titled with the phrase), download fallback,
+// the photobooth's path.
 //
 // GA4 via the house trackEvent: signs_render (a phrase rendered; deduped per
 // distinct phrase+settings) and signs_save (PNG shared or downloaded).
@@ -55,10 +56,11 @@ type StyleId = "standard" | "messy"
 // empty, and at 4:5 the photo's own phrase lands as it does in the photo (four
 // lines, four rails). "Long" is a banner, one or two rails. maxCardH caps the
 // card height as a fraction of board height so a two-word phrase does not
-// become two giant cards.
-const BOARD_SIZES: { id: BoardSizeId; label: string; width: number; height: number; maxCardH: number }[] = [
-  { id: "standard", label: "Standard", width: 900, height: 1125, maxCardH: 0.2 },
-  { id: "long", label: "Long", width: 1800, height: 450, maxCardH: 0.6 },
+// become two giant cards. logoH is the height of Amy's logo at the foot of the
+// board, as a fraction of board height; the rails stay clear of it.
+const BOARD_SIZES: { id: BoardSizeId; label: string; width: number; height: number; maxCardH: number; logoH: number }[] = [
+  { id: "standard", label: "Standard", width: 900, height: 1125, maxCardH: 0.2, logoH: 0.045 },
+  { id: "long", label: "Long", width: 1800, height: 450, maxCardH: 0.6, logoH: 0.09 },
 ]
 
 const EXPORT_SCALE = 2
@@ -162,11 +164,16 @@ const BOARD = {
   cardShadow: "rgba(0, 0, 0, 0.18)",
 }
 
+// Amy's logo, the one in the site header. Same origin, so drawing it keeps the
+// canvas exportable. If it fails to load, the foot falls back to the text mark.
+const LOGO = {
+  src: "/images/amy-tangerine-logo.png",
+  aspect: 1500 / 389, // the file's width / height
+}
+
 const WATERMARK = {
   text: "amytangerine.com",
-  sizeFrac: 0.022, // of the board's shorter side
-  minSizeFrac: 0.011, // of the board's width, so the Long board's mark is not tiny
-  inset: 0.012, // of the board's height, from the bottom edge
+  sizeFrac: 0.5, // of the logo height it stands in for
   color: "rgba(60, 60, 60, 0.7)",
 }
 
@@ -312,7 +319,7 @@ function layoutPhrase(
   const W = board.width
   const H = board.height
   const innerW = W * (1 - 2 * LAYOUT.padX)
-  const innerH = H * (1 - 2 * LAYOUT.padY)
+  const innerH = H * (1 - 2 * LAYOUT.padY - board.logoH)
   const paragraphs = tokenize(phrase)
 
   const geometry = (cardH: number) => {
@@ -426,6 +433,16 @@ type SignOptions = {
   inkHex: string
   letterFont: string
   uiFont: string
+  logo: HTMLImageElement | null
+}
+
+function loadImage(src: string): Promise<HTMLImageElement | null> {
+  return new Promise((resolve) => {
+    const img = new Image()
+    img.onload = () => resolve(img)
+    img.onerror = () => resolve(null)
+    img.src = src
+  })
 }
 
 function letterFontSpec(fontSize: number, family: string) {
@@ -584,13 +601,31 @@ function drawRails(ctx: CanvasRenderingContext2D, layout: Layout, W: number) {
   }
 }
 
-function drawWatermark(ctx: CanvasRenderingContext2D, W: number, H: number, uiFont: string) {
-  const size = Math.max(10, Math.min(W, H) * WATERMARK.sizeFrac, W * WATERMARK.minSizeFrac)
-  ctx.font = `700 ${size}px ${uiFont}`
+// Amy's logo, centred in the band below the rails (the bottom margin plus the
+// board's logoH). Centred, not in a corner: a rounded message bubble clips corners.
+function drawLogo(
+  ctx: CanvasRenderingContext2D,
+  W: number,
+  H: number,
+  logoFrac: number,
+  logo: HTMLImageElement | null,
+  uiFont: string,
+) {
+  const h = H * logoFrac
+  const bandTop = H * (1 - LAYOUT.padY - logoFrac)
+  const cy = (bandTop + H) / 2
+  if (logo) {
+    const w = h * LOGO.aspect
+    ctx.imageSmoothingEnabled = true
+    ctx.imageSmoothingQuality = "high"
+    ctx.drawImage(logo, W / 2 - w / 2, cy - h / 2, w, h)
+    return
+  }
+  ctx.font = `700 ${Math.max(10, h * WATERMARK.sizeFrac)}px ${uiFont}`
   ctx.textAlign = "center"
-  ctx.textBaseline = "alphabetic"
+  ctx.textBaseline = "middle"
   ctx.fillStyle = WATERMARK.color
-  ctx.fillText(WATERMARK.text, W / 2, H - H * WATERMARK.inset)
+  ctx.fillText(WATERMARK.text, W / 2, cy)
 }
 
 // Draw the whole sign into `canvas` at `scale` times the board's logical size.
@@ -623,7 +658,7 @@ function drawSign(canvas: HTMLCanvasElement, opts: SignOptions, scale: number) {
   drawCards(ctx, placed, layout)
   drawLetters(ctx, placed, layout, opts.letterFont, capRatio)
   drawRails(ctx, layout, W)
-  drawWatermark(ctx, W, H, opts.uiFont)
+  drawLogo(ctx, W, H, board.logoH, opts.logo, opts.uiFont)
 
   return { lineCount: layout.lines.length, railsTotal: layout.railsTotal, overflow: layout.overflow }
 }
@@ -643,6 +678,7 @@ export default function SignsPage() {
   const [style, setStyle] = useState<StyleId>("standard")
   const [inkId, setInkId] = useState(INKS[0].id)
   const [fonts, setFonts] = useState<Fonts | null>(null)
+  const [logo, setLogo] = useState<HTMLImageElement | null>(null)
   const [status, setStatus] = useState("Sorting the letters...")
   const [saving, setSaving] = useState(false)
 
@@ -650,8 +686,8 @@ export default function SignsPage() {
   const boardDims = BOARD_SIZES.find((b) => b.id === size) ?? BOARD_SIZES[0]
 
   // Resolve the next/font families off their CSS variables (app/signs/
-  // layout.tsx sets them) and wait for the letter font to load, so the first
-  // canvas paint is in Anton and not the fallback.
+  // layout.tsx sets them) and wait for the letter font and the logo to load, so
+  // the first canvas paint is in Anton and carries the logo.
   useEffect(() => {
     let alive = true
     const root = rootRef.current
@@ -660,6 +696,7 @@ export default function SignsPage() {
     const letter = styles.getPropertyValue("--font-anton").trim() || FALLBACK_LETTER_FONT
     const ui = styles.getPropertyValue("--font-quicksand").trim() || FALLBACK_UI_FONT
     const ready = async () => {
+      const logoLoad = loadImage(LOGO.src)
       try {
         await document.fonts.load(letterFontSpec(40, letter))
       } catch {
@@ -668,7 +705,10 @@ export default function SignsPage() {
       try {
         await document.fonts.ready
       } catch {}
-      if (alive) setFonts({ letter, ui })
+      const img = await logoLoad
+      if (!alive) return
+      setLogo(img)
+      setFonts({ letter, ui })
     }
     void ready()
     return () => {
@@ -684,8 +724,9 @@ export default function SignsPage() {
       inkHex: ink.hex,
       letterFont: fonts?.letter ?? FALLBACK_LETTER_FONT,
       uiFont: fonts?.ui ?? FALLBACK_UI_FONT,
+      logo,
     }),
-    [phrase, size, style, ink.hex, fonts],
+    [phrase, size, style, ink.hex, fonts, logo],
   )
 
   // Debounced preview render. Fires signs_render once per distinct
