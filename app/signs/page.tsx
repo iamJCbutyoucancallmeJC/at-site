@@ -35,11 +35,14 @@
 // Save: PNG at 2x the on-screen board (1800x2250 standard, 3600x900 long) for
 // sticker printing, with Amy's logo centred at the foot (JC, 10/20: her brand,
 // not just her name; a corner mark gets clipped by rounded message bubbles).
-// Web Share first (iOS share sheet, titled with the phrase), download fallback,
-// the photobooth's path.
+// Three ways out (JC, 10/20: share a sign without downloading it). Share opens
+// the device's share sheet (phones, Safari, any browser that can share files),
+// titled with the phrase. Where a browser cannot share files, Copy Image puts
+// the sign on the clipboard to paste into a message. Download PNG is always
+// there, for sticker printing.
 //
 // GA4 via the house trackEvent: signs_render (a phrase rendered; deduped per
-// distinct phrase+settings) and signs_save (PNG shared or downloaded).
+// distinct phrase+settings) and signs_save (method share, copy or download).
 
 import { useCallback, useEffect, useRef, useState } from "react"
 import { trackEvent } from "@/lib/analytics"
@@ -445,6 +448,17 @@ function loadImage(src: string): Promise<HTMLImageElement | null> {
   })
 }
 
+function downloadBlob(blob: Blob, name: string) {
+  const url = URL.createObjectURL(blob)
+  const link = document.createElement("a")
+  link.download = name
+  link.href = url
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
+  setTimeout(() => URL.revokeObjectURL(url), 1000)
+}
+
 function letterFontSpec(fontSize: number, family: string) {
   return `400 ${fontSize}px ${family}`
 }
@@ -681,6 +695,8 @@ export default function SignsPage() {
   const [logo, setLogo] = useState<HTMLImageElement | null>(null)
   const [status, setStatus] = useState("Sorting the letters...")
   const [saving, setSaving] = useState(false)
+  const [can, setCan] = useState({ share: false, copy: false })
+  const [copyLabel, setCopyLabel] = useState("Copy Image")
 
   const ink = INKS.find((c) => c.id === inkId) ?? INKS[0]
   const boardDims = BOARD_SIZES.find((b) => b.id === size) ?? BOARD_SIZES[0]
@@ -768,56 +784,92 @@ export default function SignsPage() {
     }
   }, [fonts, currentOptions, inkId])
 
-  // Export at 2x, Web Share first, download fallback (the photobooth's path).
-  const savePng = useCallback(async () => {
+  // Which ways out this browser has. Probed after mount so the server render
+  // and the first client render agree.
+  useEffect(() => {
+    const probe = new File([new Blob([], { type: "image/png" })], "probe.png", { type: "image/png" })
+    setCan({
+      share: "share" in navigator && "canShare" in navigator && navigator.canShare({ files: [probe] }),
+      copy: typeof ClipboardItem !== "undefined" && !!navigator.clipboard?.write,
+    })
+  }, [])
+
+  // The 2x export, named for the phrase, so the file and the share sheet's
+  // title (which Messages puts in as text) say what the sign says, not "Sign".
+  const exportSign = useCallback(() => {
+    const opts = currentOptions()
+    const out = document.createElement("canvas")
+    drawSign(out, opts, EXPORT_SCALE)
+    const phraseText = opts.phrase.trim().replace(/\s+/g, " ")
+    const slug = phraseText
+      .toLowerCase()
+      .replace(/[’']/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .slice(0, 48)
+      .replace(/-+$/, "")
+    return {
+      name: `amy-tangerine-sign${slug ? `-${slug}` : ""}.png`,
+      title: phraseText || "Amy Tangerine sign",
+      blob: new Promise<Blob | null>((resolve) => out.toBlob(resolve, "image/png")),
+      eventData: { board: opts.size, style: opts.style, ink: inkId },
+    }
+  }, [currentOptions, inkId])
+
+  const shareSign = useCallback(async () => {
     if (!fonts || saving) return
     setSaving(true)
     try {
-      const opts = currentOptions()
-      const out = document.createElement("canvas")
-      drawSign(out, opts, EXPORT_SCALE)
-
-      const blob = await new Promise<Blob | null>((resolve) => out.toBlob(resolve, "image/png"))
+      const sign = exportSign()
+      const blob = await sign.blob
       if (!blob) return
-
-      // Named for the phrase, so the file and the share sheet's title (which
-      // Messages puts in as text) say what the sign says, not "Sign".
-      const phraseText = opts.phrase.trim().replace(/\s+/g, " ")
-      const slug = phraseText
-        .toLowerCase()
-        .replace(/[’']/g, "")
-        .replace(/[^a-z0-9]+/g, "-")
-        .replace(/^-+|-+$/g, "")
-        .slice(0, 48)
-        .replace(/-+$/, "")
-      const name = `amy-tangerine-sign${slug ? `-${slug}` : ""}.png`
-      const file = new File([blob], name, { type: "image/png" })
-      const eventData = { board: opts.size, style: opts.style, ink: inkId }
-
-      if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
-        try {
-          await navigator.share({ files: [file], title: phraseText || "Amy Tangerine sign" })
-          trackEvent("signs_save", { method: "share", ...eventData })
-          return
-        } catch (err) {
-          if ((err as Error)?.name === "AbortError") return
-          // Otherwise fall through to download.
-        }
+      const file = new File([blob], sign.name, { type: "image/png" })
+      try {
+        await navigator.share({ files: [file], title: sign.title })
+        trackEvent("signs_save", { method: "share", ...sign.eventData })
+      } catch (err) {
+        if ((err as Error)?.name === "AbortError") return
+        // The sheet was refused (the tap went stale, say): hand over the file instead.
+        downloadBlob(blob, sign.name)
+        trackEvent("signs_save", { method: "download", ...sign.eventData })
       }
-
-      const url = URL.createObjectURL(blob)
-      const link = document.createElement("a")
-      link.download = name
-      link.href = url
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
-      setTimeout(() => URL.revokeObjectURL(url), 1000)
-      trackEvent("signs_save", { method: "download", ...eventData })
     } finally {
       setSaving(false)
     }
-  }, [fonts, saving, currentOptions, inkId])
+  }, [fonts, saving, exportSign])
+
+  const copySign = useCallback(async () => {
+    if (!fonts) return
+    const sign = exportSign()
+    // Safari only allows the write inside the tap itself, so the image goes in
+    // as a promise rather than being awaited first.
+    const png = sign.blob.then((b) => {
+      if (!b) throw new Error("No image to copy")
+      return b
+    })
+    try {
+      await navigator.clipboard.write([new ClipboardItem({ "image/png": png })])
+      setCopyLabel("Copied")
+      trackEvent("signs_save", { method: "copy", ...sign.eventData })
+    } catch {
+      setCopyLabel("Could not copy")
+    }
+    window.setTimeout(() => setCopyLabel("Copy Image"), 2000)
+  }, [fonts, exportSign])
+
+  const downloadSign = useCallback(async () => {
+    if (!fonts || saving) return
+    setSaving(true)
+    try {
+      const sign = exportSign()
+      const blob = await sign.blob
+      if (!blob) return
+      downloadBlob(blob, sign.name)
+      trackEvent("signs_save", { method: "download", ...sign.eventData })
+    } finally {
+      setSaving(false)
+    }
+  }, [fonts, saving, exportSign])
 
   const reset = useCallback(() => {
     setPhrase(DEFAULT_PHRASE)
@@ -917,15 +969,35 @@ export default function SignsPage() {
         </div>
 
         <div className="sg-actions">
-          <button type="button" className="sg-btn" onClick={savePng} disabled={!fonts || saving}>
-            {saving ? "Saving..." : "Save PNG"}
+          {can.share ? (
+            <button type="button" className="sg-btn" onClick={shareSign} disabled={!fonts || saving}>
+              {saving ? "Sharing..." : "Share"}
+            </button>
+          ) : can.copy ? (
+            <button type="button" className="sg-btn" onClick={copySign} disabled={!fonts}>
+              {copyLabel}
+            </button>
+          ) : null}
+          <button
+            type="button"
+            className={`sg-btn${can.share || can.copy ? " sg-secondary" : ""}`}
+            onClick={downloadSign}
+            disabled={!fonts || saving}
+          >
+            Download PNG
           </button>
           <button type="button" className="sg-btn sg-secondary" onClick={reset}>
             Start Over
           </button>
         </div>
         <p className="sg-note">
-          Saves at {boardDims.width * EXPORT_SCALE} x {boardDims.height * EXPORT_SCALE} px, ready for sticker printing.
+          {can.share
+            ? "Share sends the sign straight to a text, an email or AirDrop, no download. "
+            : can.copy
+              ? "Copy Image puts the sign on your clipboard to paste into a message. "
+              : ""}
+          Download saves it at {boardDims.width * EXPORT_SCALE} x {boardDims.height * EXPORT_SCALE} px, ready for
+          sticker printing.
         </p>
       </div>
     </div>

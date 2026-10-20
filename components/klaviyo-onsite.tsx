@@ -13,14 +13,16 @@
 //
 // The gated class surface (/classes) keeps its chrome but skips the popup: a
 // student who has paid should never see the newsletter ask over their class
-// (2026-10-07, Glimmers container).
+// (2026-10-07, Glimmers container). The sign maker (/signs) skips it too: it
+// is a page people type into, and the popup kept landing mid-phrase (JC,
+// 2026-10-20, t1378).
 
 import Script from "next/script"
 import { usePathname } from "next/navigation"
 import KlaviyoFormsBridge from "@/components/klaviyo-forms-bridge"
 import { isChromelessRoute } from "@/lib/chromeless-routes"
 
-const NO_POPUP_PREFIXES = ["/classes"]
+const NO_POPUP_PREFIXES = ["/classes", "/signs"]
 
 export default function KlaviyoOnsite({ companyId }: { companyId: string }) {
   const pathname = usePathname() ?? ""
