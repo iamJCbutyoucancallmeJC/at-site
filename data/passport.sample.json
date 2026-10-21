@@ -1,0 +1,100 @@
+{
+ "generated": "2026-10-21T23:01:54Z",
+ "source": "sample (invented names, real month patterns)",
+ "subscribers": [
+  {
+   "token": "sampledmt9tx",
+   "first": "Marisol",
+   "since": "2026-02",
+   "plan": "six-month",
+   "stamps": [
+    {
+     "month": "2026-02",
+     "mailed": null,
+     "cycle": null
+    },
+    {
+     "month": "2026-03",
+     "mailed": null,
+     "cycle": null
+    },
+    {
+     "month": "2026-04",
+     "mailed": null,
+     "cycle": null
+    },
+    {
+     "month": "2026-05",
+     "mailed": null,
+     "cycle": null
+    },
+    {
+     "month": "2026-06",
+     "mailed": null,
+     "cycle": 1
+    },
+    {
+     "month": "2026-07",
+     "mailed": "2026-07-18",
+     "cycle": 1
+    },
+    {
+     "month": "2026-08",
+     "mailed": "2026-08-13",
+     "cycle": 2
+    },
+    {
+     "month": "2026-09",
+     "mailed": "2026-09-12",
+     "cycle": 3
+    },
+    {
+     "month": "2026-10",
+     "mailed": "2026-10-14",
+     "cycle": 4
+    }
+   ]
+  },
+  {
+   "token": "sample69d7h7",
+   "first": "Dede",
+   "since": "2026-07",
+   "plan": "six-month",
+   "stamps": [
+    {
+     "month": "2026-07",
+     "mailed": "2026-07-09",
+     "cycle": 1
+    },
+    {
+     "month": "2026-08",
+     "mailed": "2026-08-13",
+     "cycle": 2
+    },
+    {
+     "month": "2026-09",
+     "mailed": null,
+     "cycle": 3
+    },
+    {
+     "month": "2026-10",
+     "mailed": "2026-10-14",
+     "cycle": 4
+    }
+   ]
+  },
+  {
+   "token": "samplewwuq4v",
+   "first": "Priya",
+   "since": "2026-10",
+   "plan": "monthly",
+   "stamps": [
+    {
+     "month": "2026-10",
+     "mailed": "2026-10-16",
+     "cycle": 1
+    }
+   ]
+  }
+ ]
+}

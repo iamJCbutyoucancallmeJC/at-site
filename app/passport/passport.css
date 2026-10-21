@@ -1,0 +1,93 @@
+/* Happy Mail Passport (held prototype). Namespaced under .hm-passport. */
+
+.hm-passport {
+  background: var(--color-orange-light);
+  min-height: 60vh;
+}
+
+.hm-passport .hm-cover {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 1rem;
+}
+
+.hm-passport .hm-title {
+  font-family: var(--font-brush), var(--font-sans);
+  color: var(--color-orange);
+  font-size: clamp(2.6rem, 7vw, 4.6rem);
+  line-height: 1;
+  margin: 0 0 0.5rem;
+}
+
+.hm-passport .hm-lede {
+  font-size: 1.1rem;
+  color: var(--color-text-primary);
+  max-width: 40rem;
+}
+
+.hm-passport .hm-stat {
+  display: inline-flex;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  padding: 0.6rem 1rem;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  font-size: 0.95rem;
+}
+
+.hm-passport .hm-stat b { font-weight: 700; }
+
+.hm-passport .hm-spread {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 1rem 1.25rem 3rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .hm-passport .hm-spread { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
+}
+
+@media (min-width: 1024px) {
+  .hm-passport .hm-spread { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2rem; }
+}
+
+.hm-passport figure { margin: 0; }
+
+.hm-passport .hm-stamp {
+  display: block;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.12));
+  transform: rotate(var(--tilt, 0deg));
+  transition: transform 160ms ease;
+}
+
+.hm-passport figure:hover .hm-stamp { transform: rotate(0deg) scale(1.02); }
+
+.hm-passport figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+.hm-passport figcaption b { color: var(--color-text-primary); font-weight: 600; }
+
+.hm-passport .hm-slot { opacity: 0.9; }
+
+.hm-passport .hm-foot {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 1.25rem 4rem;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+.hm-passport .hm-foot a { color: var(--color-orange); text-decoration: underline; text-underline-offset: 3px; }
+
+@media print {
+  .hm-passport { background: #fff; }
+  .hm-passport .hm-stamp { filter: none; transform: none; }
+}

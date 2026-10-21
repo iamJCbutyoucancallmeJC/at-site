@@ -35,3 +35,6 @@ __pycache__/
 *.pyc
 scripts/blog-automation/work/
 scripts/blog-automation/images/
+
+# Happy Mail Passport (held prototype): the real export carries first names; the sample is committed
+/data/passport.json
