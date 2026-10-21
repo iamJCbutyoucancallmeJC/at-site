@@ -8,6 +8,25 @@
   },
   "entries": [
     {
+      "date": "2026-10-21",
+      "title": "A sign maker under Fun Stuff",
+      "summary": "Type a phrase and it goes up on a slide-in letter board: a card per letter, a little crooked, an S upside down now and then. Share it or save a PNG for stickers.",
+      "note": "we should use amy's brand/logo not just her name",
+      "options": [
+        {
+          "key": "S1",
+          "title": "A painted sign",
+          "blurb": "Brush letters on a wooden board, guessed before the reference photo turned up. Read as a font trying to look loose."
+        },
+        {
+          "key": "S2",
+          "title": "A slide-in letter board",
+          "picked": "picked 10/20",
+          "blurb": "Built from the farmers market photo Amy sent in August: cards in rails, heavy condensed caps, quirks seeded by the phrase so the same sign renders the same way twice. Her logo in a band at the foot."
+        }
+      ]
+    },
+    {
       "date": "2026-10-10",
       "title": "A separate path for Happy Mail gifts",
       "summary": "Happy Mail and its FAQ now point givers to one gift page, replacing instructions to put a recipient’s address on the giver’s subscription. Gift checkout is not open yet."
