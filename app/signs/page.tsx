@@ -39,7 +39,8 @@
 // the device's share sheet (phones, Safari, any browser that can share files),
 // titled with the phrase. Where a browser cannot share files, Copy Image puts
 // the sign on the clipboard to paste into a message. Download PNG is always
-// there, for sticker printing.
+// there, for sticker printing. Amy's own link adds ?logo=off for signs without
+// her logo (her ask, 10/20: stickers of her own); it is not linked anywhere.
 //
 // GA4 via the house trackEvent: signs_render (a phrase rendered; deduped per
 // distinct phrase+settings) and signs_save (method share, copy or download).
@@ -437,6 +438,7 @@ type SignOptions = {
   letterFont: string
   uiFont: string
   logo: HTMLImageElement | null
+  showLogo: boolean
 }
 
 function loadImage(src: string): Promise<HTMLImageElement | null> {
@@ -665,14 +667,15 @@ function drawSign(canvas: HTMLCanvasElement, opts: SignOptions, scale: number) {
   const capRatio = probe.actualBoundingBoxAscent > 0 ? probe.actualBoundingBoxAscent / 100 : 0.72
   const fontSizeFor = (cardH: number) => (cardH * CARD.letterH) / capRatio
 
-  const layout = layoutPhrase(opts.phrase, board, fontSizeFor)
+  // Without the logo the band goes back to the rails.
+  const layout = layoutPhrase(opts.phrase, opts.showLogo ? board : { ...board, logoH: 0 }, fontSizeFor)
 
   drawPanel(ctx, W, H, seed)
   const placed = placeCards(layout, style, opts.inkHex, W, seed)
   drawCards(ctx, placed, layout)
   drawLetters(ctx, placed, layout, opts.letterFont, capRatio)
   drawRails(ctx, layout, W)
-  drawLogo(ctx, W, H, board.logoH, opts.logo, opts.uiFont)
+  if (opts.showLogo) drawLogo(ctx, W, H, board.logoH, opts.logo, opts.uiFont)
 
   return { lineCount: layout.lines.length, railsTotal: layout.railsTotal, overflow: layout.overflow }
 }
@@ -696,6 +699,7 @@ export default function SignsPage() {
   const [status, setStatus] = useState("Sorting the letters...")
   const [saving, setSaving] = useState(false)
   const [can, setCan] = useState({ share: false, copy: false })
+  const [showLogo, setShowLogo] = useState(true)
   const [copyLabel, setCopyLabel] = useState("Copy Image")
 
   const ink = INKS.find((c) => c.id === inkId) ?? INKS[0]
@@ -741,8 +745,9 @@ export default function SignsPage() {
       letterFont: fonts?.letter ?? FALLBACK_LETTER_FONT,
       uiFont: fonts?.ui ?? FALLBACK_UI_FONT,
       logo,
+      showLogo,
     }),
-    [phrase, size, style, ink.hex, fonts, logo],
+    [phrase, size, style, ink.hex, fonts, logo, showLogo],
   )
 
   // Debounced preview render. Fires signs_render once per distinct
@@ -792,6 +797,9 @@ export default function SignsPage() {
       share: "share" in navigator && "canShare" in navigator && navigator.canShare({ files: [probe] }),
       copy: typeof ClipboardItem !== "undefined" && !!navigator.clipboard?.write,
     })
+    // Amy's own sticker link (10/20): ?logo=off leaves her logo off the board.
+    // Unlisted; the page everyone reaches keeps the logo.
+    if (new URLSearchParams(window.location.search).get("logo") === "off") setShowLogo(false)
   }, [])
 
   // The 2x export, named for the phrase, so the file and the share sheet's
@@ -812,7 +820,7 @@ export default function SignsPage() {
       name: `amy-tangerine-sign${slug ? `-${slug}` : ""}.png`,
       title: phraseText || "Amy Tangerine sign",
       blob: new Promise<Blob | null>((resolve) => out.toBlob(resolve, "image/png")),
-      eventData: { board: opts.size, style: opts.style, ink: inkId },
+      eventData: { board: opts.size, style: opts.style, ink: inkId, logo: opts.showLogo ? "on" : "off" },
     }
   }, [currentOptions, inkId])
 
