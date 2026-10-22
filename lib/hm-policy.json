@@ -1,0 +1,8 @@
+{
+  "stated_cutoff_day": 15,
+  "policy_month": "2026-11",
+  "ruled": true,
+  "ruled_by": "JC",
+  "ruled_at": "2026-10-21",
+  "source": "Happy Mail/Tools/ledger/hm-month-policy.jsonl via hm-policy-sync.py (t1307)"
+}
