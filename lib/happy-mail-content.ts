@@ -6,6 +6,20 @@
 // Edit it here only; both surfaces import from this file. When a centralized FAQ
 // page is built, pull FAQ_ITEMS out of the PDP/landing and point everything here.
 
+import hmPolicy from "@/lib/hm-policy.json"
+
+// [t1307, ledger P3] The stated cutoff in the first-envelope FAQ answer (US and IHM) comes from
+// lib/hm-policy.json, the same file components/first-envelope-promise.tsx reads. Generated
+// from the Happy Mail month policy record by hm-policy-sync.py; never edit the day by hand.
+// Wording is the t658-locked sentence with the day filled in.
+function ordinal(n: number): string {
+  const tens = n % 100
+  if (tens >= 11 && tens <= 13) return `${n}th`
+  return `${n}${({ 1: "st", 2: "nd", 3: "rd" } as Record<number, string>)[n % 10] ?? "th"}`
+}
+const STATED_CUTOFF = ordinal(hmPolicy.stated_cutoff_day)
+const FIRST_ENVELOPE_ANSWER = `Order by the ${STATED_CUTOFF} and this month's envelope is yours. After the ${STATED_CUTOFF}, you're in for next month's. It's a real envelope we mail once a month, so there's a cutoff to make the mail run.`
+
 // Recharge customer portal login. ONE HOME: /happy-mail/update-card imports this too.
 // There is no deep-linkable portal URL: post-login paths are customer-hash + session-token
 // specific, hash-less paths 404, and ?redirect_url= is ignored (tested live 2026-08-20; see
@@ -133,7 +147,7 @@ export const HM_FAQ_ITEMS = [
   },
   {
     q: "Which month will my first envelope be?",
-    a: "Order by the 15th and this month's envelope is yours. After the 15th, you're in for next month's. It's a real envelope we mail once a month, so there's a cutoff to make the mail run.",
+    a: FIRST_ENVELOPE_ANSWER,
   },
   {
     // [t1428, 2026-09-09] Gap 3 of the 8/31 read: nothing said when you get billed. Billing
@@ -262,7 +276,7 @@ export const IHM_FAQ_ITEMS = [
   },
   {
     q: "Which month will my first envelope be?",
-    a: "Order by the 15th and this month's envelope is yours. After the 15th, you're in for next month's. It's a real envelope we mail once a month, so there's a cutoff to make the mail run.",
+    a: FIRST_ENVELOPE_ANSWER,
   },
   {
     q: "Are the contents available in your shop?",

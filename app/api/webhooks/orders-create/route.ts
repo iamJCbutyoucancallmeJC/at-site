@@ -21,6 +21,11 @@
 // order (lib/class-grant.ts). This runs for EVERY channel, before the
 // browser-pixel early return below, because a class bought at web checkout is
 // exactly the case the pixel covers for GA4 and this must still grant.
+//
+// Third job (2026-10-21): no GA4 send for Recharge $0 orders. Each sessionless
+// `purchase` is counted by GA4 as its own one-event session and user; the $0
+// subscription orders were 124 of the 327 such sessions from 9/29 to 10/20 and
+// carry no revenue or attribution. Priced renewals and POS keep sending.
 
 import { NextResponse } from "next/server"
 import { grantClassAccess } from "@/lib/class-grant"
@@ -93,6 +98,13 @@ function hasShopifyBrowserPurchase(order: Pick<ShopifyOrder, "source_name">): bo
   return src === "web" || src === SHOPIFY_HEADLESS_APP_SOURCE
 }
 
+// Recharge $0 orders (channel "subscription": prepaid-cycle orders with no charge).
+// Still orders in Shopify; GA4 has no use for a purchase with no value and no buyer
+// session. Only the $0 ones: a priced "subscription" order still sends.
+function isZeroDollarSubscriptionOrder(order: Pick<ShopifyOrder, "source_name" | "tags" | "total_price">): boolean {
+  return classifyOrderChannel(order) === "subscription" && Number(order.total_price) === 0
+}
+
 export async function POST(request: Request) {
   // Read the raw body BEFORE parsing — HMAC is over the exact bytes Shopify sent.
   const rawBody = await request.text()
@@ -129,6 +141,16 @@ export async function POST(request: Request) {
       ok: true,
       sent: false,
       reason: "shopify-browser-pixel-authoritative",
+      order_channel: orderChannel,
+      classes,
+    })
+  }
+
+  if (isZeroDollarSubscriptionOrder(order)) {
+    return NextResponse.json({
+      ok: true,
+      sent: false,
+      reason: "zero-dollar-subscription-order",
       order_channel: orderChannel,
       classes,
     })
