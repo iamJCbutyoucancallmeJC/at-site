@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
+import BlogLinkTracker from "@/components/blog-link-tracker"
 import EmailCaptureInline from "@/components/email-capture-inline"
 import {
   getListablePosts,
@@ -137,6 +138,7 @@ export default async function BlogPost({
             className="blog-body"
             dangerouslySetInnerHTML={{ __html: post.body }}
           />
+          <BlogLinkTracker slug={post.slug} />
 
           {post.tags.length > 0 && (
             <footer

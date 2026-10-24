@@ -62,7 +62,9 @@ def check_body(body: str) -> list[str]:
     bad = sorted(tags - ALLOWED_TAGS)
     if bad:
         warns.append(f"body uses tags outside the Journal vocabulary: {', '.join(bad)}")
-    if re.search(r'\s(style|class)="', body):
+    # class="blog-button" is the one sanctioned class: the CTA pill styled in
+    # app/globals.css and click-tracked by components/blog-link-tracker.tsx.
+    if re.search(r'\sstyle="|\sclass="(?!blog-button")', body):
         warns.append("body carries style/class attributes")
     if re.search(r"[—]", body):
         warns.append("body contains an em dash")
