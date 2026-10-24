@@ -2,7 +2,7 @@
   "slug": "archival-ink-collection-with-ranger",
   "title": "My Archival Ink collection with Ranger is here!",
   "date": "2026-10-24",
-  "datePublishedISO": "2026-10-24T09:34:18-0700",
+  "datePublishedISO": "2026-10-24T09:59:20-0700",
   "tags": [
     "Products",
     "Collaborations",
@@ -13,7 +13,6 @@
   "legacyPath": "",
   "legacyFile": "",
   "imageCount": 4,
-  "draft": true,
   "source": {
     "work_id": "2026-10-23-ranger-launch-2026-10-23",
     "kind": "klaviyo-campaign",
@@ -69,6 +68,7 @@
         "notes": "Changed only the blog-button link text to \"Shop at Ranger\"; all attributes and the rest of the post are unchanged. Note: the post still includes class, data-cta, target and rel attributes on that link, which were kept as instructed.",
         "prior": "content/blog/revisions/archival-ink-collection-with-ranger/2026-10-24T095912.json"
       }
-    ]
+    ],
+    "approved_at": "2026-10-24T09:59:20-0700"
   }
 }
