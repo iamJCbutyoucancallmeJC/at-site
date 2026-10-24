@@ -137,22 +137,33 @@ body {
   border-radius: 0.75rem;
   margin: 1.5rem 0;
 }
-/* CTA button inside a post body: <a class="blog-button" data-cta="..."> (same pill as
-   the booth CTA). Clicks are tracked by components/blog-link-tracker.tsx. */
+/* CTA button inside a post body: <a class="blog-button" data-cta="..."> (the booth
+   CTA pill, centered on its own line and lifted so it reads as THE action in a post).
+   Clicks are tracked by components/blog-link-tracker.tsx. */
 .blog-body a.blog-button {
-  display: inline-block;
-  padding: 1rem 2.5rem;
+  display: block;
+  width: fit-content;
+  min-width: min(100%, 18rem);
+  margin: 2.5rem auto;
+  padding: 1.15rem 3rem;
   border-radius: 9999px;
   background: var(--color-orange);
   color: var(--color-white);
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   text-decoration: none;
   text-align: center;
+  box-shadow: 0 10px 24px -8px rgba(253, 137, 28, 0.6);
+  transition: background-color 150ms ease, transform 150ms ease, box-shadow 150ms ease;
 }
-.blog-body a.blog-button:hover { background: var(--color-orange-dark); color: var(--color-white); }
+.blog-body a.blog-button:hover {
+  background: var(--color-orange-dark);
+  color: var(--color-white);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px -8px rgba(229, 117, 16, 0.65);
+}
 .blog-body hr {
   border: 0;
   border-top: 1px solid var(--color-border);
