@@ -58,20 +58,43 @@ body {
    ink until its component is touched (white on orange is 2.4:1, ink is 7.2:1).
    Matches React's rendered style attribute for background / backgroundColor.
    Elements whose own color is orange (links, eyebrows) are not matched. */
+/* React serialises style={{ background: "var(--color-orange)" }} WITHOUT the
+   space ("background:var(--color-orange)"), so both spellings are matched
+   (found on the 2026-10-25 preview walk: every spaced-only selector missed). */
 [style*="background: var(--color-orange)"],
+[style*="background:var(--color-orange)"],
 [style*="background-color: var(--color-orange)"],
+[style*="background-color:var(--color-orange)"],
 [style*="background: var(--color-teal)"],
-[style*="background-color: var(--color-teal)"] {
+[style*="background:var(--color-teal)"],
+[style*="background-color: var(--color-teal)"],
+[style*="background-color:var(--color-teal)"] {
   color: var(--color-ink);
 }
 [style*="background: var(--color-orange)"] .text-white,
+[style*="background:var(--color-orange)"] .text-white,
 [style*="background-color: var(--color-orange)"] .text-white,
+[style*="background-color:var(--color-orange)"] .text-white,
 [style*="background: var(--color-teal)"] .text-white,
+[style*="background:var(--color-teal)"] .text-white,
 [style*="background-color: var(--color-teal)"] .text-white,
+[style*="background-color:var(--color-teal)"] .text-white,
 [style*="background: var(--color-orange)"].text-white,
+[style*="background:var(--color-orange)"].text-white,
 [style*="background-color: var(--color-orange)"].text-white,
+[style*="background-color:var(--color-orange)"].text-white,
 [style*="background: var(--color-teal)"].text-white,
-[style*="background-color: var(--color-teal)"].text-white {
+[style*="background:var(--color-teal)"].text-white,
+[style*="background-color: var(--color-teal)"].text-white,
+[style*="background-color:var(--color-teal)"].text-white,
+[style*="background: var(--color-orange)"] [class*="text-white/"],
+[style*="background:var(--color-orange)"] [class*="text-white/"],
+[style*="background-color: var(--color-orange)"] [class*="text-white/"],
+[style*="background-color:var(--color-orange)"] [class*="text-white/"],
+[style*="background: var(--color-teal)"] [class*="text-white/"],
+[style*="background:var(--color-teal)"] [class*="text-white/"],
+[style*="background-color: var(--color-teal)"] [class*="text-white/"],
+[style*="background-color:var(--color-teal)"] [class*="text-white/"] {
   color: var(--color-ink);
 }
 
