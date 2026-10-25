@@ -92,7 +92,7 @@ export default async function BoothPage({ params }: { params: Promise<{ slug: st
             />
           </div>
           <div className="flex-1 w-full">
-            <p className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-3" style={{ color: "var(--color-orange)" }}>
+            <p className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-3" style={{ color: "var(--color-orange)" }}>
               {booth.offer.kind === "hm-6month" ? "Happy Mail · 6-Month Subscription" : "Show offer"}
             </p>
             <h1

@@ -103,7 +103,7 @@ export default function ProductDetail({
           <div className="mt-6 md:mt-0">
             {product.tags.includes("new") && (
               <span
-                className="inline-block mb-2 px-2.5 py-0.5 text-[10px] uppercase tracking-[0.12em] font-bold rounded-full text-white"
+                className="inline-block mb-2 px-2.5 py-0.5 text-[11px] uppercase tracking-[0.12em] font-bold rounded-full text-white"
                 style={{ background: "var(--color-orange)" }}
               >
                 New
@@ -223,7 +223,7 @@ export default function ProductDetail({
                   .map((tag) => (
                     <span
                       key={tag}
-                      className="px-2.5 py-0.5 text-[11px] rounded-full border"
+                      className="px-2.5 py-0.5 text-[12px] rounded-full border"
                       style={{ borderColor: "var(--color-border)", color: "var(--color-text-secondary)" }}
                     >
                       {tag}
@@ -242,7 +242,7 @@ export default function ProductDetail({
           style={{ background: "var(--color-orange-light)", border: "1px solid #fde0c0" }}
         >
           <div className="flex-1">
-            <p className="text-[11px] uppercase tracking-[0.15em] font-semibold mb-1" style={{ color: "var(--color-orange)" }}>
+            <p className="text-[12px] uppercase tracking-[0.15em] font-semibold mb-1" style={{ color: "var(--color-orange)" }}>
               Monthly Subscription
             </p>
             <h3 className="text-[18px] font-bold mb-1.5" style={{ color: "var(--color-text-primary)" }}>

@@ -70,7 +70,7 @@ export default function RecapVideo({
           <path d="M8 5.5v13l11-6.5-11-6.5z" />
         </svg>
       </span>
-      <span className="absolute bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap text-[11px] md:text-[12px] uppercase tracking-[0.15em] font-semibold text-white drop-shadow">
+      <span className="absolute bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap text-[12px] md:text-[12px] uppercase tracking-[0.15em] font-semibold text-white drop-shadow">
         Watch Amy&rsquo;s recap
       </span>
     </button>

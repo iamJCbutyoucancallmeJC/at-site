@@ -61,7 +61,7 @@ export default function JapanPage() {
         />
         <div className="absolute inset-0 bg-black/35" />
         <div className="absolute inset-0 flex flex-col items-center justify-end pb-12 md:pb-20 px-6 text-center">
-          <p className="text-[11px] md:text-[13px] uppercase tracking-[0.25em] font-semibold mb-4 text-white/90">
+          <p className="text-[12px] md:text-[13px] uppercase tracking-[0.25em] font-semibold mb-4 text-white/90">
             Craft Tour · Tokyo, Japan
           </p>
           <h1 className="text-[40px] md:text-[76px] font-bold tracking-tight leading-[1.0] text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)]">
@@ -117,7 +117,7 @@ export default function JapanPage() {
             />
           </div>
         </div>
-        <p className="text-center text-[11px] uppercase tracking-[0.12em] mt-3" style={{ color: "var(--color-text-secondary)" }}>
+        <p className="text-center text-[12px] uppercase tracking-[0.12em] mt-3" style={{ color: "var(--color-text-secondary)" }}>
           From the first trip
         </p>
       </section>

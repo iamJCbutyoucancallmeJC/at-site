@@ -1,10 +1,17 @@
-// Homepage — Production (Option D3: Editorial + Color)
-// Hero image path: /images/hero/homepage-hero.webp — swap when Amy provides final shot
-// Design: teal category bg, orange newsletter panel, teal Instagram bar, orange accent strip
+// Homepage — design finish, Phases 0 + 1 + 3 (2026-10-25; design system "Amy Tangerine",
+// section "Upgrade plan"). The mural photograph carries the hero with nothing on it; the
+// headline and Shop now sit in a white card under it (JC 10/25: a pill between the SHINE /
+// BRIGHT curbs read as part of the photo; B-treatment card, below the picture, curbs whole).
+// White wall + paper sections instead of the orange strip / teal band / orange panel;
+// section titles are real h2s in sentence case (SectionHeader); Happy Mail is a card with a
+// real envelope right after the categories; New arrivals is a grid; one email card.
+// Hero image: /images/hero/homepage-hero.jpg, anchored at the bottom so the curbs stay in frame.
 
 import Image from "next/image"
 import type { Metadata } from "next"
 import KeepUpCard from "@/components/keep-up-card"
+import SectionHeader from "@/components/section-header"
+import PromoCard from "@/components/promo-card"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 import TrackableLink from "@/components/trackable-link"
 import { getAllProducts, formatPrice } from "@/lib/shopify"
@@ -72,152 +79,116 @@ export default async function HomePage() {
     <main>
       <PageEngagementTracker page="homepage" />
 
-      {/* ── Hero ── */}
-      <section className="relative w-full h-screen overflow-hidden">
+      {/* ── Hero: the photograph, nothing on it ── */}
+      <section className="relative w-full h-[62vh] md:h-[80vh] overflow-hidden">
         <Image
           src="/images/hero/homepage-hero.jpg"
           alt="Amy Tangerine in front of the Shine Bright mural"
           fill
           priority
           className="object-cover"
-          style={{ objectPosition: "50% 20%" }}
+          style={{ objectPosition: "50% 88%" }}
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-black/20" />
-        <div className="absolute inset-0 flex flex-col items-center justify-end pb-16 md:pb-24 px-6 text-center">
+      </section>
+
+      {/* ── Hero card: the line and the one button, on the page, not the picture ── */}
+      <section className="px-4 md:px-10 pt-4 md:pt-6">
+        <div
+          className="rounded-2xl shadow-lift p-6 md:px-10 md:py-8 flex flex-col md:flex-row md:items-center md:justify-between gap-5 md:gap-8"
+          style={{ background: "var(--color-white)" }}
+        >
           <h1
-            className="text-[56px] md:text-[120px] lg:text-[160px] font-bold tracking-tight leading-none text-white"
-            style={{ fontFamily: "var(--font-sans)" }}
+            className="text-[28px] md:text-[40px] font-bold leading-[1.05] tracking-[-0.02em] max-w-[560px]"
+            style={{ color: "var(--color-ink)" }}
           >
-            AMY TANGERINE
+            Craft supplies for a colorful life.
           </h1>
-          <p className="mt-3 md:mt-4 text-[18px] md:text-[24px] uppercase tracking-[0.2em] font-medium text-white">
-            Craft supplies for a colorful life
-          </p>
           <TrackableLink
             href="/shop"
             event="hero_cta_click"
-            eventData={{ cta_text: "Shop Now", destination: "/shop", page: "homepage" }}
-            className="mt-6 md:mt-8 inline-block px-8 py-3 text-[13px] md:text-[14px] uppercase tracking-[0.15em] font-semibold rounded-full border-2 border-white text-white hover:bg-white hover:text-black transition-all duration-300"
+            eventData={{ cta_text: "Shop now", destination: "/shop", page: "homepage" }}
+            className="cta-primary w-full md:w-auto shrink-0"
           >
-            Shop Now
+            Shop now
           </TrackableLink>
         </div>
       </section>
 
-      {/* ── Happy Mail Banner ── */}
-      <section
-        className="py-4 md:py-5 text-center border-y-2"
-        style={{ background: "var(--color-orange)", borderColor: "var(--color-teal)" }}
-      >
-        <p className="text-[13px] md:text-[15px] uppercase tracking-[0.15em] font-semibold text-white">
-          Happy Mail — Monthly craft subscription{" "}
-          <TrackableLink
-            href="/happy-mail"
-            event="hero_cta_click"
-            eventData={{ cta_text: "Happy Mail Banner Subscribe", destination: "/happy-mail", page: "homepage" }}
-            className="ml-3 underline underline-offset-2 hover:opacity-80 transition-opacity"
-          >
-            Subscribe
-          </TrackableLink>
-        </p>
-      </section>
-
-      {/* ── Shop by Category ── */}
-      <section className="px-4 md:px-10 pt-8 md:pt-12 pb-8 md:pb-10" style={{ background: "var(--color-teal)" }}>
-        <h2 className="text-[15px] md:text-[18px] uppercase tracking-[0.12em] font-semibold text-center mb-5 md:mb-6 text-white">
-          Shop by Category
-        </h2>
-        <div className="grid grid-cols-3 gap-2 md:gap-3">
+      {/* ── Shop by category ── */}
+      <section className="px-4 md:px-10 pt-12 md:pt-16 pb-6 md:pb-8">
+        <SectionHeader title="Shop by category" />
+        <div className="grid grid-cols-3 gap-3 md:gap-4">
           {CATEGORIES.map((cat) => (
             <TrackableLink
               key={cat.name}
               href={cat.href}
               event="category_click"
               eventData={{ category_name: cat.name, page: "homepage" }}
-              className="group relative block aspect-square overflow-hidden rounded-md"
+              className="group block min-w-0"
             >
-              <Image
-                src={cat.img}
-                alt={cat.name}
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
-                sizes="(max-width: 768px) 50vw, 25vw"
-              />
-              <div className="absolute inset-0 bg-black/15 group-hover:bg-black/25 transition-colors duration-300" />
-              {/* Label on a solid bar (design critic 2026-10, F13): the corner caps
-                  over busy product photos did not read on phones. Same type style. */}
-              <span
-                className="absolute inset-x-0 bottom-0 px-1.5 md:px-3 py-2 md:py-2.5 text-center text-[13px] md:text-[15px] uppercase tracking-[0.1em] font-semibold leading-tight"
-                style={{ background: "var(--color-white)", color: "var(--color-text-primary)" }}
-              >
+              <div className="relative aspect-square overflow-hidden rounded-xl" style={{ background: "var(--color-paper)" }}>
+                <Image
+                  src={cat.img}
+                  alt={cat.name}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 768px) 33vw, 30vw"
+                />
+              </div>
+              {/* Label under the tile (design critic F13 moved it onto a bar; Phase 3
+                  takes it off the photograph altogether). */}
+              <p className="mt-2 md:mt-3 text-[14px] md:text-[18px] font-semibold leading-tight" style={{ color: "var(--color-ink)" }}>
                 {cat.name}
-              </span>
+              </p>
             </TrackableLink>
           ))}
         </div>
       </section>
 
-      {/* ── Editorial Break ── */}
-      {/* Default image: /images/homepage/editorial-break-default.jpg (Paper Play journals + watercolor flat-lay).
-          Use this whenever there is no temporary feature image to display. Convention set 2026-05-28 with Amy.
-          Section links to nothing on purpose -- purely visual rhythm between Shop by Category and New Arrivals.
-          Typography matches Feature Spotlight headline treatment (bottom-left gradient + drop-shadow). */}
-      <div className="relative w-full h-[280px] md:h-[400px] mt-8 md:mt-10">
-        <Image
-          src="/images/homepage/editorial-break-default.jpg"
-          alt="Amy Tangerine craft styling"
-          fill
-          className="object-cover"
-          sizes="100vw"
+      {/* ── Happy Mail: the headline, right after the categories ── */}
+      <section className="px-4 md:px-10 pt-6 md:pt-8 pb-12 md:pb-16">
+        <PromoCard
+          tone="pink"
+          eyebrow="Monthly subscription"
+          title="Every month, a letter from Amy."
+          text="An envelope filled with stickers, die cuts, and a note about what she's making. Starting at $13/month."
+          cta={{
+            href: "/happy-mail",
+            label: "Subscribe",
+            event: "hero_cta_click",
+            eventData: { cta_text: "Happy Mail card Subscribe", destination: "/happy-mail", page: "homepage" },
+          }}
+          image={{ src: "/images/happy-mail/envelopes/2026-04.jpg", alt: "The April 2026 Happy Mail envelope and what came in it" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/15 to-transparent" />
-        <div className="absolute bottom-6 right-6 md:bottom-10 md:right-10 max-w-lg text-right">
-          <h3 className="text-[28px] md:text-[44px] font-bold leading-tight text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
-            Craft A Life
-            <br />
-            You Love
-          </h3>
-        </div>
-      </div>
+      </section>
 
-      {/* ── New Arrivals ── */}
-      <section className="pt-8 md:pt-10 pb-0">
-        <h2
-          className="text-[15px] md:text-[18px] uppercase tracking-[0.12em] font-semibold text-center mb-5 md:mb-6 px-4"
-          style={{ color: "var(--color-text-primary)" }}
-        >
-          New Arrivals
-        </h2>
-        <div
-          className="flex gap-2 md:gap-3 overflow-x-auto px-4 md:px-10 pb-1"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-        >
-          {newArrivals.map((product) => (
+      {/* ── New arrivals ── */}
+      <section className="px-4 md:px-10 py-12 md:py-16 border-t" style={{ borderColor: "var(--color-border)" }}>
+        <SectionHeader title="New arrivals" link={{ href: "/shop", label: "See all" }} />
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {newArrivals.slice(0, 4).map((product) => (
             <TrackableLink
               key={product.name}
               href={product.href}
               event="product_click"
               eventData={{ product_name: product.name, source_section: "new-arrivals", page: "homepage" }}
-              className="flex-shrink-0 w-[160px] md:w-[220px] group"
+              className="group block min-w-0 rounded-xl transition-[transform,box-shadow] duration-150 hover:-translate-y-0.5 hover:shadow-lift"
             >
-              <div className="relative aspect-square overflow-hidden rounded-md mb-2">
+              <div className="relative aspect-square overflow-hidden rounded-xl" style={{ background: "var(--color-paper)" }}>
                 <Image
-                  src={shopifyImageUrl(product.img, 440)}
+                  src={shopifyImageUrl(product.img, 640)}
                   unoptimized={isShopifyCdn(product.img)}
                   alt={product.name}
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  sizes="220px"
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, 25vw"
                 />
               </div>
-              <p
-                className="text-[12px] md:text-[13px] font-medium truncate"
-                style={{ color: "var(--color-text-primary)" }}
-              >
+              <p className="mt-3 mb-1 px-0.5 text-[16px] font-semibold leading-[1.35]" style={{ color: "var(--color-ink)" }}>
                 {product.name}
               </p>
-              <p className="text-[12px] md:text-[13px]" style={{ color: "var(--color-text-secondary)" }}>
+              <p className="px-0.5 pb-1 text-[15px] font-semibold" style={{ color: "var(--color-ink)" }}>
                 {product.price}
               </p>
             </TrackableLink>
@@ -225,51 +196,32 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── Orange accent strip ── */}
-      <div className="mx-4 md:mx-10 h-1.5 rounded-full mt-8 md:mt-10" style={{ background: "var(--color-orange)" }} />
-
-      {/* ── Feature Spotlight ── */}
-      <section className="relative mt-3 md:mt-4 mx-4 md:mx-10 rounded-lg overflow-hidden">
-        <div className="relative h-[320px] md:h-[420px]">
-          <Image
-            src="/images/homepage/sunshine-rainbows-spotlight.jpg"
-            alt="Sunshine &amp; Rainbows Traveler's Notebook by Amy Tangerine"
-            fill
-            className="object-cover object-top"
-            sizes="(max-width: 768px) 100vw, 80vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
-          <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10 max-w-lg">
-            <h3 className="text-[36px] md:text-[56px] font-bold leading-tight text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
-              Sunshine &amp; Rainbows
-            </h3>
-            <p className="text-[15px] md:text-[17px] text-white/95 mt-2 md:mt-3 leading-snug">
-              Amy&apos;s new traveler&apos;s notebook — now available on Amazon.
-            </p>
-            <TrackableLink
-              href="/amzn/book"
-              event="product_click"
-              eventData={{ product_name: "Sunshine & Rainbows Traveler's Notebook", source_section: "spotlight", page: "homepage" }}
-              className="inline-block mt-4 md:mt-5 px-8 py-3 text-[13px] md:text-[14px] uppercase tracking-[0.1em] font-semibold rounded-full border-2 border-white text-white hover:bg-white hover:text-black transition-all duration-300"
-            >
-              Get It on Amazon
-            </TrackableLink>
-          </div>
-        </div>
+      {/* ── Sunshine & Rainbows (Amazon): the one off-site door, as a paper card ── */}
+      <section className="px-4 md:px-10 pb-12 md:pb-16">
+        <PromoCard
+          eyebrow="On Amazon"
+          title="Sunshine & Rainbows"
+          text="Amy's new traveler's notebook, now available on Amazon."
+          button="secondary"
+          cta={{
+            href: "/amzn/book",
+            label: "Get it on Amazon",
+            event: "product_click",
+            eventData: { product_name: "Sunshine & Rainbows Traveler's Notebook", source_section: "spotlight", page: "homepage" },
+          }}
+          image={{ src: "/images/homepage/sunshine-rainbows-spotlight.jpg", alt: "Sunshine & Rainbows Traveler's Notebook by Amy Tangerine", position: "top" }}
+        />
       </section>
 
-      {/* ── About + Newsletter ── */}
-      <section className="py-10 md:py-14">
-        <div className="max-w-5xl mx-auto md:flex md:items-stretch md:gap-0">
-          {/* About */}
-          <div className="md:flex-1 px-6 md:px-10 pb-8 md:pb-0 flex flex-col justify-center">
-            <h2
-              className="text-[15px] md:text-[18px] uppercase tracking-[0.12em] font-semibold mb-3"
-              style={{ color: "var(--color-text-primary)" }}
-            >
-              About Amy
-            </h2>
-            <p className="text-[14px] md:text-[15px] leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+      {/* ── About + Keep up, on paper ── */}
+      <section
+        className="px-4 md:px-10 py-12 md:py-16 border-y"
+        style={{ background: "var(--color-paper)", borderColor: "var(--color-border)" }}
+      >
+        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+          <div className="min-w-0">
+            <SectionHeader title="About Amy" className="mb-3" />
+            <p className="text-[16px] leading-relaxed max-w-[42rem]" style={{ color: "var(--color-ink)" }}>
               Amy Tan is an author, designer, and creative entrepreneur on a mission to
               inspire others to craft a life they love. From stickers to workshops to her
               monthly Happy Mail, everything she creates is meant to add a little color
@@ -278,25 +230,21 @@ export default async function HomePage() {
             <TrackableLink
               href="/about"
               event="footer_click"
-              eventData={{ link_text: "About Amy Read More", page: "homepage" }}
-              className="inline-block mt-3 text-[13px] uppercase tracking-[0.1em] font-semibold hover:opacity-70 transition-opacity"
-              style={{ color: "var(--color-orange)" }}
+              eventData={{ link_text: "About Amy Read more", page: "homepage" }}
+              className="inline-block mt-3 text-[16px] font-semibold underline underline-offset-[3px] hover:text-[color:var(--color-ink)] transition-colors"
+              style={{ color: "var(--color-orange-ink)" }}
             >
-              Read More
+              Read more
             </TrackableLink>
           </div>
-
-          {/* Newsletter: the site's one capture card (components/keep-up-card.tsx) */}
           <KeepUpCard sourcePage="homepage" layout="panel" id="newsletter" />
         </div>
       </section>
 
       {/* ── Instagram ── */}
-      <section className="pb-0">
-        <div className="py-5 md:py-6 text-center" style={{ background: "var(--color-teal)" }}>
-          <h2 className="text-[15px] md:text-[18px] uppercase tracking-[0.12em] font-semibold text-white">
-            @amytangerine
-          </h2>
+      <section className="pt-12 md:pt-16">
+        <div className="px-4 md:px-10">
+          <SectionHeader title="@amytangerine" />
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-1">
           {IG_IMAGES.map((src, i) => (
@@ -314,7 +262,7 @@ export default async function HomePage() {
                 alt="Amy Tangerine on Instagram"
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
-                sizes="(max-width: 768px) 25vw, 16vw"
+                sizes="(max-width: 768px) 50vw, 20vw"
               />
             </TrackableLink>
           ))}

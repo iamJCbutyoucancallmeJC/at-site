@@ -36,7 +36,7 @@ export default function HmWaitlistForm({ page, compact = false }: { page: string
       className={`rounded-2xl border-2 ${compact ? "p-5" : "p-6 md:p-8"} text-center`}
       style={{ background: "var(--color-white)", borderColor: "var(--color-orange)" }}
     >
-      <p className="text-[11px] uppercase tracking-[0.15em] font-semibold mb-2" style={{ color: "var(--color-orange)" }}>
+      <p className="text-[12px] uppercase tracking-[0.15em] font-semibold mb-2" style={{ color: "var(--color-orange)" }}>
         Waitlist
       </p>
       <h3 className={`${compact ? "text-[20px]" : "text-[22px] md:text-[26px]"} font-bold leading-tight mb-2`} style={{ color: "var(--color-text-primary)" }}>
@@ -76,7 +76,7 @@ export default function HmWaitlistForm({ page, compact = false }: { page: string
           That didn&apos;t go through. Please try again.
         </p>
       )}
-      <p className="mt-4 text-[11px]" style={{ color: "var(--color-text-secondary)" }}>
+      <p className="mt-4 text-[12px]" style={{ color: "var(--color-text-secondary)" }}>
         We&apos;ll email you when Happy Mail reopens. Unsubscribe anytime.
       </p>
     </div>

@@ -190,7 +190,7 @@ export default function EventsVariantPage() {
               {/* Text overlay */}
               <div className="absolute inset-0 flex flex-col justify-end p-5 md:p-6">
                 <p
-                  className="text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-semibold mb-1"
+                  className="text-[11px] md:text-[12px] uppercase tracking-[0.2em] font-semibold mb-1"
                   style={{ color: "var(--color-orange)" }}
                 >
                   {event.label}
@@ -202,7 +202,7 @@ export default function EventsVariantPage() {
                   {event.description}
                 </p>
                 <span
-                  className="inline-block self-start px-4 py-1.5 text-[11px] md:text-[12px] uppercase tracking-[0.1em] font-semibold rounded-full border text-white border-white/60 group-hover:bg-white group-hover:text-black transition-all duration-300"
+                  className="inline-block self-start px-4 py-1.5 text-[12px] md:text-[12px] uppercase tracking-[0.1em] font-semibold rounded-full border text-white border-white/60 group-hover:bg-white group-hover:text-black transition-all duration-300"
                 >
                   {event.cta}
                 </span>
@@ -271,7 +271,7 @@ export default function EventsVariantPage() {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
           <div className="absolute bottom-5 left-5 md:bottom-8 md:left-8 max-w-md">
-            <p className="text-[11px] md:text-[12px] uppercase tracking-[0.15em] text-white/60 mb-1">
+            <p className="text-[12px] md:text-[12px] uppercase tracking-[0.15em] text-white/60 mb-1">
               Featured
             </p>
             <h3 className="text-[28px] md:text-[40px] font-bold leading-tight text-white">

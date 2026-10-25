@@ -84,7 +84,7 @@ export default async function GlimmersSalesPage({ searchParams }: { searchParams
 
       <section className="grid md:grid-cols-2 gap-10 md:gap-16 items-start">
         <div>
-          <p className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-5" style={{ color: "var(--color-orange)" }}>
+          <p className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-5" style={{ color: "var(--color-orange)" }}>
             A thirty-day class with Amy
           </p>
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-5">{c.title}</h1>

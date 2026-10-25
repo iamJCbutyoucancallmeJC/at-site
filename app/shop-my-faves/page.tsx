@@ -32,7 +32,7 @@ export default async function ShopMyFavesPage() {
       >
         <div className="max-w-3xl mx-auto text-center">
           <p
-            className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-4"
+            className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-4"
             style={{ color: "var(--color-orange)" }}
           >
             Shop My Faves

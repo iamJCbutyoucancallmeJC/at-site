@@ -83,9 +83,10 @@ export default function NewsletterForm({ sourcePage = 'homepage' }: { sourcePage
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="px-5 md:px-7 py-3 md:py-3.5 rounded-lg md:rounded-[10px] text-sm md:text-[15px] font-bold text-white disabled:opacity-60"
+          className="px-5 md:px-7 py-3 md:py-3.5 rounded-full text-sm md:text-[15px] font-bold disabled:opacity-60"
           style={{
             background: "var(--color-orange)",
+            color: "var(--color-ink)",
             fontFamily: "var(--font-sans)",
           }}
         >

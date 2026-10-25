@@ -104,7 +104,7 @@ export default function AnaheimClassPage() {
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-10 md:gap-14 items-start">
           <div className="flex-1 order-2 md:order-1">
             <p
-              className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-4"
+              className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-4"
               style={{ color: "var(--color-orange)" }}
             >
               {EVENT.expo} · {EVENT.city} · {EVENT.dateLabel}

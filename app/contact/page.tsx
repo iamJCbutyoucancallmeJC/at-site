@@ -41,7 +41,7 @@ export default function ContactPage() {
         style={{ background: "var(--color-gray-light)" }}
       >
         <p
-          className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-4"
+          className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-4"
           style={{ color: "var(--color-orange)" }}
         >
           Say Hello
@@ -154,7 +154,7 @@ export default function ContactPage() {
         className="py-16 md:py-20 px-6 text-center"
         style={{ background: "var(--color-orange)" }}
       >
-        <p className="text-[11px] uppercase tracking-[0.2em] text-white/70 mb-3">
+        <p className="text-[12px] uppercase tracking-[0.2em] text-white/70 mb-3">
           The good kind of mail
         </p>
         <h2 className="text-[28px] md:text-[40px] font-bold text-white leading-tight mb-4">

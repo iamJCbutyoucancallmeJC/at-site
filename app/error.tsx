@@ -34,7 +34,7 @@ export default function Error({
         style={{ background: "var(--color-gray-light)" }}
       >
         <p
-          className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-4"
+          className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-4"
           style={{ color: "var(--color-orange)" }}
         >
           Something went wrong

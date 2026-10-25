@@ -74,7 +74,7 @@ export default function AboutPage() {
           {/* Intro */}
           <div className="flex-1">
             <p
-              className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-4"
+              className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-4"
               style={{ color: "var(--color-orange)" }}
             >
               About Amy
@@ -144,7 +144,7 @@ export default function AboutPage() {
       >
         <div className="max-w-6xl mx-auto">
           <p
-            className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-10 text-center"
+            className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-10 text-center"
             style={{ color: "var(--color-orange)" }}
           >
             Collaborations
@@ -203,7 +203,7 @@ export default function AboutPage() {
         className="py-16 md:py-20 px-6 text-center"
         style={{ background: "var(--color-orange)" }}
       >
-        <p className="text-[11px] uppercase tracking-[0.2em] text-white/70 mb-3">
+        <p className="text-[12px] uppercase tracking-[0.2em] text-white/70 mb-3">
           The good kind of mail
         </p>
         <h2 className="text-[28px] md:text-[40px] font-bold text-white leading-tight mb-4">

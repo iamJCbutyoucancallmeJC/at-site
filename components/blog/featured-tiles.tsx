@@ -20,7 +20,7 @@ export default function FeaturedTiles({ posts }: { posts: FeaturedPost[] }) {
     >
       <div className="max-w-6xl mx-auto">
         <p
-          className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-8"
+          className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-8"
           style={{ color: "var(--color-teal)" }}
         >
           Featured · Amy&rsquo;s picks
@@ -72,7 +72,7 @@ function Tile({ post, hero = false }: { post: FeaturedPost; hero?: boolean }) {
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
         <div className="absolute inset-0 flex flex-col justify-end p-5 md:p-6">
           {post.label && (
-            <span className="text-[10px] uppercase tracking-[0.18em] font-semibold text-white/90 mb-1.5 drop-shadow-[0_1px_4px_rgba(0,0,0,0.6)]">
+            <span className="text-[11px] uppercase tracking-[0.18em] font-semibold text-white/90 mb-1.5 drop-shadow-[0_1px_4px_rgba(0,0,0,0.6)]">
               {post.label}
             </span>
           )}
@@ -88,7 +88,7 @@ function Tile({ post, hero = false }: { post: FeaturedPost; hero?: boolean }) {
               {post.blurb}
             </p>
           )}
-          <span className="text-[11px] text-white/80 mt-2 drop-shadow-[0_1px_4px_rgba(0,0,0,0.6)]">
+          <span className="text-[12px] text-white/80 mt-2 drop-shadow-[0_1px_4px_rgba(0,0,0,0.6)]">
             {formatDate(post.date)}
           </span>
         </div>

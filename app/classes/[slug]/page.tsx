@@ -39,7 +39,7 @@ export default async function ClassHome({
     return (
       <main className="max-w-xl mx-auto px-6 pt-16 pb-24 text-center">
         <PageEngagementTracker page={`class-${slug}-locked`} />
-        <p className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-4" style={{ color: "var(--color-orange)" }}>
+        <p className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-4" style={{ color: "var(--color-orange)" }}>
           {c.title}
         </p>
         <h1 className="text-[28px] md:text-[34px] font-bold mb-4" style={{ color: "var(--color-text-primary)" }}>
@@ -76,7 +76,7 @@ export default async function ClassHome({
   return (
     <main className="max-w-2xl mx-auto px-6 pt-16 pb-24">
       <PageEngagementTracker page={`class-${slug}`} />
-      <p className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-4" style={{ color: "var(--color-orange)" }}>
+      <p className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-4" style={{ color: "var(--color-orange)" }}>
         Your class
       </p>
       <h1 className="text-[32px] md:text-[40px] font-bold leading-tight mb-3" style={{ color: "var(--color-text-primary)" }}>
@@ -115,7 +115,7 @@ export default async function ClassHome({
                     {label}
                   </Link>
                   {n === todayN ? (
-                    <span className="text-[11px] uppercase tracking-[0.12em] font-semibold" style={{ color: "var(--color-orange)" }}>
+                    <span className="text-[12px] uppercase tracking-[0.12em] font-semibold" style={{ color: "var(--color-orange)" }}>
                       Today
                     </span>
                   ) : null}
@@ -136,7 +136,7 @@ export default async function ClassHome({
 
       {qa ? (
         <section className="mt-14">
-          <p className="text-[11px] uppercase tracking-[0.18em] font-semibold mb-4" style={{ color: "var(--color-text-secondary)" }}>
+          <p className="text-[12px] uppercase tracking-[0.18em] font-semibold mb-4" style={{ color: "var(--color-text-secondary)" }}>
             Amy answers your questions
           </p>
           <DemoPlayer hls={qa.hls} hlsQuery={qa.hlsQuery} mp4={qa.mp4} poster={qa.poster} caption="Recorded in the middle of the month, from the questions left in the box." />

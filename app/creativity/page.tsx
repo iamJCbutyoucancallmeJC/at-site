@@ -48,7 +48,7 @@ export default async function CreativityPrintablePage({
     <main className="max-w-4xl mx-auto px-6 md:px-10 pt-12 md:pt-16 pb-24">
       <section className="text-center max-w-2xl mx-auto mb-10 md:mb-14">
         <p
-          className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-3"
+          className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-3"
           style={{ color: "var(--color-orange)" }}
         >
           A free printable

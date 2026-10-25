@@ -174,7 +174,7 @@ export default function ShopGrid({
                         style={{ background: "var(--color-gray-light)" }}
                       >
                         <span
-                          className="text-[10px] uppercase tracking-[0.1em] text-center px-2"
+                          className="text-[11px] uppercase tracking-[0.1em] text-center px-2"
                           style={{ color: "var(--color-text-secondary)" }}
                         >
                           Image coming soon
@@ -184,7 +184,7 @@ export default function ShopGrid({
                     {!product.availableForSale && (
                       <div className="absolute inset-0 bg-white/60 flex items-center justify-center">
                         <span
-                          className="text-[11px] uppercase tracking-[0.1em] font-semibold px-3 py-1 rounded-full"
+                          className="text-[12px] uppercase tracking-[0.1em] font-semibold px-3 py-1 rounded-full"
                           style={{ background: "var(--color-text-secondary)", color: "#fff" }}
                         >
                           Sold Out

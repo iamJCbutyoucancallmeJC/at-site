@@ -34,7 +34,7 @@ export default async function ShopPage({
         >
           <div className="flex flex-col md:flex-row items-center gap-6 p-6 md:p-10">
             <div className="flex-1">
-              <p className="text-[11px] uppercase tracking-[0.15em] text-white/70 mb-1">Monthly Subscription</p>
+              <p className="text-[12px] uppercase tracking-[0.15em] text-white/70 mb-1">Monthly Subscription</p>
               <h2 className="text-[22px] md:text-[28px] font-bold text-white leading-tight mb-2">
                 Happy Mail
               </h2>

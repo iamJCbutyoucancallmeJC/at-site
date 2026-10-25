@@ -67,7 +67,7 @@ export default function BookQrPage() {
 
       {/* Disclosure — top (Amazon-required, verbatim) */}
       <div
-        className="py-2 px-4 text-center text-[11px] leading-snug"
+        className="py-2 px-4 text-center text-[12px] leading-snug"
         style={{ background: "var(--color-gray-light)", color: "var(--color-text-secondary)" }}
       >
         {AFFILIATE_DISCLOSURE}
@@ -76,7 +76,7 @@ export default function BookQrPage() {
       {/* Hero */}
       <section className="max-w-xl mx-auto px-6 pt-12 md:pt-16 pb-10 text-center">
         <p
-          className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-3"
+          className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-3"
           style={{ color: "var(--color-orange)" }}
         >
           New from Amy Tangerine

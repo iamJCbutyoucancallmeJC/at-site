@@ -55,7 +55,7 @@ export default async function ClassDayPage({ params }: { params: Promise<{ slug:
           {c.title}
         </Link>
       </p>
-      <p className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-6" style={link}>
+      <p className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-6" style={link}>
         Day {n} of {c.days}
       </p>
 
@@ -137,7 +137,7 @@ export default async function ClassDayPage({ params }: { params: Promise<{ slug:
           ) : null}
           {isLast ? (
             <section className="mt-16">
-              <p className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-6" style={link}>
+              <p className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-6" style={link}>
                 Your thirty little pages
               </p>
               <p className="text-[15px] italic mb-8" style={{ color: "var(--color-text-secondary)" }}>
@@ -146,7 +146,7 @@ export default async function ClassDayPage({ params }: { params: Promise<{ slug:
               <ol className="space-y-6">
                 {allDays.map((d) => (
                   <li key={d.day}>
-                    <p className="text-[11px] uppercase tracking-[0.12em] font-semibold mb-1" style={{ color: "var(--color-text-secondary)" }}>
+                    <p className="text-[12px] uppercase tracking-[0.12em] font-semibold mb-1" style={{ color: "var(--color-text-secondary)" }}>
                       Day {d.day}: {d.title}
                     </p>
                     <p className="text-[16px] leading-relaxed whitespace-pre-wrap" style={{ color: answers[d.prompt.key] ? "var(--color-text-primary)" : "var(--color-text-secondary)" }}>

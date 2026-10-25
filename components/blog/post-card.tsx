@@ -9,7 +9,7 @@ export default function PostCard({ post }: { post: PostMeta }) {
     <article className="group">
       <Link href={`/blog/${post.slug}`} className="block">
         <time
-          className="text-[11px] uppercase tracking-[0.18em] font-semibold"
+          className="text-[12px] uppercase tracking-[0.18em] font-semibold"
           style={{ color: "var(--color-orange)" }}
           dateTime={post.date ?? undefined}
         >
@@ -33,7 +33,7 @@ export default function PostCard({ post }: { post: PostMeta }) {
           {post.tags.slice(0, 3).map((tag) => (
             <span
               key={tag}
-              className="text-[11px] px-2.5 py-1 rounded-full"
+              className="text-[12px] px-2.5 py-1 rounded-full"
               style={{
                 background: "var(--color-gray-light)",
                 color: "var(--color-text-secondary)",

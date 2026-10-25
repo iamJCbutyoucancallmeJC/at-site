@@ -67,7 +67,7 @@ export default async function BlogIndex({
         />
         <div className="max-w-5xl mx-auto w-full relative">
           <p
-            className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-3"
+            className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-3"
             style={{ color: "var(--color-orange)" }}
           >
             The Journal
@@ -109,7 +109,7 @@ export default async function BlogIndex({
         >
           <div className="max-w-5xl mx-auto">
             <p
-              className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-8"
+              className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-8"
               style={{ color: "var(--color-teal)" }}
             >
               Start here · Reader favorites
@@ -127,7 +127,7 @@ export default async function BlogIndex({
       <section className="py-12 md:py-16 px-6 md:px-16">
         <div className="max-w-5xl mx-auto">
           <p
-            className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-8"
+            className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-8"
             style={{ color: "var(--color-orange)" }}
           >
             Latest posts
@@ -185,7 +185,7 @@ export default async function BlogIndex({
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
           <div>
             <p
-              className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-5"
+              className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-5"
               style={{ color: "var(--color-text-secondary)" }}
             >
               Browse by year
@@ -209,7 +209,7 @@ export default async function BlogIndex({
           </div>
           <div>
             <p
-              className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-5"
+              className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-5"
               style={{ color: "var(--color-text-secondary)" }}
             >
               Popular topics

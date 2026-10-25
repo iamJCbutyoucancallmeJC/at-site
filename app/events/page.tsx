@@ -44,14 +44,14 @@ function EventCard({ event, section }: { event: SiteEvent; section: "upcoming" |
     >
       <div className="flex items-baseline justify-between gap-3 flex-wrap">
         <p
-          className="text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-semibold"
+          className="text-[11px] md:text-[12px] uppercase tracking-[0.2em] font-semibold"
           style={{ color: "var(--color-orange)" }}
         >
           {event.label}
         </p>
         {comingSoon && (
           <span
-            className="text-[10px] md:text-[11px] uppercase tracking-[0.15em] font-bold px-3 py-1 rounded-full text-white"
+            className="text-[11px] md:text-[12px] uppercase tracking-[0.15em] font-bold px-3 py-1 rounded-full text-white"
             style={{ background: "var(--color-teal)" }}
           >
             Coming Soon

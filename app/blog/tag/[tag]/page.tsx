@@ -43,7 +43,7 @@ export default async function TagArchive({
             ← The Journal
           </Link>
           <p
-            className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-2"
+            className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-2"
             style={{ color: "var(--color-orange)" }}
           >
             Topic

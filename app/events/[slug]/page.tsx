@@ -54,7 +54,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
 
       {/* ── Hero band ── */}
       <section className="px-6 py-14 md:py-20 text-center" style={{ background: "var(--color-teal)" }}>
-        <p className="text-[11px] md:text-[13px] uppercase tracking-[0.25em] font-semibold text-white/80">
+        <p className="text-[12px] md:text-[13px] uppercase tracking-[0.25em] font-semibold text-white/80">
           {event.label}
           {comingSoon && " · Coming Soon"}
           {isPast && " · Recap"}

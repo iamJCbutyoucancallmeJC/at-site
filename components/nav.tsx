@@ -251,9 +251,10 @@ export default function Nav() {
         <div className="shrink-0 flex items-center gap-5">
           <Link
             href="/happy-mail"
-            className="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-full text-base font-bold text-white"
+            className="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-full text-base font-bold"
             style={{
               background: "var(--color-orange)",
+              color: "var(--color-ink)",
               boxShadow: "0 2px 8px rgba(253,137,28,0.3)",
             }}
             onClick={() => trackEvent("nav_click", { link_text: "Happy Mail", mobile_or_desktop: "desktop" })}
@@ -269,7 +270,7 @@ export default function Nav() {
             <ShoppingBag size={22} />
             {count > 0 && (
               <span
-                className="absolute top-1 right-1 w-4 h-4 flex items-center justify-center text-[9px] font-bold rounded-full text-white"
+                className="absolute top-1 right-1 w-4 h-4 flex items-center justify-center text-[10px] font-bold rounded-full"
                 style={{ background: "var(--color-orange)" }}
               >
                 {count > 9 ? "9+" : count}
@@ -296,7 +297,7 @@ export default function Nav() {
           {/* Cart count rides on the menu button now that the cart row lives in the drawer. */}
           {!mobileOpen && count > 0 && (
             <span
-              className="absolute top-1 right-1 w-4 h-4 flex items-center justify-center text-[9px] font-bold rounded-full text-white"
+              className="absolute top-1 right-1 w-4 h-4 flex items-center justify-center text-[10px] font-bold rounded-full"
               style={{ background: "var(--color-orange)" }}
             >
               {count > 9 ? "9+" : count}
@@ -323,14 +324,15 @@ export default function Nav() {
             Adding to cart still opens the cart drawer on its own (context/cart). */}
         <Link
           href="/happy-mail"
-          className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-full text-[11px] font-bold text-white whitespace-nowrap"
+          className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-full text-[12px] font-bold whitespace-nowrap"
           style={{
             background: "var(--color-orange)",
+            color: "var(--color-ink)",
             boxShadow: "0 2px 8px rgba(253,137,28,0.3)",
           }}
           onClick={() => trackEvent("nav_click", { link_text: "Happy Mail", mobile_or_desktop: "mobile" })}
         >
-          <span className="text-[10px]">♥</span> Happy Mail
+          <span className="text-[12px]">♥</span> Happy Mail
         </Link>
       </nav>
 
@@ -354,7 +356,7 @@ export default function Nav() {
               </span>
               {count > 0 && (
                 <span
-                  className="min-w-6 h-6 px-1.5 flex items-center justify-center text-[12px] font-bold rounded-full text-white"
+                  className="min-w-6 h-6 px-1.5 flex items-center justify-center text-[12px] font-bold rounded-full"
                   style={{ background: "var(--color-orange)" }}
                 >
                   {count > 9 ? "9+" : count}
@@ -363,9 +365,10 @@ export default function Nav() {
             </button>
             <Link
               href="/happy-mail"
-              className="inline-flex items-center justify-center gap-2 py-3 mb-3 rounded-full text-base font-bold text-white"
+              className="inline-flex items-center justify-center gap-2 py-3 mb-3 rounded-full text-base font-bold"
               style={{
                 background: "var(--color-orange)",
+                color: "var(--color-ink)",
                 boxShadow: "0 2px 8px rgba(253,137,28,0.3)",
               }}
               onClick={() => { setMobileOpen(false); trackEvent("nav_click", { link_text: "Happy Mail", mobile_or_desktop: "mobile" }) }}

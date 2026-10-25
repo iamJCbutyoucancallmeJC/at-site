@@ -81,10 +81,10 @@ export default function PromptBlock({ slug, promptKey, headline, instruction, st
       ) : null}
       {noField ? null : (<>
       <div className="flex items-baseline justify-between mb-2">
-        <span className="text-[11px] uppercase tracking-[0.18em] font-semibold" style={{ color: "var(--color-text-primary)" }}>
+        <span className="text-[12px] uppercase tracking-[0.18em] font-semibold" style={{ color: "var(--color-text-primary)" }}>
           {label}
         </span>
-        <span className="text-[11px]" style={{ color: state === "error" ? "#b00020" : "var(--color-text-secondary)" }} aria-live="polite">
+        <span className="text-[12px]" style={{ color: state === "error" ? "#b00020" : "var(--color-text-secondary)" }} aria-live="polite">
           {state === "saving" ? "saving" : state === "saved" ? "saved" : state === "error" ? "not saved, try again" : ""}
         </span>
       </div>

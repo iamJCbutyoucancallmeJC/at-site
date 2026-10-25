@@ -131,7 +131,7 @@ export default function KeepPage() {
         {/* Copy + CTA */}
         <div className="flex-1">
           <p
-            className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-3"
+            className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-3"
             style={{ color: "var(--color-orange)" }}
           >
             Happy Mail · You were one of the first

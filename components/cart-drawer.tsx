@@ -173,7 +173,7 @@ export default function CartDrawer() {
             </h2>
             {count > 0 && (
               <span
-                className="text-[11px] font-bold px-1.5 py-0.5 rounded-full text-white"
+                className="text-[12px] font-bold px-1.5 py-0.5 rounded-full text-white"
                 style={{ background: "var(--color-orange)" }}
               >
                 {count}
@@ -278,7 +278,7 @@ export default function CartDrawer() {
 
                       <button
                         onClick={() => removeItem(item.variantId)}
-                        className="text-[11px] uppercase tracking-[0.05em] hover:underline ml-1"
+                        className="text-[12px] uppercase tracking-[0.05em] hover:underline ml-1"
                         style={{ color: "var(--color-text-secondary)" }}
                       >
                         Remove
@@ -326,7 +326,7 @@ export default function CartDrawer() {
             {/* d051 (t1076): intl pass-through pricing is deliberate; say it before
                 checkout so a ~$39 USPS first-class rate never lands as a surprise. */}
             <p
-              className="text-[11px] text-center leading-snug mb-3"
+              className="text-[12px] text-center leading-snug mb-3"
               style={{ color: "var(--color-text-secondary)" }}
             >
               International orders ship at live USPS rates by weight, shown at
@@ -345,7 +345,7 @@ export default function CartDrawer() {
                   Checkout coming soon
                 </div>
                 <p
-                  className="text-[11px] text-center leading-snug"
+                  className="text-[12px] text-center leading-snug"
                   style={{ color: "var(--color-text-secondary)" }}
                 >
                   Full checkout will be available when the store launches.

@@ -96,9 +96,10 @@ export default function NewsletterFormWarm({ sourcePage = 'homepage' }: { source
             <button
               type="submit"
               disabled={status === "submitting"}
-              className="px-5 md:px-7 py-3 md:py-3.5 rounded-xl text-sm md:text-[15px] font-bold text-white disabled:opacity-60"
+              className="px-5 md:px-7 py-3 md:py-3.5 rounded-xl text-sm md:text-[15px] font-bold disabled:opacity-60"
               style={{
                 background: "var(--color-orange)",
+                color: "var(--color-ink)",
                 fontFamily: "var(--font-sans)",
               }}
             >

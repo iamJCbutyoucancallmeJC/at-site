@@ -174,7 +174,7 @@ export default function UpdateCardPage() {
       <section className="px-4 md:px-10 pt-10 md:pt-16 pb-6 md:pb-8">
         <div className="max-w-2xl mx-auto">
           <p
-            className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-3"
+            className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-3"
             style={{ color: "var(--color-orange)" }}
           >
             Happy Mail
@@ -292,7 +292,7 @@ export default function UpdateCardPage() {
       >
         <div className="max-w-2xl mx-auto">
           <p
-            className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-3"
+            className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-3"
             style={{ color: "var(--color-orange)" }}
           >
             Common questions

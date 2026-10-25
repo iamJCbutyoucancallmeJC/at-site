@@ -45,7 +45,7 @@ function ThankYouContent() {
   return (
     <main className="min-h-[80vh] flex flex-col items-center justify-center px-6 text-center py-24">
       <p
-        className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-4"
+        className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-4"
         style={{ color: "var(--color-orange)" }}
       >
         Order Confirmed

@@ -56,7 +56,7 @@ export default function AffiliateCard({ pick, href, listTitle }: AffiliateCardPr
         ) : (
           <div className="w-full h-full flex items-center justify-center">
             <span
-              className="text-[11px] uppercase tracking-[0.18em] font-semibold"
+              className="text-[12px] uppercase tracking-[0.18em] font-semibold"
               style={{ color: "var(--color-text-secondary)" }}
             >
               Amy&rsquo;s pick
