@@ -48,6 +48,8 @@ const NEW_ARRIVAL_HANDLES = [
 ]
 
 // Instagram grid: 5 hand-picked posts from @amytangerine (Amy-curated 2026-05-28).
+// Phones show four (2x2; the fifth tile is hidden below sm so no tile sits alone);
+// a sixth from Amy makes it 2x3 on phones and six across on desktop.
 // Static download pattern -- tiles link out to instagram.com/amytangerine but images are
 // local files. Real-feed integration (Meta Graph API or third-party widget) is a separate
 // post-launch project. To refresh: pull new images, replace files in /images/homepage/ig/,
@@ -80,7 +82,9 @@ export default async function HomePage() {
       <PageEngagementTracker page="homepage" />
 
       {/* ── Hero: the photograph, nothing on it ── */}
-      <section className="relative w-full h-[62vh] md:h-[80vh] overflow-hidden">
+      {/* Phones show the whole frame (16:9) so SHINE and BRIGHT both stay in the picture;
+          a portrait crop of this photo always loses one curb. Desktop keeps the 80vh crop. */}
+      <section className="relative w-full aspect-video md:aspect-auto md:h-[80vh] overflow-hidden">
         <Image
           src="/images/hero/homepage-hero.jpg"
           alt="Amy Tangerine in front of the Shine Bright mural"
@@ -253,7 +257,7 @@ export default async function HomePage() {
               href="https://instagram.com/amytangerine"
               event="external_link"
               eventData={{ destination: "instagram", source_page: "homepage", position: i }}
-              className="relative aspect-square overflow-hidden group block"
+              className={`relative aspect-square overflow-hidden group block${i === 4 ? " hidden sm:block" : ""}`}
               target="_blank"
               rel="noopener noreferrer"
             >
