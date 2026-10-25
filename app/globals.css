@@ -170,6 +170,17 @@ body {
   transform: translateY(-2px);
   box-shadow: 0 14px 28px -8px rgba(229, 117, 16, 0.65);
 }
+/* Phones: a touch smaller and tighter so labels like "Subscribe monthly · $13/mo"
+   stay on one line inside a plan card (measured at 375px, 2026-10-25). */
+@media (max-width: 639px) {
+  .cta-primary,
+  .blog-body a.blog-button {
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
 .cta-primary:disabled {
   opacity: 0.6;
   cursor: default;
