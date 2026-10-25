@@ -189,8 +189,7 @@ export default function KeepPage() {
           <button
             onClick={handleCheckout}
             disabled={loading}
-            className="w-full md:w-auto px-10 py-4 text-[14px] uppercase tracking-[0.12em] font-semibold rounded-full text-white transition-all duration-300 disabled:opacity-60"
-            style={{ background: "var(--color-orange)" }}
+            className="cta-primary w-full md:w-auto"
           >
             {loading ? "One moment..." : `Keep my Happy Mail coming — $${OFFER_PRICE}`}
           </button>

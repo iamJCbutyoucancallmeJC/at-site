@@ -116,8 +116,7 @@ export default function BookQrPage() {
           target="_blank"
           rel="noopener sponsored nofollow"
           onClick={handleBuy}
-          className="inline-flex items-center justify-center gap-2 px-10 py-4 text-[14px] uppercase tracking-[0.12em] font-semibold rounded-full text-white transition-all duration-300 hover:opacity-90"
-          style={{ background: "var(--color-orange)" }}
+          className="cta-primary inline-flex items-center justify-center gap-2"
         >
           Get it on Amazon
         </a>

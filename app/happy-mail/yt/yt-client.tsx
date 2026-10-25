@@ -155,8 +155,7 @@ export default function YtLandingClient({ videoId }: { videoId: string }) {
           <button
             onClick={handleCheckout}
             disabled={loading}
-            className="w-full md:w-auto px-10 py-4 rounded-full text-[14px] font-bold uppercase tracking-[0.1em] text-white transition-opacity disabled:opacity-60"
-            style={{ background: "var(--color-orange)" }}
+            className="cta-primary w-full md:w-auto"
           >
             {loading ? "One moment..." : "Get Happy Mail"}
           </button>

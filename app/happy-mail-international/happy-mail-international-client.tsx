@@ -69,7 +69,7 @@ function SubscribeButton({ plan, label }: { plan: "monthly" | "6-month"; label: 
     trackEvent("hm_subscribe_click", { plan: "monthly-intl", price: PRICE.toString(), source: "happy-mail-international", page: "happy-mail-international" })
   }
   return (
-    <button onClick={handle} className="w-full py-3 text-[12px] uppercase tracking-[0.1em] font-semibold rounded-full transition-all duration-300 hover:opacity-90 cursor-pointer" style={{ background: "var(--color-orange)", color: "#fff", border: "2px solid var(--color-orange)" }}>
+    <button onClick={handle} className="cta-primary w-full" style={{ paddingInline: "1rem" }}>
       {label}
     </button>
   )

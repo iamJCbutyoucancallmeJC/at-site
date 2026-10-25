@@ -38,8 +38,7 @@ export default function JoinClassButton({ slug, available, label, notYet, code =
         type="button"
         onClick={join}
         disabled={busy || !available}
-        className="w-full md:w-auto md:min-w-[280px] rounded-full px-8 py-4 font-semibold text-black disabled:bg-gray-100 disabled:text-gray-500 enabled:cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black"
-        style={busy || !available ? undefined : { backgroundColor: "var(--color-orange)" }}
+        className="cta-primary cta-primary--ink w-full md:w-auto md:min-w-[280px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black"
       >
         {busy ? "Opening checkout" : label}
       </button>

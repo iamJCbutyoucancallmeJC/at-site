@@ -50,11 +50,8 @@ function SubscribeButton({ plan, dark = true }: { plan: "monthly" | "6-month"; d
     })
     trackEvent("hm_subscribe_click", { plan, price: priceAmount.toString(), source: "happy-mail", page: "happy-mail" })
   }
-  const styles = dark
-    ? { background: "var(--color-orange)", color: "#fff", border: "2px solid var(--color-orange)" }
-    : { background: "transparent", color: "var(--color-orange)", border: "2px solid var(--color-orange)" }
   return (
-    <button onClick={handle} className="w-full py-3 text-[12px] uppercase tracking-[0.1em] font-semibold rounded-full transition-all duration-300 hover:opacity-90 cursor-pointer" style={styles}>
+    <button onClick={handle} className={`cta-primary w-full ${dark ? "" : "cta-primary--outline"}`} style={{ paddingInline: "1rem" }}>
       {isMonthly ? `Subscribe Monthly · $${PRICE_MONTHLY}/mo` : `Get 6 Months · $${PRICE_6MONTH}`}
     </button>
   )

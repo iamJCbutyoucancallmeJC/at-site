@@ -133,8 +133,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
                 href={event.ticketUrl}
                 event="event_cta_click"
                 eventData={{ event_slug: event.slug, cta: "tickets", source_page: sourcePage }}
-                className="inline-block px-7 py-3 text-[13px] uppercase tracking-[0.1em] font-semibold rounded-full text-white transition-all duration-300 hover:opacity-90"
-                style={{ background: "var(--color-orange)" }}
+                className="cta-primary"
                 target="_blank"
                 rel="noopener noreferrer"
               >
