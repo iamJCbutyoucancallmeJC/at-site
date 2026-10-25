@@ -148,13 +148,15 @@ body {
 .cta-primary,
 .blog-body a.blog-button {
   display: inline-block;
-  padding: 1.15rem 3rem;
+  /* 15px / 0.08em: measured 2026-10-25 so the longest labels ("Subscribe monthly ·
+     $13/mo" in a 288px plan card, "Keep my Happy Mail coming — $66") stay one line. */
+  padding: 1.15rem 2rem;
   border-radius: 9999px;
   background: var(--color-orange);
   color: var(--color-white);
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   line-height: 1.3;
   text-transform: uppercase;
   text-decoration: none;
@@ -169,17 +171,6 @@ body {
   color: var(--color-white);
   transform: translateY(-2px);
   box-shadow: 0 14px 28px -8px rgba(229, 117, 16, 0.65);
-}
-/* Phones: a touch smaller and tighter so labels like "Subscribe monthly · $13/mo"
-   stay on one line inside a plan card (measured at 375px, 2026-10-25). */
-@media (max-width: 639px) {
-  .cta-primary,
-  .blog-body a.blog-button {
-    font-size: 15px;
-    letter-spacing: 0.08em;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
 }
 .cta-primary:disabled {
   opacity: 0.6;
