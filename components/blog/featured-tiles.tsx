@@ -49,7 +49,7 @@ function Tile({ post, hero = false }: { post: FeaturedPost; hero?: boolean }) {
       style={{ background: "var(--color-gray-light)" }}
     >
       <div
-        className={`relative w-full ${hero ? "aspect-[16/10] md:aspect-[16/11]" : "aspect-[4/3]"}`}
+        className={`relative w-full ${hero ? "aspect-square md:aspect-[16/11]" : "aspect-[4/3]"}`}
       >
         {post.cover ? (
           <Image
