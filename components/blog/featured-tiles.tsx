@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { formatDate, type FeaturedPost } from "@/lib/blog"
+import { formatDate, isNewPost, type FeaturedPost } from "@/lib/blog"
 
 // Amy-curated merchandising module for the top of the Journal. A small set of
 // posts she's proud of, given a richer image-forward tile treatment than the feed
@@ -70,6 +70,17 @@ function Tile({ post, hero = false }: { post: FeaturedPost; hero?: boolean }) {
         )}
         {/* Readability scrim — matches the homepage Feature Spotlight (stronger gradient + text drop-shadow) */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+        {/* "New" badge: shows for NEW_POST_DAYS after the post date, then drops off on its own. */}
+        {isNewPost(post.date) && (
+          <span
+            className={`absolute top-4 left-4 md:top-5 md:left-5 z-10 inline-flex items-center gap-1.5 rounded-full font-bold uppercase text-white shadow-[0_6px_16px_-4px_rgba(253,137,28,0.7)] ${
+              hero ? "px-4 py-1.5 text-[13px] tracking-[0.14em]" : "px-3 py-1 text-[11px] tracking-[0.12em]"
+            }`}
+            style={{ background: "var(--color-orange)" }}
+          >
+            <span aria-hidden="true">&#9733;</span> New
+          </span>
+        )}
         <div className="absolute inset-0 flex flex-col justify-end p-5 md:p-6">
           {post.label && (
             <span className="text-[11px] uppercase tracking-[0.18em] font-semibold text-white/90 mb-1.5 drop-shadow-[0_1px_4px_rgba(0,0,0,0.6)]">

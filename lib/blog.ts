@@ -155,6 +155,18 @@ export type FeaturedPost = PostMeta & {
   cover?: string
 }
 
+// "New" badge window. /blog renders per request (it reads searchParams), so the
+// badge drops off by itself once a post is older than this; nobody has to remove it.
+export const NEW_POST_DAYS = 30
+
+export function isNewPost(date: string | null, now: Date = new Date()): boolean {
+  if (!date) return false
+  const published = new Date(`${date}T00:00:00`)
+  if (Number.isNaN(published.getTime())) return false
+  const ageDays = (now.getTime() - published.getTime()) / 86_400_000
+  return ageDays >= 0 && ageDays < NEW_POST_DAYS
+}
+
 function firstBodyImage(slug: string): string | undefined {
   const post = getPostBySlug(slug)
   if (!post) return undefined
