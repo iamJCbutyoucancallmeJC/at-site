@@ -82,8 +82,7 @@ export default function AffiliateCard({ pick, href, listTitle }: AffiliateCardPr
           </p>
         )}
         <span
-          className="mt-auto inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-full text-[13px] font-semibold uppercase tracking-[0.08em] text-white transition-colors group-hover:opacity-90"
-          style={{ background: "var(--color-orange)" }}
+          className="cta-primary cta--compact mt-auto"
         >
           Shop on Amazon
           <span aria-hidden="true">&rarr;</span>

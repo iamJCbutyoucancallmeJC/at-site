@@ -21,7 +21,7 @@ import { playbackSource } from "@/lib/video"
 
 export const dynamic = "force-dynamic"
 
-const link = { color: "var(--color-orange)" }
+const link = { color: "var(--color-orange-ink)" }
 // The field under the steps is a log of the paper page, not the answer (10/14).
 const LOG_LABEL = "Your page, in a line"
 const LOG_PLACEHOLDER = "What went on the page? (optional)"
@@ -126,8 +126,7 @@ export default async function ClassDayPage({ params }: { params: Promise<{ slug:
                 <li key={f.name}>
                   <a
                     href={`/classes/${slug}/files/${encodeURIComponent(f.name)}`}
-                    className="inline-block px-5 py-2.5 rounded-full text-[13px] font-semibold uppercase tracking-[0.08em] text-white"
-                    style={{ backgroundColor: "var(--color-orange)" }}
+                    className="cta-teal cta--compact"
                   >
                     {f.label}
                   </a>

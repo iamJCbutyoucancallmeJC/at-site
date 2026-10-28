@@ -92,13 +92,13 @@ export default function HappyMailInternationalClient({ localizedPrice }: { local
               (JC 2026-05-30). The asset + 3 SVG alternates live in app/happy-mail-international/
               ihm-stamp.tsx; re-add <IhmStamp> here when Amy picks one. Post-launch: t679 (clean
               stamp PNG re-export). */}
-          <p className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-3" style={{ color: "var(--color-orange)" }}>International · Monthly Subscription</p>
+          <p className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-3" style={{ color: "var(--color-orange-ink)" }}>International · Monthly Subscription</p>
           <h1 className="text-[36px] md:text-[52px] font-bold leading-[1.05] tracking-tight mb-4" style={{ color: "var(--color-text-primary)" }}>Every month, a letter from Amy.</h1>
           <p className="text-[16px] md:text-[18px] leading-relaxed max-w-xl mb-3" style={{ color: "var(--color-text-secondary)" }}>The good kind of mail, now shipping to Canada, the UK, and Australia.</p>
           {/* US-visitor cross-link (US can see this page but can't buy the intl product). */}
           <p className="text-[13px] mb-8" style={{ color: "var(--color-text-secondary)" }}>
             In the US?{" "}
-            <TrackableLink href="/happy-mail" event="nav_click" eventData={{ link_text: "US Happy Mail", page: "happy-mail-international" }} className="font-semibold underline" style={{ color: "var(--color-orange)" }}>
+            <TrackableLink href="/happy-mail" event="nav_click" eventData={{ link_text: "US Happy Mail", page: "happy-mail-international" }} className="font-semibold underline" style={{ color: "var(--color-orange-ink)" }}>
               Subscribe to US Happy Mail here →
             </TrackableLink>
           </p>
@@ -126,7 +126,7 @@ export default function HappyMailInternationalClient({ localizedPrice }: { local
         <div className={`mx-auto grid gap-4 ${IHM_6MONTH_READY ? "max-w-2xl sm:grid-cols-2" : "max-w-md"}`}>
           {/* Monthly */}
           <div className="rounded-2xl p-6 border-2 relative flex flex-col" style={{ background: "var(--color-white)", borderColor: "var(--color-border)" }}>
-            <p className="text-[12px] uppercase tracking-[0.15em] font-semibold mb-2" style={{ color: "var(--color-orange)" }}>Monthly · International</p>
+            <p className="text-[12px] uppercase tracking-[0.15em] font-semibold mb-2" style={{ color: "var(--color-orange-ink)" }}>Monthly · International</p>
             <div className="flex items-end gap-1 mb-1">
               <span className="text-[36px] font-bold leading-none" style={{ color: "var(--color-text-primary)" }}>{priceLabel}</span>
               <span className="text-[13px] mb-1" style={{ color: "var(--color-text-secondary)" }}>/month</span>
@@ -139,7 +139,7 @@ export default function HappyMailInternationalClient({ localizedPrice }: { local
           {IHM_6MONTH_READY && (
             <div className="rounded-2xl p-6 border-2 relative flex flex-col" style={{ background: "var(--color-white)", borderColor: "var(--color-orange)" }}>
               <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 text-[11px] uppercase tracking-[0.12em] font-bold rounded-full text-white whitespace-nowrap" style={{ background: "var(--color-teal)" }}>Save $6 with 6 months</span>
-              <p className="text-[12px] uppercase tracking-[0.15em] font-semibold mb-2" style={{ color: "var(--color-orange)" }}>6-Month · International</p>
+              <p className="text-[12px] uppercase tracking-[0.15em] font-semibold mb-2" style={{ color: "var(--color-orange-ink)" }}>6-Month · International</p>
               <div className="flex items-end gap-1 mb-1">
                 <span className="text-[36px] font-bold leading-none" style={{ color: "var(--color-text-primary)" }}>${PRICE_6MONTH}</span>
                 <span className="text-[13px] mb-1" style={{ color: "var(--color-text-secondary)" }}>/6 months</span>
@@ -154,7 +154,7 @@ export default function HappyMailInternationalClient({ localizedPrice }: { local
           <p className="text-center text-[12px] mt-4" style={{ color: "var(--color-text-secondary)" }}>Happy Mail reopens October 16. Ships around the 15th. International postage included.</p>
         ) : (
         <p className="text-center text-[12px] mt-4" style={{ color: "var(--color-text-secondary)" }}>
-          <span className="font-semibold" style={{ color: "var(--color-orange)" }}>First in your market</span> — subscribe now and lock in this rate. Ships around the 15th. International postage included.
+          <span className="font-semibold" style={{ color: "var(--color-orange-ink)" }}>First in your market</span> — subscribe now and lock in this rate. Ships around the 15th. International postage included.
         </p>
         )}
       </section>
@@ -162,7 +162,7 @@ export default function HappyMailInternationalClient({ localizedPrice }: { local
       {/* ── Editorial ── */}
       <section className="py-12 md:py-16 px-4 md:px-10" style={{ background: "var(--color-white)" }}>
         <div className="max-w-2xl mx-auto">
-          <p className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-3" style={{ color: "var(--color-orange)" }}>
+          <p className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-3" style={{ color: "var(--color-orange-ink)" }}>
             Let me send you mail
           </p>
           <h2 className="text-[26px] md:text-[34px] font-bold leading-tight tracking-tight mb-5" style={{ color: "var(--color-text-primary)" }}>
@@ -188,13 +188,13 @@ export default function HappyMailInternationalClient({ localizedPrice }: { local
               "A note from me about what I'm making, loving, or thinking about",
             ].map((item) => (
               <li key={item} className="flex gap-3 text-[15px] md:text-[16px] leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-                <span aria-hidden className="select-none" style={{ color: "var(--color-orange)" }}>&#10003;</span>
+                <span aria-hidden className="select-none" style={{ color: "var(--color-orange-ink)" }}>&#10003;</span>
                 <span>{item}</span>
               </li>
             ))}
           </ul>
 
-          <p className="text-[14px] font-semibold" style={{ color: "var(--color-orange)" }}>
+          <p className="text-[14px] font-semibold" style={{ color: "var(--color-orange-ink)" }}>
             Limited spots available.
           </p>
         </div>

@@ -62,7 +62,7 @@ export default function BoothOffer({ slug, city, offer, ended }: Props) {
     return (
       <p className="text-[14px] leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
         This show&rsquo;s offer has ended. Happy Mail is always open at{" "}
-        <a href="/happy-mail" className="underline" style={{ color: "var(--color-orange)" }}>
+        <a href="/happy-mail" className="underline" style={{ color: "var(--color-orange-ink)" }}>
           amytangerine.com/happy-mail
         </a>
         .
@@ -79,14 +79,13 @@ export default function BoothOffer({ slug, city, offer, ended }: Props) {
         <p className="text-[13px] uppercase tracking-[0.16em] font-semibold mb-1" style={{ color: "var(--color-text-secondary)" }}>
           Your code at checkout
         </p>
-        <p className="text-[34px] font-bold tracking-wide mb-5" style={{ color: "var(--color-teal)" }}>
+        <p className="text-[34px] font-bold tracking-wide mb-5" style={{ color: "var(--color-teal-ink)" }}>
           {offer.code}
         </p>
         <a
           href="/shop"
           onClick={() => trackEvent("event_cta_click", { event_slug: slug, cta: "booth-shop", source_page: `at-site:/${page}` })}
-          className="inline-block w-full md:w-auto text-center px-10 py-4 text-[14px] uppercase tracking-[0.12em] font-semibold rounded-full text-white"
-          style={{ background: "var(--color-orange)" }}
+          className="cta-primary w-full md:w-auto"
         >
           Shop with the code
         </a>
@@ -113,14 +112,14 @@ export default function BoothOffer({ slug, city, offer, ended }: Props) {
           </span>
         </span>
       </div>
-      <p className="text-[13px] font-semibold mb-6" style={{ color: "var(--color-teal)" }}>
+      <p className="text-[13px] font-semibold mb-6" style={{ color: "var(--color-teal-ink)" }}>
         ${offer.amountOff} off at the show · code {offer.code} applied automatically
       </p>
 
       {closed === null ? (
         <div aria-hidden style={{ minHeight: 56 }} />
       ) : closed ? (
-        <p className="text-[14px] font-semibold" style={{ color: "var(--color-orange)" }}>
+        <p className="text-[14px] font-semibold" style={{ color: "var(--color-orange-ink)" }}>
           Happy Mail is full this month.{" "}
           <a href="/happy-mail" className="underline">
             Join the waitlist

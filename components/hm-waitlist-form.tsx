@@ -36,7 +36,7 @@ export default function HmWaitlistForm({ page, compact = false }: { page: string
       className={`rounded-2xl border-2 ${compact ? "p-5" : "p-6 md:p-8"} text-center`}
       style={{ background: "var(--color-white)", borderColor: "var(--color-orange)" }}
     >
-      <p className="text-[12px] uppercase tracking-[0.15em] font-semibold mb-2" style={{ color: "var(--color-orange)" }}>
+      <p className="text-[12px] uppercase tracking-[0.15em] font-semibold mb-2" style={{ color: "var(--color-orange-ink)" }}>
         Waitlist
       </p>
       <h3 className={`${compact ? "text-[20px]" : "text-[22px] md:text-[26px]"} font-bold leading-tight mb-2`} style={{ color: "var(--color-text-primary)" }}>
@@ -46,7 +46,7 @@ export default function HmWaitlistForm({ page, compact = false }: { page: string
         {HM_CLOSED_BODY}
       </p>
       {state === "done" ? (
-        <p className="text-[15px] font-semibold" style={{ color: "var(--color-teal)" }}>
+        <p className="text-[15px] font-semibold" style={{ color: "var(--color-teal-ink)" }}>
           Your spot is saved. We&apos;ll email you on October 16.
         </p>
       ) : (
@@ -64,8 +64,7 @@ export default function HmWaitlistForm({ page, compact = false }: { page: string
           <button
             type="submit"
             disabled={state === "sending"}
-            className="px-8 py-3 rounded-full text-[12px] font-bold uppercase tracking-[0.1em] text-white disabled:opacity-60 cursor-pointer"
-            style={{ background: "var(--color-orange)" }}
+            className="cta-primary cta--compact"
           >
             {state === "sending" ? "Saving..." : "Save my spot"}
           </button>

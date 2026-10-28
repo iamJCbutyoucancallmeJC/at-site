@@ -46,7 +46,7 @@ function ThankYouContent() {
     <main className="min-h-[80vh] flex flex-col items-center justify-center px-6 text-center py-24">
       <p
         className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-4"
-        style={{ color: "var(--color-orange)" }}
+        style={{ color: "var(--color-orange-ink)" }}
       >
         Order Confirmed
       </p>
@@ -77,7 +77,7 @@ function ThankYouContent() {
         <a
           href="mailto:help@amytangerine.com"
           className="underline underline-offset-2 hover:opacity-70"
-          style={{ color: "var(--color-orange)" }}
+          style={{ color: "var(--color-orange-ink)" }}
         >
           help@amytangerine.com
         </a>
@@ -88,8 +88,7 @@ function ThankYouContent() {
           href="/shop"
           event="thank_you_cta_click"
           eventData={{ label: "Keep Shopping", source }}
-          className="px-8 py-3 rounded-full text-[13px] font-semibold uppercase tracking-[0.1em] text-white transition-all duration-200 hover:opacity-80"
-          style={{ background: "var(--color-orange)" }}
+          className="cta-primary"
         >
           Keep Shopping
         </TrackableLink>
@@ -97,8 +96,7 @@ function ThankYouContent() {
           href="/"
           event="thank_you_cta_click"
           eventData={{ label: "Back to Home", source }}
-          className="px-8 py-3 rounded-full text-[13px] font-semibold uppercase tracking-[0.1em] border transition-all duration-200 hover:opacity-80"
-          style={{ borderColor: "var(--color-orange)", color: "var(--color-orange)" }}
+          className="cta-secondary"
         >
           Back to Home
         </TrackableLink>

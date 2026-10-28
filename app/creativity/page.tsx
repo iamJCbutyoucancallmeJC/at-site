@@ -24,7 +24,7 @@
 
 import type { Metadata } from "next"
 import Image from "next/image"
-import EmailCaptureInline from "@/components/email-capture-inline"
+import NewsletterForm from "@/components/newsletter-form"
 
 const VIDEO_ID = "XcSINuJKdPg"
 const VIDEO_TITLE = "The Secret to Feeling Creative Again | 10 Ways to Reconnect"
@@ -49,7 +49,7 @@ export default async function CreativityPrintablePage({
       <section className="text-center max-w-2xl mx-auto mb-10 md:mb-14">
         <p
           className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-3"
-          style={{ color: "var(--color-orange)" }}
+          style={{ color: "var(--color-orange-ink)" }}
         >
           A free printable
         </p>
@@ -119,7 +119,7 @@ export default async function CreativityPrintablePage({
       {fromNewsletter ? (
         <section
           className="mt-12 md:mt-16 rounded-2xl px-6 py-10 text-center"
-          style={{ background: "var(--color-cream, #faf6f0)" }}
+          style={{ background: "var(--color-paper)" }}
         >
           <h2 className="text-[22px] font-bold mb-2" style={{ color: "var(--color-text-primary)" }}>
             Here&apos;s your printable
@@ -132,16 +132,14 @@ export default async function CreativityPrintablePage({
               href={PDF_URL}
               target="_blank"
               rel="noopener"
-              className="px-7 py-3 rounded-full text-[12px] font-bold uppercase tracking-[0.1em] text-white"
-              style={{ background: "var(--color-orange)" }}
+              className="cta-primary"
             >
               Open and print
             </a>
             <a
               href={PDF_URL}
               download
-              className="px-7 py-3 rounded-full border text-[12px] font-bold uppercase tracking-[0.1em]"
-              style={{ color: "var(--color-text-primary)" }}
+              className="cta-secondary"
             >
               Download the PDF
             </a>
@@ -150,7 +148,7 @@ export default async function CreativityPrintablePage({
       ) : (
         <section
           className="mt-12 md:mt-16 rounded-2xl px-6 py-10 text-center"
-          style={{ background: "var(--color-cream, #faf6f0)" }}
+          style={{ background: "var(--color-paper)" }}
         >
           <h2 className="text-[22px] font-bold mb-2" style={{ color: "var(--color-text-primary)" }}>
             Get the printable
@@ -160,13 +158,13 @@ export default async function CreativityPrintablePage({
             that, a note from me when I have something to share: no schedule, and you can
             leave any time.
           </p>
-          <EmailCaptureInline
-            source="youtube-creativity"
-            force
-            compact
-            buttonLabel="Send me the printable"
-            doneMessage="You're in. Check your inbox in a few minutes for the printable."
-          />
+          <div className="max-w-md mx-auto text-left">
+            <NewsletterForm
+              sourcePage="youtube-creativity"
+              buttonLabel="Send me the printable"
+              doneMessage="You're in. Check your inbox in a few minutes for the printable."
+            />
+          </div>
         </section>
       )}
     </main>

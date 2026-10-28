@@ -30,7 +30,7 @@ export default async function ClassHowPage({ params }: { params: Promise<{ slug:
           {c.title}
         </Link>
       </p>
-      <p className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-10" style={{ color: "var(--color-orange)" }}>
+      <p className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-10" style={{ color: "var(--color-orange-ink)" }}>
         How the class works
       </p>
       {src ? (

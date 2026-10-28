@@ -5,6 +5,7 @@ import Image from "next/image"
 import { trackEvent } from "@/lib/analytics"
 import { HM_PRICE_MONTHLY } from "@/lib/happy-mail-content"
 import HmWaitlistForm from "@/components/hm-waitlist-form"
+import NewsletterForm from "@/components/newsletter-form"
 import { useHmClosed, HmButtonPlaceholder } from "@/components/hm-closed"
 
 const YT_OFF = 4
@@ -22,8 +23,6 @@ function readGaClientId(): string {
 export default function YtLandingClient({ videoId }: { videoId: string }) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
-  const [email, setEmail] = useState("")
-  const [emailState, setEmailState] = useState<"idle" | "sending" | "done" | "error">("idle")
   // October 2026 cap (t1702). Amy's video sends people here, so this page gets the waitlist.
   const closed = useHmClosed()
 
@@ -53,23 +52,6 @@ export default function YtLandingClient({ videoId }: { videoId: string }) {
     } catch (e) {
       setError(e instanceof Error ? e.message : "Something went wrong. Please try again.")
       setLoading(false)
-    }
-  }
-
-  async function handleEmailSubmit(e: React.FormEvent) {
-    e.preventDefault()
-    if (!email || emailState === "sending") return
-    setEmailState("sending")
-    try {
-      const res = await fetch("/api/klaviyo/subscribe", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, source: "youtube-landing" }),
-      })
-      if (!res.ok) throw new Error()
-      setEmailState("done")
-    } catch {
-      setEmailState("error")
     }
   }
 
@@ -114,7 +96,7 @@ export default function YtLandingClient({ videoId }: { videoId: string }) {
         <div className="flex-1">
           <p
             className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-3"
-            style={{ color: "var(--color-orange)" }}
+            style={{ color: "var(--color-orange-ink)" }}
           >
             Happy Mail · Monthly
           </p>
@@ -147,7 +129,7 @@ export default function YtLandingClient({ videoId }: { videoId: string }) {
               your first month · then ${HM_PRICE_MONTHLY}/mo
             </span>
           </div>
-          <p className="text-[13px] font-semibold mb-5" style={{ color: "var(--color-teal)" }}>
+          <p className="text-[13px] font-semibold mb-5" style={{ color: "var(--color-teal-ink)" }}>
             YouTube thank-you applied automatically at checkout
           </p>
 
@@ -179,7 +161,7 @@ export default function YtLandingClient({ videoId }: { videoId: string }) {
       {/* ── Email capture ── */}
       <section
         className="border-t"
-        style={{ borderColor: "var(--color-border)", background: "var(--color-cream, #faf6f0)" }}
+        style={{ borderColor: "var(--color-border)", background: "var(--color-paper)" }}
       >
         <div className="max-w-2xl mx-auto px-6 py-12 text-center">
           <h2 className="text-[22px] font-bold mb-2" style={{ color: "var(--color-text-primary)" }}>
@@ -189,36 +171,9 @@ export default function YtLandingClient({ videoId }: { videoId: string }) {
             Leave your email and Amy will send you what she&apos;s making — no
             envelope required.
           </p>
-          {emailState === "done" ? (
-            <p className="text-[15px] font-semibold" style={{ color: "var(--color-teal)" }}>
-              You&apos;re on the list. Talk soon!
-            </p>
-          ) : (
-            <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-3 justify-center">
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@example.com"
-                className="px-5 py-3 rounded-full border text-[14px] w-full sm:w-[320px]"
-                style={{ borderColor: "var(--color-border)", background: "var(--color-white)" }}
-              />
-              <button
-                type="submit"
-                disabled={emailState === "sending"}
-                className="px-8 py-3 rounded-full text-[13px] font-bold uppercase tracking-[0.1em] text-white disabled:opacity-60"
-                style={{ background: "var(--color-teal)" }}
-              >
-                {emailState === "sending" ? "Sending..." : "Keep me posted"}
-              </button>
-            </form>
-          )}
-          {emailState === "error" && (
-            <p className="mt-3 text-[13px]" style={{ color: "#c0392b" }}>
-              That didn&apos;t go through — mind trying again?
-            </p>
-          )}
+          <div className="max-w-md mx-auto text-left">
+            <NewsletterForm sourcePage="youtube-landing" buttonLabel="Keep me posted" />
+          </div>
         </div>
       </section>
     </main>

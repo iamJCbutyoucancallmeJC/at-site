@@ -39,7 +39,7 @@ export default async function ClassHome({
     return (
       <main className="max-w-xl mx-auto px-6 pt-16 pb-24 text-center">
         <PageEngagementTracker page={`class-${slug}-locked`} />
-        <p className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-4" style={{ color: "var(--color-orange)" }}>
+        <p className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-4" style={{ color: "var(--color-orange-ink)" }}>
           {c.title}
         </p>
         <h1 className="text-[28px] md:text-[34px] font-bold mb-4" style={{ color: "var(--color-text-primary)" }}>
@@ -52,7 +52,7 @@ export default async function ClassHome({
         </p>
         <p className="text-[14px] leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
           Can&apos;t find it? Write to{" "}
-          <a href="mailto:help@amytangerine.com" className="underline underline-offset-2" style={{ color: "var(--color-orange)" }}>
+          <a href="mailto:help@amytangerine.com" className="underline underline-offset-2" style={{ color: "var(--color-orange-ink)" }}>
             help@amytangerine.com
           </a>{" "}
           with the email you ordered with and we&apos;ll send it again.
@@ -76,7 +76,7 @@ export default async function ClassHome({
   return (
     <main className="max-w-2xl mx-auto px-6 pt-16 pb-24">
       <PageEngagementTracker page={`class-${slug}`} />
-      <p className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-4" style={{ color: "var(--color-orange)" }}>
+      <p className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-4" style={{ color: "var(--color-orange-ink)" }}>
         Your class
       </p>
       <h1 className="text-[32px] md:text-[40px] font-bold leading-tight mb-3" style={{ color: "var(--color-text-primary)" }}>
@@ -94,7 +94,7 @@ export default async function ClassHome({
       ) : null}
 
       <p className="text-[14px] mb-10">
-        <Link href={`/classes/${slug}/how`} className="underline underline-offset-4" style={{ color: "var(--color-orange)" }}>
+        <Link href={`/classes/${slug}/how`} className="underline underline-offset-4" style={{ color: "var(--color-orange-ink)" }}>
           How the class works
         </Link>
       </p>
@@ -115,7 +115,7 @@ export default async function ClassHome({
                     {label}
                   </Link>
                   {n === todayN ? (
-                    <span className="text-[12px] uppercase tracking-[0.12em] font-semibold" style={{ color: "var(--color-orange)" }}>
+                    <span className="text-[12px] uppercase tracking-[0.12em] font-semibold" style={{ color: "var(--color-orange-ink)" }}>
                       Today
                     </span>
                   ) : null}
@@ -145,7 +145,7 @@ export default async function ClassHome({
 
       <p className="mt-12 text-[13px] leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
         Order #{claim.orderRef}. Questions or a lost link:{" "}
-        <a href="mailto:help@amytangerine.com" className="underline underline-offset-2" style={{ color: "var(--color-orange)" }}>
+        <a href="mailto:help@amytangerine.com" className="underline underline-offset-2" style={{ color: "var(--color-orange-ink)" }}>
           help@amytangerine.com
         </a>
         .

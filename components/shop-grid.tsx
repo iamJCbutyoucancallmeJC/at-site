@@ -95,7 +95,7 @@ export default function ShopGrid({
               className="flex-shrink-0 px-4 py-1.5 text-[12px] uppercase tracking-[0.08em] font-semibold rounded-full border transition-all duration-200"
               style={
                 isActive
-                  ? { background: "var(--color-orange)", borderColor: "var(--color-orange)", color: "#fff" }
+                  ? { background: "var(--color-orange)", borderColor: "var(--color-orange)", color: "var(--color-ink)" }
                   : {
                       background: "transparent",
                       borderColor: "var(--color-border)",

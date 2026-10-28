@@ -45,7 +45,7 @@ function EventCard({ event, section }: { event: SiteEvent; section: "upcoming" |
       <div className="flex items-baseline justify-between gap-3 flex-wrap">
         <p
           className="text-[11px] md:text-[12px] uppercase tracking-[0.2em] font-semibold"
-          style={{ color: "var(--color-orange)" }}
+          style={{ color: "var(--color-orange-ink)" }}
         >
           {event.label}
         </p>
@@ -101,12 +101,7 @@ function EventCard({ event, section }: { event: SiteEvent; section: "upcoming" |
         href={eventHref(event)}
         event="event_cta_click"
         eventData={{ event_slug: event.slug, status: section, source_page: "at-site:/events" }}
-        className="mt-5 inline-block px-5 py-2 text-[12px] uppercase tracking-[0.1em] font-semibold rounded-full border-2 transition-all duration-300 hover:opacity-80"
-        style={
-          section === "upcoming"
-            ? { background: "var(--color-orange)", borderColor: "var(--color-orange)", color: "#fff" }
-            : { borderColor: "var(--color-teal)", color: "var(--color-teal)" }
-        }
+        className={`${section === "upcoming" ? "cta-primary" : "cta-secondary"} cta--compact mt-5`}
         {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       >
         {cta}
@@ -143,7 +138,7 @@ export default function EventsPage() {
       <section className="max-w-2xl mx-auto px-6 py-12 md:py-16">
         <h2
           className="text-[13px] md:text-[15px] uppercase tracking-[0.18em] font-semibold mb-7 text-center"
-          style={{ color: "var(--color-orange)" }}
+          style={{ color: "var(--color-orange-ink)" }}
         >
           Coming Up
         </h2>
@@ -172,7 +167,7 @@ export default function EventsPage() {
       <section className="max-w-2xl mx-auto px-6 py-12 md:py-16">
         <h2
           className="text-[13px] md:text-[15px] uppercase tracking-[0.18em] font-semibold mb-7 text-center"
-          style={{ color: "var(--color-teal)" }}
+          style={{ color: "var(--color-teal-ink)" }}
         >
           Where Amy&rsquo;s Been
         </h2>

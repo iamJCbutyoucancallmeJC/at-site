@@ -92,7 +92,7 @@ export default async function BoothPage({ params }: { params: Promise<{ slug: st
             />
           </div>
           <div className="flex-1 w-full">
-            <p className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-3" style={{ color: "var(--color-orange)" }}>
+            <p className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-3" style={{ color: "var(--color-orange-ink)" }}>
               {booth.offer.kind === "hm-6month" ? "Happy Mail · 6-Month Subscription" : "Show offer"}
             </p>
             <h1
@@ -128,8 +128,7 @@ export default async function BoothPage({ params }: { params: Promise<{ slug: st
                   href={link.href}
                   event="event_cta_click"
                   eventData={{ event_slug: event.slug, cta: "workshop", source_page: sourcePage }}
-                  className="block px-6 py-3 text-[13px] md:text-[14px] font-semibold rounded-full text-white text-center transition-all duration-300 hover:opacity-90"
-                  style={{ background: "var(--color-orange)" }}
+                  className="cta-primary w-full"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -162,7 +161,7 @@ export default async function BoothPage({ params }: { params: Promise<{ slug: st
               event="event_cta_click"
               eventData={{ event_slug: event.slug, cta: "booth-shop-link", source_page: sourcePage }}
               className="underline underline-offset-2 font-semibold"
-              style={{ color: "var(--color-orange)" }}
+              style={{ color: "var(--color-orange-ink)" }}
             >
               amytangerine.com/shop
             </TrackableLink>
@@ -188,7 +187,7 @@ export default async function BoothPage({ params }: { params: Promise<{ slug: st
       <footer className="py-6 text-center text-[12px]" style={{ color: "var(--color-text-secondary)", borderTop: "1px solid var(--color-border)" }}>
         <p>
           Questions?{" "}
-          <a href="mailto:help@amytangerine.com" className="underline hover:opacity-70" style={{ color: "var(--color-orange)" }}>
+          <a href="mailto:help@amytangerine.com" className="underline hover:opacity-70" style={{ color: "var(--color-orange-ink)" }}>
             help@amytangerine.com
           </a>{" "}
           · amytangerine.com

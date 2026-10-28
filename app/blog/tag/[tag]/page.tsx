@@ -38,13 +38,13 @@ export default async function TagArchive({
           <Link
             href="/blog"
             className="text-[13px] font-semibold inline-block mb-6"
-            style={{ color: "var(--color-orange)" }}
+            style={{ color: "var(--color-orange-ink)" }}
           >
             ← The Journal
           </Link>
           <p
             className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-2"
-            style={{ color: "var(--color-orange)" }}
+            style={{ color: "var(--color-orange-ink)" }}
           >
             Topic
           </p>

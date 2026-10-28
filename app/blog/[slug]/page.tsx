@@ -2,7 +2,7 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 import BlogLinkTracker from "@/components/blog-link-tracker"
-import EmailCaptureInline from "@/components/email-capture-inline"
+import KeepUpCard from "@/components/keep-up-card"
 import {
   getListablePosts,
   getDraftPosts,
@@ -65,7 +65,7 @@ export default async function BlogPost({
           <Link
             href="/blog"
             className="text-[13px] font-semibold inline-block mb-8"
-            style={{ color: "var(--color-orange)" }}
+            style={{ color: "var(--color-orange-ink)" }}
           >
             ← The Journal
           </Link>
@@ -88,7 +88,7 @@ export default async function BlogPost({
           <header className="mb-10">
             <time
               className="text-[12px] uppercase tracking-[0.18em] font-semibold"
-              style={{ color: "var(--color-orange)" }}
+              style={{ color: "var(--color-orange-ink)" }}
               dateTime={post.date ?? undefined}
             >
               {formatDate(post.date)}
@@ -124,7 +124,7 @@ export default async function BlogPost({
               <Link
                 href="/blog"
                 className="font-semibold underline underline-offset-2"
-                style={{ color: "var(--color-orange)" }}
+                style={{ color: "var(--color-orange-ink)" }}
               >
                 See what&rsquo;s new in the Journal →
               </Link>
@@ -166,7 +166,7 @@ export default async function BlogPost({
       </article>
       {/* Email capture (t1092, D3 inline block) -- renders null until
           NEXT_PUBLIC_CAPTURE_BLOCKS=1 (Amy aesthetic pass gate) */}
-      <EmailCaptureInline source="blog" />
+      <KeepUpCard sourcePage="blog" gated />
     </>
   )
 }

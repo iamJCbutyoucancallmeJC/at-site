@@ -21,7 +21,7 @@ export default function FeaturedTiles({ posts }: { posts: FeaturedPost[] }) {
       <div className="max-w-6xl mx-auto">
         <p
           className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-8"
-          style={{ color: "var(--color-teal)" }}
+          style={{ color: "var(--color-teal-ink)" }}
         >
           Featured · Amy&rsquo;s picks
         </p>
