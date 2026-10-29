@@ -54,8 +54,11 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     day: 1,
     title: "Why Glimmers & Gratitude? Why now?",
     prompt: { key: "d01", steps: ["Open your journal to a fresh page and write the date.", "Notice one glimmer from today: the light through a window, the first sip, a song you forgot you loved.", "Write it down in one sentence. That is the whole practice."] },
+    // Amy's 2023 Day 1 video from Kajabi, 16 min ("Glimmers are all around"; Amy asked for it 10/29).
+    // Re-encoded at 4 Mbps for upload (the 16 Mbps original stalled); Bunny "glimmers-2023-d01".
+    demo: { id: "0538ab24-d474-495a-a8f6-b8ae7d6112b6", caption: "Amy on why glimmers and gratitude matter, from the 2023 class. Sixteen minutes; watch what you like." },
     // Amy's welcome, her wording 10/29 (mail thread "Glimmers this week, and the Nevada permit").
-    body: ["Welcome. I'm so glad you're here. Today is just about noticing. Start simple, start small.", "A glimmer is a small moment that makes you feel safe, calm, or quietly glad. The opposite of a trigger.", "The journal-setup printable is below, if you want something in hand to start with. Day 2 sets up the journal with it."],
+    body: ["Welcome. I'm so glad you're here. Today is just about noticing. Start simple, start small.", "A glimmer is a small moment that makes you feel safe, calm, or quietly glad. The opposite of a trigger.", "The journal-setup printable is below, if you want something in hand to start with. Day 2 sets up the journal with it.", "Day 1 is about understanding why glimmers and gratitude are so important to our well-being and happiness. In the video we go over defining glimmers, recognizing glimmers, creativity and gratitude, and the ripple effect.", "We will explore why it is important to recognize and appreciate the small moments of joy and beauty in our lives. There are so many ways creativity can amplify the experience of gratitude. It can help us cultivate a more positive outlook and find joy in the everyday."],
     // Amy 10/27: link a printable on Day 1 so people can start with something in hand.
     // The files route gates a file by the FIRST day that names it, so this opens it Nov 1.
     files: [{ name: "printable-1-journal-setup.pdf", label: "Journal-setup printable (PDF)" }],
