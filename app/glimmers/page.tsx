@@ -48,8 +48,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Glimmers and Gratitude, a November class with Amy Tangerine",
     description: "Thirty days of noticing the small good things. One prompt a day, in your own journal, starting November 1.",
-    url: "https://www.amytangerine.com/glimmers",
-    images: [{ url: "https://www.amytangerine.com/images/classes/glimmers-amy-journal.jpg", width: 1200, height: 1600, alt: "Amy Tangerine holding her Glimmers and Gratitude journal" }],
+    url: "/glimmers",
+    images: [{ url: "/images/classes/glimmers-amy-journal.jpg", width: 1200, height: 1600, alt: "Amy Tangerine holding her Glimmers and Gratitude journal" }],
   },
 }
 
@@ -138,9 +138,10 @@ export default async function GlimmersSalesPage({ searchParams }: { searchParams
               Your returning-student code <span className="font-semibold">{code}</span> is applied at checkout, so your price is $10.
             </p>
           ) : null}
+          {/* The $10 line lives by the price and in the FAQ: a first-time visitor should not
+              meet someone else's price beside her first button (round 1, CRO). */}
           <p className={`text-sm leading-relaxed mt-5 ${secondary}`}>
-            {code ? "" : "Took the class in 2023? Your price is $10, with the code in your email. "}
-            Already in the class?{" "}
+            Already joined for November?{" "}
             <Link href={`/classes/${SLUG}`} className="underline underline-offset-4" style={{ color: "var(--color-text-primary)" }}>
               Open your class
             </Link>
@@ -194,7 +195,7 @@ export default async function GlimmersSalesPage({ searchParams }: { searchParams
           <div>
             <h2 className="text-2xl font-bold mb-4">How it works</h2>
             <p className="text-lg leading-relaxed">
-              Buy the class and your link arrives by email. Open it on your phone or your laptop, on as many devices as you like. Each day&apos;s prompt unlocks on its day, so the month has a rhythm instead of a pile. Miss a day, catch up whenever you like. Nothing to log in to, no password to remember.
+              Buy the class and your link arrives by email. Open it on your phone or your laptop, on as many devices as you like. Each day&apos;s prompt opens on its day, so the month has a rhythm instead of a pile. Miss a day, catch up whenever you like. Nothing to log in to, no password to remember.
             </p>
           </div>
           <div>
@@ -205,6 +206,12 @@ export default async function GlimmersSalesPage({ searchParams }: { searchParams
           </div>
         </div>
       </section>
+
+      {available ? (
+        <section className="mt-12 md:mt-14 max-w-3xl">
+          <JoinClassButton slug={SLUG} available={available} label={joinLabel} notYet={notYet} code={code} />
+        </section>
+      ) : null}
 
       <section className="mt-14 md:mt-20 max-w-3xl">
         <h2 className="text-2xl font-bold mb-5">A taste of the month</h2>
@@ -238,7 +245,7 @@ export default async function GlimmersSalesPage({ searchParams }: { searchParams
         <div>
           <h2 className="text-2xl font-bold mb-3">About Amy</h2>
           <p className="text-lg leading-relaxed">
-            Amy Tangerine is a modern-day memory keeper and self-proclaimed hobby collector, with creative journaling at the heart of it all. She has taught crafty workshops all over the world and filmed tons of YouTube videos.{" "}
+            Amy Tangerine is a modern-day memory keeper and self-proclaimed hobby collector, with creative journaling at the heart of it all. She has taught crafty workshops all over the world and filmed tons of YouTube videos, and she&apos;s all about helping others find joy in crafting a life they love.{" "}
             <Link href="/about" className="underline underline-offset-4">More about Amy</Link>
           </p>
         </div>
@@ -246,14 +253,25 @@ export default async function GlimmersSalesPage({ searchParams }: { searchParams
 
       <section className="mt-14 md:mt-20 max-w-3xl rounded-2xl p-7 md:p-10" style={{ background: "var(--color-orange-light)" }}>
         <h2 className="text-2xl font-bold mb-3">The price</h2>
-        <p className="text-3xl font-semibold mb-2">{price} <span className="text-base font-normal">USD</span></p>
-        <p className="text-lg leading-relaxed mb-7">For the class, with lifetime access.</p>
+        {code ? (
+          <>
+            <p className="text-3xl font-semibold mb-2">$10 <span className="text-base font-normal">USD, with your code (usually {price})</span></p>
+            <p className="text-lg leading-relaxed mb-7">For the class, with lifetime access. Your code is applied at checkout.</p>
+          </>
+        ) : (
+          <>
+            <p className="text-3xl font-semibold mb-2">{price} <span className="text-base font-normal">USD</span></p>
+            <p className="text-lg leading-relaxed mb-7">For the class, with lifetime access.</p>
+          </>
+        )}
         <JoinClassButton slug={SLUG} available={available} label={joinLabel} notYet={notYet} code={code} />
-        <p className="text-base leading-relaxed mt-7">
-          If you took Glimmers and Gratitude in 2023, your price is $10. Check your email for your link, or write to{" "}
-          <a href="mailto:help@amytangerine.com" className="underline underline-offset-4">help@amytangerine.com</a>{" "}
-          and we will find you.
-        </p>
+        {code ? null : (
+          <p className="text-base leading-relaxed mt-7">
+            If you took Glimmers and Gratitude in 2023, your price is $10 with the code in your email. Can&apos;t find it? Write to{" "}
+            <a href="mailto:help@amytangerine.com" className="underline underline-offset-4">help@amytangerine.com</a>{" "}
+            and we will find you.
+          </p>
+        )}
       </section>
 
       <section className="mt-14 md:mt-20 max-w-3xl">
@@ -266,6 +284,7 @@ export default async function GlimmersSalesPage({ searchParams }: { searchParams
             </div>
           ))}
         </dl>
+        <p className={`text-sm mt-8 ${secondary}`}>As an Amazon Associate, Amy earns from qualifying purchases.</p>
       </section>
 
       {available ? (

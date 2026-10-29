@@ -4,12 +4,13 @@
 // /gift uses: no cart drawer, nothing else in the order, so the orders-create
 // webhook finds exactly one class line item and mints the link.
 
-import { useState } from "react"
+import { useId, useState } from "react"
 import { trackEvent } from "@/lib/analytics"
 
 export default function JoinClassButton({ slug, available, label, notYet, code = "" }: { slug: string; available: boolean; label: string; notYet: string; code?: string }) {
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState("")
+  const statusId = useId()
 
   async function join() {
     if (busy || !available) return
@@ -30,7 +31,7 @@ export default function JoinClassButton({ slug, available, label, notYet, code =
   return (
     <div>
       {!available ? (
-        <p role="status" className="mb-4 p-4 rounded-lg leading-relaxed" style={{ background: "var(--color-orange-light)" }}>
+        <p id={statusId} className="mb-4 p-4 rounded-lg leading-relaxed" style={{ background: "var(--color-orange-light)" }}>
           {notYet}
         </p>
       ) : null}
@@ -38,6 +39,7 @@ export default function JoinClassButton({ slug, available, label, notYet, code =
         type="button"
         onClick={join}
         disabled={busy || !available}
+        aria-describedby={available ? undefined : statusId}
         className="cta-primary cta-primary--ink w-full md:w-auto md:min-w-[280px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black"
       >
         {busy ? "Opening checkout" : label}
