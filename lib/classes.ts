@@ -78,7 +78,7 @@ export const CLASSES: ClassDef[] = [
     sales: {
       path: "/glimmers",
       live: false, // flip at the Oct 26 on-sale, in the same commit as class-go-live --open
-      onSaleDate: "2026-10-26",
+      onSaleDate: "2026-10-30", // the target once Amy says yes (10/29); was 10/26 before the hold
       productHandle: "glimmers-and-gratitude",
       price: 45,
     },
