@@ -54,8 +54,12 @@ export default function ShopGrid({
   basePath = "/shop",
   pdpBasePath = "/shop",
   useLandingPages = true,
+  leadTiles = [],
 }: {
   products: ShopifyProduct[]
+  // Tiles that link to their own page instead of a product page, shown first in the
+  // grid (the Glimmers class, JC 10/29: classes sell from their sales page).
+  leadTiles?: { href: string; title: string; price: string; image: { src: string; alt: string } }[]
   activeCategory: string
   basePath?: string
   pdpBasePath?: string
@@ -117,6 +121,31 @@ export default function ShopGrid({
           </p>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+            {leadTiles.map((tile) => (
+              <TrackableLink
+                key={tile.href}
+                href={tile.href}
+                event="product_click"
+                eventData={{ product_name: tile.title, source_section: "shop-grid", page: "shop" }}
+                className="group block"
+              >
+                <div className="relative aspect-square overflow-hidden rounded-lg mb-3 bg-gray-50">
+                  <Image
+                    src={tile.image.src}
+                    alt={tile.image.alt}
+                    fill
+                    className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  />
+                </div>
+                <p className="text-[13px] md:text-[14px] font-medium leading-snug mb-0.5 line-clamp-2" style={{ color: "var(--color-text-primary)" }}>
+                  {tile.title}
+                </p>
+                <p className="text-[13px]" style={{ color: "var(--color-text-secondary)" }}>
+                  {tile.price}
+                </p>
+              </TrackableLink>
+            ))}
             {products.map((product, index) => {
               const img = product.images.nodes[0]
               // Not minVariantPrice: the HM products' cheapest variant is a per-delivery

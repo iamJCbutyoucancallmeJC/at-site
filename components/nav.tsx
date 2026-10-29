@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useEffect, useRef, useState } from "react"
+import { getClass } from "@/lib/classes"
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
@@ -35,6 +36,9 @@ const NAV_LINKS: NavItem[] = [
       { label: "Shop My Faves", href: "/shop-my-faves" },
     ],
   },
+  // The November class (JC 10/29): a plain link while it is on sale, so the class
+  // page is reachable from every page, not only from the emails.
+  ...(getClass("glimmers")?.sales.live ? [{ label: "Glimmers Class", href: "/glimmers" }] : []),
   {
     label: "About Amy",
     href: "/about",
