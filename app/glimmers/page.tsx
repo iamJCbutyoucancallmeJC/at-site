@@ -166,8 +166,13 @@ export default async function GlimmersSalesPage({ searchParams }: { searchParams
 
       {open ? (
         <section className="mt-14 md:mt-20 max-w-3xl">
-          {/* Captions transcribed from the 10/29 cut (56 s, Bunny 6c8598a4). A re-cut needs a new file. */}
+          {/* Captions from the 10/29 cut, last cue dropped for the 10/29b re-cut (54.8 s, Bunny fc7edd7c, ends
+              on "The link is right here."). A re-cut needs a new file. */}
           <DemoPlayer hls={open.hls} hlsQuery={open.hlsQuery} mp4={open.mp4} poster={open.poster} captions="/classes/glimmers-class-is-open.vtt" label="Amy on Glimmers and Gratitude, under a minute" />
+          {/* The video ends "The link is right here.", so the button sits right under it (JC 10/29). */}
+          <div className="mt-6">
+            <JoinClassButton slug={SLUG} available={available} label={joinLabel} notYet={notYet} code={code} />
+          </div>
         </section>
       ) : null}
 
