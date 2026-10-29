@@ -258,11 +258,11 @@ export default function Nav() {
           )}
         </div>
 
-        <div className="shrink-0 flex items-center gap-5">
+        <div className="shrink-0 flex items-center gap-3 xl:gap-5">
           {CLASS_PILL ? (
             <Link
               href={CLASS_PILL.href}
-              className="inline-flex items-center px-6 py-2.5 rounded-full text-base font-bold"
+              className="inline-flex items-center whitespace-nowrap px-4 xl:px-6 py-2 xl:py-2.5 rounded-full text-sm xl:text-base font-bold"
               style={{ background: "var(--color-teal)", color: "var(--color-ink)" }}
               onClick={() => trackEvent("nav_click", { link_text: CLASS_PILL.label, mobile_or_desktop: "desktop" })}
             >
@@ -271,7 +271,7 @@ export default function Nav() {
           ) : null}
           <Link
             href="/happy-mail"
-            className="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-full text-base font-bold"
+            className="inline-flex items-center gap-1.5 whitespace-nowrap px-4 xl:px-6 py-2 xl:py-2.5 rounded-full text-sm xl:text-base font-bold"
             style={{
               background: "var(--color-orange)",
               color: "var(--color-ink)",
