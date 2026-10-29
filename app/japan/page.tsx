@@ -72,7 +72,7 @@ export default function JapanPage() {
           </p>
           <a
             href="#waitlist"
-            className="mt-6 md:mt-8 inline-block px-8 py-3 text-[13px] md:text-[14px] uppercase tracking-[0.12em] font-semibold rounded-full border-2 border-white text-white hover:bg-white hover:text-black transition-all duration-300"
+            className="cta-secondary cta-secondary--light mt-6 md:mt-8"
           >
             Get on the List
           </a>
@@ -202,7 +202,7 @@ export default function JapanPage() {
           event="footer_click"
           eventData={{ link_text: "Back to all events", page: "japan" }}
           className="text-[13px] uppercase tracking-[0.1em] font-semibold hover:opacity-70"
-          style={{ color: "var(--color-orange)" }}
+          style={{ color: "var(--color-orange-ink)" }}
         >
           ← Back to In Person
         </TrackableLink>

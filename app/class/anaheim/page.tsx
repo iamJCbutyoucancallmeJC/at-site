@@ -20,7 +20,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
-import EmailCaptureInline from "@/components/email-capture-inline"
+import KeepUpCard from "@/components/keep-up-card"
 import PhotoGallery, { type GalleryPhoto } from "@/components/photo-gallery"
 
 const PAGE = "class-anaheim"
@@ -105,7 +105,7 @@ export default function AnaheimClassPage() {
           <div className="flex-1 order-2 md:order-1">
             <p
               className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-4"
-              style={{ color: "var(--color-orange)" }}
+              style={{ color: "var(--color-orange-ink)" }}
             >
               {EVENT.expo} · {EVENT.city} · {EVENT.dateLabel}
             </p>
@@ -179,7 +179,7 @@ export default function AnaheimClassPage() {
             <a
               href="mailto:help@amytangerine.com?subject=Anaheim%20class%20photo"
               className="underline hover:opacity-70"
-              style={{ color: "var(--color-orange)" }}
+              style={{ color: "var(--color-orange-ink)" }}
             >
               help@amytangerine.com
             </a>{" "}
@@ -231,7 +231,7 @@ export default function AnaheimClassPage() {
                     </p>
                     <span
                       className="text-[12px] font-semibold uppercase tracking-[0.1em]"
-                      style={{ color: "var(--color-orange)" }}
+                      style={{ color: "var(--color-orange-ink)" }}
                     >
                       {item.cta} →
                     </span>
@@ -262,7 +262,7 @@ export default function AnaheimClassPage() {
       </section>
 
       {/* Renders null until NEXT_PUBLIC_CAPTURE_BLOCKS=1 (t1092 gate). */}
-      <EmailCaptureInline source={PAGE} />
+      <KeepUpCard sourcePage={PAGE} gated />
     </main>
   )
 }

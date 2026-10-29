@@ -16,6 +16,7 @@ export default function PromoCard({
   image,
   tone = "paper",
   button = "primary",
+  heading = "h3",
 }: {
   eyebrow: string
   title: string
@@ -24,13 +25,12 @@ export default function PromoCard({
   image: { src: string; alt: string; position?: string }
   tone?: "paper" | "pink"
   button?: "primary" | "secondary"
+  /** h2 where the card opens its own section (no SectionHeader above it). */
+  heading?: "h2" | "h3"
 }) {
+  const Heading = heading
   const bg = tone === "pink" ? "var(--color-orange-light)" : "var(--color-paper)"
-  const buttonClass =
-    button === "primary"
-      ? "cta-primary w-full md:w-auto"
-      : "inline-flex items-center justify-center w-full md:w-auto px-8 py-[1.15rem] rounded-full text-[15px] font-bold uppercase tracking-[0.08em] leading-[1.3] border-[1.5px] transition-colors hover:bg-white"
-  const buttonStyle = button === "primary" ? undefined : { color: "var(--color-ink)", borderColor: "var(--color-ink)" }
+  const buttonClass = button === "primary" ? "cta-primary w-full md:w-auto" : "cta-secondary w-full md:w-auto"
 
   return (
     <div
@@ -51,9 +51,9 @@ export default function PromoCard({
         <p className="text-[12px] font-bold uppercase tracking-[0.12em] leading-tight mb-2" style={{ color: "var(--color-orange-ink)" }}>
           {eyebrow}
         </p>
-        <h3 className="text-[22px] font-bold leading-[1.25] mb-2" style={{ color: "var(--color-ink)" }}>
+        <Heading className="text-[22px] font-bold leading-[1.25] mb-2" style={{ color: "var(--color-ink)" }}>
           {title}
-        </h3>
+        </Heading>
         <p className="text-[16px] leading-relaxed mb-5 max-w-[42rem]" style={{ color: "var(--color-ink)" }}>
           {text}
         </p>
@@ -62,7 +62,6 @@ export default function PromoCard({
           event={cta.event}
           eventData={cta.eventData}
           className={buttonClass}
-          style={buttonStyle}
         >
           {cta.label}
         </TrackableLink>

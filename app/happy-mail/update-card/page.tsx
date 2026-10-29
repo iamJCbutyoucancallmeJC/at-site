@@ -37,7 +37,7 @@ const STEPS = [
         <a
           href={PORTAL_LOGIN_URL}
           className="font-semibold underline"
-          style={{ color: "var(--color-orange)" }}
+          style={{ color: "var(--color-orange-ink)" }}
         >
           the Happy Mail account page
         </a>
@@ -175,7 +175,7 @@ export default function UpdateCardPage() {
         <div className="max-w-2xl mx-auto">
           <p
             className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-3"
-            style={{ color: "var(--color-orange)" }}
+            style={{ color: "var(--color-orange-ink)" }}
           >
             Happy Mail
           </p>
@@ -268,8 +268,7 @@ export default function UpdateCardPage() {
           <div className="mt-10 text-center">
             <a
               href={PORTAL_LOGIN_URL}
-              className="inline-block px-8 py-3 rounded-full text-[13px] uppercase tracking-[0.1em] font-semibold text-white transition-all duration-300 hover:opacity-90"
-              style={{ background: "var(--color-orange)" }}
+              className="cta-primary"
             >
               Update your card
             </a>
@@ -293,7 +292,7 @@ export default function UpdateCardPage() {
         <div className="max-w-2xl mx-auto">
           <p
             className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-3"
-            style={{ color: "var(--color-orange)" }}
+            style={{ color: "var(--color-orange-ink)" }}
           >
             Common questions
           </p>

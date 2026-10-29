@@ -5,7 +5,19 @@ import { trackEvent } from '@/lib/analytics'
 
 type Status = "idle" | "submitting" | "success" | "error"
 
-export default function NewsletterForm({ sourcePage = 'homepage' }: { sourcePage?: string }) {
+// The site's one email form (design finish, Phase 1, 2026-10-28): KeepUpCard
+// wraps it, and the pages that ARE the form (/join, /creativity) use it bare.
+// `sourcePage` becomes the Klaviyo profile's signup_source.
+export default function NewsletterForm({
+  sourcePage = 'homepage',
+  buttonLabel = "Join",
+  doneMessage = "You're on the list. Talk soon!",
+}: {
+  sourcePage?: string
+  buttonLabel?: string
+  /** Replaces the confirmation line (a lead-magnet page says what arrives). */
+  doneMessage?: string
+}) {
   const [email, setEmail] = useState("")
   const [status, setStatus] = useState<Status>("idle")
   const [errorMsg, setErrorMsg] = useState("")
@@ -56,7 +68,7 @@ export default function NewsletterForm({ sourcePage = 'homepage' }: { sourcePage
         }}
         role="status"
       >
-        You&apos;re on the list. Talk soon!
+        {doneMessage}
       </div>
     )
   }
@@ -83,14 +95,9 @@ export default function NewsletterForm({ sourcePage = 'homepage' }: { sourcePage
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="px-5 md:px-7 py-3 md:py-3.5 rounded-full text-sm md:text-[15px] font-bold disabled:opacity-60"
-          style={{
-            background: "var(--color-orange)",
-            color: "var(--color-ink)",
-            fontFamily: "var(--font-sans)",
-          }}
+          className="cta-primary cta--compact"
         >
-          {status === "submitting" ? "Joining..." : "Join"}
+          {status === "submitting" ? "Joining..." : buttonLabel}
         </button>
       </div>
       {status === "error" && errorMsg && (

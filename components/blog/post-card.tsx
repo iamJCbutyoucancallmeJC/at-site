@@ -10,7 +10,7 @@ export default function PostCard({ post }: { post: PostMeta }) {
       <Link href={`/blog/${post.slug}`} className="block">
         <time
           className="text-[12px] uppercase tracking-[0.18em] font-semibold"
-          style={{ color: "var(--color-orange)" }}
+          style={{ color: "var(--color-orange-ink)" }}
           dateTime={post.date ?? undefined}
         >
           {formatDate(post.date)}

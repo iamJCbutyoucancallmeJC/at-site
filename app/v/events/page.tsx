@@ -92,7 +92,7 @@ export default function EventsVariantPage() {
             href="/shop"
             event="hero_cta_click"
             eventData={{ cta_text: "Shop Now", destination: "/shop", page: "homepage-events-variant" }}
-            className="mt-6 md:mt-8 inline-block px-8 py-3 text-[13px] md:text-[14px] uppercase tracking-[0.15em] font-semibold rounded-full border-2 border-white text-white hover:bg-white hover:text-black transition-all duration-300"
+            className="cta-secondary cta-secondary--light mt-6 md:mt-8"
           >
             Shop Now
           </TrackableLink>
@@ -161,7 +161,7 @@ export default function EventsVariantPage() {
             event="section_link_click"
             eventData={{ section: "in-person", page: "homepage-events-variant" }}
             className="text-[12px] md:text-[13px] uppercase tracking-[0.1em] font-semibold hover:opacity-70 transition-opacity"
-            style={{ color: "var(--color-orange)" }}
+            style={{ color: "var(--color-orange-ink)" }}
           >
             All Events →
           </TrackableLink>
@@ -191,7 +191,7 @@ export default function EventsVariantPage() {
               <div className="absolute inset-0 flex flex-col justify-end p-5 md:p-6">
                 <p
                   className="text-[11px] md:text-[12px] uppercase tracking-[0.2em] font-semibold mb-1"
-                  style={{ color: "var(--color-orange)" }}
+                  style={{ color: "var(--color-orange-ink)" }}
                 >
                   {event.label}
                 </p>
@@ -202,7 +202,7 @@ export default function EventsVariantPage() {
                   {event.description}
                 </p>
                 <span
-                  className="inline-block self-start px-4 py-1.5 text-[12px] md:text-[12px] uppercase tracking-[0.1em] font-semibold rounded-full border text-white border-white/60 group-hover:bg-white group-hover:text-black transition-all duration-300"
+                  className="cta-secondary cta-secondary--light cta--compact self-start"
                 >
                   {event.cta}
                 </span>
@@ -284,7 +284,7 @@ export default function EventsVariantPage() {
               href="/shop/make-your-mark"
               event="product_click"
               eventData={{ product_name: "Make Your Mark", source_section: "spotlight", page: "homepage-events-variant" }}
-              className="inline-block mt-3 md:mt-4 px-6 py-2.5 text-[12px] md:text-[13px] uppercase tracking-[0.1em] font-semibold rounded-full border border-white text-white hover:bg-white hover:text-black transition-all duration-300"
+              className="cta-secondary cta-secondary--light cta--compact mt-3 md:mt-4"
             >
               Learn More
             </TrackableLink>
@@ -314,7 +314,7 @@ export default function EventsVariantPage() {
               event="footer_click"
               eventData={{ link_text: "About Amy Read More", page: "homepage-events-variant" }}
               className="inline-block mt-3 text-[13px] uppercase tracking-[0.1em] font-semibold hover:opacity-70 transition-opacity"
-              style={{ color: "var(--color-orange)" }}
+              style={{ color: "var(--color-orange-ink)" }}
             >
               Read More
             </TrackableLink>

@@ -114,8 +114,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
                 href={link.href}
                 event="event_cta_click"
                 eventData={{ event_slug: event.slug, cta: "workshop", source_page: sourcePage }}
-                className="block px-6 py-3 text-[13px] md:text-[14px] font-semibold rounded-full text-white transition-all duration-300 hover:opacity-90"
-                style={{ background: "var(--color-orange)" }}
+                className="cta-primary w-full"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -145,8 +144,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
                 href={event.eventUrl}
                 event="event_cta_click"
                 eventData={{ event_slug: event.slug, cta: "event-site", source_page: sourcePage }}
-                className="inline-block px-7 py-3 text-[13px] uppercase tracking-[0.1em] font-semibold rounded-full border-2 transition-all duration-300 hover:opacity-80"
-                style={{ borderColor: "var(--color-teal)", color: "var(--color-teal)" }}
+                className="cta-secondary"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -212,8 +210,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
                     href={link.href}
                     event="external_link"
                     eventData={{ destination: link.label.toLowerCase(), source_page: sourcePage }}
-                    className="inline-block px-6 py-2.5 text-[12px] uppercase tracking-[0.1em] font-semibold rounded-full border-2 transition-all duration-300 hover:opacity-80"
-                    style={{ borderColor: "var(--color-orange)", color: "var(--color-orange)" }}
+                    className="cta-secondary cta--compact"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -230,7 +227,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
                   event="event_cta_click"
                   eventData={{ event_slug: event.slug, cta: "event-site", source_page: sourcePage }}
                   className="underline underline-offset-2 font-semibold hover:opacity-80"
-                  style={{ color: "var(--color-teal)" }}
+                  style={{ color: "var(--color-teal-ink)" }}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -268,7 +265,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
           event="footer_click"
           eventData={{ link_text: "Back to all events", page: `events/${event.slug}` }}
           className="text-[13px] uppercase tracking-[0.1em] font-semibold hover:opacity-70"
-          style={{ color: "var(--color-orange)" }}
+          style={{ color: "var(--color-orange-ink)" }}
         >
           ← Back to In Person
         </TrackableLink>

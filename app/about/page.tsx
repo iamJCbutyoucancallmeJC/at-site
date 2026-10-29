@@ -1,6 +1,6 @@
 import Image from "next/image"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
-import TrackableLink from "@/components/trackable-link"
+import PromoCard from "@/components/promo-card"
 
 export const metadata = {
   title: "About Amy | Amy Tangerine",
@@ -53,7 +53,7 @@ export default function AboutPage() {
       {/* ── Hero ── */}
       <section
         className="py-16 md:py-24 px-6 md:px-16"
-        style={{ background: "var(--color-gray-light)" }}
+        style={{ background: "var(--color-paper)" }}
       >
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-12 md:gap-16 items-center">
 
@@ -75,7 +75,7 @@ export default function AboutPage() {
           <div className="flex-1">
             <p
               className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-4"
-              style={{ color: "var(--color-orange)" }}
+              style={{ color: "var(--color-orange-ink)" }}
             >
               About Amy
             </p>
@@ -145,7 +145,7 @@ export default function AboutPage() {
         <div className="max-w-6xl mx-auto">
           <p
             className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-10 text-center"
-            style={{ color: "var(--color-orange)" }}
+            style={{ color: "var(--color-orange-ink)" }}
           >
             Collaborations
           </p>
@@ -198,30 +198,25 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── Happy Mail CTA ── */}
-      <section
-        className="py-16 md:py-20 px-6 text-center"
-        style={{ background: "var(--color-orange)" }}
-      >
-        <p className="text-[12px] uppercase tracking-[0.2em] text-white/70 mb-3">
-          The good kind of mail
-        </p>
-        <h2 className="text-[28px] md:text-[40px] font-bold text-white leading-tight mb-4">
-          Get Happy Mail from Amy.
-        </h2>
-        <p className="text-[15px] text-white/80 mb-8 max-w-sm mx-auto leading-relaxed">
-          Once a month, a package arrives — die cuts, stickers, and a personal
-          note. The good kind of mail.
-        </p>
-        <TrackableLink
-          href="/happy-mail"
-          event="hero_cta_click"
-          eventData={{ cta_text: "About Happy Mail CTA", destination: "/happy-mail", page: "about" }}
-          className="inline-block px-10 py-4 rounded-full bg-white text-[14px] font-semibold uppercase tracking-[0.1em] hover:bg-white/90 transition-all duration-200"
-          style={{ color: "var(--color-orange)" }}
-        >
-          Learn more
-        </TrackableLink>
+      {/* ── Happy Mail CTA (design finish Phase 1, 2026-10-28: the shared PromoCard on
+          the pink, in place of the full-bleed orange band; copy unchanged) ── */}
+      <section className="px-4 md:px-10 py-12 md:py-16">
+        <div className="max-w-5xl mx-auto">
+          <PromoCard
+            tone="pink"
+            heading="h2"
+            eyebrow="The good kind of mail"
+            title="Get Happy Mail from Amy."
+            text="Once a month, a package arrives — die cuts, stickers, and a personal note. The good kind of mail."
+            cta={{
+              href: "/happy-mail",
+              label: "Learn more",
+              event: "hero_cta_click",
+              eventData: { cta_text: "About Happy Mail CTA", destination: "/happy-mail", page: "about" },
+            }}
+            image={{ src: "/images/happy-mail/envelopes/2026-04.jpg", alt: "The April 2026 Happy Mail envelope and what came in it" }}
+          />
+        </div>
       </section>
     </>
   )

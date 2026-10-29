@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { Menu, X, ShoppingBag, ChevronDown } from "lucide-react"
+import { Menu, X, ShoppingBag, ChevronDown, Heart } from "lucide-react"
 import { trackEvent } from "@/lib/analytics"
 import { useCart } from "@/context/cart"
 import { isChromelessRoute, isQuietRoute, quietHome } from "@/lib/chromeless-routes"
@@ -47,7 +47,9 @@ const NAV_LINKS: NavItem[] = [
 ]
 
 function DesktopDropdownChild({ child, group, onNavigate }: { child: NavChild; group: string; onNavigate: () => void }) {
-  const className = "block px-5 py-2.5 text-base font-semibold transition-colors hover:opacity-80"
+  // Design finish Phase 1 (2026-10-28): rows tint to paper on hover inside a
+  // white panel (12px radius, shadow-lift), not a fade.
+  const className = "block px-5 py-2.5 text-base font-semibold transition-colors hover:bg-[var(--color-paper)]"
   const style = { color: "var(--color-text-primary)" }
   const onClick = () => {
     onNavigate()
@@ -205,7 +207,7 @@ export default function Nav() {
                   }`}
                 >
                   <div
-                    className="min-w-[180px] rounded-lg border py-2 shadow-lg"
+                    className="min-w-[200px] rounded-xl border py-2 shadow-lift overflow-hidden"
                     style={{
                       background: "var(--color-white)",
                       borderColor: "var(--color-border)",
@@ -259,7 +261,7 @@ export default function Nav() {
             }}
             onClick={() => trackEvent("nav_click", { link_text: "Happy Mail", mobile_or_desktop: "desktop" })}
           >
-            <span className="text-sm">♥</span> Happy Mail
+            <Heart size={16} fill="currentColor" aria-hidden="true" /> Happy Mail
           </Link>
           <button
             onClick={openCart}

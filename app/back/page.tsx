@@ -105,7 +105,7 @@ export default function BackPage() {
         <div className="flex-1">
           <p
             className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-3"
-            style={{ color: "var(--color-orange)" }}
+            style={{ color: "var(--color-orange-ink)" }}
           >
             Happy Mail · Monthly
           </p>
@@ -134,7 +134,7 @@ export default function BackPage() {
           </div>
 
           {closed ? (
-            <p className="text-[14px] font-semibold" style={{ color: "var(--color-orange)" }}>October is full. Happy Mail reopens October 16. <a href="/happy-mail" className="underline">Join the waitlist</a></p>
+            <p className="text-[14px] font-semibold" style={{ color: "var(--color-orange-ink)" }}>October is full. Happy Mail reopens October 16. <a href="/happy-mail" className="underline">Join the waitlist</a></p>
           ) : (
           <button
             onClick={handleCheckout}

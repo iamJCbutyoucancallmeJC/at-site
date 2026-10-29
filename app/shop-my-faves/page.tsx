@@ -33,7 +33,7 @@ export default async function ShopMyFavesPage() {
         <div className="max-w-3xl mx-auto text-center">
           <p
             className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-4"
-            style={{ color: "var(--color-orange)" }}
+            style={{ color: "var(--color-orange-ink)" }}
           >
             Shop My Faves
           </p>
@@ -126,7 +126,7 @@ export default async function ShopMyFavesPage() {
                       target="_blank"
                       rel="noopener sponsored nofollow"
                       className="inline-flex items-center gap-1.5 text-[14px] font-semibold transition-opacity hover:opacity-70"
-                      style={{ color: "var(--color-orange)" }}
+                      style={{ color: "var(--color-orange-ink)" }}
                     >
                       {list.itemCount
                         ? `See all ${list.itemCount} on Amazon`

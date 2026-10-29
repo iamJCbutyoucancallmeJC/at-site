@@ -56,8 +56,7 @@ export default function AddToCartButton({
     return (
       <a
         href="/happy-mail"
-        className="block w-full py-3.5 text-center text-[13px] uppercase tracking-[0.12em] font-semibold rounded-full transition-all duration-300 text-white"
-        style={{ background: "var(--color-orange)" }}
+        className="cta-primary w-full"
         onClick={() =>
           trackEvent("hero_cta_click", {
             cta_text: "Subscribe",
@@ -76,8 +75,7 @@ export default function AddToCartButton({
       <button
         onClick={handleAddToCart}
         disabled={status === "adding" || !hydrated}
-        className="w-full py-3.5 text-[13px] uppercase tracking-[0.12em] font-semibold rounded-full transition-all duration-300 text-white disabled:opacity-70"
-        style={{ background: status === "added" ? "var(--color-teal)" : "var(--color-orange)" }}
+        className={`${status === "added" ? "cta-teal" : "cta-primary"} w-full`}
       >
         {status === "idle" && `Subscribe · ${price}/mo`}
         {status === "adding" && "Adding..."}
@@ -90,8 +88,7 @@ export default function AddToCartButton({
     <button
       onClick={handleAddToCart}
       disabled={status === "adding" || !hydrated}
-      className="w-full py-3.5 text-[13px] uppercase tracking-[0.12em] font-semibold rounded-full transition-all duration-300 text-white disabled:opacity-70"
-      style={{ background: status === "added" ? "var(--color-teal)" : "var(--color-orange)" }}
+      className={`${status === "added" ? "cta-teal" : "cta-primary"} w-full`}
     >
       {status === "idle" && "Add to Cart"}
       {status === "adding" && "Adding..."}

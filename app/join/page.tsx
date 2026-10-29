@@ -8,12 +8,12 @@
 // Listed since 2026-09-09: JC ruled the capture go-live at the console queue
 // (Amy edits afterwards), the popup is published and the blocks are live, so
 // this page is indexable and in app/sitemap.ts. It stays off the nav. The
-// form renders regardless of the NEXT_PUBLIC_CAPTURE_BLOCKS gate (force) so
+// form renders regardless of the NEXT_PUBLIC_CAPTURE_BLOCKS gate (ungated) so
 // the join link in emails always lands on a working form. The footer skips
 // its own capture block on this path.
 
 import type { Metadata } from "next"
-import EmailCaptureInline from "@/components/email-capture-inline"
+import NewsletterForm from "@/components/newsletter-form"
 
 export const metadata: Metadata = {
   title: "Join the list | Amy Tangerine",
@@ -31,7 +31,9 @@ export default function JoinPage() {
         Happy Mail, classes, and where she&apos;ll be in person. No schedule, and you can
         leave any time.
       </p>
-      <EmailCaptureInline source="join" force compact />
+      <div className="max-w-md mx-auto text-left">
+        <NewsletterForm sourcePage="join" />
+      </div>
     </main>
   )
 }

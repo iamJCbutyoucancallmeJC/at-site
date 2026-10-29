@@ -76,7 +76,7 @@ export default function PromptBlock({ slug, promptKey, headline, instruction, st
       ) : null}
       {quoteBack?.text ? (
         <p className="text-[15px] italic leading-relaxed mb-7" style={{ color: "var(--color-text-secondary)" }}>
-          {quoteBack.label} <span className="not-italic font-medium" style={{ color: "var(--color-orange)" }}>{quoteBack.text}</span>
+          {quoteBack.label} <span className="not-italic font-medium" style={{ color: "var(--color-orange-ink)" }}>{quoteBack.text}</span>
         </p>
       ) : null}
       {noField ? null : (<>

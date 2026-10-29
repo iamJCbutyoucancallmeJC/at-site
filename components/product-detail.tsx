@@ -140,7 +140,7 @@ export default function ProductDetail({
                   event="nav_click"
                   eventData={{ link_text: "Learn about Happy Mail", page: "pdp" }}
                   className="font-semibold underline"
-                  style={{ color: "var(--color-orange)" }}
+                  style={{ color: "var(--color-orange-ink)" }}
                 >
                   See what's inside, how it ships, and how to gift it →
                 </TrackableLink>
@@ -162,7 +162,7 @@ export default function ProductDetail({
                   event="nav_click"
                   eventData={{ link_text: "US Happy Mail", page: "pdp" }}
                   className="font-semibold underline"
-                  style={{ color: "var(--color-orange)" }}
+                  style={{ color: "var(--color-orange-ink)" }}
                 >
                   Subscribe to US Happy Mail here →
                 </TrackableLink>
@@ -182,12 +182,9 @@ export default function ProductDetail({
                 sellingPlanId={subscribeSellingPlanId}
               />
             ) : (
-              <div
-                className="w-full py-3.5 text-center text-[13px] uppercase tracking-[0.1em] font-semibold rounded-full border-2"
-                style={{ borderColor: "var(--color-border)", color: "var(--color-text-secondary)" }}
-              >
+              <button type="button" disabled className="cta-secondary w-full">
                 Sold Out
-              </div>
+              </button>
             )}
             {!product.availableForSale && mainVariant && (
               <BackInStockForm variantId={mainVariant.id} productHandle={slug} />
@@ -242,7 +239,7 @@ export default function ProductDetail({
           style={{ background: "var(--color-orange-light)", border: "1px solid #fde0c0" }}
         >
           <div className="flex-1">
-            <p className="text-[12px] uppercase tracking-[0.15em] font-semibold mb-1" style={{ color: "var(--color-orange)" }}>
+            <p className="text-[12px] uppercase tracking-[0.15em] font-semibold mb-1" style={{ color: "var(--color-orange-ink)" }}>
               Monthly Subscription
             </p>
             <h3 className="text-[18px] font-bold mb-1.5" style={{ color: "var(--color-text-primary)" }}>
@@ -256,8 +253,7 @@ export default function ProductDetail({
               href="/happy-mail"
               event="hm_subscribe_click"
               eventData={{ source: "cross-sell-pdp", slug: slug, cta_text: "PDP Happy Mail Cross-sell", destination: "/happy-mail", page: "pdp" }}
-              className="inline-block px-5 py-2 text-[12px] uppercase tracking-[0.1em] font-semibold rounded-full text-white transition-all duration-300"
-              style={{ background: "var(--color-orange)" }}
+              className="cta-primary cta--compact"
             >
               Learn More
             </TrackableLink>

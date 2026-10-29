@@ -77,7 +77,7 @@ export default function BookQrPage() {
       <section className="max-w-xl mx-auto px-6 pt-12 md:pt-16 pb-10 text-center">
         <p
           className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-3"
-          style={{ color: "var(--color-orange)" }}
+          style={{ color: "var(--color-orange-ink)" }}
         >
           New from Amy Tangerine
         </p>
@@ -154,7 +154,7 @@ export default function BookQrPage() {
           <a
             href="mailto:help@amytangerine.com"
             className="underline hover:opacity-70"
-            style={{ color: "var(--color-orange)" }}
+            style={{ color: "var(--color-orange-ink)" }}
           >
             help@amytangerine.com
           </a>

@@ -7,17 +7,25 @@ import NewsletterForm from "@/components/newsletter-form"
 // /api/newsletter -> lib/klaviyo-subscribe (same Klaviyo list + signup_source).
 //
 // layout="panel": the right-hand card of the homepage's About + Keep up section.
-// layout="band":  a standalone paper band with the card centered (the footer).
+// layout="band":  a standalone paper band with the card centered (the footer,
+//                  and the end of a Journal post or a class landing).
+// gated: render nothing until NEXT_PUBLIC_CAPTURE_BLOCKS=1 (Amy's aesthetic-pass
+// hold, t1092). The footer and the in-page blocks honour it; the homepage does not.
+
+const CAPTURE_BLOCKS = process.env.NEXT_PUBLIC_CAPTURE_BLOCKS === "1"
 
 export default function KeepUpCard({
   sourcePage,
   layout = "band",
   id,
+  gated = false,
 }: {
   sourcePage: string
   layout?: "panel" | "band"
   id?: string
+  gated?: boolean
 }) {
+  if (gated && !CAPTURE_BLOCKS) return null
   const card = (
     <div
       id={id}

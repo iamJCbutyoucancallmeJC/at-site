@@ -132,7 +132,7 @@ export default function KeepPage() {
         <div className="flex-1">
           <p
             className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-3"
-            style={{ color: "var(--color-orange)" }}
+            style={{ color: "var(--color-orange-ink)" }}
           >
             Happy Mail · You were one of the first
           </p>
@@ -181,7 +181,7 @@ export default function KeepPage() {
               </span>
             </span>
           </div>
-          <p className="text-[13px] font-semibold mb-6" style={{ color: "var(--color-teal)" }}>
+          <p className="text-[13px] font-semibold mb-6" style={{ color: "var(--color-teal-ink)" }}>
             Your original price — applied automatically
           </p>
 

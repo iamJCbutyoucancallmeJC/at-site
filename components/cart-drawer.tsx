@@ -203,8 +203,7 @@ export default function CartDrawer() {
               <Link
                 href="/shop"
                 onClick={closeCart}
-                className="px-6 py-2.5 text-[12px] uppercase tracking-[0.1em] font-semibold rounded-full text-white transition-colors"
-                style={{ background: "var(--color-orange)" }}
+                className="cta-primary cta--compact"
               >
                 Shop Now
               </Link>
@@ -335,15 +334,9 @@ export default function CartDrawer() {
 
             {hasLocalItems ? (
               <div>
-                <div
-                  className="w-full py-3.5 text-center text-[12px] uppercase tracking-[0.1em] font-semibold rounded-full border-2 mb-2"
-                  style={{
-                    borderColor: "var(--color-border)",
-                    color: "var(--color-text-secondary)",
-                  }}
-                >
+                <button type="button" disabled className="cta-secondary w-full mb-2">
                   Checkout coming soon
-                </div>
+                </button>
                 <p
                   className="text-[12px] text-center leading-snug"
                   style={{ color: "var(--color-text-secondary)" }}
@@ -355,8 +348,7 @@ export default function CartDrawer() {
               <button
                 onClick={handleCheckout}
                 disabled={checkingOut}
-                className="w-full py-3.5 text-[13px] uppercase tracking-[0.12em] font-semibold rounded-full text-white transition-colors disabled:opacity-60"
-                style={{ background: "var(--color-orange)" }}
+                className="cta-primary w-full"
               >
                 {checkingOut ? "One moment..." : "Checkout"}
               </button>

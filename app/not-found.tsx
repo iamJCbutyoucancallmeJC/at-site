@@ -35,7 +35,7 @@ export default function NotFound() {
       >
         <p
           className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-4"
-          style={{ color: "var(--color-orange)" }}
+          style={{ color: "var(--color-orange-ink)" }}
         >
           404
         </p>
@@ -88,7 +88,7 @@ export default function NotFound() {
                 </span>
                 <span
                   className="block mt-3 text-[12px] uppercase tracking-[0.12em] font-semibold"
-                  style={{ color: "var(--color-orange)" }}
+                  style={{ color: "var(--color-orange-ink)" }}
                 >
                   View &rarr;
                 </span>
@@ -109,8 +109,7 @@ export default function NotFound() {
               href="/blog"
               event="nav_click"
               eventData={{ link_text: "Read the Journal", source_page: "not-found" }}
-              className="inline-block px-7 py-3 rounded-full text-[13px] font-semibold uppercase tracking-[0.1em] bg-white transition-all duration-200 hover:opacity-80"
-              style={{ color: "var(--color-teal)" }}
+              className="cta-secondary"
             >
               Read the Journal
             </TrackableLink>
@@ -121,8 +120,7 @@ export default function NotFound() {
               href="/shop"
               event="nav_click"
               eventData={{ link_text: "All Products", source_page: "not-found" }}
-              className="px-8 py-3 rounded-full text-[13px] font-semibold uppercase tracking-[0.1em] border transition-all duration-200 hover:opacity-80"
-              style={{ borderColor: "var(--color-orange)", color: "var(--color-orange)" }}
+              className="cta-secondary"
             >
               All Products
             </TrackableLink>
@@ -130,8 +128,7 @@ export default function NotFound() {
               href="/happy-mail"
               event="nav_click"
               eventData={{ link_text: "Happy Mail", source_page: "not-found" }}
-              className="px-8 py-3 rounded-full text-[13px] font-semibold uppercase tracking-[0.1em] border transition-all duration-200 hover:opacity-80"
-              style={{ borderColor: "var(--color-orange)", color: "var(--color-orange)" }}
+              className="cta-secondary"
             >
               Happy Mail
             </TrackableLink>
@@ -139,8 +136,7 @@ export default function NotFound() {
               href="/"
               event="nav_click"
               eventData={{ link_text: "Home", source_page: "not-found" }}
-              className="px-8 py-3 rounded-full text-[13px] font-semibold uppercase tracking-[0.1em] border transition-all duration-200 hover:opacity-80"
-              style={{ borderColor: "var(--color-orange)", color: "var(--color-orange)" }}
+              className="cta-secondary"
             >
               Home
             </TrackableLink>

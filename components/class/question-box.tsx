@@ -74,8 +74,7 @@ export default function QuestionBox({ slug, initial, max }: { slug: string; init
         type="button"
         onClick={send}
         disabled={!text.trim() || state === "sending"}
-        className="mt-5 px-6 py-2.5 rounded-full text-[12px] uppercase tracking-[0.12em] font-semibold text-white disabled:opacity-40"
-        style={{ backgroundColor: "var(--color-orange)" }}
+        className="cta-teal cta--compact mt-5"
       >
         Send to Amy
       </button>

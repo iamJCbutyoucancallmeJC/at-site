@@ -35,7 +35,7 @@ export default function Error({
       >
         <p
           className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-4"
-          style={{ color: "var(--color-orange)" }}
+          style={{ color: "var(--color-orange-ink)" }}
         >
           Something went wrong
         </p>
@@ -59,11 +59,7 @@ export default function Error({
           <div className="flex flex-wrap justify-center gap-4">
             <button
               onClick={() => reset()}
-              className="px-8 py-3 rounded-full text-[13px] font-semibold uppercase tracking-[0.1em] border transition-all duration-200 hover:opacity-80"
-              style={{
-                borderColor: "var(--color-orange)",
-                color: "var(--color-orange)",
-              }}
+              className="cta-secondary"
             >
               Try again
             </button>
@@ -71,11 +67,7 @@ export default function Error({
               href="/shop"
               event="nav_click"
               eventData={{ link_text: "Shop", source_page: "error" }}
-              className="px-8 py-3 rounded-full text-[13px] font-semibold uppercase tracking-[0.1em] border transition-all duration-200 hover:opacity-80"
-              style={{
-                borderColor: "var(--color-orange)",
-                color: "var(--color-orange)",
-              }}
+              className="cta-secondary"
             >
               Shop
             </TrackableLink>
@@ -83,11 +75,7 @@ export default function Error({
               href="/"
               event="nav_click"
               eventData={{ link_text: "Home", source_page: "error" }}
-              className="px-8 py-3 rounded-full text-[13px] font-semibold uppercase tracking-[0.1em] border transition-all duration-200 hover:opacity-80"
-              style={{
-                borderColor: "var(--color-orange)",
-                color: "var(--color-orange)",
-              }}
+              className="cta-secondary"
             >
               Home
             </TrackableLink>

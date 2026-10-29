@@ -134,7 +134,7 @@ export default async function HomePage() {
               <div className="relative aspect-square overflow-hidden rounded-xl" style={{ background: "var(--color-paper)" }}>
                 <Image
                   src={cat.img}
-                  alt={cat.name}
+                  alt=""
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                   sizes="(max-width: 768px) 33vw, 30vw"
