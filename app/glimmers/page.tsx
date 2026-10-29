@@ -127,7 +127,7 @@ export default async function GlimmersSalesPage({ searchParams }: { searchParams
           </p>
           <ul aria-label="The class at a glance" className="flex flex-wrap gap-2 mb-8">
             {facts.map((f) => (
-              <li key={f} className="text-[15px] font-semibold rounded-full px-4 py-1.5" style={{ background: "var(--color-orange-light)", color: "var(--color-text-primary)" }}>
+              <li key={f} className="text-[14px] md:text-[15px] font-semibold rounded-full px-3 md:px-4 py-1 md:py-1.5" style={{ background: "var(--color-orange-light)", color: "var(--color-text-primary)" }}>
                 {f}
               </li>
             ))}
