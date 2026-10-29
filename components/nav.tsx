@@ -20,6 +20,9 @@ import { isChromelessRoute, isQuietRoute, quietHome } from "@/lib/chromeless-rou
 type NavChild = { label: string; href: string; external?: boolean }
 type NavItem = { label: string; href?: string; external?: boolean; children?: NavChild[] }
 
+// Teal is the class button in the button family (globals.css --color-teal: "Workshop/class buttons").
+const CLASS_PILL = getClass("glimmers")?.sales.live ? { label: "Glimmers and Gratitude", href: "/glimmers" } : null
+
 const NAV_LINKS: NavItem[] = [
   {
     label: "Fun Stuff",
@@ -36,9 +39,10 @@ const NAV_LINKS: NavItem[] = [
       { label: "Shop My Faves", href: "/shop-my-faves" },
     ],
   },
-  // The November class (JC 10/29): a plain link while it is on sale, so the class
-  // page is reachable from every page, not only from the emails.
-  ...(getClass("glimmers")?.sales.live ? [{ label: "Glimmers Class", href: "/glimmers" }] : []),
+  // The November class (JC 10/29), by its real title, while it is on sale. On desktop it
+  // is the teal class pill beside Happy Mail (see CLASS_PILL), so the center row skips it;
+  // the phone drawer lists it here.
+  ...(CLASS_PILL ? [{ label: CLASS_PILL.label, href: CLASS_PILL.href }] : []),
   {
     label: "About Amy",
     href: "/about",
@@ -157,7 +161,7 @@ export default function Nav() {
         </Link>
 
         <div className="flex-1 flex items-center justify-center gap-8">
-          {NAV_LINKS.map((link) =>
+          {NAV_LINKS.filter((link) => link.href !== CLASS_PILL?.href).map((link) =>
             link.children ? (
               <div key={link.label} className="relative group">
                 {link.href ? (
@@ -255,6 +259,16 @@ export default function Nav() {
         </div>
 
         <div className="shrink-0 flex items-center gap-5">
+          {CLASS_PILL ? (
+            <Link
+              href={CLASS_PILL.href}
+              className="inline-flex items-center px-6 py-2.5 rounded-full text-base font-bold"
+              style={{ background: "var(--color-teal)", color: "var(--color-ink)" }}
+              onClick={() => trackEvent("nav_click", { link_text: CLASS_PILL.label, mobile_or_desktop: "desktop" })}
+            >
+              {CLASS_PILL.label}
+            </Link>
+          ) : null}
           <Link
             href="/happy-mail"
             className="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-full text-base font-bold"
