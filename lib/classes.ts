@@ -77,7 +77,7 @@ export const CLASSES: ClassDef[] = [
     openVideo: process.env.GLIMMERS_OPEN_VIDEO_ID || undefined,
     sales: {
       path: "/glimmers",
-      live: false, // flip at the Oct 26 on-sale, in the same commit as class-go-live --open
+      live: true, // on sale 10/29 at Amy's yes (thread "Glimmers this week"), with class-go-live --open
       onSaleDate: "2026-10-30", // the target once Amy says yes (10/29); was 10/26 before the hold
       productHandle: "glimmers-and-gratitude",
       price: 45,
