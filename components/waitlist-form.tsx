@@ -14,7 +14,12 @@ import { trackEvent } from "@/lib/analytics"
 
 type Status = "idle" | "submitting" | "success" | "error"
 
-export default function WaitlistForm({ sourcePage = "at-site:/events" }: { sourcePage?: string }) {
+// button: "primary" (orange) by default; "secondary" (ink ring) where the band is
+// itself orange, as on /events, or the orange button disappears into it.
+export default function WaitlistForm({
+  sourcePage = "at-site:/events",
+  button = "primary",
+}: { sourcePage?: string; button?: "primary" | "secondary" }) {
   const [email, setEmail] = useState("")
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
@@ -146,7 +151,7 @@ export default function WaitlistForm({ sourcePage = "at-site:/events" }: { sourc
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="cta-primary cta--compact whitespace-nowrap"
+          className={`${button === "secondary" ? "cta-secondary" : "cta-primary"} cta--compact whitespace-nowrap`}
         >
           {status === "submitting" ? "Joining..." : "Get on the List"}
         </button>

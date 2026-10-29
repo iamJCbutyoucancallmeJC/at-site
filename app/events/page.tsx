@@ -159,7 +159,7 @@ export default function EventsPage() {
             Drop your email and you&rsquo;ll be the first to hear about new shows, pop-ups, and trips,
             including the next Tangerine Tokyo Takeover.
           </p>
-          <WaitlistForm sourcePage="at-site:/events" />
+          <WaitlistForm sourcePage="at-site:/events" button="secondary" />
         </div>
       </section>
 
