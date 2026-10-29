@@ -49,6 +49,8 @@ export const metadata: Metadata = {
     title: "Glimmers and Gratitude, a November class with Amy Tangerine",
     description: "Thirty days of noticing the small good things. One prompt a day, in your own journal, starting November 1.",
     url: "/glimmers",
+    siteName: "Amy Tangerine",
+    type: "website",
     images: [{ url: "/images/classes/glimmers-amy-journal.jpg", width: 1200, height: 1600, alt: "Amy Tangerine holding her Glimmers and Gratitude journal" }],
   },
 }
@@ -84,7 +86,7 @@ const QUESTIONS: [string, React.ReactNode][] = [
     </>
   )],
   ["Is there a live session?", "There is a question-and-answer session on video partway through the month. You send questions in ahead of time, and the recording lives in the class."],
-  ["Is this the same as the 2023 class?", "Same idea, updated. Most of the prompts that worked are back, freshened, and a few are new. If you took it before, your price is $10."],
+  ["Is this the same as the 2023 class?", "Same idea, updated. Most of the prompts that worked are back, freshened, and a few are new. If you took it before, your price is $10 with the code in your email."],
   ["How long do I have access?", "For good. The link in your email never expires."],
 ]
 
@@ -125,7 +127,7 @@ export default async function GlimmersSalesPage({ searchParams }: { searchParams
           <p className="text-lg md:text-xl leading-relaxed mb-6">
             Thirty days of noticing the small good things. One prompt a day, in your own journal, starting November 1.
           </p>
-          <ul aria-label="The class at a glance" className="flex flex-wrap gap-2 mb-8">
+          <ul role="list" aria-label="The class at a glance" className="flex flex-wrap gap-2 mb-8">
             {facts.map((f) => (
               <li key={f} className="text-[14px] md:text-[15px] font-semibold rounded-full px-3 md:px-4 py-1 md:py-1.5" style={{ background: "var(--color-orange-light)", color: "var(--color-text-primary)" }}>
                 {f}
@@ -238,8 +240,8 @@ export default async function GlimmersSalesPage({ searchParams }: { searchParams
         <Image
           src="/images/about/amy-hero.webp"
           alt=""
-          width={120}
-          height={150}
+          width={240}
+          height={300}
           className="rounded-2xl object-cover w-[96px] h-[120px] flex-shrink-0"
         />
         <div>
