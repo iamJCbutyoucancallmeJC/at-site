@@ -1,9 +1,10 @@
 // /glimmers : the public sales page for Glimmers and Gratitude (t1102).
 //
 // Copy is Amy's voice, built from glimmers-sales-page-draft-2026-09-23.md with
-// the rulings since: four printables (10/8), any journal (the Amazon journal
-// will not be live by Nov 1, 10/8), the Q&A as a video partway through the
-// month (9/23). Amy edits the words; the shape stays.
+// the rulings since: four printables (10/8), any journal, the Q&A as a video
+// partway through the month (9/23). Amy's 10/27 edits are in as she wrote them:
+// the intro, "Who it is for", and the supplies answer, which links her 2023
+// journal on Amazon under her Associates tag. Amy edits the words; the shape stays.
 //
 // Hidden on production until lib/classes.ts says `sales.live: true` (the Oct 26
 // commit); preview deploys and the dev server always render it so Amy can read
@@ -20,6 +21,7 @@ import DemoPlayer from "@/components/class/demo-player"
 import { getClass, salesPageVisible, formatUnlockDate } from "@/lib/classes"
 import { getProductByHandle } from "@/lib/shopify"
 import { playbackSource } from "@/lib/video"
+import { withTag } from "@/lib/affiliate"
 
 export const dynamic = "force-dynamic"
 
@@ -47,10 +49,19 @@ const TASTE = [
   ["Progress over perfection", "one area where you have seen real change, and the part gratitude played in noticing it."],
 ]
 
-const QUESTIONS: [string, string][] = [
+// Amy's 2023 Glimmers and Gratitude journal (JC, 10/27).
+const JOURNAL_URL = withTag("https://www.amazon.com/dp/B0CLNXSR2G")
+
+const QUESTIONS: [string, React.ReactNode][] = [
   ["When does it start?", "Day 1 opens Sunday, November 1. Day 30 is November 30."],
   ["What if I fall behind?", "Nothing closes. Each day opens on its day and stays open. Do two on a Saturday."],
-  ["Do I need special supplies?", "A journal and a pen. Everything else is a bonus."],
+  ["Do I need special supplies?", (
+    <>
+      A journal and a pen. Any supplies you would like to use. If you want the exact journal Amy used and made for the workshop back in 2023, it is{" "}
+      <a href={JOURNAL_URL} target="_blank" rel="sponsored noopener" className="underline underline-offset-4">Glimmers and Gratitude on Amazon</a>
+      . There are color printables provided. If you don&apos;t have a working printer, Amy suggests what she does: get them printed by a local print shop for about $1 a page.
+    </>
+  )],
   ["Is there a live session?", "There is a question-and-answer session on video partway through the month. You send questions in ahead of time, and the recording lives in the class."],
   ["Is this the same as the 2023 class?", "Same idea, updated. Most of the prompts that worked are back, freshened, and a few are new. If you took it before, your price is $10."],
   ["How long do I have access?", "For good. The link in your email never expires."],
@@ -121,7 +132,7 @@ export default async function GlimmersSalesPage({ searchParams }: { searchParams
 
       {open ? (
         <section className="mt-14 md:mt-20 max-w-3xl">
-          <DemoPlayer hls={open.hls} hlsQuery={open.hlsQuery} mp4={open.mp4} poster={open.poster} caption="Amy on the class, a minute and a quarter." />
+          <DemoPlayer hls={open.hls} hlsQuery={open.hlsQuery} mp4={open.mp4} poster={open.poster} />
         </section>
       ) : null}
 
@@ -130,7 +141,7 @@ export default async function GlimmersSalesPage({ searchParams }: { searchParams
           A glimmer is the opposite of a trigger: a small moment that makes you feel calm, safe, or quietly glad. The light through the kitchen window. The first sip. A note in someone else&apos;s handwriting. They are everywhere, and most of them go by unnoticed.
         </p>
         <p>
-          This class is thirty days of catching them. Every morning a new prompt opens. You write, sketch, tape something in, or just make a list. Ten minutes is plenty. By the end of the month you have a journal that is not finished, but full.
+          This class is 30 days of catching them. Every morning a new prompt opens. You write, sketch, tape something in, or simply make a list. You deserve to carve out at least 10 minutes to notice and play with your supplies. By the end of the month you have a journal that might not be completely finished, but it will certainly be full.
         </p>
         <p>
           I first ran Glimmers and Gratitude in 2023 and I still keep the journal from it on my desk. This is the updated version: the prompts that landed, freshened, with a few new ones, and a place to do it that is finally on my own site.
@@ -177,7 +188,7 @@ export default async function GlimmersSalesPage({ searchParams }: { searchParams
       <section className="mt-14 md:mt-20 max-w-3xl">
         <h2 className="text-2xl font-bold mb-4">Who it is for</h2>
         <p className="text-lg leading-relaxed">
-          Anyone who wants a gratitude practice that is creative instead of dutiful. You do not need to be a scrapbooker or a good drawer. If you have ever kept a journal for three days and stopped, this is built for you: the prompt shows up, you answer it, that is the whole thing.
+          Anyone who wants a consistent gratitude journaling practice that is creative and easeful. You do not need to be a scrapbooker or an artist. If you have ever kept a journal for three days and stopped, this is built for you: the prompt shows up, you answer. The process is easy and fun.
         </p>
       </section>
 

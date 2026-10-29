@@ -226,7 +226,7 @@ export async function getAffiliatePickLists(): Promise<AffiliatePickList[]> {
  * so the tag lives in ONE config spot. Returns "" for a null/empty input. Used
  * for both product links and the per-list "See all on Amazon" deep-link.
  */
-function withTag(url: string | null): string {
+export function withTag(url: string | null): string {
   if (!url) return ""
   try {
     const u = new URL(url)
