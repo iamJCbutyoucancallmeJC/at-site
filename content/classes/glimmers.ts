@@ -54,7 +54,8 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     day: 1,
     title: "Why Glimmers & Gratitude? Why now?",
     prompt: { key: "d01", steps: ["Open your journal to a fresh page and write the date.", "Notice one glimmer from today: the light through a window, the first sip, a song you forgot you loved.", "Write it down in one sentence. That is the whole practice."] },
-    body: ["A glimmer is a small moment that makes you feel safe, calm, or quietly glad. The opposite of a trigger."],
+    // Amy's welcome, her wording 10/29 (mail thread "Glimmers this week, and the Nevada permit").
+    body: ["Welcome. I'm so glad you're here. Today is just about noticing. Start simple, start small.", "A glimmer is a small moment that makes you feel safe, calm, or quietly glad. The opposite of a trigger."],
   },
   {
     day: 2,
