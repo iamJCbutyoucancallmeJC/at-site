@@ -10,6 +10,14 @@
 // commit); preview deploys and the dev server always render it so Amy can read
 // it. The Join button checks the Storefront API at the moment of the click, so
 // until class-go-live.mjs --open the page says when checkout opens.
+//
+// 10/29 conversion pass (branch glimmers-landing-review; checklist in the vault,
+// A5 Job/Linslow/Clients/Amy Tangerine/sales-page-guide.md): the four facts beside
+// the first button, the button label matching the launch email ("Join the class
+// for $45"), an "About Amy" block from her own About page in place of
+// testimonials (none exist for this class yet), four FAQ answers for the
+// objections a buyer actually has, captions on the video. Amy's own words (the
+// intro, "Who it is for", the supplies answer) are untouched.
 
 import Image from "next/image"
 import Link from "next/link"
@@ -35,6 +43,14 @@ export const metadata: Metadata = {
   title: "Glimmers and Gratitude | Amy Tangerine",
   description: "Thirty days of noticing the small good things. One prompt a day, in your own journal, starting November 1. A class with Amy Tangerine.",
   alternates: { canonical: "/glimmers" },
+  // A shared link (Instagram bio, a text to a friend) shows Amy with the journal,
+  // not the site-wide card.
+  openGraph: {
+    title: "Glimmers and Gratitude, a November class with Amy Tangerine",
+    description: "Thirty days of noticing the small good things. One prompt a day, in your own journal, starting November 1.",
+    url: "https://www.amytangerine.com/glimmers",
+    images: [{ url: "https://www.amytangerine.com/images/classes/glimmers-amy-journal.jpg", width: 1200, height: 1600, alt: "Amy Tangerine holding her Glimmers and Gratitude journal" }],
+  },
 }
 
 function dollars(amount: number): string {
@@ -54,11 +70,16 @@ const JOURNAL_URL = withTag("https://www.amazon.com/dp/B0CLNXSR2G")
 
 const QUESTIONS: [string, React.ReactNode][] = [
   ["When does it start?", "Day 1 opens Sunday, November 1. Day 30 is November 30."],
+  // Amy's own words: "at least 10 minutes" (her 10/27 edit), "some days you write, some
+  // days you decorate a page" (the class-is-open video).
+  ["How much time does it take?", "Carve out at least 10 minutes a day. Some days you write, some days you decorate a page."],
   ["What if I fall behind?", "Nothing closes. Each day opens on its day and stays open. Do two on a Saturday."],
+  ["Can I join after November 1?", "Yes. Every day that has already opened is waiting for you, so you start at Day 1 and catch up at your own pace."],
+  ["How do I get the class?", "Your link arrives by email after checkout. It opens the class on your phone or laptop, with nothing to log in to. Questions about an order go to help@amytangerine.com."],
   ["Do I need special supplies?", (
     <>
       A journal and a pen. Any supplies you would like to use. If you want the exact journal Amy used and made for the workshop back in 2023, it is{" "}
-      <a href={JOURNAL_URL} target="_blank" rel="sponsored noopener" className="underline underline-offset-4">Glimmers and Gratitude on Amazon</a>
+      <a href={JOURNAL_URL} target="_blank" rel="sponsored noopener" className="underline underline-offset-4">Glimmers and Gratitude on Amazon<span className="sr-only"> (opens in a new tab)</span></a>
       . There are color printables provided. If you don&apos;t have a working printer, Amy suggests what she does: get them printed by a local print shop for about $1 a page.
     </>
   )],
@@ -86,7 +107,9 @@ export default async function GlimmersSalesPage({ searchParams }: { searchParams
     }
   } catch { /* Shopify down: the page still reads; the button says not yet. */ }
   const notYet = `Checkout opens ${formatUnlockDate(c.sales.onSaleDate)}. Day 1 is Sunday, November 1.`
-  const joinLabel = code ? "Join the class with your code" : `Join the class, ${price}`
+  // Same words as the launch email's button (email-copy-guide.md: the label matches the page).
+  const joinLabel = code ? "Join the class with your code" : `Join the class for ${price}`
+  const facts = [code ? "$10 with your code" : `${price}, lifetime access`, "November 1 to 30", "One prompt a day", "Any journal works"]
   const secondary = "text-[var(--color-text-secondary)]"
 
   return (
@@ -99,9 +122,16 @@ export default async function GlimmersSalesPage({ searchParams }: { searchParams
             A thirty-day class with Amy
           </p>
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-5">{c.title}</h1>
-          <p className="text-lg md:text-xl leading-relaxed mb-8">
+          <p className="text-lg md:text-xl leading-relaxed mb-6">
             Thirty days of noticing the small good things. One prompt a day, in your own journal, starting November 1.
           </p>
+          <ul aria-label="The class at a glance" className="flex flex-wrap gap-2 mb-8">
+            {facts.map((f) => (
+              <li key={f} className="text-[15px] font-semibold rounded-full px-4 py-1.5" style={{ background: "var(--color-orange-light)", color: "var(--color-text-primary)" }}>
+                {f}
+              </li>
+            ))}
+          </ul>
           <JoinClassButton slug={SLUG} available={available} label={joinLabel} notYet={notYet} code={code} />
           {code ? (
             <p className="text-sm leading-relaxed mt-5" style={{ color: "var(--color-text-primary)" }}>
@@ -109,10 +139,10 @@ export default async function GlimmersSalesPage({ searchParams }: { searchParams
             </p>
           ) : null}
           <p className={`text-sm leading-relaxed mt-5 ${secondary}`}>
-            {code ? "" : "Took the class in 2023? Your link is in your inbox. "}
+            {code ? "" : "Took the class in 2023? Your price is $10, with the code in your email. "}
             Already in the class?{" "}
             <Link href={`/classes/${SLUG}`} className="underline underline-offset-4" style={{ color: "var(--color-text-primary)" }}>
-              Open it
+              Open your class
             </Link>
             .
           </p>
@@ -124,6 +154,7 @@ export default async function GlimmersSalesPage({ searchParams }: { searchParams
             width={1200}
             height={1600}
             className="rounded-2xl w-full h-auto"
+            sizes="(min-width: 768px) 50vw, 100vw"
             priority
           />
           <figcaption className={`text-sm mt-3 ${secondary}`}>Amy, with the journal she keeps on her desk.</figcaption>
@@ -132,7 +163,8 @@ export default async function GlimmersSalesPage({ searchParams }: { searchParams
 
       {open ? (
         <section className="mt-14 md:mt-20 max-w-3xl">
-          <DemoPlayer hls={open.hls} hlsQuery={open.hlsQuery} mp4={open.mp4} poster={open.poster} />
+          {/* Captions transcribed from the 10/29 cut (56 s, Bunny 6c8598a4). A re-cut needs a new file. */}
+          <DemoPlayer hls={open.hls} hlsQuery={open.hlsQuery} mp4={open.mp4} poster={open.poster} captions="/classes/glimmers-class-is-open.vtt" label="Amy on Glimmers and Gratitude, under a minute" />
         </section>
       ) : null}
 
@@ -190,6 +222,26 @@ export default async function GlimmersSalesPage({ searchParams }: { searchParams
         <p className="text-lg leading-relaxed">
           Anyone who wants a consistent gratitude journaling practice that is creative and easeful. You do not need to be a scrapbooker or an artist. If you have ever kept a journal for three days and stopped, this is built for you: the prompt shows up, you answer. The process is easy and fun.
         </p>
+      </section>
+
+      {/* Trust in place of testimonials: the class has none on record yet, so this is
+          Amy's own About page, in its words. Real student words replace nothing here;
+          they go above the price once Amy has some (sales-page-guide.md). */}
+      <section className="mt-14 md:mt-20 max-w-3xl flex flex-col sm:flex-row gap-6 sm:items-center">
+        <Image
+          src="/images/about/amy-hero.webp"
+          alt=""
+          width={120}
+          height={150}
+          className="rounded-2xl object-cover w-[96px] h-[120px] flex-shrink-0"
+        />
+        <div>
+          <h2 className="text-2xl font-bold mb-3">About Amy</h2>
+          <p className="text-lg leading-relaxed">
+            Amy Tangerine is a modern-day memory keeper and self-proclaimed hobby collector, with creative journaling at the heart of it all. She has taught crafty workshops all over the world and filmed tons of YouTube videos.{" "}
+            <Link href="/about" className="underline underline-offset-4">More about Amy</Link>
+          </p>
+        </div>
       </section>
 
       <section className="mt-14 md:mt-20 max-w-3xl rounded-2xl p-7 md:p-10" style={{ background: "var(--color-orange-light)" }}>
