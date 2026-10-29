@@ -125,7 +125,7 @@ export default function WaitlistForm({ sourcePage = "at-site:/events" }: { sourc
           aria-label="Last name"
         />
       </div>
-      <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row gap-2">
         <input
           type="email"
           required
@@ -133,7 +133,7 @@ export default function WaitlistForm({ sourcePage = "at-site:/events" }: { sourc
           onChange={(e) => setEmail(e.target.value)}
           disabled={status === "submitting"}
           autoComplete="email"
-          className="flex-1 px-4 py-3.5 rounded-xl text-sm md:text-[15px] border-2 outline-none disabled:opacity-60"
+          className="flex-1 min-w-0 px-4 py-3.5 rounded-xl text-sm md:text-[15px] border-2 outline-none disabled:opacity-60"
           style={{
             borderColor: "var(--color-border)",
             background: "var(--color-white)",
