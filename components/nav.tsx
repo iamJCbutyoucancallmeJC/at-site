@@ -41,7 +41,8 @@ const NAV_LINKS: NavItem[] = [
   },
   // The November class (JC 10/29), by its real title, while it is on sale. On desktop it
   // is the teal class pill beside Happy Mail (see CLASS_PILL), so the center row skips it;
-  // the phone drawer lists it here.
+  // the pill shows from lg up (at md it pushes Happy Mail off the edge; the shop tile covers
+  // tablets). The phone drawer lists it here.
   ...(CLASS_PILL ? [{ label: CLASS_PILL.label, href: CLASS_PILL.href }] : []),
   {
     label: "About Amy",
@@ -262,7 +263,7 @@ export default function Nav() {
           {CLASS_PILL ? (
             <Link
               href={CLASS_PILL.href}
-              className="inline-flex items-center whitespace-nowrap px-4 xl:px-6 py-2 xl:py-2.5 rounded-full text-sm xl:text-base font-bold"
+              className="hidden lg:inline-flex items-center whitespace-nowrap px-4 xl:px-6 py-2 xl:py-2.5 rounded-full text-sm xl:text-base font-bold"
               style={{ background: "var(--color-teal)", color: "var(--color-ink)" }}
               onClick={() => trackEvent("nav_click", { link_text: CLASS_PILL.label, mobile_or_desktop: "desktop" })}
             >
