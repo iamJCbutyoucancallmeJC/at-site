@@ -7,6 +7,8 @@ import type { AnalyticsEvent } from "@/lib/analytics"
 // Happy Mail's card sits on the pink (orange-light) so pink keeps meaning the
 // envelope. Replaces the full-bleed orange strip and the dark photo banners.
 // On phones it stacks: picture first, words under, button full width.
+// 2026-10-29: the type scales with the viewport (md/lg steps) so the words keep
+// pace with the 40% photograph instead of shrinking beside it on wide windows.
 
 export default function PromoCard({
   eyebrow,
@@ -34,7 +36,7 @@ export default function PromoCard({
 
   return (
     <div
-      className="grid md:grid-cols-[1fr_40%] gap-5 md:gap-8 items-center rounded-2xl p-6 md:p-8"
+      className="grid md:grid-cols-[1fr_40%] gap-5 md:gap-10 lg:gap-14 items-center rounded-2xl p-6 md:p-10 lg:p-14"
       style={{ background: bg }}
     >
       <div className="relative aspect-[4/3] rounded-xl overflow-hidden md:order-2">
@@ -48,13 +50,13 @@ export default function PromoCard({
         />
       </div>
       <div className="md:order-1 min-w-0">
-        <p className="text-[12px] font-bold uppercase tracking-[0.12em] leading-tight mb-2" style={{ color: "var(--color-orange-ink)" }}>
+        <p className="text-[12px] md:text-[13px] font-bold uppercase tracking-[0.12em] leading-tight mb-2 md:mb-3" style={{ color: "var(--color-orange-ink)" }}>
           {eyebrow}
         </p>
-        <Heading className="text-[22px] font-bold leading-[1.25] mb-2" style={{ color: "var(--color-ink)" }}>
+        <Heading className="text-[22px] md:text-[32px] lg:text-[40px] font-bold leading-[1.25] md:leading-[1.15] tracking-tight mb-2 md:mb-3" style={{ color: "var(--color-ink)" }}>
           {title}
         </Heading>
-        <p className="text-[16px] leading-relaxed mb-5 max-w-[42rem]" style={{ color: "var(--color-ink)" }}>
+        <p className="text-[16px] md:text-[18px] lg:text-[20px] leading-relaxed mb-5 md:mb-7 max-w-[42rem]" style={{ color: "var(--color-ink)" }}>
           {text}
         </p>
         <TrackableLink
