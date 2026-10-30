@@ -31,6 +31,7 @@ export type Prompt = {
 }
 
 export type ClassVideo = { id: string; cues?: Cue[] }
+export type ClassDemo = { id: string; caption: string }
 
 export type ClassDay = {
   day: number
@@ -43,8 +44,9 @@ export type ClassDay = {
   photo?: { src: string; alt: string }
   video?: ClassVideo
   // A longer landscape "here is mine" video under the steps (Amy's 2023 page
-  // videos from Kajabi, 10/14). Plain player, no cues.
-  demo?: { id: string; caption: string }
+  // videos from Kajabi, 10/14; her 2026 hands-on clips, 10/29). Plain player, no
+  // cues. A list plays as stacked players, first on top.
+  demo?: ClassDemo | ClassDemo[]
   // Optional printable(s): file names inside content/classes/<slug>/files/.
   files?: { name: string; label: string }[]
 }
@@ -69,8 +71,12 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     // Amy to camera, shot 10/8; Amy-only re-cut 10/14 (Bunny "glimmers-d02"): the 10/9 cut
     // carried JC's "Make a fun place for your glimmers to go". 6.4 s.
     video: { id: "fc46fd24-9302-4fe2-9e5e-418a3d4c2904", cues: [{ at: 6.1, key: "d02" }] },
-    // Amy's 2023 journal-setup video from Kajabi, 25 min. JC ruled 10/14: in, under the steps.
-    demo: { id: "86628475-cb90-45ea-9d40-32a7a4e661bb", caption: "Amy setting up her journal, from the 2023 class. Twenty-five minutes; watch what you like." },
+    // First: Amy's 2026 hands-on setup, shot overhead 10/29 (IMG_0434-0446, cover sped 6x,
+    // no talking; Bunny "glimmers-2026-d02-hands"). Then the 2023 Kajabi video, 25 min (JC 10/14).
+    demo: [
+      { id: "766c78a4-67b5-4779-b805-b211fc2a8879", caption: "Amy setting up this year's journal: the cover, then the first page. Two and a half minutes, no talking." },
+      { id: "86628475-cb90-45ea-9d40-32a7a4e661bb", caption: "Amy setting up her journal, from the 2023 class. Twenty-five minutes; watch what you like." },
+    ],
     prompt: { key: "d02", steps: ["Pick the notebook. Any notebook works.", "Write today's date on the first page.", "Make a fun place for your glimmers to go: a title, a doodle, a strip of tape.", "Print the journal-setup page and glue it in, if you want it."] },
     body: [],
     files: [{ name: "printable-1-journal-setup.pdf", label: "Printable (PDF)" }],

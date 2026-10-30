@@ -40,7 +40,9 @@ export default async function ClassDayPage({ params }: { params: Promise<{ slug:
   const day = open ? getClassDay(slug, n) : null
   const answers = open ? await getAnswers(claim) : {}
   const src = day?.video ? await playbackSource(day.video.id) : null
-  const demo = day?.demo ? await playbackSource(day.demo.id) : null
+  const demos = await Promise.all(
+    (day?.demo ? [day.demo].flat() : []).map(async (d) => ({ ...d, src: await playbackSource(d.id) })),
+  )
   const quote = day?.prompt.quoteBack && answers[day.prompt.quoteBack]
     ? { label: "You wrote earlier:", text: answers[day.prompt.quoteBack] }
     : null
@@ -115,11 +117,13 @@ export default async function ClassDayPage({ params }: { params: Promise<{ slug:
               ))}
             </div>
           ) : null}
-          {demo && day.demo ? (
-            <div className="mt-12">
-              <DemoPlayer hls={demo.hls} hlsQuery={demo.hlsQuery} mp4={demo.mp4} poster={demo.poster} caption={day.demo.caption} />
-            </div>
-          ) : null}
+          {demos.map((d) =>
+            d.src ? (
+              <div key={d.id} className="mt-12">
+                <DemoPlayer hls={d.src.hls} hlsQuery={d.src.hlsQuery} mp4={d.src.mp4} poster={d.src.poster} caption={d.caption} />
+              </div>
+            ) : null,
+          )}
           {day.files?.length ? (
             <ul className="mt-10 space-y-2">
               {day.files.map((f) => (
