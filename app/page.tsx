@@ -12,6 +12,8 @@ import type { Metadata } from "next"
 import KeepUpCard from "@/components/keep-up-card"
 import SectionHeader from "@/components/section-header"
 import PromoCard from "@/components/promo-card"
+import FromTheJournal from "@/components/blog/from-the-journal"
+import { HM_RECENT_ENVELOPES } from "@/lib/happy-mail-content"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 import TrackableLink from "@/components/trackable-link"
 import { getAllProducts, formatPrice } from "@/lib/shopify"
@@ -76,6 +78,8 @@ export default async function HomePage() {
       href: `/shop/${handle}`,
     }]
   })
+
+  const latestEnvelope = HM_RECENT_ENVELOPES[0] ?? { month: "April 2026", img: "/images/happy-mail/envelopes/2026-04.jpg" }
 
   return (
     <main>
@@ -163,7 +167,8 @@ export default async function HomePage() {
             event: "hero_cta_click",
             eventData: { cta_text: "Happy Mail card Subscribe", destination: "/happy-mail", page: "homepage" },
           }}
-          image={{ src: "/images/happy-mail/envelopes/2026-04.jpg", alt: "The April 2026 Happy Mail envelope and what came in it" }}
+          // The newest month scripts/add-hm-envelope.mjs added, so the card follows the series.
+          image={{ src: latestEnvelope.img, alt: `The ${latestEnvelope.month} Happy Mail envelope and what came in it` }}
         />
       </section>
 
@@ -198,6 +203,11 @@ export default async function HomePage() {
             </TrackableLink>
           ))}
         </div>
+      </section>
+
+      {/* ── From the Journal (Phase 4): the Journal's own card, three newest posts ── */}
+      <section className="px-4 md:px-10 py-12 md:py-16 border-t" style={{ borderColor: "var(--color-border)" }}>
+        <FromTheJournal page="homepage" />
       </section>
 
       {/* ── Sunshine & Rainbows (Amazon): the one off-site door, as a paper card ── */}

@@ -5,10 +5,7 @@ import { formatDate, type PostMeta } from "@/lib/blog"
 // built for browsing the long tail).
 export default function PostList({ posts }: { posts: PostMeta[] }) {
   return (
-    <ul
-      className="divide-y"
-      style={{ borderColor: "var(--color-border)" }}
-    >
+    <ul className="divide-y divide-[color:var(--color-border)]">
       {posts.map((post) => (
         <li key={post.slug}>
           <Link
@@ -16,15 +13,15 @@ export default function PostList({ posts }: { posts: PostMeta[] }) {
             className="block py-5 group flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-5"
           >
             <time
-              className="text-[12px] uppercase tracking-[0.12em] font-semibold shrink-0 sm:w-36"
-              style={{ color: "var(--color-text-secondary)" }}
+              className="text-[13px] shrink-0 sm:w-40"
+              style={{ color: "var(--color-ink-soft)" }}
               dateTime={post.date ?? undefined}
             >
               {formatDate(post.date)}
             </time>
             <span
-              className="text-[17px] font-semibold leading-snug group-hover:underline underline-offset-4"
-              style={{ color: "var(--color-text-primary)" }}
+              className="text-[18px] font-semibold leading-[1.3] group-hover:underline underline-offset-4"
+              style={{ color: "var(--color-ink)" }}
             >
               {post.title}
             </span>

@@ -25,18 +25,18 @@ export default function BlogSearchPage() {
   return (
     <>
       <PageEngagementTracker page="blog-search" />
-      <section className="px-6 md:px-16 py-12 md:py-16">
+      <section className="px-4 md:px-10 py-12 md:py-16">
         <div className="max-w-3xl mx-auto">
           <Link
             href="/blog"
-            className="text-[13px] font-semibold inline-block mb-6"
+            className="text-[14px] font-semibold inline-block mb-6 hover:text-[color:var(--color-ink)] transition-colors"
             style={{ color: "var(--color-orange-ink)" }}
           >
             ← The Journal
           </Link>
           <h1
-            className="text-[32px] md:text-[44px] font-bold tracking-tight mb-6"
-            style={{ color: "var(--color-text-primary)" }}
+            className="text-[32px] md:text-[40px] font-bold leading-[1.1] tracking-[-0.02em] mb-6"
+            style={{ color: "var(--color-ink)" }}
           >
             Search the Journal
           </h1>

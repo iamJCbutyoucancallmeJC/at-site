@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 import BlogLinkTracker from "@/components/blog-link-tracker"
 import KeepUpCard from "@/components/keep-up-card"
+import FromTheJournal from "@/components/blog/from-the-journal"
 import {
   getListablePosts,
   getDraftPosts,
@@ -60,11 +61,14 @@ export default async function BlogPost({
     <>
       <PageEngagementTracker page="blog-post" />
 
-      <article className="px-6 md:px-16 py-12 md:py-16">
-        <div className="max-w-2xl mx-auto">
+      {/* Post template (Phase 4): the 42rem measure, h1 40px (32 on phones), body
+          16px / 1.6 in ink, images 12px radius; .blog-button stays the one
+          shadow-cta button. */}
+      <article className="px-4 md:px-10 py-12 md:py-16">
+        <div className="max-w-[42rem] mx-auto">
           <Link
             href="/blog"
-            className="text-[13px] font-semibold inline-block mb-8"
+            className="text-[14px] font-semibold inline-block mb-8 hover:text-[color:var(--color-ink)] transition-colors"
             style={{ color: "var(--color-orange-ink)" }}
           >
             ← The Journal
@@ -74,11 +78,11 @@ export default async function BlogPost({
               has approved it yet. Unlisted, noindex; approve.py clears the flag. */}
           {post.draft && (
             <aside
-              className="mb-8 rounded-xl px-5 py-3 text-[13px] font-semibold uppercase tracking-[0.12em]"
+              className="mb-8 rounded-xl px-5 py-3 text-[14px] font-semibold"
               style={{
-                background: "var(--color-gray-light)",
-                color: "var(--color-text-secondary)",
-                borderLeft: "3px solid var(--color-orange)",
+                background: "var(--color-paper)",
+                color: "var(--color-ink)",
+                borderLeft: "3px solid var(--color-orange-ink)",
               }}
             >
               Draft preview. Not published, not listed.
@@ -86,19 +90,19 @@ export default async function BlogPost({
           )}
 
           <header className="mb-10">
-            <time
-              className="text-[12px] uppercase tracking-[0.18em] font-semibold"
-              style={{ color: "var(--color-orange-ink)" }}
-              dateTime={post.date ?? undefined}
-            >
-              {formatDate(post.date)}
-            </time>
             <h1
-              className="text-[32px] md:text-[44px] font-bold leading-[1.1] tracking-tight mt-3"
-              style={{ color: "var(--color-text-primary)" }}
+              className="text-[32px] md:text-[40px] font-bold leading-[1.1] tracking-[-0.02em]"
+              style={{ color: "var(--color-ink)" }}
             >
               {post.title}
             </h1>
+            {/* Byline line: the date only. No author name, because some archive posts are
+                by Amy's design team and the store records no author. */}
+            {post.date && (
+              <p className="mt-3 text-[14px]" style={{ color: "var(--color-ink-soft)" }}>
+                <time dateTime={post.date}>{formatDate(post.date)}</time>
+              </p>
+            )}
           </header>
 
           {/* Archival notice: older posts (giveaways, dated collabs, link-rot) get a
@@ -108,14 +112,14 @@ export default async function BlogPost({
             <aside
               className="mb-10 rounded-xl px-5 py-4 text-[14px] leading-relaxed"
               style={{
-                background: "var(--color-gray-light)",
-                color: "var(--color-text-secondary)",
-                borderLeft: "3px solid var(--color-orange)",
+                background: "var(--color-paper)",
+                color: "var(--color-ink-soft)",
+                borderLeft: "3px solid var(--color-orange-ink)",
               }}
             >
               <span
                 className="font-semibold"
-                style={{ color: "var(--color-text-primary)" }}
+                style={{ color: "var(--color-ink)" }}
               >
                 From the archive.
               </span>{" "}
@@ -136,7 +140,9 @@ export default async function BlogPost({
               Squarespace CDN; t811 re-hosts them. */}
           <div
             className="blog-body"
-            dangerouslySetInnerHTML={{ __html: post.body }}
+            // Legacy images with no alt get alt="" so a screen reader skips them
+            // instead of reading the file name (Lighthouse image-alt, Phase 4).
+            dangerouslySetInnerHTML={{ __html: post.body.replace(/<img(?![^>]*\salt=)/g, '<img alt=""') }}
           />
           <BlogLinkTracker slug={post.slug} />
 
@@ -150,10 +156,10 @@ export default async function BlogPost({
                   <Link
                     key={tag}
                     href={`/blog/tag/${tagToSlug(tag)}`}
-                    className="text-[13px] px-3 py-1.5 rounded-full transition hover:opacity-80"
+                    className="text-[13px] px-3 py-1.5 rounded-lg border border-[color:var(--color-paper)] hover:border-[color:var(--color-ink)] transition-colors"
                     style={{
-                      background: "var(--color-gray-light)",
-                      color: "var(--color-text-secondary)",
+                      background: "var(--color-paper)",
+                      color: "var(--color-ink-soft)",
                     }}
                   >
                     {tag}
@@ -166,6 +172,14 @@ export default async function BlogPost({
       </article>
       {/* Email capture (t1092, D3 inline block) -- renders null until
           NEXT_PUBLIC_CAPTURE_BLOCKS=1 (Amy aesthetic pass gate) */}
+      {/* The module the homepage carries too, minus this post (Phase 4). */}
+      {!post.draft && (
+        <section className="px-4 md:px-10 py-12 md:py-16 border-t" style={{ borderColor: "var(--color-border)" }}>
+          <div className="max-w-6xl mx-auto">
+            <FromTheJournal page="blog-post" exclude={post.slug} />
+          </div>
+        </section>
+      )}
       <KeepUpCard sourcePage="blog" gated />
     </>
   )

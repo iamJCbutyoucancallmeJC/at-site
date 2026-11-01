@@ -12,6 +12,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
+import SectionHeader from "@/components/section-header"
 import FaqAccordion from "@/components/faq-accordion"
 import FirstEnvelopePromise from "@/components/first-envelope-promise"
 import HmWaitlistForm from "@/components/hm-waitlist-form"
@@ -87,17 +88,17 @@ export default function HappyMailClient() {
 
       <section className="px-4 md:px-10 pt-10 md:pt-16 pb-8 md:pb-10">
         <div className="max-w-6xl mx-auto">
-          <p className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-3" style={{ color: "var(--color-orange-ink)" }}>Monthly Subscription</p>
-          <h1 className="text-[36px] md:text-[52px] font-bold leading-[1.05] tracking-tight mb-4" style={{ color: "var(--color-text-primary)" }}>Every month, a letter from Amy.</h1>
-          <p className="text-[16px] md:text-[18px] leading-relaxed max-w-xl mb-8" style={{ color: "var(--color-text-secondary)" }}>The good kind of mail.</p>
+          <p className="text-[12px] uppercase tracking-[0.12em] font-bold mb-3" style={{ color: "var(--color-orange-ink)" }}>Monthly subscription</p>
+          <h1 className="text-[40px] md:text-[56px] font-bold leading-[1.02] tracking-[-0.02em] mb-4" style={{ color: "var(--color-ink)" }}>Every month, a letter from Amy.</h1>
+          <p className="text-[18px] leading-relaxed max-w-xl mb-8" style={{ color: "var(--color-ink-soft)" }}>The good kind of mail.</p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4 mb-8">
             {BOX_CONTENTS.map((item) => (
               <div key={item.label}>
-                <div className="relative aspect-square bg-gray-50 rounded-xl overflow-hidden mb-2">
+                <div className="relative aspect-square rounded-xl overflow-hidden mb-2" style={{ background: "var(--color-paper)" }}>
                   <Image src={item.img} alt={item.label} fill className="object-cover" sizes="(max-width: 768px) 50vw, 25vw" />
                 </div>
-                <p className="text-[13px] font-semibold leading-snug" style={{ color: "var(--color-text-primary)" }}>{item.label}</p>
-                <p className="text-[12px] leading-snug" style={{ color: "var(--color-text-secondary)" }}>{item.body}</p>
+                <p className="text-[14px] font-semibold leading-snug" style={{ color: "var(--color-ink)" }}>{item.label}</p>
+                <p className="text-[13px] leading-snug" style={{ color: "var(--color-ink-soft)" }}>{item.body}</p>
               </div>
             ))}
           </div>
@@ -114,18 +115,18 @@ export default function HappyMailClient() {
           </div>
         ) : (
         <div className="max-w-2xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div className="rounded-2xl p-5 border" style={{ background: "var(--color-white)", borderColor: "var(--color-border)" }}>
-            <p className="text-[12px] uppercase tracking-[0.15em] font-semibold mb-2" style={{ color: "var(--color-text-secondary)" }}>Monthly</p>
+          <div className="rounded-xl p-5 border" style={{ background: "var(--color-white)", borderColor: "var(--color-border)" }}>
+            <h2 className="text-[18px] font-semibold leading-[1.3] mb-2" style={{ color: "var(--color-ink)" }}>Monthly</h2>
             <div className="flex items-end gap-1 mb-1">
-              <span className="text-[36px] font-bold leading-none" style={{ color: "var(--color-text-primary)" }}>${PRICE_MONTHLY}</span>
-              <span className="text-[13px] mb-1" style={{ color: "var(--color-text-secondary)" }}>/month</span>
+              <span className="text-[36px] font-bold leading-none" style={{ color: "var(--color-ink)" }}>${PRICE_MONTHLY}</span>
+              <span className="text-[14px] mb-1" style={{ color: "var(--color-ink-soft)" }}>/month</span>
             </div>
-            <p className="text-[12px] mb-4" style={{ color: "var(--color-text-secondary)" }}>Renews monthly · cancel anytime</p>
+            <p className="text-[14px] mb-4" style={{ color: "var(--color-ink-soft)" }}>Renews monthly · cancel anytime</p>
             {closed === null ? <HmButtonPlaceholder /> : <SubscribeButton plan="monthly" dark={false} />}
           </div>
           <div
             ref={sixMonthRef}
-            className="rounded-2xl p-5 border-2 relative transition-all duration-500"
+            className="rounded-xl p-5 border-2 relative transition-all duration-500"
             style={{
               background: "var(--color-white)",
               borderColor: "var(--color-orange)",
@@ -133,11 +134,12 @@ export default function HappyMailClient() {
               transform: highlight6mo ? "scale(1.02)" : "scale(1)",
             }}
           >
-            <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 text-[11px] uppercase tracking-[0.12em] font-bold rounded-full text-white" style={{ background: "var(--color-teal)" }}>Best value</span>
-            <p className="text-[12px] uppercase tracking-[0.15em] font-semibold mb-2" style={{ color: "var(--color-orange-ink)" }}>6 Months</p>
+            {/* Badge (Phase 4): ink-family text on the teal tint, teal-ink 4.7:1. It was white on teal, 2.75:1. */}
+            <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-2.5 py-1 text-[11px] uppercase tracking-[0.1em] font-bold leading-none rounded-lg" style={{ background: "var(--color-teal-tint)", color: "var(--color-teal-ink)" }}>Best value</span>
+            <h2 className="text-[18px] font-semibold leading-[1.3] mb-2" style={{ color: "var(--color-ink)" }}>6 months</h2>
             <div className="flex items-end gap-1 mb-1">
-              <span className="text-[36px] font-bold leading-none" style={{ color: "var(--color-text-primary)" }}>${PRICE_6MONTH}</span>
-              <span className="text-[13px] mb-1" style={{ color: "var(--color-text-secondary)" }}>one payment</span>
+              <span className="text-[36px] font-bold leading-none" style={{ color: "var(--color-ink)" }}>${PRICE_6MONTH}</span>
+              <span className="text-[14px] mb-1" style={{ color: "var(--color-ink-soft)" }}>one payment</span>
             </div>
             {/* [t658] 6-month copy correction (2026-05-29). Plan was WRONG: it recurs (Recharge 22062815, expire_after=null).
                 Selling surface — discount now emphasized big/bold per JC+Amy 2026-05-29; honest cadence kept as subline.
@@ -147,7 +149,7 @@ export default function HappyMailClient() {
                   C:        "Save $6" big/bold + "auto-renews every 6 months" subline
                 Final wording is JC+Amy's call — do not mark t658 done. */}
             <p className="text-[20px] md:text-[22px] font-extrabold leading-none mb-0.5" style={{ color: "var(--color-teal-ink)" }}>Save $6</p>
-            <p className="text-[12px] mb-4" style={{ color: "var(--color-text-secondary)" }}>billed every 6 months</p>
+            <p className="text-[14px] mb-4" style={{ color: "var(--color-ink-soft)" }}>billed every 6 months</p>
             {closed === null ? <HmButtonPlaceholder /> : <SubscribeButton plan="6-month" dark={true} />}
           </div>
         </div>
@@ -156,7 +158,7 @@ export default function HappyMailClient() {
             "Ships around the 15th." line). Wording is Amy-veto-gated via the
             fall-plan doc; merge to main only after the veto window clears. */}
         {closed ? (
-          <p className="text-center text-[12px] mt-4" style={{ color: "var(--color-text-secondary)" }}>
+          <p className="text-center text-[14px] mt-4" style={{ color: "var(--color-ink-soft)" }}>
             Happy Mail reopens October 16. Envelopes ship around the 15th.
           </p>
         ) : (
@@ -167,31 +169,26 @@ export default function HappyMailClient() {
       {/* ── Editorial: a note about Happy Mail (reused from prior site, Amy's voice) ── */}
       <section className="py-12 md:py-16 px-4 md:px-10" style={{ background: "var(--color-white)" }}>
         <div className="max-w-2xl mx-auto">
-          <p className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-3" style={{ color: "var(--color-orange-ink)" }}>
-            Let me send you mail
-          </p>
-          <h2 className="text-[26px] md:text-[34px] font-bold leading-tight tracking-tight mb-5" style={{ color: "var(--color-text-primary)" }}>
-            Happy mail!
-          </h2>
-          <p className="text-[16px] md:text-[18px] leading-relaxed mb-5" style={{ color: "var(--color-text-secondary)" }}>
+          <SectionHeader eyebrow="Let me send you mail" title="Happy mail!" />
+          <p className="text-[16px] md:text-[18px] leading-relaxed mb-5" style={{ color: "var(--color-ink-soft)" }}>
             Once a month, you&rsquo;ll get an envelope from me filled with fresh &amp; juicy bits I designed
             and actually use for paper crafting and journaling: a 4&times;6 sticker sheet, die cuts, and some
             surprises. Plus a little note.
           </p>
-          <p className="text-[16px] md:text-[18px] leading-relaxed mb-8" style={{ color: "var(--color-text-secondary)" }}>
+          <p className="text-[16px] md:text-[18px] leading-relaxed mb-8" style={{ color: "var(--color-ink-soft)" }}>
             It&rsquo;s the good kind of mail. The kind that makes you smile when you see it in the stack.
           </p>
 
-          <p className="text-[12px] uppercase tracking-[0.15em] font-semibold mb-4" style={{ color: "var(--color-text-primary)" }}>
+          <h3 className="text-[18px] font-semibold leading-[1.3] mb-4" style={{ color: "var(--color-ink)" }}>
             What&rsquo;s inside
-          </p>
+          </h3>
           <ul className="space-y-3 mb-8">
             {[
               "Ephemera (die cuts), made in the USA",
               "Exclusive first look at our newest 4×6 sticker sheet (not available anywhere else online)",
               "A note from me about what I'm making, loving, or thinking about",
             ].map((item) => (
-              <li key={item} className="flex gap-3 text-[15px] md:text-[16px] leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+              <li key={item} className="flex gap-3 text-[16px] leading-relaxed" style={{ color: "var(--color-ink-soft)" }}>
                 <span aria-hidden className="select-none" style={{ color: "var(--color-orange-ink)" }}>&#10003;</span>
                 <span>{item}</span>
               </li>
@@ -204,76 +201,52 @@ export default function HappyMailClient() {
         </div>
       </section>
 
+      {/* Recent envelopes (Phase 4): a series grid that grows by script. Every month
+          scripts/add-hm-envelope.mjs adds goes in here, newest first: 2-up on phones,
+          3-up from sm, and 4-up from lg once there are four months to show. */}
       {RECENT_ENVELOPES.length > 0 && (
-        <section id="inside" className="py-12 md:py-16 px-4 md:px-10">
-          <h2 className="text-[15px] md:text-[17px] uppercase tracking-[0.12em] font-semibold text-center mb-8 md:mb-10" style={{ color: "var(--color-text-primary)" }}>
-            Recent envelopes
-          </h2>
-          {/* Flex, not a 3-col grid: one or two months center instead of hugging the left. */}
-          <div className="max-w-5xl mx-auto flex flex-wrap justify-center gap-4">
-            {RECENT_ENVELOPES.slice(0, 3).map((e) => (
-              <figure key={e.month} className="w-full sm:w-[calc((100%-2rem)/3)]">
-                <div className="relative aspect-square bg-gray-50 rounded-xl overflow-hidden mb-2">
-                  <Image src={e.img} alt={`${e.month} Happy Mail envelope`} fill className="object-cover" sizes="(max-width: 640px) 100vw, 33vw" />
-                </div>
-                <figcaption className="text-[13px] font-semibold" style={{ color: "var(--color-text-primary)" }}>{e.month}</figcaption>
-                {e.caption && <p className="text-[12px] leading-snug" style={{ color: "var(--color-text-secondary)" }}>{e.caption}</p>}
-              </figure>
-            ))}
+        <section id="inside" className="py-12 md:py-16 px-4 md:px-10 border-t" style={{ borderColor: "var(--color-border)" }}>
+          <div className="max-w-5xl mx-auto">
+            <SectionHeader title="Recent envelopes" />
+            <div className={`grid grid-cols-2 sm:grid-cols-3 ${RECENT_ENVELOPES.length >= 4 ? "lg:grid-cols-4" : ""} gap-4`}>
+              {RECENT_ENVELOPES.map((e) => (
+                <figure key={e.month} className="min-w-0">
+                  <div className="relative aspect-square rounded-xl overflow-hidden mb-2" style={{ background: "var(--color-paper)" }}>
+                    <Image src={e.img} alt={`${e.month} Happy Mail envelope`} fill className="object-cover" sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw" />
+                  </div>
+                  <figcaption className="text-[14px] font-semibold" style={{ color: "var(--color-ink)" }}>{e.month}</figcaption>
+                  {e.caption && <p className="text-[13px] leading-snug" style={{ color: "var(--color-ink-soft)" }}>{e.caption}</p>}
+                </figure>
+              ))}
+            </div>
           </div>
         </section>
       )}
 
-      {/* ── Testimonials ── */}
-      <section
-        id="fan-mail"
-        className="py-12 md:py-16 px-4 md:px-10"
-        style={{ background: "var(--color-gray-light)" }}
-      >
-        <h2
-          className="text-[15px] md:text-[17px] uppercase tracking-[0.12em] font-semibold text-center mb-8 md:mb-10"
-          style={{ color: "var(--color-text-primary)" }}
-        >
-          Fan mail
-        </h2>
-        <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {TESTIMONIALS.map((t, i) => (
-            <div
-              key={i}
-              className="rounded-xl p-5 flex flex-col"
-              style={{ background: "var(--color-white)", border: "1px solid var(--color-border)" }}
-            >
-              <p
-                className="text-[13px] leading-relaxed flex-1 mb-4"
-                style={{ color: "var(--color-text-secondary)" }}
-              >
-                &ldquo;{t.quote}&rdquo;
-              </p>
-              <div>
-                <p
-                  className="text-[12px] font-semibold"
-                  style={{ color: "var(--color-text-primary)" }}
-                >
-                  {t.name}
-                </p>
-                <p className="text-[12px]" style={{ color: "var(--color-text-secondary)" }}>
-                  {t.location}
-                </p>
-              </div>
-            </div>
-          ))}
+      {/* ── Fan mail: paper cards on the white page (the gray band is gone, Phase 4) ── */}
+      <section id="fan-mail" className="py-12 md:py-16 px-4 md:px-10 border-t" style={{ borderColor: "var(--color-border)" }}>
+        <div className="max-w-5xl mx-auto">
+          <SectionHeader title="Fan mail" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {TESTIMONIALS.map((t, i) => (
+              <figure key={i} className="rounded-xl p-5 flex flex-col" style={{ background: "var(--color-paper)" }}>
+                <blockquote className="text-[14px] leading-relaxed flex-1 mb-4" style={{ color: "var(--color-ink)" }}>
+                  &ldquo;{t.quote}&rdquo;
+                </blockquote>
+                <figcaption>
+                  <p className="text-[14px] font-semibold" style={{ color: "var(--color-ink)" }}>{t.name}</p>
+                  <p className="text-[13px]" style={{ color: "var(--color-ink-soft)" }}>{t.location}</p>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ── FAQ ── */}
-      <section id="faq" className="py-12 md:py-16 px-4 md:px-10">
-        <div className="max-w-2xl mx-auto">
-          <h2
-            className="text-[15px] md:text-[17px] uppercase tracking-[0.12em] font-semibold mb-8"
-            style={{ color: "var(--color-text-primary)" }}
-          >
-            Questions?
-          </h2>
+      <section id="faq" className="py-12 md:py-16 px-4 md:px-10 border-t" style={{ borderColor: "var(--color-border)" }}>
+        <div className="max-w-[42rem] mx-auto">
+          <SectionHeader title="Questions?" />
           <FaqAccordion items={hmFaqForState(FAQ_ITEMS, closed === true)} />
         </div>
       </section>

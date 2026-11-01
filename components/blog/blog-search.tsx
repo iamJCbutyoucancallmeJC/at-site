@@ -51,7 +51,7 @@ export default function BlogSearch({ index }: { index: SearchEntry[] }) {
       <div className="relative max-w-xl">
         <Search
           className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4"
-          style={{ color: "var(--color-text-secondary)" }}
+          style={{ color: "var(--color-ink-soft)" }}
           aria-hidden
         />
         <input
@@ -60,11 +60,11 @@ export default function BlogSearch({ index }: { index: SearchEntry[] }) {
           onChange={(e) => setQ(e.target.value)}
           placeholder={`Search ${index.length.toLocaleString()} posts…`}
           aria-label="Search the blog"
-          className="w-full pl-11 pr-4 py-3 rounded-full text-[15px] outline-none focus:ring-2 transition"
+          className="w-full pl-11 pr-4 py-3 rounded-lg text-[16px] outline-none focus:ring-2 transition"
           style={{
             background: "var(--color-white)",
             border: "1px solid var(--color-border)",
-            color: "var(--color-text-primary)",
+            color: "var(--color-ink)",
           }}
         />
       </div>
@@ -73,7 +73,7 @@ export default function BlogSearch({ index }: { index: SearchEntry[] }) {
         <div className="mt-6">
           <p
             className="text-[13px] mb-4"
-            style={{ color: "var(--color-text-secondary)" }}
+            style={{ color: "var(--color-ink-soft)" }}
           >
             {results.length === 0
               ? "No posts found."
@@ -83,21 +83,18 @@ export default function BlogSearch({ index }: { index: SearchEntry[] }) {
             {results.map((r) => (
               <li key={r.slug}>
                 <Link href={`/blog/${r.slug}`} className="block group">
-                  <span
-                    className="text-[12px] uppercase tracking-[0.15em] font-semibold"
-                    style={{ color: "var(--color-orange-ink)" }}
-                  >
+                  <span className="text-[13px]" style={{ color: "var(--color-ink-soft)" }}>
                     {r.date ?? ""}
                   </span>
                   <h3
-                    className="text-[17px] font-semibold leading-snug group-hover:underline underline-offset-4"
-                    style={{ color: "var(--color-text-primary)" }}
+                    className="text-[18px] font-semibold leading-[1.3] group-hover:underline underline-offset-4"
+                    style={{ color: "var(--color-ink)" }}
                   >
                     {r.title}
                   </h3>
                   <p
                     className="text-[14px] leading-relaxed line-clamp-2 mt-1"
-                    style={{ color: "var(--color-text-secondary)" }}
+                    style={{ color: "var(--color-ink-soft)" }}
                   >
                     {r.excerpt}
                   </p>

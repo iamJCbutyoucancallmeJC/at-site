@@ -210,7 +210,7 @@ export default function UpdateCardPage() {
           <div
             className="rounded-2xl p-5 md:p-6 mb-8 border"
             style={{
-              background: "var(--color-gray-light)",
+              background: "var(--color-paper)",
               borderColor: "var(--color-border)",
             }}
           >
@@ -286,8 +286,8 @@ export default function UpdateCardPage() {
 
       {/* FAQ */}
       <section
-        className="px-4 md:px-10 py-10 md:py-14"
-        style={{ background: "var(--color-gray-light)" }}
+        className="px-4 md:px-10 py-10 md:py-14 border-y"
+        style={{ background: "var(--color-paper)", borderColor: "var(--color-border)" }}
       >
         <div className="max-w-2xl mx-auto">
           <p
