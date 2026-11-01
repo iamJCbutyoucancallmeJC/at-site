@@ -65,7 +65,9 @@ export const HM_BOX_CONTENTS = [
 // product-render image here: the point is what actually went out.
 export type HmEnvelope = { month: string; img: string; caption?: string }
 export const HM_RECENT_ENVELOPES: HmEnvelope[] = [
+  { month: "July 2026", img: "/images/happy-mail/envelopes/2026-07.jpg" },
   { month: "April 2026", img: "/images/happy-mail/envelopes/2026-04.jpg" },
+  { month: "March 2026", img: "/images/happy-mail/envelopes/2026-03.jpg" },
 ]
 
 // Testimonials — REAL subscribers, verbatim from their own emails to hello@.
