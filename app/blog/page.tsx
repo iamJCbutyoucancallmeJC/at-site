@@ -3,6 +3,7 @@ import Image from "next/image"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 import PostCard from "@/components/blog/post-card"
 import FeaturedTiles from "@/components/blog/featured-tiles"
+import SectionHeader from "@/components/section-header"
 import {
   getDefaultFeed,
   getFeatured,
@@ -67,22 +68,22 @@ export default async function BlogIndex({
         />
         <div className="max-w-5xl mx-auto w-full relative">
           <p
-            className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-3"
+            className="text-[12px] uppercase tracking-[0.12em] font-bold mb-3"
             style={{ color: "var(--color-orange-ink)" }}
           >
             The Journal
           </p>
           <h1
-            className="text-[36px] md:text-[52px] font-bold leading-[1.05] tracking-tight mb-4"
-            style={{ color: "var(--color-text-primary)" }}
+            className="text-[32px] md:text-[40px] font-bold leading-[1.1] tracking-[-0.02em] mb-4"
+            style={{ color: "var(--color-ink)" }}
           >
             Crafting a life,
             <br />
             one story at a time.
           </h1>
           <p
-            className="text-[16px] md:text-[18px] leading-relaxed max-w-2xl"
-            style={{ color: "var(--color-text-secondary)" }}
+            className="text-[18px] leading-relaxed max-w-2xl"
+            style={{ color: "var(--color-ink-soft)" }}
           >
             A decade of creative journaling, scrapbooking, travel, and behind-the-scenes
             from the studio. {" "}
@@ -104,17 +105,12 @@ export default async function BlogIndex({
       {/* ── Start here ── */}
       {startHere.length > 0 && (
         <section
-          className="py-12 md:py-16 px-6 md:px-16 border-b"
+          className="py-12 md:py-16 px-4 md:px-10 border-b"
           style={{ borderColor: "var(--color-border)" }}
         >
-          <div className="max-w-5xl mx-auto">
-            <p
-              className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-8"
-              style={{ color: "var(--color-teal-ink)" }}
-            >
-              Start here · Reader favorites
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-10">
+          <div className="max-w-6xl mx-auto">
+            <SectionHeader eyebrow="Start here" title="Reader favorites" />
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 md:gap-x-6 gap-y-8 md:gap-y-10">
               {startHere.map((post) => (
                 <PostCard key={post.slug} post={post} />
               ))}
@@ -124,15 +120,10 @@ export default async function BlogIndex({
       )}
 
       {/* ── Recent feed ── */}
-      <section className="py-12 md:py-16 px-6 md:px-16">
-        <div className="max-w-5xl mx-auto">
-          <p
-            className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-8"
-            style={{ color: "var(--color-orange-ink)" }}
-          >
-            Latest posts
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12">
+      <section className="py-12 md:py-16 px-4 md:px-10">
+        <div className="max-w-6xl mx-auto">
+          <SectionHeader title="Latest posts" />
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 md:gap-x-6 gap-y-8 md:gap-y-10">
             {pagePosts.map((post) => (
               <PostCard key={post.slug} post={post} />
             ))}
@@ -154,7 +145,7 @@ export default async function BlogIndex({
               )}
               <span
                 className="text-[13px]"
-                style={{ color: "var(--color-text-secondary)" }}
+                style={{ color: "var(--color-ink-soft)" }}
               >
                 Page {page} of {totalPages}
               </span>
@@ -175,31 +166,26 @@ export default async function BlogIndex({
       </section>
 
       {/* ── Archive: by year + by tag ── */}
+      {/* Archive doors on paper (Phase 4: the gray band and its caps labels are gone). */}
       <section
-        className="py-12 md:py-16 px-6 md:px-16 border-t"
+        className="py-12 md:py-16 px-4 md:px-10 border-t"
         style={{
           borderColor: "var(--color-border)",
-          background: "var(--color-gray-light)",
+          background: "var(--color-paper)",
         }}
       >
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
           <div>
-            <p
-              className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-5"
-              style={{ color: "var(--color-text-secondary)" }}
-            >
-              Browse by year
-            </p>
+            <SectionHeader title="Browse by year" />
             <div className="flex flex-wrap gap-2.5">
               {years.map((y) => (
                 <Link
                   key={y}
                   href={`/blog/archive/${y}`}
-                  className="text-[14px] px-3.5 py-1.5 rounded-full transition hover:opacity-80"
+                  className="text-[14px] px-3.5 py-1.5 rounded-lg border border-[color:var(--color-border)] hover:border-[color:var(--color-ink)] transition-colors"
                   style={{
                     background: "var(--color-white)",
-                    border: "1px solid var(--color-border)",
-                    color: "var(--color-text-primary)",
+                    color: "var(--color-ink)",
                   }}
                 >
                   {y}
@@ -208,26 +194,20 @@ export default async function BlogIndex({
             </div>
           </div>
           <div>
-            <p
-              className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-5"
-              style={{ color: "var(--color-text-secondary)" }}
-            >
-              Popular topics
-            </p>
+            <SectionHeader title="Popular topics" />
             <div className="flex flex-wrap gap-2.5">
               {tags.map((t) => (
                 <Link
                   key={t.slug}
                   href={`/blog/tag/${t.slug}`}
-                  className="text-[14px] px-3.5 py-1.5 rounded-full transition hover:opacity-80"
+                  className="text-[14px] px-3.5 py-1.5 rounded-lg border border-[color:var(--color-border)] hover:border-[color:var(--color-ink)] transition-colors"
                   style={{
                     background: "var(--color-white)",
-                    border: "1px solid var(--color-border)",
-                    color: "var(--color-text-primary)",
+                    color: "var(--color-ink)",
                   }}
                 >
                   {t.tag}{" "}
-                  <span style={{ color: "var(--color-text-secondary)" }}>
+                  <span style={{ color: "var(--color-ink-soft)" }}>
                     {t.count}
                   </span>
                 </Link>

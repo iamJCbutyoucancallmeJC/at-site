@@ -5,6 +5,10 @@ import { Plus, Minus } from "lucide-react"
 
 type FaqItem = { q: string; a: string; lead?: string; link?: { href: string; label: string } }
 
+// Phase 4 (2026-11-01): questions at the h4 style (18px / 600, ink), answers in body
+// (16px / 1.6, ink-soft) at the 42rem measure. Shared by /happy-mail, its
+// international twin and /happy-mail/update-card.
+
 // Stable per-question anchor id, e.g. "When does it ship?" -> "faq-when-does-it-ship"
 function faqId(q: string): string {
   return (
@@ -30,28 +34,28 @@ export default function FaqAccordion({ items }: { items: FaqItem[] }) {
   }, [items])
 
   return (
-    <div className="divide-y" style={{ borderColor: "var(--color-border)" }}>
+    <div className="divide-y divide-[color:var(--color-border)]">
       {items.map((item, i) => (
         <div key={i} id={faqId(item.q)} className="scroll-mt-24">
           <button
-            className="w-full flex items-center justify-between gap-4 py-4 text-left"
+            className="w-full flex items-center justify-between gap-4 py-5 text-left"
             onClick={() => setOpen(open === i ? null : i)}
             aria-expanded={open === i}
           >
             <span
-              className="text-[14px] md:text-[15px] font-semibold leading-snug"
-              style={{ color: "var(--color-text-primary)" }}
+              className="text-[18px] font-semibold leading-[1.3]"
+              style={{ color: "var(--color-ink)" }}
             >
               {item.q}
             </span>
             <span className="flex-shrink-0" style={{ color: "var(--color-orange-ink)" }}>
-              {open === i ? <Minus size={16} /> : <Plus size={16} />}
+              {open === i ? <Minus size={20} /> : <Plus size={20} />}
             </span>
           </button>
           {open === i && (
             <div
-              className="pb-4 text-[14px] leading-relaxed"
-              style={{ color: "var(--color-text-secondary)" }}
+              className="pb-5 text-[16px] leading-[1.6] max-w-[42rem]"
+              style={{ color: "var(--color-ink-soft)" }}
             >
               {item.lead && (
                 <p

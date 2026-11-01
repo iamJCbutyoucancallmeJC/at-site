@@ -174,6 +174,16 @@ function firstBodyImage(slug: string): string | undefined {
   return m?.[1]
 }
 
+// A card's photograph: the post's first body image (re-hosted on the Shopify CDN
+// since t811). Undefined for the two feed posts with none; the card shows the logo on paper.
+export const getPostCover = cache((slug: string): string | undefined => firstBodyImage(slug))
+
+// "From the Journal" (Phase 4): the newest posts in the default feed, minus the
+// one being read, for the module shared by the homepage and the post template.
+export function getLatestPosts(count: number, excludeSlug?: string): PostMeta[] {
+  return getDefaultFeed().filter((p) => p.slug !== excludeSlug).slice(0, count)
+}
+
 export const getFeatured = cache((): FeaturedPost[] => {
   const file = path.join(CONTENT_DIR, "_featured.json")
   if (!fs.existsSync(file)) return []

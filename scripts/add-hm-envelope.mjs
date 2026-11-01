@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-// Add one month's Happy Mail flat-lay to the /happy-mail "Recent envelopes" strip (#inside).
+// Add one month's Happy Mail flat-lay to the /happy-mail "Recent envelopes" grid (#inside),
+// which shows every month listed, newest first, and goes 4-up from the fourth month.
 //
 //   node scripts/add-hm-envelope.mjs <photo> "October 2026" ["optional caption"]
 //

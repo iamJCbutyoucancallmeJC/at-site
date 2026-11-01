@@ -148,10 +148,12 @@ body {
 /* ── Blog post body (t812) ──
    Legacy Squarespace post HTML, sanitized at extraction (wrappers stripped, semantic
    tags kept). Images still resolve from the Squarespace CDN until t811 re-hosts them. */
+/* Post body (Phase 4, 2026-11-01): the system's body style, 16px / 1.6 in ink
+   (was 17px / 1.75 in the old #555). Headings ink, images 12px radius. */
 .blog-body {
-  font-size: 1.0625rem;
-  line-height: 1.75;
-  color: var(--color-text-secondary);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-ink);
 }
 .blog-body > * + * {
   margin-top: 1.25rem;
@@ -164,7 +166,7 @@ body {
 .blog-body h3,
 .blog-body h4 {
   font-weight: 700;
-  color: var(--color-text-primary);
+  color: var(--color-ink);
   line-height: 1.25;
   margin-top: 2rem;
   margin-bottom: 0.5rem;
@@ -196,9 +198,9 @@ body {
   border-left: 3px solid var(--color-orange);
   padding-left: 1.25rem;
   font-style: italic;
-  color: var(--color-text-primary);
+  color: var(--color-ink);
 }
-.blog-body strong { color: var(--color-text-primary); font-weight: 600; }
+.blog-body strong { color: var(--color-ink); font-weight: 600; }
 .blog-body iframe {
   max-width: 100%;
   width: 100%;
