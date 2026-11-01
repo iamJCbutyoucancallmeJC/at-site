@@ -14,7 +14,12 @@ import { trackEvent } from "@/lib/analytics"
 
 type Status = "idle" | "submitting" | "success" | "error"
 
-export default function WaitlistForm({ sourcePage = "at-site:/events" }: { sourcePage?: string }) {
+// button: "primary" (orange) by default; "secondary" (ink ring) where the band is
+// itself orange, as on /events, or the orange button disappears into it.
+export default function WaitlistForm({
+  sourcePage = "at-site:/events",
+  button = "primary",
+}: { sourcePage?: string; button?: "primary" | "secondary" }) {
   const [email, setEmail] = useState("")
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
@@ -125,7 +130,7 @@ export default function WaitlistForm({ sourcePage = "at-site:/events" }: { sourc
           aria-label="Last name"
         />
       </div>
-      <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row gap-2">
         <input
           type="email"
           required
@@ -133,7 +138,7 @@ export default function WaitlistForm({ sourcePage = "at-site:/events" }: { sourc
           onChange={(e) => setEmail(e.target.value)}
           disabled={status === "submitting"}
           autoComplete="email"
-          className="flex-1 px-4 py-3.5 rounded-xl text-sm md:text-[15px] border-2 outline-none disabled:opacity-60"
+          className="flex-1 min-w-0 px-4 py-3.5 rounded-xl text-sm md:text-[15px] border-2 outline-none disabled:opacity-60"
           style={{
             borderColor: "var(--color-border)",
             background: "var(--color-white)",
@@ -146,11 +151,7 @@ export default function WaitlistForm({ sourcePage = "at-site:/events" }: { sourc
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="px-6 md:px-8 py-3.5 rounded-xl text-sm md:text-[15px] font-bold text-white disabled:opacity-60 whitespace-nowrap"
-          style={{
-            background: "var(--color-orange)",
-            fontFamily: "var(--font-sans)",
-          }}
+          className={`${button === "secondary" ? "cta-secondary" : "cta-primary"} cta--compact whitespace-nowrap`}
         >
           {status === "submitting" ? "Joining..." : "Get on the List"}
         </button>

@@ -30,7 +30,7 @@ export default function BlogSearchPage() {
           <Link
             href="/blog"
             className="text-[13px] font-semibold inline-block mb-6"
-            style={{ color: "var(--color-orange)" }}
+            style={{ color: "var(--color-orange-ink)" }}
           >
             ← The Journal
           </Link>

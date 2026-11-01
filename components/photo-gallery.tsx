@@ -112,8 +112,7 @@ export default function PhotoGallery({
                 href={current.src}
                 download
                 onClick={() => trackEvent("class_photo_save", { page, photo: open + 1 })}
-                className="px-4 py-2 rounded-full text-[12px] font-semibold uppercase tracking-[0.1em]"
-                style={{ background: "var(--color-orange)" }}
+                className="cta-primary cta--compact"
               >
                 Save photo
               </a>

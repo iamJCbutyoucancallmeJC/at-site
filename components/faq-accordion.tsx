@@ -44,7 +44,7 @@ export default function FaqAccordion({ items }: { items: FaqItem[] }) {
             >
               {item.q}
             </span>
-            <span className="flex-shrink-0" style={{ color: "var(--color-orange)" }}>
+            <span className="flex-shrink-0" style={{ color: "var(--color-orange-ink)" }}>
               {open === i ? <Minus size={16} /> : <Plus size={16} />}
             </span>
           </button>
@@ -56,7 +56,7 @@ export default function FaqAccordion({ items }: { items: FaqItem[] }) {
               {item.lead && (
                 <p
                   className="text-[18px] md:text-[20px] font-extrabold leading-tight mb-2"
-                  style={{ color: "var(--color-teal)" }}
+                  style={{ color: "var(--color-teal-ink)" }}
                 >
                   {item.lead}
                 </p>
@@ -66,7 +66,7 @@ export default function FaqAccordion({ items }: { items: FaqItem[] }) {
                 <p className="mt-2">
                   <a
                     href={item.link.href}
-                    style={{ color: "var(--color-orange)", textDecoration: "underline" }}
+                    style={{ color: "var(--color-orange-ink)", textDecoration: "underline" }}
                   >
                     {item.link.label}
                   </a>

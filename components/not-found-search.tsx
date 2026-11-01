@@ -39,8 +39,7 @@ export default function NotFoundSearch() {
       />
       <button
         type="submit"
-        className="px-6 py-3 rounded-full text-[13px] font-semibold uppercase tracking-[0.1em] text-white transition-all duration-200 hover:opacity-80"
-        style={{ background: "var(--color-orange)" }}
+        className="cta-primary cta--compact"
       >
         Search
       </button>

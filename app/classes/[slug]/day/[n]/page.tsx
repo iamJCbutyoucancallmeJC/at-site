@@ -21,7 +21,7 @@ import { playbackSource } from "@/lib/video"
 
 export const dynamic = "force-dynamic"
 
-const link = { color: "var(--color-orange)" }
+const link = { color: "var(--color-orange-ink)" }
 // The field under the steps is a log of the paper page, not the answer (10/14).
 const LOG_LABEL = "Your page, in a line"
 const LOG_PLACEHOLDER = "What went on the page? (optional)"
@@ -40,7 +40,9 @@ export default async function ClassDayPage({ params }: { params: Promise<{ slug:
   const day = open ? getClassDay(slug, n) : null
   const answers = open ? await getAnswers(claim) : {}
   const src = day?.video ? await playbackSource(day.video.id) : null
-  const demo = day?.demo ? await playbackSource(day.demo.id) : null
+  const demos = await Promise.all(
+    (day?.demo ? [day.demo].flat() : []).map(async (d) => ({ ...d, src: await playbackSource(d.id) })),
+  )
   const quote = day?.prompt.quoteBack && answers[day.prompt.quoteBack]
     ? { label: "You wrote earlier:", text: answers[day.prompt.quoteBack] }
     : null
@@ -55,7 +57,7 @@ export default async function ClassDayPage({ params }: { params: Promise<{ slug:
           {c.title}
         </Link>
       </p>
-      <p className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-6" style={link}>
+      <p className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-6" style={link}>
         Day {n} of {c.days}
       </p>
 
@@ -115,19 +117,20 @@ export default async function ClassDayPage({ params }: { params: Promise<{ slug:
               ))}
             </div>
           ) : null}
-          {demo && day.demo ? (
-            <div className="mt-12">
-              <DemoPlayer hls={demo.hls} hlsQuery={demo.hlsQuery} mp4={demo.mp4} poster={demo.poster} caption={day.demo.caption} />
-            </div>
-          ) : null}
+          {demos.map((d) =>
+            d.src ? (
+              <div key={d.id} className="mt-12">
+                <DemoPlayer hls={d.src.hls} hlsQuery={d.src.hlsQuery} mp4={d.src.mp4} poster={d.src.poster} caption={d.caption} />
+              </div>
+            ) : null,
+          )}
           {day.files?.length ? (
             <ul className="mt-10 space-y-2">
               {day.files.map((f) => (
                 <li key={f.name}>
                   <a
                     href={`/classes/${slug}/files/${encodeURIComponent(f.name)}`}
-                    className="inline-block px-5 py-2.5 rounded-full text-[13px] font-semibold uppercase tracking-[0.08em] text-white"
-                    style={{ backgroundColor: "var(--color-orange)" }}
+                    className="cta-teal cta--compact"
                   >
                     {f.label}
                   </a>
@@ -137,7 +140,7 @@ export default async function ClassDayPage({ params }: { params: Promise<{ slug:
           ) : null}
           {isLast ? (
             <section className="mt-16">
-              <p className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-6" style={link}>
+              <p className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-6" style={link}>
                 Your thirty little pages
               </p>
               <p className="text-[15px] italic mb-8" style={{ color: "var(--color-text-secondary)" }}>
@@ -146,7 +149,7 @@ export default async function ClassDayPage({ params }: { params: Promise<{ slug:
               <ol className="space-y-6">
                 {allDays.map((d) => (
                   <li key={d.day}>
-                    <p className="text-[11px] uppercase tracking-[0.12em] font-semibold mb-1" style={{ color: "var(--color-text-secondary)" }}>
+                    <p className="text-[12px] uppercase tracking-[0.12em] font-semibold mb-1" style={{ color: "var(--color-text-secondary)" }}>
                       Day {d.day}: {d.title}
                     </p>
                     <p className="text-[16px] leading-relaxed whitespace-pre-wrap" style={{ color: answers[d.prompt.key] ? "var(--color-text-primary)" : "var(--color-text-secondary)" }}>

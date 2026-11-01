@@ -67,7 +67,7 @@ export default function BookQrPage() {
 
       {/* Disclosure — top (Amazon-required, verbatim) */}
       <div
-        className="py-2 px-4 text-center text-[11px] leading-snug"
+        className="py-2 px-4 text-center text-[12px] leading-snug"
         style={{ background: "var(--color-gray-light)", color: "var(--color-text-secondary)" }}
       >
         {AFFILIATE_DISCLOSURE}
@@ -76,8 +76,8 @@ export default function BookQrPage() {
       {/* Hero */}
       <section className="max-w-xl mx-auto px-6 pt-12 md:pt-16 pb-10 text-center">
         <p
-          className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-3"
-          style={{ color: "var(--color-orange)" }}
+          className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-3"
+          style={{ color: "var(--color-orange-ink)" }}
         >
           New from Amy Tangerine
         </p>
@@ -116,8 +116,7 @@ export default function BookQrPage() {
           target="_blank"
           rel="noopener sponsored nofollow"
           onClick={handleBuy}
-          className="inline-flex items-center justify-center gap-2 px-10 py-4 text-[14px] uppercase tracking-[0.12em] font-semibold rounded-full text-white transition-all duration-300 hover:opacity-90"
-          style={{ background: "var(--color-orange)" }}
+          className="cta-primary inline-flex items-center justify-center gap-2"
         >
           Get it on Amazon
         </a>
@@ -155,7 +154,7 @@ export default function BookQrPage() {
           <a
             href="mailto:help@amytangerine.com"
             className="underline hover:opacity-70"
-            style={{ color: "var(--color-orange)" }}
+            style={{ color: "var(--color-orange-ink)" }}
           >
             help@amytangerine.com
           </a>

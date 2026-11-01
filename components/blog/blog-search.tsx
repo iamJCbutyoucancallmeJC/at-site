@@ -84,8 +84,8 @@ export default function BlogSearch({ index }: { index: SearchEntry[] }) {
               <li key={r.slug}>
                 <Link href={`/blog/${r.slug}`} className="block group">
                   <span
-                    className="text-[11px] uppercase tracking-[0.15em] font-semibold"
-                    style={{ color: "var(--color-orange)" }}
+                    className="text-[12px] uppercase tracking-[0.15em] font-semibold"
+                    style={{ color: "var(--color-orange-ink)" }}
                   >
                     {r.date ?? ""}
                   </span>

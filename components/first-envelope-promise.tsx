@@ -26,7 +26,7 @@ export default function FirstEnvelopePromise() {
   const style = { color: "var(--color-text-secondary)" }
   if (!now) {
     return (
-      <p className="text-center text-[11px] mt-4" style={style}>
+      <p className="text-center text-[12px] mt-4" style={style}>
         Envelopes ship around the 15th.
       </p>
     )
@@ -37,7 +37,7 @@ export default function FirstEnvelopePromise() {
   const early = now.getDate() <= LATE_CUTOFF
 
   return (
-    <p className="text-center text-[11px] mt-4" style={style}>
+    <p className="text-center text-[12px] mt-4" style={style}>
       {early
         ? `Subscribe today and your first envelope is ${thisMonth}'s. Envelopes ship around the 15th.`
         : `Subscribe today and your first envelope is ${nextMonth}'s. ${thisMonth}'s envelopes are already in the mail.`}

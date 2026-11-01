@@ -44,7 +44,7 @@ export default function GiftForm({ available, closed }: { available: boolean; cl
       </fieldset>
       <p className="text-sm leading-relaxed">At checkout, use your own details. Your recipient enters their address separately when they redeem.</p>
       {error && <p role="alert" className="text-red-800">{error}</p>}
-      <button disabled={busy || !available} className="w-full rounded-full p-4 font-semibold bg-[var(--color-orange)] text-black disabled:bg-gray-100 disabled:text-gray-500 enabled:cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black">{busy ? "Opening gift checkout…" : "Continue to gift checkout · $72"}</button>
+      <button disabled={busy || !available} className="cta-primary w-full">{busy ? "Opening gift checkout…" : "Continue to gift checkout · $72"}</button>
     </form>
   )
 }

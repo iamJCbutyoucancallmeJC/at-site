@@ -53,10 +53,10 @@ export default function QuestionBox({ slug, initial, max }: { slug: string; init
         Leave it here. She collects them, answers on camera in the middle of the month, and that video lands on this page.
       </p>
       <div className="flex items-baseline justify-between mb-2">
-        <span className="text-[11px] uppercase tracking-[0.18em] font-semibold" style={{ color: "var(--color-text-primary)" }}>
+        <span className="text-[12px] uppercase tracking-[0.18em] font-semibold" style={{ color: "var(--color-text-primary)" }}>
           Your question
         </span>
-        <span className="text-[11px]" style={{ color: state === "error" ? "#b00020" : "var(--color-text-secondary)" }} aria-live="polite">
+        <span className="text-[12px]" style={{ color: state === "error" ? "#b00020" : "var(--color-text-secondary)" }} aria-live="polite">
           {note}
         </span>
       </div>
@@ -74,14 +74,13 @@ export default function QuestionBox({ slug, initial, max }: { slug: string; init
         type="button"
         onClick={send}
         disabled={!text.trim() || state === "sending"}
-        className="mt-5 px-6 py-2.5 rounded-full text-[12px] uppercase tracking-[0.12em] font-semibold text-white disabled:opacity-40"
-        style={{ backgroundColor: "var(--color-orange)" }}
+        className="cta-teal cta--compact mt-5"
       >
         Send to Amy
       </button>
       {sent.length ? (
         <div className="mt-10">
-          <p className="text-[11px] uppercase tracking-[0.18em] font-semibold mb-3" style={{ color: "var(--color-text-secondary)" }}>
+          <p className="text-[12px] uppercase tracking-[0.18em] font-semibold mb-3" style={{ color: "var(--color-text-secondary)" }}>
             {sent.length === 1 ? "You asked" : `You asked (${sent.length})`}
           </p>
           <ul className="space-y-3">

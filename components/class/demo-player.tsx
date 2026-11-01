@@ -6,9 +6,11 @@
 
 import { useEffect, useRef } from "react"
 
-type Props = { hls: string; hlsQuery?: string; mp4?: string; poster?: string; caption?: string }
+// captions: a same-origin WebVTT file, shown by default (WCAG 1.2.2; most phone viewers start
+// with the sound off). label: the accessible name of the video.
+type Props = { hls: string; hlsQuery?: string; mp4?: string; poster?: string; caption?: string; captions?: string; label?: string }
 
-export default function DemoPlayer({ hls, hlsQuery = "", mp4, poster, caption }: Props) {
+export default function DemoPlayer({ hls, hlsQuery = "", mp4, poster, caption, captions, label }: Props) {
   const video = useRef<HTMLVideoElement>(null)
   const hlsPath = hls.split("?")[0]
   const latest = useRef({ hls, hlsQuery, mp4 })
@@ -38,7 +40,9 @@ export default function DemoPlayer({ hls, hlsQuery = "", mp4, poster, caption }:
   return (
     <figure className="w-full">
       <div className="w-full overflow-hidden rounded-sm" style={{ background: "var(--color-gray-light)" }}>
-        <video ref={video} poster={poster} controls playsInline preload="metadata" className="w-full h-auto block" />
+        <video ref={video} poster={poster} controls playsInline preload="metadata" aria-label={label} className="w-full h-auto block">
+          {captions ? <track kind="captions" src={captions} srcLang="en" label="English" default /> : null}
+        </video>
       </div>
       {caption ? (
         <figcaption className="mt-3 text-[13px] italic" style={{ color: "var(--color-text-secondary)" }}>

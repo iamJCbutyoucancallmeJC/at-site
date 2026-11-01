@@ -173,7 +173,7 @@ export default function CartDrawer() {
             </h2>
             {count > 0 && (
               <span
-                className="text-[11px] font-bold px-1.5 py-0.5 rounded-full text-white"
+                className="text-[12px] font-bold px-1.5 py-0.5 rounded-full text-white"
                 style={{ background: "var(--color-orange)" }}
               >
                 {count}
@@ -203,8 +203,7 @@ export default function CartDrawer() {
               <Link
                 href="/shop"
                 onClick={closeCart}
-                className="px-6 py-2.5 text-[12px] uppercase tracking-[0.1em] font-semibold rounded-full text-white transition-colors"
-                style={{ background: "var(--color-orange)" }}
+                className="cta-primary cta--compact"
               >
                 Shop Now
               </Link>
@@ -278,7 +277,7 @@ export default function CartDrawer() {
 
                       <button
                         onClick={() => removeItem(item.variantId)}
-                        className="text-[11px] uppercase tracking-[0.05em] hover:underline ml-1"
+                        className="text-[12px] uppercase tracking-[0.05em] hover:underline ml-1"
                         style={{ color: "var(--color-text-secondary)" }}
                       >
                         Remove
@@ -326,7 +325,7 @@ export default function CartDrawer() {
             {/* d051 (t1076): intl pass-through pricing is deliberate; say it before
                 checkout so a ~$39 USPS first-class rate never lands as a surprise. */}
             <p
-              className="text-[11px] text-center leading-snug mb-3"
+              className="text-[12px] text-center leading-snug mb-3"
               style={{ color: "var(--color-text-secondary)" }}
             >
               International orders ship at live USPS rates by weight, shown at
@@ -335,17 +334,11 @@ export default function CartDrawer() {
 
             {hasLocalItems ? (
               <div>
-                <div
-                  className="w-full py-3.5 text-center text-[12px] uppercase tracking-[0.1em] font-semibold rounded-full border-2 mb-2"
-                  style={{
-                    borderColor: "var(--color-border)",
-                    color: "var(--color-text-secondary)",
-                  }}
-                >
+                <button type="button" disabled className="cta-secondary w-full mb-2">
                   Checkout coming soon
-                </div>
+                </button>
                 <p
-                  className="text-[11px] text-center leading-snug"
+                  className="text-[12px] text-center leading-snug"
                   style={{ color: "var(--color-text-secondary)" }}
                 >
                   Full checkout will be available when the store launches.
@@ -355,8 +348,7 @@ export default function CartDrawer() {
               <button
                 onClick={handleCheckout}
                 disabled={checkingOut}
-                className="w-full py-3.5 text-[13px] uppercase tracking-[0.12em] font-semibold rounded-full text-white transition-colors disabled:opacity-60"
-                style={{ background: "var(--color-orange)" }}
+                className="cta-primary w-full"
               >
                 {checkingOut ? "One moment..." : "Checkout"}
               </button>

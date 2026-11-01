@@ -20453,5 +20453,20 @@
     "code": 200,
     "final": "https://www.youtube.com/amytangerine",
     "status": "alive"
+  },
+  "https://creativelife.mykajabi.com/tn-course": {
+    "code": 200,
+    "final": "https://creativelife.mykajabi.com/tn-course",
+    "status": "alive"
+  },
+  "https://creativelife.mykajabi.com/free-TN-workshop": {
+    "code": 200,
+    "final": "https://creativelife.mykajabi.com/free-TN-workshop",
+    "status": "alive"
+  },
+  "https://creativelife.mykajabi.com/free-workshop": {
+    "code": 200,
+    "final": "https://creativelife.mykajabi.com/free-workshop",
+    "status": "alive"
   }
 }

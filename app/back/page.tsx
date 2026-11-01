@@ -104,8 +104,8 @@ export default function BackPage() {
 
         <div className="flex-1">
           <p
-            className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-3"
-            style={{ color: "var(--color-orange)" }}
+            className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-3"
+            style={{ color: "var(--color-orange-ink)" }}
           >
             Happy Mail · Monthly
           </p>
@@ -134,13 +134,12 @@ export default function BackPage() {
           </div>
 
           {closed ? (
-            <p className="text-[14px] font-semibold" style={{ color: "var(--color-orange)" }}>October is full. Happy Mail reopens October 16. <a href="/happy-mail" className="underline">Join the waitlist</a></p>
+            <p className="text-[14px] font-semibold" style={{ color: "var(--color-orange-ink)" }}>October is full. Happy Mail reopens October 16. <a href="/happy-mail" className="underline">Join the waitlist</a></p>
           ) : (
           <button
             onClick={handleCheckout}
             disabled={loading}
-            className="w-full md:w-auto px-10 py-4 rounded-full text-[14px] font-bold uppercase tracking-[0.1em] text-white transition-opacity disabled:opacity-60"
-            style={{ background: "var(--color-orange)" }}
+            className="cta-primary w-full md:w-auto"
           >
             {loading ? "One moment..." : "Set up my card"}
           </button>

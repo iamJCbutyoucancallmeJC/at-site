@@ -67,8 +67,8 @@ export default async function BlogIndex({
         />
         <div className="max-w-5xl mx-auto w-full relative">
           <p
-            className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-3"
-            style={{ color: "var(--color-orange)" }}
+            className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-3"
+            style={{ color: "var(--color-orange-ink)" }}
           >
             The Journal
           </p>
@@ -89,7 +89,7 @@ export default async function BlogIndex({
             <Link
               href="/blog/search"
               className="font-semibold underline underline-offset-4"
-              style={{ color: "var(--color-orange)" }}
+              style={{ color: "var(--color-orange-ink)" }}
             >
               Search the full archive
             </Link>
@@ -109,8 +109,8 @@ export default async function BlogIndex({
         >
           <div className="max-w-5xl mx-auto">
             <p
-              className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-8"
-              style={{ color: "var(--color-teal)" }}
+              className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-8"
+              style={{ color: "var(--color-teal-ink)" }}
             >
               Start here · Reader favorites
             </p>
@@ -127,8 +127,8 @@ export default async function BlogIndex({
       <section className="py-12 md:py-16 px-6 md:px-16">
         <div className="max-w-5xl mx-auto">
           <p
-            className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-8"
-            style={{ color: "var(--color-orange)" }}
+            className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-8"
+            style={{ color: "var(--color-orange-ink)" }}
           >
             Latest posts
           </p>
@@ -145,7 +145,7 @@ export default async function BlogIndex({
                 <Link
                   href={page - 1 === 1 ? "/blog" : `/blog?page=${page - 1}`}
                   className="text-[14px] font-semibold"
-                  style={{ color: "var(--color-orange)" }}
+                  style={{ color: "var(--color-orange-ink)" }}
                 >
                   ← Newer
                 </Link>
@@ -162,7 +162,7 @@ export default async function BlogIndex({
                 <Link
                   href={`/blog?page=${page + 1}`}
                   className="text-[14px] font-semibold"
-                  style={{ color: "var(--color-orange)" }}
+                  style={{ color: "var(--color-orange-ink)" }}
                 >
                   Older →
                 </Link>
@@ -185,7 +185,7 @@ export default async function BlogIndex({
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
           <div>
             <p
-              className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-5"
+              className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-5"
               style={{ color: "var(--color-text-secondary)" }}
             >
               Browse by year
@@ -209,7 +209,7 @@ export default async function BlogIndex({
           </div>
           <div>
             <p
-              className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-5"
+              className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-5"
               style={{ color: "var(--color-text-secondary)" }}
             >
               Popular topics

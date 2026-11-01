@@ -31,6 +31,7 @@ export type Prompt = {
 }
 
 export type ClassVideo = { id: string; cues?: Cue[] }
+export type ClassDemo = { id: string; caption: string }
 
 export type ClassDay = {
   day: number
@@ -43,8 +44,9 @@ export type ClassDay = {
   photo?: { src: string; alt: string }
   video?: ClassVideo
   // A longer landscape "here is mine" video under the steps (Amy's 2023 page
-  // videos from Kajabi, 10/14). Plain player, no cues.
-  demo?: { id: string; caption: string }
+  // videos from Kajabi, 10/14; her 2026 hands-on clips, 10/29). Plain player, no
+  // cues. A list plays as stacked players, first on top.
+  demo?: ClassDemo | ClassDemo[]
   // Optional printable(s): file names inside content/classes/<slug>/files/.
   files?: { name: string; label: string }[]
 }
@@ -54,7 +56,14 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     day: 1,
     title: "Why Glimmers & Gratitude? Why now?",
     prompt: { key: "d01", steps: ["Open your journal to a fresh page and write the date.", "Notice one glimmer from today: the light through a window, the first sip, a song you forgot you loved.", "Write it down in one sentence. That is the whole practice."] },
-    body: ["A glimmer is a small moment that makes you feel safe, calm, or quietly glad. The opposite of a trigger."],
+    // Amy's 2023 Day 1 video from Kajabi, 16 min ("Glimmers are all around"; Amy asked for it 10/29).
+    // Re-encoded at 4 Mbps for upload (the 16 Mbps original stalled); Bunny "glimmers-2023-d01".
+    demo: { id: "0538ab24-d474-495a-a8f6-b8ae7d6112b6", caption: "Amy on why glimmers and gratitude matter, from the 2023 class. Sixteen minutes; watch what you like." },
+    // Amy's welcome, her wording 10/29 (mail thread "Glimmers this week, and the Nevada permit").
+    body: ["Welcome. I'm so glad you're here. Today is just about noticing. Start simple, start small.", "A glimmer is a small moment that makes you feel safe, calm, or quietly glad. The opposite of a trigger.", "The journal-setup printable is below, if you want something in hand to start with. Day 2 sets up the journal with it.", "Day 1 is about understanding why glimmers and gratitude are so important to our well-being and happiness. In the video we go over defining glimmers, recognizing glimmers, creativity and gratitude, and the ripple effect.", "We will explore why it is important to recognize and appreciate the small moments of joy and beauty in our lives. There are so many ways creativity can amplify the experience of gratitude. It can help us cultivate a more positive outlook and find joy in the everyday."],
+    // Amy 10/27: link a printable on Day 1 so people can start with something in hand.
+    // The files route gates a file by the FIRST day that names it, so this opens it Nov 1.
+    files: [{ name: "printable-1-journal-setup.pdf", label: "Journal-setup printable (PDF)" }],
   },
   {
     day: 2,
@@ -62,8 +71,12 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     // Amy to camera, shot 10/8; Amy-only re-cut 10/14 (Bunny "glimmers-d02"): the 10/9 cut
     // carried JC's "Make a fun place for your glimmers to go". 6.4 s.
     video: { id: "fc46fd24-9302-4fe2-9e5e-418a3d4c2904", cues: [{ at: 6.1, key: "d02" }] },
-    // Amy's 2023 journal-setup video from Kajabi, 25 min. JC ruled 10/14: in, under the steps.
-    demo: { id: "86628475-cb90-45ea-9d40-32a7a4e661bb", caption: "Amy setting up her journal, from the 2023 class. Twenty-five minutes; watch what you like." },
+    // First: Amy's 2026 hands-on setup, shot overhead 10/29 (IMG_0434-0446, cover sped 6x,
+    // no talking; Bunny "glimmers-2026-d02-hands"). Then the 2023 Kajabi video, 25 min (JC 10/14).
+    demo: [
+      { id: "766c78a4-67b5-4779-b805-b211fc2a8879", caption: "Amy setting up this year's journal: the cover, then the first page. Two and a half minutes, no talking." },
+      { id: "86628475-cb90-45ea-9d40-32a7a4e661bb", caption: "Amy setting up her journal, from the 2023 class. Twenty-five minutes; watch what you like." },
+    ],
     prompt: { key: "d02", steps: ["Pick the notebook. Any notebook works.", "Write today's date on the first page.", "Make a fun place for your glimmers to go: a title, a doodle, a strip of tape.", "Print the journal-setup page and glue it in, if you want it."] },
     body: [],
     files: [{ name: "printable-1-journal-setup.pdf", label: "Printable (PDF)" }],

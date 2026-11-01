@@ -2,16 +2,36 @@
 
 @theme {
   /* Amy Tangerine — REAL brand tokens (pulled from amytangerine.com April 2026) */
-  --color-orange: #FD891C;          /* THE brand color. Links, CTAs, accents. One color, not two. */
+  --color-orange: #FD891C;          /* THE brand color. Fills: buttons, the Happy Mail pill, badges. Text on it is ink, never white (2.4:1). */
   --color-orange-dark: #E57510;     /* Hover state for orange */
-  --color-orange-light: #FFF5FA;    /* Light pink accent bg (from AT site) */
-  --color-teal: #00ADB3;            /* Secondary accent. Workshop buttons, some headings. */
+  --color-orange-light: #FFF5FA;    /* Light pink accent bg (from AT site). Happy Mail only, so pink means the envelope. */
+  --color-teal: #00ADB3;            /* Secondary accent. Workshop/class buttons. Text on it is ink (6.3:1). */
   --color-teal-dark: #009399;       /* Hover state for teal */
   --color-white: #FFFFFF;           /* Page background — AT uses pure white, not cream */
-  --color-gray-light: #F3F5F7;     /* Light gray section bg (from AT site) */
-  --color-text-primary: #000000;    /* Body text — AT uses true black */
-  --color-text-secondary: #555555;  /* Secondary text — slightly softer */
+  --color-gray-light: #F3F5F7;     /* Light gray section bg (from AT site); being retired for paper */
   --color-border: #E5E5E5;          /* Borders and dividers */
+
+  /* Design finish, Phase 0 (2026-10-25, design system "Amy Tangerine"): the
+     warm neutrals and the text-safe versions of the two brand hues.
+     - ink replaces true black for all text (17:1 on white, 7.2:1 on orange).
+     - orange-ink / teal-ink are the hues as TEXT (4.9:1 / 5.3:1 on white);
+       --color-orange itself stays a fill and is never small text.
+     - paper is the warm section ground that replaces full-bleed color bands. */
+  --color-ink: #1F1A17;
+  --color-ink-soft: #6B6560;
+  --color-paper: #FFF7EE;
+  --color-orange-ink: #B85300;
+  --color-teal-ink: #00787C;
+  --color-orange-tint: #FFEEDD;
+  --color-teal-tint: #E3F5F5;
+  /* text-primary / text-secondary are kept as names (every component uses them)
+     and now point at the warm neutrals. Delete the two names in Phase 5. */
+  --color-text-primary: #1F1A17;
+  --color-text-secondary: #6B6560;
+
+  /* Shadows: flat at rest; lift on hover, and the one orange glow (the CTA). */
+  --shadow-lift: 0 1px 2px rgba(31, 26, 23, 0.06), 0 12px 28px -12px rgba(31, 26, 23, 0.22);
+  --shadow-cta: 0 10px 24px -8px rgba(253, 137, 28, 0.6);
 
   /* Font */
   --font-sans: "Epilogue", ui-sans-serif, system-ui, sans-serif;
@@ -26,6 +46,56 @@ body {
   color: var(--color-text-primary);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+}
+
+/* Phase 0: one focus ring, visible on every ground (ink: 17:1 white, 7.2:1 orange). */
+:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+}
+
+/* Phase 0 safety net: an orange or teal FILL that still sets white text reads in
+   ink until its component is touched (white on orange is 2.4:1, ink is 7.2:1).
+   Matches React's rendered style attribute for background / backgroundColor.
+   Elements whose own color is orange (links, eyebrows) are not matched. */
+/* React serialises style={{ background: "var(--color-orange)" }} WITHOUT the
+   space ("background:var(--color-orange)"), so both spellings are matched
+   (found on the 2026-10-25 preview walk: every spaced-only selector missed). */
+[style*="background: var(--color-orange)"],
+[style*="background:var(--color-orange)"],
+[style*="background-color: var(--color-orange)"],
+[style*="background-color:var(--color-orange)"],
+[style*="background: var(--color-teal)"],
+[style*="background:var(--color-teal)"],
+[style*="background-color: var(--color-teal)"],
+[style*="background-color:var(--color-teal)"] {
+  color: var(--color-ink);
+}
+[style*="background: var(--color-orange)"] .text-white,
+[style*="background:var(--color-orange)"] .text-white,
+[style*="background-color: var(--color-orange)"] .text-white,
+[style*="background-color:var(--color-orange)"] .text-white,
+[style*="background: var(--color-teal)"] .text-white,
+[style*="background:var(--color-teal)"] .text-white,
+[style*="background-color: var(--color-teal)"] .text-white,
+[style*="background-color:var(--color-teal)"] .text-white,
+[style*="background: var(--color-orange)"].text-white,
+[style*="background:var(--color-orange)"].text-white,
+[style*="background-color: var(--color-orange)"].text-white,
+[style*="background-color:var(--color-orange)"].text-white,
+[style*="background: var(--color-teal)"].text-white,
+[style*="background:var(--color-teal)"].text-white,
+[style*="background-color: var(--color-teal)"].text-white,
+[style*="background-color:var(--color-teal)"].text-white,
+[style*="background: var(--color-orange)"] [class*="text-white/"],
+[style*="background:var(--color-orange)"] [class*="text-white/"],
+[style*="background-color: var(--color-orange)"] [class*="text-white/"],
+[style*="background-color:var(--color-orange)"] [class*="text-white/"],
+[style*="background: var(--color-teal)"] [class*="text-white/"],
+[style*="background:var(--color-teal)"] [class*="text-white/"],
+[style*="background-color: var(--color-teal)"] [class*="text-white/"],
+[style*="background-color:var(--color-teal)"] [class*="text-white/"] {
+  color: var(--color-ink);
 }
 
 /* Product description HTML (rendered from Shopify descriptionHtml).
@@ -58,11 +128,11 @@ body {
   color: var(--color-text-primary);
 }
 .product-description a {
-  color: var(--color-orange);
+  color: var(--color-orange-ink);
   text-decoration: underline;
 }
 .product-description a:hover {
-  color: var(--color-orange-dark);
+  color: var(--color-ink);
 }
 .product-description small {
   font-size: 0.75rem;
@@ -102,11 +172,11 @@ body {
 .blog-body h2 { font-size: 1.5rem; }
 .blog-body h3 { font-size: 1.25rem; }
 .blog-body a {
-  color: var(--color-orange);
+  color: var(--color-orange-ink);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
-.blog-body a:hover { color: var(--color-orange-dark); }
+.blog-body a:hover { color: var(--color-ink); }
 .blog-body img {
   max-width: 100%;
   height: auto;
@@ -137,6 +207,144 @@ body {
   border-radius: 0.75rem;
   margin: 1.5rem 0;
 }
+/* Primary CTA (2026-10-25): the one button on a page that earns (subscribe, renew,
+   join, tickets, buy) plus the blog-post button. ONE style for all of them: add
+   `cta-primary` and keep only layout utilities (w-full, md:w-auto) beside it; no
+   inline background, or the hover state is lost. Variants:
+   - cta-primary--outline: the unpicked plan in a pair (Happy Mail monthly).
+   - cta-primary--ink: black text on orange (the class Join button's contrast
+     choice); its disabled state is grey, meaning "not on sale yet".
+   Unlayered on purpose so it beats Tailwind utilities. */
+.cta-primary,
+.blog-body a.blog-button {
+  display: inline-block;
+  /* 15px / 0.08em: measured 2026-10-25 so the longest labels ("Subscribe monthly ·
+     $13/mo" in a 288px plan card, "Keep my Happy Mail coming — $66") stay one line. */
+  padding: 1.15rem 2rem;
+  border-radius: 9999px;
+  background: var(--color-orange);
+  /* Phase 0 (2026-10-25): ink on orange, 7.2:1. White on this orange was 2.4:1. */
+  color: var(--color-ink);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 10px 24px -8px rgba(253, 137, 28, 0.6);
+  transition: background-color 150ms ease, transform 150ms ease, box-shadow 150ms ease;
+}
+.cta-primary:hover:not(:disabled),
+.blog-body a.blog-button:hover {
+  background: var(--color-orange-dark);
+  color: var(--color-ink);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px -8px rgba(229, 117, 16, 0.65);
+}
+.cta-primary:disabled {
+  opacity: 0.6;
+  cursor: default;
+  transform: none;
+  box-shadow: none;
+}
+.cta-primary--outline {
+  background: transparent;
+  /* orange-ink: the tangerine as text and as a 2px ring, 4.9:1 on white. */
+  color: var(--color-orange-ink);
+  box-shadow: inset 0 0 0 2px var(--color-orange-ink);
+}
+.cta-primary--outline:hover:not(:disabled) {
+  background: var(--color-orange-light);
+  color: var(--color-ink);
+  box-shadow: inset 0 0 0 2px var(--color-ink);
+}
+/* --ink is now the default (above); the variant keeps its grey disabled state. */
+.cta-primary--ink:disabled {
+  background: var(--color-paper);
+  color: var(--color-ink-soft);
+  opacity: 1;
+}
+
+/* The button family (design finish, Phase 1, 2026-10-28). Three classes and no
+   hand-rolled pills: .cta-primary (above: the one that earns), .cta-secondary
+   (everything else: outline in ink) and .cta-teal (classes and workshops). All
+   three share the label: 15px / 700 / 0.08em uppercase, pill radius. Only
+   .cta-primary carries shadow-cta. Layout utilities (w-full, md:w-auto, mt-*)
+   go beside the class; colour, size and radius never do.
+   Modifiers, not new buttons:
+   - cta--compact: shorter padding, for a button beside an input or in a row.
+   - cta-secondary--light: white outline, for the few buttons that sit on a photo.
+   Unlayered on purpose so it beats Tailwind utilities. */
+.cta-primary,
+.cta-secondary,
+.cta-teal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.cta-secondary,
+.cta-teal {
+  padding: 1.15rem 2rem;
+  border-radius: 9999px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease, transform 150ms ease, box-shadow 150ms ease;
+}
+.cta-secondary {
+  background: transparent;
+  color: var(--color-ink);
+  /* 1.5px ink ring, drawn inside so outline and fill buttons line up. */
+  box-shadow: inset 0 0 0 1.5px var(--color-ink);
+}
+.cta-secondary:hover:not(:disabled) {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  transform: translateY(-2px);
+}
+.cta-secondary--light {
+  color: var(--color-white);
+  box-shadow: inset 0 0 0 1.5px var(--color-white);
+}
+.cta-secondary--light:hover:not(:disabled) {
+  background: var(--color-white);
+  color: var(--color-ink);
+}
+.cta-teal {
+  background: var(--color-teal);
+  /* ink on teal, 6.3:1. White on this teal was 2.6:1. */
+  color: var(--color-ink);
+}
+.cta-teal:hover:not(:disabled) {
+  background: var(--color-teal-dark);
+  color: var(--color-ink);
+  transform: translateY(-2px);
+}
+.cta-secondary:disabled,
+.cta-teal:disabled {
+  opacity: 0.6;
+  cursor: default;
+  transform: none;
+}
+.cta--compact {
+  padding: 0.8rem 1.5rem;
+}
+/* In a post body the button sits centered on its own line. Clicks are tracked by
+   components/blog-link-tracker.tsx (<a class="blog-button" data-cta="...">). */
+.blog-body a.blog-button {
+  display: block;
+  width: fit-content;
+  min-width: min(100%, 18rem);
+  margin: 2.5rem auto;
+}
 .blog-body hr {
   border: 0;
   border-top: 1px solid var(--color-border);
@@ -152,7 +360,7 @@ body {
   --log-text: var(--color-text-primary);
   --log-dim: var(--color-text-secondary);
   --log-faint: #8a8a8a;
-  --log-pop: var(--color-orange);
+  --log-pop: var(--color-orange-ink);
 }
 
 /* Class guided player scrubber (components/class/guided-player.tsx) */

@@ -1,40 +1,78 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
+import { ChevronDown, Instagram, Youtube } from "lucide-react"
 import { trackEvent } from "@/lib/analytics"
 import { isChromelessRoute, isQuietRoute } from "@/lib/chromeless-routes"
 import KeepUpCard from "@/components/keep-up-card"
 
-// Same env gate the old footer block (EmailCaptureInline) honored: Amy's
-// aesthetic-pass hold on capture blocks (t1092). Flip in Vercel, no code change.
-const CAPTURE_BLOCKS = process.env.NEXT_PUBLIC_CAPTURE_BLOCKS === "1"
+// Footer (design finish, Phase 1, 2026-10-28). Three layers, top to bottom:
+//   1. the capture card (KeepUpCard, gated; skipped where the page has its own form)
+//   2. a paper band: logo, four columns (Shop / Happy Mail / Learn / About) on
+//      desktop and an accordion of the same four on phones, then the social row
+//   3. an ink strip: copyright and the changelog link
+// It replaces the black bar with nine links in a row. Column labels are new;
+// every link points at a page that already existed.
 
-const DESKTOP_LINKS = [
-  { label: "Shop", href: "/shop" },
-  { label: "About", href: "/about" },
-  { label: "Journal", href: "/blog" },
-  { label: "Happy Mail", href: "/happy-mail" },
-  { label: "In Person", href: "/events" },
-  { label: "Contact", href: "/contact" },
-  { label: "Instagram", href: "https://instagram.com/amytangerine" },
-  { label: "YouTube", href: "https://youtube.com/@amytangerine" },
-  { label: "Changelog", href: "/changelog" },
+type FooterLink = { label: string; href: string }
+
+const COLUMNS: { title: string; links: FooterLink[] }[] = [
+  {
+    title: "Shop",
+    links: [
+      { label: "Shop My Stuff", href: "/shop" },
+      { label: "Shop My Faves", href: "/shop-my-faves" },
+    ],
+  },
+  {
+    title: "Happy Mail",
+    links: [
+      { label: "Subscribe", href: "/happy-mail" },
+      { label: "Give Happy Mail", href: "/gift" },
+      { label: "Outside the US", href: "/happy-mail-international" },
+    ],
+  },
+  {
+    title: "Learn",
+    links: [
+      { label: "Journal", href: "/blog" },
+      { label: "In Person", href: "/events" },
+      { label: "Photobooth", href: "/photobooth" },
+    ],
+  },
+  {
+    title: "About",
+    links: [
+      { label: "About Amy", href: "/about" },
+      { label: "Contact", href: "/contact" },
+      { label: "Join the list", href: "/join" },
+    ],
+  },
 ]
 
-const MOBILE_LINKS = [
-  { label: "Shop", href: "/shop" },
-  { label: "About", href: "/about" },
-  { label: "Journal", href: "/blog" },
-  { label: "Happy Mail", href: "/happy-mail" },
-  { label: "In Person", href: "/events" },
-  { label: "Contact", href: "/contact" },
-  { label: "Changelog", href: "/changelog" },
+const SOCIAL = [
+  { label: "Instagram", href: "https://instagram.com/amytangerine", Icon: Instagram },
+  { label: "YouTube", href: "https://youtube.com/@amytangerine", Icon: Youtube },
 ]
+
+function ColumnLink({ link, group }: { link: FooterLink; group: string }) {
+  return (
+    <Link
+      href={link.href}
+      className="block py-1.5 text-[15px] hover:underline underline-offset-4"
+      style={{ color: "var(--color-ink)" }}
+      onClick={() => trackEvent("footer_click", { link_text: link.label, group })}
+    >
+      {link.label}
+    </Link>
+  )
+}
 
 // Pages that already carry a capture form of their own (JC 9/6: two on one
 // page is one too many).
-// Keep in sync with every page that renders WaitlistForm or EmailCaptureInline
+// Keep in sync with every page that renders WaitlistForm, NewsletterForm or KeepUpCard
 // itself (JC 9/23: event detail pages were showing both).
 const OWN_FORM_EXACT = ["/", "/join", "/creativity", "/events", "/japan"]
 const OWN_FORM_PREFIXES = ["/v/", "/events/", "/blog/", "/class/"]
@@ -52,66 +90,99 @@ export default function Footer() {
   // Quiet routes (the gated class pages): one line, no link rows, no capture.
   if (isQuietRoute(pathname)) {
     return (
-      <footer className="px-5 md:px-12 py-8 text-center md:text-left text-xs" style={{ background: "var(--color-text-primary)", color: "rgba(255,255,255,0.6)" }}>
+      <footer className="px-5 md:px-12 py-8 text-center md:text-left text-xs" style={{ background: "var(--color-ink)", color: "rgba(255,255,255,0.75)" }}>
         &copy; {new Date().getFullYear()} Amy Tangerine &middot;{" "}
-        <Link href="/" style={{ color: "rgba(255,255,255,0.8)" }}>amytangerine.com</Link>
+        <Link href="/" style={{ color: "var(--color-white)" }}>amytangerine.com</Link>
       </footer>
     )
   }
 
+  const year = new Date().getFullYear()
+
   return (
-    <footer style={{ background: "var(--color-text-primary)" }}>
-      {/* Email capture (t1092, D3 inline block) -- renders null until
+    <footer>
+      {/* Email capture (t1092, D3 inline block): renders null until
           NEXT_PUBLIC_CAPTURE_BLOCKS=1 (Amy aesthetic pass gate). One form per
-          page: skipped on /join and /creativity (the page is the form) and on the homepage and
-          its /v/ variants, which carry their own "Keep up with Amy" box.
-          Design critic 2026-10 (F15): this is the homepage's orange card, not a
-          second black-band design; see components/keep-up-card.tsx. */}
-      {CAPTURE_BLOCKS && !hasOwnCaptureForm(pathname) && <KeepUpCard sourcePage="footer" />}
-      {/* Desktop */}
-      <div className="hidden md:flex items-center justify-between px-12 py-8">
-        <p className="text-sm" style={{ color: "rgba(255,255,255,0.5)" }}>
-          &copy; {new Date().getFullYear()} Amy Tangerine
-        </p>
-        <div className="flex gap-6">
-          {DESKTOP_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-sm hover:opacity-100 transition-opacity"
-              style={{ color: "rgba(255,255,255,0.7)" }}
-              target={link.href.startsWith('http') ? '_blank' : undefined}
-              rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-              onClick={() => link.href.startsWith('http')
-                ? trackEvent('external_link', { destination: link.label.toLowerCase(), source_page: 'footer' })
-                : trackEvent('footer_click', { link_text: link.label })
-              }
-            >
-              {link.label}
+          page: skipped where the page carries its own (hasOwnCaptureForm). */}
+      {!hasOwnCaptureForm(pathname) && <KeepUpCard sourcePage="footer" gated />}
+
+      <div className="px-5 md:px-12 pt-10 md:pt-14 pb-8 border-t" style={{ background: "var(--color-paper)", borderColor: "var(--color-border)" }}>
+        <div className="max-w-6xl mx-auto">
+          <div className="md:grid md:grid-cols-[1.2fr_repeat(4,1fr)] md:gap-8">
+            <Link href="/" className="inline-block mb-6 md:mb-0" aria-label="Amy Tangerine home">
+              <Image
+                src="/images/amy-tangerine-logo.png"
+                alt="Amy Tangerine"
+                width={160}
+                height={64}
+                className="h-12 w-auto object-contain"
+              />
             </Link>
-          ))}
+
+            {/* Desktop: four columns */}
+            {COLUMNS.map((col) => (
+              <nav key={col.title} aria-label={col.title} className="hidden md:block">
+                <h2 className="text-[12px] font-bold uppercase tracking-[0.12em] mb-3" style={{ color: "var(--color-ink-soft)" }}>
+                  {col.title}
+                </h2>
+                {col.links.map((link) => (
+                  <ColumnLink key={link.href} link={link} group={col.title} />
+                ))}
+              </nav>
+            ))}
+
+            {/* Phones: the same four as an accordion */}
+            <div className="md:hidden border-t" style={{ borderColor: "var(--color-border)" }}>
+              {COLUMNS.map((col) => (
+                <details key={col.title} className="group border-b" style={{ borderColor: "var(--color-border)" }}>
+                  <summary
+                    className="flex items-center justify-between py-4 text-[16px] font-semibold cursor-pointer list-none [&::-webkit-details-marker]:hidden"
+                    style={{ color: "var(--color-ink)" }}
+                  >
+                    {col.title}
+                    <ChevronDown size={18} aria-hidden="true" className="transition-transform group-open:rotate-180" />
+                  </summary>
+                  <div className="pb-3">
+                    {col.links.map((link) => (
+                      <ColumnLink key={link.href} link={link} group={col.title} />
+                    ))}
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 mt-8">
+            {SOCIAL.map(({ label, href, Icon }) => (
+              <a
+                key={href}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Amy on ${label}`}
+                className="w-11 h-11 inline-flex items-center justify-center rounded-full hover:bg-white transition-colors"
+                style={{ color: "var(--color-ink)" }}
+                onClick={() => trackEvent("external_link", { destination: label.toLowerCase(), source_page: "footer" })}
+              >
+                <Icon size={22} aria-hidden="true" />
+              </a>
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* Mobile */}
-      <div className="md:hidden text-center py-6 px-5">
-        <p className="text-xs" style={{ color: "rgba(255,255,255,0.7)" }}>
-          {MOBILE_LINKS.map((link, i) => (
-            <span key={link.href}>
-              {i > 0 && <span style={{ color: "rgba(255,255,255,0.4)" }}> &middot; </span>}
-              <Link
-                href={link.href}
-                style={{ color: "rgba(255,255,255,0.7)" }}
-                onClick={() => trackEvent('footer_click', { link_text: link.label })}
-              >
-                {link.label}
-              </Link>
-            </span>
-          ))}
-        </p>
-        <p className="text-xs mt-2" style={{ color: "rgba(255,255,255,0.5)" }}>
-          &copy; {new Date().getFullYear()} Amy Tangerine
-        </p>
+      <div className="px-5 md:px-12 py-5" style={{ background: "var(--color-ink)" }}>
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2 text-[13px]" style={{ color: "rgba(255,255,255,0.75)" }}>
+          <p>&copy; {year} Amy Tangerine</p>
+          <Link
+            href="/changelog"
+            className="underline underline-offset-4 hover:text-white"
+            style={{ color: "rgba(255,255,255,0.85)" }}
+            onClick={() => trackEvent("footer_click", { link_text: "Changelog" })}
+          >
+            Changelog
+          </Link>
+        </div>
       </div>
     </footer>
   )

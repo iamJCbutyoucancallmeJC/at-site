@@ -38,7 +38,7 @@ export default function BackInStockForm({
 
   if (state === "done") {
     return (
-      <p className="mt-3 text-[13px] text-center font-semibold" style={{ color: "var(--color-teal)" }}>
+      <p className="mt-3 text-[13px] text-center font-semibold" style={{ color: "var(--color-teal-ink)" }}>
         Got it. We&apos;ll email you when it&apos;s back.
       </p>
     )
@@ -63,8 +63,7 @@ export default function BackInStockForm({
         <button
           type="submit"
           disabled={state === "sending"}
-          className="px-6 py-3 rounded-full text-[12px] font-bold uppercase tracking-[0.1em] text-white disabled:opacity-60"
-          style={{ background: "var(--color-orange)" }}
+          className="cta-secondary cta--compact"
         >
           {state === "sending" ? "Sending..." : "Email me"}
         </button>

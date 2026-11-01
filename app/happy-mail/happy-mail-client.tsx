@@ -50,11 +50,8 @@ function SubscribeButton({ plan, dark = true }: { plan: "monthly" | "6-month"; d
     })
     trackEvent("hm_subscribe_click", { plan, price: priceAmount.toString(), source: "happy-mail", page: "happy-mail" })
   }
-  const styles = dark
-    ? { background: "var(--color-orange)", color: "#fff", border: "2px solid var(--color-orange)" }
-    : { background: "transparent", color: "var(--color-orange)", border: "2px solid var(--color-orange)" }
   return (
-    <button onClick={handle} className="w-full py-3 text-[12px] uppercase tracking-[0.1em] font-semibold rounded-full transition-all duration-300 hover:opacity-90 cursor-pointer" style={styles}>
+    <button onClick={handle} className={`cta-primary w-full ${dark ? "" : "cta-primary--outline"}`} style={{ paddingInline: "1rem" }}>
       {isMonthly ? `Subscribe Monthly · $${PRICE_MONTHLY}/mo` : `Get 6 Months · $${PRICE_6MONTH}`}
     </button>
   )
@@ -90,7 +87,7 @@ export default function HappyMailClient() {
 
       <section className="px-4 md:px-10 pt-10 md:pt-16 pb-8 md:pb-10">
         <div className="max-w-6xl mx-auto">
-          <p className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-3" style={{ color: "var(--color-orange)" }}>Monthly Subscription</p>
+          <p className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-3" style={{ color: "var(--color-orange-ink)" }}>Monthly Subscription</p>
           <h1 className="text-[36px] md:text-[52px] font-bold leading-[1.05] tracking-tight mb-4" style={{ color: "var(--color-text-primary)" }}>Every month, a letter from Amy.</h1>
           <p className="text-[16px] md:text-[18px] leading-relaxed max-w-xl mb-8" style={{ color: "var(--color-text-secondary)" }}>The good kind of mail.</p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4 mb-8">
@@ -100,7 +97,7 @@ export default function HappyMailClient() {
                   <Image src={item.img} alt={item.label} fill className="object-cover" sizes="(max-width: 768px) 50vw, 25vw" />
                 </div>
                 <p className="text-[13px] font-semibold leading-snug" style={{ color: "var(--color-text-primary)" }}>{item.label}</p>
-                <p className="text-[11px] leading-snug" style={{ color: "var(--color-text-secondary)" }}>{item.body}</p>
+                <p className="text-[12px] leading-snug" style={{ color: "var(--color-text-secondary)" }}>{item.body}</p>
               </div>
             ))}
           </div>
@@ -118,12 +115,12 @@ export default function HappyMailClient() {
         ) : (
         <div className="max-w-2xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div className="rounded-2xl p-5 border" style={{ background: "var(--color-white)", borderColor: "var(--color-border)" }}>
-            <p className="text-[11px] uppercase tracking-[0.15em] font-semibold mb-2" style={{ color: "var(--color-text-secondary)" }}>Monthly</p>
+            <p className="text-[12px] uppercase tracking-[0.15em] font-semibold mb-2" style={{ color: "var(--color-text-secondary)" }}>Monthly</p>
             <div className="flex items-end gap-1 mb-1">
               <span className="text-[36px] font-bold leading-none" style={{ color: "var(--color-text-primary)" }}>${PRICE_MONTHLY}</span>
               <span className="text-[13px] mb-1" style={{ color: "var(--color-text-secondary)" }}>/month</span>
             </div>
-            <p className="text-[11px] mb-4" style={{ color: "var(--color-text-secondary)" }}>Renews monthly · cancel anytime</p>
+            <p className="text-[12px] mb-4" style={{ color: "var(--color-text-secondary)" }}>Renews monthly · cancel anytime</p>
             {closed === null ? <HmButtonPlaceholder /> : <SubscribeButton plan="monthly" dark={false} />}
           </div>
           <div
@@ -136,8 +133,8 @@ export default function HappyMailClient() {
               transform: highlight6mo ? "scale(1.02)" : "scale(1)",
             }}
           >
-            <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 text-[10px] uppercase tracking-[0.12em] font-bold rounded-full text-white" style={{ background: "var(--color-teal)" }}>Best value</span>
-            <p className="text-[11px] uppercase tracking-[0.15em] font-semibold mb-2" style={{ color: "var(--color-orange)" }}>6 Months</p>
+            <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 text-[11px] uppercase tracking-[0.12em] font-bold rounded-full text-white" style={{ background: "var(--color-teal)" }}>Best value</span>
+            <p className="text-[12px] uppercase tracking-[0.15em] font-semibold mb-2" style={{ color: "var(--color-orange-ink)" }}>6 Months</p>
             <div className="flex items-end gap-1 mb-1">
               <span className="text-[36px] font-bold leading-none" style={{ color: "var(--color-text-primary)" }}>${PRICE_6MONTH}</span>
               <span className="text-[13px] mb-1" style={{ color: "var(--color-text-secondary)" }}>one payment</span>
@@ -149,8 +146,8 @@ export default function HappyMailClient() {
                   B:        "Save $6" big/bold + "renews until you cancel" subline
                   C:        "Save $6" big/bold + "auto-renews every 6 months" subline
                 Final wording is JC+Amy's call — do not mark t658 done. */}
-            <p className="text-[20px] md:text-[22px] font-extrabold leading-none mb-0.5" style={{ color: "var(--color-teal)" }}>Save $6</p>
-            <p className="text-[11px] mb-4" style={{ color: "var(--color-text-secondary)" }}>billed every 6 months</p>
+            <p className="text-[20px] md:text-[22px] font-extrabold leading-none mb-0.5" style={{ color: "var(--color-teal-ink)" }}>Save $6</p>
+            <p className="text-[12px] mb-4" style={{ color: "var(--color-text-secondary)" }}>billed every 6 months</p>
             {closed === null ? <HmButtonPlaceholder /> : <SubscribeButton plan="6-month" dark={true} />}
           </div>
         </div>
@@ -159,7 +156,7 @@ export default function HappyMailClient() {
             "Ships around the 15th." line). Wording is Amy-veto-gated via the
             fall-plan doc; merge to main only after the veto window clears. */}
         {closed ? (
-          <p className="text-center text-[11px] mt-4" style={{ color: "var(--color-text-secondary)" }}>
+          <p className="text-center text-[12px] mt-4" style={{ color: "var(--color-text-secondary)" }}>
             Happy Mail reopens October 16. Envelopes ship around the 15th.
           </p>
         ) : (
@@ -170,7 +167,7 @@ export default function HappyMailClient() {
       {/* ── Editorial: a note about Happy Mail (reused from prior site, Amy's voice) ── */}
       <section className="py-12 md:py-16 px-4 md:px-10" style={{ background: "var(--color-white)" }}>
         <div className="max-w-2xl mx-auto">
-          <p className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-3" style={{ color: "var(--color-orange)" }}>
+          <p className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-3" style={{ color: "var(--color-orange-ink)" }}>
             Let me send you mail
           </p>
           <h2 className="text-[26px] md:text-[34px] font-bold leading-tight tracking-tight mb-5" style={{ color: "var(--color-text-primary)" }}>
@@ -195,13 +192,13 @@ export default function HappyMailClient() {
               "A note from me about what I'm making, loving, or thinking about",
             ].map((item) => (
               <li key={item} className="flex gap-3 text-[15px] md:text-[16px] leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-                <span aria-hidden className="select-none" style={{ color: "var(--color-orange)" }}>&#10003;</span>
+                <span aria-hidden className="select-none" style={{ color: "var(--color-orange-ink)" }}>&#10003;</span>
                 <span>{item}</span>
               </li>
             ))}
           </ul>
 
-          <p className="text-[14px] font-semibold" style={{ color: "var(--color-orange)" }}>
+          <p className="text-[14px] font-semibold" style={{ color: "var(--color-orange-ink)" }}>
             Limited spots available.
           </p>
         </div>
@@ -259,7 +256,7 @@ export default function HappyMailClient() {
                 >
                   {t.name}
                 </p>
-                <p className="text-[11px]" style={{ color: "var(--color-text-secondary)" }}>
+                <p className="text-[12px]" style={{ color: "var(--color-text-secondary)" }}>
                   {t.location}
                 </p>
               </div>

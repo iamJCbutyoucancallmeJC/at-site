@@ -131,8 +131,8 @@ export default function KeepPage() {
         {/* Copy + CTA */}
         <div className="flex-1">
           <p
-            className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-3"
-            style={{ color: "var(--color-orange)" }}
+            className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-3"
+            style={{ color: "var(--color-orange-ink)" }}
           >
             Happy Mail · You were one of the first
           </p>
@@ -181,7 +181,7 @@ export default function KeepPage() {
               </span>
             </span>
           </div>
-          <p className="text-[13px] font-semibold mb-6" style={{ color: "var(--color-teal)" }}>
+          <p className="text-[13px] font-semibold mb-6" style={{ color: "var(--color-teal-ink)" }}>
             Your original price — applied automatically
           </p>
 
@@ -189,8 +189,7 @@ export default function KeepPage() {
           <button
             onClick={handleCheckout}
             disabled={loading}
-            className="w-full md:w-auto px-10 py-4 text-[14px] uppercase tracking-[0.12em] font-semibold rounded-full text-white transition-all duration-300 disabled:opacity-60"
-            style={{ background: "var(--color-orange)" }}
+            className="cta-primary w-full md:w-auto"
           >
             {loading ? "One moment..." : `Keep my Happy Mail coming — $${OFFER_PRICE}`}
           </button>

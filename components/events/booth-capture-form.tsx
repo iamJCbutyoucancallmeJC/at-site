@@ -112,8 +112,7 @@ export default function BoothCaptureForm({ slug }: { slug: string }) {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="px-6 md:px-8 py-3.5 rounded-xl text-sm md:text-[15px] font-bold text-white disabled:opacity-60 whitespace-nowrap"
-        style={{ background: "var(--color-teal)", fontFamily: "var(--font-sans)" }}
+        className="cta-teal cta--compact whitespace-nowrap"
       >
         {status === "submitting" ? "One moment..." : "Keep in touch"}
       </button>

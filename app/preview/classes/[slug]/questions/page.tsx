@@ -68,7 +68,7 @@ export default async function ClassQuestionsPage({ params }: { params: Promise<{
               const b = buyers.get(r.order_ref)
               return (
                 <li key={r.id} className="py-5">
-                  <p className="text-[12px] uppercase tracking-[0.12em] font-semibold mb-2" style={{ color: "var(--color-orange)" }}>
+                  <p className="text-[12px] uppercase tracking-[0.12em] font-semibold mb-2" style={{ color: "var(--color-orange-ink)" }}>
                     {when(r.created_at)} · order #{r.order_ref}
                     {b ? <span className="normal-case tracking-normal font-normal" style={{ color: "var(--color-text-secondary)" }}> · {b.name || "(no name)"}{b.email ? ` · ${b.email}` : ""}</span> : null}
                   </p>

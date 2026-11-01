@@ -20,7 +20,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
-import EmailCaptureInline from "@/components/email-capture-inline"
+import KeepUpCard from "@/components/keep-up-card"
 import PhotoGallery, { type GalleryPhoto } from "@/components/photo-gallery"
 import { withTag, AFFILIATE_DISCLOSURE } from "@/lib/book-qr"
 
@@ -139,8 +139,8 @@ export default function OrlandoClassPage() {
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-10 md:gap-14 items-start">
           <div className="flex-1 order-2 md:order-1">
             <p
-              className="text-[11px] uppercase tracking-[0.2em] font-semibold mb-4"
-              style={{ color: "var(--color-orange)" }}
+              className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-4"
+              style={{ color: "var(--color-orange-ink)" }}
             >
               {EVENT.expo} · {EVENT.city} · {EVENT.dateLabel}
             </p>
@@ -170,7 +170,7 @@ export default function OrlandoClassPage() {
                   target="_blank"
                   rel={AMAZON_REL}
                   className="underline hover:opacity-70"
-                  style={{ color: "var(--color-orange)" }}
+                  style={{ color: "var(--color-orange-ink)" }}
                 >
                   favorite wedge tool
                 </a>
@@ -226,7 +226,7 @@ export default function OrlandoClassPage() {
                 target="_blank"
                 rel={AMAZON_REL}
                 className="underline hover:opacity-70"
-                style={{ color: "var(--color-orange)" }}
+                style={{ color: "var(--color-orange-ink)" }}
               >
                 Paper Play 3
               </a>
@@ -254,7 +254,7 @@ export default function OrlandoClassPage() {
               </a>
             ))}
           </div>
-          <p className="mt-4 text-center text-[11px]" style={{ color: "var(--color-text-secondary)", opacity: 0.8 }}>
+          <p className="mt-4 text-center text-[12px]" style={{ color: "var(--color-text-secondary)", opacity: 0.8 }}>
             {AFFILIATE_DISCLOSURE}
           </p>
         </div>
@@ -284,7 +284,7 @@ export default function OrlandoClassPage() {
             <a
               href="mailto:help@amytangerine.com?subject=Orlando%20class%20photo"
               className="underline hover:opacity-70"
-              style={{ color: "var(--color-orange)" }}
+              style={{ color: "var(--color-orange-ink)" }}
             >
               help@amytangerine.com
             </a>{" "}
@@ -336,7 +336,7 @@ export default function OrlandoClassPage() {
                     </p>
                     <span
                       className="text-[12px] font-semibold uppercase tracking-[0.1em]"
-                      style={{ color: "var(--color-orange)" }}
+                      style={{ color: "var(--color-orange-ink)" }}
                     >
                       {item.cta} →
                     </span>
@@ -367,7 +367,7 @@ export default function OrlandoClassPage() {
       </section>
 
       {/* Renders null until NEXT_PUBLIC_CAPTURE_BLOCKS=1 (t1092 gate). */}
-      <EmailCaptureInline source={PAGE} />
+      <KeepUpCard sourcePage={PAGE} gated />
     </main>
   )
 }

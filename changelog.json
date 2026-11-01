@@ -8,23 +8,39 @@
   },
   "entries": [
     {
-      "date": "2026-10-21",
-      "title": "A sign maker under Fun Stuff",
-      "summary": "Type a phrase and it goes up on a slide-in letter board: a card per letter, a little crooked, an S upside down now and then. Share it or save a PNG for stickers.",
-      "note": "we should use amy's brand/logo not just her name",
-      "options": [
-        {
-          "key": "S1",
-          "title": "A painted sign",
-          "blurb": "Brush letters on a wooden board, guessed before the reference photo turned up. Read as a font trying to look loose."
-        },
-        {
-          "key": "S2",
-          "title": "A slide-in letter board",
-          "picked": "picked 10/20",
-          "blurb": "Built from the farmers market photo Amy sent in August: cards in rails, heavy condensed caps, quirks seeded by the phrase so the same sign renders the same way twice. Her logo in a band at the foot."
-        }
-      ]
+      "date": "2026-10-29",
+      "title": "The class is on the menu",
+      "summary": "Glimmers and Gratitude now has its own link in the main menu and leads the shop grid, so it can be found from any page and not only from an email. The shop tile opens the class page, where the price and the Join button are."
+    },
+    {
+      "date": "2026-10-29",
+      "title": "Glimmers and Gratitude opens",
+      "summary": "Amy's thirty-day November class has its own page: the price, dates and a Join button on the first screen, her short video, what you get, a taste of the prompts, and answers to the usual questions. Returning 2023 students arrive from their email with their code already applied."
+    },
+    {
+      "date": "2026-10-28",
+      "title": "Every page wears the same frame",
+      "summary": "The footer is a warm paper band with four short columns (an accordion on phones) over a dark strip, in place of the black bar with nine links in a row. Every button on the site is now one of three: the orange one that earns, a dark outline for everything else, and teal for classes. One email sign-up everywhere, the menus open on soft white cards, and orange and teal words are a shade deeper so they read clearly."
+    },
+    {
+      "date": "2026-10-25",
+      "title": "New posts wear a badge",
+      "summary": "An orange New badge marks a fresh post in Amy's picks for its first 30 days, then drops off by itself. The Ranger Archival Ink post leads the picks."
+    },
+    {
+      "date": "2026-10-25",
+      "title": "The mural gets the whole hero",
+      "summary": "Nothing sits on the photograph now; the headline and Shop now ride a white card under it, so the button can't be mistaken for a third curb. The orange strip and the teal band are gone, Happy Mail is a card with a real envelope right after the categories, section titles are real titles, new arrivals is a grid, and the lettering on every orange button is the warm near-black used for all text (it reads three times more clearly than white did). The orange itself is unchanged."
+    },
+    {
+      "date": "2026-10-25",
+      "title": "One button for the actions that earn",
+      "summary": "Join, subscribe, renew, tickets and the book link now share the blog button's look: bigger type, a soft orange lift, a darker hover. One shared style, so they stay matched."
+    },
+    {
+      "date": "2026-10-24",
+      "title": "A button in blog posts",
+      "summary": "Posts can carry one orange button, centered on its own line, that counts its clicks. First use: Shop at Ranger on the Archival Ink post."
     },
     {
       "date": "2026-10-10",
