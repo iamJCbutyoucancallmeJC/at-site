@@ -80,7 +80,29 @@ export const HM_RECENT_ENVELOPES: HmEnvelope[] = [
 //   - Cities come from the Shopify customer record, not from the email.
 //   - Anyone with a material connection to Amy (friend, collaborator, paid
 //     partner, featured contributor) does NOT go in here anonymized.
+// Eight cards so the 1/2/4-up grid fills its rows. The full pool, with message
+// ids and the per-channel sweep, is the vault's AT testimonials registry
+// (testimonials.md, "2026-11-01 sweep").
 export const HM_TESTIMONIALS = [
+  {
+    // Mary Lou Pollock, 2026-10-31, reply to the 10/9 "Your official permission
+    // slip to play" newsletter; the one Amy forwarded asking for fan mail like it.
+    quote: "I wanted to tell you how much I look forward to my Happy Mail, and your words of wisdom every month. In this insane world we live in, seeing your envelope in the mailbox always makes me smile.",
+    name: "Mary Lou P.",
+    location: "Rochester, NY",
+  },
+  {
+    // Cindi Peterson, 2026-10-21, "Yes! And..." to hello@ about the October envelope.
+    quote: "Happy Mail does just that. Brings some happy in the mail. I love getting the email saying I’ve been charged for it, because that signals me to watch my mail for permission to play again soon!",
+    name: "Cindi P.",
+    location: "Whittier, CA",
+  },
+  {
+    // Mary Tomkins, 2026-06-14, after CS fixed her card + shipping address.
+    quote: "It's truly such a happy day when I get the mail and it's there... to get such a little treasure each month is something you couldn't have prepared me for! It's the best!",
+    name: "Mary T.",
+    location: "Los Angeles, CA",
+  },
   {
     // Melissa Lima, 2026-07-29, "Your Happy Mail card needs an update" thread.
     quote: "I absolutely love getting your happy mail and am completely obsessed with it!",
@@ -88,10 +110,18 @@ export const HM_TESTIMONIALS = [
     location: "McAllen, TX",
   },
   {
-    // Mary Tomkins, 2026-06-14, after CS fixed her card + shipping address.
-    quote: "It's truly such a happy day when I get the mail and it's there... to get such a little treasure each month is something you couldn't have prepared me for! It's the best!",
-    name: "Mary T.",
-    location: "Los Angeles, CA",
+    // Sara Acosta, 2026-06-20, asking for the June note that was missing from her
+    // envelope. The ask in between is trimmed.
+    quote: "I've been loving my Happy Mail subscription! ... I very much look forward to your words of peace and inspiration!",
+    name: "Sara A.",
+    location: "Kansas City, KS",
+  },
+  {
+    // Jennifer Langer, 2026-08-07, coming back on the 6-month plan after
+    // cancelling in June. Leading "Otherwise" trimmed.
+    quote: "I’m just happy to be able to get this little monthly treat again. Thanks for being so inspiring and kind",
+    name: "Jennifer L.",
+    location: "Visalia, CA",
   },
   {
     // Angela Tilley, 2026-07-14, reply at renewal. Leading "Thank you for the
@@ -101,10 +131,10 @@ export const HM_TESTIMONIALS = [
     location: "Seaford, VA",
   },
   {
-    // Sharon Crouchman, 2026-06-01, on moving to the 6-month plan.
-    quote: "Thank you, Amy!! A forever Team Tangerine!!",
-    name: "Sharon C.",
-    location: "Berkley, MI",
+    // Patricia Houston, 2026-09-20, pausing to switch to the 6-month plan.
+    quote: "Thanks for making such amazing Happy Mail!!",
+    name: "Patricia H.",
+    location: "Cumming, GA",
   },
 ]
 
@@ -249,9 +279,10 @@ export const IHM_6MONTH_READY =
   IHM_VARIANT_6MONTH_GID.length > 0 && IHM_SELLING_PLAN_6MONTH.length > 0
 
 // Box contents + testimonials are identical to US HM (same physical envelope).
-// NOTE: the four testimonials are all US subscribers, shown with US cities. That
-// is honest (same envelope, real people) but there is no international quote in
-// the pool yet. Swap one in when a CA/UK/AU subscriber writes one.
+// NOTE: the eight testimonials are all US subscribers, shown with US cities. That
+// is honest (same envelope, real people). The pool's one international quote
+// (Maria A., Greenwith SA, 2026-10-13) is about a late envelope arriving, too thin
+// to swap in yet; it is in the vault registry.
 export const IHM_BOX_CONTENTS = HM_BOX_CONTENTS
 export const IHM_TESTIMONIALS = HM_TESTIMONIALS
 
