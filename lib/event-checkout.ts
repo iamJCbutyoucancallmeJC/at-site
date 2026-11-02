@@ -18,6 +18,7 @@
 import { createCart, addToCart, applyDiscountCode, extractCartToken } from "@/lib/shopify"
 import { HM_VARIANT_6MONTH_GID, HM_SELLING_PLAN_6MO, hmIsClosed } from "@/lib/happy-mail-content"
 import type { SiteEvent } from "@/lib/events-content"
+import { adClickAttributes } from "@/lib/ad-conversions"
 
 const RETURN_BASE = "https://www.amytangerine.com/thank-you"
 
@@ -25,7 +26,7 @@ export type EventCheckoutResult =
   | { ok: true; checkoutUrl: string; cartToken: string | null; subtotal: unknown; total: unknown }
   | { ok: false; status: number; error: string; closed?: boolean }
 
-export async function createEventCheckout(event: SiteEvent, gaClientId?: string): Promise<EventCheckoutResult> {
+export async function createEventCheckout(event: SiteEvent, gaClientId?: string, adClickIds?: unknown): Promise<EventCheckoutResult> {
   const booth = event.booth
   if (!booth?.offer || booth.offer.kind !== "hm-6month") {
     return { ok: false, status: 404, error: "This event has no checkout offer." }
@@ -41,6 +42,7 @@ export async function createEventCheckout(event: SiteEvent, gaClientId?: string)
   const attributes = [
     gaClientId && /^\d+\.\d+$/.test(gaClientId) ? { key: "_ga_client_id", value: gaClientId } : null,
     { key: "_event_source", value: booth.eventSource },
+    ...adClickAttributes(adClickIds),
   ].filter((a): a is { key: string; value: string } => a !== null)
 
   const cart = await createCart(attributes)

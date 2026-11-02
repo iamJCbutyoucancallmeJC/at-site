@@ -2,6 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import type { Metadata } from "next"
 import GiftForm from "./gift-form"
+import AdViewContent from "@/components/ad-view-content"
 import { getProductByHandle } from "@/lib/shopify"
 import { GIFT_CHECKOUT_ENABLED, GIFT_HANDLE, GIFT_PRICE, GIFT_VARIANT } from "@/lib/gift"
 import { hmIsClosed } from "@/lib/happy-mail-content"
@@ -23,6 +24,8 @@ export default async function GiftPage() {
   const closed = hmIsClosed()
   return (
     <main className="max-w-6xl mx-auto px-5 md:px-10 py-10 md:py-16">
+      {/* Meta ViewContent + Pinterest pagevisit for the gift landing (docs/ad-tracking.md). */}
+      <AdViewContent contentName="gift" value={GIFT_PRICE} />
       <Link href="/happy-mail" className="text-sm underline underline-offset-4">About Happy Mail</Link>
       {!available && <p role="status" className="mt-6 rounded-lg bg-[var(--color-orange-light)] p-4 leading-relaxed">Gift checkout is not open yet. Please don't buy a gift as another subscription on your account. For help with a gift, <a href="mailto:help@amytangerine.com" className="underline">email help@amytangerine.com</a>.</p>}
       <div className="grid md:grid-cols-2 gap-10 md:gap-16 mt-7 items-start">

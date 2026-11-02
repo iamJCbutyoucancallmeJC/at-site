@@ -16,7 +16,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import { trackEvent } from "@/lib/analytics"
+import { trackEvent, trackAdEvent, readAdClickIds } from "@/lib/analytics"
 import { useHmClosed } from "@/components/hm-closed"
 import { HM_PRICE_MONTHLY } from "@/lib/happy-mail-content"
 
@@ -46,11 +46,13 @@ export default function BackPage() {
       page: "back",
     })
 
+    trackAdEvent("InitiateCheckout", { value: HM_PRICE_MONTHLY, currency: "USD", content_name: "happy-mail-back" })
+
     try {
       const res = await fetch("/api/checkout/back", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ gaClientId: readGaClientId() }),
+        body: JSON.stringify({ gaClientId: readGaClientId(), adClickIds: readAdClickIds() }),
       })
       if (!res.ok) {
         const body = await res.json().catch(() => ({}))

@@ -20,6 +20,7 @@
 import { NextResponse } from "next/server"
 import { createCart, addToCart, applyDiscountCode, extractCartToken } from "@/lib/shopify"
 import { HM_VARIANT_MONTHLY_GID, HM_SELLING_PLAN_1MO, hmIsClosed } from "@/lib/happy-mail-content"
+import { adClickAttributes } from "@/lib/ad-conversions"
 
 const RETURN_BASE = "https://amytangerine.com/thank-you"
 const YT_DISCOUNT_CODE = process.env.NEXT_PUBLIC_YT_DISCOUNT_CODE ?? "YTHM9"
@@ -30,11 +31,12 @@ export async function POST(request: Request) {
     if (hmIsClosed()) {
       return NextResponse.json({ closed: true, error: "October is full. Happy Mail reopens October 16." }, { status: 409 })
     }
-    const { gaClientId } = (await request.json().catch(() => ({}))) as { gaClientId?: string }
+    const { gaClientId, adClickIds } = (await request.json().catch(() => ({}))) as { gaClientId?: string; adClickIds?: unknown }
 
     const attributes = [
       gaClientId && /^\d+\.\d+$/.test(gaClientId) ? { key: "_ga_client_id", value: gaClientId } : null,
       { key: "_event_source", value: "youtube" },
+      ...adClickAttributes(adClickIds),
     ].filter((a): a is { key: string; value: string } => a !== null)
 
     const cart = await createCart(attributes)

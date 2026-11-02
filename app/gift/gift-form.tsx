@@ -1,6 +1,8 @@
 "use client"
 
 import { useState, type FormEvent } from "react"
+import { trackAdEvent, readAdClickIds } from "@/lib/analytics"
+import { GIFT_PRICE } from "@/lib/gift"
 
 export default function GiftForm({ available, closed }: { available: boolean; closed: boolean }) {
   const [busy, setBusy] = useState(false)
@@ -11,7 +13,8 @@ export default function GiftForm({ available, closed }: { available: boolean; cl
     setBusy(true)
     setError("")
     try {
-      const body = Object.fromEntries(new FormData(event.currentTarget))
+      const body = { ...Object.fromEntries(new FormData(event.currentTarget)), adClickIds: readAdClickIds() }
+      trackAdEvent("InitiateCheckout", { value: GIFT_PRICE, currency: "USD", content_name: "gift" })
       const response = await fetch("/api/checkout/gift", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
       const result = await response.json()
       if (!response.ok || !result.checkoutUrl) throw new Error(result.error || "Gift checkout could not open. Please try again.")

@@ -6,7 +6,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { X, Minus, Plus, ShoppingBag } from "lucide-react"
 import { useCart } from "@/context/cart"
-import { trackEvent } from "@/lib/analytics"
+import { trackEvent, trackAdEvent, readAdClickIds, type GA4Item } from "@/lib/analytics"
 import { HM_VARIANT_6MONTH_GID } from "@/lib/happy-mail-content"
 import { isChromelessRoute, isQuietRoute } from "@/lib/chromeless-routes"
 import { stashPendingCartToken } from "@/lib/pending-checkout-tokens"
@@ -69,19 +69,22 @@ export default function CartDrawer() {
     // funnel reports populate; item_count/subtotal kept for back-compat. The
     // authoritative revenue is the server-side `purchase` event. See t687.
     const checkoutValue = items.reduce((sum, i) => sum + i.priceAmount * i.quantity, 0)
+    const checkoutItems: GA4Item[] = items.map((i) => ({
+      item_id: i.variantId,
+      item_name: i.title,
+      price: i.priceAmount,
+      quantity: i.quantity,
+      ...(i.sellingPlanId ? { item_variant: "subscription" } : {}),
+    }))
     trackEvent("begin_checkout", {
       item_count: count,
       subtotal,
       currency: "USD",
       value: checkoutValue,
-      items: items.map((i) => ({
-        item_id: i.variantId,
-        item_name: i.title,
-        price: i.priceAmount,
-        quantity: i.quantity,
-        ...(i.sellingPlanId ? { item_variant: "subscription" } : {}),
-      })),
+      items: checkoutItems,
     })
+    // Meta InitiateCheckout + Pinterest custom (no-op until a pixel id is set).
+    trackAdEvent("InitiateCheckout", { value: checkoutValue, currency: "USD", items: checkoutItems })
 
     // Safety net: if the redirect hasn't happened after 8s (typical mobile
     // navigation is < 2s even on slow networks), reset the button so the user
@@ -99,6 +102,8 @@ export default function CartDrawer() {
           // GA client_id so the orders/create webhook can attribute the
           // server-side purchase event to this browsing session (t687).
           gaClientId: readGaClientId(),
+          // _fbp/_fbc/_epik for the server-side ad Purchase (lib/ad-conversions).
+          adClickIds: readAdClickIds(),
         }),
       })
       if (!res.ok) throw new Error("checkout failed")

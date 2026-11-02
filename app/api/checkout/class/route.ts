@@ -9,14 +9,17 @@
 import { NextResponse } from "next/server"
 import { getClass, salesPageVisible, formatUnlockDate } from "@/lib/classes"
 import { addToCart, applyDiscountCode, createCart, getProductByHandle } from "@/lib/shopify"
+import { adClickAttributes } from "@/lib/ad-conversions"
 
 export const dynamic = "force-dynamic"
 
 export async function POST(request: Request) {
   let slug = ""
   let code = ""
+  let adClickIds: unknown
   try {
-    const body = (await request.json()) as { slug?: unknown; code?: unknown }
+    const body = (await request.json()) as { slug?: unknown; code?: unknown; adClickIds?: unknown }
+    adClickIds = body.adClickIds
     slug = typeof body.slug === "string" ? body.slug : ""
     code = typeof body.code === "string" ? body.code.trim().toUpperCase() : ""
     if (code && !/^[A-Z0-9-]{4,40}$/.test(code)) code = ""
@@ -33,7 +36,7 @@ export async function POST(request: Request) {
     if (!variant?.availableForSale || variant.price.currencyCode !== "USD") {
       return NextResponse.json({ error: notYet }, { status: 409 })
     }
-    const cart = await createCart([{ key: "Class", value: c.title }])
+    const cart = await createCart([{ key: "Class", value: c.title }, ...adClickAttributes(adClickIds)])
     let filled = await addToCart(cart.id, variant.id, 1)
     if (code) {
       // An alumni code from the email link. Shopify answers applicable:false for a used,

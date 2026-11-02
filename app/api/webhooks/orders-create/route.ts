@@ -26,9 +26,16 @@
 // `purchase` is counted by GA4 as its own one-event session and user; the $0
 // subscription orders were 124 of the 327 such sessions from 9/29 to 10/20 and
 // carry no revenue or attribution. Priced renewals and POS keep sending.
+//
+// Fourth job (feat/ad-tracking): ad Purchase to the Meta and Pinterest
+// Conversions APIs (lib/ad-conversions.ts), dark until their env vars exist.
+// Stricter than GA4: only a first, paid, site checkout counts (no $0, Recharge
+// renewal, POS, Faire/wholesale, draft or test order). Sent in after() with a
+// timeout so the ack never waits on, or fails because of, an ad API.
 
-import { NextResponse } from "next/server"
+import { NextResponse, after } from "next/server"
 import { grantClassAccess } from "@/lib/class-grant"
+import { adConversionsConfigured, adPurchaseSkipReason, sendAdPurchase } from "@/lib/ad-conversions"
 
 export const dynamic = "force-dynamic"
 export const runtime = "nodejs" // need the raw body for HMAC; keep it simple
@@ -136,6 +143,17 @@ export async function POST(request: Request) {
     console.error("[orders-create] class grant failed:", err)
   }
 
+  // Ad Purchase (Meta + Pinterest CAPI). Decided before the GA4 early returns
+  // below because a site checkout is exactly the order ads should count.
+  const adSkip = adPurchaseSkipReason(order, hasShopifyBrowserPurchase(order))
+  const ads = adSkip ?? (adConversionsConfigured() ? "queued" : "ad-env-missing")
+  if (ads === "queued") {
+    after(async () => {
+      const r = await sendAdPurchase(order)
+      console.log("[orders-create] ad purchase", order.id, r)
+    })
+  }
+
   if (hasShopifyBrowserPurchase(order)) {
     return NextResponse.json({
       ok: true,
@@ -143,6 +161,7 @@ export async function POST(request: Request) {
       reason: "shopify-browser-pixel-authoritative",
       order_channel: orderChannel,
       classes,
+      ads,
     })
   }
 
@@ -153,6 +172,7 @@ export async function POST(request: Request) {
       reason: "zero-dollar-subscription-order",
       order_channel: orderChannel,
       classes,
+      ads,
     })
   }
 
@@ -164,6 +184,7 @@ export async function POST(request: Request) {
       reason: "ga-env-missing",
       order_channel: orderChannel,
       classes,
+      ads,
     })
   }
 
@@ -213,5 +234,5 @@ export async function POST(request: Request) {
     // Still ack: a failed analytics send should not make Shopify retry forever.
   }
 
-  return NextResponse.json({ ok: true, sent: true, attributed: Boolean(gaClientId), order_channel: orderChannel, classes })
+  return NextResponse.json({ ok: true, sent: true, attributed: Boolean(gaClientId), order_channel: orderChannel, classes, ads })
 }

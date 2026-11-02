@@ -8,7 +8,7 @@
 // route 409s until the code is ACTIVE in Shopify, and the button says so.
 
 import { useState } from "react"
-import { trackEvent } from "@/lib/analytics"
+import { trackEvent, trackAdEvent, readAdClickIds } from "@/lib/analytics"
 import { useHmClosed } from "@/components/hm-closed"
 import { HM_PRICE_6MONTH } from "@/lib/happy-mail-content"
 import type { BoothOffer as BoothOfferConfig } from "@/lib/events-content"
@@ -40,11 +40,12 @@ export default function BoothOffer({ slug, city, offer, ended }: Props) {
     setLoading(true)
     setError("")
     trackEvent("hm_subscribe_click", { plan: "6-month", price: eventPrice.toString(), source: slug, page })
+    trackAdEvent("InitiateCheckout", { value: eventPrice, currency: "USD", content_name: `happy-mail-event-${slug}` })
     try {
       const res = await fetch("/api/checkout/event", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ slug, gaClientId: readGaClientId() }),
+        body: JSON.stringify({ slug, gaClientId: readGaClientId(), adClickIds: readAdClickIds() }),
       })
       if (!res.ok) {
         const body = await res.json().catch(() => ({}))

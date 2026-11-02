@@ -5,7 +5,7 @@
 // webhook finds exactly one class line item and mints the link.
 
 import { useId, useState } from "react"
-import { trackEvent } from "@/lib/analytics"
+import { trackEvent, trackAdEvent, readAdClickIds } from "@/lib/analytics"
 
 export default function JoinClassButton({ slug, available, label, notYet, code = "" }: { slug: string; available: boolean; label: string; notYet: string; code?: string }) {
   const [busy, setBusy] = useState(false)
@@ -17,8 +17,9 @@ export default function JoinClassButton({ slug, available, label, notYet, code =
     setBusy(true)
     setError("")
     trackEvent("class_join_click", { class: slug })
+    trackAdEvent("InitiateCheckout", { content_name: `class-${slug}` })
     try {
-      const response = await fetch("/api/checkout/class", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(code ? { slug, code } : { slug }) })
+      const response = await fetch("/api/checkout/class", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ slug, ...(code ? { code } : {}), adClickIds: readAdClickIds() }) })
       const result = await response.json()
       if (!response.ok || !result.checkoutUrl) throw new Error(result.error || "Checkout could not open. Please try again.")
       window.location.assign(result.checkoutUrl)

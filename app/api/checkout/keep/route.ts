@@ -20,6 +20,7 @@
 import { NextResponse } from "next/server"
 import { createCart, addToCart, applyDiscountCode, extractCartToken } from "@/lib/shopify"
 import { HM_VARIANT_6MONTH_GID, HM_SELLING_PLAN_6MO } from "@/lib/happy-mail-content"
+import { adClickAttributes } from "@/lib/ad-conversions"
 
 const RETURN_BASE = "https://amytangerine.com/thank-you"
 
@@ -29,13 +30,14 @@ const KEEP_DISCOUNT_CODE = process.env.NEXT_PUBLIC_KEEP_DISCOUNT_CODE ?? "ORIGIN
 
 export async function POST(request: Request) {
   try {
-    const { gaClientId } = (await request.json().catch(() => ({}))) as { gaClientId?: string }
+    const { gaClientId, adClickIds } = (await request.json().catch(() => ({}))) as { gaClientId?: string; adClickIds?: unknown }
 
     // Stamp the GA client_id (so the orders/create webhook attributes the
     // server-side purchase event) and the campaign source (rides on the order).
     const attributes = [
       gaClientId && /^\d+\.\d+$/.test(gaClientId) ? { key: "_ga_client_id", value: gaClientId } : null,
       { key: "_event_source", value: "cliff-2026" },
+      ...adClickAttributes(adClickIds),
     ].filter((a): a is { key: string; value: string } => a !== null)
 
     const cart = await createCart(attributes)

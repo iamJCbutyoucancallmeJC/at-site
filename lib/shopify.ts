@@ -300,7 +300,9 @@ const CART_FRAGMENT = `
 // how we attribute revenue from Shop Pay buyers who never return to /thank-you.
 export type CartAttribute = { key: string; value: string }
 
-export async function createGiftCart(variantId: string, attributes: CartAttribute[]): Promise<ShopifyCart> {
+// `cartAttributes` are cart-level (the ad click ids, lib/ad-conversions.ts); `attributes`
+// stay the gift line's properties.
+export async function createGiftCart(variantId: string, attributes: CartAttribute[], cartAttributes: CartAttribute[] = []): Promise<ShopifyCart> {
   const query = `
     ${IMAGE_FRAGMENT}
     ${PRICE_FRAGMENT}
@@ -313,7 +315,7 @@ export async function createGiftCart(variantId: string, attributes: CartAttribut
     }
   `
   const data = await shopifyFetch<{ cartCreate: { cart: ShopifyCart | null; userErrors: { message: string }[] } }>(query, {
-    input: { lines: [{ merchandiseId: variantId, quantity: 1, attributes }] },
+    input: { lines: [{ merchandiseId: variantId, quantity: 1, attributes }], ...(cartAttributes.length ? { attributes: cartAttributes } : {}) },
   })
   if (data.cartCreate.userErrors.length || !data.cartCreate.cart || data.cartCreate.cart.lines.nodes.length !== 1) {
     throw new Error("Gift cart creation failed")

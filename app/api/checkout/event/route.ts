@@ -11,10 +11,10 @@ import { createEventCheckout } from "@/lib/event-checkout"
 
 export async function POST(request: Request) {
   try {
-    const { slug, gaClientId } = (await request.json().catch(() => ({}))) as { slug?: string; gaClientId?: string }
+    const { slug, gaClientId, adClickIds } = (await request.json().catch(() => ({}))) as { slug?: string; gaClientId?: string; adClickIds?: unknown }
     const event = slug ? getBoothEvent(slug) : undefined
     if (!event) return NextResponse.json({ error: "Unknown event" }, { status: 404 })
-    const result = await createEventCheckout(event, gaClientId)
+    const result = await createEventCheckout(event, gaClientId, adClickIds)
     if (!result.ok) {
       const { ok: _ok, status, ...rest } = result
       return NextResponse.json(rest, { status })

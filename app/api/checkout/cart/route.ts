@@ -8,14 +8,16 @@ import { NextResponse } from "next/server"
 import { createCart, addToCart, extractCartToken } from "@/lib/shopify"
 import { hmIsClosed, hmCapVariantGids } from "@/lib/happy-mail-content"
 import { GIFT_VARIANT } from "@/lib/gift"
+import { adClickAttributes } from "@/lib/ad-conversions"
 
 const RETURN_BASE = "https://amytangerine.com/thank-you"
 
 export async function POST(request: Request) {
   try {
-    const { items, gaClientId } = await request.json() as {
+    const { items, gaClientId, adClickIds } = await request.json() as {
       items: { variantId: string; quantity: number; sellingPlanId?: string }[]
       gaClientId?: string
+      adClickIds?: unknown
     }
 
     if (!Array.isArray(items) || items.length === 0) {
@@ -43,11 +45,14 @@ export async function POST(request: Request) {
     // Attach the GA client_id as a cart attribute so it rides through every
     // checkout path onto the order, where the orders/create webhook reads it to
     // fire the server-side GA4 purchase event in the right session (t687).
-    const attributes = gaClientId && /^\d+\.\d+$/.test(gaClientId)
-      ? [{ key: "_ga_client_id", value: gaClientId }]
-      : undefined
+    // Plus the ad click ids (_fbp/_fbc/_epik) for the server-side ad Purchase
+    // (lib/ad-conversions.ts, docs/ad-tracking.md).
+    const attributes = [
+      ...(gaClientId && /^\d+\.\d+$/.test(gaClientId) ? [{ key: "_ga_client_id", value: gaClientId }] : []),
+      ...adClickAttributes(adClickIds),
+    ]
 
-    const cart = await createCart(attributes)
+    const cart = await createCart(attributes.length ? attributes : undefined)
     let updated = cart
     for (const item of items) {
       updated = await addToCart(updated.id, item.variantId, item.quantity, item.sellingPlanId)

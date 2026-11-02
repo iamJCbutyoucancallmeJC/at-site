@@ -7,8 +7,14 @@ import Nav from "@/components/nav"
 import Footer from "@/components/footer"
 import CartDrawer from "@/components/cart-drawer"
 import KlaviyoOnsite from "@/components/klaviyo-onsite"
+import AdPageViews from "@/components/ad-page-views"
 import { CartProvider } from "@/context/cart"
 import "./globals.css"
+
+// Ad pixels (docs/ad-tracking.md): dark until the ids land in Vercel env. Digits
+// only, because each id is written into an inline script.
+const META_PIXEL_ID = /^\d+$/.test(process.env.NEXT_PUBLIC_META_PIXEL_ID ?? "") ? process.env.NEXT_PUBLIC_META_PIXEL_ID : ""
+const PINTEREST_TAG_ID = /^\d+$/.test(process.env.NEXT_PUBLIC_PINTEREST_TAG_ID ?? "") ? process.env.NEXT_PUBLIC_PINTEREST_TAG_ID : ""
 
 const epilogue = Epilogue({ subsets: ["latin"], variable: "--font-sans", display: "swap" })
 
@@ -61,6 +67,46 @@ export default function RootLayout({
             />
           </>
         )}
+        {/* Meta Pixel + Pinterest tag. beforeInteractive so the fbq/pintrk queues
+            exist before any page effect fires an event (a /gift landing sends
+            ViewContent on mount). The stubs only queue calls and load the vendor
+            script async, so nothing blocks render. Events: lib/analytics.ts
+            trackAdEvent; Purchase is server-side (lib/ad-conversions.ts). */}
+        {META_PIXEL_ID && (
+          <Script
+            id="meta-pixel"
+            strategy="beforeInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+                !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+                n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+                t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+                document,'script','https://connect.facebook.net/en_US/fbevents.js');
+                fbq.disablePushState = true;
+                fbq('init', '${META_PIXEL_ID}');
+                fbq('track', 'PageView');
+              `,
+            }}
+          />
+        )}
+        {PINTEREST_TAG_ID && (
+          <Script
+            id="pinterest-tag"
+            strategy="beforeInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+                !function(e){if(!window.pintrk){window.pintrk=function(){window.pintrk.queue.push(
+                Array.prototype.slice.call(arguments))};var n=window.pintrk;n.queue=[],n.version="3.0";
+                var t=document.createElement("script");t.async=!0,t.src=e;var r=document.getElementsByTagName("script")[0];
+                r.parentNode.insertBefore(t,r)}}("https://s.pinimg.com/ct/core.js");
+                pintrk('load', '${PINTEREST_TAG_ID}');
+                pintrk('page');
+              `,
+            }}
+          />
+        )}
+        {(META_PIXEL_ID || PINTEREST_TAG_ID) && <AdPageViews />}
         {/* Klaviyo onsite (t1092): serves Klaviyo-native signup forms (the D3
             timed/exit-intent popup Amy designs in Klaviyo's builder) once the
             company id lands in Vercel env. Renders nothing until then, and
