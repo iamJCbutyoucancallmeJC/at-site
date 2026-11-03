@@ -130,6 +130,22 @@ export function laDate(at: Date = new Date()): string {
   }).format(at)
 }
 
+// Calendar date (YYYY-MM-DD) in any IANA zone. A missing or malformed zone
+// falls back to Los Angeles instead of throwing, so a bad header can never
+// take a class page down.
+export function zonedDate(timeZone: string, at: Date = new Date()): string {
+  try {
+    return new Intl.DateTimeFormat("en-CA", {
+      timeZone,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).format(at)
+  } catch {
+    return laDate(at)
+  }
+}
+
 function addDays(ymd: string, n: number): string {
   const [y, m, d] = ymd.split("-").map(Number)
   const t = Date.UTC(y, m - 1, d + n)
@@ -141,11 +157,31 @@ export function unlockDate(c: ClassDef, day: number): string {
   return addDays(c.startDate, day - 1)
 }
 
-// Days are compared as calendar strings, so "today in LA" >= unlock date.
-export function isDayOpen(c: ClassDef, day: number, at: Date = new Date()): boolean {
+// Whether day n is open for a student whose own calendar reads viewerDate
+// (YYYY-MM-DD). Days are compared as calendar strings.
+//
+// THE STUDENT'S OWN DATE IS THE GATE, not Amy's (JC ruled 2026-11-03). The
+// class shipped gating on midnight Pacific, and on launch night a student
+// three hours ahead wrote into the question box: "it is 2am November 1st for
+// me. I tried clicking on Nov 1st and nothing happened." Her calendar said the
+// date, the page said locked, and a locked day renders as a plain span rather
+// than a link, so clicking it did nothing and explained nothing. 113 of the
+// measurable 170 users sat east of Pacific and hit that window every day;
+// the nine Australians were effectively a day behind for the whole month.
+//
+// Day n now opens at local midnight wherever the student is. The cost is that
+// Sydney reaches day n about nineteen hours before Los Angeles, which for one
+// prompt a day in a paper journal is not a cost.
+export function isDayOpenOn(c: ClassDef, day: number, viewerDate: string): boolean {
   if (day < 1 || day > c.days) return false
   if (allDaysOpen()) return true
-  return laDate(at) >= unlockDate(c, day)
+  return viewerDate >= unlockDate(c, day)
+}
+
+// Pacific-time gate: the fallback for callers with no request context. Prefer
+// isDayOpenOn with viewerDate() from lib/class-viewer.
+export function isDayOpen(c: ClassDef, day: number, at: Date = new Date()): boolean {
+  return isDayOpenOn(c, day, laDate(at))
 }
 
 export function formatUnlockDate(ymd: string): string {

@@ -13,7 +13,8 @@ import PageEngagementTracker from "@/components/page-engagement-tracker"
 import PromptBlock from "@/components/class/prompt-block"
 import GuidedPlayer from "@/components/class/guided-player"
 import DemoPlayer from "@/components/class/demo-player"
-import { getClass, isDayOpen, unlockDate, formatUnlockDate } from "@/lib/classes"
+import { getClass, isDayOpenOn, unlockDate, formatUnlockDate } from "@/lib/classes"
+import { viewerDate } from "@/lib/class-viewer"
 import { getClassClaim } from "@/lib/class-session"
 import { getClassDay, getClassDays } from "@/lib/class-content"
 import { getAnswers } from "@/lib/class-answers"
@@ -36,7 +37,9 @@ export default async function ClassDayPage({ params }: { params: Promise<{ slug:
   const claim = await getClassClaim(slug)
   if (!claim) redirect(`/classes/${slug}`)
 
-  const open = isDayOpen(c, n)
+  // Gated on the student's own calendar date, not Pacific (lib/class-viewer).
+  const today = await viewerDate()
+  const open = isDayOpenOn(c, n, today)
   const day = open ? getClassDay(slug, n) : null
   const answers = open ? await getAnswers(claim) : {}
   const src = day?.video ? await playbackSource(day.video.id) : null
@@ -169,7 +172,7 @@ export default async function ClassDayPage({ params }: { params: Promise<{ slug:
             Day {n - 1}
           </Link>
         ) : <span />}
-        {n < c.days && isDayOpen(c, n + 1) ? (
+        {n < c.days && isDayOpenOn(c, n + 1, today) ? (
           <Link href={`/classes/${slug}/day/${n + 1}`} className="underline underline-offset-2" style={link}>
             Day {n + 1}
           </Link>

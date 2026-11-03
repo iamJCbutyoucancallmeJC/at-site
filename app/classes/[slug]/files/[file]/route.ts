@@ -10,7 +10,8 @@
 import { NextResponse } from "next/server"
 import { promises as fs } from "node:fs"
 import path from "node:path"
-import { getClass, isDayOpen } from "@/lib/classes"
+import { getClass, isDayOpenOn } from "@/lib/classes"
+import { viewerDate } from "@/lib/class-viewer"
 import { getClassClaim } from "@/lib/class-session"
 import { getClassDays } from "@/lib/class-content"
 
@@ -35,7 +36,7 @@ export async function GET(_req: Request, ctx: { params: Promise<{ slug: string; 
   const name = decodeURIComponent(file)
   const owner = getClassDays(slug).find((d) => d.files?.some((f) => f.name === name))
   if (!owner) return new NextResponse("Not found", { status: 404 })
-  if (!isDayOpen(c, owner.day)) return new NextResponse("Not yet", { status: 403 })
+  if (!isDayOpenOn(c, owner.day, await viewerDate())) return new NextResponse("Not yet", { status: 403 })
 
   const ext = path.extname(name).toLowerCase()
   const type = TYPES[ext]

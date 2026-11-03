@@ -4,7 +4,8 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
-import { getClass, isDayOpen, unlockDate, formatUnlockDate, laDate } from "@/lib/classes"
+import { getClass, isDayOpenOn, unlockDate, formatUnlockDate } from "@/lib/classes"
+import { viewerDate } from "@/lib/class-viewer"
 import { getClassClaim } from "@/lib/class-session"
 import { getClassDays, getContainerCues } from "@/lib/class-content"
 import { getAnswers } from "@/lib/class-answers"
@@ -65,7 +66,9 @@ export default async function ClassHome({
   const now = new Date()
   // The day that unlocked today, if the class is running; marked in the list so
   // a returning student does not have to count.
-  const today = laDate(now)
+  // The student's own calendar date, so the "Today" chip and the open days
+  // agree with the date on their wall (not Amy's). See lib/class-viewer.
+  const today = await viewerDate(now)
   const todayN = Array.from({ length: c.days }, (_, i) => i + 1).find((n) => unlockDate(c, n) === today) ?? null
   const answers = await getAnswers(claim)
   const asked = await myQuestions(claim)
@@ -101,7 +104,7 @@ export default async function ClassHome({
 
       <ol className="divide-y" style={{ borderColor: "var(--color-border)" }}>
         {Array.from({ length: c.days }, (_, i) => i + 1).map((n) => {
-          const open = isDayOpen(c, n, now)
+          const open = isDayOpenOn(c, n, today)
           const d = days.find((x) => x.day === n)
           const label = d?.title ?? `Day ${n}`
           return (
