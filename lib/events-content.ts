@@ -116,8 +116,42 @@ export const EVENTS: SiteEvent[] = [
     },
   },
   {
-    slug: "little-craft-fest-fall-2026",
+    slug: "paper-world-las-vegas",
     status: "upcoming",
+    title: "Paper World Stationery Expo",
+    label: "Stationery Expo",
+    city: "Las Vegas, NV",
+    venue: "Virgin Hotels Las Vegas",
+    dates: "November 7, 2026",
+    sortDate: "2026-11-07",
+    blurb:
+      "Paper World's Las Vegas stop: one day of stationery vendors and workshops at Virgin Hotels. Amy has a table and teaches a workshop that has already sold out.",
+    meetAmy:
+      "Come find Amy's table on the show floor, 11am to 6pm. Shopping is open to everyone; the workshop seats are gone.",
+    detailPage: true,
+    eventUrl: "https://www.paperworldstationeryexpo.com/",
+    details: ["Virgin Hotels Las Vegas, 4455 Paradise Road, Las Vegas, NV 89169"],
+    // Paper World stop: carries the "paperworld" alias, so the standing printed
+    // sign lands here. Same PAPERWORLD code as every stop, window reopened for
+    // this show (runbook step 3). Booth number: not in the 10/21 vendor email.
+    booth: {
+      eventSource: "paperworld-las-vegas",
+      qrAlias: "paperworld",
+      hours: ["Saturday Nov 7: 11am to 6pm"],
+      offer: {
+        code: "PAPERWORLD",
+        kind: "hm-6month",
+        amountOff: 6,
+        headline: "Six months of mail from me.",
+        terms: "Show price for friends who stopped by the booth: one payment of $66 instead of $72. Good through about a week after the show. US addresses only.",
+      },
+      captureHeading: "Not ready to subscribe? Stay in touch.",
+      captureBlurb: "Leave your email and Amy will send a note after the show with photos and what is new.",
+    },
+  },
+  {
+    slug: "little-craft-fest-fall-2026",
+    status: "past",
     title: "Fall Market + Spooky Little Craft Fest",
     label: "Workshops",
     city: "Conroe, TX",
@@ -172,7 +206,7 @@ export const EVENTS: SiteEvent[] = [
   },
   {
     slug: "village-well",
-    status: "upcoming",
+    status: "past",
     title: "Art Show at Village Well",
     label: "Art Show",
     city: "Culver City, CA",
