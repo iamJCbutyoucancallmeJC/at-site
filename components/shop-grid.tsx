@@ -27,8 +27,17 @@ export function selectProductsForCategory(
   allProducts: ShopifyProduct[],
   activeCategory: string
 ): ShopifyProduct[] {
-  // Sort the international HM product to the very back of the grid.
+  // What a person can buy comes first (design critic F38, 2026-11-04). On 11/04 the All
+  // grid ran eleven tiles of which seven were sold out, interleaved, so a shopper on a
+  // phone scrolled four rows that were mostly unavailable to reach the four things in
+  // stock. Sold out still shows, because the sticker someone saw on Instagram should be
+  // findable and the badge tells the truth; it just stops leading. Then the international
+  // HM product to the very back, as before. Array.prototype.sort is stable, so within each
+  // group Shopify's own order is untouched.
   const ordered = [...allProducts].sort((a, b) => {
+    const aOut = a.availableForSale ? 0 : 1
+    const bOut = b.availableForSale ? 0 : 1
+    if (aOut !== bOut) return aOut - bOut
     const aIntl = a.handle === "happy-mail-international" ? 1 : 0
     const bIntl = b.handle === "happy-mail-international" ? 1 : 0
     return aIntl - bIntl
@@ -78,8 +87,12 @@ export default function ShopGrid({
         >
           Shop
         </h1>
+        {/* The count is what the grid shows, lead tiles included (design critic F38,
+            2026-11-04): it read "10 products" over eleven tiles while the Glimmers
+            class led the All grid. */}
         <p className="text-[14px]" style={{ color: "var(--color-text-secondary)" }}>
-          {products.length} {products.length === 1 ? "product" : "products"}
+          {products.length + leadTiles.length}{" "}
+          {products.length + leadTiles.length === 1 ? "product" : "products"}
         </p>
       </div>
 
@@ -115,7 +128,7 @@ export default function ShopGrid({
 
       {/* ── Product Grid ── */}
       <div className="px-4 md:px-10 py-8">
-        {products.length === 0 ? (
+        {products.length + leadTiles.length === 0 ? (
           <p className="text-center py-16 text-[14px]" style={{ color: "var(--color-text-secondary)" }}>
             No products in this category yet.
           </p>
