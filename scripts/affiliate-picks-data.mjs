@@ -24,11 +24,13 @@ export const AFFILIATE_LISTS = [
     // page above My Books: new-launch featuring, per JC's "needs to be featured"
     // directive; easy to renumber once the launch window passes. No listId --
     // no Amazon idea list for these, so no "See all" deep-link.
+    // 2026-11-04: Amy asked to move it to the bottom of the page; sortOrder 6
+    // sorts it after Crafty Kids Gift Guide (5).
     listId: null,
     title: "On the Bright Side with Creative Memories",
     slug: "on-the-bright-side",
     count: 3,
-    sortOrder: -1,
+    sortOrder: 6,
     description:
       "My collection with Creative Memories! Watercolor brights and uplifting phrases designed to keep your memory keeping on the sunny side.",
     picks: [
@@ -49,11 +51,15 @@ export const AFFILIATE_LISTS = [
     listId: null,
     title: "My Books",
     slug: "my-books",
-    count: 6,
+    count: 7,
     sortOrder: 0,
     description:
       "The ones I made myself! Books and notebooks designed to be used hard: torn, snipped, painted, and filled with your everyday memories.",
     picks: [
+      // Glimmers & Gratitude journal: Amy asked 2026-11-04 to add it; first in
+      // the list while the November Glimmers class runs (amytangerine.com/glimmers).
+      { asin: "B0CLNXSR2G", title: "Glimmers & Gratitude Journal",
+        note: "The journal I made for my first Glimmers and Gratitude workshop in 2023. I still keep mine on my desk." },
       { asin: "B0H414S9DK", title: "Sunshine & Rainbows Traveler's Notebook",
         note: "My traveler's notebook: a colorful foundation for creativity, memories, and everyday joy." },
       { asin: "B0GVF8HP46", title: "Paper Play 3: Junk Journal Edition",
