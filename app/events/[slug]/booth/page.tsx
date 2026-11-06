@@ -18,7 +18,10 @@ import PageEngagementTracker from "@/components/page-engagement-tracker"
 import TrackableLink from "@/components/trackable-link"
 import BoothOffer from "@/components/events/booth-offer"
 import BoothCaptureForm from "@/components/events/booth-capture-form"
-import { boothEvents, getBoothEvent } from "@/lib/events-content"
+import { boothEvents, getBoothEvent, offerOpenAfterShow } from "@/lib/events-content"
+
+// Hourly, so an after-show window (offer.openUntil) closes without a redeploy.
+export const revalidate = 3600
 
 export function generateStaticParams() {
   return boothEvents().map((e) => ({ slug: e.slug }))
@@ -41,6 +44,7 @@ export default async function BoothPage({ params }: { params: Promise<{ slug: st
   if (!event || !event.booth) notFound()
   const booth = event.booth
   const ended = event.status === "past"
+  const afterShow = ended && offerOpenAfterShow(booth.offer)
   const sourcePage = `at-site:/events/${event.slug}/booth`
   const facts = [event.venue, booth.boothNumber ? `Find Amy at ${booth.boothNumber}` : null].filter(Boolean) as string[]
 
@@ -101,7 +105,7 @@ export default async function BoothPage({ params }: { params: Promise<{ slug: st
             >
               {booth.offer.headline}
             </h1>
-            <BoothOffer slug={event.slug} city={event.city} offer={booth.offer} ended={ended} />
+            <BoothOffer slug={event.slug} city={event.city} offer={booth.offer} ended={ended && !afterShow} afterShow={afterShow} />
           </div>
         </section>
       )}

@@ -30,6 +30,18 @@ export type BoothOffer = {
   amountOff: number // dollars off, for the price display
   headline: string
   terms: string // the fine print, in Amy's words
+  // After-show window (2026-11-06): a past event's offer stays buyable through
+  // this Pacific date (YYYY-MM-DD) for a follow-up email to the class. The
+  // Shopify code's own endsAt must cover it; the checkout route still 409s if not.
+  openUntil?: string
+  afterShowIntro?: string // replaces the "Scanned the code at the table?" line during the window
+}
+
+// True while a past event's offer is inside its after-show window.
+export function offerOpenAfterShow(offer: BoothOffer | undefined, now: Date = new Date()): boolean {
+  if (!offer?.openUntil) return false
+  const today = new Intl.DateTimeFormat("en-CA", { timeZone: "America/Los_Angeles" }).format(now)
+  return today <= offer.openUntil
 }
 
 export type EventBooth = {
@@ -198,7 +210,10 @@ export const EVENTS: SiteEvent[] = [
         kind: "hm-6month",
         amountOff: 6,
         headline: "Six months of mail from me, at the show price.",
-        terms: "$6 off the Happy Mail 6-month subscription for friends who found the table: one payment of $66 instead of $72. Good through about a week after the show. US addresses only.",
+        terms: "$6 off the Happy Mail 6-month subscription for friends who found the table: one payment of $66 instead of $72. Good through November 22. US addresses only.",
+        // Reopened 2026-11-06 for the BIG LOVE class follow-up email (Amy, 11/6).
+        openUntil: "2026-11-22",
+        afterShowIntro: "For my Little Craft Fest friends: the show price is back through November 22.",
       },
       captureHeading: "Not ready to subscribe? Stay in touch.",
       captureBlurb: "Leave your email and Amy will send a note after the show with photos and what is new.",

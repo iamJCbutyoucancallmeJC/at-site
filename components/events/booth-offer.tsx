@@ -27,9 +27,10 @@ type Props = {
   city: string
   offer: BoothOfferConfig
   ended: boolean // event is past: the code has expired, show the page without a buy button
+  afterShow?: boolean // past event, offer reopened (offer.openUntil): buyable, with the after-show intro
 }
 
-export default function BoothOffer({ slug, city, offer, ended }: Props) {
+export default function BoothOffer({ slug, city, offer, ended, afterShow = false }: Props) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
   const closed = useHmClosed()
@@ -96,7 +97,9 @@ export default function BoothOffer({ slug, city, offer, ended }: Props) {
   return (
     <div>
       <p className="text-[14px] leading-relaxed mb-6" style={{ color: "var(--color-text-secondary)" }}>
-        Scanned the code at the table? This {city} show price is just for you, today.
+        {afterShow && offer.afterShowIntro
+          ? offer.afterShowIntro
+          : <>Scanned the code at the table? This {city} show price is just for you, today.</>}
       </p>
 
       <div className="flex items-end gap-3 mb-1">
