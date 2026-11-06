@@ -71,6 +71,25 @@ const nextConfig = {
       //    the /blog/[slug] route serves them at the canonical URL directly.
       { source: "/blog/:year(20\\d{2})/:month/:day/:slug", destination: "/blog/:slug", permanent: true },
       { source: "/blog/:year(20\\d{2})/:month/:slug", destination: "/blog/:slug", permanent: true },
+      // 2b) Blogspot-era flat posts, /blog/<slug>.html, still linked from other sites (aocr.org
+      //     sent most of October's). Every one checked exists at /blog/<slug> (2026-11-06, MBR #5).
+      { source: "/blog/:slug([^/]+)\\.html", destination: "/blog/:slug", permanent: true },
+
+      // ---- Old links still in the wild (GA4 not_found_view, October 2026; MBR #5) ----
+      // Temporary (302) so they can point at a real product again if one comes back.
+      // A retired stamp set linked under a YouTube video; nearest live shelf is stamps.
+      { source: "/shop/moody2stamp4x6", destination: "/shop?category=stamps", permanent: false },
+      // An old class link on Amy's Linktree; classes now live at /classes.
+      { source: "/shop/creativejournalsession", destination: "/classes", permanent: false },
+      // Retired prints and sticker books.
+      { source: "/shop/bring-your-own-sunshine-print", destination: "/shop?category=printables", permanent: false },
+      { source: "/shop/feblight", destination: "/shop?category=printables", permanent: false },
+      { source: "/shop/hearthealinghappiness-sticker-book", destination: "/shop?category=stickers", permanent: false },
+      { source: "/shop/pre-order-sticker-book", destination: "/shop?category=stickers", permanent: false },
+      // Old Squarespace paths: the signup page, the book preorder, a Glimmers typo.
+      { source: "/subscribe", destination: "/join", permanent: false },
+      { source: "/craft-a-life-you-love-preorder", destination: "https://www.amazon.com/dp/B078W7LJ13?tag=atwbsite-20", permanent: false },
+      { source: "/flimmers", destination: "/glimmers", permanent: false },
       // 3) Old SQS taxonomy pages: /blog/tag/X stays (we have a tag route); /blog/category/X
       //    maps to the same tag namespace (categories and tags were merged at extraction).
       { source: "/blog/category/:slug", destination: "/blog/tag/:slug", permanent: true },
