@@ -6,10 +6,20 @@ import { getAffiliatePickLists, amazonHref } from "@/lib/affiliate"
 // Affiliate content is authored in Shopify and may change anytime; read fresh.
 export const dynamic = "force-dynamic"
 
-export const metadata = {
+const BASE_METADATA = {
   title: "Shop My Faves | Amy Tangerine",
   description:
     "The third-party tools, supplies, and gear Amy actually uses for her best creative life. Hand-picked favorites, linked on Amazon.",
+}
+
+type PageProps = { searchParams: Promise<{ preview?: string | string[] }> }
+
+const previewSlugOf = (p?: string | string[]) => (Array.isArray(p) ? p[0] : p) || undefined
+
+// A ?preview=<slug> link shows one hidden list for review; keep it out of search.
+export async function generateMetadata({ searchParams }: PageProps) {
+  const previewSlug = previewSlugOf((await searchParams).preview)
+  return previewSlug ? { ...BASE_METADATA, robots: { index: false, follow: false } } : BASE_METADATA
 }
 
 // The required Amazon Associates disclosure. The first sentence is Amazon's
@@ -18,8 +28,9 @@ export const metadata = {
 const DISCLOSURE =
   "As an Amazon Associate I earn from qualifying purchases. These are products I genuinely use and recommend; if you buy through these links, I may earn a small commission at no extra cost to you."
 
-export default async function ShopMyFavesPage() {
-  const lists = await getAffiliatePickLists()
+export default async function ShopMyFavesPage({ searchParams }: PageProps) {
+  const previewSlug = previewSlugOf((await searchParams).preview)
+  const lists = await getAffiliatePickLists({ previewSlug })
 
   return (
     <>

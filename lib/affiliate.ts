@@ -203,14 +203,18 @@ function mapList(raw: RawList): AffiliatePickList {
  * Lists with no renderable picks are dropped. Sort: explicit sort_order first
  * (ascending), then alphabetical by title.
  */
-export async function getAffiliatePickLists(): Promise<AffiliatePickList[]> {
+export async function getAffiliatePickLists(
+  opts: { previewSlug?: string } = {},
+): Promise<AffiliatePickList[]> {
   const data = await adminFetch<{ metaobjects: { nodes: RawList[] } }>(LISTS_QUERY, {
     listType: LIST_TYPE,
     first: 50,
   })
+  // previewSlug: also render that ONE hidden (active=false) list, so Amy can see
+  // a staged list on the real page before she says go (?preview=<slug>).
   const lists = data.metaobjects.nodes
     .map(mapList)
-    .filter((l) => l.active && l.picks.length > 0)
+    .filter((l) => (l.active || (!!opts.previewSlug && l.slug === opts.previewSlug)) && l.picks.length > 0)
 
   lists.sort((a, b) => {
     const ao = a.sortOrder ?? Number.POSITIVE_INFINITY
