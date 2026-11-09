@@ -52,8 +52,13 @@ export type AffiliatePick = {
   /** Resolved image src (uploaded file URL, else hosted image_url), or null. */
   imageUrl: string | null
   imageAlt: string
+  /** True when the image is Amy's own uploaded photo (not Amazon's product art). */
+  hasOwnPhoto: boolean
   featured: boolean
   active: boolean
+  /** Optional second link on a spotlight (a post, one of Amy's own products). */
+  linkLabel: string | null
+  linkUrl: string | null
 }
 
 export type AffiliatePickList = {
@@ -159,9 +164,21 @@ function mapPick(raw: RawPick): AffiliatePick {
     amazonUrl: text(m.get("amazon_url")),
     imageUrl: imageUrl ?? null,
     imageAlt: uploaded?.altText ?? title,
+    hasOwnPhoto: !!uploaded?.url,
     featured: bool(m.get("featured")),
     active: activeFlag(m.get("active")),
+    linkLabel: text(m.get("link_label")),
+    linkUrl: text(m.get("link_url")),
   }
+}
+
+/**
+ * A list's spotlight: the first featured pick that carries Amy's own photo. It
+ * renders as one wide card above the grid (a friend moment, e.g. an author
+ * wearing Amy's bracelet). A featured pick with only Amazon art stays a tile.
+ */
+export function spotlightOf(list: AffiliatePickList): AffiliatePick | null {
+  return list.picks.find((p) => p.featured && p.hasOwnPhoto) ?? null
 }
 
 type RawList = {

@@ -1,7 +1,8 @@
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 import AffiliateCard from "@/components/affiliate-card"
+import AffiliateSpotlight from "@/components/affiliate-spotlight"
 import TrackableLink from "@/components/trackable-link"
-import { getAffiliatePickLists, amazonHref } from "@/lib/affiliate"
+import { getAffiliatePickLists, amazonHref, spotlightOf } from "@/lib/affiliate"
 
 // Affiliate content is authored in Shopify and may change anytime; read fresh.
 export const dynamic = "force-dynamic"
@@ -110,8 +111,16 @@ export default async function ShopMyFavesPage({ searchParams }: PageProps) {
                   )}
                 </div>
 
+                {spotlightOf(list) && (
+                  <AffiliateSpotlight
+                    pick={spotlightOf(list)!}
+                    href={amazonHref(spotlightOf(list)!)}
+                    listTitle={list.title}
+                  />
+                )}
+
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6">
-                  {list.picks.map((pick) => (
+                  {list.picks.filter((pick) => pick !== spotlightOf(list)).map((pick) => (
                     <AffiliateCard
                       key={pick.id}
                       pick={pick}
