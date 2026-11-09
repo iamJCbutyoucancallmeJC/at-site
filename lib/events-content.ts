@@ -129,7 +129,7 @@ export const EVENTS: SiteEvent[] = [
   },
   {
     slug: "paper-world-las-vegas",
-    status: "upcoming",
+    status: "past",
     title: "Paper World Stationery Expo",
     label: "Stationery Expo",
     city: "Las Vegas, NV",
