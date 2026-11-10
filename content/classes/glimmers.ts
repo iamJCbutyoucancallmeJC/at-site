@@ -97,7 +97,7 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     // Juni (5) painting her page and writing LOVE for Amy's journal, shot 11/9 with the two of them
     // talking; landscape, as it happened (Amy 11/9: "the one with Juni was intended for the day where
     // you put someone else's writing"). Bunny "glimmers-2026-d04-juni-page", 2:43.
-    demo: { id: "a5f55f00-bf80-4b70-96ca-f162dcd368d9", caption: "Juni making her page and writing LOVE for Amy's journal. Two and a half minutes, the two of them talking." },
+    demo: { id: "112ae79c-66d6-4436-8725-a31327487021", caption: "Juni, five, making her page and writing LOVE for Amy's journal in November 2026, with the two of them talking as it happened. Two and a half minutes." },
     body: [],
   },
   {
@@ -145,8 +145,8 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     // no talking, 1x to 2x (Bunny "glimmers-2026-d10-currently-spread", 2:34); then Juni's page again
     // so this week's students see it without going back to Day 4 (Amy 11/9: "inserted in tomorrow or elsewhere").
     demo: [
-      { id: "e2ecec27-37be-4509-b09c-4216727c17bb", caption: "Amy making this week's Currently spread, start to finish. Two and a half minutes, no talking." },
-      { id: "a5f55f00-bf80-4b70-96ca-f162dcd368d9", caption: "Juni making her page and writing LOVE for Amy's journal. Two and a half minutes." },
+      { id: "e2ecec27-37be-4509-b09c-4216727c17bb", caption: "Amy making this week's Currently spread, November 2026: a kraft insert clipped open, distress ink pushed around with a wipe, the Currently card from her show table, then stamps, stickers and washi layered on. Two and a half minutes, music only for now." },
+      { id: "112ae79c-66d6-4436-8725-a31327487021", caption: "Juni, five, making her page and writing LOVE for Amy's journal in November 2026, the two of them talking. Two and a half minutes." },
     ],
     body: [],
   },
@@ -158,7 +158,7 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     prompt: { key: "d11", steps: ["Print the Ideas tag, cut it out, and glue it in.", "Write about your outlook on ideas.", "How are you sparking ideas that inspire you?"] },
     // Amy's pink Glimmers & Gratitude title spread, start to finish, shot overhead 11/9, no talking,
     // 1x to 5x (the star-sticker pass). Bunny "glimmers-2026-d11-title-spread", 3:16.
-    demo: { id: "4d266a11-d0b9-4bba-bffc-874d9cb8c282", caption: "Amy making her Glimmers & Gratitude title spread, start to finish. Three minutes, no talking." },
+    demo: { id: "e09d9d32-602e-4878-99b2-d78335540e71", caption: "Amy making her Glimmers & Gratitude title spread, November 2026: hot pink and yellow ink, a sheet of star stickers (sped up), a few Paper World Las Vegas stickers, then the words stamped in. Three minutes, music only for now." },
     body: [],
     files: [{ name: "printable-2-ideas-tag.pdf", label: "Printable (PDF)" }],
   },
