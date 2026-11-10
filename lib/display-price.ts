@@ -1,4 +1,5 @@
-import { formatPrice, type ShopifyPrice, type ShopifyProduct } from "@/lib/shopify"
+import type { ShopifyPrice, ShopifyProduct } from "@/lib/shopify"
+import { formatMoney } from "@/lib/money"
 import { HM_VARIANT_6MONTH_GID, IHM_VARIANT_6MONTH_GID } from "@/lib/happy-mail-content"
 
 // Why this file exists (Amy flagged the /shop tile reading "$12.00" on 2026-09-16):
@@ -35,5 +36,18 @@ export function displayPrice(product: ShopifyProduct): ShopifyPrice {
 
 /** displayPrice, formatted for render ("$13.00", "CA$23.00", "£13.00"). */
 export function formatDisplayPrice(product: ShopifyProduct): string {
-  return formatPrice(displayPrice(product))
+  return formatMoney(displayPrice(product))
+}
+
+/**
+ * True when the variants a shopper can pick between carry more than one price
+ * (so a tile says "From $10" rather than a number that is only sometimes right).
+ */
+export function hasPriceSpread(product: ShopifyProduct): boolean {
+  const amounts = new Set(
+    product.variants.nodes
+      .filter((v) => !PER_DELIVERY_VARIANT_GIDS.has(v.id))
+      .map((v) => parseFloat(v.price.amount))
+  )
+  return amounts.size > 1
 }

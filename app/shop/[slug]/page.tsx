@@ -1,5 +1,5 @@
 import { notFound, redirect } from "next/navigation"
-import { getProductByHandle, getAllProducts } from "@/lib/shopify"
+import { getProductByHandle, getAllProducts, getShopPolicies } from "@/lib/shopify"
 import { getVisitorCountry, isInternational } from "@/lib/geo"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 import ProductDetail from "@/components/product-detail"
@@ -78,7 +78,9 @@ export default async function ProductPage({
     notFound()
   }
 
-  const allProducts = await getAllProducts(country)
+  // The store's shipping and refund policies (Amy's words in Shopify) feed the
+  // Shipping & returns panel (design finish, Phase 2, 2026-11-10).
+  const [allProducts, policies] = await Promise.all([getAllProducts(country), getShopPolicies()])
   // Related: same collection, excluding current
   const relatedProducts = allProducts
     .filter(
@@ -105,6 +107,7 @@ export default async function ProductPage({
         relatedProducts={relatedProducts}
         slug={slug}
         subscribeSellingPlanId={subscribeSellingPlanId}
+        policies={policies}
       />
     </>
   )

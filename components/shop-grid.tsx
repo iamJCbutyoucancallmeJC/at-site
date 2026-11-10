@@ -1,8 +1,10 @@
-import Image from "next/image"
-import { type ShopifyProduct } from "@/lib/shopify"
-import { formatDisplayPrice } from "@/lib/display-price"
-import { shopifyImageUrl, isShopifyCdn } from "@/lib/shopify-image-loader"
+import type { ShopifyProduct } from "@/lib/shopify"
+import { displayPrice } from "@/lib/display-price"
 import TrackableLink from "@/components/trackable-link"
+import ProductCard, { ProductTileLink } from "@/components/product-card"
+import ShopSort from "@/components/shop-sort"
+import { shopHref, type ShopSortKey } from "@/lib/shop-sort"
+import { CATEGORY_LINES } from "@/lib/shop-copy"
 
 export const SHOP_CATEGORIES = [
   { label: "All", value: "all" },
@@ -20,24 +22,46 @@ export function isPrintable(p: ShopifyProduct): boolean {
 
 /**
  * Selects which products show for a given category, applying the "printables stay
- * out of the All grid" rule. Shared by the live /shop page and the /preview/shop route
- * so both behave identically.
+ * out of the All grid" rule, and orders them. Shared by the live /shop page and the
+ * /preview/shop route so both behave identically.
  */
 export function selectProductsForCategory(
   allProducts: ShopifyProduct[],
-  activeCategory: string
+  activeCategory: string,
+  sort: ShopSortKey = "featured"
 ): ShopifyProduct[] {
   // What a person can buy comes first (design critic F38, 2026-11-04). On 11/04 the All
   // grid ran eleven tiles of which seven were sold out, interleaved, so a shopper on a
   // phone scrolled four rows that were mostly unavailable to reach the four things in
   // stock. Sold out still shows, because the sticker someone saw on Instagram should be
-  // findable and the badge tells the truth; it just stops leading. Then the international
-  // HM product to the very back, as before. Array.prototype.sort is stable, so within each
-  // group Shopify's own order is untouched.
+  // findable and the badge tells the truth; it just stops leading. That rule holds under
+  // every sort (Phase 2, 2026-11-10): Newest and the two price sorts order WITHIN the
+  // in-stock group and the sold-out group. Then the international HM product to the very
+  // back, as before. Array.prototype.sort is stable, so with no sort Shopify's own order
+  // is untouched.
+  const created = (p: ShopifyProduct) => {
+    const t = Date.parse(p.createdAt ?? "")
+    return Number.isNaN(t) ? 0 : t
+  }
+  const amount = (p: ShopifyProduct) => parseFloat(displayPrice(p).amount)
+  const bySort = (a: ShopifyProduct, b: ShopifyProduct) => {
+    switch (sort) {
+      case "newest":
+        return created(b) - created(a)
+      case "price-asc":
+        return amount(a) - amount(b)
+      case "price-desc":
+        return amount(b) - amount(a)
+      default:
+        return 0
+    }
+  }
   const ordered = [...allProducts].sort((a, b) => {
     const aOut = a.availableForSale ? 0 : 1
     const bOut = b.availableForSale ? 0 : 1
     if (aOut !== bOut) return aOut - bOut
+    const s = bySort(a, b)
+    if (s !== 0) return s
     const aIntl = a.handle === "happy-mail-international" ? 1 : 0
     const bIntl = b.handle === "happy-mail-international" ? 1 : 0
     return aIntl - bIntl
@@ -53,13 +77,14 @@ export function selectProductsForCategory(
 }
 
 /**
- * The shop's category-filter + product grid. Presentational. The category links
- * are configurable so the preview route can point them at /preview/shop instead
- * of /shop.
+ * The shop's header, category chips, sort and product grid (design finish, Phase 2,
+ * 2026-11-10). Presentational. The category links are configurable so the preview
+ * route can point them at /preview/shop instead of /shop.
  */
 export default function ShopGrid({
   products,
   activeCategory,
+  sort = "featured",
   basePath = "/shop",
   pdpBasePath = "/shop",
   useLandingPages = true,
@@ -70,6 +95,7 @@ export default function ShopGrid({
   // grid (the Glimmers class, JC 10/29: classes sell from their sales page).
   leadTiles?: { href: string; title: string; price: string; image: { src: string; alt: string } }[]
   activeCategory: string
+  sort?: ShopSortKey
   basePath?: string
   pdpBasePath?: string
   // When true, the two HM products route to their rich landing pages. The preview
@@ -77,93 +103,81 @@ export default function ShopGrid({
   // product-lineup review).
   useLandingPages?: boolean
 }) {
+  // The count is what the grid shows, lead tiles included (design critic F38,
+  // 2026-11-04): it read "10 products" over eleven tiles while the Glimmers
+  // class led the All grid.
+  const count = products.length + leadTiles.length
+  // One sentence per chip, drafted for Amy (lib/shop-copy.ts).
+  const line = CATEGORY_LINES[activeCategory] ?? CATEGORY_LINES.all
+
   return (
     <>
-      {/* ── Header ── */}
-      <div className="py-8 md:py-12 px-4 md:px-10 border-b" style={{ borderColor: "var(--color-border)" }}>
-        <h1
-          className="text-[24px] md:text-[32px] font-bold tracking-tight mb-1"
-          style={{ color: "var(--color-text-primary)" }}
-        >
-          Shop
-        </h1>
-        {/* The count is what the grid shows, lead tiles included (design critic F38,
-            2026-11-04): it read "10 products" over eleven tiles while the Glimmers
-            class led the All grid. */}
-        <p className="text-[14px]" style={{ color: "var(--color-text-secondary)" }}>
-          {products.length + leadTiles.length}{" "}
-          {products.length + leadTiles.length === 1 ? "product" : "products"}
-        </p>
-      </div>
+      {/* Header: the h1 and count stay; a sentence for the category; the sort. */}
+      <header className="px-4 md:px-10 pt-8 md:pt-12 pb-5 md:pb-6 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+        <div className="min-w-0">
+          <div className="flex items-baseline gap-3">
+            <h1
+              className="text-[28px] md:text-[32px] font-bold leading-[1.15] tracking-[-0.01em]"
+              style={{ color: "var(--color-ink)" }}
+            >
+              Shop
+            </h1>
+            <p className="text-[14px]" style={{ color: "var(--color-ink-soft)" }}>
+              {count} {count === 1 ? "product" : "products"}
+            </p>
+          </div>
+          <p className="mt-2 text-[16px] md:text-[18px] leading-relaxed max-w-[42rem]" style={{ color: "var(--color-ink-soft)" }}>
+            {line}
+          </p>
+        </div>
+        <ShopSort sort={sort} category={activeCategory} basePath={basePath} />
+      </header>
 
-      {/* ── Category Filter ── */}
-      <div
-        className="sticky top-0 z-10 px-4 md:px-10 py-3 flex gap-2 overflow-x-auto border-b bg-white"
-        style={{ borderColor: "var(--color-border)", scrollbarWidth: "none" }}
+      {/* Category chips: pills, the selected one on orange-tint (globals.css .chip).
+          Sticky under the phone header (h-14); the desktop header does not stick. */}
+      <nav
+        aria-label="Shop categories"
+        className="sticky top-14 md:top-0 z-10 px-4 md:px-10 py-3 flex gap-2 overflow-x-auto border-y"
+        style={{ background: "var(--color-white)", borderColor: "var(--color-border)", scrollbarWidth: "none" }}
       >
         {SHOP_CATEGORIES.map((cat) => {
           const isActive = activeCategory === cat.value
           return (
             <TrackableLink
               key={cat.value}
-              href={cat.value === "all" ? basePath : `${basePath}?category=${cat.value}`}
+              href={shopHref(basePath, cat.value, sort)}
               event="category_click"
               eventData={{ category_name: cat.label, page: "shop" }}
-              className="flex-shrink-0 px-4 py-1.5 text-[12px] uppercase tracking-[0.08em] font-semibold rounded-full border transition-all duration-200"
-              style={
-                isActive
-                  ? { background: "var(--color-orange)", borderColor: "var(--color-orange)", color: "var(--color-ink)" }
-                  : {
-                      background: "transparent",
-                      borderColor: "var(--color-border)",
-                      color: "var(--color-text-secondary)",
-                    }
-              }
+              className={`chip${isActive ? " chip--on" : ""}`}
+              ariaCurrent={isActive ? "page" : undefined}
             >
               {cat.label}
             </TrackableLink>
           )
         })}
-      </div>
+      </nav>
 
-      {/* ── Product Grid ── */}
-      <div className="px-4 md:px-10 py-8">
-        {products.length + leadTiles.length === 0 ? (
-          <p className="text-center py-16 text-[14px]" style={{ color: "var(--color-text-secondary)" }}>
+      {/* Grid: 2 / 3 / 4 across, gap 16, every tile a ProductCard. */}
+      <div className="px-4 md:px-10 py-6 md:py-8">
+        {count === 0 ? (
+          <p className="text-center py-16 text-[16px]" style={{ color: "var(--color-ink-soft)" }}>
             No products in this category yet.
           </p>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {leadTiles.map((tile) => (
-              <TrackableLink
+              <ProductTileLink
                 key={tile.href}
                 href={tile.href}
-                event="product_click"
-                eventData={{ product_name: tile.title, source_section: "shop-grid", page: "shop" }}
-                className="group block"
-              >
-                <div className="relative aspect-square overflow-hidden rounded-lg mb-3 bg-gray-50">
-                  <Image
-                    src={tile.image.src}
-                    alt={tile.image.alt}
-                    fill
-                    className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                    sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  />
-                </div>
-                <p className="text-[13px] md:text-[14px] font-medium leading-snug mb-0.5 line-clamp-2" style={{ color: "var(--color-text-primary)" }}>
-                  {tile.title}
-                </p>
-                <p className="text-[13px]" style={{ color: "var(--color-text-secondary)" }}>
-                  {tile.price}
-                </p>
-              </TrackableLink>
+                title={tile.title}
+                price={tile.price}
+                image={tile.image}
+                action="View the class"
+                source="shop-grid"
+                page="shop"
+              />
             ))}
             {products.map((product, index) => {
-              const img = product.images.nodes[0]
-              // Not minVariantPrice: the HM products' cheapest variant is a per-delivery
-              // prepaid price nobody pays ($12 on a $13/mo product). See lib/display-price.ts.
-              const priceStr = formatDisplayPrice(product)
               const tileHref =
                 useLandingPages && product.handle === "happy-mail"
                   ? "/happy-mail"
@@ -171,81 +185,15 @@ export default function ShopGrid({
                     ? "/happy-mail-international"
                     : `${pdpBasePath}/${product.handle}`
               return (
-                <TrackableLink
+                <ProductCard
                   key={product.id}
+                  product={product}
                   href={tileHref}
-                  event="product_click"
-                  eventData={{ product_name: product.title, source_section: "shop-grid", page: "shop" }}
-                  className="group block"
-                >
-                  {/* Image */}
-                  <div className="relative aspect-square overflow-hidden rounded-lg mb-3 bg-gray-50">
-                    {img && isShopifyCdn(img.url) ? (
-                      // Native srcSet keeps resizing on Shopify's CDN. Next's
-                      // unoptimized Image drops srcSet, so sizes alone did not
-                      // stop phones from downloading every tile at 700px.
-                      <img
-                        src={shopifyImageUrl(img.url, 700)}
-                        srcSet={[240, 360, 480, 640, 800, 1080, 1440]
-                          .filter((width) => width < img.width)
-                          .concat(Math.min(img.width, 1920))
-                          .map((width) => `${shopifyImageUrl(img.url, width)} ${width}w`)
-                          .join(", ")}
-                        sizes="(min-width: 1024px) calc((100vw - 152px) / 4), (min-width: 768px) calc((100vw - 128px) / 3), calc((100vw - 48px) / 2)"
-                        width={img.width}
-                        height={img.height}
-                        alt={img.altText ?? product.title}
-                        loading={index < 2 ? "eager" : "lazy"}
-                        fetchPriority={index === 0 ? "high" : undefined}
-                        decoding="async"
-                        className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                    ) : img ? (
-                      <Image
-                        src={img.url}
-                        alt={img.altText ?? product.title}
-                        fill
-                        loading={index < 2 ? "eager" : "lazy"}
-                        fetchPriority={index === 0 ? "high" : undefined}
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                        sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                      />
-                    ) : (
-                      <div
-                        className="w-full h-full flex items-center justify-center"
-                        style={{ background: "var(--color-gray-light)" }}
-                      >
-                        <span
-                          className="text-[11px] uppercase tracking-[0.1em] text-center px-2"
-                          style={{ color: "var(--color-text-secondary)" }}
-                        >
-                          Image coming soon
-                        </span>
-                      </div>
-                    )}
-                    {!product.availableForSale && (
-                      <div className="absolute inset-0 bg-white/60 flex items-center justify-center">
-                        <span
-                          className="text-[12px] uppercase tracking-[0.1em] font-semibold px-3 py-1 rounded-full"
-                          style={{ background: "var(--color-text-secondary)", color: "#fff" }}
-                        >
-                          Sold Out
-                        </span>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Info */}
-                  <p
-                    className="text-[13px] md:text-[14px] font-medium leading-snug mb-0.5 line-clamp-2"
-                    style={{ color: "var(--color-text-primary)" }}
-                  >
-                    {product.title}
-                  </p>
-                  <p className="text-[13px]" style={{ color: "var(--color-text-secondary)" }}>
-                    {priceStr}
-                  </p>
-                </TrackableLink>
+                  source="shop-grid"
+                  page="shop"
+                  eager={index < 2}
+                  priority={index === 0}
+                />
               )
             })}
           </div>

@@ -67,6 +67,12 @@ export type ShopifyVariant = {
   id: string
   title: string
   availableForSale: boolean
+  // True when the variant is out of stock but still sells (inventory policy
+  // "continue"): a preorder. Design finish Phase 2 (2026-11-10) reads it for the
+  // Preorder badge, the button label and the shipping line; the 11/13 shop update
+  // lists Stationery Lover and the grab bag this way. Optional so older fixtures
+  // and the Admin mapper's derivation stay valid.
+  currentlyNotInStock?: boolean
   price: ShopifyPrice
   compareAtPrice: ShopifyPrice | null
 }
@@ -78,6 +84,11 @@ export type ShopifyProduct = {
   description: string
   descriptionHtml: string
   availableForSale: boolean
+  // Phase 2: the /shop "Newest" sort reads createdAt; the product page's option
+  // picker is titled from options[0].name ("Design", "Color"; "Title" when there
+  // is only the default variant).
+  createdAt?: string
+  options?: { name: string }[]
   priceRange: {
     minVariantPrice: ShopifyPrice
     maxVariantPrice: ShopifyPrice
@@ -87,6 +98,14 @@ export type ShopifyProduct = {
   tags: string[]
   productType: string
   collections: { nodes: { handle: string; title: string }[] }
+}
+
+// The store's own policy copy (Settings -> Policies in Shopify, Amy's words). The
+// product page's Shipping & returns panel renders these so the site never carries
+// a second copy of a policy that can drift. Null when a policy is not set.
+export type ShopPolicies = {
+  shipping: string | null
+  refund: string | null
 }
 
 export type ShopifyCart = {
@@ -140,6 +159,7 @@ const VARIANT_FRAGMENT = `
     id
     title
     availableForSale
+    currentlyNotInStock
     price { ...PriceFragment }
     compareAtPrice { ...PriceFragment }
   }
@@ -153,6 +173,8 @@ const PRODUCT_FRAGMENT = `
     description
     descriptionHtml
     availableForSale
+    createdAt
+    options { name }
     tags
     productType
     priceRange {
@@ -253,6 +275,33 @@ export async function getProductsByCollection(collectionHandle: string, country?
     { handle: collectionHandle, ...ctx.vars }
   )
   return data.collection?.products.nodes ?? []
+}
+
+// ---------------------------------------------------------------------------
+// Shop policies (Phase 2, 2026-11-10)
+// ---------------------------------------------------------------------------
+
+export async function getShopPolicies(): Promise<ShopPolicies> {
+  const query = `
+    query ShopPolicies {
+      shop {
+        shippingPolicy { body }
+        refundPolicy { body }
+      }
+    }
+  `
+  try {
+    const data = await shopifyFetch<{
+      shop: { shippingPolicy: { body: string } | null; refundPolicy: { body: string } | null }
+    }>(query)
+    return {
+      shipping: data.shop.shippingPolicy?.body || null,
+      refund: data.shop.refundPolicy?.body || null,
+    }
+  } catch {
+    // The product page still renders with the fallback copy in lib/shop-copy.ts.
+    return { shipping: null, refund: null }
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -449,12 +498,9 @@ export async function removeFromCart(cartId: string, lineId: string): Promise<Sh
 // Helpers
 // ---------------------------------------------------------------------------
 
-export function formatPrice(price: ShopifyPrice): string {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: price.currencyCode,
-  }).format(parseFloat(price.amount))
-}
+// Lives in lib/money.ts (no env reads) so client components can format a price
+// without bundling this module; re-exported here for every existing import.
+export { formatMoney as formatPrice } from "@/lib/money"
 
 // Shopify returns cart IDs like "gid://shopify/Cart/<token>?key=<key>".
 // Strip to the opaque token, which /thank-you uses to discriminate a real

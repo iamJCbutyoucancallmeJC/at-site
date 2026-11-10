@@ -16,9 +16,9 @@ import FromTheJournal from "@/components/blog/from-the-journal"
 import { HM_RECENT_ENVELOPES } from "@/lib/happy-mail-content"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 import TrackableLink from "@/components/trackable-link"
-import { getAllProducts, formatPrice } from "@/lib/shopify"
+import ProductCard from "@/components/product-card"
+import { getAllProducts } from "@/lib/shopify"
 import { getVisitorCountry } from "@/lib/geo"
-import { shopifyImageUrl, isShopifyCdn } from "@/lib/shopify-image-loader"
 
 // Dynamic rendering: new-arrivals section varies by visitor country (Markets-scoped products).
 export const dynamic = "force-dynamic"
@@ -68,16 +68,16 @@ export default async function HomePage() {
   const country = await getVisitorCountry()
   const allProducts = await getAllProducts(country)
   const productMap = new Map(allProducts.map((p) => [p.handle, p]))
+  // The first four of the editorial list that are live, as ProductCard v2 (design
+  // finish, Phase 2, 2026-11-10): the same card as the shop grid, Add to cart included.
+  // In-stock first within the list (F38, what you can buy comes first): on 11/10 three
+  // of the first four were sold out while an in-stock pick sat fifth.
   const newArrivals = NEW_ARRIVAL_HANDLES.flatMap((handle) => {
     const p = productMap.get(handle)
-    if (!p) return []
-    return [{
-      name: p.title,
-      price: formatPrice(p.priceRange.minVariantPrice),
-      img: p.images.nodes[0]?.url ?? `/images/products/${handle}/1.jpg`,
-      href: `/shop/${handle}`,
-    }]
+    return p ? [p] : []
   })
+    .sort((a, b) => (a.availableForSale ? 0 : 1) - (b.availableForSale ? 0 : 1))
+    .slice(0, 4)
 
   const latestEnvelope = HM_RECENT_ENVELOPES[0] ?? { month: "April 2026", img: "/images/happy-mail/envelopes/2026-04.jpg" }
 
@@ -176,31 +176,15 @@ export default async function HomePage() {
       <section className="px-4 md:px-10 py-12 md:py-16 border-t" style={{ borderColor: "var(--color-border)" }}>
         <SectionHeader title="New arrivals" link={{ href: "/shop", label: "See all" }} />
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {newArrivals.slice(0, 4).map((product) => (
-            <TrackableLink
-              key={product.name}
-              href={product.href}
-              event="product_click"
-              eventData={{ product_name: product.name, source_section: "new-arrivals", page: "homepage" }}
-              className="group block min-w-0 rounded-xl transition-[transform,box-shadow] duration-150 hover:-translate-y-0.5 hover:shadow-lift"
-            >
-              <div className="relative aspect-square overflow-hidden rounded-xl" style={{ background: "var(--color-paper)" }}>
-                <Image
-                  src={shopifyImageUrl(product.img, 640)}
-                  unoptimized={isShopifyCdn(product.img)}
-                  alt={product.name}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                />
-              </div>
-              <p className="mt-3 mb-1 px-0.5 text-[16px] font-semibold leading-[1.35]" style={{ color: "var(--color-ink)" }}>
-                {product.name}
-              </p>
-              <p className="px-0.5 pb-1 text-[15px] font-semibold" style={{ color: "var(--color-ink)" }}>
-                {product.price}
-              </p>
-            </TrackableLink>
+          {newArrivals.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              href={`/shop/${product.handle}`}
+              source="new-arrivals"
+              page="homepage"
+              sizes="four"
+            />
           ))}
         </div>
       </section>

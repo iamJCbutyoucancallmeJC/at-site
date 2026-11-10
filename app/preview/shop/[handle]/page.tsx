@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation"
 import { getPreviewProductByHandle, getPreviewProducts } from "@/lib/shopify-admin"
+import { getShopPolicies } from "@/lib/shopify"
 import ProductDetail from "@/components/product-detail"
 
 // Preview-only PDP: reads the DRAFT product via the Admin API and renders the
@@ -18,7 +19,7 @@ export default async function PreviewProductPage({
   if (!product) notFound()
 
   // Related: same collection, drawn from the preview set (draft + active).
-  const all = await getPreviewProducts()
+  const [all, policies] = await Promise.all([getPreviewProducts(), getShopPolicies()])
   const relatedProducts = all
     .filter(
       (p) =>
@@ -44,6 +45,7 @@ export default async function PreviewProductPage({
         slug={handle}
         shopBasePath="/preview/shop"
         pdpBasePath="/preview/shop"
+        policies={policies}
       />
     </>
   )

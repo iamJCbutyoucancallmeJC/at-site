@@ -3,6 +3,7 @@ import { getVisitorCountry } from "@/lib/geo"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 import PromoCard from "@/components/promo-card"
 import ShopGrid, { selectProductsForCategory } from "@/components/shop-grid"
+import { parseSort } from "@/lib/shop-sort"
 import { getClass } from "@/lib/classes"
 
 // Dynamic rendering: grid varies by visitor country (Markets-scoped products).
@@ -11,14 +12,15 @@ export const dynamic = "force-dynamic"
 export default async function ShopPage({
   searchParams,
 }: {
-  searchParams: Promise<{ category?: string; country?: string }>
+  searchParams: Promise<{ category?: string; sort?: string; country?: string }>
 }) {
   const sp = await searchParams
   const activeCategory = sp.category ?? "all"
+  const sort = parseSort(sp.sort)
   // Country resolved for pricing context only (localized currency). No geo routing.
   const country = await getVisitorCountry()
   const allProducts = await getAllProducts(country)
-  const products = selectProductsForCategory(allProducts, activeCategory)
+  const products = selectProductsForCategory(allProducts, activeCategory, sort)
   // The Glimmers class leads the All grid while it is on sale (JC 10/29). It links to
   // its sales page, never to a product page: classes check out from /glimmers.
   const glimmers = getClass("glimmers")
@@ -31,7 +33,7 @@ export default async function ShopPage({
     <main className="min-h-screen" style={{ background: "var(--color-white)" }}>
       <PageEngagementTracker page="shop" />
 
-      <ShopGrid products={products} activeCategory={activeCategory} leadTiles={leadTiles} />
+      <ShopGrid products={products} activeCategory={activeCategory} sort={sort} leadTiles={leadTiles} />
 
       {/* ── Happy Mail Cross-sell ── */}
       {activeCategory !== "happy-mail" && (

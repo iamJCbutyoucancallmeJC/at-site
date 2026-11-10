@@ -39,7 +39,8 @@ type CartContextValue = {
   isOpen: boolean
   /** False until the localStorage read has finished. Adds are unsafe before this. */
   hydrated: boolean
-  addItem: (item: Omit<CartItem, "quantity">) => void
+  /** meta.source_section names the surface that added (shop-grid, new-arrivals, pdp) for GA4. */
+  addItem: (item: Omit<CartItem, "quantity">, meta?: { source_section?: string }) => void
   removeItem: (variantId: string) => void
   updateQty: (variantId: string, quantity: number) => void
   openCart: () => void
@@ -152,7 +153,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     currency: "USD",
   }).format(subtotalAmount)
 
-  function addItem(item: Omit<CartItem, "quantity">) {
+  function addItem(item: Omit<CartItem, "quantity">, meta?: { source_section?: string }) {
     dispatch({ type: "ADD_ITEM", item })
     dispatch({ type: "OPEN" })
     // GA4 standard ecommerce shape (items[] + value + currency) so native
@@ -160,11 +161,13 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     // params are kept for back-compat with existing reports. Currency is USD
     // client-side; the authoritative per-order revenue is the server-side
     // `purchase` event (orders/create webhook), which reads the real currency.
-    // See t687.
+    // See t687. source_section (Phase 2, 2026-11-10) says which surface added,
+    // so grid adds and product-page adds can be told apart in the before/after.
     trackEvent("add_to_cart", {
       product_name: item.title,
       variant_id: item.variantId,
       product_handle: item.productHandle,
+      ...(meta?.source_section ? { source_section: meta.source_section } : {}),
       currency: "USD",
       value: item.priceAmount,
       items: [

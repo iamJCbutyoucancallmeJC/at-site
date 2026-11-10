@@ -11,6 +11,8 @@ interface TrackableLinkProps {
   children: React.ReactNode
   target?: string
   rel?: string
+  /** "page" on the link that names the page you are on (the active shop chip). */
+  ariaCurrent?: "page"
 }
 
 export default function TrackableLink({
@@ -22,6 +24,7 @@ export default function TrackableLink({
   children,
   target,
   rel,
+  ariaCurrent,
 }: TrackableLinkProps) {
   return (
     <a
@@ -31,6 +34,7 @@ export default function TrackableLink({
       style={style}
       target={target}
       rel={rel}
+      aria-current={ariaCurrent}
     >
       {children}
     </a>

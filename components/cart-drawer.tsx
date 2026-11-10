@@ -5,11 +5,19 @@ import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { X, Minus, Plus, ShoppingBag } from "lucide-react"
-import { useCart } from "@/context/cart"
+import { useCart, type CartItem } from "@/context/cart"
 import { trackEvent } from "@/lib/analytics"
 import { HM_VARIANT_6MONTH_GID } from "@/lib/happy-mail-content"
 import { isChromelessRoute, isQuietRoute } from "@/lib/chromeless-routes"
 import { stashPendingCartToken } from "@/lib/pending-checkout-tokens"
+import { CART_NUDGE } from "@/lib/shop-copy"
+
+// The cart drawer (design finish, Phase 2, 2026-11-10): a sheet that rises from the
+// bottom of a phone (16px top radius) and slides in from the right on desktop (16px
+// left radius), rows at 14px, the Happy Mail row on orange-tint, one .cta-primary
+// Checkout, and one nudge line grounded in the flat-rate shipping policy
+// (lib/shop-copy.ts CART_NUDGE; set it to null to remove it). When closed the dialog
+// is inert, so nothing inside it can take focus or be read.
 
 // Detect local (non-Shopify) variant IDs — checkout not available yet
 function isLocalVariant(variantId: string) {
@@ -39,6 +47,13 @@ function productHref(variantId: string, productHandle: string): string {
   return `/shop/${productHandle}`
 }
 
+// A Happy Mail line (either edition, or any subscription plan) gets the pink row.
+function isHappyMailItem(item: CartItem): boolean {
+  return item.productHandle.startsWith("happy-mail") || !!item.sellingPlanId
+}
+
+const money = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" })
+
 export default function CartDrawer() {
   const { items, count, subtotal, isOpen, closeCart, removeItem, updateQty } = useCart()
   const drawerRef = useRef<HTMLDivElement>(null)
@@ -60,6 +75,7 @@ export default function CartDrawer() {
   }, [isOpen])
 
   const hasLocalItems = items.some((i) => isLocalVariant(i.variantId))
+  const hasOneTimeItems = items.some((i) => !isHappyMailItem(i))
 
   const [checkingOut, setCheckingOut] = useState(false)
 
@@ -138,7 +154,7 @@ export default function CartDrawer() {
       <div
         className="fixed inset-0 z-40 transition-opacity duration-300"
         style={{
-          background: "rgba(0,0,0,0.4)",
+          background: "rgba(31, 26, 23, 0.45)",
           opacity: isOpen ? 1 : 0,
           pointerEvents: isOpen ? "auto" : "none",
         }}
@@ -146,190 +162,171 @@ export default function CartDrawer() {
         aria-hidden="true"
       />
 
-      {/* Drawer */}
+      {/* Drawer: a bottom sheet on phones, a right-hand panel from md up. */}
       <div
         ref={drawerRef}
         role="dialog"
         aria-modal="true"
         aria-label="Shopping cart"
-        className="fixed top-0 right-0 z-50 h-full w-full max-w-sm flex flex-col shadow-2xl transition-transform duration-300"
-        style={{
-          background: "var(--color-white)",
-          transform: isOpen ? "translateX(0)" : "translateX(100%)",
-        }}
+        inert={!isOpen}
+        // visibility rides the transition: hidden once the slide-out ends, shown the
+        // instant it opens, so the closed drawer is off-canvas AND invisible.
+        className={`fixed z-50 flex flex-col shadow-2xl transition-[transform,visibility] duration-300 inset-x-0 bottom-0 max-h-[92vh] rounded-t-2xl md:inset-y-0 md:left-auto md:right-0 md:h-full md:max-h-none md:w-full md:max-w-sm md:rounded-none md:rounded-l-2xl ${
+          isOpen ? "visible translate-y-0 md:translate-x-0" : "invisible translate-y-full md:translate-y-0 md:translate-x-full"
+        }`}
+        style={{ background: "var(--color-white)" }}
       >
         {/* Header */}
         <div
-          className="flex items-center justify-between px-5 py-4 border-b flex-shrink-0"
+          className="flex items-center justify-between pl-5 pr-3 py-3 border-b shrink-0"
           style={{ borderColor: "var(--color-border)" }}
         >
-          <div className="flex items-center gap-2">
-            <ShoppingBag size={18} style={{ color: "var(--color-text-primary)" }} />
-            <h2
-              className="text-[15px] font-semibold uppercase tracking-[0.08em]"
-              style={{ color: "var(--color-text-primary)" }}
-            >
+          <div className="flex items-center gap-2.5">
+            <ShoppingBag size={20} style={{ color: "var(--color-ink)" }} aria-hidden="true" />
+            <h2 className="text-[18px] font-semibold" style={{ color: "var(--color-ink)" }}>
               Cart
             </h2>
             {count > 0 && (
               <span
-                className="text-[12px] font-bold px-1.5 py-0.5 rounded-full text-white"
-                style={{ background: "var(--color-orange)" }}
+                className="inline-flex items-center justify-center min-w-6 h-6 px-1.5 rounded-full text-[12px] font-bold"
+                style={{ background: "var(--color-orange)", color: "var(--color-ink)" }}
               >
                 {count}
               </span>
             )}
           </div>
           <button
+            type="button"
             onClick={closeCart}
-            className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors"
+            className="w-11 h-11 flex items-center justify-center rounded-full transition-colors hover:bg-[color:var(--color-paper)]"
+            style={{ color: "var(--color-ink)" }}
             aria-label="Close cart"
           >
-            <X size={18} />
+            <X size={20} />
           </button>
         </div>
 
         {/* Items */}
-        <div className="flex-1 overflow-y-auto px-5 py-4">
+        <div className="flex-1 min-h-0 overflow-y-auto px-5 py-4">
           {items.length === 0 ? (
-            <div className="flex flex-col items-center justify-center h-full gap-4 pb-16">
-              <ShoppingBag size={40} style={{ color: "var(--color-border)" }} />
-              <p
-                className="text-[14px] text-center"
-                style={{ color: "var(--color-text-secondary)" }}
-              >
+            <div className="flex flex-col items-center justify-center gap-4 py-12 md:h-full md:pb-16">
+              <ShoppingBag size={40} style={{ color: "var(--color-border)" }} aria-hidden="true" />
+              <p className="text-[16px] text-center" style={{ color: "var(--color-ink)" }}>
                 Your cart is empty
               </p>
-              <Link
-                href="/shop"
-                onClick={closeCart}
-                className="cta-primary cta--compact"
-              >
-                Shop Now
+              <Link href="/shop" onClick={closeCart} className="cta-primary cta--compact">
+                Shop now
               </Link>
             </div>
           ) : (
-            <ul className="flex flex-col gap-4">
-              {items.map((item) => (
-                <li
-                  key={item.variantId}
-                  className="flex gap-3 pb-4 border-b"
-                  style={{ borderColor: "var(--color-border)" }}
-                >
-                  {/* Image */}
-                  <Link
-                    href={productHref(item.variantId, item.productHandle)}
-                    onClick={closeCart}
-                    className="relative flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden bg-gray-50"
+            <ul className="flex flex-col gap-2">
+              {items.map((item) => {
+                const hm = isHappyMailItem(item)
+                const href = productHref(item.variantId, item.productHandle)
+                return (
+                  <li
+                    key={item.variantId}
+                    className={`flex gap-3 ${hm ? "rounded-xl p-3" : "py-3 border-b"}`}
+                    style={hm ? { background: "var(--color-orange-tint)" } : { borderColor: "var(--color-border)" }}
                   >
-                    {item.imageUrl && (
-                      <Image
-                        src={item.imageUrl}
-                        alt={item.title}
-                        fill
-                        className="object-cover"
-                        sizes="80px"
-                      />
-                    )}
-                  </Link>
-
-                  {/* Details */}
-                  <div className="flex-1 min-w-0">
-                    <Link
-                      href={productHref(item.variantId, item.productHandle)}
-                      onClick={closeCart}
-                      className="block text-[13px] font-medium leading-snug line-clamp-2 hover:underline mb-1"
-                      style={{ color: "var(--color-text-primary)" }}
+                    {/* Image (the title beside it is the link) */}
+                    <div
+                      className="relative shrink-0 w-[72px] h-[72px] rounded-lg overflow-hidden"
+                      style={{ background: "var(--color-paper)" }}
                     >
-                      {item.title}
-                    </Link>
-                    <p
-                      className="text-[13px] mb-2"
-                      style={{ color: "var(--color-text-secondary)" }}
-                    >
-                      {item.price}
-                    </p>
+                      {item.imageUrl && (
+                        <Image src={item.imageUrl} alt="" fill className="object-cover" sizes="72px" />
+                      )}
+                    </div>
 
-                    {/* Qty controls */}
-                    <div className="flex items-center gap-2">
-                      <div
-                        className="flex items-center border rounded-full overflow-hidden"
-                        style={{ borderColor: "var(--color-border)" }}
+                    {/* Details */}
+                    <div className="flex-1 min-w-0">
+                      <Link
+                        href={href}
+                        onClick={closeCart}
+                        className="block text-[14px] font-semibold leading-snug line-clamp-2 hover:underline"
+                        style={{ color: "var(--color-ink)" }}
                       >
-                        <button
-                          onClick={() => updateQty(item.variantId, item.quantity - 1)}
-                          className="w-7 h-7 flex items-center justify-center hover:bg-gray-50 transition-colors"
-                          aria-label="Decrease quantity"
+                        {item.title}
+                      </Link>
+                      <p className="mt-0.5 text-[14px]" style={{ color: "var(--color-ink-soft)" }}>
+                        {item.price}
+                      </p>
+
+                      {/* Qty controls */}
+                      <div className="mt-2 flex items-center gap-3">
+                        <div
+                          className="inline-flex items-center rounded-lg"
+                          style={{ border: "1px solid var(--color-border)", background: "var(--color-white)" }}
                         >
-                          <Minus size={12} />
-                        </button>
-                        <span className="w-6 text-center text-[13px] font-medium">
-                          {item.quantity}
-                        </span>
+                          <button
+                            type="button"
+                            onClick={() => updateQty(item.variantId, item.quantity - 1)}
+                            className="w-9 h-9 flex items-center justify-center rounded-l-lg transition-colors hover:bg-[color:var(--color-paper)]"
+                            style={{ color: "var(--color-ink)" }}
+                            aria-label={`Decrease quantity of ${item.title}`}
+                          >
+                            <Minus size={14} />
+                          </button>
+                          <span className="min-w-6 text-center text-[14px] font-semibold" style={{ color: "var(--color-ink)" }}>
+                            {item.quantity}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => updateQty(item.variantId, item.quantity + 1)}
+                            className="w-9 h-9 flex items-center justify-center rounded-r-lg transition-colors hover:bg-[color:var(--color-paper)]"
+                            style={{ color: "var(--color-ink)" }}
+                            aria-label={`Increase quantity of ${item.title}`}
+                          >
+                            <Plus size={14} />
+                          </button>
+                        </div>
+
                         <button
-                          onClick={() => updateQty(item.variantId, item.quantity + 1)}
-                          className="w-7 h-7 flex items-center justify-center hover:bg-gray-50 transition-colors"
-                          aria-label="Increase quantity"
+                          type="button"
+                          onClick={() => removeItem(item.variantId)}
+                          className="min-h-9 text-[13px] font-semibold underline underline-offset-2 hover:text-[color:var(--color-ink)]"
+                          style={{ color: "var(--color-ink-soft)" }}
+                          aria-label={`Remove ${item.title}`}
                         >
-                          <Plus size={12} />
+                          Remove
                         </button>
                       </div>
-
-                      <button
-                        onClick={() => removeItem(item.variantId)}
-                        className="text-[12px] uppercase tracking-[0.05em] hover:underline ml-1"
-                        style={{ color: "var(--color-text-secondary)" }}
-                      >
-                        Remove
-                      </button>
                     </div>
-                  </div>
 
-                  {/* Line total */}
-                  <p
-                    className="text-[13px] font-semibold flex-shrink-0"
-                    style={{ color: "var(--color-text-primary)" }}
-                  >
-                    {new Intl.NumberFormat("en-US", {
-                      style: "currency",
-                      currency: "USD",
-                    }).format(item.priceAmount * item.quantity)}
-                  </p>
-                </li>
-              ))}
+                    {/* Line total */}
+                    <p className="text-[14px] font-semibold shrink-0" style={{ color: "var(--color-ink)" }}>
+                      {money.format(item.priceAmount * item.quantity)}
+                    </p>
+                  </li>
+                )
+              })}
             </ul>
           )}
         </div>
 
         {/* Footer */}
         {items.length > 0 && (
-          <div
-            className="flex-shrink-0 px-5 py-5 border-t"
-            style={{ borderColor: "var(--color-border)" }}
-          >
-            <div className="flex justify-between items-center mb-4">
-              <span
-                className="text-[13px] uppercase tracking-[0.08em] font-semibold"
-                style={{ color: "var(--color-text-secondary)" }}
-              >
+          <div className="shrink-0 px-5 py-5 border-t" style={{ borderColor: "var(--color-border)" }}>
+            <div className="flex justify-between items-baseline mb-3">
+              <span className="text-[14px] font-semibold" style={{ color: "var(--color-ink-soft)" }}>
                 Subtotal
               </span>
-              <span
-                className="text-[18px] font-bold"
-                style={{ color: "var(--color-text-primary)" }}
-              >
+              <span className="text-[18px] font-bold" style={{ color: "var(--color-ink)" }}>
                 {subtotal}
               </span>
             </div>
 
+            {CART_NUDGE && hasOneTimeItems && (
+              <p className="text-[13px] leading-snug mb-3" style={{ color: "var(--color-ink-soft)" }}>
+                {CART_NUDGE}
+              </p>
+            )}
+
             {/* d051 (t1076): intl pass-through pricing is deliberate; say it before
                 checkout so a ~$39 USPS first-class rate never lands as a surprise. */}
-            <p
-              className="text-[12px] text-center leading-snug mb-3"
-              style={{ color: "var(--color-text-secondary)" }}
-            >
-              International orders ship at live USPS rates by weight, shown at
-              checkout before you pay.
+            <p className="text-[13px] leading-snug mb-4" style={{ color: "var(--color-ink-soft)" }}>
+              International orders ship at live USPS rates by weight, shown at checkout before you pay.
             </p>
 
             {hasLocalItems ? (
@@ -337,19 +334,12 @@ export default function CartDrawer() {
                 <button type="button" disabled className="cta-secondary w-full mb-2">
                   Checkout coming soon
                 </button>
-                <p
-                  className="text-[12px] text-center leading-snug"
-                  style={{ color: "var(--color-text-secondary)" }}
-                >
+                <p className="text-[13px] text-center leading-snug" style={{ color: "var(--color-ink-soft)" }}>
                   Full checkout will be available when the store launches.
                 </p>
               </div>
             ) : (
-              <button
-                onClick={handleCheckout}
-                disabled={checkingOut}
-                className="cta-primary w-full"
-              >
+              <button type="button" onClick={handleCheckout} disabled={checkingOut} className="cta-primary w-full">
                 {checkingOut ? "One moment..." : "Checkout"}
               </button>
             )}
@@ -357,10 +347,10 @@ export default function CartDrawer() {
             <Link
               href="/shop"
               onClick={closeCart}
-              className="block mt-3 text-center text-[12px] uppercase tracking-[0.08em] font-medium hover:underline"
-              style={{ color: "var(--color-text-secondary)" }}
+              className="block mt-3 text-center text-[14px] font-semibold underline underline-offset-[3px] hover:text-[color:var(--color-ink)]"
+              style={{ color: "var(--color-ink-soft)" }}
             >
-              Continue Shopping
+              Continue shopping
             </Link>
           </div>
         )}

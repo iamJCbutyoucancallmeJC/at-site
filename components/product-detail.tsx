@@ -1,15 +1,18 @@
-import Image from "next/image"
-import { formatPrice, type ShopifyProduct } from "@/lib/shopify"
-import { formatDisplayPrice } from "@/lib/display-price"
-import { shopifyImageUrl, isShopifyCdn } from "@/lib/shopify-image-loader"
+import type { ShopifyProduct, ShopPolicies } from "@/lib/shopify"
 import TrackableLink from "@/components/trackable-link"
-import AddToCartButton from "@/components/add-to-cart-button"
+import SectionHeader from "@/components/section-header"
+import PromoCard from "@/components/promo-card"
+import ProductCard from "@/components/product-card"
 import ProductImageGallery from "@/components/product-image-gallery"
-import BackInStockForm from "@/components/back-in-stock-form"
+import BuyBox from "@/components/buy-box"
+import ProductAccordion from "@/components/product-accordion"
+import { productBadge } from "@/lib/product-state"
+import { ABOUT_AMY_SHORT, REFUND_POLICY_FALLBACK, SHIPPING_POLICY_FALLBACK } from "@/lib/shop-copy"
 
 // Tags that are functional/internal, not customer-facing descriptors -- never
 // shown in the PDP tag row. `preview-ready` is preview plumbing; the category +
-// fulfillment tags drive filtering/logic, not browse display.
+// fulfillment tags drive filtering/logic, not browse display; a `shop-update-*`
+// tag marks a drop's batch (11/13's drafts carry shop-update-2026-11-13).
 const HIDDEN_TAGS = new Set([
   "new",
   "subscription",
@@ -20,15 +23,25 @@ const HIDDEN_TAGS = new Set([
   "happy-mail",
 ])
 
+const BADGE_BG = {
+  paper: "var(--color-paper)",
+  teal: "var(--color-teal-tint)",
+  orange: "var(--color-orange-tint)",
+} as const
+
 /**
  * The product detail (PDP) body, shared by the live /shop/[slug] page and the
  * gated /preview/shop/[handle] route. Keeping this in one component guarantees
  * the preview SKU page is identical to what ships.
  *
- * `basePath` lets the preview keep its links inside /preview (so clicking a
- * breadcrumb / related product stays in the gated preview, not the public shop).
- * `interactive` defaults true (real Add to Cart); the preview can disable the
- * buy flow if desired, but we keep it on so Amy sees the true page.
+ * Design finish, Phase 2 (2026-11-10): the 4:5 gallery with tap-to-zoom on the
+ * left and the accordion (Details, Shipping & returns, About Amy) under it; the
+ * buy box (price, option picker, one button, shipping line) on the right, sticky
+ * on desktop; the tag row as a line of text; the cross-sell as four ProductCards;
+ * the Happy Mail cross-sell as the shared PromoCard on the pink.
+ *
+ * `shopBasePath` / `pdpBasePath` let the preview keep its links inside /preview.
+ * `policies` is the store's own shipping and refund copy from Shopify (Amy's words).
  */
 export default function ProductDetail({
   product,
@@ -37,6 +50,7 @@ export default function ProductDetail({
   shopBasePath = "/shop",
   pdpBasePath = "/shop",
   subscribeSellingPlanId,
+  policies,
 }: {
   product: ShopifyProduct
   relatedProducts: ShopifyProduct[]
@@ -44,25 +58,62 @@ export default function ProductDetail({
   shopBasePath?: string
   pdpBasePath?: string
   subscribeSellingPlanId?: string
+  policies?: ShopPolicies
 }) {
-  const mainVariant = product.variants.nodes[0]
-  const priceFormatted = formatPrice(product.priceRange.minVariantPrice)
-  const priceAmount = parseFloat(product.priceRange.minVariantPrice.amount)
-  const mainImage = product.images.nodes[0]?.url ?? ""
-  const isSubscription = product.tags.includes("subscription")
   const isHappyMailIntl = product.handle === "happy-mail-international"
   const isHappyMail =
     product.handle === "happy-mail" ||
     product.tags.includes("happy-mail") ||
     product.collections.nodes.some((c) => c.handle === "happy-mail")
   const breadcrumbCategory = product.collections.nodes[0]
+  const badge = productBadge(product)
+  const visibleTags = product.tags.filter((t) => !HIDDEN_TAGS.has(t) && !t.startsWith("shop-update-"))
+
+  const accordion = [
+    {
+      id: "details",
+      title: "Details",
+      content: (
+        <div className="product-description" dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
+      ),
+    },
+    {
+      id: "shipping",
+      title: "Shipping & returns",
+      content: (
+        <div className="product-description">
+          <div dangerouslySetInnerHTML={{ __html: policies?.shipping ?? SHIPPING_POLICY_FALLBACK }} />
+          <div dangerouslySetInnerHTML={{ __html: policies?.refund ?? REFUND_POLICY_FALLBACK }} />
+        </div>
+      ),
+    },
+    {
+      id: "about-amy",
+      title: "About Amy",
+      content: (
+        <div className="product-description">
+          <p>{ABOUT_AMY_SHORT}</p>
+          <p>
+            <TrackableLink
+              href="/about"
+              event="nav_click"
+              eventData={{ link_text: "About Amy (product page)", page: "pdp" }}
+            >
+              Read more about Amy
+            </TrackableLink>
+          </p>
+        </div>
+      ),
+    },
+  ]
 
   return (
     <main className="min-h-screen" style={{ background: "var(--color-white)" }}>
       {/* ── Breadcrumb ── */}
       <nav
-        className="px-4 md:px-10 py-3 text-[12px] flex gap-2 items-center border-b"
-        style={{ color: "var(--color-text-secondary)", borderColor: "var(--color-border)" }}
+        aria-label="Breadcrumb"
+        className="px-4 md:px-10 py-3 text-[13px] flex gap-2 items-center border-b"
+        style={{ color: "var(--color-ink-soft)", borderColor: "var(--color-border)" }}
       >
         <TrackableLink
           href={shopBasePath}
@@ -74,7 +125,7 @@ export default function ProductDetail({
         </TrackableLink>
         {breadcrumbCategory && (
           <>
-            <span>/</span>
+            <span aria-hidden="true">/</span>
             <TrackableLink
               href={`${shopBasePath}?category=${breadcrumbCategory.handle}`}
               event="category_click"
@@ -85,54 +136,42 @@ export default function ProductDetail({
             </TrackableLink>
           </>
         )}
-        <span>/</span>
-        <span style={{ color: "var(--color-text-primary)" }}>{product.title}</span>
+        <span aria-hidden="true">/</span>
+        <span className="truncate" style={{ color: "var(--color-ink)" }} aria-current="page">
+          {product.title}
+        </span>
       </nav>
 
-      {/* ── Product Layout ── */}
+      {/* ── Product layout: gallery and accordion left, buy box right (sticky) ── */}
       <div className="px-4 md:px-10 py-8 md:py-12 max-w-6xl mx-auto">
-        <div className="md:grid md:grid-cols-2 md:gap-12 lg:gap-16">
-          {/* Left: Image Gallery */}
-          <ProductImageGallery
-            images={product.images.nodes}
-            productTitle={product.title}
-            handle={slug}
-          />
+        <div className="flex flex-col md:grid md:grid-cols-2 md:gap-x-12 lg:gap-x-16 md:items-start">
+          <div className="md:col-start-1 md:row-start-1">
+            <ProductImageGallery images={product.images.nodes} productTitle={product.title} handle={slug} />
+          </div>
 
-          {/* Right: Product Info */}
-          <div className="mt-6 md:mt-0">
-            {product.tags.includes("new") && (
+          <div className="mt-6 md:mt-0 md:col-start-2 md:row-start-1 md:row-span-2 md:sticky md:top-8">
+            {badge && (
               <span
-                className="inline-block mb-2 px-2.5 py-0.5 text-[11px] uppercase tracking-[0.12em] font-bold rounded-full text-white"
-                style={{ background: "var(--color-orange)" }}
+                className="inline-block mb-3 rounded-lg px-2 py-1 text-[11px] font-bold uppercase tracking-[0.08em] leading-none"
+                style={{ background: BADGE_BG[badge.tone], color: "var(--color-ink)" }}
               >
-                New
+                {badge.label}
               </span>
             )}
 
             <h1
-              className="text-[24px] md:text-[30px] font-bold leading-tight mb-2"
-              style={{ color: "var(--color-text-primary)" }}
+              className="text-[28px] md:text-[32px] font-bold leading-[1.15] tracking-[-0.01em] mb-3"
+              style={{ color: "var(--color-ink)" }}
             >
               {product.title}
             </h1>
 
-            <p
-              className="text-[22px] md:text-[24px] font-semibold mb-4"
-              style={{ color: isHappyMail ? "var(--color-orange)" : "var(--color-text-primary)" }}
-            >
-              {priceFormatted}
-              {isSubscription && (
-                <span className="text-[14px] font-normal ml-1" style={{ color: "var(--color-text-secondary)" }}>
-                  / month
-                </span>
-              )}
-            </p>
+            <BuyBox product={product} slug={slug} subscribeSellingPlanId={subscribeSellingPlanId} />
 
             {isHappyMail && !isHappyMailIntl && (
               <div
-                className="mb-4 p-3 rounded-lg text-[13px] leading-relaxed"
-                style={{ background: "var(--color-orange-light)", border: "1px solid #fde0c0", color: "var(--color-text-primary)" }}
+                className="mt-5 p-4 rounded-xl text-[14px] leading-relaxed"
+                style={{ background: "var(--color-orange-light)", border: "1px solid var(--color-orange-tint)", color: "var(--color-ink)" }}
               >
                 New to Happy Mail?{" "}
                 <TrackableLink
@@ -142,16 +181,21 @@ export default function ProductDetail({
                   className="font-semibold underline"
                   style={{ color: "var(--color-orange-ink)" }}
                 >
-                  See what's inside, how it ships, and how to gift it →
+                  See what&apos;s inside, how it ships, and how to gift it
                 </TrackableLink>
-                <p className="mt-2"><a href="/gift" className="font-semibold underline">Give six months of Happy Mail for $72</a>. Your recipient redeems with their own address.</p>
+                <p className="mt-2">
+                  <a href="/gift" className="font-semibold underline" style={{ color: "var(--color-orange-ink)" }}>
+                    Give six months of Happy Mail for $72
+                  </a>
+                  . Your recipient redeems with their own address.
+                </p>
               </div>
             )}
 
             {isHappyMailIntl && (
               <div
-                className="mb-4 p-3 rounded-lg text-[13px] leading-relaxed"
-                style={{ background: "var(--color-orange-light)", border: "1px solid #fde0c0", color: "var(--color-text-primary)" }}
+                className="mt-5 p-4 rounded-xl text-[14px] leading-relaxed"
+                style={{ background: "var(--color-orange-light)", border: "1px solid var(--color-orange-tint)", color: "var(--color-ink)" }}
               >
                 <span className="font-semibold">Shipping outside the US?</span> This is the
                 international edition of Happy Mail, for subscribers in Canada, Australia, and the
@@ -164,147 +208,61 @@ export default function ProductDetail({
                   className="font-semibold underline"
                   style={{ color: "var(--color-orange-ink)" }}
                 >
-                  Subscribe to US Happy Mail here →
+                  Subscribe to US Happy Mail here
                 </TrackableLink>
                 )
               </div>
             )}
 
-            {product.availableForSale && mainVariant ? (
-              <AddToCartButton
-                variantId={mainVariant.id}
-                productTitle={product.title}
-                productHandle={slug}
-                price={priceFormatted}
-                priceAmount={priceAmount}
-                imageUrl={mainImage}
-                isSubscription={isSubscription}
-                sellingPlanId={subscribeSellingPlanId}
-              />
-            ) : (
-              <button type="button" disabled className="cta-secondary w-full">
-                Sold Out
-              </button>
-            )}
-            {!product.availableForSale && mainVariant && (
-              <BackInStockForm variantId={mainVariant.id} productHandle={slug} />
-            )}
-
-            {/* Free shipping callout */}
-            {product.description.toLowerCase().includes("free us shipping") && (
-              <p className="mt-3 text-[12px] text-center" style={{ color: "var(--color-text-secondary)" }}>
-                Free US shipping included
+            {/* Tags as a line of text, not chips (Phase 2). */}
+            {visibleTags.length > 0 && (
+              <p className="mt-6 text-[13px]" style={{ color: "var(--color-ink-soft)" }}>
+                Tags: {visibleTags.join(", ")}
               </p>
             )}
+          </div>
 
-            {/* Description */}
-            <div className="mt-6 border-t pt-6" style={{ borderColor: "var(--color-border)" }}>
-              <h2
-                className="text-[12px] uppercase tracking-[0.1em] font-semibold mb-3"
-                style={{ color: "var(--color-text-primary)" }}
-              >
-                Details
-              </h2>
-              <div
-                className="product-description text-[14px] leading-relaxed"
-                style={{ color: "var(--color-text-secondary)" }}
-                dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
-              />
-            </div>
-
-            {/* Tags (internal/plumbing + category tags hidden; only descriptors show) */}
-            {product.tags.filter((t) => !HIDDEN_TAGS.has(t)).length > 0 && (
-              <div className="mt-4 flex flex-wrap gap-1.5">
-                {product.tags
-                  .filter((t) => !HIDDEN_TAGS.has(t))
-                  .map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2.5 py-0.5 text-[12px] rounded-full border"
-                      style={{ borderColor: "var(--color-border)", color: "var(--color-text-secondary)" }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-              </div>
-            )}
+          <div className="mt-8 md:mt-10 md:col-start-1 md:row-start-2">
+            <ProductAccordion items={accordion} />
           </div>
         </div>
       </div>
 
-      {/* ── Happy Mail Cross-sell (non-HM products) ── */}
+      {/* ── Happy Mail cross-sell (non-HM products): the shared card on the pink ── */}
       {!isHappyMail && (
-        <section
-          className="mx-4 md:mx-10 mb-8 rounded-xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-4"
-          style={{ background: "var(--color-orange-light)", border: "1px solid #fde0c0" }}
-        >
-          <div className="flex-1">
-            <p className="text-[12px] uppercase tracking-[0.15em] font-semibold mb-1" style={{ color: "var(--color-orange-ink)" }}>
-              Monthly Subscription
-            </p>
-            <h3 className="text-[18px] font-bold mb-1.5" style={{ color: "var(--color-text-primary)" }}>
-              Add Happy Mail to your life
-            </h3>
-            <p className="text-[13px] leading-relaxed mb-3" style={{ color: "var(--color-text-secondary)" }}>
-              Every month, an envelope from Amy filled with stickers, die cuts, and surprises.
-              Starting at $13/month.
-            </p>
-            <TrackableLink
-              href="/happy-mail"
-              event="hm_subscribe_click"
-              eventData={{ source: "cross-sell-pdp", slug: slug, cta_text: "PDP Happy Mail Cross-sell", destination: "/happy-mail", page: "pdp" }}
-              className="cta-primary cta--compact"
-            >
-              Learn More
-            </TrackableLink>
-          </div>
-          <div className="relative w-32 h-32 rounded-lg overflow-hidden flex-shrink-0">
-            <Image src="/images/products/happy-mail/2.jpg" alt="Happy Mail" fill className="object-cover" sizes="128px" />
-          </div>
+        <section className="mx-4 md:mx-10 mb-12">
+          <PromoCard
+            tone="pink"
+            heading="h2"
+            eyebrow="Monthly subscription"
+            title="Add Happy Mail to your life"
+            text="Every month, an envelope from Amy filled with stickers, die cuts, and surprises. Starting at $13/month."
+            cta={{
+              href: "/happy-mail",
+              label: "Learn more",
+              event: "hm_subscribe_click",
+              eventData: { source: "cross-sell-pdp", slug, cta_text: "PDP Happy Mail Cross-sell", destination: "/happy-mail", page: "pdp" },
+            }}
+            image={{ src: "/images/products/happy-mail/2.jpg", alt: "A Happy Mail envelope and what came in it" }}
+          />
         </section>
       )}
 
-      {/* ── Related Products ── */}
+      {/* ── Related products: the same card as the shop grid ── */}
       {relatedProducts.length > 0 && (
-        <section className="px-4 md:px-10 pb-12">
-          <h2
-            className="text-[15px] md:text-[18px] uppercase tracking-[0.12em] font-semibold mb-5"
-            style={{ color: "var(--color-text-primary)" }}
-          >
-            You May Also Like
-          </h2>
+        <section className="px-4 md:px-10 pb-12 md:pb-16">
+          <SectionHeader title="You may also like" link={{ href: shopBasePath, label: "See all" }} />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {relatedProducts.map((related) => {
-              const img = related.images.nodes[0]
-              return (
-                <TrackableLink
-                  key={related.id}
-                  href={`${pdpBasePath}/${related.handle}`}
-                  event="product_click"
-                  eventData={{ product_name: related.title, source_section: "related-products", page: "pdp" }}
-                  className="group block"
-                >
-                  <div className="relative aspect-square overflow-hidden rounded-lg mb-2 bg-gray-50">
-                    {img && (
-                      <Image
-                        src={shopifyImageUrl(img.url, 700)}
-                        unoptimized={isShopifyCdn(img.url)}
-                        alt={img.altText ?? related.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                        sizes="(max-width: 768px) 50vw, 25vw"
-                      />
-                    )}
-                  </div>
-                  <p className="text-[13px] font-medium line-clamp-2 leading-snug mb-0.5" style={{ color: "var(--color-text-primary)" }}>
-                    {related.title}
-                  </p>
-                  <p className="text-[12px]" style={{ color: "var(--color-text-secondary)" }}>
-                    {formatDisplayPrice(related)}
-                  </p>
-                </TrackableLink>
-              )
-            })}
+            {relatedProducts.map((related) => (
+              <ProductCard
+                key={related.id}
+                product={related}
+                href={`${pdpBasePath}/${related.handle}`}
+                source="related-products"
+                page="pdp"
+                sizes="four"
+              />
+            ))}
           </div>
         </section>
       )}

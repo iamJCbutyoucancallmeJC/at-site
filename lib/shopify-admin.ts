@@ -88,6 +88,8 @@ type AdminProductNode = {
   status: "ACTIVE" | "DRAFT" | "ARCHIVED"
   description: string
   descriptionHtml: string
+  createdAt: string
+  options: { name: string }[]
   totalInventory: number | null
   tracksInventory: boolean
   productType: string
@@ -104,6 +106,9 @@ type AdminProductNode = {
       availableForSale: boolean
       price: string
       compareAtPrice: string | null
+      inventoryPolicy: "DENY" | "CONTINUE"
+      inventoryQuantity: number | null
+      inventoryItem: { tracked: boolean } | null
     }[]
   }
   collections: { nodes: { handle: string; title: string }[] }
@@ -137,6 +142,8 @@ function mapAdminProduct(p: AdminProductNode, currency: string): ShopifyProduct 
     title: p.title,
     description: p.description,
     descriptionHtml: p.descriptionHtml,
+    createdAt: p.createdAt,
+    options: p.options,
     // Admin has no availableForSale at product level; derive from any variant.
     availableForSale: p.variants.nodes.some((v) => v.availableForSale),
     priceRange: {
@@ -149,6 +156,13 @@ function mapAdminProduct(p: AdminProductNode, currency: string): ShopifyProduct 
         id: v.id,
         title: v.title,
         availableForSale: v.availableForSale,
+        // The Storefront API's currentlyNotInStock, derived: tracked stock at or
+        // below zero that still sells because the policy is "continue" (a preorder).
+        currentlyNotInStock:
+          v.availableForSale &&
+          v.inventoryPolicy === "CONTINUE" &&
+          (v.inventoryItem?.tracked ?? false) &&
+          (v.inventoryQuantity ?? 0) <= 0,
         price: money(v.price),
         compareAtPrice: v.compareAtPrice ? money(v.compareAtPrice) : null,
       })),
@@ -166,6 +180,8 @@ const ADMIN_PRODUCT_FIELDS = `
   status
   description
   descriptionHtml
+  createdAt
+  options { name }
   totalInventory
   tracksInventory
   productType
@@ -179,7 +195,7 @@ const ADMIN_PRODUCT_FIELDS = `
     nodes { ... on MediaImage { image { url altText width height } } }
   }
   variants(first: 20) {
-    nodes { id title availableForSale price compareAtPrice }
+    nodes { id title availableForSale price compareAtPrice inventoryPolicy inventoryQuantity inventoryItem { tracked } }
   }
   collections(first: 5) { nodes { handle title } }
 `

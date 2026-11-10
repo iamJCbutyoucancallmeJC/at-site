@@ -135,9 +135,10 @@ body {
   color: var(--color-ink);
 }
 .product-description small {
+  /* 12px ink-soft at full opacity (Phase 2, 2026-11-10): the 0.8 opacity here was
+     the product page's one Lighthouse contrast failure (ink-soft faded to #898480). */
   font-size: 0.75rem;
-  color: var(--color-text-secondary);
-  opacity: 0.8;
+  color: var(--color-ink-soft);
 }
 .product-description h3 {
   font-weight: 600;
@@ -338,6 +339,101 @@ body {
 }
 .cta--compact {
   padding: 0.8rem 1.5rem;
+}
+/* Phase 2 (2026-11-10): the action on a ProductCard. Same family, full width, a
+   shorter label so "Add to cart" fits a 2-up phone tile, and no glow or lift on the
+   primary: a grid of twelve glowing buttons is a wall, not a call. */
+.cta--card {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+}
+.cta-primary.cta--card,
+.cta-primary.cta--card:hover:not(:disabled) {
+  box-shadow: none;
+  transform: none;
+}
+
+/* The ProductCard's action row (Phase 2). Phones and touch-only tablets see it always
+   (one tap to the cart); where a pointer can hover and the window is desktop-wide it
+   appears on hover or keyboard focus. Keyed on hover capability, not width alone, so an
+   iPad at 1024px is never left without a button. */
+.card-action {
+  transition: opacity 150ms ease;
+}
+@media (hover: hover) and (min-width: 48rem) {
+  .card-action {
+    opacity: 0;
+  }
+  .group:hover .card-action,
+  .group:focus-within .card-action {
+    opacity: 1;
+  }
+}
+
+/* /shop category chips (Phase 2): pills at 14px / 600 in ink; the selected chip
+   sits on orange-tint with an orange-ink ring. Orange-ink TEXT on orange-tint
+   measures 4.3:1, under AA for 14px text, so the lettering stays ink. */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-ink);
+  background: var(--color-white);
+  box-shadow: inset 0 0 0 1px var(--color-border);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 150ms ease, box-shadow 150ms ease;
+}
+.chip:hover {
+  background: var(--color-paper);
+}
+.chip--on,
+.chip--on:hover {
+  background: var(--color-orange-tint);
+  box-shadow: inset 0 0 0 1.5px var(--color-orange-ink);
+}
+
+/* The product page's option picker (Phase 2): 8px chips with the same states. A
+   sold-out option stays pickable (the back-in-stock form is for that variant) and
+   reads struck through in ink-soft. The radio input is visually hidden; its focus
+   ring is drawn on the chip. */
+.option-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: 0.5rem;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-ink);
+  background: var(--color-white);
+  box-shadow: inset 0 0 0 1px var(--color-border);
+  cursor: pointer;
+  transition: background-color 150ms ease, box-shadow 150ms ease;
+}
+.option-chip:hover {
+  background: var(--color-paper);
+}
+.option-chip--on,
+.option-chip--on:hover {
+  background: var(--color-orange-tint);
+  box-shadow: inset 0 0 0 1.5px var(--color-orange-ink);
+}
+.option-chip--out {
+  color: var(--color-ink-soft);
+  text-decoration: line-through;
+}
+input:focus-visible + .option-chip {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
 }
 /* In a post body the button sits centered on its own line. Clicks are tracked by
    components/blog-link-tracker.tsx (<a class="blog-button" data-cta="...">). */
