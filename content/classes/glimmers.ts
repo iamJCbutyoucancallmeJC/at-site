@@ -32,6 +32,7 @@ export type Prompt = {
 
 export type ClassVideo = { id: string; cues?: Cue[] }
 export type ClassDemo = { id: string; caption: string }
+export type ClassPhoto = { src: string; alt: string }
 
 export type ClassDay = {
   day: number
@@ -40,8 +41,9 @@ export type ClassDay = {
   prompt: Prompt
   // Paragraphs of longer prose under the prompt, plain text.
   body: string[]
-  // Amy's page photo for the day (path under /public is fine: photos are not secret).
-  photo?: { src: string; alt: string }
+  // Amy's page photo(s) for the day (path under /public is fine: photos are not secret).
+  // A list stacks in the same column, first on top.
+  photo?: ClassPhoto | ClassPhoto[]
   video?: ClassVideo
   // A longer landscape "here is mine" video under the steps (Amy's 2023 page
   // videos from Kajabi, 10/14; her 2026 hands-on clips, 10/29). Plain player, no
@@ -146,6 +148,11 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     // shot overhead 11/9, re-timed 11/9 night to her own voice memo (2:13, hiss removed, no tonal cuts, mix at -14 LUFS), her
     // three cuts applied (Bunny "glimmers-2026-d10-currently-spread", 2:16); then Juni's page again so
     // this week's students see it without going back to Day 4 (Amy 11/9: "inserted in tomorrow or elsewhere").
+    // Her finished Currently insert, two phone photos (Amy 11/10 05:57, "add these photos as well for Day 10").
+    photo: [
+      { src: "/classes/glimmers/d10-currently-window.jpg", alt: "Amy holding her finished Currently insert up to the window: the Currently list, Busy Hands Quiet Brain, Happy Go Lucky in letter beads, a checkerboard, a glossy orange heart, torn pink and polka-dot papers, with a bright pink circle behind." },
+      { src: "/classes/glimmers/d10-currently-table.jpg", alt: "The same Currently insert flat on the table beside a torn lined page." },
+    ],
     demo: [
       { id: "38d28c35-f75e-45c7-b097-2703245d2bf7", caption: "Amy making the opening spread of her journal, November 2026, and talking you through it: the stamp, a cluster she built on the first of the month, watercolor and gouache for the background, a star punch she has had for twenty years, stickers, and the pen outline around the words. Two minutes." },
       { id: "3a3c131d-3698-43ce-8a71-7f4c4e29f4d5", caption: "This is my daughter Juniper, who is five, making her page for my journal in November 2026. Day four asked you to let someone else write in your book. This is what that looked like at our table. I asked her to write the word LOVE and I might make this into a LOVE list eventually." },

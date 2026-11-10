@@ -43,6 +43,7 @@ export default async function ClassDayPage({ params }: { params: Promise<{ slug:
   const day = open ? getClassDay(slug, n) : null
   const answers = open ? await getAnswers(claim) : {}
   const src = day?.video ? await playbackSource(day.video.id) : null
+  const photos = day?.photo ? [day.photo].flat() : []
   const demos = await Promise.all(
     (day?.demo ? [day.demo].flat() : []).map(async (d) => ({ ...d, src: await playbackSource(d.id) })),
   )
@@ -89,9 +90,11 @@ export default async function ClassDayPage({ params }: { params: Promise<{ slug:
         />
       ) : (
         <div className="flex flex-col md:flex-row gap-10 md:gap-14 items-start">
-          {day.photo ? (
-            <div className="shrink-0 w-full md:w-[300px]">
-              <Image src={day.photo.src} alt={day.photo.alt} width={600} height={600} className="w-full h-auto rounded-sm" />
+          {photos.length ? (
+            <div className="shrink-0 w-full md:w-[300px] space-y-4">
+              {photos.map((ph) => (
+                <Image key={ph.src} src={ph.src} alt={ph.alt} width={600} height={600} className="w-full h-auto rounded-sm" />
+              ))}
             </div>
           ) : null}
           <div className="flex-1 max-w-[520px]">
