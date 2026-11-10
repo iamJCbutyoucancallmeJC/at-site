@@ -95,9 +95,10 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     title: "Somebody loves you",
     prompt: { key: "d04", steps: ["Find a handwritten note or card someone gave you.", "Add it to the journal. It does not have to be anything big.", "If you don't have one, ask someone to write a line in your journal for you."] },
     // Juni (5) painting her page and writing LOVE for Amy's journal, shot 11/9 with the two of them
-    // talking; landscape, as it happened (Amy 11/9: "the one with Juni was intended for the day where
-    // you put someone else's writing"). Bunny "glimmers-2026-d04-juni-page", 2:43.
-    demo: { id: "112ae79c-66d6-4436-8725-a31327487021", caption: "Juni, five, making her page and writing LOVE for Amy's journal in November 2026, with the two of them talking as it happened. Two and a half minutes." },
+    // talking; landscape, as it happened. Re-cut on Amy's 11/9 20:49 email: her table clip opens, the
+    // painting follows, the LOVE card closes; the caption is Amy's text, verbatim, in place of a voice-over.
+    // Bunny "glimmers-2026-d04-juni-page", 2:43.
+    demo: { id: "3a3c131d-3698-43ce-8a71-7f4c4e29f4d5", caption: "This is my daughter Juniper, who is five, making her page for my journal in November 2026. Day four asked you to let someone else write in your book. This is what that looked like at our table. I asked her to write the word LOVE and I might make this into a LOVE list eventually." },
     body: [],
   },
   {
@@ -141,12 +142,13 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     day: 10,
     title: "Be free",
     prompt: { key: "d10", steps: ["Write what freedom feels like to you.", "List what you do with your free time.", "Circle the parts of freedom you're most grateful for."] },
-    // Amy's yellow "Currently" spread from the clip going on to the finished page, shot overhead 11/9,
-    // no talking, 1x to 2x (Bunny "glimmers-2026-d10-currently-spread", 2:34); then Juni's page again
-    // so this week's students see it without going back to Day 4 (Amy 11/9: "inserted in tomorrow or elsewhere").
+    // Amy's yellow opening spread (her family, California) from the clip going on to the finished page,
+    // shot overhead 11/9, re-timed 11/9 night to her own voice memo (2:13, denoised and softened), her
+    // three cuts applied (Bunny "glimmers-2026-d10-currently-spread", 2:16); then Juni's page again so
+    // this week's students see it without going back to Day 4 (Amy 11/9: "inserted in tomorrow or elsewhere").
     demo: [
-      { id: "e2ecec27-37be-4509-b09c-4216727c17bb", caption: "Amy making this week's Currently spread, November 2026: a kraft insert clipped open, distress ink pushed around with a wipe, the Currently card from her show table, then stamps, stickers and washi layered on. Two and a half minutes, music only for now." },
-      { id: "112ae79c-66d6-4436-8725-a31327487021", caption: "Juni, five, making her page and writing LOVE for Amy's journal in November 2026, the two of them talking. Two and a half minutes." },
+      { id: "33f52af0-aa6e-4d6b-8ead-315a2e95f6c5", caption: "Amy making the opening spread of her journal, November 2026, and talking you through it: the stamp, a cluster she built on the first of the month, watercolor and gouache for the background, a star punch she has had for twenty years, stickers, and the pen outline around the words. Two minutes." },
+      { id: "3a3c131d-3698-43ce-8a71-7f4c4e29f4d5", caption: "This is my daughter Juniper, who is five, making her page for my journal in November 2026. Day four asked you to let someone else write in your book. This is what that looked like at our table. I asked her to write the word LOVE and I might make this into a LOVE list eventually." },
     ],
     body: [],
   },
