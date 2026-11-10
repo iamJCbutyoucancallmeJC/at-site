@@ -94,6 +94,10 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     day: 4,
     title: "Somebody loves you",
     prompt: { key: "d04", steps: ["Find a handwritten note or card someone gave you.", "Add it to the journal. It does not have to be anything big.", "If you don't have one, ask someone to write a line in your journal for you."] },
+    // Juni (5) painting her page and writing LOVE for Amy's journal, shot 11/9 with the two of them
+    // talking; landscape, as it happened (Amy 11/9: "the one with Juni was intended for the day where
+    // you put someone else's writing"). Bunny "glimmers-2026-d04-juni-page", 2:43.
+    demo: { id: "a5f55f00-bf80-4b70-96ca-f162dcd368d9", caption: "Juni making her page and writing LOVE for Amy's journal. Two and a half minutes, the two of them talking." },
     body: [],
   },
   {
@@ -137,6 +141,13 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     day: 10,
     title: "Be free",
     prompt: { key: "d10", steps: ["Write what freedom feels like to you.", "List what you do with your free time.", "Circle the parts of freedom you're most grateful for."] },
+    // Amy's yellow "Currently" spread from the clip going on to the finished page, shot overhead 11/9,
+    // no talking, 1x to 2x (Bunny "glimmers-2026-d10-currently-spread", 2:34); then Juni's page again
+    // so this week's students see it without going back to Day 4 (Amy 11/9: "inserted in tomorrow or elsewhere").
+    demo: [
+      { id: "e2ecec27-37be-4509-b09c-4216727c17bb", caption: "Amy making this week's Currently spread, start to finish. Two and a half minutes, no talking." },
+      { id: "a5f55f00-bf80-4b70-96ca-f162dcd368d9", caption: "Juni making her page and writing LOVE for Amy's journal. Two and a half minutes." },
+    ],
     body: [],
   },
   {
@@ -145,6 +156,9 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     // Amy to camera, shot 10/8; Amy-only re-cut 10/14 (Bunny "glimmers-d11"), 8.5 s.
     video: { id: "64dd6fa2-1581-4c7f-b27f-465b21cfe392", cues: [{ at: 8.2, key: "d11" }] },
     prompt: { key: "d11", steps: ["Print the Ideas tag, cut it out, and glue it in.", "Write about your outlook on ideas.", "How are you sparking ideas that inspire you?"] },
+    // Amy's pink Glimmers & Gratitude title spread, start to finish, shot overhead 11/9, no talking,
+    // 1x to 5x (the star-sticker pass). Bunny "glimmers-2026-d11-title-spread", 3:16.
+    demo: { id: "4d266a11-d0b9-4bba-bffc-874d9cb8c282", caption: "Amy making her Glimmers & Gratitude title spread, start to finish. Three minutes, no talking." },
     body: [],
     files: [{ name: "printable-2-ideas-tag.pdf", label: "Printable (PDF)" }],
   },
