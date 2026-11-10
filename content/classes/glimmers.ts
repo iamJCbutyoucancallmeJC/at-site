@@ -143,11 +143,11 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     title: "Be free",
     prompt: { key: "d10", steps: ["Write what freedom feels like to you.", "List what you do with your free time.", "Circle the parts of freedom you're most grateful for."] },
     // Amy's yellow opening spread (her family, California) from the clip going on to the finished page,
-    // shot overhead 11/9, re-timed 11/9 night to her own voice memo (2:13, denoised and softened), her
+    // shot overhead 11/9, re-timed 11/9 night to her own voice memo (2:13, hiss removed, no tonal cuts, mix at -14 LUFS), her
     // three cuts applied (Bunny "glimmers-2026-d10-currently-spread", 2:16); then Juni's page again so
     // this week's students see it without going back to Day 4 (Amy 11/9: "inserted in tomorrow or elsewhere").
     demo: [
-      { id: "33f52af0-aa6e-4d6b-8ead-315a2e95f6c5", caption: "Amy making the opening spread of her journal, November 2026, and talking you through it: the stamp, a cluster she built on the first of the month, watercolor and gouache for the background, a star punch she has had for twenty years, stickers, and the pen outline around the words. Two minutes." },
+      { id: "38d28c35-f75e-45c7-b097-2703245d2bf7", caption: "Amy making the opening spread of her journal, November 2026, and talking you through it: the stamp, a cluster she built on the first of the month, watercolor and gouache for the background, a star punch she has had for twenty years, stickers, and the pen outline around the words. Two minutes." },
       { id: "3a3c131d-3698-43ce-8a71-7f4c4e29f4d5", caption: "This is my daughter Juniper, who is five, making her page for my journal in November 2026. Day four asked you to let someone else write in your book. This is what that looked like at our table. I asked her to write the word LOVE and I might make this into a LOVE list eventually." },
     ],
     body: [],
