@@ -32,7 +32,7 @@ export default function JoinPage() {
         leave any time.
       </p>
       <div className="max-w-md mx-auto text-left">
-        <NewsletterForm sourcePage="join" />
+        <NewsletterForm sourcePage="join" prefillFromHash />
       </div>
     </main>
   )
