@@ -166,8 +166,8 @@ export const GLIMMERS_DAYS: ClassDay[] = [
     video: { id: "64dd6fa2-1581-4c7f-b27f-465b21cfe392", cues: [{ at: 8.2, key: "d11" }] },
     prompt: { key: "d11", steps: ["Print the Ideas tag, cut it out, and glue it in.", "Write about your outlook on ideas.", "How are you sparking ideas that inspire you?"] },
     // Amy's pink Glimmers & Gratitude title spread, start to finish, shot overhead 11/9, no talking,
-    // 1x to 5x (the star-sticker pass). Bunny "glimmers-2026-d11-title-spread", 3:16.
-    demo: { id: "e09d9d32-602e-4878-99b2-d78335540e71", caption: "Amy making her Glimmers & Gratitude title spread, November 2026: hot pink and yellow ink, a sheet of star stickers (sped up), a few Paper World Las Vegas stickers, then the words stamped in. Three minutes, music only for now." },
+    // 1x to 5x (the star-sticker pass). Bunny "glimmers-2026-d11-title-spread", 3:16. Music only: Amy 11/10, no voice-over needed.
+    demo: { id: "e09d9d32-602e-4878-99b2-d78335540e71", caption: "Amy making her Glimmers & Gratitude title spread, November 2026: hot pink and yellow ink, a sheet of star stickers (sped up), a few Paper World Las Vegas stickers, then the words stamped in. Three minutes, music only." },
     body: [],
     files: [{ name: "printable-2-ideas-tag.pdf", label: "Printable (PDF)" }],
   },
