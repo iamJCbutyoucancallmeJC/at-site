@@ -13,6 +13,8 @@ export default function NewsletterForm({
   buttonLabel = "Join",
   doneMessage = "You're on the list. Talk soon!",
   prefillFromHash = false,
+  autoSubmitTags = [],
+  onSuccess,
 }: {
   sourcePage?: string
   buttonLabel?: string
@@ -24,9 +26,21 @@ export default function NewsletterForm({
    * browsers never send to the server, and is stripped from the address bar on
    * load, so it stays out of request logs and analytics. The form arrives
    * filled in: one tap on the button subscribes, no typing. Nothing submits on
-   * its own, because mail scanners open links and would otherwise sign people up.
+   * its own, because mail scanners open links and would otherwise sign people up
+   * (except the tags in autoSubmitTags, below).
    */
   prefillFromHash?: boolean
+  /**
+   * 2026-11-13 (JC, t2070): a link whose src tag is listed here signs the reader
+   * up on arrival, no second tap: the click on the email's "Yes" button IS the
+   * signup. This reverses the 11/11 "nothing submits on its own" rule for these
+   * tags only. Guard against mail scanners: a browser that reports itself as
+   * automated (navigator.webdriver) gets the filled form instead. Amy's readers
+   * are mostly Gmail, Yahoo and iCloud, which do not open links on their own.
+   */
+  autoSubmitTags?: string[]
+  /** Called once a signup succeeds (auto is true when it happened on arrival). */
+  onSuccess?: (info: { auto: boolean }) => void
 }) {
   const [email, setEmail] = useState("")
   const [status, setStatus] = useState<Status>("idle")
@@ -41,10 +55,14 @@ export default function NewsletterForm({
     const tag = (params.get("src") ?? "").replace(/[^a-z0-9-]/gi, "").slice(0, 24)
     window.history.replaceState(null, "", window.location.pathname + window.location.search)
     if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fromLink)) {
+      const src = tag ? `${sourcePage}-${tag}` : sourcePage
       setEmail(fromLink)
       setPrefilled(true)
-      if (tag) setSource(`${sourcePage}-${tag}`)
+      setSource(src)
+      const automated = typeof navigator !== "undefined" && (navigator as Navigator & { webdriver?: boolean }).webdriver
+      if (tag && autoSubmitTags.includes(tag) && !automated) void subscribe(fromLink, src, true)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [prefillFromHash, sourcePage])
 
   async function handleSubmit(e: React.FormEvent) {
@@ -57,16 +75,19 @@ export default function NewsletterForm({
       setErrorMsg("Please enter your email")
       return
     }
+    await subscribe(trimmed, source, false)
+  }
 
+  async function subscribe(trimmed: string, src: string, auto: boolean) {
     setStatus("submitting")
     setErrorMsg("")
-    trackEvent('newsletter_signup', { source_page: source })
+    trackEvent('newsletter_signup', { source_page: src })
 
     try {
       const res = await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: trimmed, source }),
+        body: JSON.stringify({ email: trimmed, source: src }),
       })
       const data = await res.json().catch(() => ({}))
       if (!res.ok) {
@@ -76,6 +97,7 @@ export default function NewsletterForm({
       }
       setStatus("success")
       setEmail("")
+      onSuccess?.({ auto })
     } catch {
       setStatus("error")
       setErrorMsg("Network error, please try again")

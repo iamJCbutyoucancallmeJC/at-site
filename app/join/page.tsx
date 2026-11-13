@@ -11,9 +11,12 @@
 // form renders regardless of the NEXT_PUBLIC_CAPTURE_BLOCKS gate (ungated) so
 // the join link in emails always lands on a working form. The footer skips
 // its own capture block on this path.
+//
+// 2026-11-13 (JC, t2070): an invite link (#email=...&src=invite) signs the reader up
+// on arrival and the page turns into a "You're in" note (join-client.tsx).
 
 import type { Metadata } from "next"
-import NewsletterForm from "@/components/newsletter-form"
+import JoinClient from "./join-client"
 
 export const metadata: Metadata = {
   title: "Join the list | Amy Tangerine",
@@ -23,17 +26,7 @@ export const metadata: Metadata = {
 export default function JoinPage() {
   return (
     <main className="max-w-xl mx-auto px-6 pt-16 pb-24 text-center">
-      <h1 className="text-[28px] md:text-[34px] font-bold mb-4" style={{ color: "var(--color-text-primary)" }}>
-        Join the list
-      </h1>
-      <p className="text-[15px] leading-relaxed mb-8" style={{ color: "var(--color-text-secondary)" }}>
-        A note from Amy when she has something to share: what she&apos;s making, new
-        Happy Mail, classes, and where she&apos;ll be in person. No schedule, and you can
-        leave any time.
-      </p>
-      <div className="max-w-md mx-auto text-left">
-        <NewsletterForm sourcePage="join" prefillFromHash />
-      </div>
+      <JoinClient />
     </main>
   )
 }
