@@ -41,7 +41,8 @@ export default async function ClassHowPage({ params }: { params: Promise<{ slug:
           <p>Under the steps there is one line where you can note what went on the page. It is optional. Whatever you leave there is saved to this class, on any device you open your link on, and on Day 30 all thirty lines show up in a row.</p>
           <p>Four printables come with the class, the first one on Day 1. Print them once, or do not print them at all. They are there if you want a place to keep the list.</p>
           <p>If you have a question, there is a box at the bottom of the class page. Amy collects them, answers on camera in the middle of the month, and that video lands on the class page.</p>
-          <p>Do not try to catch up. Do not make it good. One small good thing a day, somewhere you can find it later.</p>
+          {/* Amy's words, texted 11/18, replacing "Do not try to catch up. Do not make it good." */}
+          <p>Don’t stress about falling behind. Feel free to catch up whenever you can. Remember to give yourself grace and space to make it your own. Take your time. May you find an abundance of glimmers and feel all the gratitude in your everyday.</p>
         </div>
       )}
     </main>
