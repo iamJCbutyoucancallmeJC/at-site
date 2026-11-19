@@ -95,7 +95,7 @@ export default function HappyMailInternationalClient({ localizedPrice }: { local
               stamp PNG re-export). */}
           <p className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-3" style={{ color: "var(--color-orange-ink)" }}>International · Monthly Subscription</p>
           <h1 className="text-[36px] md:text-[52px] font-bold leading-[1.05] tracking-tight mb-4" style={{ color: "var(--color-text-primary)" }}>Every month, a letter from Amy.</h1>
-          <p className="text-[16px] md:text-[18px] leading-relaxed max-w-xl mb-3" style={{ color: "var(--color-text-secondary)" }}>The good kind of mail, now shipping to 16 countries.</p>
+          <p className="text-[16px] md:text-[18px] leading-relaxed max-w-xl mb-3" style={{ color: "var(--color-text-secondary)" }}>The good kind of mail, now shipping to 17 countries.</p>
           {/* US-visitor cross-link (US can see this page but can't buy the intl product). */}
           <p className="text-[13px] mb-8" style={{ color: "var(--color-text-secondary)" }}>
             In the US?{" "}

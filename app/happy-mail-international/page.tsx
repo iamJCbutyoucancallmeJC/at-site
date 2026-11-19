@@ -2,7 +2,7 @@
 //
 // Mirrors /happy-mail (commit 61f0584): a rich landing surface. The PDP
 // /shop/happy-mail-international redirects here (see app/shop/[slug]/page.tsx).
-// IHM is intl-market-scoped (16 countries, lib/geo.ts IHM_COUNTRIES); a US visitor can VIEW this page but
+// IHM is intl-market-scoped (17 countries, lib/geo.ts IHM_COUNTRIES); a US visitor can VIEW this page but
 // cannot purchase the intl product, so the page cross-links US readers to
 // /happy-mail. No country-based routing (removed 2026-05-29).
 //
@@ -23,7 +23,7 @@ export const dynamic = "force-dynamic"
 export const metadata: Metadata = {
   title: "International Happy Mail — Amy Tangerine",
   description:
-    "Monthly Happy Mail shipped to 16 countries, including Canada, the UK, Australia, New Zealand, and Japan. International postage included.",
+    "Monthly Happy Mail shipped to 17 countries, including Canada, the UK, Australia, New Zealand, and Japan. International postage included.",
 }
 
 export default async function HappyMailInternationalPage() {

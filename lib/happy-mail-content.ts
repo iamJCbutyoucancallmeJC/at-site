@@ -228,7 +228,7 @@ export const HM_FAQ_ITEMS = [
     // PDP that 404s for US readers). Intl buyers subscribe there; US gifters email help@.
     // [t1076/d051] Shop-orders sentence added 2026-08-12 via the t658 process:
     // staged as a veto line in fall-2026-plan-for-amy.md, Amy blessed 8/12.
-    a: `Yes. If you live in Australia, Austria, Belgium, Canada, Denmark, Finland, France, Ireland, Israel, Japan, the Netherlands, New Zealand, Norway, Sweden, Switzerland, or the UK, you can subscribe to International Happy Mail at $16/mo USD (shown in your local currency at checkout where we can). The price reflects international postage. If you're in the US and want to send Happy Mail to someone abroad, email help@amytangerine.com and we'll arrange an international gift. Shop orders (everything besides Happy Mail) ship to Canada, the UK, and Australia at actual USPS rates by weight, shown at checkout before you pay.`,
+    a: `Yes. If you live in Australia, Austria, Belgium, Canada, Denmark, Finland, France, Ireland, Israel, Japan, Mexico, the Netherlands, New Zealand, Norway, Sweden, Switzerland, or the UK, you can subscribe to International Happy Mail at $16/mo USD (shown in your local currency at checkout where we can). The price reflects international postage. If you're in the US and want to send Happy Mail to someone abroad, email help@amytangerine.com and we'll arrange an international gift. Shop orders (everything besides Happy Mail) ship to Canada, the UK, and Australia at actual USPS rates by weight, shown at checkout before you pay.`,
     link: { href: "/happy-mail-international", label: "International Happy Mail →" },
   },
 ]
@@ -251,7 +251,7 @@ export const IHM_PRICE_USD = 16
 // Display list of IHM countries for copy, alphabetical (t2196, 2026-11-19). Keep in step
 // with IHM_COUNTRIES in lib/geo.ts (that one is server-only; this one is safe in client code).
 export const IHM_COUNTRY_LIST =
-  "Australia, Austria, Belgium, Canada, Denmark, Finland, France, Ireland, Israel, Japan, the Netherlands, New Zealand, Norway, Sweden, Switzerland, and the UK"
+  "Australia, Austria, Belgium, Canada, Denmark, Finland, France, Ireland, Israel, Japan, Mexico, the Netherlands, New Zealand, Norway, Sweden, Switzerland, and the UK"
 
 // ── IHM 6-Month tier (BUILT + LIVE 2026-06-01) ────────────────────────────────────
 // $90 6-month ("Save $6" vs $16 x 6 = $96), mirroring US "$6 off" shape.
@@ -296,7 +296,7 @@ export const IHM_TESTIMONIALS = HM_TESTIMONIALS
 export const IHM_FAQ_ITEMS = [
   {
     q: "Where do you ship, and how much is it?",
-    a: `International Happy Mail goes to Australia, Austria, Belgium, Canada, Denmark, Finland, France, Ireland, Israel, Japan, the Netherlands, New Zealand, Norway, Sweden, Switzerland, and the UK. It's $${IHM_PRICE_USD}/mo USD, and most countries see it in their own currency on this page and at checkout. International postage is already included — there's no separate shipping charge. This is our "first in your market" pricing: subscribe now and lock in $${IHM_PRICE_USD}/mo for as long as you stay subscribed.`,
+    a: `International Happy Mail goes to Australia, Austria, Belgium, Canada, Denmark, Finland, France, Ireland, Israel, Japan, Mexico, the Netherlands, New Zealand, Norway, Sweden, Switzerland, and the UK. It's $${IHM_PRICE_USD}/mo USD, and most countries see it in their own currency on this page and at checkout. International postage is already included — there's no separate shipping charge. This is our "first in your market" pricing: subscribe now and lock in $${IHM_PRICE_USD}/mo for as long as you stay subscribed.`,
   },
   {
     q: "How is this different from US Happy Mail?",

@@ -30,7 +30,7 @@ export function isInternational(country: string): boolean {
 }
 
 // International Happy Mail countries (t2196, 2026-11-19). The original three sit in the
-// "International" market with the shop catalog; the 13 added 11/19 sit in the
+// "International" market with the shop catalog; the 14 added 11/19 sit in the
 // "International Happy Mail" market, whose catalog holds ONLY the IHM product (JC ruled
 // Happy Mail only, 11/16). They are deliberately NOT in SUPPORTED_COUNTRIES: the home page
 // and shop grid read the catalog for the visitor's country, and an IHM-only catalog would
@@ -39,7 +39,7 @@ export function isInternational(country: string): boolean {
 // Runbook: vault A5 Job/Linslow/Clients/Amy Tangerine/Happy Mail/ihm-expansion-runbook.md.
 export const IHM_COUNTRIES = new Set([
   "CA", "AU", "GB",
-  "NZ", "JP", "IL", "CH", "IE", "NL", "FR", "BE", "AT", "SE", "DK", "FI", "NO",
+  "NZ", "JP", "IL", "CH", "IE", "NL", "FR", "BE", "AT", "SE", "DK", "FI", "NO", "MX",
 ])
 
 export async function getIhmVisitorCountry(): Promise<string> {
