@@ -34,6 +34,7 @@ import {
   IHM_BOX_CONTENTS as BOX_CONTENTS,
   IHM_TESTIMONIALS as TESTIMONIALS,
   IHM_FAQ_ITEMS as FAQ_ITEMS,
+  IHM_COUNTRY_LIST,
 } from "@/lib/happy-mail-content"
 
 // Shape (JC 2026-06-01): TWO-TIER. Monthly ($16) + 6-Month ($90 = "save $6") intl tiers,
@@ -94,7 +95,7 @@ export default function HappyMailInternationalClient({ localizedPrice }: { local
               stamp PNG re-export). */}
           <p className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-3" style={{ color: "var(--color-orange-ink)" }}>International · Monthly Subscription</p>
           <h1 className="text-[36px] md:text-[52px] font-bold leading-[1.05] tracking-tight mb-4" style={{ color: "var(--color-text-primary)" }}>Every month, a letter from Amy.</h1>
-          <p className="text-[16px] md:text-[18px] leading-relaxed max-w-xl mb-3" style={{ color: "var(--color-text-secondary)" }}>The good kind of mail, now shipping to Canada, the UK, and Australia.</p>
+          <p className="text-[16px] md:text-[18px] leading-relaxed max-w-xl mb-3" style={{ color: "var(--color-text-secondary)" }}>The good kind of mail, now shipping to 16 countries.</p>
           {/* US-visitor cross-link (US can see this page but can't buy the intl product). */}
           <p className="text-[13px] mb-8" style={{ color: "var(--color-text-secondary)" }}>
             In the US?{" "}
@@ -174,7 +175,7 @@ export default function HappyMailInternationalClient({ localizedPrice }: { local
             surprises. Plus a little note.
           </p>
           <p className="text-[16px] md:text-[18px] leading-relaxed mb-8" style={{ color: "var(--color-text-secondary)" }}>
-            Same envelope our US subscribers love &mdash; now mailed to your door in Canada, the UK, or Australia,
+            Same envelope our US subscribers love &mdash; now mailed to your door in {IHM_COUNTRY_LIST},
             with international postage already included in the price.
           </p>
 

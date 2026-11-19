@@ -2,7 +2,7 @@
 //
 // Mirrors /happy-mail (commit 61f0584): a rich landing surface. The PDP
 // /shop/happy-mail-international redirects here (see app/shop/[slug]/page.tsx).
-// IHM is intl-market-scoped (CA/AU/GB); a US visitor can VIEW this page but
+// IHM is intl-market-scoped (16 countries, lib/geo.ts IHM_COUNTRIES); a US visitor can VIEW this page but
 // cannot purchase the intl product, so the page cross-links US readers to
 // /happy-mail. No country-based routing (removed 2026-05-29).
 //
@@ -15,7 +15,7 @@
 import type { Metadata } from "next"
 import { getProductByHandle } from "@/lib/shopify"
 import { formatDisplayPrice } from "@/lib/display-price"
-import { getVisitorCountry } from "@/lib/geo"
+import { getIhmVisitorCountry } from "@/lib/geo"
 import HappyMailInternationalClient from "./happy-mail-international-client"
 
 export const dynamic = "force-dynamic"
@@ -23,14 +23,16 @@ export const dynamic = "force-dynamic"
 export const metadata: Metadata = {
   title: "International Happy Mail — Amy Tangerine",
   description:
-    "Monthly Happy Mail shipped to Canada, the UK, and Australia. International postage included.",
+    "Monthly Happy Mail shipped to 16 countries, including Canada, the UK, Australia, New Zealand, and Japan. International postage included.",
 }
 
 export default async function HappyMailInternationalPage() {
   // Localized price for display. Country drives @inContext pricing only (CA$/AU$/£).
   // Falls back to null (client shows the flat $16 USD default) on local dev / no header /
   // a US visitor (US is null for this intl-scoped product, so we keep the $16 USD label).
-  const country = await getVisitorCountry()
+  // IHM-only list (t2196): the 13 countries added 11/19 get their local price here
+  // without joining the site-wide SUPPORTED_COUNTRIES.
+  const country = await getIhmVisitorCountry()
   const product = await getProductByHandle("happy-mail-international", country)
   const localizedPrice = product
     ? formatDisplayPrice(product) // e.g. "CA$23.00", "£13.00", "$16.00"

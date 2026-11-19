@@ -228,7 +228,7 @@ export const HM_FAQ_ITEMS = [
     // PDP that 404s for US readers). Intl buyers subscribe there; US gifters email help@.
     // [t1076/d051] Shop-orders sentence added 2026-08-12 via the t658 process:
     // staged as a veto line in fall-2026-plan-for-amy.md, Amy blessed 8/12.
-    a: `Yes. If you live in Canada, the UK, or Australia, you can subscribe to International Happy Mail at $16/mo USD (shown in your local currency at checkout). The price reflects international postage. If you're in the US and want to send Happy Mail to someone abroad, email help@amytangerine.com and we'll arrange an international gift. Shop orders (everything besides Happy Mail) ship internationally at actual USPS rates by weight, shown at checkout before you pay.`,
+    a: `Yes. If you live in Australia, Austria, Belgium, Canada, Denmark, Finland, France, Ireland, Israel, Japan, the Netherlands, New Zealand, Norway, Sweden, Switzerland, or the UK, you can subscribe to International Happy Mail at $16/mo USD (shown in your local currency at checkout where we can). The price reflects international postage. If you're in the US and want to send Happy Mail to someone abroad, email help@amytangerine.com and we'll arrange an international gift. Shop orders (everything besides Happy Mail) ship to Canada, the UK, and Australia at actual USPS rates by weight, shown at checkout before you pay.`,
     link: { href: "/happy-mail-international", label: "International Happy Mail →" },
   },
 ]
@@ -247,6 +247,11 @@ export const IHM_SELLING_PLAN =
 
 // $16 USD base; Shopify Markets presents local currency at checkout (CA$23 / AU$23 / £13).
 export const IHM_PRICE_USD = 16
+
+// Display list of IHM countries for copy, alphabetical (t2196, 2026-11-19). Keep in step
+// with IHM_COUNTRIES in lib/geo.ts (that one is server-only; this one is safe in client code).
+export const IHM_COUNTRY_LIST =
+  "Australia, Austria, Belgium, Canada, Denmark, Finland, France, Ireland, Israel, Japan, the Netherlands, New Zealand, Norway, Sweden, Switzerland, and the UK"
 
 // ── IHM 6-Month tier (BUILT + LIVE 2026-06-01) ────────────────────────────────────
 // $90 6-month ("Save $6" vs $16 x 6 = $96), mirroring US "$6 off" shape.
@@ -291,7 +296,7 @@ export const IHM_TESTIMONIALS = HM_TESTIMONIALS
 export const IHM_FAQ_ITEMS = [
   {
     q: "Where do you ship, and how much is it?",
-    a: `International Happy Mail goes to Canada, the UK, and Australia. It's $${IHM_PRICE_USD}/mo USD, shown in your local currency at checkout (about CA$23, AU$23, or £13 with current exchange rates). International postage is already included — there's no separate shipping charge. This is our "first in your market" pricing: subscribe now and lock in $${IHM_PRICE_USD}/mo for as long as you stay subscribed.`,
+    a: `International Happy Mail goes to Australia, Austria, Belgium, Canada, Denmark, Finland, France, Ireland, Israel, Japan, the Netherlands, New Zealand, Norway, Sweden, Switzerland, and the UK. It's $${IHM_PRICE_USD}/mo USD, and most countries see it in their own currency on this page and at checkout. International postage is already included — there's no separate shipping charge. This is our "first in your market" pricing: subscribe now and lock in $${IHM_PRICE_USD}/mo for as long as you stay subscribed.`,
   },
   {
     q: "How is this different from US Happy Mail?",
@@ -305,7 +310,7 @@ export const IHM_FAQ_ITEMS = [
   },
   {
     q: "When does it ship?",
-    a: "Around the 15th of each month. It travels as international letter mail, so allow a little extra time — it usually arrives within two to three weeks depending on your country's post.",
+    a: "Around the 15th of each month. It travels as a stamped international letter, so there's no tracking. It usually arrives within four weeks, and some countries take longer.",
   },
   {
     q: "Which month will my first envelope be?",
@@ -319,7 +324,7 @@ export const IHM_FAQ_ITEMS = [
     q: "Can I send it as a gift?",
     // The native $72 gift is US-only. Retire the old second-plan-on-giver advice
     // internationally too; support must arrange a separate recipient account.
-    a: "For a gift to Canada, the UK, or Australia, email help@amytangerine.com before ordering so we can arrange it under your recipient's own email and address. The $72 six-month gift on our gift page is for US delivery.",
+    a: "For a gift to any country we ship to, email help@amytangerine.com before ordering so we can arrange it under your recipient's own email and address. The $72 six-month gift on our gift page is for US delivery.",
     link: { href: "/gift", label: "About Happy Mail gifts" },
   },
   {
@@ -329,12 +334,12 @@ export const IHM_FAQ_ITEMS = [
   {
     q: "What if my mail doesn't arrive?",
     // Wider window than US (intl transit is slower).
-    a: "International mail can take longer. If you haven't received your envelope within four weeks of the ship date, email help@amytangerine.com and we'll sort it out.",
+    a: "International mail can take longer. If you haven't received your envelope within six weeks of the ship date, email help@amytangerine.com and we'll sort it out.",
   },
   {
     q: "Are there any customs fees?",
     // Honest: low-value letter mail is below de-minimis in CA/AU/GB, but say it plainly.
-    a: "For Canada, the UK, and Australia, Happy Mail is small, low-value letter mail and almost never triggers customs charges. If your country's post ever asks for a small import fee, reach out to help@amytangerine.com and we'll help.",
+    a: "Happy Mail travels as a small, low-value letter. Some countries' posts charge import tax or a handling fee on mail from abroad; that charge is set by your post, not by us. If one ever comes up, write to help@amytangerine.com and we'll help.",
   },
   {
     q: "Want US Happy Mail instead?",

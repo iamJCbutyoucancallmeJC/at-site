@@ -198,8 +198,8 @@ export default function ProductDetail({
                 style={{ background: "var(--color-orange-light)", border: "1px solid var(--color-orange-tint)", color: "var(--color-ink)" }}
               >
                 <span className="font-semibold">Shipping outside the US?</span> This is the
-                international edition of Happy Mail, for subscribers in Canada, Australia, and the
-                UK. Same envelope, same surprises, shipped worldwide with postage included. (In the
+                international edition of Happy Mail, for subscribers in 16 countries outside
+                the US. Same envelope, same surprises, with postage included. (In the
                 US?{" "}
                 <TrackableLink
                   href="/happy-mail"
