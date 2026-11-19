@@ -143,6 +143,16 @@ export default async function ClassHome({
             Amy answers your questions
           </p>
           <DemoPlayer hls={qa.hls} hlsQuery={qa.hlsQuery} mp4={qa.mp4} poster={qa.poster} caption="Recorded in the middle of the month, from the questions left in the box." />
+          {/* Amy says "I'm going to link it here" near the end of the Glimmers Q&A (11/18). */}
+          {slug === "glimmers" ? (
+            <p className="mt-4 text-[14px] leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+              The podcast episode Amy mentions:{" "}
+              <Link href="/blog/podcast-creating-atomic-habits-with-james-clear" className="underline underline-offset-4" style={{ color: "var(--color-orange-ink)" }}>
+                Creating Atomic Habits with James Clear
+              </Link>
+              .
+            </p>
+          ) : null}
         </section>
       ) : null}
 
