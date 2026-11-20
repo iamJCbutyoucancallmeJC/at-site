@@ -54,11 +54,11 @@ export const EMPTY_STATES = {
     door: { label: "Go to the shop", href: "/shop" },
   },
   category: {
-    line: "Nothing here right now. New things land often, so check back soon.",
+    line: "This corner of the shop is empty right now. New things land often, so check back soon.",
     door: { label: "See everything", href: "/shop" },
   },
   search: {
-    line: "No posts match that. Try one word, like stickers or travel.",
+    line: "That search came up empty. Try one word, like stickers or travel.",
     door: { label: "Browse the Journal", href: "/blog" },
   },
 } as const
