@@ -35,7 +35,7 @@ export default async function PreviewProductPage({
       {/* PREVIEW banner so a SKU page is never mistaken for the live product. */}
       <div
         className="px-4 md:px-10 py-2.5 text-center text-[12px] uppercase tracking-[0.12em] font-semibold"
-        style={{ background: "var(--color-orange)", color: "#fff" }}
+        style={{ background: "var(--color-orange)", color: "var(--color-ink)" }}
       >
         Preview only — not live. This is an unpublished (draft) product.
       </div>

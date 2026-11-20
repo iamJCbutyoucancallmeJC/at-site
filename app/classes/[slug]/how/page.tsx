@@ -26,7 +26,7 @@ export default async function ClassHowPage({ params }: { params: Promise<{ slug:
     <main className="max-w-4xl mx-auto px-6 pt-12 pb-24">
       <PageEngagementTracker page={`class-${slug}-how`} />
       <p className="text-[12px] mb-8">
-        <Link href={`/classes/${slug}`} className="underline underline-offset-2" style={{ color: "var(--color-text-secondary)" }}>
+        <Link href={`/classes/${slug}`} className="underline underline-offset-2" style={{ color: "var(--color-ink-soft)" }}>
           {c.title}
         </Link>
       </p>
@@ -36,7 +36,7 @@ export default async function ClassHowPage({ params }: { params: Promise<{ slug:
       {src ? (
         <GuidedPlayer slug={slug} hls={src.hls} hlsQuery={src.hlsQuery} mp4={src.mp4} poster={src.poster} cues={getContainerCues(slug, "walkthrough")} answers={answers} />
       ) : (
-        <div className="max-w-2xl space-y-5 text-[17px] leading-relaxed" style={{ color: "var(--color-text-primary)" }}>
+        <div className="max-w-2xl space-y-5 text-[17px] leading-relaxed" style={{ color: "var(--color-ink)" }}>
           <p>Each morning a new day opens on the class page and stays open. Open it, read the steps, and do them in your journal: write the date, write two or three lines. Some days that is it. Some days you add a scrap or a sticker.</p>
           <p>Under the steps there is one line where you can note what went on the page. It is optional. Whatever you leave there is saved to this class, on any device you open your link on, and on Day 30 all thirty lines show up in a row.</p>
           <p>Four printables come with the class, the first one on Day 1. Print them once, or do not print them at all. They are there if you want a place to keep the list.</p>

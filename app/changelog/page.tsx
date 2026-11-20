@@ -30,7 +30,7 @@ export default function ChangelogPage() {
         <div className="max-w-5xl mx-auto">
           <p
             className="text-xs uppercase tracking-widest"
-            style={{ color: "var(--color-text-secondary)" }}
+            style={{ color: "var(--color-ink-soft)" }}
           >
             Changelog
           </p>

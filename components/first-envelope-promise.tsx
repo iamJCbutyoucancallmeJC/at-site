@@ -23,7 +23,7 @@ export default function FirstEnvelopePromise() {
   const [now, setNow] = useState<Date | null>(null)
   useEffect(() => setNow(new Date()), [])
 
-  const style = { color: "var(--color-text-secondary)" }
+  const style = { color: "var(--color-ink-soft)" }
   if (!now) {
     return (
       <p className="text-center text-[12px] mt-4" style={style}>

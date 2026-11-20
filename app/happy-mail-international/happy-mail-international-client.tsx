@@ -94,10 +94,10 @@ export default function HappyMailInternationalClient({ localizedPrice }: { local
               ihm-stamp.tsx; re-add <IhmStamp> here when Amy picks one. Post-launch: t679 (clean
               stamp PNG re-export). */}
           <p className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-3" style={{ color: "var(--color-orange-ink)" }}>International · Monthly Subscription</p>
-          <h1 className="text-[36px] md:text-[52px] font-bold leading-[1.05] tracking-tight mb-4" style={{ color: "var(--color-text-primary)" }}>Every month, a letter from Amy.</h1>
-          <p className="text-[16px] md:text-[18px] leading-relaxed max-w-xl mb-3" style={{ color: "var(--color-text-secondary)" }}>The good kind of mail, now shipping to 17 countries.</p>
+          <h1 className="text-[36px] md:text-[52px] font-bold leading-[1.05] tracking-tight mb-4" style={{ color: "var(--color-ink)" }}>Every month, a letter from Amy.</h1>
+          <p className="text-[16px] md:text-[18px] leading-relaxed max-w-xl mb-3" style={{ color: "var(--color-ink-soft)" }}>The good kind of mail, now shipping to 17 countries.</p>
           {/* US-visitor cross-link (US can see this page but can't buy the intl product). */}
-          <p className="text-[13px] mb-8" style={{ color: "var(--color-text-secondary)" }}>
+          <p className="text-[13px] mb-8" style={{ color: "var(--color-ink-soft)" }}>
             In the US?{" "}
             <TrackableLink href="/happy-mail" event="nav_click" eventData={{ link_text: "US Happy Mail", page: "happy-mail-international" }} className="font-semibold underline" style={{ color: "var(--color-orange-ink)" }}>
               Subscribe to US Happy Mail here →
@@ -109,8 +109,8 @@ export default function HappyMailInternationalClient({ localizedPrice }: { local
                 <div className="relative aspect-square bg-gray-50 rounded-xl overflow-hidden mb-2">
                   <Image src={item.img} alt={item.label} fill className="object-cover" sizes="(max-width: 768px) 50vw, 25vw" />
                 </div>
-                <p className="text-[13px] font-semibold leading-snug" style={{ color: "var(--color-text-primary)" }}>{item.label}</p>
-                <p className="text-[12px] leading-snug" style={{ color: "var(--color-text-secondary)" }}>{item.body}</p>
+                <p className="text-[13px] font-semibold leading-snug" style={{ color: "var(--color-ink)" }}>{item.label}</p>
+                <p className="text-[12px] leading-snug" style={{ color: "var(--color-ink-soft)" }}>{item.body}</p>
               </div>
             ))}
           </div>
@@ -129,32 +129,32 @@ export default function HappyMailInternationalClient({ localizedPrice }: { local
           <div className="rounded-2xl p-6 border-2 relative flex flex-col" style={{ background: "var(--color-white)", borderColor: "var(--color-border)" }}>
             <p className="text-[12px] uppercase tracking-[0.15em] font-semibold mb-2" style={{ color: "var(--color-orange-ink)" }}>Monthly · International</p>
             <div className="flex items-end gap-1 mb-1">
-              <span className="text-[36px] font-bold leading-none" style={{ color: "var(--color-text-primary)" }}>{priceLabel}</span>
-              <span className="text-[13px] mb-1" style={{ color: "var(--color-text-secondary)" }}>/month</span>
+              <span className="text-[36px] font-bold leading-none" style={{ color: "var(--color-ink)" }}>{priceLabel}</span>
+              <span className="text-[13px] mb-1" style={{ color: "var(--color-ink-soft)" }}>/month</span>
             </div>
-            <p className="text-[12px] mb-4 flex-1" style={{ color: "var(--color-text-secondary)" }}>Postage included · cancel anytime</p>
+            <p className="text-[12px] mb-4 flex-1" style={{ color: "var(--color-ink-soft)" }}>Postage included · cancel anytime</p>
             {closed === null ? <HmButtonPlaceholder /> : <SubscribeButton plan="monthly" label={`Subscribe · ${priceLabel}/mo`} />}
           </div>
 
           {/* 6-Month (renders only when the tier is live) */}
           {IHM_6MONTH_READY && (
             <div className="rounded-2xl p-6 border-2 relative flex flex-col" style={{ background: "var(--color-white)", borderColor: "var(--color-orange)" }}>
-              <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 text-[11px] uppercase tracking-[0.12em] font-bold rounded-full text-white whitespace-nowrap" style={{ background: "var(--color-teal)" }}>Save $6 with 6 months</span>
+              <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 text-[11px] uppercase tracking-[0.12em] font-bold rounded-full text-ink whitespace-nowrap" style={{ background: "var(--color-teal)" }}>Save $6 with 6 months</span>
               <p className="text-[12px] uppercase tracking-[0.15em] font-semibold mb-2" style={{ color: "var(--color-orange-ink)" }}>6-Month · International</p>
               <div className="flex items-end gap-1 mb-1">
-                <span className="text-[36px] font-bold leading-none" style={{ color: "var(--color-text-primary)" }}>${PRICE_6MONTH}</span>
-                <span className="text-[13px] mb-1" style={{ color: "var(--color-text-secondary)" }}>/6 months</span>
+                <span className="text-[36px] font-bold leading-none" style={{ color: "var(--color-ink)" }}>${PRICE_6MONTH}</span>
+                <span className="text-[13px] mb-1" style={{ color: "var(--color-ink-soft)" }}>/6 months</span>
               </div>
-              <p className="text-[12px] mb-4 flex-1" style={{ color: "var(--color-text-secondary)" }}>Billed once every 6 months · postage included · shown in your local currency at checkout</p>
+              <p className="text-[12px] mb-4 flex-1" style={{ color: "var(--color-ink-soft)" }}>Billed once every 6 months · postage included · shown in your local currency at checkout</p>
               {closed === null ? <HmButtonPlaceholder /> : <SubscribeButton plan="6-month" label={`Subscribe · $${PRICE_6MONTH}/6mo`} />}
             </div>
           )}
         </div>
         )}
         {closed ? (
-          <p className="text-center text-[12px] mt-4" style={{ color: "var(--color-text-secondary)" }}>Happy Mail reopens October 16. Ships around the 15th. International postage included.</p>
+          <p className="text-center text-[12px] mt-4" style={{ color: "var(--color-ink-soft)" }}>Happy Mail reopens October 16. Ships around the 15th. International postage included.</p>
         ) : (
-        <p className="text-center text-[12px] mt-4" style={{ color: "var(--color-text-secondary)" }}>
+        <p className="text-center text-[12px] mt-4" style={{ color: "var(--color-ink-soft)" }}>
           <span className="font-semibold" style={{ color: "var(--color-orange-ink)" }}>First in your market</span> — subscribe now and lock in this rate. Ships around the 15th. International postage included.
         </p>
         )}
@@ -166,20 +166,20 @@ export default function HappyMailInternationalClient({ localizedPrice }: { local
           <p className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-3" style={{ color: "var(--color-orange-ink)" }}>
             Let me send you mail
           </p>
-          <h2 className="text-[26px] md:text-[34px] font-bold leading-tight tracking-tight mb-5" style={{ color: "var(--color-text-primary)" }}>
+          <h2 className="text-[26px] md:text-[34px] font-bold leading-tight tracking-tight mb-5" style={{ color: "var(--color-ink)" }}>
             Happy mail, worldwide!
           </h2>
-          <p className="text-[16px] md:text-[18px] leading-relaxed mb-5" style={{ color: "var(--color-text-secondary)" }}>
+          <p className="text-[16px] md:text-[18px] leading-relaxed mb-5" style={{ color: "var(--color-ink-soft)" }}>
             Once a month, you&rsquo;ll get an envelope from me filled with fresh &amp; juicy bits I designed
             and actually use for paper crafting and journaling: a 4&times;6 sticker sheet, die cuts, and some
             surprises. Plus a little note.
           </p>
-          <p className="text-[16px] md:text-[18px] leading-relaxed mb-8" style={{ color: "var(--color-text-secondary)" }}>
+          <p className="text-[16px] md:text-[18px] leading-relaxed mb-8" style={{ color: "var(--color-ink-soft)" }}>
             Same envelope our US subscribers love &mdash; now mailed to your door in {IHM_COUNTRY_LIST},
             with international postage already included in the price.
           </p>
 
-          <p className="text-[12px] uppercase tracking-[0.15em] font-semibold mb-4" style={{ color: "var(--color-text-primary)" }}>
+          <p className="text-[12px] uppercase tracking-[0.15em] font-semibold mb-4" style={{ color: "var(--color-ink)" }}>
             What&rsquo;s inside
           </p>
           <ul className="space-y-3 mb-8">
@@ -188,7 +188,7 @@ export default function HappyMailInternationalClient({ localizedPrice }: { local
               "Exclusive first look at our newest 4×6 sticker sheet (not available anywhere else online)",
               "A note from me about what I'm making, loving, or thinking about",
             ].map((item) => (
-              <li key={item} className="flex gap-3 text-[15px] md:text-[16px] leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+              <li key={item} className="flex gap-3 text-[15px] md:text-[16px] leading-relaxed" style={{ color: "var(--color-ink-soft)" }}>
                 <span aria-hidden className="select-none" style={{ color: "var(--color-orange-ink)" }}>&#10003;</span>
                 <span>{item}</span>
               </li>
@@ -203,18 +203,18 @@ export default function HappyMailInternationalClient({ localizedPrice }: { local
 
       {/* ── Testimonials ── */}
       <section className="py-12 md:py-16 px-4 md:px-10" style={{ background: "var(--color-gray-light)" }}>
-        <h2 className="text-[15px] md:text-[17px] uppercase tracking-[0.12em] font-semibold text-center mb-8 md:mb-10" style={{ color: "var(--color-text-primary)" }}>
+        <h2 className="text-[15px] md:text-[17px] uppercase tracking-[0.12em] font-semibold text-center mb-8 md:mb-10" style={{ color: "var(--color-ink)" }}>
           Fan mail
         </h2>
         <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {TESTIMONIALS.map((t, i) => (
             <div key={i} className="rounded-xl p-5 flex flex-col" style={{ background: "var(--color-white)", border: "1px solid var(--color-border)" }}>
-              <p className="text-[13px] leading-relaxed flex-1 mb-4" style={{ color: "var(--color-text-secondary)" }}>
+              <p className="text-[13px] leading-relaxed flex-1 mb-4" style={{ color: "var(--color-ink-soft)" }}>
                 &ldquo;{t.quote}&rdquo;
               </p>
               <div>
-                <p className="text-[12px] font-semibold" style={{ color: "var(--color-text-primary)" }}>{t.name}</p>
-                <p className="text-[12px]" style={{ color: "var(--color-text-secondary)" }}>{t.location}</p>
+                <p className="text-[12px] font-semibold" style={{ color: "var(--color-ink)" }}>{t.name}</p>
+                <p className="text-[12px]" style={{ color: "var(--color-ink-soft)" }}>{t.location}</p>
               </div>
             </div>
           ))}
@@ -224,7 +224,7 @@ export default function HappyMailInternationalClient({ localizedPrice }: { local
       {/* ── FAQ ── */}
       <section className="py-12 md:py-16 px-4 md:px-10">
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-[15px] md:text-[17px] uppercase tracking-[0.12em] font-semibold mb-8" style={{ color: "var(--color-text-primary)" }}>
+          <h2 className="text-[15px] md:text-[17px] uppercase tracking-[0.12em] font-semibold mb-8" style={{ color: "var(--color-ink)" }}>
             Questions?
           </h2>
           <FaqAccordion items={hmFaqForState(FAQ_ITEMS, closed === true)} />

@@ -54,36 +54,36 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
 
       {/* ── Hero band ── */}
       <section className="px-6 py-14 md:py-20 text-center" style={{ background: "var(--color-teal)" }}>
-        <p className="text-[12px] md:text-[13px] uppercase tracking-[0.25em] font-semibold text-white/80">
+        <p className="text-[12px] md:text-[13px] uppercase tracking-[0.25em] font-semibold text-ink">
           {event.label}
           {comingSoon && " · Coming Soon"}
           {isPast && " · Recap"}
         </p>
-        <h1 className="mt-3 text-[34px] md:text-[56px] font-bold tracking-tight text-white leading-[1.05]">
+        <h1 className="mt-3 text-[34px] md:text-[56px] font-bold tracking-tight text-ink leading-[1.05]">
           {event.title}
         </h1>
-        <p className="mt-4 text-[14px] md:text-[16px] uppercase tracking-[0.12em] text-white/90 font-semibold">
+        <p className="mt-4 text-[14px] md:text-[16px] uppercase tracking-[0.12em] text-ink font-semibold">
           {[event.city, event.venue].filter(Boolean).join(" · ")}
         </p>
-        <p className="mt-1 text-[14px] md:text-[16px] text-white/80">{event.dates}</p>
+        <p className="mt-1 text-[14px] md:text-[16px] text-ink">{event.dates}</p>
       </section>
 
       {/* ── Story ── */}
       <section className="max-w-2xl mx-auto px-6 py-12 md:py-16 text-center">
-        <p className="text-[15px] md:text-[17px] leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+        <p className="text-[15px] md:text-[17px] leading-relaxed" style={{ color: "var(--color-ink-soft)" }}>
           {event.blurb}
         </p>
 
         {/* What meeting Amy there looks like (per-event: booth vs walking) */}
         {event.meetAmy && (
-          <p className="mt-4 text-[15px] md:text-[17px] leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+          <p className="mt-4 text-[15px] md:text-[17px] leading-relaxed" style={{ color: "var(--color-ink-soft)" }}>
             {event.meetAmy}
           </p>
         )}
 
         {/* Fact bullets (booth number, hours) once JC fills them in */}
         {event.details && event.details.length > 0 && (
-          <ul className="mt-6 space-y-2 text-[14px] md:text-[15px]" style={{ color: "var(--color-text-primary)" }}>
+          <ul className="mt-6 space-y-2 text-[14px] md:text-[15px]" style={{ color: "var(--color-ink)" }}>
             {event.details.map((d) => (
               <li key={d} className="font-semibold">
                 {d}
@@ -94,13 +94,13 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
 
         {/* Booth facts from the event kit (t1101): public, so a reader can plan a visit */}
         {event.booth && !isPast && (event.booth.boothNumber || (event.booth.hours && event.booth.hours.length > 0) || (event.booth.bring && event.booth.bring.length > 0)) && (
-          <div className="mt-6 space-y-2 text-[14px] md:text-[15px]" style={{ color: "var(--color-text-primary)" }}>
+          <div className="mt-6 space-y-2 text-[14px] md:text-[15px]" style={{ color: "var(--color-ink)" }}>
             {event.booth.boothNumber && <p className="font-semibold">Find Amy at {event.booth.boothNumber}</p>}
             {event.booth.hours?.map((h) => (
               <p key={h} className="font-semibold">{h}</p>
             ))}
             {event.booth.bring && event.booth.bring.length > 0 && (
-              <p style={{ color: "var(--color-text-secondary)" }}>On the table: {event.booth.bring.join(", ").toLowerCase()}.</p>
+              <p style={{ color: "var(--color-ink-soft)" }}>On the table: {event.booth.bring.join(", ").toLowerCase()}.</p>
             )}
           </div>
         )}
@@ -187,7 +187,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
           <div className="max-w-3xl mx-auto">
             <h2
               className="text-[20px] md:text-[26px] font-bold leading-tight text-center mb-5"
-              style={{ color: "var(--color-text-primary)" }}
+              style={{ color: "var(--color-ink)" }}
             >
               How it went
             </h2>
@@ -198,7 +198,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
                 eventSlug={event.slug}
               />
             ) : (
-              <p className="text-center text-[15px] leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+              <p className="text-center text-[15px] leading-relaxed" style={{ color: "var(--color-ink-soft)" }}>
                 Amy shared this one on her channels.
               </p>
             )}
@@ -220,7 +220,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
               </div>
             )}
             {event.eventUrl && (
-              <p className="text-center text-[13px] md:text-[14px] mt-6" style={{ color: "var(--color-text-secondary)" }}>
+              <p className="text-center text-[13px] md:text-[14px] mt-6" style={{ color: "var(--color-ink-soft)" }}>
                 Curious about the event itself?{" "}
                 <TrackableLink
                   href={event.eventUrl}
@@ -243,14 +243,14 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
       {/* ── Waitlist ── */}
       <section className="px-6 py-12 md:py-16" style={{ background: "var(--color-orange)" }}>
         <div className="max-w-lg mx-auto text-center">
-          <h2 className="text-[24px] md:text-[32px] font-bold leading-tight text-white mb-3">
+          <h2 className="text-[24px] md:text-[32px] font-bold leading-tight text-ink mb-3">
             {comingSoon
               ? "Want the details the moment they land?"
               : isPast
                 ? "Missed this one?"
                 : "Can't make it this time?"}
           </h2>
-          <p className="text-[14px] md:text-[15px] text-white/90 mb-5 leading-relaxed">
+          <p className="text-[14px] md:text-[15px] text-ink mb-5 leading-relaxed">
             Get on the list and you&rsquo;ll be the first to hear when Amy&rsquo;s headed somewhere
             near you.
           </p>

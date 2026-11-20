@@ -51,7 +51,7 @@ export default async function ShopMyFavesPage({ searchParams }: PageProps) {
           </p>
           <h1
             className="text-[34px] md:text-[52px] font-bold leading-[1.05] tracking-tight mb-6"
-            style={{ color: "var(--color-text-primary)" }}
+            style={{ color: "var(--color-ink)" }}
           >
             Fresh and juicy favorites
             <br />
@@ -59,7 +59,7 @@ export default async function ShopMyFavesPage({ searchParams }: PageProps) {
           </h1>
           <p
             className="text-[16px] md:text-[18px] leading-relaxed"
-            style={{ color: "var(--color-text-secondary)" }}
+            style={{ color: "var(--color-ink-soft)" }}
           >
             After always getting asked what supplies I&rsquo;m using, what I&rsquo;m
             wearing, or where something is from, I gathered the things I love all in
@@ -76,7 +76,7 @@ export default async function ShopMyFavesPage({ searchParams }: PageProps) {
       >
         <p
           className="max-w-3xl mx-auto text-[12px] leading-relaxed"
-          style={{ color: "var(--color-text-secondary)" }}
+          style={{ color: "var(--color-ink-soft)" }}
         >
           {DISCLOSURE}
         </p>
@@ -85,7 +85,7 @@ export default async function ShopMyFavesPage({ searchParams }: PageProps) {
       {/* ── Lists ── */}
       {lists.length === 0 ? (
         <section className="py-24 px-6 text-center">
-          <p className="text-[16px]" style={{ color: "var(--color-text-secondary)" }}>
+          <p className="text-[16px]" style={{ color: "var(--color-ink-soft)" }}>
             Amy&rsquo;s favorites are on their way. Check back soon!
           </p>
         </section>
@@ -97,14 +97,14 @@ export default async function ShopMyFavesPage({ searchParams }: PageProps) {
                 <div className="mb-7 md:mb-9 max-w-2xl">
                   <h2
                     className="text-[24px] md:text-[32px] font-bold leading-tight tracking-tight"
-                    style={{ color: "var(--color-text-primary)" }}
+                    style={{ color: "var(--color-ink)" }}
                   >
                     {list.title}
                   </h2>
                   {list.description && (
                     <p
                       className="mt-2 text-[15px] leading-relaxed"
-                      style={{ color: "var(--color-text-secondary)" }}
+                      style={{ color: "var(--color-ink-soft)" }}
                     >
                       {list.description}
                     </p>
@@ -168,7 +168,7 @@ export default async function ShopMyFavesPage({ searchParams }: PageProps) {
       >
         <p
           className="max-w-3xl mx-auto text-[12px] leading-relaxed"
-          style={{ color: "var(--color-text-secondary)" }}
+          style={{ color: "var(--color-ink-soft)" }}
         >
           {DISCLOSURE}
         </p>

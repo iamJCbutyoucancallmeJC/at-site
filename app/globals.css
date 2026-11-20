@@ -24,10 +24,9 @@
   --color-teal-ink: #00787C;
   --color-orange-tint: #FFEEDD;
   --color-teal-tint: #E3F5F5;
-  /* text-primary / text-secondary are kept as names (every component uses them)
-     and now point at the warm neutrals. Delete the two names in Phase 5. */
-  --color-text-primary: #1F1A17;
-  --color-text-secondary: #6B6560;
+  /* Form errors (Phase 5, 2026-11-20): one red, 5.4:1 on white. Was two hand-typed
+     hexes (#c0392b, #b00020) across nine forms. */
+  --color-error: #C0392B;
 
   /* Shadows: flat at rest; lift on hover, and the one orange glow (the CTA). */
   --shadow-lift: 0 1px 2px rgba(31, 26, 23, 0.06), 0 12px 28px -12px rgba(31, 26, 23, 0.22);
@@ -43,7 +42,7 @@ html {
 
 body {
   background-color: var(--color-white);
-  color: var(--color-text-primary);
+  color: var(--color-ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
@@ -54,49 +53,10 @@ body {
   outline-offset: 2px;
 }
 
-/* Phase 0 safety net: an orange or teal FILL that still sets white text reads in
-   ink until its component is touched (white on orange is 2.4:1, ink is 7.2:1).
-   Matches React's rendered style attribute for background / backgroundColor.
-   Elements whose own color is orange (links, eyebrows) are not matched. */
-/* React serialises style={{ background: "var(--color-orange)" }} WITHOUT the
-   space ("background:var(--color-orange)"), so both spellings are matched
-   (found on the 2026-10-25 preview walk: every spaced-only selector missed). */
-[style*="background: var(--color-orange)"],
-[style*="background:var(--color-orange)"],
-[style*="background-color: var(--color-orange)"],
-[style*="background-color:var(--color-orange)"],
-[style*="background: var(--color-teal)"],
-[style*="background:var(--color-teal)"],
-[style*="background-color: var(--color-teal)"],
-[style*="background-color:var(--color-teal)"] {
-  color: var(--color-ink);
-}
-[style*="background: var(--color-orange)"] .text-white,
-[style*="background:var(--color-orange)"] .text-white,
-[style*="background-color: var(--color-orange)"] .text-white,
-[style*="background-color:var(--color-orange)"] .text-white,
-[style*="background: var(--color-teal)"] .text-white,
-[style*="background:var(--color-teal)"] .text-white,
-[style*="background-color: var(--color-teal)"] .text-white,
-[style*="background-color:var(--color-teal)"] .text-white,
-[style*="background: var(--color-orange)"].text-white,
-[style*="background:var(--color-orange)"].text-white,
-[style*="background-color: var(--color-orange)"].text-white,
-[style*="background-color:var(--color-orange)"].text-white,
-[style*="background: var(--color-teal)"].text-white,
-[style*="background:var(--color-teal)"].text-white,
-[style*="background-color: var(--color-teal)"].text-white,
-[style*="background-color:var(--color-teal)"].text-white,
-[style*="background: var(--color-orange)"] [class*="text-white/"],
-[style*="background:var(--color-orange)"] [class*="text-white/"],
-[style*="background-color: var(--color-orange)"] [class*="text-white/"],
-[style*="background-color:var(--color-orange)"] [class*="text-white/"],
-[style*="background: var(--color-teal)"] [class*="text-white/"],
-[style*="background:var(--color-teal)"] [class*="text-white/"],
-[style*="background-color: var(--color-teal)"] [class*="text-white/"],
-[style*="background-color:var(--color-teal)"] [class*="text-white/"] {
-  color: var(--color-ink);
-}
+/* The Phase 0 safety net (an attribute selector that re-lettered any orange or
+   teal fill in ink) was deleted in Phase 5, 2026-11-20: every fill has been
+   touched by hand and site-qa's tripwire now fails a build that sets white text
+   on an orange or teal fill. */
 
 /* Product description HTML (rendered from Shopify descriptionHtml).
    Tailwind v4 resets list styles, so re-establish bullets + spacing here. */
@@ -125,7 +85,7 @@ body {
 }
 .product-description strong {
   font-weight: 600;
-  color: var(--color-text-primary);
+  color: var(--color-ink);
 }
 .product-description a {
   color: var(--color-orange-ink);
@@ -142,7 +102,7 @@ body {
 }
 .product-description h3 {
   font-weight: 600;
-  color: var(--color-text-primary);
+  color: var(--color-ink);
   margin: 0;
 }
 
@@ -215,8 +175,6 @@ body {
    `cta-primary` and keep only layout utilities (w-full, md:w-auto) beside it; no
    inline background, or the hover state is lost. Variants:
    - cta-primary--outline: the unpicked plan in a pair (Happy Mail monthly).
-   - cta-primary--ink: black text on orange (the class Join button's contrast
-     choice); its disabled state is grey, meaning "not on sale yet".
    Unlayered on purpose so it beats Tailwind utilities. */
 .cta-primary,
 .blog-body a.blog-button {
@@ -262,12 +220,6 @@ body {
   background: var(--color-orange-light);
   color: var(--color-ink);
   box-shadow: inset 0 0 0 2px var(--color-ink);
-}
-/* --ink is now the default (above); the variant keeps its grey disabled state. */
-.cta-primary--ink:disabled {
-  background: var(--color-paper);
-  color: var(--color-ink-soft);
-  opacity: 1;
 }
 
 /* The button family (design finish, Phase 1, 2026-10-28). Three classes and no
@@ -455,8 +407,8 @@ input:focus-visible + .option-chip {
    until Amy's yes: see app/changelog/page.tsx. */
 .at-log {
   --log-bg: var(--color-white);
-  --log-text: var(--color-text-primary);
-  --log-dim: var(--color-text-secondary);
+  --log-text: var(--color-ink);
+  --log-dim: var(--color-ink-soft);
   --log-faint: #8a8a8a;
   --log-pop: var(--color-orange-ink);
 }

@@ -46,7 +46,7 @@ export default function BackInStockForm({
 
   return (
     <div className="mt-3">
-      <p className="text-[13px] mb-2 text-center" style={{ color: "var(--color-text-secondary)" }}>
+      <p className="text-[13px] mb-2 text-center" style={{ color: "var(--color-ink-soft)" }}>
         Want to know when it&apos;s back? We&apos;ll send one email.
       </p>
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2">
@@ -69,7 +69,7 @@ export default function BackInStockForm({
         </button>
       </form>
       {state === "error" && (
-        <p className="mt-2 text-[13px] text-center" style={{ color: "#c0392b" }}>
+        <p className="mt-2 text-[13px] text-center" style={{ color: "var(--color-error)" }}>
           That didn&apos;t go through. Mind trying again?
         </p>
       )}

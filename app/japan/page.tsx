@@ -81,10 +81,10 @@ export default function JapanPage() {
 
       {/* ── The story ── */}
       <section className="max-w-2xl mx-auto px-6 py-12 md:py-16 text-center">
-        <h2 className="text-[24px] md:text-[32px] font-bold leading-tight mb-4" style={{ color: "var(--color-text-primary)" }}>
+        <h2 className="text-[24px] md:text-[32px] font-bold leading-tight mb-4" style={{ color: "var(--color-ink)" }}>
           A girlfriends&rsquo; shopping adventure through Tokyo.
         </h2>
-        <p className="text-[15px] md:text-[17px] leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+        <p className="text-[15px] md:text-[17px] leading-relaxed" style={{ color: "var(--color-ink-soft)" }}>
           Six nights in Ginza, the world&rsquo;s most beautiful stationery and paper shops, a Tokyo
           Disneyland day, a super special trip to Hobonichi headquarters (pinch me!), late nights
           crafting away in the hotel lobby and the best tour bus guide to Mt. Fuji. The first
@@ -117,7 +117,7 @@ export default function JapanPage() {
             />
           </div>
         </div>
-        <p className="text-center text-[12px] uppercase tracking-[0.12em] mt-3" style={{ color: "var(--color-text-secondary)" }}>
+        <p className="text-center text-[12px] uppercase tracking-[0.12em] mt-3" style={{ color: "var(--color-ink-soft)" }}>
           From the first trip
         </p>
       </section>
@@ -125,7 +125,7 @@ export default function JapanPage() {
       {/* ── Recap videos (Amy's, then Hobonichi's feature below it) ── */}
       <section className="px-6 pb-12 md:pb-16">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-[20px] md:text-[26px] font-bold leading-tight text-center mb-5" style={{ color: "var(--color-text-primary)" }}>
+          <h2 className="text-[20px] md:text-[26px] font-bold leading-tight text-center mb-5" style={{ color: "var(--color-ink)" }}>
             Watch the recap
           </h2>
           <div className="relative w-full overflow-hidden rounded-xl" style={{ aspectRatio: "16 / 9" }}>
@@ -140,7 +140,7 @@ export default function JapanPage() {
           </div>
 
           {/* Hobonichi's video feature, below Amy's */}
-          <p className="text-center text-[12px] md:text-[13px] uppercase tracking-[0.15em] font-semibold mt-10 mb-4" style={{ color: "var(--color-text-secondary)" }}>
+          <p className="text-center text-[12px] md:text-[13px] uppercase tracking-[0.15em] font-semibold mt-10 mb-4" style={{ color: "var(--color-ink-soft)" }}>
             And on Hobonichi&rsquo;s channel
           </p>
           <div className="relative w-full overflow-hidden rounded-xl" style={{ aspectRatio: "16 / 9" }}>
@@ -159,21 +159,21 @@ export default function JapanPage() {
       {/* ── Waitlist ── */}
       <section id="waitlist" className="px-6 py-12 md:py-16" style={{ background: "var(--color-teal)" }}>
         <div className="max-w-lg mx-auto text-center">
-          <h2 className="text-[26px] md:text-[36px] font-bold leading-tight text-white mb-3">
+          <h2 className="text-[26px] md:text-[36px] font-bold leading-tight text-ink mb-3">
             Get on the list for the next Tangerine Takeover
           </h2>
-          <p className="text-[14px] md:text-[16px] text-white/85 mb-6 leading-relaxed">
+          <p className="text-[14px] md:text-[16px] text-ink mb-6 leading-relaxed">
             Be it in Tokyo or somewhere closer. No spam, just the details when there&rsquo;s something
             to share, and you&rsquo;ll be among the first to know.
           </p>
           <WaitlistForm sourcePage="at-site:/japan" />
-          <p className="text-[13px] md:text-[14px] text-white/80 mt-5 leading-relaxed">
+          <p className="text-[13px] md:text-[14px] text-ink mt-5 leading-relaxed">
             Want to follow along?{" "}
             <TrackableLink
               href="https://youtube.com/@amytangerine"
               event="external_link"
               eventData={{ destination: "youtube", source_page: "japan" }}
-              className="underline underline-offset-2 hover:opacity-100 text-white font-semibold"
+              className="underline underline-offset-2 hover:opacity-100 text-ink font-semibold"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -184,7 +184,7 @@ export default function JapanPage() {
               href="https://instagram.com/amytangerine"
               event="external_link"
               eventData={{ destination: "instagram", source_page: "japan" }}
-              className="underline underline-offset-2 hover:opacity-100 text-white font-semibold"
+              className="underline underline-offset-2 hover:opacity-100 text-ink font-semibold"
               target="_blank"
               rel="noopener noreferrer"
             >

@@ -44,14 +44,14 @@ export default function AffiliateSpotlight({ pick, href, listTitle }: AffiliateS
       <div className="flex flex-col justify-center p-6 md:p-10 lg:p-12">
         <h3
           className="text-[22px] md:text-[28px] font-bold leading-tight tracking-tight mb-4"
-          style={{ color: "var(--color-text-primary)" }}
+          style={{ color: "var(--color-ink)" }}
         >
           {pick.title}
         </h3>
         {pick.note && (
           <p
             className="text-[16px] md:text-[18px] leading-relaxed mb-7"
-            style={{ color: "var(--color-text-secondary)" }}
+            style={{ color: "var(--color-ink-soft)" }}
           >
             {pick.note}
           </p>

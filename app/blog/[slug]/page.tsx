@@ -11,7 +11,17 @@ import {
   formatDate,
   tagToSlug,
   isArchivalPost,
+  getPostCover,
 } from "@/lib/blog"
+import { isShopifyCdn } from "@/lib/shopify-image-loader"
+
+function shopifyShareUrl(src: string): string {
+  const url = new URL(src)
+  url.searchParams.set("width", "1200")
+  url.searchParams.set("height", "630")
+  url.searchParams.set("crop", "center")
+  return url.toString()
+}
 
 // Static at build time. Built from the listable set (redirect-tier ephemera is
 // excluded -- those 301 to /blog in next.config, so no page is generated for them)
@@ -31,6 +41,7 @@ export async function generateMetadata({
   const post = getPostBySlug(slug)
   if (!post) return {}
   const description = post.excerpt.slice(0, 155)
+  const cover = getPostCover(post.slug)
   return {
     title: `${post.title} | Amy Tangerine`,
     description,
@@ -41,6 +52,11 @@ export async function generateMetadata({
       description,
       url: `https://amytangerine.com/blog/${post.slug}`,
       type: "article",
+      // Phase 5 (2026-11-20): the post's own first photo, cropped to 1200x630 by the
+      // Shopify CDN; the site share image when a post has none.
+      images: [cover && isShopifyCdn(cover)
+        ? { url: shopifyShareUrl(cover), width: 1200, height: 630 }
+        : { url: "https://www.amytangerine.com/og.png", width: 1200, height: 630 }],
       ...(post.datePublishedISO
         ? { publishedTime: post.datePublishedISO }
         : {}),
@@ -68,7 +84,7 @@ export default async function BlogPost({
         <div className="max-w-[42rem] mx-auto">
           <Link
             href="/blog"
-            className="text-[14px] font-semibold inline-block mb-8 hover:text-[color:var(--color-ink)] transition-colors"
+            className="text-[14px] font-semibold inline-block mb-8 hover:text-ink transition-colors"
             style={{ color: "var(--color-orange-ink)" }}
           >
             ← The Journal

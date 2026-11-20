@@ -4,7 +4,7 @@ import TrackableLink from "@/components/trackable-link"
 import ProductCard, { ProductTileLink } from "@/components/product-card"
 import ShopSort from "@/components/shop-sort"
 import { shopHref, type ShopSortKey } from "@/lib/shop-sort"
-import { CATEGORY_LINES } from "@/lib/shop-copy"
+import { CATEGORY_LINES, EMPTY_STATES } from "@/lib/shop-copy"
 
 export const SHOP_CATEGORIES = [
   { label: "All", value: "all" },
@@ -160,9 +160,19 @@ export default function ShopGrid({
       {/* Grid: 2 / 3 / 4 across, gap 16, every tile a ProductCard. */}
       <div className="px-4 md:px-10 py-6 md:py-8">
         {count === 0 ? (
-          <p className="text-center py-16 text-[16px]" style={{ color: "var(--color-ink-soft)" }}>
-            No products in this category yet.
-          </p>
+          <div className="flex flex-col items-center gap-5 py-16 text-center">
+            <p className="text-[16px]" style={{ color: "var(--color-ink)" }}>
+              {EMPTY_STATES.category.line}
+            </p>
+            <TrackableLink
+              href={EMPTY_STATES.category.door.href}
+              event="nav_click"
+              eventData={{ link_text: EMPTY_STATES.category.door.label, source_page: "shop-empty-category" }}
+              className="cta-secondary cta--compact"
+            >
+              {EMPTY_STATES.category.door.label}
+            </TrackableLink>
+          </div>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {leadTiles.map((tile) => (

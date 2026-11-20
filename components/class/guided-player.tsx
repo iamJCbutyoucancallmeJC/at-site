@@ -156,7 +156,7 @@ export default function GuidedPlayer({ slug, hls, hlsQuery = "", mp4, poster, cu
           {paused ? (
             <span className="absolute inset-0 grid place-items-center" style={{ background: "rgba(255,255,255,0.35)" }}>
               <span className="w-16 h-16 rounded-full grid place-items-center" style={{ background: "rgba(255,255,255,0.9)" }}>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="var(--color-text-primary)" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="var(--color-ink)" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
               </span>
             </span>
           ) : null}
@@ -183,7 +183,7 @@ export default function GuidedPlayer({ slug, hls, hlsQuery = "", mp4, poster, cu
         ) : null}
       </div>
 
-      <div className="mt-10 mx-auto max-w-[460px] flex items-center gap-3 text-[12px]" style={{ color: "var(--color-text-secondary)" }}>
+      <div className="mt-10 mx-auto max-w-[460px] flex items-center gap-3 text-[12px]" style={{ color: "var(--color-ink-soft)" }}>
         <span className="w-10 text-right tabular-nums">{fmt(t)}</span>
         <div className="relative flex-1 h-6 flex items-center">
           <input
@@ -200,13 +200,13 @@ export default function GuidedPlayer({ slug, hls, hlsQuery = "", mp4, poster, cu
           {/* Cue ticks only matter when a cue changes the page; in open mode the column is
               already there, so the end-of-read cue would just be a stray mark near the end. */}
           {dur > 0 && !open ? sorted.map((c) => (
-            <span key={c.key} className="absolute top-1 bottom-1 w-px pointer-events-none" style={{ left: `${(c.at / dur) * 100}%`, background: "var(--color-text-secondary)" }} />
+            <span key={c.key} className="absolute top-1 bottom-1 w-px pointer-events-none" style={{ left: `${(c.at / dur) * 100}%`, background: "var(--color-ink-soft)" }} />
           )) : null}
         </div>
         <span className="w-10 tabular-nums">{fmt(dur)}</span>
       </div>
       {holding ? (
-        <p className="mt-3 text-center text-[13px] italic" style={{ color: "var(--color-text-secondary)" }} aria-live="polite">
+        <p className="mt-3 text-center text-[13px] italic" style={{ color: "var(--color-ink-soft)" }} aria-live="polite">
           Write a line, or press play to keep going.
         </p>
       ) : null}

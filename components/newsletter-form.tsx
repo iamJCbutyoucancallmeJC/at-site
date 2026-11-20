@@ -110,7 +110,7 @@ export default function NewsletterForm({
         className="px-4 py-3.5 rounded-lg md:rounded-[10px] text-sm md:text-[15px] font-medium text-center"
         style={{
           background: "var(--color-white)",
-          color: "var(--color-text-primary)",
+          color: "var(--color-ink)",
           fontFamily: "var(--font-sans)",
         }}
         role="status"
@@ -133,7 +133,7 @@ export default function NewsletterForm({
           style={{
             borderColor: "var(--color-border)",
             background: "var(--color-white)",
-            color: "var(--color-text-primary)",
+            color: "var(--color-ink)",
             fontFamily: "var(--font-sans)",
           }}
           placeholder="Your email"
@@ -148,7 +148,7 @@ export default function NewsletterForm({
         </button>
       </div>
       {status === "error" && errorMsg && (
-        <p className="text-[12px] md:text-[13px]" style={{ color: "var(--color-text-primary)" }} role="alert">
+        <p className="text-[12px] md:text-[13px]" style={{ color: "var(--color-ink)" }} role="alert">
           {errorMsg}
         </p>
       )}

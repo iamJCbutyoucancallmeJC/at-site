@@ -59,7 +59,7 @@ export default function YtLandingClient({ videoId }: { videoId: string }) {
     <main className="min-h-screen" style={{ background: "var(--color-white)" }}>
       {/* ── Badge ── */}
       <div
-        className="py-3 px-4 text-center text-[12px] uppercase tracking-[0.16em] font-semibold text-white"
+        className="py-3 px-4 text-center text-[12px] uppercase tracking-[0.16em] font-semibold text-ink"
         style={{ background: "var(--color-teal)" }}
       >
         Seen it on YouTube? Here&apos;s how to get your own.
@@ -102,11 +102,11 @@ export default function YtLandingClient({ videoId }: { videoId: string }) {
           </p>
           <h1
             className="text-[36px] md:text-[48px] font-bold leading-[1.05] tracking-tight mb-4"
-            style={{ color: "var(--color-text-primary)" }}
+            style={{ color: "var(--color-ink)" }}
           >
             The envelope you just watched, in your own mailbox.
           </h1>
-          <p className="text-[15px] leading-relaxed mb-3" style={{ color: "var(--color-text-primary)" }}>
+          <p className="text-[15px] leading-relaxed mb-3" style={{ color: "var(--color-ink)" }}>
             Die cuts, the newest sticker sheet, and a note from Amy — made in the
             studio you&apos;ve been watching, mailed to you once a month.
           </p>
@@ -119,13 +119,13 @@ export default function YtLandingClient({ videoId }: { videoId: string }) {
           <>
           {/* Price block */}
           <div className="mb-1 mt-5">
-            <span className="text-[34px] font-bold" style={{ color: "var(--color-text-primary)" }}>
+            <span className="text-[34px] font-bold" style={{ color: "var(--color-ink)" }}>
               ${FIRST_MONTH}
             </span>
-            <span className="text-[15px] ml-2 line-through" style={{ color: "var(--color-text-secondary, #555)" }}>
+            <span className="text-[15px] ml-2 line-through" style={{ color: "var(--color-ink-soft)" }}>
               ${HM_PRICE_MONTHLY}
             </span>
-            <span className="text-[13px] ml-2" style={{ color: "var(--color-text-secondary, #555)" }}>
+            <span className="text-[13px] ml-2" style={{ color: "var(--color-ink-soft)" }}>
               your first month · then ${HM_PRICE_MONTHLY}/mo
             </span>
           </div>
@@ -143,12 +143,12 @@ export default function YtLandingClient({ videoId }: { videoId: string }) {
           </button>
           )}
           {error && (
-            <p className="mt-3 text-[13px]" style={{ color: "#c0392b" }}>
+            <p className="mt-3 text-[13px]" style={{ color: "var(--color-error)" }}>
               {error}
             </p>
           )}
 
-          <p className="mt-4 text-[12px] leading-relaxed" style={{ color: "var(--color-text-secondary, #555)" }}>
+          <p className="mt-4 text-[12px] leading-relaxed" style={{ color: "var(--color-ink-soft)" }}>
             Renews monthly at ${HM_PRICE_MONTHLY}; cancel anytime and billing stops.
             Free US shipping. (Already used your YouTube thank-you? The button
             simply works at the regular price.)
@@ -164,10 +164,10 @@ export default function YtLandingClient({ videoId }: { videoId: string }) {
         style={{ borderColor: "var(--color-border)", background: "var(--color-paper)" }}
       >
         <div className="max-w-2xl mx-auto px-6 py-12 text-center">
-          <h2 className="text-[22px] font-bold mb-2" style={{ color: "var(--color-text-primary)" }}>
+          <h2 className="text-[22px] font-bold mb-2" style={{ color: "var(--color-ink)" }}>
             Not ready for the mailbox yet?
           </h2>
-          <p className="text-[14px] mb-6" style={{ color: "var(--color-text-secondary, #555)" }}>
+          <p className="text-[14px] mb-6" style={{ color: "var(--color-ink-soft)" }}>
             Leave your email and Amy will send you what she&apos;s making — no
             envelope required.
           </p>

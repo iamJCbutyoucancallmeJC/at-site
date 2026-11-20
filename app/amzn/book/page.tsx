@@ -68,7 +68,7 @@ export default function BookQrPage() {
       {/* Disclosure — top (Amazon-required, verbatim) */}
       <div
         className="py-2 px-4 text-center text-[12px] leading-snug"
-        style={{ background: "var(--color-gray-light)", color: "var(--color-text-secondary)" }}
+        style={{ background: "var(--color-gray-light)", color: "var(--color-ink-soft)" }}
       >
         {AFFILIATE_DISCLOSURE}
       </div>
@@ -83,21 +83,21 @@ export default function BookQrPage() {
         </p>
         <h1
           className="text-[36px] md:text-[48px] font-bold leading-[1.05] tracking-tight mb-3"
-          style={{ color: "var(--color-text-primary)" }}
+          style={{ color: "var(--color-ink)" }}
         >
           {HEADLINE}
         </h1>
         {BOOK_TITLE_CONFIRMED && BOOK_SUBTITLE && (
           <p
             className="text-[15px] md:text-[16px] font-medium leading-snug mb-5 max-w-md mx-auto"
-            style={{ color: "var(--color-text-primary)" }}
+            style={{ color: "var(--color-ink)" }}
           >
             {BOOK_SUBTITLE}
           </p>
         )}
         <p
           className="text-[16px] md:text-[18px] leading-relaxed mb-3"
-          style={{ color: "var(--color-text-secondary)" }}
+          style={{ color: "var(--color-ink-soft)" }}
         >
           Amy&rsquo;s new traveler&rsquo;s notebook — a colorful foundation for
           creativity, memories, and everyday joy. Grab your copy on Amazon and have
@@ -105,7 +105,7 @@ export default function BookQrPage() {
         </p>
         <p
           className="text-[14px] leading-relaxed mb-8"
-          style={{ color: "var(--color-text-secondary)" }}
+          style={{ color: "var(--color-ink-soft)" }}
         >
           75 pages of prompts and inspiration to make your own.
         </p>
@@ -123,7 +123,7 @@ export default function BookQrPage() {
 
         <p
           className="mt-4 text-[12px]"
-          style={{ color: "var(--color-text-secondary)" }}
+          style={{ color: "var(--color-ink-soft)" }}
         >
           {clicked ? "Opening Amazon in a new tab…" : "Opens Amazon in a new tab"}
         </p>
@@ -146,7 +146,7 @@ export default function BookQrPage() {
       {/* Footer — minimal + disclosure echo */}
       <footer
         className="py-6 px-6 text-center text-[12px]"
-        style={{ color: "var(--color-text-secondary)", borderTop: "1px solid var(--color-border)" }}
+        style={{ color: "var(--color-ink-soft)", borderTop: "1px solid var(--color-border)" }}
       >
         <p className="mb-2">{AFFILIATE_DISCLOSURE}</p>
         <p>

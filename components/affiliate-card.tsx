@@ -57,7 +57,7 @@ export default function AffiliateCard({ pick, href, listTitle }: AffiliateCardPr
           <div className="w-full h-full flex items-center justify-center">
             <span
               className="text-[12px] uppercase tracking-[0.18em] font-semibold"
-              style={{ color: "var(--color-text-secondary)" }}
+              style={{ color: "var(--color-ink-soft)" }}
             >
               Amy&rsquo;s pick
             </span>
@@ -69,14 +69,14 @@ export default function AffiliateCard({ pick, href, listTitle }: AffiliateCardPr
       <div className="flex flex-col flex-1 p-4">
         <h3
           className="text-[15px] font-bold leading-snug mb-1.5"
-          style={{ color: "var(--color-text-primary)" }}
+          style={{ color: "var(--color-ink)" }}
         >
           {pick.title}
         </h3>
         {pick.note && (
           <p
             className="text-[13px] leading-relaxed mb-4 flex-1"
-            style={{ color: "var(--color-text-secondary)" }}
+            style={{ color: "var(--color-ink-soft)" }}
           >
             {pick.note}
           </p>

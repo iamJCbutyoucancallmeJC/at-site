@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react"
 import Link from "next/link"
 import { Search } from "lucide-react"
+import { EMPTY_STATES } from "@/lib/shop-copy"
 
 // Lightweight client-side search over a build-time index (per PRD: static index,
 // $0, no service). The index is title+excerpt+tags per post, shipped as a prop.
@@ -76,9 +77,14 @@ export default function BlogSearch({ index }: { index: SearchEntry[] }) {
             style={{ color: "var(--color-ink-soft)" }}
           >
             {results.length === 0
-              ? "No posts found."
+              ? EMPTY_STATES.search.line
               : `${results.length}${results.length === 40 ? "+" : ""} result${results.length === 1 ? "" : "s"}`}
           </p>
+          {results.length === 0 ? (
+            <Link href={EMPTY_STATES.search.door.href} className="cta-secondary cta--compact">
+              {EMPTY_STATES.search.door.label}
+            </Link>
+          ) : null}
           <ul className="space-y-5">
             {results.map((r) => (
               <li key={r.slug}>

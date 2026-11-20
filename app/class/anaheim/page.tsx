@@ -111,13 +111,13 @@ export default function AnaheimClassPage() {
             </p>
             <h1
               className="text-[36px] md:text-[52px] font-bold leading-[1.05] tracking-tight mb-6"
-              style={{ color: "var(--color-text-primary)" }}
+              style={{ color: "var(--color-ink)" }}
             >
               Thank you, Anaheim!
             </h1>
             <div
               className="space-y-4 text-[16px] md:text-[17px] leading-relaxed"
-              style={{ color: "var(--color-text-secondary)" }}
+              style={{ color: "var(--color-ink-soft)" }}
             >
               <p>
                 Home turf. A sold-out room an hour from the studio, full of people I already knew
@@ -136,7 +136,7 @@ export default function AnaheimClassPage() {
             </div>
             <p
               className="mt-6 text-[18px] font-semibold"
-              style={{ color: "var(--color-text-primary)" }}
+              style={{ color: "var(--color-ink)" }}
             >
               xo, Amy
             </p>
@@ -161,11 +161,11 @@ export default function AnaheimClassPage() {
           <div className="text-center mb-8">
             <h2
               className="text-[15px] md:text-[17px] uppercase tracking-[0.12em] font-semibold mb-2"
-              style={{ color: "var(--color-text-primary)" }}
+              style={{ color: "var(--color-ink)" }}
             >
               From the event
             </h2>
-            <p className="text-[14px]" style={{ color: "var(--color-text-secondary)" }}>
+            <p className="text-[14px]" style={{ color: "var(--color-ink-soft)" }}>
               Tap a photo to open it. Press and hold to save it to your phone, or use the
               Save button.
             </p>
@@ -173,7 +173,7 @@ export default function AnaheimClassPage() {
           <PhotoGallery photos={PHOTOS} page={PAGE} />
           <p
             className="mt-6 text-center text-[12px]"
-            style={{ color: "var(--color-text-secondary)" }}
+            style={{ color: "var(--color-ink-soft)" }}
           >
             Rather not be in one of these? Email{" "}
             <a
@@ -193,11 +193,11 @@ export default function AnaheimClassPage() {
         <div className="max-w-5xl mx-auto">
           <h2
             className="text-[15px] md:text-[17px] uppercase tracking-[0.12em] font-semibold text-center mb-2"
-            style={{ color: "var(--color-text-primary)" }}
+            style={{ color: "var(--color-ink)" }}
           >
             Until next time
           </h2>
-          <p className="text-center text-[14px] mb-8" style={{ color: "var(--color-text-secondary)" }}>
+          <p className="text-center text-[14px] mb-8" style={{ color: "var(--color-ink-soft)" }}>
             A few ways to keep making things together.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -219,13 +219,13 @@ export default function AnaheimClassPage() {
                   <div className="p-5">
                     <h3
                       className="text-[15px] font-semibold mb-1"
-                      style={{ color: "var(--color-text-primary)" }}
+                      style={{ color: "var(--color-ink)" }}
                     >
                       {item.title}
                     </h3>
                     <p
                       className="text-[13px] leading-relaxed mb-3"
-                      style={{ color: "var(--color-text-secondary)" }}
+                      style={{ color: "var(--color-ink-soft)" }}
                     >
                       {item.body}
                     </p>

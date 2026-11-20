@@ -59,32 +59,32 @@ export default function PromptBlock({ slug, promptKey, headline, instruction, st
 
   return (
     <div className="w-full">
-      <h2 className={`${compact ? "text-[26px] md:text-[32px]" : "text-[30px] md:text-[40px]"} font-bold leading-[1.05] mb-4`} style={{ color: "var(--color-text-primary)" }}>
+      <h2 className={`${compact ? "text-[26px] md:text-[32px]" : "text-[30px] md:text-[40px]"} font-bold leading-[1.05] mb-4`} style={{ color: "var(--color-ink)" }}>
         {headline}
       </h2>
       {instruction ? (
-        <p className="text-[16px] italic leading-relaxed mb-7" style={{ color: "var(--color-text-secondary)" }}>
+        <p className="text-[16px] italic leading-relaxed mb-7" style={{ color: "var(--color-ink-soft)" }}>
           {instruction}
         </p>
       ) : null}
       {steps?.length ? (
-        <ol className="list-decimal pl-6 space-y-3 mb-8 text-[17px] leading-relaxed marker:font-semibold" style={{ color: "var(--color-text-primary)" }}>
+        <ol className="list-decimal pl-6 space-y-3 mb-8 text-[17px] leading-relaxed marker:font-semibold" style={{ color: "var(--color-ink)" }}>
           {steps.map((step, i) => (
             <li key={i} className="pl-1">{step}</li>
           ))}
         </ol>
       ) : null}
       {quoteBack?.text ? (
-        <p className="text-[15px] italic leading-relaxed mb-7" style={{ color: "var(--color-text-secondary)" }}>
+        <p className="text-[15px] italic leading-relaxed mb-7" style={{ color: "var(--color-ink-soft)" }}>
           {quoteBack.label} <span className="not-italic font-medium" style={{ color: "var(--color-orange-ink)" }}>{quoteBack.text}</span>
         </p>
       ) : null}
       {noField ? null : (<>
       <div className="flex items-baseline justify-between mb-2">
-        <span className="text-[12px] uppercase tracking-[0.18em] font-semibold" style={{ color: "var(--color-text-primary)" }}>
+        <span className="text-[12px] uppercase tracking-[0.18em] font-semibold" style={{ color: "var(--color-ink)" }}>
           {label}
         </span>
-        <span className="text-[12px]" style={{ color: state === "error" ? "#b00020" : "var(--color-text-secondary)" }} aria-live="polite">
+        <span className="text-[12px]" style={{ color: state === "error" ? "var(--color-error)" : "var(--color-ink-soft)" }} aria-live="polite">
           {state === "saving" ? "saving" : state === "saved" ? "saved" : state === "error" ? "not saved, try again" : ""}
         </span>
       </div>
@@ -96,7 +96,7 @@ export default function PromptBlock({ slug, promptKey, headline, instruction, st
         placeholder={placeholder}
         rows={1}
         className="w-full bg-transparent resize-none outline-none text-[16px] leading-relaxed py-2 border-b-2"
-        style={{ color: "var(--color-text-primary)", borderColor: "var(--color-orange)" }}
+        style={{ color: "var(--color-ink)", borderColor: "var(--color-orange)" }}
       />
       </>)}
     </div>

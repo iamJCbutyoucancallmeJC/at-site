@@ -14,10 +14,10 @@ export default function JoinClient() {
   if (done) {
     return (
       <div role="status">
-        <h1 className="text-[28px] md:text-[34px] font-bold mb-4" style={{ color: "var(--color-text-primary)" }}>
+        <h1 className="text-[28px] md:text-[34px] font-bold mb-4" style={{ color: "var(--color-ink)" }}>
           You&apos;re in!
         </h1>
-        <p className="text-[15px] leading-relaxed mb-8" style={{ color: "var(--color-text-secondary)" }}>
+        <p className="text-[15px] leading-relaxed mb-8" style={{ color: "var(--color-ink-soft)" }}>
           Thanks for saying yes. My Friday letter will land in your inbox about once a week, and you can
           leave any time. xo, Amy
         </p>
@@ -30,10 +30,10 @@ export default function JoinClient() {
 
   return (
     <>
-      <h1 className="text-[28px] md:text-[34px] font-bold mb-4" style={{ color: "var(--color-text-primary)" }}>
+      <h1 className="text-[28px] md:text-[34px] font-bold mb-4" style={{ color: "var(--color-ink)" }}>
         Join the list
       </h1>
-      <p className="text-[15px] leading-relaxed mb-8" style={{ color: "var(--color-text-secondary)" }}>
+      <p className="text-[15px] leading-relaxed mb-8" style={{ color: "var(--color-ink-soft)" }}>
         A note from Amy when she has something to share: what she&apos;s making, new
         Happy Mail, classes, and where she&apos;ll be in person. No schedule, and you can
         leave any time.

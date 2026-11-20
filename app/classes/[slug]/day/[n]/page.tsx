@@ -57,7 +57,7 @@ export default async function ClassDayPage({ params }: { params: Promise<{ slug:
     <main className="max-w-4xl mx-auto px-6 pt-12 pb-24">
       <PageEngagementTracker page={`class-${slug}-day`} />
       <p className="text-[12px] mb-8">
-        <Link href={`/classes/${slug}`} className="underline underline-offset-2" style={{ color: "var(--color-text-secondary)" }}>
+        <Link href={`/classes/${slug}`} className="underline underline-offset-2" style={{ color: "var(--color-ink-soft)" }}>
           {c.title}
         </Link>
       </p>
@@ -67,10 +67,10 @@ export default async function ClassDayPage({ params }: { params: Promise<{ slug:
 
       {!open || !day ? (
         <div className="max-w-2xl">
-          <h1 className="text-[28px] md:text-[34px] font-bold leading-tight mb-4" style={{ color: "var(--color-text-primary)" }}>
+          <h1 className="text-[28px] md:text-[34px] font-bold leading-tight mb-4" style={{ color: "var(--color-ink)" }}>
             Not yet
           </h1>
-          <p className="text-[16px] leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+          <p className="text-[16px] leading-relaxed" style={{ color: "var(--color-ink-soft)" }}>
             Day {n} opens {formatUnlockDate(unlockDate(c, n))}. One day at a time is the point.
           </p>
         </div>
@@ -117,7 +117,7 @@ export default async function ClassDayPage({ params }: { params: Promise<{ slug:
           {day.body.length ? (
             <div className="space-y-5">
               {day.body.map((p, i) => (
-                <p key={i} className="text-[17px] leading-relaxed" style={{ color: "var(--color-text-primary)" }}>
+                <p key={i} className="text-[17px] leading-relaxed" style={{ color: "var(--color-ink)" }}>
                   {p}
                 </p>
               ))}
@@ -149,16 +149,16 @@ export default async function ClassDayPage({ params }: { params: Promise<{ slug:
               <p className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-6" style={link}>
                 Your thirty little pages
               </p>
-              <p className="text-[15px] italic mb-8" style={{ color: "var(--color-text-secondary)" }}>
+              <p className="text-[15px] italic mb-8" style={{ color: "var(--color-ink-soft)" }}>
                 The line you left on each day. The pages themselves are in your journal.
               </p>
               <ol className="space-y-6">
                 {allDays.map((d) => (
                   <li key={d.day}>
-                    <p className="text-[12px] uppercase tracking-[0.12em] font-semibold mb-1" style={{ color: "var(--color-text-secondary)" }}>
+                    <p className="text-[12px] uppercase tracking-[0.12em] font-semibold mb-1" style={{ color: "var(--color-ink-soft)" }}>
                       Day {d.day}: {d.title}
                     </p>
-                    <p className="text-[16px] leading-relaxed whitespace-pre-wrap" style={{ color: answers[d.prompt.key] ? "var(--color-text-primary)" : "var(--color-text-secondary)" }}>
+                    <p className="text-[16px] leading-relaxed whitespace-pre-wrap" style={{ color: answers[d.prompt.key] ? "var(--color-ink)" : "var(--color-ink-soft)" }}>
                       {answers[d.prompt.key] || "(no note)"}
                     </p>
                   </li>

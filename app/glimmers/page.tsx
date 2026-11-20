@@ -112,7 +112,7 @@ export default async function GlimmersSalesPage({ searchParams }: { searchParams
   // Same words as the launch email's button (email-copy-guide.md: the label matches the page).
   const joinLabel = code ? "Join the class with your code" : `Join the class for ${price}`
   const facts = [code ? "$10 with your code" : `${price}, lifetime access`, "November 1 to 30", "One prompt a day", "Any journal works"]
-  const secondary = "text-[var(--color-text-secondary)]"
+  const secondary = "text-ink-soft"
 
   return (
     <main className="max-w-6xl mx-auto px-5 md:px-10 py-10 md:py-16">
@@ -129,14 +129,14 @@ export default async function GlimmersSalesPage({ searchParams }: { searchParams
           </p>
           <ul role="list" aria-label="The class at a glance" className="flex flex-wrap gap-2 mb-8">
             {facts.map((f) => (
-              <li key={f} className="text-[14px] md:text-[15px] font-semibold rounded-full px-3 md:px-4 py-1 md:py-1.5" style={{ background: "var(--color-orange-light)", color: "var(--color-text-primary)" }}>
+              <li key={f} className="text-[14px] md:text-[15px] font-semibold rounded-full px-3 md:px-4 py-1 md:py-1.5" style={{ background: "var(--color-orange-light)", color: "var(--color-ink)" }}>
                 {f}
               </li>
             ))}
           </ul>
           <JoinClassButton slug={SLUG} available={available} label={joinLabel} notYet={notYet} code={code} />
           {code ? (
-            <p className="text-sm leading-relaxed mt-5" style={{ color: "var(--color-text-primary)" }}>
+            <p className="text-sm leading-relaxed mt-5" style={{ color: "var(--color-ink)" }}>
               Your returning-student code <span className="font-semibold">{code}</span> is applied at checkout, so your price is $10.
             </p>
           ) : null}
@@ -144,7 +144,7 @@ export default async function GlimmersSalesPage({ searchParams }: { searchParams
               meet someone else's price beside her first button (round 1, CRO). */}
           <p className={`text-sm leading-relaxed mt-5 ${secondary}`}>
             Already joined for November?{" "}
-            <Link href={`/classes/${SLUG}`} className="underline underline-offset-4" style={{ color: "var(--color-text-primary)" }}>
+            <Link href={`/classes/${SLUG}`} className="underline underline-offset-4" style={{ color: "var(--color-ink)" }}>
               Open your class
             </Link>
             .

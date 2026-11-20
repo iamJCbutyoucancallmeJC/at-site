@@ -23,6 +23,9 @@ export const metadata = {
       "Stories on creative journaling, scrapbooking, travel, and crafting a life you love, from Amy Tangerine.",
     url: "https://amytangerine.com/blog",
     type: "website",
+    // Phase 5 (2026-11-20): this block replaces the root openGraph wholesale, so the
+    // Journal had no share image. A 1200x630 cut of the Archival Ink post's photo.
+    images: [{ url: "/og/journal.jpg", width: 1200, height: 630 }],
   },
 }
 

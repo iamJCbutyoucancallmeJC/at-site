@@ -53,7 +53,7 @@ function ThankYouContent() {
 
       <h1
         className="text-[36px] md:text-[52px] font-bold leading-[1.05] tracking-tight mb-4"
-        style={{ color: "var(--color-text-primary)" }}
+        style={{ color: "var(--color-ink)" }}
       >
         You&rsquo;re getting
         <br />
@@ -62,7 +62,7 @@ function ThankYouContent() {
 
       <p
         className="text-[16px] md:text-[18px] leading-relaxed mb-4 max-w-md"
-        style={{ color: "var(--color-text-secondary)" }}
+        style={{ color: "var(--color-ink-soft)" }}
       >
         {isEvent
           ? "So glad you stopped by! Your first envelope is on its way. Check your email for a confirmation."
@@ -71,7 +71,7 @@ function ThankYouContent() {
 
       <p
         className="text-[14px] mb-10 max-w-sm leading-relaxed"
-        style={{ color: "var(--color-text-secondary)" }}
+        style={{ color: "var(--color-ink-soft)" }}
       >
         Questions? Reach out at{" "}
         <a

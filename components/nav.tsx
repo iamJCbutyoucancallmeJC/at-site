@@ -59,7 +59,7 @@ function DesktopDropdownChild({ child, group, onNavigate }: { child: NavChild; g
   // Design finish Phase 1 (2026-10-28): rows tint to paper on hover inside a
   // white panel (12px radius, shadow-lift), not a fade.
   const className = "block px-5 py-2.5 text-base font-semibold transition-colors hover:bg-[var(--color-paper)]"
-  const style = { color: "var(--color-text-primary)" }
+  const style = { color: "var(--color-ink)" }
   const onClick = () => {
     onNavigate()
     trackEvent("nav_click", { link_text: child.label, group, mobile_or_desktop: "desktop" })
@@ -131,7 +131,7 @@ export default function Nav() {
         <a
           href="mailto:help@amytangerine.com"
           className="text-[13px] md:text-sm underline underline-offset-4"
-          style={{ color: "var(--color-text-secondary)" }}
+          style={{ color: "var(--color-ink-soft)" }}
         >
           help@amytangerine.com
         </a>
@@ -169,7 +169,7 @@ export default function Nav() {
                   <Link
                     href={link.href}
                     className="inline-flex items-center gap-1 text-base font-semibold transition-colors hover:opacity-80 py-2"
-                    style={{ color: "var(--color-text-primary)" }}
+                    style={{ color: "var(--color-ink)" }}
                     aria-haspopup="true"
                     aria-expanded={openDropdown === link.label}
                     onClick={(e) => {
@@ -194,7 +194,7 @@ export default function Nav() {
                   <button
                     type="button"
                     className="inline-flex items-center gap-1 text-base font-semibold transition-colors hover:opacity-80 py-2"
-                    style={{ color: "var(--color-text-primary)" }}
+                    style={{ color: "var(--color-ink)" }}
                     aria-haspopup="true"
                     aria-expanded={openDropdown === link.label}
                     onClick={() => setOpenDropdown(openDropdown === link.label ? null : link.label)}
@@ -240,7 +240,7 @@ export default function Nav() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-base font-semibold transition-colors hover:opacity-80"
-                style={{ color: "var(--color-text-primary)" }}
+                style={{ color: "var(--color-ink)" }}
                 onClick={() => trackEvent("nav_click", { link_text: link.label, mobile_or_desktop: "desktop" })}
               >
                 {link.label}
@@ -250,7 +250,7 @@ export default function Nav() {
                 key={link.label}
                 href={link.href!}
                 className="text-base font-semibold transition-colors hover:opacity-80"
-                style={{ color: "var(--color-text-primary)" }}
+                style={{ color: "var(--color-ink)" }}
                 onClick={() => trackEvent("nav_click", { link_text: link.label, mobile_or_desktop: "desktop" })}
               >
                 {link.label}
@@ -285,13 +285,13 @@ export default function Nav() {
           <button
             onClick={openCart}
             className="relative w-11 h-11 flex items-center justify-center"
-            style={{ color: "var(--color-text-primary)" }}
+            style={{ color: "var(--color-ink)" }}
             aria-label={`Cart${count > 0 ? ` (${count} items)` : ""}`}
           >
             <ShoppingBag size={22} />
             {count > 0 && (
               <span
-                className="absolute top-1 right-1 w-4 h-4 flex items-center justify-center text-[10px] font-bold rounded-full"
+                className="absolute top-1 right-1 w-4 h-4 flex items-center justify-center text-[11px] font-bold rounded-full"
                 style={{ background: "var(--color-orange)" }}
               >
                 {count > 9 ? "9+" : count}
@@ -318,7 +318,7 @@ export default function Nav() {
           {/* Cart count rides on the menu button now that the cart row lives in the drawer. */}
           {!mobileOpen && count > 0 && (
             <span
-              className="absolute top-1 right-1 w-4 h-4 flex items-center justify-center text-[10px] font-bold rounded-full"
+              className="absolute top-1 right-1 w-4 h-4 flex items-center justify-center text-[11px] font-bold rounded-full"
               style={{ background: "var(--color-orange)" }}
             >
               {count > 9 ? "9+" : count}
@@ -368,7 +368,7 @@ export default function Nav() {
               type="button"
               onClick={() => { setMobileOpen(false); openCart() }}
               className="flex items-center justify-between text-lg font-semibold py-3 border-b"
-              style={{ color: "var(--color-text-primary)", borderColor: "var(--color-border)" }}
+              style={{ color: "var(--color-ink)", borderColor: "var(--color-border)" }}
               aria-label={`Cart${count > 0 ? ` (${count} items)` : ""}`}
             >
               <span className="inline-flex items-center gap-3">
@@ -403,13 +403,13 @@ export default function Nav() {
                     <Link
                       href={link.href}
                       className="block text-lg font-semibold py-3"
-                      style={{ color: "var(--color-text-primary)" }}
+                      style={{ color: "var(--color-ink)" }}
                       onClick={() => { setMobileOpen(false); trackEvent("nav_click", { link_text: link.label, mobile_or_desktop: "mobile" }) }}
                     >
                       {link.label}
                     </Link>
                   ) : (
-                    <p className="text-lg font-semibold py-3" style={{ color: "var(--color-text-primary)" }}>
+                    <p className="text-lg font-semibold py-3" style={{ color: "var(--color-ink)" }}>
                       {link.label}
                     </p>
                   )}
@@ -421,7 +421,7 @@ export default function Nav() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="block text-base font-semibold py-2.5 pl-4"
-                        style={{ color: "var(--color-text-secondary, var(--color-text-primary))" }}
+                        style={{ color: "var(--color-ink-soft, var(--color-ink))" }}
                         onClick={() => { setMobileOpen(false); trackEvent("nav_click", { link_text: child.label, group: link.label, mobile_or_desktop: "mobile" }) }}
                       >
                         {child.label}
@@ -431,7 +431,7 @@ export default function Nav() {
                         key={child.href}
                         href={child.href}
                         className="block text-base font-semibold py-2.5 pl-4"
-                        style={{ color: "var(--color-text-secondary, var(--color-text-primary))" }}
+                        style={{ color: "var(--color-ink-soft, var(--color-ink))" }}
                         onClick={() => { setMobileOpen(false); trackEvent("nav_click", { link_text: child.label, group: link.label, mobile_or_desktop: "mobile" }) }}
                       >
                         {child.label}
@@ -447,7 +447,7 @@ export default function Nav() {
                   rel="noopener noreferrer"
                   className="text-lg font-semibold py-3 border-b"
                   style={{
-                    color: "var(--color-text-primary)",
+                    color: "var(--color-ink)",
                     borderColor: "var(--color-border)",
                   }}
                   onClick={() => { setMobileOpen(false); trackEvent("nav_click", { link_text: link.label, mobile_or_desktop: "mobile" }) }}
@@ -460,7 +460,7 @@ export default function Nav() {
                   href={link.href!}
                   className="text-lg font-semibold py-3 border-b"
                   style={{
-                    color: "var(--color-text-primary)",
+                    color: "var(--color-ink)",
                     borderColor: "var(--color-border)",
                   }}
                   onClick={() => { setMobileOpen(false); trackEvent("nav_click", { link_text: link.label, mobile_or_desktop: "mobile" }) }}

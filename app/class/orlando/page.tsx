@@ -146,13 +146,13 @@ export default function OrlandoClassPage() {
             </p>
             <h1
               className="text-[36px] md:text-[52px] font-bold leading-[1.05] tracking-tight mb-6"
-              style={{ color: "var(--color-text-primary)" }}
+              style={{ color: "var(--color-ink)" }}
             >
               Thank you, Orlando!
             </h1>
             <div
               className="space-y-4 text-[16px] md:text-[17px] leading-relaxed"
-              style={{ color: "var(--color-text-secondary)" }}
+              style={{ color: "var(--color-ink-soft)" }}
             >
               <p>
                 What a room. A sold-out class, full of focused faces and smiles, and an hour
@@ -189,7 +189,7 @@ export default function OrlandoClassPage() {
             </div>
             <p
               className="mt-6 text-[18px] font-semibold"
-              style={{ color: "var(--color-text-primary)" }}
+              style={{ color: "var(--color-ink)" }}
             >
               xo, Amy
             </p>
@@ -214,11 +214,11 @@ export default function OrlandoClassPage() {
           <div className="text-center mb-8">
             <h2
               className="text-[15px] md:text-[17px] uppercase tracking-[0.12em] font-semibold mb-2"
-              style={{ color: "var(--color-text-primary)" }}
+              style={{ color: "var(--color-ink)" }}
             >
               Back in the studio
             </h2>
-            <p className="text-[14px] max-w-xl mx-auto" style={{ color: "var(--color-text-secondary)" }}>
+            <p className="text-[14px] max-w-xl mx-auto" style={{ color: "var(--color-ink-soft)" }}>
               The spread from the note above, made with what was left of the kit. The polka
               dots are a rip from{" "}
               <a
@@ -254,7 +254,7 @@ export default function OrlandoClassPage() {
               </a>
             ))}
           </div>
-          <p className="mt-4 text-center text-[12px]" style={{ color: "var(--color-text-secondary)", opacity: 0.8 }}>
+          <p className="mt-4 text-center text-[12px]" style={{ color: "var(--color-ink-soft)", opacity: 0.8 }}>
             {AFFILIATE_DISCLOSURE}
           </p>
         </div>
@@ -266,11 +266,11 @@ export default function OrlandoClassPage() {
           <div className="text-center mb-8">
             <h2
               className="text-[15px] md:text-[17px] uppercase tracking-[0.12em] font-semibold mb-2"
-              style={{ color: "var(--color-text-primary)" }}
+              style={{ color: "var(--color-ink)" }}
             >
               From the event
             </h2>
-            <p className="text-[14px]" style={{ color: "var(--color-text-secondary)" }}>
+            <p className="text-[14px]" style={{ color: "var(--color-ink-soft)" }}>
               Tap a photo to open it. Press and hold to save it to your phone, or use the
               Save button.
             </p>
@@ -278,7 +278,7 @@ export default function OrlandoClassPage() {
           <PhotoGallery photos={PHOTOS} page={PAGE} />
           <p
             className="mt-6 text-center text-[12px]"
-            style={{ color: "var(--color-text-secondary)" }}
+            style={{ color: "var(--color-ink-soft)" }}
           >
             Rather not be in one of these? Email{" "}
             <a
@@ -298,11 +298,11 @@ export default function OrlandoClassPage() {
         <div className="max-w-5xl mx-auto">
           <h2
             className="text-[15px] md:text-[17px] uppercase tracking-[0.12em] font-semibold text-center mb-2"
-            style={{ color: "var(--color-text-primary)" }}
+            style={{ color: "var(--color-ink)" }}
           >
             Until next time
           </h2>
-          <p className="text-center text-[14px] mb-8" style={{ color: "var(--color-text-secondary)" }}>
+          <p className="text-center text-[14px] mb-8" style={{ color: "var(--color-ink-soft)" }}>
             A few ways to keep making things together.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -324,13 +324,13 @@ export default function OrlandoClassPage() {
                   <div className="p-5">
                     <h3
                       className="text-[15px] font-semibold mb-1"
-                      style={{ color: "var(--color-text-primary)" }}
+                      style={{ color: "var(--color-ink)" }}
                     >
                       {item.title}
                     </h3>
                     <p
                       className="text-[13px] leading-relaxed mb-3"
-                      style={{ color: "var(--color-text-secondary)" }}
+                      style={{ color: "var(--color-ink-soft)" }}
                     >
                       {item.body}
                     </p>

@@ -49,13 +49,13 @@ export default function ContactPage() {
         </p>
         <h1
           className="text-[40px] md:text-[56px] font-bold leading-[1.05] tracking-tight mb-6"
-          style={{ color: "var(--color-text-primary)" }}
+          style={{ color: "var(--color-ink)" }}
         >
           Get in touch.
         </h1>
         <p
           className="text-[16px] md:text-[18px] leading-relaxed max-w-xl mx-auto"
-          style={{ color: "var(--color-text-secondary)" }}
+          style={{ color: "var(--color-ink-soft)" }}
         >
           The fastest way to reach Amy is on Instagram. For orders, Happy Mail,
           and anything about a purchase, or for business, partnerships, and
@@ -68,7 +68,7 @@ export default function ContactPage() {
         <div className="max-w-2xl mx-auto text-center">
           <h2
             className="text-[24px] md:text-[28px] font-bold mb-8"
-            style={{ color: "var(--color-text-primary)" }}
+            style={{ color: "var(--color-ink)" }}
           >
             Email
           </h2>
@@ -76,7 +76,7 @@ export default function ContactPage() {
           {/* Customer service: orders, Happy Mail, anything about a purchase */}
           <p
             className="text-[15px] mb-3 leading-relaxed"
-            style={{ color: "var(--color-text-secondary)" }}
+            style={{ color: "var(--color-ink-soft)" }}
           >
             Questions about an order, Happy Mail, or a purchase:
           </p>
@@ -93,7 +93,7 @@ export default function ContactPage() {
           {/* Business: proposals, press, wholesale, partnerships, Amy access */}
           <p
             className="text-[15px] mb-3 mt-12 leading-relaxed"
-            style={{ color: "var(--color-text-secondary)" }}
+            style={{ color: "var(--color-ink-soft)" }}
           >
             Collabs, press, wholesale, or partnerships:
           </p>
@@ -117,13 +117,13 @@ export default function ContactPage() {
         <div className="max-w-3xl mx-auto text-center">
           <h2
             className="text-[24px] md:text-[28px] font-bold mb-3"
-            style={{ color: "var(--color-text-primary)" }}
+            style={{ color: "var(--color-ink)" }}
           >
             Follow along
           </h2>
           <p
             className="text-[15px] mb-10 leading-relaxed"
-            style={{ color: "var(--color-text-secondary)" }}
+            style={{ color: "var(--color-ink-soft)" }}
           >
             Daily creative life, behind-the-scenes, and new project drops.
           </p>

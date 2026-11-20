@@ -104,7 +104,7 @@ export default function EventsVariantPage() {
         className="py-4 md:py-5 text-center border-y-2"
         style={{ background: "var(--color-orange)", borderColor: "var(--color-teal)" }}
       >
-        <p className="text-[13px] md:text-[15px] uppercase tracking-[0.15em] font-semibold text-white">
+        <p className="text-[13px] md:text-[15px] uppercase tracking-[0.15em] font-semibold text-ink">
           Happy Mail — Monthly craft subscription{" "}
           <TrackableLink
             href="/happy-mail"
@@ -119,7 +119,7 @@ export default function EventsVariantPage() {
 
       {/* ── Shop by Category ── */}
       <section className="px-4 md:px-10 pt-8 md:pt-12 pb-8 md:pb-10" style={{ background: "var(--color-teal)" }}>
-        <h2 className="text-[15px] md:text-[18px] uppercase tracking-[0.12em] font-semibold text-center mb-5 md:mb-6 text-white">
+        <h2 className="text-[15px] md:text-[18px] uppercase tracking-[0.12em] font-semibold text-center mb-5 md:mb-6 text-ink">
           Shop by Category
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
@@ -152,7 +152,7 @@ export default function EventsVariantPage() {
         <div className="flex items-center justify-between mb-4 md:mb-5">
           <h2
             className="text-[15px] md:text-[18px] uppercase tracking-[0.12em] font-semibold"
-            style={{ color: "var(--color-text-primary)" }}
+            style={{ color: "var(--color-ink)" }}
           >
             In Person
           </h2>
@@ -216,7 +216,7 @@ export default function EventsVariantPage() {
       <section className="pt-8 md:pt-10 pb-0">
         <h2
           className="text-[15px] md:text-[18px] uppercase tracking-[0.12em] font-semibold text-center mb-5 md:mb-6 px-4"
-          style={{ color: "var(--color-text-primary)" }}
+          style={{ color: "var(--color-ink)" }}
         >
           New Arrivals
         </h2>
@@ -244,11 +244,11 @@ export default function EventsVariantPage() {
               </div>
               <p
                 className="text-[12px] md:text-[13px] font-medium truncate"
-                style={{ color: "var(--color-text-primary)" }}
+                style={{ color: "var(--color-ink)" }}
               >
                 {product.name}
               </p>
-              <p className="text-[12px] md:text-[13px]" style={{ color: "var(--color-text-secondary)" }}>
+              <p className="text-[12px] md:text-[13px]" style={{ color: "var(--color-ink-soft)" }}>
                 {product.price}
               </p>
             </TrackableLink>
@@ -299,11 +299,11 @@ export default function EventsVariantPage() {
           <div className="md:flex-1 px-6 md:px-10 pb-8 md:pb-0 flex flex-col justify-center">
             <h2
               className="text-[15px] md:text-[18px] uppercase tracking-[0.12em] font-semibold mb-3"
-              style={{ color: "var(--color-text-primary)" }}
+              style={{ color: "var(--color-ink)" }}
             >
               About Amy
             </h2>
-            <p className="text-[14px] md:text-[15px] leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+            <p className="text-[14px] md:text-[15px] leading-relaxed" style={{ color: "var(--color-ink-soft)" }}>
               Amy Tan is an author, designer, and creative entrepreneur on a mission to
               inspire others to craft a life they love. From stickers to workshops to her
               monthly Happy Mail, everything she creates is meant to add a little color
@@ -325,10 +325,10 @@ export default function EventsVariantPage() {
             className="md:flex-1 px-6 md:px-10 py-8 md:py-10 rounded-none md:rounded-r-lg flex flex-col justify-center"
             style={{ background: "var(--color-orange)" }}
           >
-            <h2 className="text-[15px] md:text-[18px] uppercase tracking-[0.12em] font-semibold mb-3 text-white">
+            <h2 className="text-[15px] md:text-[18px] uppercase tracking-[0.12em] font-semibold mb-3 text-ink">
               Keep up with Amy
             </h2>
-            <p className="text-[13px] md:text-[14px] mb-3 text-white/80">
+            <p className="text-[13px] md:text-[14px] mb-3 text-ink">
               What she's making, right to your inbox.
             </p>
             <NewsletterForm sourcePage="homepage-events-variant" />
@@ -339,7 +339,7 @@ export default function EventsVariantPage() {
       {/* ── Instagram ── */}
       <section className="pb-0">
         <div className="py-5 md:py-6 text-center" style={{ background: "var(--color-teal)" }}>
-          <h2 className="text-[15px] md:text-[18px] uppercase tracking-[0.12em] font-semibold text-white">
+          <h2 className="text-[15px] md:text-[18px] uppercase tracking-[0.12em] font-semibold text-ink">
             @amytangerine
           </h2>
         </div>

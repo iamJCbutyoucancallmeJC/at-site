@@ -79,13 +79,13 @@ export default function WaitlistForm({
         className="px-5 py-5 rounded-xl text-center"
         style={{
           background: "var(--color-white)",
-          color: "var(--color-text-primary)",
+          color: "var(--color-ink)",
           fontFamily: "var(--font-sans)",
         }}
         role="status"
       >
         <p className="text-[16px] md:text-[18px] font-bold mb-1">You&rsquo;re on the list.</p>
-        <p className="text-[13px] md:text-[14px]" style={{ color: "var(--color-text-secondary)" }}>
+        <p className="text-[13px] md:text-[14px]" style={{ color: "var(--color-ink-soft)" }}>
           We&rsquo;ll let you know where Amy&rsquo;s headed next.
         </p>
       </div>
@@ -106,7 +106,7 @@ export default function WaitlistForm({
           style={{
             borderColor: "var(--color-border)",
             background: "var(--color-white)",
-            color: "var(--color-text-primary)",
+            color: "var(--color-ink)",
             fontFamily: "var(--font-sans)",
           }}
           placeholder="First name"
@@ -123,7 +123,7 @@ export default function WaitlistForm({
           style={{
             borderColor: "var(--color-border)",
             background: "var(--color-white)",
-            color: "var(--color-text-primary)",
+            color: "var(--color-ink)",
             fontFamily: "var(--font-sans)",
           }}
           placeholder="Last name"
@@ -142,7 +142,7 @@ export default function WaitlistForm({
           style={{
             borderColor: "var(--color-border)",
             background: "var(--color-white)",
-            color: "var(--color-text-primary)",
+            color: "var(--color-ink)",
             fontFamily: "var(--font-sans)",
           }}
           placeholder="Your email"
@@ -157,7 +157,7 @@ export default function WaitlistForm({
         </button>
       </div>
       {status === "error" && errorMsg && (
-        <p className="text-[12px] md:text-[13px]" style={{ color: "var(--color-text-primary)" }} role="alert">
+        <p className="text-[12px] md:text-[13px]" style={{ color: "var(--color-ink)" }} role="alert">
           {errorMsg}
         </p>
       )}

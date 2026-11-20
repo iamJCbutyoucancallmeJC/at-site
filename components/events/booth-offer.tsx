@@ -61,7 +61,7 @@ export default function BoothOffer({ slug, city, offer, ended, afterShow = false
 
   if (ended) {
     return (
-      <p className="text-[14px] leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+      <p className="text-[14px] leading-relaxed" style={{ color: "var(--color-ink-soft)" }}>
         This show&rsquo;s offer has ended. Happy Mail is always open at{" "}
         <a href="/happy-mail" className="underline" style={{ color: "var(--color-orange-ink)" }}>
           amytangerine.com/happy-mail
@@ -74,10 +74,10 @@ export default function BoothOffer({ slug, city, offer, ended, afterShow = false
   if (offer.kind === "shop") {
     return (
       <div>
-        <p className="text-[14px] leading-relaxed mb-4" style={{ color: "var(--color-text-secondary)" }}>
+        <p className="text-[14px] leading-relaxed mb-4" style={{ color: "var(--color-ink-soft)" }}>
           {offer.terms}
         </p>
-        <p className="text-[13px] uppercase tracking-[0.16em] font-semibold mb-1" style={{ color: "var(--color-text-secondary)" }}>
+        <p className="text-[13px] uppercase tracking-[0.16em] font-semibold mb-1" style={{ color: "var(--color-ink-soft)" }}>
           Your code at checkout
         </p>
         <p className="text-[34px] font-bold tracking-wide mb-5" style={{ color: "var(--color-teal-ink)" }}>
@@ -96,21 +96,21 @@ export default function BoothOffer({ slug, city, offer, ended, afterShow = false
 
   return (
     <div>
-      <p className="text-[14px] leading-relaxed mb-6" style={{ color: "var(--color-text-secondary)" }}>
+      <p className="text-[14px] leading-relaxed mb-6" style={{ color: "var(--color-ink-soft)" }}>
         {afterShow && offer.afterShowIntro
           ? offer.afterShowIntro
           : <>Scanned the code at the table? This {city} show price is just for you, today.</>}
       </p>
 
       <div className="flex items-end gap-3 mb-1">
-        <span className="text-[52px] font-bold leading-none" style={{ color: "var(--color-text-primary)" }}>
+        <span className="text-[52px] font-bold leading-none" style={{ color: "var(--color-ink)" }}>
           ${eventPrice}
         </span>
         <span className="flex flex-col leading-tight mb-1">
-          <span className="text-[18px] line-through" style={{ color: "var(--color-text-secondary)" }}>
+          <span className="text-[18px] line-through" style={{ color: "var(--color-ink-soft)" }}>
             ${HM_PRICE_6MONTH}
           </span>
-          <span className="text-[13px]" style={{ color: "var(--color-text-secondary)" }}>
+          <span className="text-[13px]" style={{ color: "var(--color-ink-soft)" }}>
             one payment · 6 months
           </span>
         </span>
@@ -139,15 +139,15 @@ export default function BoothOffer({ slug, city, offer, ended, afterShow = false
       )}
 
       {error && (
-        <p className="mt-3 text-[12px]" style={{ color: "#c0392b" }} role="alert">
+        <p className="mt-3 text-[12px]" style={{ color: "var(--color-error)" }} role="alert">
           {error}
         </p>
       )}
 
-      <p className="mt-4 text-[12px] leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+      <p className="mt-4 text-[12px] leading-relaxed" style={{ color: "var(--color-ink-soft)" }}>
         {offer.terms}
       </p>
-      <p className="mt-2 text-[12px]" style={{ color: "var(--color-text-secondary)" }}>
+      <p className="mt-2 text-[12px]" style={{ color: "var(--color-ink-soft)" }}>
         Ships around the 15th each month · Auto-renews every 6 months, cancel anytime
       </p>
     </div>

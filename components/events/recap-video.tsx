@@ -62,7 +62,7 @@ export default function RecapVideo({
       />
       <span className="absolute inset-0 bg-black/25 transition-colors group-hover:bg-black/35" />
       <span
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex h-16 w-16 md:h-20 md:w-20 items-center justify-center rounded-full text-white shadow-lg transition-transform group-hover:scale-105"
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex h-16 w-16 md:h-20 md:w-20 items-center justify-center rounded-full text-ink shadow-lg transition-transform group-hover:scale-105"
         style={{ background: "var(--color-orange)" }}
       >
         {/* Play triangle */}

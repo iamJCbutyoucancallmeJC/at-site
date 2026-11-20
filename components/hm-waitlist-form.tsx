@@ -39,10 +39,10 @@ export default function HmWaitlistForm({ page, compact = false }: { page: string
       <p className="text-[12px] uppercase tracking-[0.15em] font-semibold mb-2" style={{ color: "var(--color-orange-ink)" }}>
         Waitlist
       </p>
-      <h3 className={`${compact ? "text-[20px]" : "text-[22px] md:text-[26px]"} font-bold leading-tight mb-2`} style={{ color: "var(--color-text-primary)" }}>
+      <h3 className={`${compact ? "text-[20px]" : "text-[22px] md:text-[26px]"} font-bold leading-tight mb-2`} style={{ color: "var(--color-ink)" }}>
         {HM_CLOSED_HEADLINE}
       </h3>
-      <p className="text-[14px] leading-relaxed mb-5 max-w-md mx-auto" style={{ color: "var(--color-text-secondary)" }}>
+      <p className="text-[14px] leading-relaxed mb-5 max-w-md mx-auto" style={{ color: "var(--color-ink-soft)" }}>
         {HM_CLOSED_BODY}
       </p>
       {state === "done" ? (
@@ -71,11 +71,11 @@ export default function HmWaitlistForm({ page, compact = false }: { page: string
         </form>
       )}
       {state === "error" && (
-        <p className="mt-3 text-[13px]" style={{ color: "#c0392b" }}>
+        <p className="mt-3 text-[13px]" style={{ color: "var(--color-error)" }}>
           That didn&apos;t go through. Please try again.
         </p>
       )}
-      <p className="mt-4 text-[12px]" style={{ color: "var(--color-text-secondary)" }}>
+      <p className="mt-4 text-[12px]" style={{ color: "var(--color-ink-soft)" }}>
         We&apos;ll email you when Happy Mail reopens. Unsubscribe anytime.
       </p>
     </div>

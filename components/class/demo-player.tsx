@@ -45,7 +45,7 @@ export default function DemoPlayer({ hls, hlsQuery = "", mp4, poster, caption, c
         </video>
       </div>
       {caption ? (
-        <figcaption className="mt-3 text-[13px] italic" style={{ color: "var(--color-text-secondary)" }}>
+        <figcaption className="mt-3 text-[13px] italic" style={{ color: "var(--color-ink-soft)" }}>
           {caption}
         </figcaption>
       ) : null}

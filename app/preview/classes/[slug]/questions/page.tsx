@@ -50,18 +50,18 @@ export default async function ClassQuestionsPage({ params }: { params: Promise<{
 
   return (
     <main className="min-h-screen" style={{ background: "var(--color-white)" }}>
-      <div className="px-4 md:px-10 py-2.5 text-center text-[12px] uppercase tracking-[0.12em] font-semibold" style={{ background: "var(--color-orange)", color: "#fff" }}>
+      <div className="px-4 md:px-10 py-2.5 text-center text-[12px] uppercase tracking-[0.12em] font-semibold" style={{ background: "var(--color-orange)", color: "var(--color-ink)" }}>
         Preview only. Student questions for {c.title}; not public.
       </div>
       <div className="max-w-2xl mx-auto px-6 pt-12 pb-24">
-        <h1 className="text-[28px] font-bold mb-2" style={{ color: "var(--color-text-primary)" }}>
+        <h1 className="text-[28px] font-bold mb-2" style={{ color: "var(--color-ink)" }}>
           Questions from the box
         </h1>
-        <p className="text-[14px] mb-10" style={{ color: "var(--color-text-secondary)" }}>
+        <p className="text-[14px] mb-10" style={{ color: "var(--color-ink-soft)" }}>
           {rows.length} question{rows.length === 1 ? "" : "s"}, newest first. {dbConfigured() ? "" : "DATABASE_URL is not set on this deploy."}
         </p>
         {rows.length === 0 ? (
-          <p className="text-[15px]" style={{ color: "var(--color-text-secondary)" }}>Nothing yet.</p>
+          <p className="text-[15px]" style={{ color: "var(--color-ink-soft)" }}>Nothing yet.</p>
         ) : (
           <ol className="divide-y" style={{ borderColor: "var(--color-border)" }}>
             {rows.map((r) => {
@@ -70,9 +70,9 @@ export default async function ClassQuestionsPage({ params }: { params: Promise<{
                 <li key={r.id} className="py-5">
                   <p className="text-[12px] uppercase tracking-[0.12em] font-semibold mb-2" style={{ color: "var(--color-orange-ink)" }}>
                     {when(r.created_at)} · order #{r.order_ref}
-                    {b ? <span className="normal-case tracking-normal font-normal" style={{ color: "var(--color-text-secondary)" }}> · {b.name || "(no name)"}{b.email ? ` · ${b.email}` : ""}</span> : null}
+                    {b ? <span className="normal-case tracking-normal font-normal" style={{ color: "var(--color-ink-soft)" }}> · {b.name || "(no name)"}{b.email ? ` · ${b.email}` : ""}</span> : null}
                   </p>
-                  <p className="text-[16px] leading-relaxed whitespace-pre-wrap" style={{ color: "var(--color-text-primary)" }}>{r.body}</p>
+                  <p className="text-[16px] leading-relaxed whitespace-pre-wrap" style={{ color: "var(--color-ink)" }}>{r.body}</p>
                 </li>
               )
             })}

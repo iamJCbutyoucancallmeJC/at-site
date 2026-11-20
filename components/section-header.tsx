@@ -51,7 +51,7 @@ export default function SectionHeader({
       {link && (
         <Link
           href={link.href}
-          className="shrink-0 text-[16px] font-semibold underline underline-offset-[3px] pb-0.5 whitespace-nowrap hover:text-[color:var(--color-ink)] transition-colors"
+          className="shrink-0 text-[16px] font-semibold underline underline-offset-[3px] pb-0.5 whitespace-nowrap hover:text-ink transition-colors"
           style={{ color: "var(--color-orange-ink)" }}
         >
           {link.label}

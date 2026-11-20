@@ -39,3 +39,26 @@ export const SHIPPING_POLICY_FALLBACK =
   "<p>Orders ship from Culver City, California. US shipping is a flat $8; Happy Mail subscriptions always ship free. International shipping is calculated at checkout at live carrier rates. Printables are delivered by email, so nothing ships.</p>"
 export const REFUND_POLICY_FALLBACK =
   "<p>All sales are final. If your order arrives damaged or incorrect, email help@amytangerine.com and we'll make it right.</p>"
+
+// Empty states (design finish, Phase 5, 2026-11-20). Each one is a sentence in
+// Amy's voice and ONE door. Drafts for Amy to edit; one edit here changes the site.
+export const EMPTY_STATES = {
+  notFound: {
+    eyebrow: "Page not found",
+    title: "This page wandered off.",
+    line: "The link may be old, or the thing it pointed to sold out. Everything that's here right now is in the shop.",
+    door: { label: "Go to the shop", href: "/shop" },
+  },
+  cart: {
+    line: "Your cart is empty. Let's fix that.",
+    door: { label: "Go to the shop", href: "/shop" },
+  },
+  category: {
+    line: "Nothing here right now. New things land often, so check back soon.",
+    door: { label: "See everything", href: "/shop" },
+  },
+  search: {
+    line: "No posts match that. Try one word, like stickers or travel.",
+    door: { label: "Browse the Journal", href: "/blog" },
+  },
+} as const

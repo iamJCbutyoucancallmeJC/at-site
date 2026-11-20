@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation"
 import { X, Minus, Plus, ShoppingBag } from "lucide-react"
 import { useCart, type CartItem } from "@/context/cart"
 import { trackEvent } from "@/lib/analytics"
+import { EMPTY_STATES } from "@/lib/shop-copy"
 import { HM_VARIANT_6MONTH_GID } from "@/lib/happy-mail-content"
 import { isChromelessRoute, isQuietRoute } from "@/lib/chromeless-routes"
 import { stashPendingCartToken } from "@/lib/pending-checkout-tokens"
@@ -212,10 +213,10 @@ export default function CartDrawer() {
             <div className="flex flex-col items-center justify-center gap-4 py-12 md:h-full md:pb-16">
               <ShoppingBag size={40} style={{ color: "var(--color-border)" }} aria-hidden="true" />
               <p className="text-[16px] text-center" style={{ color: "var(--color-ink)" }}>
-                Your cart is empty
+                {EMPTY_STATES.cart.line}
               </p>
-              <Link href="/shop" onClick={closeCart} className="cta-primary cta--compact">
-                Shop now
+              <Link href={EMPTY_STATES.cart.door.href} onClick={closeCart} className="cta-primary cta--compact">
+                {EMPTY_STATES.cart.door.label}
               </Link>
             </div>
           ) : (
@@ -285,7 +286,7 @@ export default function CartDrawer() {
                         <button
                           type="button"
                           onClick={() => removeItem(item.variantId)}
-                          className="min-h-9 text-[13px] font-semibold underline underline-offset-2 hover:text-[color:var(--color-ink)]"
+                          className="min-h-9 text-[13px] font-semibold underline underline-offset-2 hover:text-ink"
                           style={{ color: "var(--color-ink-soft)" }}
                           aria-label={`Remove ${item.title}`}
                         >
@@ -347,7 +348,7 @@ export default function CartDrawer() {
             <Link
               href="/shop"
               onClick={closeCart}
-              className="block mt-3 text-center text-[14px] font-semibold underline underline-offset-[3px] hover:text-[color:var(--color-ink)]"
+              className="block mt-3 text-center text-[14px] font-semibold underline underline-offset-[3px] hover:text-ink"
               style={{ color: "var(--color-ink-soft)" }}
             >
               Continue shopping

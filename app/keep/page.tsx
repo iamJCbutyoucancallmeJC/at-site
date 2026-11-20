@@ -108,7 +108,7 @@ export default function KeepPage() {
 
       {/* ── Originals badge ── */}
       <div
-        className="py-3 px-4 text-center text-[12px] uppercase tracking-[0.16em] font-semibold text-white"
+        className="py-3 px-4 text-center text-[12px] uppercase tracking-[0.16em] font-semibold text-ink"
         style={{ background: "var(--color-teal)" }}
       >
         For the Happy Mail originals · Envelope 6 of 6
@@ -138,7 +138,7 @@ export default function KeepPage() {
           </p>
           <h1
             className="text-[36px] md:text-[48px] font-bold leading-[1.05] tracking-tight mb-4"
-            style={{ color: "var(--color-text-primary)" }}
+            style={{ color: "var(--color-ink)" }}
           >
             Keep them
             <br />
@@ -146,7 +146,7 @@ export default function KeepPage() {
           </h1>
           <p
             className="text-[16px] leading-relaxed mb-4"
-            style={{ color: "var(--color-text-secondary)" }}
+            style={{ color: "var(--color-ink-soft)" }}
           >
             Your sixth and final envelope is on its way — or already in your
             hands. Thank you: sending these has been one of my favorite things
@@ -154,7 +154,7 @@ export default function KeepPage() {
           </p>
           <p
             className="text-[14px] leading-relaxed mb-6"
-            style={{ color: "var(--color-text-secondary)" }}
+            style={{ color: "var(--color-ink-soft)" }}
           >
             If they've earned a spot in your mailbox, six more months is one click
             away — at the price you joined at, as a thank-you for being an
@@ -165,18 +165,18 @@ export default function KeepPage() {
           <div className="flex items-end gap-3 mb-1">
             <span
               className="text-[52px] font-bold leading-none"
-              style={{ color: "var(--color-text-primary)" }}
+              style={{ color: "var(--color-ink)" }}
             >
               ${OFFER_PRICE}
             </span>
             <span className="flex flex-col leading-tight mb-1">
               <span
                 className="text-[18px] line-through"
-                style={{ color: "var(--color-text-secondary)" }}
+                style={{ color: "var(--color-ink-soft)" }}
               >
                 ${HM_PRICE_6MONTH}
               </span>
-              <span className="text-[13px]" style={{ color: "var(--color-text-secondary)" }}>
+              <span className="text-[13px]" style={{ color: "var(--color-ink-soft)" }}>
                 one payment · 6 months
               </span>
             </span>
@@ -195,12 +195,12 @@ export default function KeepPage() {
           </button>
 
           {error && (
-            <p className="mt-3 text-[12px]" style={{ color: "#c0392b" }}>
+            <p className="mt-3 text-[12px]" style={{ color: "var(--color-error)" }}>
               {error}
             </p>
           )}
 
-          <p className="mt-4 text-[12px] leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+          <p className="mt-4 text-[12px] leading-relaxed" style={{ color: "var(--color-ink-soft)" }}>
             After these six months it renews at the regular ${HM_PRICE_6MONTH} every
             six months — cancel anytime. And if this is where your Happy Mail story
             pauses: thank you, truly. xo, Amy
@@ -216,7 +216,7 @@ export default function KeepPage() {
         <div className="max-w-4xl mx-auto px-6 md:px-10 py-12 md:py-14">
           <h2
             className="text-[22px] md:text-[26px] font-bold tracking-tight mb-8 text-center"
-            style={{ color: "var(--color-text-primary)" }}
+            style={{ color: "var(--color-ink)" }}
           >
             What keeps coming, every month
           </h2>
@@ -227,10 +227,10 @@ export default function KeepPage() {
                   <Image src={item.img} alt={item.title} fill className="object-cover" sizes="72px" />
                 </div>
                 <div>
-                  <p className="text-[14px] font-semibold mb-1" style={{ color: "var(--color-text-primary)" }}>
+                  <p className="text-[14px] font-semibold mb-1" style={{ color: "var(--color-ink)" }}>
                     {item.title}
                   </p>
-                  <p className="text-[13px] leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+                  <p className="text-[13px] leading-relaxed" style={{ color: "var(--color-ink-soft)" }}>
                     {item.body}
                   </p>
                 </div>
@@ -242,7 +242,7 @@ export default function KeepPage() {
 
       {/* ── Footer note ── */}
       <footer className="py-8 text-center">
-        <p className="text-[12px]" style={{ color: "var(--color-text-secondary)" }}>
+        <p className="text-[12px]" style={{ color: "var(--color-ink-soft)" }}>
           Questions? Just reply to any Happy Mail email — or write help@amytangerine.com
         </p>
       </footer>

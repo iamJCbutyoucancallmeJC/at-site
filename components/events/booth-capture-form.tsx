@@ -55,7 +55,7 @@ export default function BoothCaptureForm({ slug }: { slug: string }) {
   const inputStyle = {
     borderColor: "var(--color-border)",
     background: "var(--color-white)",
-    color: "var(--color-text-primary)",
+    color: "var(--color-ink)",
     fontFamily: "var(--font-sans)",
   }
 
@@ -63,11 +63,11 @@ export default function BoothCaptureForm({ slug }: { slug: string }) {
     return (
       <div
         className="px-5 py-5 rounded-xl text-center"
-        style={{ background: "var(--color-white)", color: "var(--color-text-primary)", fontFamily: "var(--font-sans)" }}
+        style={{ background: "var(--color-white)", color: "var(--color-ink)", fontFamily: "var(--font-sans)" }}
         role="status"
       >
         <p className="text-[16px] md:text-[18px] font-bold mb-1">Thanks, you&rsquo;re in.</p>
-        <p className="text-[13px] md:text-[14px]" style={{ color: "var(--color-text-secondary)" }}>
+        <p className="text-[13px] md:text-[14px]" style={{ color: "var(--color-ink-soft)" }}>
           Amy will write after the show.
         </p>
       </div>
@@ -117,7 +117,7 @@ export default function BoothCaptureForm({ slug }: { slug: string }) {
         {status === "submitting" ? "One moment..." : "Keep in touch"}
       </button>
       {status === "error" && errorMsg && (
-        <p className="text-[12px] md:text-[13px]" style={{ color: "#c0392b" }} role="alert">
+        <p className="text-[12px] md:text-[13px]" style={{ color: "var(--color-error)" }} role="alert">
           {errorMsg}
         </p>
       )}

@@ -83,7 +83,7 @@ export default function BackPage() {
 
       {/* ── Badge ── */}
       <div
-        className="py-3 px-4 text-center text-[12px] uppercase tracking-[0.16em] font-semibold text-white"
+        className="py-3 px-4 text-center text-[12px] uppercase tracking-[0.16em] font-semibold text-ink"
         style={{ background: "var(--color-teal)" }}
       >
         Pick up right where you left off
@@ -111,24 +111,24 @@ export default function BackPage() {
           </p>
           <h1
             className="text-[36px] md:text-[48px] font-bold leading-[1.05] tracking-tight mb-4"
-            style={{ color: "var(--color-text-primary)" }}
+            style={{ color: "var(--color-ink)" }}
           >
             The mail's about to get happier again.
           </h1>
-          <p className="text-[15px] leading-relaxed mb-3" style={{ color: "var(--color-text-primary)" }}>
+          <p className="text-[15px] leading-relaxed mb-3" style={{ color: "var(--color-ink)" }}>
             Your envelope is ready to start up right where it paused — die cuts,
             the newest sticker sheet, and a note from Amy, once a month.
           </p>
-          <p className="text-[15px] leading-relaxed mb-5" style={{ color: "var(--color-text-primary)" }}>
+          <p className="text-[15px] leading-relaxed mb-5" style={{ color: "var(--color-ink)" }}>
             One minute, one button, and you're back on the list.
           </p>
 
           {/* Price block */}
           <div className="mb-5">
-            <span className="text-[34px] font-bold" style={{ color: "var(--color-text-primary)" }}>
+            <span className="text-[34px] font-bold" style={{ color: "var(--color-ink)" }}>
               ${HM_PRICE_MONTHLY}
             </span>
-            <span className="text-[13px] ml-2" style={{ color: "var(--color-text-secondary, #555)" }}>
+            <span className="text-[13px] ml-2" style={{ color: "var(--color-ink-soft)" }}>
               per month · free US shipping
             </span>
           </div>
@@ -145,12 +145,12 @@ export default function BackPage() {
           </button>
           )}
           {error && (
-            <p className="mt-3 text-[13px]" style={{ color: "#c0392b" }}>
+            <p className="mt-3 text-[13px]" style={{ color: "var(--color-error)" }}>
               {error}
             </p>
           )}
 
-          <p className="mt-4 text-[12px] leading-relaxed" style={{ color: "var(--color-text-secondary, #555)" }}>
+          <p className="mt-4 text-[12px] leading-relaxed" style={{ color: "var(--color-ink-soft)" }}>
             Renews monthly; cancel anytime and billing stops. Free US shipping.
           </p>
         </div>
@@ -158,7 +158,7 @@ export default function BackPage() {
 
       {/* ── Footer ── */}
       <footer className="py-8 text-center border-t" style={{ borderColor: "var(--color-border)" }}>
-        <p className="text-[13px]" style={{ color: "var(--color-text-secondary, #555)" }}>
+        <p className="text-[13px]" style={{ color: "var(--color-ink-soft)" }}>
           Questions? Just reply to any Happy Mail email — or write help@amytangerine.com
         </p>
       </footer>

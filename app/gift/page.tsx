@@ -30,7 +30,7 @@ export default async function GiftPage() {
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-5">Give six months of mailbox joy.</h1>
           <p className="text-lg leading-relaxed mb-7">An envelope from Amy each month, filled with stickers, die cuts, a note, and little surprises. Their name hand-lettered on the front.</p>
           <Image src="/images/happy-mail/gift-for-you.jpg" alt="A Happy Mail envelope lettered happy mail, for you, with the stickers, paper pieces, and note that come inside" width={800} height={800} className="rounded-2xl w-full" priority />
-          <p className="text-sm mt-3 text-[var(--color-text-secondary)]">A peek inside. Each month's envelope is different.</p>
+          <p className="text-sm mt-3 text-ink-soft">A peek inside. Each month's envelope is different.</p>
           <h2 className="text-2xl font-bold mt-9 mb-4">You give it. They make it theirs.</h2>
           <ol className="list-decimal pl-5 space-y-3 leading-relaxed">
             <li>Buy the $72 gift using your own billing details.</li>

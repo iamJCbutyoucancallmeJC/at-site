@@ -59,7 +59,7 @@ export default async function BoothPage({ params }: { params: Promise<{ slug: st
 
       {/* Event badge */}
       <div
-        className="py-3 px-4 text-center text-[12px] uppercase tracking-[0.16em] font-semibold text-white"
+        className="py-3 px-4 text-center text-[12px] uppercase tracking-[0.16em] font-semibold text-ink"
         style={{ background: "var(--color-teal)" }}
       >
         {event.title} · {event.city} · {event.dates}
@@ -70,12 +70,12 @@ export default async function BoothPage({ params }: { params: Promise<{ slug: st
       {(facts.length > 0 || (booth.hours && booth.hours.length > 0)) && (
         <section className="max-w-2xl mx-auto px-6 pt-8 text-center">
           {facts.map((f) => (
-            <p key={f} className="text-[14px] md:text-[15px] font-semibold" style={{ color: "var(--color-text-primary)" }}>
+            <p key={f} className="text-[14px] md:text-[15px] font-semibold" style={{ color: "var(--color-ink)" }}>
               {f}
             </p>
           ))}
           {booth.hours?.map((h) => (
-            <p key={h} className="text-[13px] md:text-[14px]" style={{ color: "var(--color-text-secondary)" }}>
+            <p key={h} className="text-[13px] md:text-[14px]" style={{ color: "var(--color-ink-soft)" }}>
               {h}
             </p>
           ))}
@@ -101,7 +101,7 @@ export default async function BoothPage({ params }: { params: Promise<{ slug: st
             </p>
             <h1
               className="text-[32px] md:text-[44px] font-bold leading-[1.05] tracking-tight mb-4"
-              style={{ color: "var(--color-text-primary)" }}
+              style={{ color: "var(--color-ink)" }}
             >
               {booth.offer.headline}
             </h1>
@@ -116,12 +116,12 @@ export default async function BoothPage({ params }: { params: Promise<{ slug: st
           <div className="max-w-2xl mx-auto">
             <h2
               className="text-[15px] md:text-[17px] uppercase tracking-[0.12em] font-semibold text-center mb-5"
-              style={{ color: "var(--color-text-primary)" }}
+              style={{ color: "var(--color-ink)" }}
             >
               Take a class with Amy
             </h2>
             {event.meetAmy && (
-              <p className="text-center text-[14px] md:text-[15px] leading-relaxed mb-5" style={{ color: "var(--color-text-secondary)" }}>
+              <p className="text-center text-[14px] md:text-[15px] leading-relaxed mb-5" style={{ color: "var(--color-ink-soft)" }}>
                 {event.meetAmy}
               </p>
             )}
@@ -149,16 +149,16 @@ export default async function BoothPage({ params }: { params: Promise<{ slug: st
         <section className="max-w-2xl mx-auto px-6 py-10 md:py-12 text-center">
           <h2
             className="text-[15px] md:text-[17px] uppercase tracking-[0.12em] font-semibold mb-4"
-            style={{ color: "var(--color-text-primary)" }}
+            style={{ color: "var(--color-ink)" }}
           >
             {ended ? "What was on the table" : "On the table"}
           </h2>
-          <ul className="space-y-1.5 text-[14px] md:text-[15px]" style={{ color: "var(--color-text-secondary)" }}>
+          <ul className="space-y-1.5 text-[14px] md:text-[15px]" style={{ color: "var(--color-ink-soft)" }}>
             {booth.bring.map((b) => (
               <li key={b}>{b}</li>
             ))}
           </ul>
-          <p className="mt-5 text-[13px]" style={{ color: "var(--color-text-secondary)" }}>
+          <p className="mt-5 text-[13px]" style={{ color: "var(--color-ink-soft)" }}>
             Everything else lives at{" "}
             <TrackableLink
               href="/shop"
@@ -177,10 +177,10 @@ export default async function BoothPage({ params }: { params: Promise<{ slug: st
       {/* Capture */}
       <section className="px-6 py-12 md:py-14" style={{ background: "var(--color-orange)" }}>
         <div className="max-w-lg mx-auto text-center">
-          <h2 className="text-[22px] md:text-[30px] font-bold leading-tight text-white mb-2">
+          <h2 className="text-[22px] md:text-[30px] font-bold leading-tight text-ink mb-2">
             {booth.captureHeading ?? "Stay in touch with Amy."}
           </h2>
-          <p className="text-[14px] md:text-[15px] text-white/90 mb-5 leading-relaxed">
+          <p className="text-[14px] md:text-[15px] text-ink mb-5 leading-relaxed">
             {booth.captureBlurb ?? "Leave your email and Amy will send a note after the show with photos and what is new."}
           </p>
           <BoothCaptureForm slug={event.slug} />
@@ -188,7 +188,7 @@ export default async function BoothPage({ params }: { params: Promise<{ slug: st
       </section>
 
       {/* Footer: minimal */}
-      <footer className="py-6 text-center text-[12px]" style={{ color: "var(--color-text-secondary)", borderTop: "1px solid var(--color-border)" }}>
+      <footer className="py-6 text-center text-[12px]" style={{ color: "var(--color-ink-soft)", borderTop: "1px solid var(--color-border)" }}>
         <p>
           Questions?{" "}
           <a href="mailto:help@amytangerine.com" className="underline hover:opacity-70" style={{ color: "var(--color-orange-ink)" }}>

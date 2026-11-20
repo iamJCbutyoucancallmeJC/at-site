@@ -40,7 +40,7 @@ export default function JoinClassButton({ slug, available, label, notYet, code =
         onClick={join}
         disabled={busy || !available}
         aria-describedby={available ? undefined : statusId}
-        className="cta-primary cta-primary--ink w-full md:w-auto md:min-w-[280px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black"
+        className={`${available ? "cta-primary" : "cta-secondary"} w-full md:w-auto md:min-w-[280px]`}
       >
         {busy ? "Opening checkout" : label}
       </button>

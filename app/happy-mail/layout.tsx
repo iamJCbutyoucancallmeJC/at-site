@@ -18,7 +18,9 @@ export const metadata: Metadata = {
     title: "Happy Mail — Monthly Craft Subscription | Amy Tangerine",
     description:
       "Once a month, an envelope from Amy. Die cuts, stickers, and a personal note. The good kind of mail.",
-    images: [{ url: "/images/products/happy-mail/1.jpg" }],
+    // Phase 5 (2026-11-20): a 1200x630 cut of the newest envelope flat lay (the old
+    // image was a 2500x2864 portrait that every share card cropped to its middle).
+    images: [{ url: "/og/happy-mail.jpg", width: 1200, height: 630 }],
   },
 }
 

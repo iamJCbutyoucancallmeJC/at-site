@@ -229,7 +229,7 @@ export default async function HomePage() {
               href="/about"
               event="footer_click"
               eventData={{ link_text: "About Amy Read more", page: "homepage" }}
-              className="inline-block mt-3 text-[16px] font-semibold underline underline-offset-[3px] hover:text-[color:var(--color-ink)] transition-colors"
+              className="inline-block mt-3 text-[16px] font-semibold underline underline-offset-[3px] hover:text-ink transition-colors"
               style={{ color: "var(--color-orange-ink)" }}
             >
               Read more

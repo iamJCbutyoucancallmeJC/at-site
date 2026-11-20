@@ -81,7 +81,7 @@ export default function AboutPage() {
             </p>
             <h1
               className="text-[36px] md:text-[52px] font-bold leading-[1.05] tracking-tight mb-6"
-              style={{ color: "var(--color-text-primary)" }}
+              style={{ color: "var(--color-ink)" }}
             >
               Craft a life
               <br />
@@ -89,7 +89,7 @@ export default function AboutPage() {
             </h1>
             <p
               className="text-[17px] leading-relaxed"
-              style={{ color: "var(--color-text-secondary)" }}
+              style={{ color: "var(--color-ink-soft)" }}
             >
               Amy Tangerine is a modern-day memory keeper and self-proclaimed
               hobby collector, with creative journaling at the heart of it all.
@@ -106,7 +106,7 @@ export default function AboutPage() {
         <div className="max-w-2xl mx-auto">
           <p
             className="text-[16px] md:text-[18px] leading-relaxed mb-6"
-            style={{ color: "var(--color-text-secondary)" }}
+            style={{ color: "var(--color-ink-soft)" }}
           >
             As a multi-passionate maker ever since she can remember, Amy
             Tangerine thrives in providing creatives with the space and tools to
@@ -114,7 +114,7 @@ export default function AboutPage() {
           </p>
           <p
             className="text-[16px] md:text-[18px] leading-relaxed mb-6"
-            style={{ color: "var(--color-text-secondary)" }}
+            style={{ color: "var(--color-ink-soft)" }}
           >
             She has taught crafty workshops all over the world, filmed tons of
             YouTube videos, and consulted with awesome brands including Disney,
@@ -124,7 +124,7 @@ export default function AboutPage() {
           </p>
           <p
             className="text-[16px] md:text-[18px] leading-relaxed"
-            style={{ color: "var(--color-text-secondary)" }}
+            style={{ color: "var(--color-ink-soft)" }}
           >
             Amy loves any excuse to celebrate and spread happiness. She spends a
             lot of her time in her art studio in Los Angeles, CA or hanging out
@@ -174,23 +174,23 @@ export default function AboutPage() {
         className="py-16 md:py-20 px-6 md:px-16"
         style={{ background: "var(--color-teal)" }}
       >
-        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 text-white text-center">
+        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 text-ink text-center">
           <div>
             <p className="text-[28px] font-bold mb-2">Creativity</p>
-            <p className="text-[14px] leading-relaxed text-white/75">
+            <p className="text-[14px] leading-relaxed text-ink">
               Everyone has a story. The work is making space for it.
             </p>
           </div>
           <div>
             <p className="text-[28px] font-bold mb-2">Journaling</p>
-            <p className="text-[14px] leading-relaxed text-white/75">
+            <p className="text-[14px] leading-relaxed text-ink">
               Documenting a life, in notebooks, photos, a few lines at the end
               of the day, is a practice worth keeping.
             </p>
           </div>
           <div>
             <p className="text-[28px] font-bold mb-2">Community</p>
-            <p className="text-[14px] leading-relaxed text-white/75">
+            <p className="text-[14px] leading-relaxed text-ink">
               Workshops, retreats, YouTube, Happy Mail. Connection with fellow
               makers, always.
             </p>

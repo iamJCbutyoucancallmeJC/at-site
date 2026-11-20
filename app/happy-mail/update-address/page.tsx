@@ -153,13 +153,13 @@ export default function UpdateAddressPage() {
           </p>
           <h1
             className="text-[32px] md:text-[44px] font-bold leading-[1.07] tracking-tight mb-4"
-            style={{ color: "var(--color-text-primary)" }}
+            style={{ color: "var(--color-ink)" }}
           >
             Changing your Happy Mail shipping address
           </h1>
           <p
             className="text-[16px] md:text-[18px] leading-relaxed mb-3"
-            style={{ color: "var(--color-text-secondary)" }}
+            style={{ color: "var(--color-ink-soft)" }}
           >
             Moving, or want your envelope somewhere new? Update the address in your
             subscriber account and the next envelope goes there. It takes about a
@@ -167,7 +167,7 @@ export default function UpdateAddressPage() {
           </p>
           <p
             className="text-[14px] leading-relaxed italic"
-            style={{ color: "var(--color-text-secondary)" }}
+            style={{ color: "var(--color-ink-soft)" }}
           >
             If you get stuck anywhere, write us at help@amytangerine.com with your new
             address and we&apos;ll update it for you.
@@ -187,7 +187,7 @@ export default function UpdateAddressPage() {
           >
             <p
               className="text-[13px] md:text-[14px] leading-relaxed mb-3"
-              style={{ color: "var(--color-text-primary)" }}
+              style={{ color: "var(--color-ink)" }}
             >
               <strong>One thing worth knowing first:</strong> your subscription keeps
               its own shipping address, and that&apos;s the one your envelope is printed
@@ -196,7 +196,7 @@ export default function UpdateAddressPage() {
             </p>
             <p
               className="text-[13px] md:text-[14px] leading-relaxed"
-              style={{ color: "var(--color-text-primary)" }}
+              style={{ color: "var(--color-ink)" }}
             >
               <strong>What you&apos;ll need:</strong> the email address your Happy Mail
               subscription is under, and a minute. You&apos;ll get a quick 4-digit code
@@ -208,7 +208,7 @@ export default function UpdateAddressPage() {
             {STEPS.map((step) => (
               <li key={step.n} className="flex gap-4">
                 <span
-                  className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-[14px] font-bold text-white"
+                  className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-[14px] font-bold text-ink"
                   style={{ background: "var(--color-orange)" }}
                 >
                   {step.n}
@@ -216,13 +216,13 @@ export default function UpdateAddressPage() {
                 <div className="flex-1">
                   <h2
                     className="text-[18px] md:text-[20px] font-bold leading-snug mb-2"
-                    style={{ color: "var(--color-text-primary)" }}
+                    style={{ color: "var(--color-ink)" }}
                   >
                     {step.title}
                   </h2>
                   <p
                     className="text-[15px] leading-relaxed"
-                    style={{ color: "var(--color-text-secondary)" }}
+                    style={{ color: "var(--color-ink-soft)" }}
                   >
                     {step.body}
                   </p>
@@ -230,7 +230,7 @@ export default function UpdateAddressPage() {
                     <p
                       className="mt-2 text-[13px] leading-relaxed pl-3 border-l-2"
                       style={{
-                        color: "var(--color-text-secondary)",
+                        color: "var(--color-ink-soft)",
                         borderColor: "var(--color-orange)",
                       }}
                     >
@@ -253,7 +253,7 @@ export default function UpdateAddressPage() {
             </a>
             <p
               className="mt-4 text-[14px] leading-relaxed"
-              style={{ color: "var(--color-text-secondary)" }}
+              style={{ color: "var(--color-ink-soft)" }}
             >
               Stuck on any step? Write <strong>help@amytangerine.com</strong> with your
               new address and a real person (hi, it&apos;s us) will update it for you.

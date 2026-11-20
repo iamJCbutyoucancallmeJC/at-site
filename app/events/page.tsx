@@ -51,7 +51,7 @@ function EventCard({ event, section }: { event: SiteEvent; section: "upcoming" |
         </p>
         {comingSoon && (
           <span
-            className="text-[11px] md:text-[12px] uppercase tracking-[0.15em] font-bold px-3 py-1 rounded-full text-white"
+            className="text-[11px] md:text-[12px] uppercase tracking-[0.15em] font-bold px-3 py-1 rounded-full text-ink"
             style={{ background: "var(--color-teal)" }}
           >
             Coming Soon
@@ -62,21 +62,21 @@ function EventCard({ event, section }: { event: SiteEvent; section: "upcoming" |
       {/* City first: the recognition hook */}
       <h3
         className="mt-2 text-[26px] md:text-[34px] font-bold leading-tight tracking-tight"
-        style={{ color: "var(--color-text-primary)" }}
+        style={{ color: "var(--color-ink)" }}
       >
         {event.city}
       </h3>
-      <p className="text-[16px] md:text-[19px] font-semibold leading-snug" style={{ color: "var(--color-text-primary)" }}>
+      <p className="text-[16px] md:text-[19px] font-semibold leading-snug" style={{ color: "var(--color-ink)" }}>
         {event.title}
       </p>
       <p
         className="mt-1 text-[12px] md:text-[13px] uppercase tracking-[0.08em]"
-        style={{ color: "var(--color-text-secondary)" }}
+        style={{ color: "var(--color-ink-soft)" }}
       >
         {[event.venue, event.dates].filter(Boolean).join(" · ")}
       </p>
 
-      <p className="mt-3 text-[14px] md:text-[15px] leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+      <p className="mt-3 text-[14px] md:text-[15px] leading-relaxed" style={{ color: "var(--color-ink-soft)" }}>
         {event.blurb}
       </p>
 
@@ -121,15 +121,15 @@ export default function EventsPage() {
       {/* ── Header (Amy's real voice) ── */}
       <section className="px-6 py-14 md:py-20 text-center" style={{ background: "var(--color-teal)" }}>
         <h1
-          className="text-[38px] md:text-[60px] font-bold tracking-tight text-white leading-[1.05]"
+          className="text-[38px] md:text-[60px] font-bold tracking-tight text-ink leading-[1.05]"
           style={{ fontFamily: "var(--font-sans)" }}
         >
           In Person
         </h1>
-        <p className="mt-3 text-[12px] md:text-[14px] uppercase tracking-[0.2em] text-white/70">
+        <p className="mt-3 text-[12px] md:text-[14px] uppercase tracking-[0.2em] text-ink">
           Shows · Showings · Tours
         </p>
-        <p className="mt-5 text-[15px] md:text-[18px] text-white/90 max-w-xl mx-auto leading-relaxed">
+        <p className="mt-5 text-[15px] md:text-[18px] text-ink max-w-xl mx-auto leading-relaxed">
           Come hang out in real life. See when Amy and her supplies are headed somewhere near you.
         </p>
       </section>
@@ -152,10 +152,10 @@ export default function EventsPage() {
       {/* ── Capture ── */}
       <section className="px-6 py-10 md:py-14" style={{ background: "var(--color-orange)" }}>
         <div className="max-w-lg mx-auto text-center">
-          <h2 className="text-[22px] md:text-[30px] font-bold leading-tight text-white mb-2">
+          <h2 className="text-[22px] md:text-[30px] font-bold leading-tight text-ink mb-2">
             Want a heads-up when Amy&rsquo;s coming to your city?
           </h2>
-          <p className="text-[14px] md:text-[15px] text-white/90 mb-5 leading-relaxed">
+          <p className="text-[14px] md:text-[15px] text-ink mb-5 leading-relaxed">
             Drop your email and you&rsquo;ll be the first to hear about new shows, pop-ups, and trips,
             including the next Tangerine Tokyo Takeover.
           </p>
@@ -176,7 +176,7 @@ export default function EventsPage() {
             <EventCard key={event.slug} event={event} section="past" />
           ))}
         </div>
-        <p className="text-center text-[14px] md:text-[15px] mt-10 leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+        <p className="text-center text-[14px] md:text-[15px] mt-10 leading-relaxed" style={{ color: "var(--color-ink-soft)" }}>
           More to come. Get on the list above and you&rsquo;ll know where Amy&rsquo;s headed next.
         </p>
       </section>

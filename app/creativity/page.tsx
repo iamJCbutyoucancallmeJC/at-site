@@ -55,11 +55,11 @@ export default async function CreativityPrintablePage({
         </p>
         <h1
           className="text-[30px] md:text-[40px] font-bold leading-[1.1] tracking-tight mb-4"
-          style={{ color: "var(--color-text-primary)" }}
+          style={{ color: "var(--color-ink)" }}
         >
           10 ways to reconnect with your creativity
         </h1>
-        <p className="text-[15px] leading-relaxed" style={{ color: "var(--color-text-primary)" }}>
+        <p className="text-[15px] leading-relaxed" style={{ color: "var(--color-ink)" }}>
           When I drift away from making stuff, these are the ten things that bring me
           back. I talk through all of them in the video below, and I hand-lettered the
           list so it can live on your desk.{" "}
@@ -81,14 +81,14 @@ export default async function CreativityPrintablePage({
               className="absolute inset-0 h-full w-full border-0"
             />
           </div>
-          <p className="mt-3 text-[13px]" style={{ color: "var(--color-text-secondary, #555)" }}>
+          <p className="mt-3 text-[13px]" style={{ color: "var(--color-ink-soft)" }}>
             {VIDEO_TITLE}, on{" "}
             <a
               href={`https://www.youtube.com/watch?v=${VIDEO_ID}`}
               target="_blank"
               rel="noopener noreferrer"
               className="underline"
-              style={{ color: "var(--color-text-primary)" }}
+              style={{ color: "var(--color-ink)" }}
             >
               my YouTube channel
             </a>
@@ -110,7 +110,7 @@ export default async function CreativityPrintablePage({
               sizes="(max-width: 768px) 100vw, 300px"
             />
           </div>
-          <p className="mt-3 text-[13px] text-center" style={{ color: "var(--color-text-secondary, #555)" }}>
+          <p className="mt-3 text-[13px] text-center" style={{ color: "var(--color-ink-soft)" }}>
             The printable, letter size.
           </p>
         </div>
@@ -121,10 +121,10 @@ export default async function CreativityPrintablePage({
           className="mt-12 md:mt-16 rounded-2xl px-6 py-10 text-center"
           style={{ background: "var(--color-paper)" }}
         >
-          <h2 className="text-[22px] font-bold mb-2" style={{ color: "var(--color-text-primary)" }}>
+          <h2 className="text-[22px] font-bold mb-2" style={{ color: "var(--color-ink)" }}>
             Here&apos;s your printable
           </h2>
-          <p className="text-[14px] mb-6" style={{ color: "var(--color-text-secondary, #555)" }}>
+          <p className="text-[14px] mb-6" style={{ color: "var(--color-ink-soft)" }}>
             Open the sheet and print it from your browser, or save the PDF for later.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
@@ -150,10 +150,10 @@ export default async function CreativityPrintablePage({
           className="mt-12 md:mt-16 rounded-2xl px-6 py-10 text-center"
           style={{ background: "var(--color-paper)" }}
         >
-          <h2 className="text-[22px] font-bold mb-2" style={{ color: "var(--color-text-primary)" }}>
+          <h2 className="text-[22px] font-bold mb-2" style={{ color: "var(--color-ink)" }}>
             Get the printable
           </h2>
-          <p className="text-[14px] mb-6" style={{ color: "var(--color-text-secondary, #555)" }}>
+          <p className="text-[14px] mb-6" style={{ color: "var(--color-ink-soft)" }}>
             Join my newsletter and the sheet lands in your inbox a few minutes later. After
             that, a note from me when I have something to share: no schedule, and you can
             leave any time.

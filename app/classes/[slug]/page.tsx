@@ -43,15 +43,15 @@ export default async function ClassHome({
         <p className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-4" style={{ color: "var(--color-orange-ink)" }}>
           {c.title}
         </p>
-        <h1 className="text-[28px] md:text-[34px] font-bold mb-4" style={{ color: "var(--color-text-primary)" }}>
+        <h1 className="text-[28px] md:text-[34px] font-bold mb-4" style={{ color: "var(--color-ink)" }}>
           {sp.locked ? "That link didn't work" : "This page is for the class"}
         </h1>
-        <p className="text-[15px] leading-relaxed mb-6" style={{ color: "var(--color-text-secondary)" }}>
+        <p className="text-[15px] leading-relaxed mb-6" style={{ color: "var(--color-ink-soft)" }}>
           Your class link is in the email you got when you signed up. Open that link
           and this page unlocks on this device. It works on as many devices as you
           like, and it never expires.
         </p>
-        <p className="text-[14px] leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+        <p className="text-[14px] leading-relaxed" style={{ color: "var(--color-ink-soft)" }}>
           Can&apos;t find it? Write to{" "}
           <a href="mailto:help@amytangerine.com" className="underline underline-offset-2" style={{ color: "var(--color-orange-ink)" }}>
             help@amytangerine.com
@@ -82,10 +82,10 @@ export default async function ClassHome({
       <p className="text-[12px] uppercase tracking-[0.2em] font-semibold mb-4" style={{ color: "var(--color-orange-ink)" }}>
         Your class
       </p>
-      <h1 className="text-[32px] md:text-[40px] font-bold leading-tight mb-3" style={{ color: "var(--color-text-primary)" }}>
+      <h1 className="text-[32px] md:text-[40px] font-bold leading-tight mb-3" style={{ color: "var(--color-ink)" }}>
         {c.title}
       </h1>
-      <p className="text-[16px] leading-relaxed mb-10" style={{ color: "var(--color-text-secondary)" }}>
+      <p className="text-[16px] leading-relaxed mb-10" style={{ color: "var(--color-ink-soft)" }}>
         {c.tagline}
       </p>
 
@@ -109,12 +109,12 @@ export default async function ClassHome({
           const label = d?.title ?? `Day ${n}`
           return (
             <li key={n} className="py-4 flex items-baseline gap-4">
-              <span className="w-14 shrink-0 text-[12px] uppercase tracking-[0.12em] font-semibold" style={{ color: open ? "var(--color-orange)" : "var(--color-text-secondary)" }}>
+              <span className="w-14 shrink-0 text-[12px] uppercase tracking-[0.12em] font-semibold" style={{ color: open ? "var(--color-orange)" : "var(--color-ink-soft)" }}>
                 Day {n}
               </span>
               {open ? (
                 <span className="flex items-baseline gap-3 flex-wrap">
-                  <Link href={`/classes/${slug}/day/${n}`} className="text-[17px] font-semibold underline-offset-4 hover:underline" style={{ color: "var(--color-text-primary)" }}>
+                  <Link href={`/classes/${slug}/day/${n}`} className="text-[17px] font-semibold underline-offset-4 hover:underline" style={{ color: "var(--color-ink)" }}>
                     {label}
                   </Link>
                   {n === todayN ? (
@@ -124,7 +124,7 @@ export default async function ClassHome({
                   ) : null}
                 </span>
               ) : (
-                <span className="text-[15px]" style={{ color: "var(--color-text-secondary)" }}>
+                <span className="text-[15px]" style={{ color: "var(--color-ink-soft)" }}>
                   Opens {formatUnlockDate(unlockDate(c, n))}
                 </span>
               )}
@@ -139,13 +139,13 @@ export default async function ClassHome({
 
       {qa ? (
         <section className="mt-14">
-          <p className="text-[12px] uppercase tracking-[0.18em] font-semibold mb-4" style={{ color: "var(--color-text-secondary)" }}>
+          <p className="text-[12px] uppercase tracking-[0.18em] font-semibold mb-4" style={{ color: "var(--color-ink-soft)" }}>
             Amy answers your questions
           </p>
           <DemoPlayer hls={qa.hls} hlsQuery={qa.hlsQuery} mp4={qa.mp4} poster={qa.poster} caption="Recorded in the middle of the month, from the questions left in the box." />
           {/* Amy says "I'm going to link it here" near the end of the Glimmers Q&A (11/18). */}
           {slug === "glimmers" ? (
-            <p className="mt-4 text-[14px] leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+            <p className="mt-4 text-[14px] leading-relaxed" style={{ color: "var(--color-ink-soft)" }}>
               The podcast episode Amy mentions:{" "}
               <Link href="/blog/podcast-creating-atomic-habits-with-james-clear" className="underline underline-offset-4" style={{ color: "var(--color-orange-ink)" }}>
                 Creating Atomic Habits with James Clear
@@ -156,7 +156,7 @@ export default async function ClassHome({
         </section>
       ) : null}
 
-      <p className="mt-12 text-[13px] leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+      <p className="mt-12 text-[13px] leading-relaxed" style={{ color: "var(--color-ink-soft)" }}>
         Order #{claim.orderRef}. Questions or a lost link:{" "}
         <a href="mailto:help@amytangerine.com" className="underline underline-offset-2" style={{ color: "var(--color-orange-ink)" }}>
           help@amytangerine.com
