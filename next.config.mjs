@@ -10,6 +10,8 @@ const nextConfig = {
   // they live outside /public on purpose, so trace them into the function.
   outputFileTracingIncludes: {
     "/classes/[slug]/files/[file]": ["./content/classes/**/*"],
+    // The shop-refresh countdown image draws in Epilogue (t2113).
+    "/api/countdown": ["./assets/fonts/**/*"],
   },
   async redirects() {
     return [
