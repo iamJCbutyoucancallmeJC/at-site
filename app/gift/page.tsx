@@ -34,7 +34,7 @@ export default async function GiftPage() {
           <h2 className="text-2xl font-bold mt-9 mb-4">You give it. They make it theirs.</h2>
           <ol className="list-decimal pl-5 space-y-3 leading-relaxed">
             <li>Buy the $72 gift using your own billing details.</li>
-            <li>They receive an email with your note and a redemption link.</li>
+            <li>They get an email with your note and a link to claim it, right away or on the day you pick.</li>
             <li>They enter their own shipping address and pick the six-month plan. Their gift covers all six envelopes.</li>
           </ol>
           <p className="text-sm leading-relaxed mt-5">This gift is for US delivery. For an international gift, <a className="underline" href="mailto:help@amytangerine.com">email help@amytangerine.com</a> before ordering.</p>

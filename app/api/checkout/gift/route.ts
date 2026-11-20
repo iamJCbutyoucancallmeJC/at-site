@@ -7,7 +7,7 @@ export async function POST(request: Request) {
   let gift
   try { gift = parseGiftDetails(await request.json()) }
   catch { return NextResponse.json({ error: "Check the gift details and try again." }, { status: 400 }) }
-  if (!gift) return NextResponse.json({ error: "Enter the recipient's name and email, your name, and a start choice." }, { status: 400 })
+  if (!gift) return NextResponse.json({ error: "Enter the recipient's name and email, your name, a start choice, and a send date within the next 90 days (before January 5 for a January start)." }, { status: 400 })
   if (!GIFT_CHECKOUT_ENABLED) return NextResponse.json({ error: "Gift checkout is not open yet. Please check back soon." }, { status: 409 })
   // Redemption is immediate and takes place outside this site. Do not let gifting
   // bypass the operational Happy Mail cap, even for a requested January start.

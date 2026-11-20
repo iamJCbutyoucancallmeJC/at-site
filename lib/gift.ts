@@ -13,6 +13,36 @@ export type GiftDetails = {
   senderName: string
   message: string
   start: "next" | "january"
+  // "" = Recharge emails the recipient right after checkout. Otherwise a
+  // YYYY-MM-DD day (Pacific) on which Recharge sends the gift email instead.
+  sendOn: string
+}
+
+// How far ahead a giver may schedule the gift email.
+export const GIFT_SEND_MAX_DAYS = 90
+
+// Today's date in Pacific time as YYYY-MM-DD (the store's day; the server runs in UTC).
+export function pacificToday(now = new Date()): string {
+  return new Intl.DateTimeFormat("en-CA", { timeZone: "America/Los_Angeles", year: "numeric", month: "2-digit", day: "2-digit" }).format(now)
+}
+
+export function addDays(ymd: string, days: number): string {
+  const d = new Date(`${ymd}T12:00:00Z`)
+  d.setUTCDate(d.getUTCDate() + days)
+  return d.toISOString().slice(0, 10)
+}
+
+// A send date must be a real day, after today and within GIFT_SEND_MAX_DAYS.
+// Today itself means "send now", which is the default and needs no date.
+// A January-start gift must reach the recipient before the January pull, or the
+// watcher (hm-gift-watch.py JANUARY_DATE) would be moving a first charge into the past.
+export const GIFT_JANUARY_LAST_SEND = "2027-01-04"
+
+export function validSendOn(value: string, today = pacificToday()): boolean {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false
+  const d = new Date(`${value}T12:00:00Z`)
+  if (Number.isNaN(d.getTime()) || d.toISOString().slice(0, 10) !== value) return false
+  return value > today && value <= addDays(today, GIFT_SEND_MAX_DAYS)
 }
 
 export function parseGiftDetails(value: unknown): GiftDetails | null {
@@ -28,11 +58,20 @@ export function parseGiftDetails(value: unknown): GiftDetails | null {
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(clean.email)) return null
   if (v.start !== "next" && v.start !== "january") return null
-  return { ...clean, start: v.start } as GiftDetails
+  let sendOn = ""
+  if (v.send === "date") {
+    if (typeof v.sendOn !== "string" || !validSendOn(v.sendOn.trim())) return null
+    sendOn = v.sendOn.trim()
+    if (v.start === "january" && sendOn > GIFT_JANUARY_LAST_SEND) return null
+  } else if (v.send !== undefined && v.send !== "now") return null
+  return { ...clean, start: v.start, sendOn } as GiftDetails
 }
 
 // These exact double-underscore names are Recharge's custom-widget contract:
 // https://support.getrecharge.com/hc/en-us/articles/17326018885783
+// The send date is the widget's "Send gift on" field, a date input (YYYY-MM-DD):
+// https://docs.getrecharge.com/docs/custom-coding-the-gift-subscriptions-widget-for-shopify-20-themes.md
+// Recharge stores it on the gift as notification_scheduled_at.
 // The start choice is a request for the recipient, not a scheduled-email date
 // or an automatic subscription start. Affinity owns the actual start date.
 export function giftProperties(gift: GiftDetails) {
@@ -50,6 +89,7 @@ export function giftProperties(gift: GiftDetails) {
     { key: "__rc_gift_recipient_last_name", value: gift.lastName },
     { key: "__rc_gift_sender_name", value: gift.senderName },
     { key: "__rc_gift_recipient_note", value: [gift.message, instructions].filter(Boolean).join("\n\n") },
+    ...(gift.sendOn ? [{ key: "__rc_gift_notification_scheduled_at", value: gift.sendOn }] : []),
     { key: "Requested first envelope", value: start },
   ]
 }
