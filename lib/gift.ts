@@ -71,7 +71,12 @@ export function parseGiftDetails(value: unknown): GiftDetails | null {
 // https://support.getrecharge.com/hc/en-us/articles/17326018885783
 // The send date is the widget's "Send gift on" field, a date input (YYYY-MM-DD):
 // https://docs.getrecharge.com/docs/custom-coding-the-gift-subscriptions-widget-for-shopify-20-themes.md
-// Recharge stores it on the gift as notification_scheduled_at.
+// Recharge stores it on the gift as notification_scheduled_at, and reads the clock
+// time in Eastern, ignoring any offset (tested 2026-11-20, gifts 128262 and 128263:
+// a bare date became 05:00Z, i.e. 9 pm Pacific the night before; "08:00-08:00" became
+// 13:00Z). So we send 11:00 Eastern, written with its offset: 8 am Pacific whether
+// Recharge keeps ignoring the offset or starts honoring it.
+export const GIFT_SEND_TIME = "T11:00:00-05:00"
 // The start choice is a request for the recipient, not a scheduled-email date
 // or an automatic subscription start. Affinity owns the actual start date.
 export function giftProperties(gift: GiftDetails) {
@@ -89,7 +94,7 @@ export function giftProperties(gift: GiftDetails) {
     { key: "__rc_gift_recipient_last_name", value: gift.lastName },
     { key: "__rc_gift_sender_name", value: gift.senderName },
     { key: "__rc_gift_recipient_note", value: [gift.message, instructions].filter(Boolean).join("\n\n") },
-    ...(gift.sendOn ? [{ key: "__rc_gift_notification_scheduled_at", value: gift.sendOn }] : []),
+    ...(gift.sendOn ? [{ key: "__rc_gift_notification_scheduled_at", value: gift.sendOn + GIFT_SEND_TIME }] : []),
     { key: "Requested first envelope", value: start },
   ]
 }

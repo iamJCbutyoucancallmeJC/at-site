@@ -23,6 +23,10 @@ try {
   assert.match(attributes.__rc_gift_recipient_note, /Hello[\s\S]*6-Month \(per-delivery\)[\s\S]*January 2027/)
   assert.equal(attributes.__rc_gift_notification_scheduled_at, undefined, "A January start request must not delay the redemption email")
   assert.match(giftProperties({ ...gift, start: "next" }).find((a) => a.key === "__rc_gift_recipient_note").value, /next batch/)
+  const tomorrow = new Date(Date.now() + 2 * 86400000).toISOString().slice(0, 10)
+  const dated = Object.fromEntries(giftProperties(parseGiftDetails({ ...gift, start: "next", send: "date", sendOn: tomorrow })).map(({ key, value }) => [key, value]))
+  assert.equal(dated.__rc_gift_notification_scheduled_at, `${tomorrow}T11:00:00-05:00`, "A chosen day sends at 8 am Pacific")
+  assert.equal(parseGiftDetails({ ...gift, send: "date", sendOn: "2027-01-20" }), null, "A January start must send by January 4")
   console.log("Gift validation and Recharge property contract passed")
 } finally {
   fs.rmSync(dir, { recursive: true, force: true })
