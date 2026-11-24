@@ -5,6 +5,8 @@ import PromoCard from "@/components/promo-card"
 import ShopGrid, { selectProductsForCategory } from "@/components/shop-grid"
 import { parseSort } from "@/lib/shop-sort"
 import { getClass } from "@/lib/classes"
+import ShopRefreshBanner from "@/components/shop-refresh-banner"
+import { msUntilOpen } from "@/lib/shop-refresh"
 
 // Dynamic rendering: grid varies by visitor country (Markets-scoped products).
 export const dynamic = "force-dynamic"
@@ -32,6 +34,9 @@ export default async function ShopPage({
   return (
     <main className="min-h-screen" style={{ background: "var(--color-white)" }}>
       <PageEngagementTracker page="shop" />
+
+      {/* Small Business Saturday refresh (t2113): the same time as the email, gone once the shop opens. */}
+      {msUntilOpen() > 0 && <ShopRefreshBanner />}
 
       <ShopGrid products={products} activeCategory={activeCategory} sort={sort} leadTiles={leadTiles} />
 
