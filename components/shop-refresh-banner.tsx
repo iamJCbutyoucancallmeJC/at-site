@@ -52,7 +52,7 @@ export default function ShopRefreshBanner() {
             Small Business Saturday
           </p>
           <h2 className="text-[22px] md:text-[28px] font-bold leading-[1.2] tracking-tight mb-2" style={{ color: "var(--color-ink)" }}>
-            New things from my show table land here Saturday
+            New things from Amy&apos;s show table land here Saturday
           </h2>
           <p className="text-[16px] md:text-[18px] leading-relaxed max-w-[38rem]" style={{ color: "var(--color-ink)" }}>
             Stamp sets, books, jewelry and more, online November 28 at {OPEN_LABEL_SHORT}.
