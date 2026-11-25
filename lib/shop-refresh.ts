@@ -25,3 +25,16 @@ export function countdownParts(ms: number) {
     seconds: s % 60,
   }
 }
+
+// Amy's weekend bonus (email 2026-11-25): every order over $50 placed this weekend
+// gets a UV DTF "I'm a little obsessed" sticker, no code. The cart drawer says so
+// during the window. The same window and threshold flag the orders for packing:
+// vault Website Redesign/Tools/bonus-sticker-2026-11-28.py (WINDOW_START/END,
+// THRESHOLD). Change them together. $50.00 exactly counts, on purpose.
+export const BONUS_START = "2026-11-28T08:00:00Z" // Sat 11/28 00:00 Pacific
+export const BONUS_END = "2026-11-30T08:00:00Z" // Mon 11/30 00:00 Pacific (exclusive)
+export const BONUS_MIN = 50
+
+export function bonusActive(now: number = Date.now()): boolean {
+  return now >= Date.parse(BONUS_START) && now < Date.parse(BONUS_END)
+}

@@ -12,6 +12,7 @@ import { HM_VARIANT_6MONTH_GID } from "@/lib/happy-mail-content"
 import { isChromelessRoute, isQuietRoute } from "@/lib/chromeless-routes"
 import { stashPendingCartToken } from "@/lib/pending-checkout-tokens"
 import { CART_NUDGE } from "@/lib/shop-copy"
+import { BONUS_MIN, bonusActive } from "@/lib/shop-refresh"
 
 // The cart drawer (design finish, Phase 2, 2026-11-10): a sheet that rises from the
 // bottom of a phone (16px top radius) and slides in from the right on desktop (16px
@@ -77,6 +78,12 @@ export default function CartDrawer() {
 
   const hasLocalItems = items.some((i) => isLocalVariant(i.variantId))
   const hasOneTimeItems = items.some((i) => !isHappyMailItem(i))
+  // Weekend bonus sticker (t2113): counts one-time items only, before any code,
+  // the same rule the packing flag uses. Checked on render, so a cart opened
+  // before midnight Friday shows it once the drawer re-renders in the window.
+  const oneTimeTotal = items.filter((i) => !isHappyMailItem(i)).reduce((sum, i) => sum + i.priceAmount * i.quantity, 0)
+  const showBonus = hasOneTimeItems && bonusActive()
+  const bonusShort = Math.max(0, BONUS_MIN - oneTimeTotal)
 
   const [checkingOut, setCheckingOut] = useState(false)
 
@@ -317,6 +324,14 @@ export default function CartDrawer() {
                 {subtotal}
               </span>
             </div>
+
+            {showBonus && (
+              <p className="text-[13px] font-semibold leading-snug mb-3" style={{ color: "var(--color-orange-ink)" }}>
+                {bonusShort > 0
+                  ? `Add ${money.format(bonusShort)} more and Amy tucks a bonus "I'm a little obsessed" sticker in your package. This weekend only.`
+                  : `This order gets Amy's bonus "I'm a little obsessed" sticker, tucked in your package.`}
+              </p>
+            )}
 
             {CART_NUDGE && hasOneTimeItems && (
               <p className="text-[13px] leading-snug mb-3" style={{ color: "var(--color-ink-soft)" }}>
