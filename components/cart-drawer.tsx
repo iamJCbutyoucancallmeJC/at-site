@@ -11,7 +11,7 @@ import { EMPTY_STATES } from "@/lib/shop-copy"
 import { HM_VARIANT_6MONTH_GID } from "@/lib/happy-mail-content"
 import { isChromelessRoute, isQuietRoute } from "@/lib/chromeless-routes"
 import { stashPendingCartToken } from "@/lib/pending-checkout-tokens"
-import { CART_NUDGE } from "@/lib/shop-copy"
+import { CART_NUDGE, SHIP_TIME_LINE } from "@/lib/shop-copy"
 import { BONUS_MIN, bonusActive } from "@/lib/shop-refresh"
 
 // The cart drawer (design finish, Phase 2, 2026-11-10): a sheet that rises from the
@@ -328,14 +328,21 @@ export default function CartDrawer() {
             {showBonus && (
               <p className="text-[13px] font-semibold leading-snug mb-3" style={{ color: "var(--color-orange-ink)" }}>
                 {bonusShort > 0
-                  ? `Add ${money.format(bonusShort)} more and Amy tucks a bonus "I'm a little obsessed" sticker in your package. This weekend only.`
-                  : `This order gets Amy's bonus "I'm a little obsessed" sticker, tucked in your package.`}
+                  ? `Add ${money.format(bonusShort)} more and Amy tucks a bonus "I'm a little obsessed" sticker in your package. This weekend only, 1 per customer, while they last.`
+                  : `This order gets Amy's bonus "I'm a little obsessed" sticker, tucked in your package. 1 per customer, while they last.`}
               </p>
             )}
 
             {CART_NUDGE && hasOneTimeItems && (
               <p className="text-[13px] leading-snug mb-3" style={{ color: "var(--color-ink-soft)" }}>
                 {CART_NUDGE}
+              </p>
+            )}
+
+            {/* Amy's ship time (2026-11-26, m209); the product page says the same. */}
+            {hasOneTimeItems && (
+              <p className="text-[13px] leading-snug mb-3" style={{ color: "var(--color-ink-soft)" }}>
+                {SHIP_TIME_LINE}
               </p>
             )}
 

@@ -42,7 +42,7 @@ export default async function ShopPage({
       {msUntilOpen() <= 0 && bonusActive() && (
         <section className="mx-4 md:mx-10 mt-6 md:mt-8" aria-label="Weekend bonus">
           <p className="rounded-2xl px-6 py-4 text-[16px] md:text-[18px] leading-relaxed" style={{ background: "var(--color-paper)", color: "var(--color-ink)" }}>
-            This weekend, every order over $50 gets a bonus &ldquo;I&rsquo;m a little obsessed&rdquo; sticker from Amy. No code needed.
+            This weekend, every order over $50 gets a bonus &ldquo;I&rsquo;m a little obsessed&rdquo; sticker from Amy. No code needed. 1 per customer, while they last.
           </p>
         </section>
       )}
