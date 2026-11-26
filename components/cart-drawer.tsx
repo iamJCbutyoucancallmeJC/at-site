@@ -340,10 +340,14 @@ export default function CartDrawer() {
             )}
 
             {/* d051 (t1076): intl pass-through pricing is deliberate; say it before
-                checkout so a ~$39 USPS first-class rate never lands as a surprise. */}
-            <p className="text-[13px] leading-snug mb-4" style={{ color: "var(--color-ink-soft)" }}>
-              International orders ship at live USPS rates by weight, shown at checkout before you pay.
-            </p>
+                checkout so a ~$39 USPS first-class rate never lands as a surprise.
+                Shop items only (t2271): Happy Mail, US and international, ships free,
+                so on a Happy Mail-only cart this line read like a surcharge. */}
+            {hasOneTimeItems && (
+              <p className="text-[13px] leading-snug mb-4" style={{ color: "var(--color-ink-soft)" }}>
+                International orders ship at live USPS rates by weight, shown at checkout before you pay.
+              </p>
+            )}
 
             {hasLocalItems ? (
               <div>
