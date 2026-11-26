@@ -54,6 +54,14 @@ function isHappyMailItem(item: CartItem): boolean {
   return item.productHandle.startsWith("happy-mail") || !!item.sellingPlanId
 }
 
+// Items that never ship (2026-11-26, t2113): every printable (all 22 handles start
+// "printable-", none requires shipping), the Glimmers and Gratitude class, the gift.
+// Read by handle, like Happy Mail above, so carts already saved in a browser work too.
+const NO_SHIP_HANDLES = new Set(["glimmers-and-gratitude", "give-happy-mail-gift"])
+function isNoShipItem(item: CartItem): boolean {
+  return item.productHandle.startsWith("printable-") || NO_SHIP_HANDLES.has(item.productHandle)
+}
+
 const money = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" })
 
 export default function CartDrawer() {
@@ -77,12 +85,16 @@ export default function CartDrawer() {
   }, [isOpen])
 
   const hasLocalItems = items.some((i) => isLocalVariant(i.variantId))
-  const hasOneTimeItems = items.some((i) => !isHappyMailItem(i))
-  // Weekend bonus sticker (t2113): counts one-time items only, before any code,
-  // the same rule the packing flag uses. Checked on render, so a cart opened
-  // before midnight Friday shows it once the drawer re-renders in the window.
+  // Weekend bonus sticker (t2113): counts every item but Happy Mail (printables too),
+  // before any code, in the shopper's currency. The packing flag
+  // (vault Website Redesign/Tools/bonus-sticker-2026-11-28.py) counts the same total
+  // since 11/26, so whatever this line promises is kept. Checked on render, so a cart
+  // opened before midnight Friday shows it once the drawer re-renders in the window.
   const oneTimeTotal = items.filter((i) => !isHappyMailItem(i)).reduce((sum, i) => sum + i.priceAmount * i.quantity, 0)
-  const showBonus = hasOneTimeItems && bonusActive()
+  // The shipping lines below (bonus "tucked in your package", the $8 nudge, ship time,
+  // USPS rates) need at least one item that ships: a printables-only cart has no package.
+  const hasShippableItems = items.some((i) => !isHappyMailItem(i) && !isNoShipItem(i))
+  const showBonus = hasShippableItems && bonusActive()
   const bonusShort = Math.max(0, BONUS_MIN - oneTimeTotal)
 
   const [checkingOut, setCheckingOut] = useState(false)
@@ -333,14 +345,14 @@ export default function CartDrawer() {
               </p>
             )}
 
-            {CART_NUDGE && hasOneTimeItems && (
+            {CART_NUDGE && hasShippableItems && (
               <p className="text-[13px] leading-snug mb-3" style={{ color: "var(--color-ink-soft)" }}>
                 {CART_NUDGE}
               </p>
             )}
 
             {/* Amy's ship time (2026-11-26, m209); the product page says the same. */}
-            {hasOneTimeItems && (
+            {hasShippableItems && (
               <p className="text-[13px] leading-snug mb-3" style={{ color: "var(--color-ink-soft)" }}>
                 {SHIP_TIME_LINE}
               </p>
@@ -350,7 +362,7 @@ export default function CartDrawer() {
                 checkout so a ~$39 USPS first-class rate never lands as a surprise.
                 Shop items only (t2271): Happy Mail, US and international, ships free,
                 so on a Happy Mail-only cart this line read like a surcharge. */}
-            {hasOneTimeItems && (
+            {hasShippableItems && (
               <p className="text-[13px] leading-snug mb-4" style={{ color: "var(--color-ink-soft)" }}>
                 International orders ship at live USPS rates by weight, shown at checkout before you pay.
               </p>
