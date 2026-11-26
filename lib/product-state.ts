@@ -47,13 +47,21 @@ export function defaultVariant(p: ShopifyProduct): ShopifyVariant | undefined {
   return vs.find((v) => v.availableForSale) ?? vs[0] ?? p.variants.nodes[0]
 }
 
-/** Sells, but from stock that is not here yet. */
+/** Sells, but from stock that is not here yet. Ask neverPreorder(product) first. */
 export function isPreorderVariant(v: ShopifyVariant | undefined): boolean {
   return !!v && v.availableForSale && v.currentlyNotInStock === true
 }
 
+/** A download or a subscription has no stock to wait for. Shopify still reports both as
+ *  "not in stock" (nothing is counted), so all 22 printables read Preorder on the card,
+ *  the badge and the page button from 11/10 until 11/26. */
+export function neverPreorder(p: ShopifyProduct): boolean {
+  return isDigitalProduct(p) || isSubscriptionProduct(p)
+}
+
 /** Every buyable variant is a preorder (the badge and the card button read Preorder). */
 export function isPreorderProduct(p: ShopifyProduct): boolean {
+  if (neverPreorder(p)) return false
   const buyable = choosableVariants(p).filter((v) => v.availableForSale)
   return buyable.length > 0 && buyable.every((v) => v.currentlyNotInStock === true)
 }

@@ -9,6 +9,7 @@ import {
   choosableVariants,
   isDigitalProduct,
   isPreorderVariant,
+  neverPreorder,
   isSubscriptionProduct,
   optionName,
   variantLabel,
@@ -44,7 +45,7 @@ export default function BuyBox({
   const variant = variants.find((v) => v.id === selectedId) ?? variants[0]
   const subscription = isSubscriptionProduct(product)
   const digital = isDigitalProduct(product)
-  const preorder = isPreorderVariant(variant)
+  const preorder = !neverPreorder(product) && isPreorderVariant(variant)
   const showPicker = variants.length > 1
   const pickerTitle = optionName(product) ?? "Options"
   const price = variant ? formatMoney(variant.price) : formatMoney(product.priceRange.minVariantPrice)
