@@ -6,10 +6,11 @@
 // Under the Add to cart button on every product page. The policy in Shopify says
 // orders ship from Culver City with a flat $8 US rate (rendered live into the
 // Shipping & returns panel); this is the one-line version.
-// CONFIRM WITH AMY: the "1 to 2 days" promise is ours, not hers, and the studio
-// ships in-house for the two weeks after the 11/13 shop update.
-export const SHIPPING_LINE = "Ships in 1 to 2 days from Culver City, California. US shipping is a flat $8."
-export const SHIPPING_LINE_FREE_US = "Free US shipping. Ships in 1 to 2 days from Culver City, California."
+// The ship time is Amy's own sentence (email 2026-11-26, vault mail m209). It replaced
+// our unconfirmed "Ships in 1 to 2 days". The cart drawer shows the same sentence.
+export const SHIP_TIME_LINE = "Please allow 3-5 business days for processing. Thanks!"
+export const SHIPPING_LINE = `Ships from Culver City, California. US shipping is a flat $8. ${SHIP_TIME_LINE}`
+export const SHIPPING_LINE_FREE_US = `Free US shipping from Culver City, California. ${SHIP_TIME_LINE}`
 // A preorder's ship-by date lives in its Shopify description (shop update plan, 11/9).
 export const PREORDER_LINE = "Preorder. It ships as soon as it arrives; the date is in the details below."
 export const DIGITAL_LINE = "Sent to your email right after checkout. Nothing ships."
