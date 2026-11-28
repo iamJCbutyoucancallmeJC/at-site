@@ -106,7 +106,9 @@ const CARD_CLASS =
 // .card-action (globals.css): always visible on phones and on any device that cannot
 // hover (a tablet at desktop width); hidden until hover or focus only where a pointer
 // can hover. A plain md: breakpoint would have left iPad users with no button at all.
-const ACTION_CLASS = "card-action mt-3 px-0.5 pb-1"
+// mt-auto: the button sits on the bottom of the card, so buttons line up across a row
+// whether a title runs one line or two (JC 11/27).
+const ACTION_CLASS = "card-action mt-auto pt-3 px-0.5 pb-1"
 
 export default function ProductCard({
   product,
