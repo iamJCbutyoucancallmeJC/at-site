@@ -130,7 +130,7 @@ export default async function HomePage() {
           <PromoCard
             heading="h2"
             eyebrow="Small Business Saturday"
-            title="New things from Amy are here"
+            title="New things from Amy are here!"
             text="Stamp sets, books, jewelry and more. This weekend, every order over $50 gets a bonus &ldquo;I&rsquo;m a little obsessed&rdquo; sticker from Amy. No code needed. 1 per customer, while they last."
             cta={{
               href: "/shop",
