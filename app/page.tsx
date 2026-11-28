@@ -12,6 +12,7 @@ import type { Metadata } from "next"
 import KeepUpCard from "@/components/keep-up-card"
 import SectionHeader from "@/components/section-header"
 import PromoCard from "@/components/promo-card"
+import { bonusActive, msUntilOpen } from "@/lib/shop-refresh"
 import FromTheJournal from "@/components/blog/from-the-journal"
 import { HM_RECENT_ENVELOPES } from "@/lib/happy-mail-content"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
@@ -122,6 +123,25 @@ export default async function HomePage() {
           </TrackableLink>
         </div>
       </section>
+
+      {/* ── Small Business Saturday (t2113): from the 9am open through Sunday night Pacific ── */}
+      {msUntilOpen() <= 0 && bonusActive() && (
+        <section className="px-4 md:px-10 pt-4 md:pt-6">
+          <PromoCard
+            heading="h2"
+            eyebrow="Small Business Saturday"
+            title="New things from Amy&rsquo;s show table are here"
+            text="Stamp sets, books, jewelry and more. This weekend, every order over $50 gets a bonus &ldquo;I&rsquo;m a little obsessed&rdquo; sticker from Amy. No code needed. 1 per customer, while they last."
+            cta={{
+              href: "/shop",
+              label: "Shop the new things",
+              event: "hero_cta_click",
+              eventData: { cta_text: "Shop the new things", destination: "/shop", page: "homepage", source: "weekend-banner" },
+            }}
+            image={{ src: "/images/shop/bonus-sticker.jpg", alt: "Amy's I'm a little obsessed sticker on a notebook cover" }}
+          />
+        </section>
+      )}
 
       {/* ── Shop by category ── */}
       <section className="px-4 md:px-10 pt-12 md:pt-16 pb-6 md:pb-8">
