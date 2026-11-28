@@ -17,7 +17,7 @@ import { HM_RECENT_ENVELOPES } from "@/lib/happy-mail-content"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 import TrackableLink from "@/components/trackable-link"
 import ProductCard from "@/components/product-card"
-import { getAllProducts } from "@/lib/shopify"
+import { getAllProducts } from "@/lib/shop-as-of"
 import { getVisitorCountry } from "@/lib/geo"
 
 // Dynamic rendering: new-arrivals section varies by visitor country (Markets-scoped products).

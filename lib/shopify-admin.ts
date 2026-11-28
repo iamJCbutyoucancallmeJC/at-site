@@ -81,7 +81,7 @@ export async function adminFetch<T>(query: string, variables?: Record<string, un
 
 type AdminMoney = { amount: string; currencyCode: string }
 
-type AdminProductNode = {
+export type AdminProductNode = {
   id: string
   handle: string
   title: string
@@ -114,7 +114,7 @@ type AdminProductNode = {
   collections: { nodes: { handle: string; title: string }[] }
 }
 
-function mapAdminProduct(p: AdminProductNode, currency: string): ShopifyProduct {
+export function mapAdminProduct(p: AdminProductNode, currency: string): ShopifyProduct {
   const images = p.media.nodes
     .map((m) => m.image)
     .filter((img): img is NonNullable<typeof img> => !!img)
@@ -173,7 +173,7 @@ function mapAdminProduct(p: AdminProductNode, currency: string): ShopifyProduct 
   }
 }
 
-const ADMIN_PRODUCT_FIELDS = `
+export const ADMIN_PRODUCT_FIELDS = `
   id
   handle
   title

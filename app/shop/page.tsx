@@ -1,4 +1,4 @@
-import { getAllProducts } from "@/lib/shopify"
+import { getAllProducts } from "@/lib/shop-as-of"
 import { getVisitorCountry } from "@/lib/geo"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 import PromoCard from "@/components/promo-card"

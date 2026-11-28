@@ -1,5 +1,6 @@
 import { notFound, redirect } from "next/navigation"
-import { getProductByHandle, getAllProducts, getShopPolicies } from "@/lib/shopify"
+import { getShopPolicies } from "@/lib/shopify"
+import { getProductByHandle, getAllProducts } from "@/lib/shop-as-of"
 import { getVisitorCountry, isInternational } from "@/lib/geo"
 import PageEngagementTracker from "@/components/page-engagement-tracker"
 import ProductDetail from "@/components/product-detail"
