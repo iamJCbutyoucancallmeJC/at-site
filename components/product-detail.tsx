@@ -67,7 +67,7 @@ export default function ProductDetail({
     product.collections.nodes.some((c) => c.handle === "happy-mail")
   const breadcrumbCategory = product.collections.nodes[0]
   const badge = productBadge(product)
-  const visibleTags = product.tags.filter((t) => !HIDDEN_TAGS.has(t) && !t.startsWith("shop-update-"))
+  const visibleTags = product.tags.filter((t) => !HIDDEN_TAGS.has(t) && !t.startsWith("shop-update-") && !t.startsWith("shop-refresh-"))
 
   const accordion = [
     {
